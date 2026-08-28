@@ -69,8 +69,8 @@ Then open `http://localhost:8000`.
 - The site does not collect or store form submissions unless the Apps Script endpoint is set;
   otherwise it prepares a WhatsApp message for the visitor to review and send.
 - The site displays **only the academy's own photographs**: `assets/orig-01.jpg` up to `orig-05.jpg`,
-  taken from the previous build. No stock, generated or third-party imagery is used anywhere on the
-  site, and those five files are the only images in `assets/`.
+  taken from the previous build, plus `assets/hero-morning.jpg`, the sunlit classroom that opens the
+  home page. No stock, generated or third-party imagery is used anywhere on the site.
 
 ## Files
 

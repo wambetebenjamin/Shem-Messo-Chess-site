@@ -288,7 +288,7 @@ html.js body.page-out{
 }
 .hero-bg{
   position:absolute; inset:0; z-index:0;
-  background:url('../assets/orig-05.jpg') center/cover no-repeat;
+  background:url('../assets/hero-morning.jpg') center/cover no-repeat;
   animation:heroStill 1.6s var(--ease) both;
 }
 @keyframes heroStill{ from{ transform:scale(1.05); opacity:.35; } to{ transform:scale(1); opacity:1; } }
