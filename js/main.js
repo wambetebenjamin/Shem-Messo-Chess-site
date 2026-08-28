@@ -247,3 +247,38 @@
     });
   }
 })();
+
+/* ---------- MOTION SUITE: pointer glow follower + 3D card tilt ---------- */
+(function () {
+  'use strict';
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+
+  const glow = document.createElement('div');
+  glow.id = 'ptr-glow';
+  glow.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(glow);
+  let tx = window.innerWidth / 2, ty = 180, gx = tx, gy = ty;
+  window.addEventListener('pointermove', function (e) { tx = e.clientX; ty = e.clientY; }, { passive: true });
+  (function loop() {
+    gx += (tx - gx) * 0.14; gy += (ty - gy) * 0.14;
+    glow.style.transform = 'translate(' + (gx - 170) + 'px,' + (gy - 170) + 'px)';
+    requestAnimationFrame(loop);
+  })();
+
+  document.querySelectorAll('.grid-3 > .hud, .grid-4 > .hud, .cat-chip').forEach(function (card) {
+    card.style.willChange = 'transform';
+    card.addEventListener('pointermove', function (e) {
+      if (card.classList.contains('reveal') && !card.classList.contains('visible')) return;
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = 'perspective(900px) rotateX(' + (-py * 6).toFixed(2) + 'deg) rotateY(' + (px * 8).toFixed(2) + 'deg) translateY(-4px)';
+    });
+    card.addEventListener('pointerleave', function () {
+      card.style.transition = 'transform .45s var(--ease)';
+      card.style.transform = '';
+      setTimeout(function () { card.style.transition = ''; }, 460);
+    });
+  });
+})();
