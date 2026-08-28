@@ -1,17 +1,47 @@
 # Shem Messo Chess Academy
 
-A polished, responsive one-page website for Shem Messo Chess Academy in Kericho, Kenya.
+A premium multi-page website for Shem Messo Chess Academy in Kericho, Kenya, rebuilt as a
+futuristic, broadcast-HUD style chess platform ("Night Circuit" design system).
 
-## Highlights
+## Design language
 
-- Rewritten, clearer marketing copy
-- Premium emerald, cream and brass visual system
-- Four locally stored high-resolution editorial images
-- Responsive mobile navigation
-- Coaching programs, tournament preparation and materials sections
-- WhatsApp-powered coaching enquiry form (no backend required)
-- Accessible FAQ and reduced-motion support
-- SEO and social sharing metadata
+"Sunrise Club": a bright, uplifting theme tuned for parents and learners. Warm cream paper,
+white cards with soft shadows, jade, brass and warm-coral accents, and gentle background
+animations (drifting chess pieces and soft pastel orbs on the hero, page headers and CTA bands).
+
+- **Cinematic photo hero:** a sunlit classroom chessboard photo with a right-aligned giant
+  wordmark, spaced subtitle, gradient hairline rule and coral buttons
+- **Friendly cards:** rounded white cards with jade corner accents, hover lift and icon pop
+- **Classic board colours:** the play and broadcast boards use cream and dusty-green vinyl
+  squares, like the academy's real tournament sets
+- **Typography:** Space Grotesk display headlines, readable Inter body text, JetBrains Mono
+  for counters, labels and notation
+- **One moody band:** only the page headers and footer go dark, for contrast
+- Motion respects `prefers-reduced-motion` throughout
+
+## Pages
+
+| Page | What's on it |
+| --- | --- |
+| `index.html` | 3D hero + HUD overlays, notation ticker, programmes, stats counters, testimonials, FAQ |
+| `coaching.html` | The three coaching tracks, four-phase method timeline, fees & FAQ |
+| `tournaments.html` | Next fixture with live countdowns, categories, M-Pesa entry steps, registration form, honour roll |
+| `live.html` | **Broadcast room:** simulated live Board 1 with clocks, eval bar, move list, spectator feed and viewer telemetry |
+| `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo) + Lichess daily puzzle |
+| `shop.html` | Materials & kits with one-tap WhatsApp ordering + Complete Club Kit quote banner |
+| `about.html` | Academy story, values and season gallery using the local photography |
+| `contact.html` | Membership form, WhatsApp coaching-enquiry composer and contact cards |
+
+All pages share `css/style.css` (design system) and `js/main.js` (nav, reveals, counters,
+countdowns, FAQ, hero board, form handling). The chess engine lives in `js/chess.js`
+(chess.js by Jeff Hlywa, BSD license) and powers `js/play.js` and `js/live.js`.
+
+## Forms
+
+Registration/membership forms POST to a Google Apps Script endpoint; paste your deployed
+Web App URL into `SHEETS_ENDPOINT` in `js/main.js`. Until then, forms gracefully fall back to a
+**WhatsApp confirmation button** pre-filled with the entrant's details (Nothing is lost, no
+backend required). Payments reference M-Pesa Paybill **880100**.
 
 ## Run locally
 
@@ -31,19 +61,35 @@ Then open `http://localhost:8000`.
 
 ## Content notes
 
-- WhatsApp and phone links currently use `+254 729 037 585`.
-- Product prices are carried over from the supplied website and should be confirmed before launch.
-- The site does not collect or store form submissions; it prepares a WhatsApp message for the visitor to review and send.
-- The current photography is AI-generated editorial imagery. Replace it with approved academy photography whenever available if the site should depict actual learners or events.
+- WhatsApp and phone links use `+254 729 037 585`.
+- Product prices are carried over from the previous site and should be confirmed before launch.
+- Season metrics (schools, learners, tournaments) are marketing figures; adjust to taste.
+- The live broadcast room replays a scripted demo game between fixtures; wire in a real feed
+  when streaming hardware/accounts are ready.
+- The site does not collect or store form submissions unless the Apps Script endpoint is set;
+  otherwise it prepares a WhatsApp message for the visitor to review and send.
+- The site displays the **original photos from the previous build**: `assets/orig-01.jpg` up to `orig-05.jpg`
+  (coach-with-learner plus the four gallery shots) were extracted from the old page; the hero and three
+  product photos are hotlinked from Unsplash exactly as the original site served them.
+- `assets/hero-chess-academy.jpg`, `coaching-session.jpg`, `tournament-focus.jpg`, `chess-materials.jpg`
+  are spare editorial images, currently unreferenced.
 
 ## Files
 
 ```text
 .
-├── index.html
+├── index.html        coaching.html    tournaments.html   live.html
+├── play.html         shop.html        about.html         contact.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── main.js       chess.js         play.js            live.js
 ├── README.md
 └── assets/
-    ├── hero-chess-academy.jpg
+    ├── orig-01.jpg … orig-05.jpg          # original site photos (displayed)
+    ├── hero-morning.jpg                   # sunlit classroom hero photo (displayed)
+    ├── hero-dark-board.jpg                # dark board hero variant (spare)
+    ├── hero-chess-academy.jpg             # spare editorial images
     ├── coaching-session.jpg
     ├── tournament-focus.jpg
     └── chess-materials.jpg
