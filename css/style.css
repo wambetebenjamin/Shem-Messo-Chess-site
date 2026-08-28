@@ -340,9 +340,9 @@ main{ position:relative; z-index:1; }
   font-family:var(--f-mono); font-size:11px; letter-spacing:.18em; color:var(--jade-deep); text-transform:uppercase; font-weight:600;
 }
 .card-link:hover{ gap:12px; color:var(--jade); }
-.card ul.tick{ margin-top:16px; display:flex; flex-direction:column; gap:9px; }
-.card ul.tick li{ color:var(--sub); font-size:13.5px; display:flex; gap:10px; align-items:flex-start; }
-.card ul.tick li::before{ content:'▸'; color:var(--jade); font-size:12px; margin-top:1px; }
+ul.tick{ margin-top:16px; display:flex; flex-direction:column; gap:9px; }
+ul.tick li{ color:var(--sub); font-size:13.5px; display:flex; gap:10px; align-items:flex-start; }
+ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-top:1px; }
 
 /* Split feature */
 .split-media{ position:relative; }
@@ -410,6 +410,31 @@ main{ position:relative; z-index:1; }
 .cta-band .lead{ margin:0 auto 38px; max-width:560px; position:relative; }
 .cta-band .eyebrow{ position:relative; }
 .cta-row{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; position:relative; z-index:2; }
+
+/* ============ LIVELY SECTION BACKGROUNDS ============ */
+.bg-checker{
+  background-color:#FFFDF7;
+  background-image:
+    radial-gradient(ellipse 75% 55% at 50% 0%, rgba(250,245,234,.95), transparent 60%),
+    linear-gradient(45deg, rgba(31,138,109,.055) 25%, transparent 25%, transparent 75%, rgba(31,138,109,.055) 75%),
+    linear-gradient(45deg, rgba(31,138,109,.055) 25%, transparent 25%, transparent 75%, rgba(31,138,109,.055) 75%);
+  background-size:auto, 52px 52px, 52px 52px;
+  background-position:0 0, 0 0, 26px 26px;
+}
+.bg-mint{ background:linear-gradient(135deg, #E9F4EE 0%, #F6EFDF 100%); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.bg-peach{ background:linear-gradient(135deg, #FAEDE6 0%, #F8F0E1 100%); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+
+/* photo cards get the same friendly lift as text cards */
+.prod-card{ transition:transform .3s var(--ease), box-shadow .3s ease; }
+.prod-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-lift); }
+.prod-media img{ filter:saturate(1.07); }
+.prod-body .mono-tag{ margin-top:0; align-self:flex-start; }
+.prod-body .card-link{ margin-top:auto; padding-top:16px; }
+.prod-body h3{ margin-top:4px; }
+
+/* schedule cards with thumbnails */
+.sched-card{ padding:0; overflow:hidden; gap:0; }
+.sched-body{ padding:22px 24px 24px; display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
 
 /* ============ PAGE HERO (subpages, warm evening band) ============ */
 .page-hero{
