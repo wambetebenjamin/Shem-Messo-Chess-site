@@ -52,6 +52,21 @@
   replay.load_pgn(PGN);
   const MOVES = replay.history({ verbose: true });
 
+  let api3 = null;
+  const boardFrameEl = boardEl.closest('.board-frame');
+
+  function try3D() {
+    if (api3 || !window.SMC3D) return;
+    const stage = document.getElementById('stage3d');
+    if (!stage) return;
+    try {
+      api3 = window.SMC3D.mount(stage, { interactive: false });
+      if (boardFrameEl) boardFrameEl.classList.add('has-3d');
+      api3.sync(game.board());
+    } catch (err) { api3 = null; }
+  }
+  document.addEventListener('smc3d:ready', try3D);
+
   const clockW = document.getElementById('clockW');
   const clockB = document.getElementById('clockB');
   const movesEl = document.getElementById('liveMoves');
@@ -70,6 +85,7 @@
   };
 
   function renderBoard() {
+    if (api3) return;
     boardEl.innerHTML = '';
     const b = game.board();
     for (let row = 0; row < 8; row++) {
@@ -146,6 +162,7 @@
     const burn = 6 + Math.random() * 22;             // seconds "thought"
     if (mv.color === 'w') timeW -= burn; else timeB -= burn;
     game.move({ from: mv.from, to: mv.to, promotion: mv.promotion || 'q' });
+    if (api3) api3.playMove(mv);
     idx++;
     renderBoard(); renderClocks(); renderMoves(); renderEval();
     if (idx % 4 === 0) pushChat();
@@ -163,6 +180,7 @@
     resultEl.classList.remove('show');
     if (stateEl) stateEl.textContent = 'LIVE · ROUND 4 IN PROGRESS';
     renderBoard(); renderClocks(); renderMoves(); renderEval();
+    if (api3) api3.sync(game.board());
     pushChat();
     timer = setInterval(stepFn, 2400);
   }
@@ -177,4 +195,5 @@
   if (restartBtn) restartBtn.addEventListener('click', start);
 
   start();
+  try3D();
 })();

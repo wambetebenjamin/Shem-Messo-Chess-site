@@ -1,7 +1,7 @@
 /* ============================================================================
    PLAY · pass-and-play academy board (requires js/chess.js)
-   Tap/click a piece, then a highlighted square. Full rules via chess.js:
-   castling, en passant, promotion (auto-queen), check & mate detection.
+   Renders in full 3D through js/board3d.js when WebGL is available;
+   the classic 2D board below remains as a graceful fallback.
    ============================================================================ */
 (function () {
   'use strict';
@@ -15,14 +15,15 @@
   const FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   const game = new Chess();
   let selected = null, legalTargets = [], lastMove = null;
+  let api3 = null;
 
   const turnEl = document.getElementById('playTurn');
   const statusEl = document.getElementById('playStatus');
   const movesEl = document.getElementById('playMoves');
-
   const squareName = (row, col) => FILES[col] + (8 - row);
 
-  function render() {
+  /* ---------- 2D fallback board ---------- */
+  function render2D() {
     boardEl.innerHTML = '';
     const b = game.board();
     for (let row = 0; row < 8; row++) {
@@ -45,21 +46,22 @@
           marker.className = cell ? 'ring' : 'dot';
           div.appendChild(marker);
         }
-        div.addEventListener('click', onSquareClick);
+        div.addEventListener('click', () => onSquareAction(sq));
         boardEl.appendChild(div);
       }
     }
-    updateStatus();
-    updateMoves();
   }
 
-  function onSquareClick(e) {
-    const sq = e.currentTarget.dataset.sq;
+  /* ---------- shared interaction logic ---------- */
+  function onSquareAction(sq) {
     if (selected && legalTargets.includes(sq)) {
       const move = game.move({ from: selected, to: sq, promotion: 'q' });
-      if (move) lastMove = move;
+      if (move) {
+        lastMove = move;
+        if (api3) api3.playMove(move); else render2D();
+      }
       selected = null; legalTargets = [];
-      render();
+      refresh();
       return;
     }
     const piece = game.get(sq);
@@ -69,7 +71,14 @@
     } else {
       selected = null; legalTargets = [];
     }
-    render();
+    refresh();
+  }
+
+  function refresh() {
+    if (!api3) render2D();
+    if (api3) api3.setSelection(selected, legalTargets, sq => game.get(sq));
+    updateStatus();
+    updateMoves();
   }
 
   function updateStatus() {
@@ -108,8 +117,34 @@
 
   const newBtn = document.getElementById('playNewGame');
   const undoBtn = document.getElementById('playUndo');
-  if (newBtn) newBtn.addEventListener('click', () => { game.reset(); selected = null; legalTargets = []; lastMove = null; render(); });
-  if (undoBtn) undoBtn.addEventListener('click', () => { game.undo(); selected = null; legalTargets = []; lastMove = null; render(); });
+  if (newBtn) newBtn.addEventListener('click', () => {
+    game.reset(); selected = null; legalTargets = []; lastMove = null;
+    if (api3) api3.sync(game.board());
+    refresh();
+  });
+  if (undoBtn) undoBtn.addEventListener('click', () => {
+    game.undo(); selected = null; legalTargets = []; lastMove = null;
+    if (api3) api3.sync(game.board());
+    refresh();
+  });
 
-  render();
+  /* ---------- attach the 3D stage when ready ---------- */
+  function try3D() {
+    if (api3 || !window.SMC3D) return;
+    const stage = document.getElementById('stage3d');
+    const frame = boardEl.closest('.board-frame');
+    if (!stage) return;
+    try {
+      api3 = window.SMC3D.mount(stage, { interactive: true, onSquare: onSquareAction });
+      if (frame) frame.classList.add('has-3d');
+      api3.sync(game.board());
+      refresh();
+    } catch (err) {
+      api3 = null;
+    }
+  }
+  document.addEventListener('smc3d:ready', try3D);
+
+  refresh();
+  try3D();
 })();
