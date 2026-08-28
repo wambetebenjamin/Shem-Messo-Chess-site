@@ -124,28 +124,45 @@ main{ position:relative; z-index:1; }
   background:#fff;
 }
 
-/* ---------- Buttons ---------- */
+/* ---------- Buttons: gradient, glowing, alive ---------- */
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:10px;
-  font-family:var(--f-display); font-size:13px; font-weight:600; letter-spacing:.13em;
-  text-transform:uppercase; padding:15px 26px; border-radius:var(--r-sm);
-  transition:transform .25s var(--ease), box-shadow .25s ease, background .25s ease, border-color .25s ease;
+  font-family:var(--f-display); font-size:13px; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; padding:16px 28px; border-radius:14px;
+  position:relative; overflow:hidden;
+  transition:transform .28s var(--ease), box-shadow .28s ease, background .28s ease;
 }
-.btn i{ font-size:12px; }
+.btn i{ font-size:12px; transition:transform .3s var(--ease); }
+.btn:hover i{ transform:translateX(3px) scale(1.1); }
+.btn::after{
+  content:''; position:absolute; top:0; bottom:0; width:55%; left:-70%; pointer-events:none;
+  background:linear-gradient(105deg, transparent 15%, rgba(255,255,255,.5) 50%, transparent 85%);
+  transform:skewX(-18deg); transition:left .6s var(--ease);
+}
+.btn:hover::after{ left:130%; }
+.btn:active{ transform:translateY(1px) scale(.98); }
 .btn-orange{
-  background:var(--orange); color:#fff;
-  box-shadow:0 10px 26px rgba(222,97,86,.34);
+  background:linear-gradient(135deg, #F2785F, #E1543F 55%, #CF4432);
+  color:#fff;
+  animation:btnBreath 3.4s ease-in-out infinite;
 }
-.btn-orange:hover{ transform:translateY(-2px); background:var(--orange-hi); box-shadow:0 16px 40px rgba(222,97,86,.42); }
+.btn-orange:hover{ transform:translateY(-2px); }
+@keyframes btnBreath{
+  0%,100%{ box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 12px 30px rgba(222,97,86,.38), 0 4px 10px rgba(222,97,86,.20); }
+  50%{ box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 15px 40px rgba(222,97,86,.52), 0 5px 14px rgba(222,97,86,.30); }
+}
 .btn-ghost{
-  background:var(--jade-soft); color:var(--jade-deep);
-  border:1.5px solid rgba(31,138,109,.4);
+  border:2px solid transparent;
+  background:linear-gradient(#fff,#F6FBF7) padding-box, linear-gradient(135deg,#2AA886,#C9A227) border-box;
+  color:var(--jade-deep);
+  box-shadow:0 8px 22px rgba(31,138,109,.14);
 }
-.btn-ghost:hover{ transform:translateY(-2px); background:rgba(31,138,109,.16); box-shadow:0 12px 30px rgba(31,138,109,.18); }
+.btn-ghost:hover{ transform:translateY(-2px); box-shadow:0 16px 38px rgba(31,138,109,.24); }
 .btn-wa{
-  background:rgba(34,185,94,.12); color:#0E7A40; border:1.5px solid rgba(34,185,94,.4);
+  background:linear-gradient(135deg,#34C96D,#1DA851); color:#fff; border:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 10px 26px rgba(33,175,97,.30);
 }
-.btn-wa:hover{ background:rgba(34,185,94,.2); transform:translateY(-2px); }
+.btn-wa:hover{ transform:translateY(-2px); box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 16px 40px rgba(33,175,97,.42); }
 .btn-block{ width:100%; }
 
 /* ---------- Cards (the friendly white system) ---------- */
@@ -291,16 +308,20 @@ main{ position:relative; z-index:1; }
 
 /* ============ NOTATION TICKER ============ */
 .ticker{
-  position:relative; z-index:2; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-  background:rgba(238,246,240,.92); overflow:hidden; padding:13px 0;
+  position:relative; z-index:2;
+  background:linear-gradient(90deg,#156A54, #1F8A6D 45%, #C9A227 50%, #1F8A6D 55%, #14624E);
+  background-size:200% 100%; animation:ribbonFlow 18s linear infinite;
+  overflow:hidden; padding:14px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14), inset 0 -2px 0 rgba(0,0,0,.12);
 }
+@keyframes ribbonFlow{ from{ background-position:0 0; } to{ background-position:200% 0; } }
 .ticker-track{
   display:flex; gap:56px; width:max-content; animation:tick 46s linear infinite;
-  font-family:var(--f-mono); font-size:11.5px; letter-spacing:.2em; color:var(--dim);
+  font-family:var(--f-mono); font-size:11.5px; letter-spacing:.2em; color:rgba(233,248,239,.88);
   text-transform:uppercase; white-space:nowrap;
 }
-.ticker-track b{ color:var(--jade-deep); font-weight:600; }
-.ticker-track span i{ color:var(--orange); font-style:normal; margin:0 6px; }
+.ticker-track b{ color:#FFE08A; font-weight:600; }
+.ticker-track span i{ color:#FFB49A; font-style:normal; margin:0 6px; }
 @keyframes tick{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
 /* ============ GENERIC SECTIONS ============ */
@@ -361,7 +382,13 @@ ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-t
 }
 
 /* Stats band */
-.stats-band{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:linear-gradient(180deg, rgba(201,162,39,.06), rgba(31,138,109,.05)); }
+.stats-band{
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  background-image:radial-gradient(rgba(31,138,109,.13) 1.4px, transparent 1.4px),
+                   linear-gradient(90deg,#E7F4EC, #F6EFD9 48%, #FBEDE7);
+  background-size:26px 26px, auto;
+  animation:panDots 38s linear infinite;
+}
 .stats-grid{ display:grid; grid-template-columns:repeat(4,1fr); max-width:var(--max); margin:0 auto; }
 .stat{ padding:44px 30px; text-align:center; border-left:1px solid var(--line); }
 .stat:first-child{ border-left:none; }
@@ -463,6 +490,25 @@ ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-t
   background-size:auto, cover; background-position:0 0, center 40%;
   border-top:1px solid var(--line); border-bottom:1px solid var(--line);
 }
+
+/* sky paper + dot-grid skins */
+.bg-sky{
+  background-image:radial-gradient(rgba(31,138,109,.10) 1.4px, transparent 1.4px),
+                   linear-gradient(160deg,#EAF4F8 0%, #EDF6EF 55%, #F4F9F4 100%);
+  background-size:24px 24px, auto;
+  animation:panDots 36s linear infinite;
+}
+.bg-dots{
+  background-color:#FCFEFA;
+  background-image:radial-gradient(rgba(201,162,39,.16) 1.3px, transparent 1.3px),
+                   radial-gradient(rgba(31,138,109,.10) 1.1px, transparent 1.1px);
+  background-size:28px 28px, 28px 28px;
+  background-position:0 0, 14px 14px;
+  animation:panDots2 34s linear infinite;
+  border-top:1px solid var(--line);
+}
+@keyframes panDots{ to{ background-position:24px 24px, 0 0; } }
+@keyframes panDots2{ from{ background-position:0 0, 14px 14px; } to{ background-position:28px 28px, 42px 42px; } }
 
 /* photo cards get the same friendly lift as text cards */
 .prod-card{ transition:transform .3s var(--ease), box-shadow .3s ease; }
