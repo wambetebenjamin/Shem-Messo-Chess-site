@@ -294,12 +294,14 @@ html.js body.page-out{
 }
 .hero-word{
   font-family:var(--f-display); font-weight:700; color:var(--ink-deep);
+  text-shadow:0 2px 42px rgba(255,255,255,.55), 0 1px 10px rgba(255,255,255,.40);
   font-size:clamp(84px, 13vw, 190px); line-height:.94; letter-spacing:-.005em;
   animation:fadeUp 1s .05s var(--ease) both;
 }
 .hero-spaced{
   margin-top:22px; font-size:clamp(10.5px, 1vw, 13.5px); font-weight:600;
   letter-spacing:.5em; text-transform:uppercase; color:#2A4138; white-space:nowrap;
+  text-shadow:0 1px 14px rgba(255,255,255,.6);
   animation:fadeUp 1s .18s var(--ease) both;
 }
 .hero-rule{
@@ -313,6 +315,7 @@ html.js body.page-out{
 @keyframes ruleGrow{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
 .hero-blurb{
   max-width:470px; color:var(--sub); font-weight:400;
+  text-shadow:0 1px 16px rgba(255,255,255,.6);
   font-size:15px; line-height:1.85; animation:fadeUp 1s .42s var(--ease) both;
 }
 .hero-ctas{
@@ -443,7 +446,9 @@ ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-t
 /* CTA band: warm sunrise */
 .cta-band{
   position:relative; overflow:hidden; text-align:center; padding:120px 40px;
-  background-image:linear-gradient(0deg, rgba(242,247,246,.52), rgba(242,247,246,.68)),
+  background-image:
+    radial-gradient(60% 66% at 50% 42%, rgba(242,247,246,.88) 0%, rgba(242,247,246,.55) 48%, rgba(242,247,246,0) 80%),
+    linear-gradient(0deg, rgba(242,247,246,.52), rgba(242,247,246,.68)),
                    url('../assets/hero-morning.jpg');
   background-size:auto, cover; background-position:0 0, center 85%;
 }
@@ -479,7 +484,7 @@ ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-t
 .bg-checker{
   background-color:#FBFFFF;
   background-image:
-    linear-gradient(180deg, rgba(252,254,254,.46), rgba(252,254,254,.30)),
+    linear-gradient(180deg, rgba(252,254,254,.62), rgba(252,254,254,.46)),
     linear-gradient(45deg, rgba(31,138,109,.07) 25%, transparent 25%, transparent 75%, rgba(31,138,109,.07) 75%),
     linear-gradient(45deg, rgba(31,138,109,.07) 25%, transparent 25%, transparent 75%, rgba(31,138,109,.07) 75%),
     url('../assets/orig-05.jpg');
@@ -494,14 +499,14 @@ ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-t
 }
 .bg-mint{
   background-image:
-    linear-gradient(135deg, rgba(222,240,232,.62) 0%, rgba(224,240,246,.55) 100%),
+    linear-gradient(135deg, rgba(226,242,236,.86) 0%, rgba(228,242,247,.80) 100%),
     url('../assets/hero-dark-board.jpg');
   background-size:auto, cover; background-position:0 0, center 60%;
   border-top:1px solid var(--line); border-bottom:1px solid var(--line);
 }
 .bg-peach{
   background-image:
-    linear-gradient(135deg, rgba(226,238,248,.60) 0%, rgba(228,244,240,.52) 100%),
+    linear-gradient(135deg, rgba(229,240,249,.72) 0%, rgba(231,245,241,.64) 100%),
     url('../assets/orig-04.jpg');
   background-size:auto, cover; background-position:0 0, center 40%;
   border-top:1px solid var(--line); border-bottom:1px solid var(--line);
@@ -524,6 +529,19 @@ ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-t
 .timeline .tl-item:nth-child(4n+2) .tl-k{ color:#3E86C6; }
 .timeline .tl-item:nth-child(4n+3) .tl-k{ color:#8A63D2; }
 .timeline .tl-item:nth-child(4n+4) .tl-k{ color:#1F8A6D; }
+
+/* frosted heading chips: headlines stay readable while photos stay alive */
+.bg-checker .sec-head, .bg-mint .sec-head, .bg-peach .sec-head{
+  position:relative; z-index:2;
+  background:rgba(255,255,255,.58);
+  -webkit-backdrop-filter:blur(14px) saturate(1.12); backdrop-filter:blur(14px) saturate(1.12);
+  border:1px solid rgba(255,255,255,.75); border-radius:var(--r-md);
+  padding:26px 32px; width:fit-content; max-width:100%;
+  box-shadow:0 14px 40px rgba(24,58,50,.10);
+}
+.bg-mint .sec-head.center, .bg-peach .sec-head.center, .bg-checker .sec-head.center{
+  margin-left:auto; margin-right:auto;
+}
 
 /* never a dead-flat section: whisper dot texture by default */
 .section:not([class*="bg-"]){
