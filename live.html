@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Broadcast Room — Shem Messo Chess Academy</title>
+  <meta name="description" content="Watch academy chess live: Board 1 with live clocks, evaluation bar, move list and spectator feed — a grandmaster-style broadcast for school chess in Kericho.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232BF5A0'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%2304160D' font-family='serif'%3E&#9822;%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="live">
+
+  <div class="atmo" aria-hidden="true">
+    <div class="atmo-glow-a"></div><div class="atmo-glow-b"></div><div class="atmo-glow-c"></div>
+    <div class="atmo-vignette"></div>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand" aria-label="Shem Messo Chess Academy — home">
+        <span class="brand-mark"><i class="fas fa-chess-knight"></i></span>
+        <span class="brand-name">SHEM MESSO <b>CHESS</b><span class="brand-sub">ACADEMY · KERICHO</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" data-nav="home">HOME</a>
+        <a href="coaching.html" data-nav="coaching">COACHING</a>
+        <a href="tournaments.html" data-nav="tournaments">TOURNAMENTS</a>
+        <a href="live.html" data-nav="live">LIVE <span class="live-dot"></span></a>
+        <a href="play.html" data-nav="play">PLAY</a>
+        <a href="shop.html" data-nav="shop">SHOP</a>
+        <a href="about.html" data-nav="about">ABOUT</a>
+      </div>
+      <a href="contact.html" class="btn btn-orange nav-cta">ENROL NOW</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" data-nav="home">HOME</a>
+      <a href="coaching.html" data-nav="coaching">COACHING</a>
+      <a href="tournaments.html" data-nav="tournaments">TOURNAMENTS</a>
+      <a href="live.html" data-nav="live">LIVE <span class="live-dot"></span></a>
+      <a href="play.html" data-nav="play">PLAY</a>
+      <a href="shop.html" data-nav="shop">SHOP</a>
+      <a href="about.html" data-nav="about">ABOUT</a>
+      <a href="contact.html" style="color:var(--orange-hi);">ENROL NOW →</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============ BROADCAST HEADER ============ -->
+    <header class="page-hero" style="padding-bottom:60px;">
+      <div class="wrap">
+        <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>LIVE</span></div>
+        <span class="badge-live" style="margin-bottom:18px;"><span class="live-dot"></span> BROADCASTING · BOARD 1</span>
+        <h1 style="margin-top:16px;">The broadcast room</h1>
+        <p class="lead">Fixture days, the top boards stream here with live clocks, an evaluation bar and the spectator feed. Tonight's replay: the Opera Game line the juniors studied in week six.</p>
+      </div>
+    </header>
+
+    <!-- ============ BROADCAST ============ -->
+    <section class="section tight" style="padding-top:60px;">
+      <div class="bc-grid">
+        <!-- Stage -->
+        <div class="hud bc-stage reveal">
+          <div class="bc-topbar">
+            <span class="bc-title"><i class="fas fa-satellite-dish" style="color:var(--orange-hi); margin-right:10px;"></i> Kericho Inter-Schools League · Round 4</span>
+            <span class="hud-label"><span class="live-dot"></span> <span id="liveState">LIVE · ROUND 4 IN PROGRESS</span></span>
+          </div>
+
+          <!-- Black player + clock -->
+          <div class="hud player-row">
+            <div class="player-id">
+              <span class="player-chip b">CA</span>
+              <div><b>Chebet A.</b><span>Kericho Primary · U-12</span></div>
+            </div>
+            <div class="clock" id="clockB">10:00</div>
+          </div>
+
+          <div class="board-frame">
+            <div class="play-board" id="liveBoard"></div>
+          </div>
+
+          <!-- White player + clock -->
+          <div class="hud player-row">
+            <div class="player-id">
+              <span class="player-chip w">BK</span>
+              <div><b>Barasa K.</b><span>Kapsaos Boys · U-14</span></div>
+            </div>
+            <div class="clock" id="clockW">10:00</div>
+          </div>
+
+          <!-- Eval bar -->
+          <div class="eval-wrap">
+            <div class="eval-bar"><div class="eval-fill" id="evalFill"></div></div>
+            <div class="eval-readout">
+              <span>ENGINE</span><b id="evalNum">+0.2</b><span>10+0 RAPID</span>
+            </div>
+          </div>
+
+          <div class="result-banner" id="liveResult"></div>
+
+          <div class="bc-controls">
+            <button class="btn btn-ghost" id="bcPause"><i class="fas fa-pause"></i> Pause Feed</button>
+            <button class="btn btn-ghost" id="bcRestart"><i class="fas fa-rotate-left"></i> Restart Game</button>
+          </div>
+        </div>
+
+        <!-- Side rail -->
+        <div class="bc-side">
+          <div class="hud bc-panel reveal d1">
+            <span class="hud-label"><i class="fas fa-eye" style="color:var(--neon);"></i>&nbsp;TELEMETRY</span>
+            <div class="metric-row"><span class="metric-k">Spectators</span><span class="metric-v warm" id="liveViewers">128</span></div>
+            <div class="metric-row"><span class="metric-k">Boards live</span><span class="metric-v">4</span></div>
+            <div class="metric-row"><span class="metric-k">Time control</span><span class="metric-v cold">10 + 0</span></div>
+            <div class="metric-row"><span class="metric-k">Feed quality</span><span class="metric-v"><span class="ok-dot"></span>&nbsp;STABLE</span></div>
+          </div>
+
+          <div class="hud bc-panel reveal d2">
+            <span class="hud-label">MOVE LIST</span>
+            <div class="movelist" id="liveMoves" style="height:300px;"></div>
+          </div>
+
+          <div class="hud bc-panel reveal d3">
+            <span class="hud-label">SPECTATOR FEED · SIMULATED</span>
+            <div class="chat-feed" id="liveChat"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SCHEDULE ============ -->
+    <section class="section">
+      <div class="sec-head reveal">
+        <span class="eyebrow">ON THE CARD</span>
+        <h2>Upcoming broadcasts</h2>
+        <p>Ask for a reminder on WhatsApp and you'll get a message the moment a board goes live.</p>
+      </div>
+      <div class="grid-3">
+        <div class="hud sched-card reveal">
+          <span class="sched-when">SAT 26 SEP · 09:00 EAT</span>
+          <h3>Kericho Inter-Schools Open — Boards 1–4</h3>
+          <p>Full-day Swiss across eight categories. The flagship stream of the season.</p>
+          <a class="btn btn-wa" style="padding:11px 16px; font-size:11px;" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20remind%20me%20when%20the%20Kericho%20Open%20goes%20live%20on%20Sep%2026." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify me</a>
+        </div>
+        <div class="hud sched-card reveal d1">
+          <span class="sched-when">EVERY SATURDAY · 10:00 EAT</span>
+          <h3>Saturday Club Challenge — Board 1</h3>
+          <p>The academy's weekly internal ladder, streamed from the club room.</p>
+          <a class="btn btn-wa" style="padding:11px 16px; font-size:11px;" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20add%20me%20to%20the%20Saturday%20club%20stream%20reminders." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify me</a>
+        </div>
+        <div class="hud sched-card reveal d2">
+          <span class="sched-when">TERM 3 · DATE TBC</span>
+          <h3>Kericho vs Litein — Friendly Dual</h3>
+          <p>Two counties, ten boards, one stream. The fixture every learner talks about.</p>
+          <a class="btn btn-wa" style="padding:11px 16px; font-size:11px;" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20notify%20me%20when%20the%20Kericho%20vs%20Litein%20dual%20is%20scheduled." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta-band">
+      <span class="eyebrow" style="justify-content:center;">BETTER THAN WATCHING</span>
+      <h2 class="display">Play your own<br>game live</h2>
+      <p class="lead">Step off the spectator bench — the same engine runs the practice board, and the circuit is open.</p>
+      <div class="cta-row">
+        <a href="play.html" class="btn btn-orange"><i class="fas fa-play"></i> SEE IT IN ACTION</a>
+        <a href="tournaments.html#register" class="btn btn-ghost">Enter a tournament</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-mark"><i class="fas fa-chess-knight"></i></span>
+          <span class="brand-name">SHEM MESSO <b>CHESS</b><span class="brand-sub">ACADEMY · KERICHO</span></span>
+        </a>
+        <p>Chess coaching, live broadcasts, tournaments and materials for schools across Kericho County, Kenya.</p>
+      </div>
+      <div class="foot-col">
+        <h4>PLATFORM</h4>
+        <a href="live.html">Live broadcasts</a>
+        <a href="play.html">Play the board</a>
+        <a href="tournaments.html">Tournaments</a>
+        <a href="shop.html">Shop</a>
+      </div>
+      <div class="foot-col">
+        <h4>ACADEMY</h4>
+        <a href="coaching.html">Coaching</a>
+        <a href="about.html">About Shem</a>
+        <a href="contact.html">Enrol &amp; contact</a>
+        <a href="index.html">Home</a>
+      </div>
+      <div class="foot-col">
+        <h4>CONTACT</h4>
+        <a href="https://wa.me/254729037585" target="_blank" rel="noopener">WhatsApp +254 729 037 585</a>
+        <a href="tel:+254729037585">Call +254 729 037 585</a>
+        <a href="contact.html">Become a member</a>
+        <a href="tournaments.html#register">Register a learner</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SHEM MESSO CHESS ACADEMY</span>
+      <span>KERICHO · KENYA · EAT (UTC+3)</span>
+    </div>
+  </footer>
+
+  <script src="js/chess.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/live.js"></script>
+</body>
+</html>
