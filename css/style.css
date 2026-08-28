@@ -447,11 +447,7 @@ ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-t
 /* CTA band: warm sunrise */
 .cta-band{
   position:relative; overflow:hidden; text-align:center; padding:120px 40px;
-  background-image:
-    radial-gradient(42% 50% at 50% 40%, rgba(242,247,246,.74) 0%, rgba(242,247,246,.30) 55%, rgba(242,247,246,0) 86%),
-    linear-gradient(0deg, rgba(242,247,246,.18), rgba(242,247,246,.28)),
-                   var(--cta-img, url('../assets/hero-morning.jpg'));
-  background-size:auto, auto, cover; background-position:0 0, 0 0, var(--cta-pos, center 78%);
+  background:#DDEAE4;  /* photo is a real img.cta-photo; wash lives on ::after */
 }
 .cta-band::before{
   content:''; position:absolute; inset:0;
@@ -1059,3 +1055,14 @@ footer .brand-sub{ color:rgba(244,240,230,.4); }
   html{ scroll-behavior:auto; }
   .reveal{ opacity:1; transform:none; }
 }
+
+/* closing band photo layers: img -> ::before colour glows -> ::after paper wash -> content */
+.cta-photo{ position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover; }
+.cta-band::before{ z-index:1; }
+.cta-band::after{
+  content:''; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:
+    radial-gradient(48% 58% at 50% 42%, rgba(242,247,246,.88) 0%, rgba(242,247,246,.48) 55%, rgba(242,247,246,.10) 88%),
+    linear-gradient(0deg, rgba(242,247,246,.22), rgba(242,247,246,.32));
+}
+.cta-band > .eyebrow, .cta-band h2, .cta-band .lead{ position:relative; z-index:3; }
