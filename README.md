@@ -68,9 +68,12 @@ Then open `http://localhost:8000`.
   when streaming hardware/accounts are ready.
 - The site does not collect or store form submissions unless the Apps Script endpoint is set;
   otherwise it prepares a WhatsApp message for the visitor to review and send.
-- The site displays **only the academy's own photographs**: `assets/orig-01.jpg` up to `orig-05.jpg`,
+- The site displays **the academy's own photographs**: `assets/orig-01.jpg` up to `orig-05.jpg`,
   taken from the previous build, plus `assets/hero-morning.jpg`, the sunlit classroom that opens the
-  home page. No stock, generated or third-party imagery is used anywhere on the site.
+  home page. Nothing on the site depicts anyone who is not part of the academy.
+- `assets/shop-*.jpg` and `assets/board-topdown.jpg` are generated product photographs of
+  merchandise: chess sets, a clock, workbooks, medals and a board. They contain no people, and they
+  carry the shop and the equipment cards so the academy's own photographs are not repeated everywhere.
 
 ## Files
 
@@ -88,5 +91,12 @@ Then open `http://localhost:8000`.
     ├── orig-02.jpg                        # tournament hall mid-round
     ├── orig-03.jpg                        # learners in uniform between rounds
     ├── orig-04.jpg                        # learners celebrating a win
-    └── orig-05.jpg                        # learners together at a competition
+    ├── orig-05.jpg                        # learners together at a competition
+    ├── hero-morning.jpg                   # sunlit classroom, opens the home page
+    ├── shop-chess-set.jpg                 # generated merchandise photography, no people
+    ├── shop-chess-clock.jpg
+    ├── shop-workbook.jpg
+    ├── shop-club-kit.jpg
+    ├── shop-medals.jpg
+    └── board-topdown.jpg
 ```
