@@ -7,6 +7,9 @@
   <meta name="description" content="School coaching, private lessons and tournament preparation from Shem Messo Chess Academy in Kericho, Kenya. A structured method that builds real players.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232BF5A0'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%2304160D' font-family='serif'%3E&#9822;%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&amp;family=IBM+Plex+Mono:wght@400..700&amp;family=Karla:wght@300..700&amp;display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="coaching">
@@ -49,7 +52,11 @@
   <main>
     <!-- ============ PAGE HERO ============ -->
     <header class="page-hero">
-      <div class="page-hero-bg" style="background-image:url('assets/orig-01.jpg');"></div>
+      <div class="page-hero-bg" data-slides="7000" aria-hidden="true">
+        <img class="slide is-active" src="assets/orig-05.jpg" alt="" decoding="async">
+        <img class="slide" src="assets/orig-02.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="slide" src="assets/orig-04.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+      </div>
       <div class="wrap">
         <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>COACHING</span></div>
         <span class="eyebrow">PROGRAMMES · TERM-BASED &amp; PRIVATE</span>
@@ -62,53 +69,59 @@
       </div>
     </header>
 
-    <!-- ============ PROGRAMME CARDS ============ -->
+    <!-- ============ THE THREE TRACKS ============ -->
     <section class="section bg-dots">
       <div class="sec-head reveal">
         <span class="eyebrow">THE THREE TRACKS</span>
         <h2>Choose your opening</h2>
       </div>
-      <div class="grid-3">
-        <div class="hud prod-card reveal">
-          <div class="prod-media" style="height:200px;"><img src="assets/orig-05.jpg" alt="Learners together at a school chess competition"></div>
-          <div class="prod-body">
-          <h3>School Coaching</h3>
-          <span class="mono-tag">GROUP · TERM-BASED</span>
-          <ul class="tick">
-            <li>Weekly sessions inside your school, fitted to the timetable</li>
-            <li>Full club setup: curriculum, ladders, house tournaments</li>
-            <li>Learner progress tracked and reported each term</li>
-            <li>Bulk materials supplied at school rates</li>
-          </ul>
-          <a class="card-link" href="contact.html">Bring us to your school →</a>
+      <div class="rows">
+        <div class="row-item reveal">
+          <div class="row-media">
+            <img src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round" loading="lazy" decoding="async" class="pt-d">
+          </div>
+          <div class="row-body">
+            <h3>School Coaching</h3>
+            <span class="mono-tag">GROUP · TERM-BASED</span>
+            <ul class="tick">
+              <li>A coach comes to your school once a week, for the length of a term</li>
+              <li>We set the club up properly: register, ladder, house teams, a teacher to hold it together</li>
+              <li>End-of-term note on every learner: rating, strengths, what comes next</li>
+              <li>Sets, workbooks and clocks supplied in bulk at school rates</li>
+            </ul>
+            <a class="card-link" href="contact.html">Bring us to your school →</a>
           </div>
         </div>
-        <div class="hud prod-card reveal d1">
-          <div class="prod-media" style="height:200px;"><img src="assets/orig-01.jpg" alt="One-on-one coaching with Shem Messo"></div>
-          <div class="prod-body">
-          <h3>Private Lessons</h3>
-          <span class="mono-tag">1-ON-1 · FLEXIBLE</span>
-          <ul class="tick">
-            <li>Personal study plan built around the learner's games</li>
-            <li>Opening repertoire chosen for their style of play</li>
-            <li>Every game analysed afterwards, mistakes become lessons</li>
-            <li>Home, school or Saturday club sessions</li>
-          </ul>
-          <a class="card-link" href="contact.html">Book private lessons →</a>
+        <div class="row-item alt reveal d1">
+          <div class="row-media">
+            <img src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position" loading="lazy" decoding="async" class="pt-b">
+          </div>
+          <div class="row-body">
+            <h3>Private Lessons</h3>
+            <span class="mono-tag">1-ON-1 · FLEXIBLE</span>
+            <ul class="tick">
+              <li>One board, one learner, one idea at a time, drawn from their own games</li>
+              <li>Work between sessions set from the mistakes they actually made</li>
+              <li>Every game analysed afterwards, including the ones they would rather forget</li>
+              <li>At home, at school, or at the Saturday club</li>
+            </ul>
+            <a class="card-link" href="contact.html">Book private lessons →</a>
           </div>
         </div>
-        <div class="hud prod-card reveal d2">
-          <div class="prod-media" style="height:200px;"><img src="assets/orig-02.jpg" alt="Tournament round in progress"></div>
-          <div class="prod-body">
-          <h3>Tournament Prep</h3>
-          <span class="mono-tag">SQUAD · SEASONAL</span>
-          <ul class="tick">
-            <li>Squads formed by age category ahead of each fixture</li>
-            <li>Clock management, scoresheets and tournament rules</li>
-            <li>Simulated match play under real time pressure</li>
-            <li>Post-event analysis of every game played</li>
-          </ul>
-          <a class="card-link" href="tournaments.html">See the circuit →</a>
+        <div class="row-item reveal d2">
+          <div class="row-media">
+            <img src="assets/orig-05.jpg" alt="Learners sitting together at a competition" loading="lazy" decoding="async" class="pt-b">
+          </div>
+          <div class="row-body">
+            <h3>Tournament Prep</h3>
+            <span class="mono-tag">SQUAD · SEASONAL</span>
+            <ul class="tick">
+              <li>Squads named by age band a few weeks before each fixture</li>
+              <li>A pre-fixture camp: openings, time trouble, and the rules arbiters enforce</li>
+              <li>Match-day routine rehearsed until it is boring: clock, scoresheet, handshake</li>
+              <li>Every game from the day goes through analysis afterwards</li>
+            </ul>
+            <a class="card-link" href="tournaments.html">See the circuit →</a>
           </div>
         </div>
       </div>
@@ -176,7 +189,7 @@
 
     <!-- ============ CTA ============ -->
     <section class="cta-band">
-      <img class="cta-photo" src="assets/orig-02.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 40%;">
+      <img class="cta-photo pt-c" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" loading="lazy" decoding="async" style="object-position:center 40%;">
       <div class="boardwave" aria-hidden="true"></div>
       <span class="eyebrow" style="justify-content:center;">DEVELOP YOUR PIECES</span>
       <h2 class="display">Start with the<br>first lesson</h2>
@@ -226,5 +239,6 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/slides.js"></script>
 </body>
 </html>

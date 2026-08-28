@@ -7,6 +7,9 @@
   <meta name="description" content="Watch academy chess live: Board 1 with live clocks, evaluation bar, move list and spectator feed: a grandmaster-style broadcast for school chess in Kericho.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232BF5A0'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%2304160D' font-family='serif'%3E&#9822;%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&amp;family=IBM+Plex+Mono:wght@400..700&amp;family=Karla:wght@300..700&amp;display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="live">
@@ -49,6 +52,11 @@
   <main>
     <!-- ============ BROADCAST HEADER ============ -->
     <header class="page-hero" style="padding-bottom:60px;">
+      <div class="page-hero-bg" data-slides="7000" aria-hidden="true">
+        <img class="slide is-active" src="assets/orig-03.jpg" alt="" decoding="async">
+        <img class="slide" src="assets/orig-05.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="slide" src="assets/orig-01.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+      </div>
       <div class="wrap">
         <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>LIVE</span></div>
         <span class="badge-live" style="margin-bottom:18px;"><span class="live-dot"></span> BROADCASTING · BOARD 1</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -137,44 +145,53 @@
       </div>
     </section>
 
-    <!-- ============ SCHEDULE ============ -->
-    <section class="section bg-checker">
-      <div class="sec-head reveal">
-        <span class="eyebrow">ON THE CARD</span>
-        <h2>Upcoming broadcasts</h2>
-        <p>Ask for a reminder on WhatsApp and you'll get a message the moment a board goes live.</p>
+    <!-- ============ ROOM TELEMETRY ============ -->
+    <section class="stats-band">
+      <div class="stats-grid">
+        <div class="stat"><div class="num"><span data-jitter="128|18">128</span></div><div class="lbl">Watching right now</div></div>
+        <div class="stat"><div class="num"><span data-count="4">0</span></div><div class="lbl">Boards on air</div></div>
+        <div class="stat"><div class="num"><span data-count="2">0</span></div><div class="lbl">Counties covered</div></div>
+        <div class="stat"><div class="num"><span data-count="15">0</span><em>+</em></div><div class="lbl">Fixtures streamed</div></div>
       </div>
-      <div class="grid-3">
-        <div class="hud sched-card reveal">
-          <div class="prod-media" style="height:150px;"><img src="assets/orig-02.jpg" alt="Inter-school tournament hall"></div>
-          <div class="sched-body"><span class="sched-when">SAT 26 SEP · 09:00 EAT</span>
-          <h3>Kericho Inter-Schools Open · Boards 1 to 4</h3>
-          <p>Full-day Swiss across eight categories. The flagship stream of the season.</p>
-          <a class="btn btn-wa" style="padding:11px 16px; font-size:11px;" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20remind%20me%20when%20the%20Kericho%20Open%20goes%20live%20on%20Sep%2026." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify me</a>
+    </section>
+
+    <!-- ============ INSIDE THE ROOM ============ -->
+    <section class="section tight bg-sky">
+      <div class="grid-2" style="align-items:stretch;">
+        <div class="split-copy reveal">
+          <span class="eyebrow">BEHIND THE FEED</span>
+          <h2 class="display" style="font-size:clamp(26px,3.2vw,40px); margin:18px 0 18px;">One laptop,<br>one board, one hall</h2>
+          <p class="lead">The broadcast setup is deliberately simple: a board on a trestle table, a laptop relaying the moves, and Shem calling the position for anyone watching from home.</p>
+          <p class="lead">Boards 1 to 4 go out live on fixture days. Between fixtures the room replays academy study games, so there is nearly always something on.</p>
+          <ul class="checklist">
+            <li><span class="ck"><i class="fas fa-check"></i></span> Live clocks and evaluation bar, updated move by move</li>
+            <li><span class="ck"><i class="fas fa-check"></i></span> Spectator feed for parents, relatives and whole classes</li>
+            <li><span class="ck"><i class="fas fa-check"></i></span> Replays of study games on non-fixture evenings</li>
+          </ul>
+          <div style="margin-top:30px; display:flex; gap:14px; flex-wrap:wrap;">
+            <a href="tournaments.html#register" class="btn btn-orange">ENTER A FIXTURE</a>
+            <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20please%20remind%20me%20whenever%20a%20board%20goes%20live." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Get a live alert</a>
           </div>
         </div>
-        <div class="hud sched-card reveal d1">
-          <div class="prod-media" style="height:150px;"><img src="assets/orig-03.jpg" alt="Learners gathered between rounds"></div>
-          <div class="sched-body"><span class="sched-when">EVERY SATURDAY · 10:00 EAT</span>
-          <h3>Saturday Club Challenge · Board 1</h3>
-          <p>The academy's weekly internal ladder, streamed from the club room.</p>
-          <a class="btn btn-wa" style="padding:11px 16px; font-size:11px;" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20add%20me%20to%20the%20Saturday%20club%20stream%20reminders." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify me</a>
+        <div class="split-media reveal d1">
+          <div class="hud float-tag">
+            <span class="hud-label"><span class="live-dot"></span> ON AIR · BOARD 1</span>
+            <span class="hud-value">10<span class="unit">+0 RAPID</span></span>
           </div>
-        </div>
-        <div class="hud sched-card reveal d2">
-          <div class="prod-media" style="height:150px;"><img src="assets/orig-04.jpg" alt="Learners celebrating after a fixture"></div>
-          <div class="sched-body"><span class="sched-when">TERM 3 · DATE TBC</span>
-          <h3>Kericho vs Litein Friendly Dual</h3>
-          <p>Two counties, ten boards, one stream. The fixture every learner talks about.</p>
-          <a class="btn btn-wa" style="padding:11px 16px; font-size:11px;" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20notify%20me%20when%20the%20Kericho%20vs%20Litein%20dual%20is%20scheduled." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify me</a>
+          <div class="slide-frame pt-d" data-slides="8000">
+              <img class="slide is-active" src="assets/orig-04.jpg" alt="Learners celebrating a tournament win" data-cap="Learners celebrating a tournament win" decoding="async">
+              <img class="slide" src="assets/orig-05.jpg" alt="Learners sitting together at a competition" data-cap="Learners sitting together at a competition" loading="lazy" decoding="async" aria-hidden="true">
+              <img class="slide" src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round" data-cap="Learners in uniform between rounds" loading="lazy" decoding="async" aria-hidden="true">
           </div>
+          <p class="media-cap"><span data-cap-target>Learners celebrating a tournament win</span></p>
         </div>
       </div>
     </section>
 
+
     <!-- ============ CTA ============ -->
     <section class="cta-band">
-      <img class="cta-photo" src="assets/orig-03.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 40%;">
+      <img class="cta-photo pt-b" src="assets/orig-05.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 40%;">
       <div class="boardwave" aria-hidden="true"></div>
       <span class="eyebrow" style="justify-content:center;">BETTER THAN WATCHING</span>
       <h2 class="display">Play your own<br>game live</h2>
@@ -227,5 +244,6 @@
   <script src="js/chess.js"></script>
   <script src="js/main.js"></script>
   <script src="js/live.js"></script>
+  <script src="js/slides.js"></script>
 </body>
 </html>

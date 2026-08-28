@@ -7,6 +7,9 @@
   <meta name="description" content="Tournament chess sets, digital clocks and training workbooks for schools building a chess club, ordered with one WhatsApp message. Kericho, Kenya.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232BF5A0'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%2304160D' font-family='serif'%3E&#9822;%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&amp;family=IBM+Plex+Mono:wght@400..700&amp;family=Karla:wght@300..700&amp;display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="shop">
@@ -49,7 +52,11 @@
   <main>
     <!-- ============ PAGE HERO ============ -->
     <header class="page-hero">
-      <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1602968407815-5963b28c66af?auto=format&fit=crop&w=700&q=75');"></div>
+      <div class="page-hero-bg" data-slides="7000" aria-hidden="true">
+        <img class="slide is-active" src="assets/shop-club-kit.jpg" alt="" decoding="async">
+        <img class="slide" src="assets/orig-05.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="slide" src="assets/orig-03.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+      </div>
       <div class="wrap">
         <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>SHOP</span></div>
         <span class="eyebrow">MATERIALS SUPPLY · WHATSAPP ORDERS</span>
@@ -68,7 +75,7 @@
       <div class="grid-3">
         <div class="hud prod-card reveal">
           <div class="prod-media">
-            <img src="https://images.unsplash.com/photo-1602968407815-5963b28c66af?auto=format&fit=crop&w=700&q=75" alt="Wooden chess set">
+<img loading="lazy" decoding="async" src="assets/shop-chess-set.jpg" alt="A tournament chess set: weighted pieces, folding board and carry pouch" class="pt-b">
             <span class="prod-price-tag">KES 1,800</span>
           </div>
           <div class="prod-body">
@@ -80,7 +87,7 @@
         </div>
         <div class="hud prod-card reveal d1">
           <div class="prod-media">
-            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=700&q=75" alt="Open workbook pages">
+<img loading="lazy" decoding="async" src="assets/shop-workbook.jpg" alt="The printed chess training workbook with a scoresheet pad and pencil">
             <span class="prod-price-tag">KES 450</span>
           </div>
           <div class="prod-body">
@@ -92,7 +99,7 @@
         </div>
         <div class="hud prod-card reveal d2">
           <div class="prod-media">
-            <img src="https://images.unsplash.com/photo-1704265586142-db3e17d0dea0?auto=format&fit=crop&w=700&q=75" alt="Close-up stopwatch">
+<img loading="lazy" decoding="async" src="assets/shop-chess-clock.jpg" alt="A digital chess clock for timed games">
             <span class="prod-price-tag">KES 2,600</span>
           </div>
           <div class="prod-body">
@@ -104,14 +111,16 @@
         </div>
       </div>
 
-      <!-- Club kit banner -->
-      <div class="hud reveal" style="max-width:var(--max); margin:26px auto 0; padding:36px 40px; display:flex; gap:30px; align-items:center; flex-wrap:wrap; justify-content:space-between;">
-        <div style="max-width:620px;">
+      <div class="row-item reveal" style="margin-top:26px;">
+        <div class="row-media">
+          <img src="assets/shop-club-kit.jpg" alt="A complete school chess club kit: boards, pieces, clocks and workbooks" loading="lazy" decoding="async">
+        </div>
+        <div class="row-body">
           <span class="eyebrow">FOR SCHOOLS · CUSTOM QUOTE</span>
           <h3 class="display" style="font-size:clamp(20px,2.4vw,28px); margin:14px 0 8px;">The Complete Club Kit</h3>
           <p class="lead" style="font-size:15px;">Eight tournament sets, two clocks, workbooks for the founding squad and a starter coaching visit: everything a school needs to launch a club in one delivery. Priced per school on WhatsApp.</p>
+          <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20we%27d%20like%20a%20quote%20for%20the%20Complete%20Club%20Kit%20for%20our%20school." target="_blank" rel="noopener" class="btn btn-orange attn" style="margin-top:14px;">GET A SCHOOL QUOTE <i class="fas fa-arrow-right"></i></a>
         </div>
-        <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20we%27d%20like%20a%20quote%20for%20the%20Complete%20Club%20Kit%20for%20our%20school." target="_blank" rel="noopener" class="btn btn-orange attn">GET A SCHOOL QUOTE <i class="fas fa-arrow-right"></i></a>
       </div>
     </section>
 
@@ -142,7 +151,7 @@
 
     <!-- ============ CTA ============ -->
     <section class="cta-band">
-      <img class="cta-photo" src="assets/orig-04.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 40%;">
+      <img class="cta-photo pt-d" src="assets/orig-04.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 40%;">
       <div class="boardwave" aria-hidden="true"></div>
       <span class="eyebrow" style="justify-content:center;">SUPPLY THE ROOKS</span>
       <h2 class="display">Your club starts<br>with one set</h2>
@@ -192,5 +201,6 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/slides.js"></script>
 </body>
 </html>
