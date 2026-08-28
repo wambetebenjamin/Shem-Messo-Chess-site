@@ -68,11 +68,9 @@ Then open `http://localhost:8000`.
   when streaming hardware/accounts are ready.
 - The site does not collect or store form submissions unless the Apps Script endpoint is set;
   otherwise it prepares a WhatsApp message for the visitor to review and send.
-- The site displays the **original photos from the previous build**: `assets/orig-01.jpg` up to `orig-05.jpg`
-  (coach-with-learner plus the four gallery shots) were extracted from the old page; the hero and three
-  product photos are hotlinked from Unsplash exactly as the original site served them.
-- `assets/hero-chess-academy.jpg`, `coaching-session.jpg`, `tournament-focus.jpg`, `chess-materials.jpg`
-  are spare editorial images, currently unreferenced.
+- The site displays **only the academy's own photographs**: `assets/orig-01.jpg` up to `orig-05.jpg`,
+  taken from the previous build. No stock, generated or third-party imagery is used anywhere on the
+  site, and those five files are the only images in `assets/`.
 
 ## Files
 
@@ -86,11 +84,9 @@ Then open `http://localhost:8000`.
 │   ├── main.js       chess.js         play.js            live.js
 ├── README.md
 └── assets/
-    ├── orig-01.jpg … orig-05.jpg          # original site photos (displayed)
-    ├── hero-morning.jpg                   # sunlit classroom hero photo (displayed)
-    ├── hero-dark-board.jpg                # dark board hero variant (spare)
-    ├── hero-chess-academy.jpg             # spare editorial images
-    ├── coaching-session.jpg
-    ├── tournament-focus.jpg
-    └── chess-materials.jpg
+    ├── orig-01.jpg                        # coach with one learner
+    ├── orig-02.jpg                        # tournament hall mid-round
+    ├── orig-03.jpg                        # learners in uniform between rounds
+    ├── orig-04.jpg                        # learners celebrating a win
+    └── orig-05.jpg                        # learners together at a competition
 ```

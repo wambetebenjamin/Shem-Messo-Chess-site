@@ -288,7 +288,7 @@ html.js body.page-out{
 }
 .hero-bg{
   position:absolute; inset:0; z-index:0;
-  background:url('../assets/hero-morning.jpg') center/cover no-repeat;
+  background:url('../assets/orig-05.jpg') center/cover no-repeat;
   animation:heroStill 1.6s var(--ease) both;
 }
 @keyframes heroStill{ from{ transform:scale(1.05); opacity:.35; } to{ transform:scale(1); opacity:1; } }
@@ -508,7 +508,7 @@ ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-t
     linear-gradient(180deg, var(--paper), rgba(242,247,246,0) 120px),
     linear-gradient(0deg, var(--paper), rgba(242,247,246,0) 120px),
     linear-gradient(135deg, rgba(226,242,236,.46) 0%, rgba(228,242,247,.36) 100%),
-    url('../assets/hero-dark-board.jpg');
+    url('../assets/orig-02.jpg');
   background-size:auto, auto, auto, cover; background-position:0 0, 0 0, 0 0, center 60%;
 }
 .bg-peach{
