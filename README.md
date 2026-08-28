@@ -65,8 +65,11 @@ Then open `http://localhost:8000`.
   when streaming hardware/accounts are ready.
 - The site does not collect or store form submissions unless the Apps Script endpoint is set;
   otherwise it prepares a WhatsApp message for the visitor to review and send.
-- Photography in `assets/` is AI-generated editorial imagery. Replace it with approved academy
-  photography whenever available if the site should depict actual learners or events.
+- The site displays the **original photos from the previous build**: `assets/orig-01.jpg`–`orig-05.jpg`
+  (coach-with-learner plus the four gallery shots) were extracted from the old page; the hero and three
+  product photos are hotlinked from Unsplash exactly as the original site served them.
+- `assets/hero-chess-academy.jpg`, `coaching-session.jpg`, `tournament-focus.jpg`, `chess-materials.jpg`
+  are spare editorial images, currently unreferenced.
 
 ## Files
 
@@ -80,7 +83,8 @@ Then open `http://localhost:8000`.
 │   ├── main.js       chess.js         play.js            live.js
 ├── README.md
 └── assets/
-    ├── hero-chess-academy.jpg
+    ├── orig-01.jpg … orig-05.jpg          # original site photos (displayed)
+    ├── hero-chess-academy.jpg             # spare editorial images
     ├── coaching-session.jpg
     ├── tournament-focus.jpg
     └── chess-materials.jpg
