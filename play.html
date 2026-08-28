@@ -52,7 +52,11 @@
   <main>
     <!-- ============ PAGE HERO ============ -->
     <header class="page-hero" style="padding-bottom:60px;">
-      <div class="page-hero-bg" style="background-image:url('assets/coaching-session.jpg');"></div>
+      <div class="page-hero-bg" data-slides="7000" aria-hidden="true">
+        <img class="slide is-active" src="assets/coaching-session.jpg" alt="" decoding="async">
+        <img class="slide" src="assets/chess-materials.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="slide" src="assets/hero-dark-board.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+      </div>
       <div class="wrap">
         <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>PLAY</span></div>
         <span class="eyebrow">THE PRACTICE HALL</span>
@@ -101,17 +105,26 @@
       </div>
       <div class="mosaic reveal">
         <figure>
-          <img src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position" loading="lazy" decoding="async">
-          <figcaption>One board, one learner, one idea</figcaption>
-        </figure>
+        <div class="slide-frame" data-slides="8000">
+            <img class="slide is-active" src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position" data-cap="Coach Shem Messo with a learner" decoding="async">
+            <img class="slide" src="assets/coaching-session.jpg" alt="A chess coach guiding a small group of learners around a chessboard" data-cap="A chess coach with a small group of learners" loading="lazy" decoding="async" aria-hidden="true">
+        </div>
+        <figcaption><span class="cap-text" data-cap-target>One board, one learner, one idea</span></figcaption>
+      </figure>
         <figure>
-          <img src="assets/orig-05.jpg" alt="Learners sitting together at a school chess competition" loading="lazy" decoding="async">
-          <figcaption>Club afternoon · Kericho</figcaption>
-        </figure>
+        <div class="slide-frame" data-slides="8000">
+            <img class="slide is-active" src="assets/orig-05.jpg" alt="Learners sitting together at a competition" data-cap="Learners sitting together at a competition" decoding="async">
+            <img class="slide" src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round" data-cap="Learners in uniform between rounds" loading="lazy" decoding="async" aria-hidden="true">
+        </div>
+        <figcaption><span class="cap-text" data-cap-target>Club afternoon · Kericho</span></figcaption>
+      </figure>
         <figure>
-          <img src="assets/chess-materials.jpg" alt="Academy boards, clocks and workbooks laid out for a session" loading="lazy" decoding="async">
-          <figcaption>Boards, clocks &amp; workbooks</figcaption>
-        </figure>
+        <div class="slide-frame" data-slides="8000">
+            <img class="slide is-active" src="assets/chess-materials.jpg" alt="A tournament chess set, chess clock and plain training workbook" data-cap="A tournament set, clock and training workbook" decoding="async">
+            <img class="slide" src="assets/hero-dark-board.jpg" alt="Chess pieces in dramatic light" data-cap="Chess pieces in dramatic light" loading="lazy" decoding="async" aria-hidden="true">
+        </div>
+        <figcaption><span class="cap-text" data-cap-target>Boards, clocks &amp; workbooks</span></figcaption>
+      </figure>
       </div>
     </section>
 
@@ -154,8 +167,12 @@
             <span class="hud-label">DAILY WARM-UP</span>
             <span class="hud-value">10<span class="unit">MINUTES A DAY</span></span>
           </div>
-          <img src="assets/hero-dark-board.jpg" alt="Chess pieces in dramatic low light" loading="lazy" decoding="async">
-          <p class="media-cap">Academy pieces set up for the daily warm-up</p>
+          <div class="slide-frame" data-slides="8000">
+              <img class="slide is-active" src="assets/hero-dark-board.jpg" alt="Chess pieces in dramatic light" data-cap="Chess pieces in dramatic light" decoding="async">
+              <img class="slide" src="assets/chess-materials.jpg" alt="A tournament chess set, chess clock and plain training workbook" data-cap="A tournament set, clock and training workbook" loading="lazy" decoding="async" aria-hidden="true">
+              <img class="slide" src="assets/coaching-session.jpg" alt="A chess coach guiding a small group of learners around a chessboard" data-cap="A chess coach with a small group of learners" loading="lazy" decoding="async" aria-hidden="true">
+          </div>
+          <p class="media-cap"><span data-cap-target>Chess pieces in dramatic light</span></p>
         </div>
         <div class="split-copy reveal d1">
           <span class="eyebrow">COACH'S HABIT</span>
@@ -230,5 +247,6 @@
   <script src="js/chess.js"></script>
   <script src="js/main.js"></script>
   <script src="js/play.js"></script>
+  <script src="js/slides.js"></script>
 </body>
 </html>

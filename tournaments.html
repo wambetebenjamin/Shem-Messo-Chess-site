@@ -52,7 +52,11 @@
   <main>
     <!-- ============ PAGE HERO ============ -->
     <header class="page-hero">
-      <div class="page-hero-bg" style="background-image:url('assets/orig-02.jpg');"></div>
+      <div class="page-hero-bg" data-slides="7000" aria-hidden="true">
+        <img class="slide is-active" src="assets/orig-02.jpg" alt="" decoding="async">
+        <img class="slide" src="assets/orig-04.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="slide" src="assets/tournament-focus.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+      </div>
       <div class="wrap">
         <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>TOURNAMENTS</span></div>
         <span class="eyebrow">THE CIRCUIT · SEASON 26</span>
@@ -149,17 +153,26 @@
       </div>
       <div class="photo-strip reveal" style="margin-top:46px;">
         <figure>
-          <img src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position" loading="lazy" decoding="async">
-          <figcaption>Board-side coaching · every round</figcaption>
-        </figure>
+        <div class="slide-frame" data-slides="8000">
+            <img class="slide is-active" src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position" data-cap="Coach Shem Messo with a learner" decoding="async">
+            <img class="slide" src="assets/coaching-session.jpg" alt="A chess coach guiding a small group of learners around a chessboard" data-cap="A chess coach with a small group of learners" loading="lazy" decoding="async" aria-hidden="true">
+        </div>
+        <figcaption><span class="cap-text" data-cap-target>Board-side coaching · every round</span></figcaption>
+      </figure>
         <figure>
-          <img src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round" loading="lazy" decoding="async">
-          <figcaption>School squads in uniform</figcaption>
-        </figure>
+        <div class="slide-frame" data-slides="8000">
+            <img class="slide is-active" src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round" data-cap="Learners in uniform between rounds" decoding="async">
+            <img class="slide" src="assets/orig-05.jpg" alt="Learners sitting together at a competition" data-cap="Learners sitting together at a competition" loading="lazy" decoding="async" aria-hidden="true">
+        </div>
+        <figcaption><span class="cap-text" data-cap-target>School squads in uniform</span></figcaption>
+      </figure>
         <figure>
-          <img src="assets/chess-materials.jpg" alt="Academy boards, clocks and workbooks laid out for a session" loading="lazy" decoding="async">
-          <figcaption>Boards, clocks &amp; scoresheets</figcaption>
-        </figure>
+        <div class="slide-frame" data-slides="8000">
+            <img class="slide is-active" src="assets/chess-materials.jpg" alt="A tournament chess set, chess clock and plain training workbook" data-cap="A tournament set, clock and training workbook" decoding="async">
+            <img class="slide" src="assets/hero-dark-board.jpg" alt="Chess pieces in dramatic light" data-cap="Chess pieces in dramatic light" loading="lazy" decoding="async" aria-hidden="true">
+        </div>
+        <figcaption><span class="cap-text" data-cap-target>Boards, clocks &amp; scoresheets</span></figcaption>
+      </figure>
       </div>
     </section>
 
@@ -171,8 +184,12 @@
             <span class="hud-label">FIXTURE DAY · 09:00 EAT</span>
             <span class="hud-value">7<span class="unit">ROUNDS · SWISS</span></span>
           </div>
-          <img src="assets/orig-05.jpg" alt="Learners sitting together at a school chess competition" loading="lazy" decoding="async">
-          <p class="media-cap">A school competition hall, boards set for the round</p>
+          <div class="slide-frame" data-slides="8000">
+              <img class="slide is-active" src="assets/orig-05.jpg" alt="Learners sitting together at a competition" data-cap="Learners sitting together at a competition" decoding="async">
+              <img class="slide" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" data-cap="An inter-school tournament hall, mid-round" loading="lazy" decoding="async" aria-hidden="true">
+              <img class="slide" src="assets/orig-04.jpg" alt="Learners celebrating a tournament win" data-cap="Learners celebrating a tournament win" loading="lazy" decoding="async" aria-hidden="true">
+          </div>
+          <p class="media-cap"><span data-cap-target>Learners sitting together at a competition</span></p>
         </div>
         <div class="split-copy reveal d1">
           <span class="eyebrow">MOVE 4 · D4</span>
@@ -276,7 +293,12 @@
       </div>
       <div class="grid-3">
         <div class="hud prod-card reveal">
-          <div class="prod-media" style="height:210px;"><img src="assets/orig-04.jpg" alt="Learners celebrating a tournament win" loading="lazy" decoding="async"></div>
+          <div class="prod-media" style="height:210px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/orig-04.jpg" alt="Learners celebrating a tournament win" decoding="async">
+                <img class="slide" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="prod-body">
             <h3>Medals &amp; Points</h3>
             <p>Medals in every category, trophies for the overall top three, and circuit points that accumulate across the season.</p>
@@ -284,7 +306,12 @@
           </div>
         </div>
         <div class="hud prod-card reveal d1">
-          <div class="prod-media" style="height:210px;"><img src="assets/coaching-session.jpg" alt="A coaching session with the academy squad" loading="lazy" decoding="async"></div>
+          <div class="prod-media" style="height:210px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/coaching-session.jpg" alt="A chess coach guiding a small group of learners around a chessboard" decoding="async">
+                <img class="slide" src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="prod-body">
             <h3>Squad Prep</h3>
             <p>Registered players get the pre-fixture squad session: opening repertoire, time-pressure drills and match simulation.</p>
@@ -292,7 +319,12 @@
           </div>
         </div>
         <div class="hud prod-card reveal d2">
-          <div class="prod-media" style="height:210px;"><img src="assets/hero-dark-board.jpg" alt="Chess pieces in dramatic low light" loading="lazy" decoding="async"></div>
+          <div class="prod-media" style="height:210px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/hero-dark-board.jpg" alt="Chess pieces in dramatic light" decoding="async">
+                <img class="slide" src="assets/chess-materials.jpg" alt="A tournament chess set, chess clock and plain training workbook" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="prod-body">
             <h3>Clock Discipline</h3>
             <p>Real clocks from the first round, so learners discover early that thinking well and thinking fast are different skills.</p>
@@ -354,5 +386,6 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/slides.js"></script>
 </body>
 </html>

@@ -52,7 +52,11 @@
   <main>
     <!-- ============ PAGE HERO ============ -->
     <header class="page-hero">
-      <div class="page-hero-bg" style="background-image:url('assets/tournament-focus.jpg');"></div>
+      <div class="page-hero-bg" data-slides="7000" aria-hidden="true">
+        <img class="slide is-active" src="assets/tournament-focus.jpg" alt="" decoding="async">
+        <img class="slide" src="assets/orig-04.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="slide" src="assets/coaching-session.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+      </div>
       <div class="wrap">
         <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>ABOUT</span></div>
         <span class="eyebrow">THE COACH · THE ACADEMY</span>
@@ -80,8 +84,12 @@
             <span class="hud-label">COACH SHEM WITH A LEARNER</span>
             <span class="hud-value">MOVE <span class="unit">BY MOVE</span></span>
           </div>
-          <img src="assets/orig-01.jpg" alt="Coach Shem Messo coaching a learner" loading="lazy" decoding="async">
-          <p class="media-cap">Coach Shem Messo with a learner, move by move</p>
+          <div class="slide-frame" data-slides="8000">
+              <img class="slide is-active" src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position" data-cap="Coach Shem Messo with a learner" decoding="async">
+              <img class="slide" src="assets/coaching-session.jpg" alt="A chess coach guiding a small group of learners around a chessboard" data-cap="A chess coach with a small group of learners" loading="lazy" decoding="async" aria-hidden="true">
+              <img class="slide" src="assets/hero-chess-academy.jpg" alt="A learner considering her next move with a coach nearby" data-cap="A learner considering her next move" loading="lazy" decoding="async" aria-hidden="true">
+          </div>
+          <p class="media-cap"><span data-cap-target>Coach Shem Messo with a learner</span></p>
         </div>
       </div>
     </section>
@@ -119,20 +127,40 @@
       </div>
       <div class="grid-4 reveal">
         <figure class="hud prod-card" style="margin:0;">
-          <div class="prod-media" style="height:230px;"><img src="assets/orig-02.jpg" alt="Learners and coaches at an inter-school chess tournament"></div>
-          <figcaption style="padding:16px 20px; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.16em; color:var(--sub); text-transform:uppercase;"><i class="fas fa-camera" style="color:var(--neon); margin-right:8px;"></i>Inter-school tournament day</figcaption>
+          <div class="prod-media" style="height:230px;">
+            <div class="slide-frame" data-slides="9000">
+                <img class="slide is-active" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" data-cap="An inter-school tournament hall, mid-round" decoding="async">
+                <img class="slide" src="assets/tournament-focus.jpg" alt="Two school learners playing a timed chess game" data-cap="Two school learners playing a timed game" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
+          <figcaption style="padding:16px 20px; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.16em; color:var(--sub); text-transform:uppercase;"><i class="fas fa-camera" style="color:var(--neon); margin-right:8px;"></i><span class="cap-text" data-cap-target>Inter-school tournament day</span></figcaption>
         </figure>
         <figure class="hud prod-card" style="margin:0;">
-          <div class="prod-media" style="height:230px;"><img src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round"></div>
-          <figcaption style="padding:16px 20px; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.16em; color:var(--sub); text-transform:uppercase;"><i class="fas fa-camera" style="color:var(--neon); margin-right:8px;"></i>Waiting for the next round</figcaption>
+          <div class="prod-media" style="height:230px;">
+            <div class="slide-frame" data-slides="9000">
+                <img class="slide is-active" src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round" data-cap="Learners in uniform between rounds" decoding="async">
+                <img class="slide" src="assets/orig-05.jpg" alt="Learners sitting together at a competition" data-cap="Learners sitting together at a competition" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
+          <figcaption style="padding:16px 20px; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.16em; color:var(--sub); text-transform:uppercase;"><i class="fas fa-camera" style="color:var(--neon); margin-right:8px;"></i><span class="cap-text" data-cap-target>Waiting for the next round</span></figcaption>
         </figure>
         <figure class="hud prod-card" style="margin:0;">
-          <div class="prod-media" style="height:230px;"><img src="assets/orig-04.jpg" alt="Learners celebrating during a tournament"></div>
-          <figcaption style="padding:16px 20px; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.16em; color:var(--sub); text-transform:uppercase;"><i class="fas fa-camera" style="color:var(--neon); margin-right:8px;"></i>Tournament spirit</figcaption>
+          <div class="prod-media" style="height:230px;">
+            <div class="slide-frame" data-slides="9000">
+                <img class="slide is-active" src="assets/orig-04.jpg" alt="Learners celebrating a tournament win" data-cap="Learners celebrating a tournament win" decoding="async">
+                <img class="slide" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" data-cap="An inter-school tournament hall, mid-round" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
+          <figcaption style="padding:16px 20px; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.16em; color:var(--sub); text-transform:uppercase;"><i class="fas fa-camera" style="color:var(--neon); margin-right:8px;"></i><span class="cap-text" data-cap-target>Tournament spirit</span></figcaption>
         </figure>
         <figure class="hud prod-card" style="margin:0;">
-          <div class="prod-media" style="height:230px;"><img src="assets/orig-05.jpg" alt="Learners sitting together at a competition"></div>
-          <figcaption style="padding:16px 20px; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.16em; color:var(--sub); text-transform:uppercase;"><i class="fas fa-camera" style="color:var(--neon); margin-right:8px;"></i>Between rounds</figcaption>
+          <div class="prod-media" style="height:230px;">
+            <div class="slide-frame" data-slides="9000">
+                <img class="slide is-active" src="assets/orig-05.jpg" alt="Learners sitting together at a competition" data-cap="Learners sitting together at a competition" decoding="async">
+                <img class="slide" src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round" data-cap="Learners in uniform between rounds" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
+          <figcaption style="padding:16px 20px; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.16em; color:var(--sub); text-transform:uppercase;"><i class="fas fa-camera" style="color:var(--neon); margin-right:8px;"></i><span class="cap-text" data-cap-target>Between rounds</span></figcaption>
         </figure>
       </div>
     </section>
@@ -189,5 +217,6 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/slides.js"></script>
 </body>
 </html>

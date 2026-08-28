@@ -53,7 +53,11 @@
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-bg" aria-hidden="true" data-slides="7000">
+        <img class="slide is-active" src="assets/hero-morning.jpg" alt="" decoding="async">
+        <img class="slide" src="assets/hero-chess-academy.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="slide" src="assets/tournament-focus.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+      </div>
       <div class="boardwave" aria-hidden="true"></div>
       <div class="hero-side">
         <h1 class="hero-word">CHESS</h1>
@@ -84,7 +88,12 @@
       </div>
       <div class="grid-3">
         <div class="hud prod-card reveal">
-          <div class="prod-media" style="height:200px;"><img src="assets/orig-05.jpg" alt="Learners sitting together at a school chess competition"></div>
+          <div class="prod-media" style="height:200px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/orig-05.jpg" alt="Learners sitting together at a competition" decoding="async">
+                <img class="slide" src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="prod-body">
           <h3>School Coaching</h3>
           <p>Weekly in-school sessions that build a full chess club from the ground up: structured curriculum, progress tracking and house tournaments.</p>
@@ -97,7 +106,12 @@
           </div>
         </div>
         <div class="hud prod-card reveal d1">
-          <div class="prod-media" style="height:200px;"><img src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position"></div>
+          <div class="prod-media" style="height:200px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position" decoding="async">
+                <img class="slide" src="assets/coaching-session.jpg" alt="A chess coach guiding a small group of learners around a chessboard" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="prod-body">
           <h3>Private Lessons</h3>
           <p>One-on-one sessions for learners who want to move faster: sharpen tactics, deepen openings and prepare seriously for individual competition.</p>
@@ -110,7 +124,12 @@
           </div>
         </div>
         <div class="hud prod-card reveal d2">
-          <div class="prod-media" style="height:200px;"><img src="assets/orig-02.jpg" alt="Learners competing at an inter-school chess tournament"></div>
+          <div class="prod-media" style="height:200px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" decoding="async">
+                <img class="slide" src="assets/tournament-focus.jpg" alt="Two school learners playing a timed chess game" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="prod-body">
           <h3>Tournament Prep</h3>
           <p>Focused squads ahead of inter-school competition: opening repertoire, time-pressure drills and the composure that only comes from practice.</p>
@@ -133,8 +152,12 @@
             <span class="hud-label">IN SESSION · TERM 3</span>
             <span class="hud-value">1,900<span class="unit">+ COACHED HOURS</span></span>
           </div>
-          <img src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round" loading="lazy" decoding="async">
-          <p class="media-cap">Learners in uniform, waiting for the next round</p>
+          <div class="slide-frame" data-slides="8000">
+              <img class="slide is-active" src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round" data-cap="Learners in uniform between rounds" decoding="async">
+              <img class="slide" src="assets/orig-05.jpg" alt="Learners sitting together at a competition" data-cap="Learners sitting together at a competition" loading="lazy" decoding="async" aria-hidden="true">
+              <img class="slide" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" data-cap="An inter-school tournament hall, mid-round" loading="lazy" decoding="async" aria-hidden="true">
+          </div>
+          <p class="media-cap"><span data-cap-target>Learners in uniform between rounds</span></p>
         </div>
         <div class="split-copy reveal d1">
           <span class="eyebrow">MOVE 2.5 · NC3</span>
@@ -173,7 +196,12 @@
       </div>
       <div class="grid-4">
         <a href="live.html" class="hud prod-card reveal">
-          <div class="prod-media" style="height:170px;"><img src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round"></div>
+          <div class="prod-media" style="height:170px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" decoding="async">
+                <img class="slide" src="assets/tournament-focus.jpg" alt="Two school learners playing a timed chess game" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="prod-body">
           <h3>Live Broadcasts</h3>
           <p>Follow Board 1 with live clocks, evaluation bar and spectator chat: a grandmaster-style stream for school chess.</p>
@@ -181,7 +209,12 @@
           </div>
         </a>
         <a href="play.html" class="hud prod-card reveal d1">
-          <div class="prod-media" style="height:170px;"><img src="assets/hero-dark-board.jpg" alt="Chess pieces in dramatic low light"></div>
+          <div class="prod-media" style="height:170px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/hero-dark-board.jpg" alt="Chess pieces in dramatic light" decoding="async">
+                <img class="slide" src="assets/chess-materials.jpg" alt="A tournament chess set, chess clock and plain training workbook" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="prod-body">
           <h3>Play The Board</h3>
           <p>A real game right on the site, with full rules, check and mate detection and a move list. Ideal warm-up between lessons.</p>
@@ -189,7 +222,12 @@
           </div>
         </a>
         <a href="tournaments.html" class="hud prod-card reveal d2">
-          <div class="prod-media" style="height:170px;"><img src="assets/orig-04.jpg" alt="Learners celebrating a tournament win"></div>
+          <div class="prod-media" style="height:170px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/orig-04.jpg" alt="Learners celebrating a tournament win" decoding="async">
+                <img class="slide" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="prod-body">
           <h3>The Circuit</h3>
           <p>Inter-school fixtures across Kericho, eight age categories, M-Pesa entry and WhatsApp confirmation for every player.</p>
@@ -197,7 +235,12 @@
           </div>
         </a>
         <a href="shop.html" class="hud prod-card reveal d3">
-          <div class="prod-media" style="height:170px;"><img src="assets/chess-materials.jpg" alt="Academy boards, clocks and workbooks laid out for a session" loading="lazy" decoding="async"></div>
+          <div class="prod-media" style="height:170px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/chess-materials.jpg" alt="A tournament chess set, chess clock and plain training workbook" decoding="async">
+                <img class="slide" src="assets/hero-dark-board.jpg" alt="Chess pieces in dramatic light" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="prod-body">
           <h3>Materials &amp; Kits</h3>
           <p>Tournament sets, clocks and workbooks for schools building a club, ordered with one WhatsApp message.</p>
@@ -317,5 +360,6 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/slides.js"></script>
 </body>
 </html>

@@ -1193,3 +1193,51 @@ img{ max-width:100%; height:auto; display:block; }
   .split-media img{ border-radius:var(--r-md); }
   iframe{ height:250px !important; }
 }
+
+/* ============================================================================
+   SLIDESHOW FRAMES · photos rotate in place and captions follow the photo
+   ============================================================================ */
+.slide-frame{ position:relative; overflow:hidden; background:var(--cream); }
+.slide-frame > .slide{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  object-position:center 35%; opacity:0; transform:scale(1.04);
+  transition:opacity 1.5s var(--ease), transform 9s linear;
+}
+.slide-frame > .slide.is-active{ opacity:1; transform:scale(1.1); }
+
+/* heroes: the frame itself already drifts, so the slides only cross-fade */
+.hero-bg > .slide, .page-hero-bg > .slide{
+  object-position:center 30%; transform:none; transition:opacity 1.9s var(--ease);
+}
+.hero-bg > .slide.is-active, .page-hero-bg > .slide.is-active{ transform:none; }
+
+/* split photos keep the framed look the old <img> carried */
+.split-media .slide-frame{
+  aspect-ratio:4/3; border-radius:var(--r-lg); box-shadow:var(--shadow-lift);
+}
+.mosaic .slide-frame{ width:100%; flex:1 1 auto; min-height:0; }
+.photo-strip .slide-frame{ width:100%; height:190px; }
+
+/* captions fade out and back as the photo they describe changes */
+[data-cap-target]{ transition:opacity .3s var(--ease); }
+[data-cap-target].swapping{ opacity:0; }
+
+/* hovering a photo still lifts it, without fighting the slow drift */
+.prod-card:hover .prod-media .slide.is-active,
+.mosaic figure:hover .slide.is-active,
+.photo-strip figure:hover .slide.is-active{ transform:scale(1.16); }
+
+@media (max-width:900px){
+  .hero-bg > .slide, .page-hero-bg > .slide{ object-position:center 28%; }
+}
+@media (max-width:600px){
+  .hero-bg > .slide{ object-position:50% 26%; }
+  .page-hero-bg > .slide{ object-position:center 24%; }
+  .photo-strip .slide-frame{ height:200px; }
+  /* phones: cross-fade only, no continuous zoom */
+  .slide-frame > .slide{ transform:none; transition:opacity 1.4s var(--ease); }
+  .slide-frame > .slide.is-active{ transform:none; }
+}
+@media (prefers-reduced-motion: reduce){
+  .slide-frame > .slide{ transition:none; }
+}

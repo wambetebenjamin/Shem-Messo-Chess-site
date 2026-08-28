@@ -52,7 +52,11 @@
   <main>
     <!-- ============ BROADCAST HEADER ============ -->
     <header class="page-hero" style="padding-bottom:60px;">
-      <div class="page-hero-bg" style="background-image:url('assets/hero-chess-academy.jpg');"></div>
+      <div class="page-hero-bg" data-slides="7000" aria-hidden="true">
+        <img class="slide is-active" src="assets/hero-chess-academy.jpg" alt="" decoding="async">
+        <img class="slide" src="assets/orig-02.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="slide" src="assets/coaching-session.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+      </div>
       <div class="wrap">
         <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>LIVE</span></div>
         <span class="badge-live" style="margin-bottom:18px;"><span class="live-dot"></span> BROADCASTING · BOARD 1</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -174,8 +178,12 @@
             <span class="hud-label"><span class="live-dot"></span> ON AIR · BOARD 1</span>
             <span class="hud-value">10<span class="unit">+0 RAPID</span></span>
           </div>
-          <img src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position" loading="lazy" decoding="async">
-          <p class="media-cap">Coach Shem Messo calling the position for the stream</p>
+          <div class="slide-frame" data-slides="8000">
+              <img class="slide is-active" src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position" data-cap="Coach Shem Messo with a learner" decoding="async">
+              <img class="slide" src="assets/coaching-session.jpg" alt="A chess coach guiding a small group of learners around a chessboard" data-cap="A chess coach with a small group of learners" loading="lazy" decoding="async" aria-hidden="true">
+              <img class="slide" src="assets/hero-chess-academy.jpg" alt="A learner considering her next move with a coach nearby" data-cap="A learner considering her next move" loading="lazy" decoding="async" aria-hidden="true">
+          </div>
+          <p class="media-cap"><span data-cap-target>Coach Shem Messo with a learner</span></p>
         </div>
       </div>
     </section>
@@ -189,7 +197,12 @@
       </div>
       <div class="grid-3">
         <div class="hud sched-card reveal">
-          <div class="prod-media" style="height:150px;"><img src="assets/orig-02.jpg" alt="Inter-school tournament hall"></div>
+          <div class="prod-media" style="height:150px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" decoding="async">
+                <img class="slide" src="assets/tournament-focus.jpg" alt="Two school learners playing a timed chess game" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="sched-body"><span class="sched-when">SAT 26 SEP · 09:00 EAT</span>
           <h3>Kericho Inter-Schools Open · Boards 1 to 4</h3>
           <p>Full-day Swiss across eight categories. The flagship stream of the season.</p>
@@ -197,7 +210,12 @@
           </div>
         </div>
         <div class="hud sched-card reveal d1">
-          <div class="prod-media" style="height:150px;"><img src="assets/orig-03.jpg" alt="Learners gathered between rounds"></div>
+          <div class="prod-media" style="height:150px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round" decoding="async">
+                <img class="slide" src="assets/orig-05.jpg" alt="Learners sitting together at a competition" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="sched-body"><span class="sched-when">EVERY SATURDAY · 10:00 EAT</span>
           <h3>Saturday Club Challenge · Board 1</h3>
           <p>The academy's weekly internal ladder, streamed from the club room.</p>
@@ -205,7 +223,12 @@
           </div>
         </div>
         <div class="hud sched-card reveal d2">
-          <div class="prod-media" style="height:150px;"><img src="assets/orig-04.jpg" alt="Learners celebrating after a fixture"></div>
+          <div class="prod-media" style="height:150px;">
+            <div class="slide-frame" data-slides="11000">
+                <img class="slide is-active" src="assets/orig-04.jpg" alt="Learners celebrating a tournament win" decoding="async">
+                <img class="slide" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" loading="lazy" decoding="async" aria-hidden="true">
+            </div>
+          </div>
           <div class="sched-body"><span class="sched-when">TERM 3 · DATE TBC</span>
           <h3>Kericho vs Litein Friendly Dual</h3>
           <p>Two counties, ten boards, one stream. The fixture every learner talks about.</p>
@@ -224,17 +247,26 @@
       </div>
       <div class="mosaic reveal">
         <figure>
-          <img src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" loading="lazy" decoding="async">
-          <figcaption>The hall, mid-round · Kericho</figcaption>
-        </figure>
+        <div class="slide-frame" data-slides="8000">
+            <img class="slide is-active" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" data-cap="An inter-school tournament hall, mid-round" decoding="async">
+            <img class="slide" src="assets/tournament-focus.jpg" alt="Two school learners playing a timed chess game" data-cap="Two school learners playing a timed game" loading="lazy" decoding="async" aria-hidden="true">
+        </div>
+        <figcaption><span class="cap-text" data-cap-target>The hall, mid-round · Kericho</span></figcaption>
+      </figure>
         <figure>
-          <img src="assets/orig-05.jpg" alt="Learners sitting together at a school chess competition" loading="lazy" decoding="async">
-          <figcaption>Boards 1 to 4, streamed live</figcaption>
-        </figure>
+        <div class="slide-frame" data-slides="8000">
+            <img class="slide is-active" src="assets/orig-05.jpg" alt="Learners sitting together at a competition" data-cap="Learners sitting together at a competition" decoding="async">
+            <img class="slide" src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round" data-cap="Learners in uniform between rounds" loading="lazy" decoding="async" aria-hidden="true">
+        </div>
+        <figcaption><span class="cap-text" data-cap-target>Boards 1 to 4, streamed live</span></figcaption>
+      </figure>
         <figure>
-          <img src="assets/tournament-focus.jpg" alt="A learner concentrating over the board during a fixture" loading="lazy" decoding="async">
-          <figcaption>Deep think · U-14 board one</figcaption>
-        </figure>
+        <div class="slide-frame" data-slides="8000">
+            <img class="slide is-active" src="assets/tournament-focus.jpg" alt="Two school learners playing a timed chess game" data-cap="Two school learners playing a timed game" decoding="async">
+            <img class="slide" src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" data-cap="An inter-school tournament hall, mid-round" loading="lazy" decoding="async" aria-hidden="true">
+        </div>
+        <figcaption><span class="cap-text" data-cap-target>Deep think · U-14 board one</span></figcaption>
+      </figure>
       </div>
     </section>
 
@@ -293,5 +325,6 @@
   <script src="js/chess.js"></script>
   <script src="js/main.js"></script>
   <script src="js/live.js"></script>
+  <script src="js/slides.js"></script>
 </body>
 </html>
