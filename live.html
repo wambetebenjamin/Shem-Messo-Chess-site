@@ -7,6 +7,9 @@
   <meta name="description" content="Watch academy chess live: Board 1 with live clocks, evaluation bar, move list and spectator feed: a grandmaster-style broadcast for school chess in Kericho.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232BF5A0'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%2304160D' font-family='serif'%3E&#9822;%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&amp;family=IBM+Plex+Mono:wght@400..700&amp;family=Karla:wght@300..700&amp;display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="live">
@@ -49,6 +52,7 @@
   <main>
     <!-- ============ BROADCAST HEADER ============ -->
     <header class="page-hero" style="padding-bottom:60px;">
+      <div class="page-hero-bg" style="background-image:url('assets/hero-chess-academy.jpg');"></div>
       <div class="wrap">
         <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>LIVE</span></div>
         <span class="badge-live" style="margin-bottom:18px;"><span class="live-dot"></span> BROADCASTING · BOARD 1</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -137,6 +141,44 @@
       </div>
     </section>
 
+    <!-- ============ ROOM TELEMETRY ============ -->
+    <section class="stats-band">
+      <div class="stats-grid">
+        <div class="stat"><div class="num"><span data-jitter="128|18">128</span></div><div class="lbl">Watching right now</div></div>
+        <div class="stat"><div class="num"><span data-count="4">0</span></div><div class="lbl">Boards on air</div></div>
+        <div class="stat"><div class="num"><span data-count="2">0</span></div><div class="lbl">Counties covered</div></div>
+        <div class="stat"><div class="num"><span data-count="15">0</span><em>+</em></div><div class="lbl">Fixtures streamed</div></div>
+      </div>
+    </section>
+
+    <!-- ============ INSIDE THE ROOM ============ -->
+    <section class="section tight bg-sky">
+      <div class="grid-2" style="align-items:stretch;">
+        <div class="split-copy reveal">
+          <span class="eyebrow">BEHIND THE FEED</span>
+          <h2 class="display" style="font-size:clamp(26px,3.2vw,40px); margin:18px 0 18px;">One laptop,<br>one board, one hall</h2>
+          <p class="lead">The broadcast setup is deliberately simple: a board on a trestle table, a laptop relaying the moves, and Shem calling the position for anyone watching from home.</p>
+          <p class="lead">Boards 1 to 4 go out live on fixture days. Between fixtures the room replays academy study games, so there is nearly always something on.</p>
+          <ul class="checklist">
+            <li><span class="ck"><i class="fas fa-check"></i></span> Live clocks and evaluation bar, updated move by move</li>
+            <li><span class="ck"><i class="fas fa-check"></i></span> Spectator feed for parents, relatives and whole classes</li>
+            <li><span class="ck"><i class="fas fa-check"></i></span> Replays of study games on non-fixture evenings</li>
+          </ul>
+          <div style="margin-top:30px; display:flex; gap:14px; flex-wrap:wrap;">
+            <a href="tournaments.html#register" class="btn btn-orange">ENTER A FIXTURE</a>
+            <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20please%20remind%20me%20whenever%20a%20board%20goes%20live." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Get a live alert</a>
+          </div>
+        </div>
+        <div class="split-media reveal d1">
+          <div class="hud float-tag">
+            <span class="hud-label"><span class="live-dot"></span> ON AIR · BOARD 1</span>
+            <span class="hud-value">10<span class="unit">+0 RAPID</span></span>
+          </div>
+          <img src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
     <!-- ============ SCHEDULE ============ -->
     <section class="section bg-checker">
       <div class="sec-head reveal">
@@ -169,6 +211,29 @@
           <a class="btn btn-wa" style="padding:11px 16px; font-size:11px;" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20notify%20me%20when%20the%20Kericho%20vs%20Litein%20dual%20is%20scheduled." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify me</a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ============ CAUGHT ON THE STREAM ============ -->
+    <section class="section bg-mint">
+      <div class="sec-head reveal">
+        <span class="eyebrow">FROM THE ARCHIVE</span>
+        <h2>Caught on the stream</h2>
+        <p>The moments parents message us about: a quiet hall, a full board, and a learner who suddenly sees three moves ahead.</p>
+      </div>
+      <div class="mosaic reveal">
+        <figure>
+          <img src="assets/orig-02.jpg" alt="An inter-school tournament hall mid-round" loading="lazy" decoding="async">
+          <figcaption>The hall, mid-round · Kericho</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/orig-05.jpg" alt="Learners sitting together at a school chess competition" loading="lazy" decoding="async">
+          <figcaption>Boards 1 to 4, streamed live</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/tournament-focus.jpg" alt="A learner concentrating over the board during a fixture" loading="lazy" decoding="async">
+          <figcaption>Deep think · U-14 board one</figcaption>
+        </figure>
       </div>
     </section>
 

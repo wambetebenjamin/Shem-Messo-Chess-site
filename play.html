@@ -7,6 +7,9 @@
   <meta name="description" content="Play a real chess game right on the site: full rules, legal-move hints, check and mate detection. Plus the daily Lichess puzzle and the academy's online team.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232BF5A0'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%2304160D' font-family='serif'%3E&#9822;%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&amp;family=IBM+Plex+Mono:wght@400..700&amp;family=Karla:wght@300..700&amp;display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="play">
@@ -49,6 +52,7 @@
   <main>
     <!-- ============ PAGE HERO ============ -->
     <header class="page-hero" style="padding-bottom:60px;">
+      <div class="page-hero-bg" style="background-image:url('assets/coaching-session.jpg');"></div>
       <div class="wrap">
         <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>PLAY</span></div>
         <span class="eyebrow">THE PRACTICE HALL</span>
@@ -58,7 +62,7 @@
     </header>
 
     <!-- ============ BOARD ============ -->
-    <section class="section tight bg-dots" style="padding-top:50px;">
+    <section class="section tight bg-checker" style="padding-top:50px;">
       <div class="bc-grid">
         <div class="hud board-shell reveal">
           <div class="board-frame">
@@ -88,6 +92,29 @@
       </div>
     </section>
 
+    <!-- ============ PRACTICE HALL MOSAIC ============ -->
+    <section class="section tight bg-peach">
+      <div class="sec-head reveal">
+        <span class="eyebrow">THE PRACTICE HALL</span>
+        <h2>Where the habit is built</h2>
+        <p>Same boards, same room, same ten minutes before every lesson. This is where the moves in the notebook become instinct.</p>
+      </div>
+      <div class="mosaic reveal">
+        <figure>
+          <img src="assets/orig-01.jpg" alt="Coach Shem Messo guiding one learner through a position" loading="lazy" decoding="async">
+          <figcaption>One board, one learner, one idea</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/orig-05.jpg" alt="Learners sitting together at a school chess competition" loading="lazy" decoding="async">
+          <figcaption>Club afternoon · Kericho</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/chess-materials.jpg" alt="Academy boards, clocks and workbooks laid out for a session" loading="lazy" decoding="async">
+          <figcaption>Boards, clocks &amp; workbooks</figcaption>
+        </figure>
+      </div>
+    </section>
+
     <!-- ============ LICHESS ============ -->
     <section class="section bg-sky">
       <div class="sec-head reveal">
@@ -108,18 +135,48 @@
           <span class="hud-label" style="margin-bottom:16px;"><i class="fas fa-users" style="color:var(--orange-hi);"></i>&nbsp;ACADEMY TEAM</span>
           <h3>Play academy members online</h3>
           <p style="margin-bottom:18px;">Join the Shem Messo Chess Academy team on Lichess to challenge other learners, track ratings and join team tournaments. Free account, works on any phone.</p>
-          <div style="flex:1; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px; border-radius:10px; border:1px solid var(--line-2); padding:34px; background:radial-gradient(circle at 30% 20%, rgba(43,245,160,.08), transparent 60%); margin-bottom:18px;">
-            <i class="fas fa-chess-knight" style="font-size:42px; color:var(--neon);"></i>
-            <span style="font-family:var(--f-mono); font-size:10.5px; letter-spacing:.2em; color:var(--dim); text-transform:uppercase;">Team link added once created</span>
+          <div style="flex:1; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px; border-radius:10px; border:1px solid var(--line-2); padding:34px; margin-bottom:18px; position:relative; overflow:hidden; background:#EEF5F3;">
+            <img src="assets/orig-03.jpg" alt="Learners gathered between rounds at an academy fixture" loading="lazy" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.26;">
+            <div style="position:absolute; inset:0; background:radial-gradient(circle at 30% 20%, rgba(43,245,160,.20), rgba(232,241,240,.86) 68%);"></div>
+            <i class="fas fa-chess-knight" style="font-size:42px; color:var(--jade-deep); position:relative; z-index:2; filter:drop-shadow(0 6px 12px rgba(18,33,27,.18));"></i>
+            <span style="font-family:var(--f-mono); font-size:10.5px; letter-spacing:.2em; color:var(--sub); text-transform:uppercase; position:relative; z-index:2; font-weight:600;">Team link added once created</span>
           </div>
           <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20please%20send%20me%20the%20academy%20Lichess%20team%20link." target="_blank" rel="noopener" class="btn btn-wa btn-block"><i class="fab fa-whatsapp"></i> Ask for the team link</a>
         </div>
       </div>
     </section>
 
+    <!-- ============ WHY WE DRILL ============ -->
+    <section class="section tight bg-sky">
+      <div class="grid-2" style="align-items:stretch;">
+        <div class="split-media reveal">
+          <div class="hud float-tag">
+            <span class="hud-label">DAILY WARM-UP</span>
+            <span class="hud-value">10<span class="unit">MINUTES A DAY</span></span>
+          </div>
+          <img src="assets/hero-dark-board.jpg" alt="Chess pieces in dramatic low light" loading="lazy" decoding="async">
+        </div>
+        <div class="split-copy reveal d1">
+          <span class="eyebrow">COACH'S HABIT</span>
+          <h2 class="display" style="font-size:clamp(26px,3.2vw,40px); margin:18px 0 18px;">Ten minutes<br>beats two hours</h2>
+          <p class="lead">A short daily game with real rules teaches more than a long careless one. Name your opponent's threat before every move and the board stops being mysterious.</p>
+          <p class="lead">Everything on this page is free and works on a phone. Play here between lessons, then take the same habits into the circuit.</p>
+          <ul class="checklist">
+            <li><span class="ck"><i class="fas fa-check"></i></span> Full rules: castling, en passant, promotion</li>
+            <li><span class="ck"><i class="fas fa-check"></i></span> Check and mate detection, plus the full move list</li>
+            <li><span class="ck"><i class="fas fa-check"></i></span> Undo anything, restart whenever you like</li>
+          </ul>
+          <div style="margin-top:30px; display:flex; gap:14px; flex-wrap:wrap;">
+            <a href="tournaments.html#register" class="btn btn-orange">ENTER A TOURNAMENT</a>
+            <a href="live.html" class="btn btn-ghost"><span class="live-dot"></span> Watch a live board</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ CTA ============ -->
     <section class="cta-band">
-      <img class="cta-photo" src="assets/hero-dark-board.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 60%;">
+      <img class="cta-photo" src="assets/orig-04.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 45%;">
       <div class="boardwave" aria-hidden="true"></div>
       <span class="eyebrow" style="justify-content:center;">YOUR TURN</span>
       <h2 class="display">Warmed up?<br>Get coached</h2>
