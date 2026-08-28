@@ -1313,3 +1313,21 @@ a.row-contact:hover{ padding-left:12px; }
   .row-contact{ grid-template-columns:56px 1fr; }
   .row-contact > div{ grid-column:2; }
 }
+
+/* ============ ONE PHOTOGRAPH, SEVERAL READINGS ============
+   A photograph that has to appear twice is treated differently each time:
+   a different crop, a different weight and a touch more or less colour, so
+   the eye reads it as another picture rather than the same one again. The
+   first appearance is always left alone, at full strength. */
+.slide-frame.pt-b{ opacity:.93; filter:saturate(.94) brightness(1.06) contrast(.97); }
+.slide-frame.pt-c{ opacity:.87; filter:saturate(.84) brightness(1.09) contrast(.94); }
+.slide-frame.pt-d{ opacity:.96; filter:saturate(.97) brightness(.98) contrast(1.08); }
+.slide-frame.pt-e{ opacity:.9;  filter:grayscale(.26) saturate(.9) brightness(1.05); }
+.slide-frame.pt-b .slide{ object-position:center 38%; }
+.slide-frame.pt-c .slide{ object-position:center 63%; }
+.slide-frame.pt-d .slide{ object-position:center 47%; }
+.slide-frame.pt-e .slide{ object-position:center 27%; }
+img.pt-b{ opacity:.93; filter:saturate(.94) brightness(1.06) contrast(.97); object-position:center 38%; }
+img.pt-c{ opacity:.87; filter:saturate(.84) brightness(1.09) contrast(.94); object-position:center 63%; }
+img.pt-d{ opacity:.96; filter:saturate(.97) brightness(.98) contrast(1.08); object-position:center 47%; }
+img.pt-e{ opacity:.9;  filter:grayscale(.26) saturate(.9) brightness(1.05); object-position:center 27%; }
