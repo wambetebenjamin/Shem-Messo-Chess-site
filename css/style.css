@@ -40,9 +40,9 @@
   --shadow-card:0 2px 6px rgba(24,58,50,.06), 0 18px 44px rgba(24,58,50,.09);
   --shadow-lift:0 6px 14px rgba(24,58,50,.07), 0 30px 70px rgba(24,58,50,.15);
 
-  --f-display:'Space Grotesk',sans-serif;
-  --f-body:'Inter',sans-serif;
-  --f-mono:'JetBrains Mono',monospace;
+  --f-display:Georgia,'Palatino Linotype',Palatino,'Times New Roman',serif;
+  --f-body:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --f-mono:ui-monospace,'SF Mono','Cascadia Mono',Menlo,Consolas,'Courier New',monospace;
 
   --max:1280px;
   --r-sm:8px; --r-md:16px; --r-lg:22px;
@@ -284,7 +284,9 @@ html.js body.page-out{
 @keyframes heroStill{ from{ transform:scale(1.05); opacity:.35; } to{ transform:scale(1); opacity:1; } }
 .hero-bg::after{
   content:''; position:absolute; inset:0;
-  background:linear-gradient(90deg, rgba(242,247,246,0) 18%, rgba(242,247,246,.45) 44%, rgba(242,247,246,.94) 76%, #F2F7F6 100%);
+  background:
+    linear-gradient(90deg, rgba(242,247,246,0) 6%, rgba(242,247,246,.12) 38%, rgba(242,247,246,.55) 74%, rgba(242,247,246,.85) 100%),
+    radial-gradient(55% 48% at 84% 16%, rgba(201,162,39,.14), transparent 62%);
 }
 .hero-side{
   position:relative; z-index:2;
@@ -441,7 +443,7 @@ ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-t
 /* CTA band: warm sunrise */
 .cta-band{
   position:relative; overflow:hidden; text-align:center; padding:120px 40px;
-  background-image:linear-gradient(0deg, rgba(242,247,246,.82), rgba(242,247,246,.93)),
+  background-image:linear-gradient(0deg, rgba(242,247,246,.52), rgba(242,247,246,.68)),
                    url('../assets/hero-morning.jpg');
   background-size:auto, cover; background-position:0 0, center 85%;
 }
@@ -477,7 +479,7 @@ ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-t
 .bg-checker{
   background-color:#FBFFFF;
   background-image:
-    linear-gradient(180deg, rgba(252,254,254,.80), rgba(252,254,254,.62)),
+    linear-gradient(180deg, rgba(252,254,254,.46), rgba(252,254,254,.30)),
     linear-gradient(45deg, rgba(31,138,109,.07) 25%, transparent 25%, transparent 75%, rgba(31,138,109,.07) 75%),
     linear-gradient(45deg, rgba(31,138,109,.07) 25%, transparent 25%, transparent 75%, rgba(31,138,109,.07) 75%),
     url('../assets/orig-05.jpg');
@@ -492,14 +494,14 @@ ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-t
 }
 .bg-mint{
   background-image:
-    linear-gradient(135deg, rgba(232,244,239,.90) 0%, rgba(235,246,249,.86) 100%),
+    linear-gradient(135deg, rgba(222,240,232,.62) 0%, rgba(224,240,246,.55) 100%),
     url('../assets/hero-dark-board.jpg');
   background-size:auto, cover; background-position:0 0, center 60%;
   border-top:1px solid var(--line); border-bottom:1px solid var(--line);
 }
 .bg-peach{
   background-image:
-    linear-gradient(135deg, rgba(234,243,250,.90) 0%, rgba(236,247,244,.86) 100%),
+    linear-gradient(135deg, rgba(226,238,248,.60) 0%, rgba(228,244,240,.52) 100%),
     url('../assets/orig-04.jpg');
   background-size:auto, cover; background-position:0 0, center 40%;
   border-top:1px solid var(--line); border-bottom:1px solid var(--line);
@@ -843,7 +845,7 @@ footer .brand-sub{ color:rgba(244,240,230,.4); }
   .nav-cta{ display:none; }
   .nav-toggle{ display:flex; }
   .hero{ justify-content:center; }
-  .hero-bg::after{ background:linear-gradient(180deg, rgba(242,247,246,.15) 0%, rgba(242,247,246,.62) 55%, #F2F7F6 100%); }
+  .hero-bg::after{ background:linear-gradient(180deg, rgba(242,247,246,.04) 0%, rgba(242,247,246,.34) 52%, rgba(242,247,246,.78) 100%); }
   .hero-side{ margin:0; width:min(640px,92vw); padding:150px 0 70px; }
   .hero-word{ font-size:clamp(64px, 17vw, 110px); }
   .hero-spaced{ white-space:normal; letter-spacing:.32em; }
