@@ -448,8 +448,8 @@ ul.tick li::before{ content:'\25B8'; color:var(--jade); font-size:12px; margin-t
 .cta-band{
   position:relative; overflow:hidden; text-align:center; padding:120px 40px;
   background-image:
-    radial-gradient(46% 54% at 50% 40%, rgba(242,247,246,.82) 0%, rgba(242,247,246,.40) 52%, rgba(242,247,246,0) 84%),
-    linear-gradient(0deg, rgba(242,247,246,.26), rgba(242,247,246,.38)),
+    radial-gradient(42% 50% at 50% 40%, rgba(242,247,246,.74) 0%, rgba(242,247,246,.30) 55%, rgba(242,247,246,0) 86%),
+    linear-gradient(0deg, rgba(242,247,246,.18), rgba(242,247,246,.28)),
                    var(--cta-img, url('../assets/hero-morning.jpg'));
   background-size:auto, auto, cover; background-position:0 0, 0 0, var(--cta-pos, center 78%);
 }
