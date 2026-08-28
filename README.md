@@ -1,20 +1,20 @@
 # Shem Messo Chess Academy
 
-A premium multi-page website for Shem Messo Chess Academy in Kericho, Kenya — rebuilt as a
+A premium multi-page website for Shem Messo Chess Academy in Kericho, Kenya, rebuilt as a
 futuristic, broadcast-HUD style chess platform ("Night Circuit" design system).
 
 ## Design language
 
 Deep navy & charcoal backgrounds, neon-green accents, bright-orange calls-to-action and soft
-ambient glows — applied to a cinematic, high-tech interface:
+ambient glows, applied to a cinematic, high-tech interface:
 
-- **3D hero board** — a CSS-perspective chessboard bottom-center of the home hero with glowing
-  white pieces, ambient under-glows and a gentle levitation loop
-- **Floating HUD overlays** — translucent, blur-backed panels with live countdowns and game
-  metrics framing the hero
-- **Typography** — Space Grotesk display headlines, light Inter body text, JetBrains Mono for
+- **Cinematic photo hero:** a full-bleed dark chessboard photograph with a right-aligned giant
+  wordmark, spaced subtitle, hairline rule and coral buttons
+- **Floating HUD overlays:** translucent, blur-backed panels carrying fixture countdowns and
+  game metrics on the tournaments page, plus telemetry in the broadcast room
+- **Typography:** Space Grotesk display headlines, light Inter body text, JetBrains Mono for
   all HUD/timer/metrics readouts
-- **Atmosphere** — soft-focus photography, vignette and film grain over every page
+- **Atmosphere:** soft-focus photography, vignette and film grain over every page
 
 ## Pages
 
@@ -23,8 +23,8 @@ ambient glows — applied to a cinematic, high-tech interface:
 | `index.html` | 3D hero + HUD overlays, notation ticker, programmes, stats counters, testimonials, FAQ |
 | `coaching.html` | The three coaching tracks, four-phase method timeline, fees & FAQ |
 | `tournaments.html` | Next fixture with live countdowns, categories, M-Pesa entry steps, registration form, honour roll |
-| `live.html` | **Broadcast room** — simulated live Board 1 with clocks, eval bar, move list, spectator feed and viewer telemetry |
-| `play.html` | **Playable board** — full-rules pass-and-play chess (check, mate, castling, undo) + Lichess daily puzzle |
+| `live.html` | **Broadcast room:** simulated live Board 1 with clocks, eval bar, move list, spectator feed and viewer telemetry |
+| `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo) + Lichess daily puzzle |
 | `shop.html` | Materials & kits with one-tap WhatsApp ordering + Complete Club Kit quote banner |
 | `about.html` | Academy story, values and season gallery using the local photography |
 | `contact.html` | Membership form, WhatsApp coaching-enquiry composer and contact cards |
@@ -35,7 +35,7 @@ countdowns, FAQ, hero board, form handling). The chess engine lives in `js/chess
 
 ## Forms
 
-Registration/membership forms POST to a Google Apps Script endpoint — paste your deployed
+Registration/membership forms POST to a Google Apps Script endpoint; paste your deployed
 Web App URL into `SHEETS_ENDPOINT` in `js/main.js`. Until then, forms gracefully fall back to a
 **WhatsApp confirmation button** pre-filled with the entrant's details (Nothing is lost, no
 backend required). Payments reference M-Pesa Paybill **880100**.
@@ -60,12 +60,12 @@ Then open `http://localhost:8000`.
 
 - WhatsApp and phone links use `+254 729 037 585`.
 - Product prices are carried over from the previous site and should be confirmed before launch.
-- Season metrics (schools, learners, tournaments) are marketing figures — adjust to taste.
+- Season metrics (schools, learners, tournaments) are marketing figures; adjust to taste.
 - The live broadcast room replays a scripted demo game between fixtures; wire in a real feed
   when streaming hardware/accounts are ready.
 - The site does not collect or store form submissions unless the Apps Script endpoint is set;
   otherwise it prepares a WhatsApp message for the visitor to review and send.
-- The site displays the **original photos from the previous build**: `assets/orig-01.jpg`–`orig-05.jpg`
+- The site displays the **original photos from the previous build**: `assets/orig-01.jpg` to `orig-05.jpg`
   (coach-with-learner plus the four gallery shots) were extracted from the old page; the hero and three
   product photos are hotlinked from Unsplash exactly as the original site served them.
 - `assets/hero-chess-academy.jpg`, `coaching-session.jpg`, `tournament-focus.jpg`, `chess-materials.jpg`

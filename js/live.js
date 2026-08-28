@@ -1,7 +1,7 @@
 /* ============================================================================
    LIVE · broadcast room simulation (requires js/chess.js)
    Replays the evening's featured game move-by-move with live clocks, an
-   evaluation bar, spectator chat and viewer telemetry — the "WATCH LIVE NOW"
+   evaluation bar, spectator chat and viewer telemetry: the "WATCH LIVE NOW"
    premium experience. When real fixtures are running, this page is where
    boards stream from the hall.
    ============================================================================ */
@@ -16,7 +16,7 @@
   };
   const FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
-  // Featured game of the evening — the Opera Game (Morphy, 1858), the same
+  // Featured game of the evening: the Opera Game (Morphy, 1858), the same
   // miniature the juniors study in week six. Replayed live as a demo feed.
   const PGN = [
     '[Event "Kericho Inter-Schools League · Board 1"]',
@@ -133,9 +133,9 @@
 
   function finish() {
     clearInterval(timer); timer = null;
-    resultEl.textContent = '1 – 0 · CHECKMATE · BARASA TAKES BOARD 1';
+    resultEl.textContent = '1-0 · CHECKMATE · BARASA TAKES BOARD 1';
     resultEl.classList.add('show');
-    if (stateEl) stateEl.textContent = 'FULL TIME — REPLAY RESTARTS SHORTLY';
+    if (stateEl) stateEl.textContent = 'FULL TIME · REPLAY RESTARTS SHORTLY';
     setTimeout(start, 9000);
   }
 

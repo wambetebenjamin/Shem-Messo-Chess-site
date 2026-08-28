@@ -1,6 +1,6 @@
 /* ============================================================================
    SHEM MESSO CHESS ACADEMY · shared runtime
-   nav · reveals · counters · countdowns · HUD jitter · FAQ · 3D hero board ·
+   nav · reveals · counters · countdowns · HUD jitter · FAQ · forms ·
    form handling (Google Apps Script endpoint + WhatsApp fallback)
    ============================================================================ */
 (function () {
@@ -12,11 +12,6 @@
   // STEP 2: Paste the deployed Web App URL below, replacing the placeholder.
   const SHEETS_ENDPOINT = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
 
-  const PIECE_GLYPHS = {
-    p: { w: '♙', b: '♟' }, n: { w: '♘', b: '♞' }, b: { w: '♗', b: '♝' },
-    r: { w: '♖', b: '♜' }, q: { w: '♕', b: '♛' }, k: { w: '♔', b: '♚' }
-  };
-  const FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
   /* ---------- Mobile nav ---------- */
   const toggle = document.querySelector('.nav-toggle');
@@ -30,6 +25,14 @@
     mobileMenu.querySelectorAll('a').forEach(a =>
       a.addEventListener('click', () => mobileMenu.classList.remove('open'))
     );
+  }
+
+  /* ---------- Nav gains glass after scroll ---------- */
+  const navBar = document.querySelector('.nav');
+  if (navBar) {
+    const onScroll = () => navBar.classList.toggle('nav-solid', window.scrollY > 36);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
   }
 
   /* ---------- Active nav link ---------- */
@@ -118,55 +121,13 @@
     });
   });
 
-  /* ---------- Home hero: 3D board builder ---------- */
-  // Position after 1. e4 e5 2. Nf3 Nc6 3. Bc4 — the Italian Game, chapter one
-  // of every academy's story.
-  const heroBoard = document.getElementById('heroBoard');
-  if (heroBoard) {
-    const SETUP = {
-      a8: 'rb', c6: 'nb', c8: 'bb', d8: 'qb', e8: 'kb', f8: 'bb', g8: 'nb', h8: 'rb',
-      a7: 'pb', b7: 'pb', c7: 'pb', d7: 'pb', e5: 'pb', f7: 'pb', g7: 'pb', h7: 'pb',
-      a2: 'pw', b2: 'pw', c2: 'pw', d2: 'pw', e4: 'pw', f2: 'pw', g2: 'pw', h2: 'pw',
-      a1: 'rw', b1: 'nw', c1: 'bw', d1: 'qw', e1: 'kw', c4: 'bw', f3: 'nw', h1: 'rw'
-    };
-    const glowSquares = ['e1', 'd1', 'e4', 'c4', 'f3', 'a2'];   // ambient glow under white pieces
-    const frag = document.createDocumentFragment();
-    const under = document.createElement('div');
-    under.className = 'underglow';
-    heroBoard.appendChild(under);
-    for (let r = 8; r >= 1; r--) {
-      for (let f = 0; f < 8; f++) {
-        const sqName = FILES[f] + r;
-        const cell = document.createElement('div');
-        const isLight = ((f + r) % 2) === 1;
-        cell.className = 'sq3 ' + (isLight ? 'l' : 'd');
-        const piece = SETUP[sqName];
-        if (piece) {
-          const color = piece[1];
-          const glyph = PIECE_GLYPHS[piece[0]][color];
-          if (color === 'w' && glowSquares.includes(sqName)) {
-            const g = document.createElement('span');
-            g.className = 'pg g' + (1 + (glowSquares.indexOf(sqName) % 4));
-            cell.appendChild(g);
-          }
-          const p = document.createElement('span');
-          p.className = 'pc ' + color;
-          p.textContent = glyph;
-          cell.appendChild(p);
-        }
-        frag.appendChild(cell);
-      }
-    }
-    heroBoard.appendChild(frag);
-  }
-
   /* ---------- Forms: Sheets endpoint + WhatsApp fallback ---------- */
   const waLink = text => 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(text);
 
   async function submitEntry(form, endpointFormType, collect, btn, msg, waBtn, waSummary) {
     // Not connected yet → offer the WhatsApp confirmation path.
     if (SHEETS_ENDPOINT.indexOf('PASTE_YOUR') === 0) {
-      msg.textContent = 'Details captured. Online submission is not connected yet — tap below to send your entry straight to Shem on WhatsApp.';
+      msg.textContent = 'Details captured. Online submission is not connected yet. Tap below to send your entry straight to Shem on WhatsApp.';
       msg.className = 'form-msg show';
       if (waBtn) { waBtn.href = waLink(waSummary()); waBtn.classList.add('show'); }
       return;
@@ -250,7 +211,7 @@
                    ' · Message: ' + val('c_notes');
       window.open(waLink(text), '_blank');
       const msg = document.getElementById('c_msg');
-      if (msg) { msg.textContent = 'Opening WhatsApp with your enquiry — just press send.'; msg.className = 'form-msg show success'; }
+      if (msg) { msg.textContent = 'Opening WhatsApp with your enquiry. Just press send.'; msg.className = 'form-msg show success'; }
     });
   }
 })();

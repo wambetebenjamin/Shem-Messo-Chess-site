@@ -76,7 +76,7 @@
     turnEl.textContent = (game.turn() === 'w' ? 'WHITE' : 'BLACK') + ' TO MOVE';
     statusEl.classList.remove('alert');
     if (game.in_checkmate()) {
-      statusEl.textContent = 'Checkmate — ' + (game.turn() === 'w' ? 'Black' : 'White') + ' wins. Brilliant finish.';
+      statusEl.textContent = 'Checkmate. ' + (game.turn() === 'w' ? 'Black' : 'White') + ' wins. Brilliant finish.';
       statusEl.classList.add('alert');
     } else if (game.in_draw() || game.in_stalemate() || game.in_threefold_repetition()) {
       statusEl.textContent = 'The game is a draw.';
@@ -86,7 +86,7 @@
       statusEl.classList.add('alert');
     } else {
       statusEl.textContent = selected
-        ? 'Selected ' + selected + ' — tap a highlighted square.'
+        ? 'Selected ' + selected + '. Tap a highlighted square.'
         : 'Tap a piece, then tap a highlighted square to move it.';
     }
   }
