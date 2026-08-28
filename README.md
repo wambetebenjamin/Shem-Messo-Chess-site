@@ -5,16 +5,19 @@ futuristic, broadcast-HUD style chess platform ("Night Circuit" design system).
 
 ## Design language
 
-Deep navy & charcoal backgrounds, neon-green accents, bright-orange calls-to-action and soft
-ambient glows, applied to a cinematic, high-tech interface:
+"Sunrise Club": a bright, uplifting theme tuned for parents and learners. Warm cream paper,
+white cards with soft shadows, jade, brass and warm-coral accents, and gentle background
+animations (drifting chess pieces and soft pastel orbs on the hero, page headers and CTA bands).
 
-- **Cinematic photo hero:** a full-bleed dark chessboard photograph with a right-aligned giant
-  wordmark, spaced subtitle, hairline rule and coral buttons
-- **Floating HUD overlays:** translucent, blur-backed panels carrying fixture countdowns and
-  game metrics on the tournaments page, plus telemetry in the broadcast room
-- **Typography:** Space Grotesk display headlines, light Inter body text, JetBrains Mono for
-  all HUD/timer/metrics readouts
-- **Atmosphere:** soft-focus photography, vignette and film grain over every page
+- **Cinematic photo hero:** a sunlit classroom chessboard photo with a right-aligned giant
+  wordmark, spaced subtitle, gradient hairline rule and coral buttons
+- **Friendly cards:** rounded white cards with jade corner accents, hover lift and icon pop
+- **Classic board colours:** the play and broadcast boards use cream and dusty-green vinyl
+  squares, like the academy's real tournament sets
+- **Typography:** Space Grotesk display headlines, readable Inter body text, JetBrains Mono
+  for counters, labels and notation
+- **One moody band:** only the page headers and footer go dark, for contrast
+- Motion respects `prefers-reduced-motion` throughout
 
 ## Pages
 
@@ -65,7 +68,7 @@ Then open `http://localhost:8000`.
   when streaming hardware/accounts are ready.
 - The site does not collect or store form submissions unless the Apps Script endpoint is set;
   otherwise it prepares a WhatsApp message for the visitor to review and send.
-- The site displays the **original photos from the previous build**: `assets/orig-01.jpg` to `orig-05.jpg`
+- The site displays the **original photos from the previous build**: `assets/orig-01.jpg` up to `orig-05.jpg`
   (coach-with-learner plus the four gallery shots) were extracted from the old page; the hero and three
   product photos are hotlinked from Unsplash exactly as the original site served them.
 - `assets/hero-chess-academy.jpg`, `coaching-session.jpg`, `tournament-focus.jpg`, `chess-materials.jpg`
@@ -84,6 +87,8 @@ Then open `http://localhost:8000`.
 ├── README.md
 └── assets/
     ├── orig-01.jpg … orig-05.jpg          # original site photos (displayed)
+    ├── hero-morning.jpg                   # sunlit classroom hero photo (displayed)
+    ├── hero-dark-board.jpg                # dark board hero variant (spare)
     ├── hero-chess-academy.jpg             # spare editorial images
     ├── coaching-session.jpg
     ├── tournament-focus.jpg
