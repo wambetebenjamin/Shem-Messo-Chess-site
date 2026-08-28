@@ -35,6 +35,18 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  /* ---------- Boardwave: chessboard shimmer sweep ---------- */
+  document.querySelectorAll('.boardwave').forEach(wave => {
+    const COLS = 12, ROWS = 6;
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const cell = document.createElement('i');
+        cell.style.animationDelay = ((r + c) * 160) + 'ms';
+        wave.appendChild(cell);
+      }
+    }
+  });
+
   /* ---------- Active nav link ---------- */
   const page = document.body.dataset.page;
   if (page) {
