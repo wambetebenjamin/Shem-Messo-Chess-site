@@ -6,6 +6,26 @@
 (function () {
   'use strict';
 
+  /* ---------- Page transitions ---------- */
+  document.documentElement.classList.add('js');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('page-in')));
+  window.addEventListener('pageshow', e => { if (e.persisted) document.body.classList.remove('page-out'); });
+
+  if (!reduceMotion) {
+    document.addEventListener('click', e => {
+      const a = e.target.closest && e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href') || '';
+      const isLocalPage = !a.target && !e.metaKey && !e.ctrlKey && !e.shiftKey &&
+        href.endsWith('.html');
+      if (!isLocalPage) return;
+      e.preventDefault();
+      document.body.classList.add('page-out');
+      setTimeout(() => { window.location.href = href; }, 250);
+    });
+  }
+
   /* ---------- Config ---------- */
   const WHATSAPP = '254729037585';
   // STEP 1: Deploy a Google Apps Script web app (instructions provided separately).
