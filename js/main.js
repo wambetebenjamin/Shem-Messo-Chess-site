@@ -41,6 +41,7 @@
     const theme = THEMES.find(t => t.id === themeId) || THEMES[0];
     document.documentElement.setAttribute('data-theme', theme.id);
     localStorage.setItem('kcc_theme', theme.id);
+    document.dispatchEvent(new CustomEvent('theme:change', { detail: { theme: theme.id } }));
 
     const themeName = document.getElementById('themeName');
     const themeIcon = document.getElementById('themeIcon');

@@ -64,8 +64,34 @@
 
   <main>
     <!-- ============ HERO ============ -->
-    <section class="hero">
+    <section class="hero" id="heroSection">
       <div class="hero-bg" aria-hidden="true"></div>
+
+      <!-- 3D Cinematic Moving Chessboard Stage -->
+      <div class="hero-3d-stage" id="hero3dStage" aria-hidden="true">
+        <canvas id="hero3dCanvas"></canvas>
+        <div class="hero-3d-wash"></div>
+      </div>
+
+      <!-- Subtle 3D Cinema Controls Bar -->
+      <div class="hero-3d-controls" id="hero3dControls" aria-label="3D Chess Animation Controls">
+        <button class="hero3d-btn" id="hero3dPlayBtn" type="button" aria-label="Pause 3D match" title="Pause / Play 3D Match">
+          <i class="fas fa-pause"></i>
+        </button>
+        <div class="hero3d-pill">
+          <i class="fas fa-film"></i>
+          <span class="hero3d-title" id="hero3dGameTitle">The Opera Game</span>
+          <span class="hero3d-sep">·</span>
+          <span class="hero3d-move" id="hero3dMoveNotation">Opening Position</span>
+        </div>
+        <button class="hero3d-btn" id="hero3dCamBtn" type="button" aria-label="Switch Camera Angle" title="Switch Camera View">
+          <i class="fas fa-video"></i>
+        </button>
+        <button class="hero3d-btn" id="hero3dNextBtn" type="button" aria-label="Next Masterpiece" title="Next Masterpiece Game">
+          <i class="fas fa-forward-step"></i>
+        </button>
+      </div>
+
       <div class="boardwave" aria-hidden="true"></div>
       <div class="hero-side">
         <h1 class="hero-word">CHESS</h1>
@@ -321,6 +347,8 @@
     </div>
   </footer>
 
+  <script src="js/chess.js"></script>
   <script src="js/main.js"></script>
+  <script type="module" src="js/hero3d.js"></script>
 </body>
 </html>

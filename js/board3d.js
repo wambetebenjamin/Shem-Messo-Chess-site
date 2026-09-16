@@ -5,7 +5,7 @@
    captures/promotion/castling. Drives both the Play board and the Live room.
    Falls back silently: if WebGL or the CDN is unavailable, callers keep 2D.
    ============================================================================ */
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+import * as THREE from './vendor/three.module.js';
 
 const FILES = 'abcdefgh';
 const SQ = 1;                       // one board square = 1 unit
