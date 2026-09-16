@@ -20,6 +20,7 @@
   <nav class="nav">
     <div class="nav-inner">
       <a href="index.html" class="brand" aria-label="Kericho Chess Club &amp; Academy home">
+        <span class="brand-mark"><i class="fas fa-chess-knight"></i></span>
         <span class="brand-name">KERICHO <b>CHESS</b><span class="brand-sub">CLUB &amp; ACADEMY</span></span>
       </a>
       <div class="nav-links">
@@ -50,8 +51,8 @@
     <!-- ============ BROADCAST HEADER ============ -->
     <header class="page-hero" style="padding-bottom:60px;">
       <div class="wrap">
-        <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>LIVE</span></div>
-        <span class="badge-live" style="margin-bottom:18px;"><span class="live-dot"></span> BROADCASTING · BOARD 1</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+        <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>LIVE BROADCAST</span></div>
+        <span class="badge-live" style="margin-bottom:18px;"><span class="live-dot"></span> LIVE RELAY · BOARD 1</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
         <h1 style="margin-top:16px;">The broadcast room</h1>
         <p class="lead">Fixture days, the top boards stream here with live clocks, an evaluation bar and the spectator feed. Tonight's replay: the Opera Game line the juniors studied in week six.</p>
       </div>
@@ -85,7 +86,7 @@
           </div>
 
           <div class="board-frame">
-            <div class="board3d-stage" id="stage3d"><span class="b3d-tag">3D BOARD &#183; WEBGL</span><span class="b3d-hint">drag pointer to tilt &#183; auto replay</span></div>
+            <div class="board3d-stage" id="stage3d"><span class="b3d-tag"><i class="fas fa-cube"></i> Interactive 3D Board</span><span class="b3d-hint">Drag to rotate view</span></div>
             <div class="play-board" id="liveBoard"></div>
           </div>
 
@@ -117,20 +118,20 @@
         <!-- Side rail -->
         <div class="bc-side">
           <div class="hud bc-panel reveal d1">
-            <span class="hud-label"><i class="fas fa-eye" style="color:var(--neon);"></i>&nbsp;TELEMETRY</span>
-            <div class="metric-row"><span class="metric-k">Spectators</span><span class="metric-v warm" id="liveViewers">128</span></div>
-            <div class="metric-row"><span class="metric-k">Boards live</span><span class="metric-v">4</span></div>
-            <div class="metric-row"><span class="metric-k">Time control</span><span class="metric-v cold">10 + 0</span></div>
-            <div class="metric-row"><span class="metric-k">Feed quality</span><span class="metric-v"><span class="ok-dot"></span>&nbsp;STABLE</span></div>
+            <span class="hud-label"><i class="fas fa-chart-simple" style="color:var(--jade);"></i>&nbsp;MATCH DETAILS &amp; STATS</span>
+            <div class="metric-row"><span class="metric-k">Active Viewers</span><span class="metric-v warm" id="liveViewers">128</span></div>
+            <div class="metric-row"><span class="metric-k">Streamed Boards</span><span class="metric-v">4</span></div>
+            <div class="metric-row"><span class="metric-k">Time Control</span><span class="metric-v cold">10 + 0 Rapid</span></div>
+            <div class="metric-row"><span class="metric-k">Match Status</span><span class="metric-v"><span class="ok-dot"></span>&nbsp;ROUND 4 IN PROGRESS</span></div>
           </div>
 
           <div class="hud bc-panel reveal d2">
-            <span class="hud-label">MOVE LIST</span>
+            <span class="hud-label"><i class="fas fa-list-ol"></i>&nbsp;MOVE HISTORY</span>
             <div class="movelist" id="liveMoves" style="height:300px;"></div>
           </div>
 
           <div class="hud bc-panel reveal d3">
-            <span class="hud-label">SPECTATOR FEED · SIMULATED</span>
+            <span class="hud-label"><i class="fas fa-comments"></i>&nbsp;COMMUNITY &amp; SPECTATOR CHAT</span>
             <div class="chat-feed" id="liveChat"></div>
           </div>
         </div>
@@ -140,14 +141,14 @@
     <!-- ============ SCHEDULE ============ -->
     <section class="section bg-checker">
       <div class="sec-head reveal">
-        <span class="eyebrow">ON THE CARD</span>
+        <span class="eyebrow"><i class="fas fa-calendar-days"></i> UPCOMING MATCH BROADCASTS</span>
         <h2>Upcoming broadcasts</h2>
         <p>Ask for a reminder on WhatsApp and you'll get a message the moment a board goes live.</p>
       </div>
       <div class="grid-3">
         <div class="hud sched-card reveal">
           <div class="prod-media" style="height:150px;"><img src="assets/orig-02.jpg" alt="Inter-school tournament hall"></div>
-          <div class="sched-body"><span class="sched-when">SAT 26 SEP · 09:00 EAT</span>
+          <div class="sched-body"><span class="sched-when"><i class="fas fa-calendar-check"></i> Sat 26 Sep · 09:00 EAT</span>
           <h3>Kericho Inter-Schools Open · Boards 1 to 4</h3>
           <p>Full-day Swiss across eight categories. The flagship stream of the season.</p>
           <a class="btn btn-wa" style="padding:11px 16px; font-size:11px;" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20remind%20me%20when%20the%20Kericho%20Open%20goes%20live%20on%20Sep%2026." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify me</a>
@@ -155,7 +156,7 @@
         </div>
         <div class="hud sched-card reveal d1">
           <div class="prod-media" style="height:150px;"><img src="assets/orig-03.jpg" alt="Learners gathered between rounds"></div>
-          <div class="sched-body"><span class="sched-when">EVERY SATURDAY · 10:00 EAT</span>
+          <div class="sched-body"><span class="sched-when"><i class="fas fa-calendar-check"></i> Every Saturday · 10:00 EAT</span>
           <h3>Saturday Club Challenge · Board 1</h3>
           <p>The academy's weekly internal ladder, streamed from the club room.</p>
           <a class="btn btn-wa" style="padding:11px 16px; font-size:11px;" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20add%20me%20to%20the%20Saturday%20club%20stream%20reminders." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify me</a>
@@ -163,7 +164,7 @@
         </div>
         <div class="hud sched-card reveal d2">
           <div class="prod-media" style="height:150px;"><img src="assets/orig-04.jpg" alt="Learners celebrating after a fixture"></div>
-          <div class="sched-body"><span class="sched-when">TERM 3 · DATE TBC</span>
+          <div class="sched-body"><span class="sched-when"><i class="fas fa-calendar-check"></i> Term 3 Fixture · Date Confirmed on WhatsApp</span>
           <h3>Kericho vs Litein Friendly Dual</h3>
           <p>Two counties, ten boards, one stream. The fixture every learner talks about.</p>
           <a class="btn btn-wa" style="padding:11px 16px; font-size:11px;" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20notify%20me%20when%20the%20Kericho%20vs%20Litein%20dual%20is%20scheduled." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify me</a>
@@ -176,7 +177,7 @@
     <section class="cta-band">
       <img class="cta-photo" src="assets/orig-03.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 40%;">
       <div class="boardwave" aria-hidden="true"></div>
-      <span class="eyebrow" style="justify-content:center;">BETTER THAN WATCHING</span>
+      <span class="eyebrow" style="justify-content:center;"><i class="fas fa-chess"></i> READY FOR YOUR OWN MATCH?</span>
       <h2 class="display">Play your own<br>game live</h2>
       <p class="lead">Step off the spectator bench. The same engine runs the practice board, and the circuit is open.</p>
       <div class="cta-row">
@@ -220,8 +221,8 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 KERICHO CHESS CLUB &amp; ACADEMY</span>
-      <span>KERICHO · KENYA · EAT (UTC+3)</span>
+      <span>© 2026 Kericho Chess Club &amp; Academy · Kericho, Kenya</span>
+      <span>Junior Chess Development · East Africa Time (UTC+3)</span>
     </div>
   </footer>
 

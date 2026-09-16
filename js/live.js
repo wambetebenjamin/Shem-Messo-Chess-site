@@ -40,7 +40,7 @@
     ['Team Kapsaos', 'LETS GO BARASA 🔥'],
     ['Mama Chebet', 'Chebet play your game, breathe!'],
     ['Junior Lions', 'this is the Opera Game line from week six 😮'],
-    ['Arbiter_SIM', 'Board 1 clock synced. 10 minutes each, no increment.'],
+    ['Chief Arbiter Kipkorir', 'Board 1 clocks running. 10 minutes each, tournament rules in effect.'],
     ['Nakuru Chess Fam', 'whoever finds Qb8+ wins a trophy'],
     ['Watching from Litein', 'these kids calculate faster than me fr'],
     ['Coach Shem', 'Note the rook lift. Textbook conversion.'],

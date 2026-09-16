@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Circuit · Tournaments · Kericho Chess Club &amp; Academy</title>
-  <meta name="description" content="Inter-school chess tournaments across Kericho: fixtures, age categories, M-Pesa entry and online registration with Kericho Chess Club &amp; Academy.">
+  <title>Tournaments &amp; Junior Circuit · Kericho Chess Club &amp; Academy</title>
+  <meta name="description" content="Official inter-school chess tournaments across Kericho County: upcoming fixtures, age divisions, M-Pesa entry, online registration, and circuit leaderboard.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232BF5A0'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%2304160D' font-family='serif'%3E&#9822;%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
@@ -17,9 +17,11 @@
   </div>
   <div class="grain" aria-hidden="true"></div>
 
+  <!-- ============ NAVIGATION ============ -->
   <nav class="nav">
     <div class="nav-inner">
       <a href="index.html" class="brand" aria-label="Kericho Chess Club &amp; Academy home">
+        <span class="brand-mark"><i class="fas fa-chess-knight"></i></span>
         <span class="brand-name">KERICHO <b>CHESS</b><span class="brand-sub">CLUB &amp; ACADEMY</span></span>
       </a>
       <div class="nav-links">
@@ -47,205 +49,641 @@
   </nav>
 
   <main>
-    <!-- ============ PAGE HERO ============ -->
-    <header class="page-hero">
-      <div class="page-hero-bg" style="background-image:url('assets/hero-dark-board.jpg');"></div>
+    <!-- ============ TOURNAMENT HERO ============ -->
+    <header class="page-hero-tournaments">
+      <div class="page-hero-bg" style="background-image:url('assets/orig-02.jpg'); opacity:0.42;"></div>
       <div class="wrap">
-        <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>TOURNAMENTS</span></div>
-        <span class="eyebrow">THE CIRCUIT · SEASON 26</span>
-        <h1 style="margin-top:16px;">Where learners<br><span class="glow-line" style="background:linear-gradient(100deg,#fff 20%,var(--neon) 55%,#BFFFE3 80%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 0 26px rgba(43,245,160,.34));">become competitors</span></h1>
-        <p class="lead">Inter-school fixtures across Kericho County, run with real clocks, real scoresheets and real trophies. Boards 1 to 4 stream live on fixture days.</p>
-        <div class="hero-mini-ctas">
-          <a href="#register" class="btn btn-orange attn">REGISTER A LEARNER</a>
-          <a href="live.html" class="btn btn-ghost"><span class="live-dot"></span> Watch the live feed</a>
+        <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>TOURNAMENTS &amp; CIRCUIT</span></div>
+        <span class="t-hero-tag"><i class="fas fa-trophy"></i> Kericho Junior Chess Circuit · 2026 Season</span>
+        <h1 style="margin-top:14px; font-size:clamp(32px, 5.2vw, 62px); line-height:1.06;">
+          Where Young Learners<br>
+          <span class="t-title-gold">Become Champions</span>
+        </h1>
+        <p class="lead" style="color:rgba(244,240,230,.92); max-width:680px; margin-top:18px;">
+          Official FIDE-format inter-school fixtures across Kericho County. High-precision digital clocks, official notation scoresheets, medals for every category, grand school trophies, and live board relays for proud parents at home.
+        </p>
+
+        <!-- Highlights Row -->
+        <div class="t-highlights">
+          <span class="t-pill"><i class="fas fa-chess-board"></i> 7 Swiss Rounds · Everyone Plays Every Round</span>
+          <span class="t-pill gold"><i class="fas fa-medal"></i> 8 Age Divisions · Trophies &amp; Medals</span>
+          <span class="t-pill"><i class="fas fa-clock"></i> FIDE Rapid Rules · 15m + 10s Clocks</span>
+          <span class="t-pill coral"><i class="fas fa-satellite-dish"></i> Boards 1–4 Streamed Live Online</span>
+        </div>
+
+        <div class="hero-mini-ctas" style="margin-top:32px;">
+          <a href="#register" class="btn btn-orange attn"><i class="fas fa-user-plus"></i> REGISTER A LEARNER</a>
+          <a href="live.html" class="btn btn-ghost"><span class="live-dot"></span> Watch Live Broadcast</a>
+          <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20please%20send%20me%20the%20upcoming%20tournament%20brochure." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp Fixture Card</a>
         </div>
       </div>
     </header>
 
-    <!-- ============ NEXT FIXTURE ============ -->
-    <section class="section tight arena">
-      <div class="grid-2" style="align-items:stretch;">
-        <div class="hud card reveal" style="padding:40px;">
-          <span class="badge-live"><span class="live-dot"></span> NEXT FIXTURE</span>
-          <h2 class="display" style="font-size:clamp(24px,3vw,36px); margin:20px 0 10px;">Kericho Inter-Schools Open</h2>
-          <p class="lead" style="font-size:15px;">Saturday 26 September 2026 · Rounds start 9:00 AM EAT · Swiss format · Venue confirmed to registered players on WhatsApp.</p>
-          <div class="clock-toggle" aria-hidden="true">
-            <span class="mini-clock w"></span><span class="mini-clock b"></span>
-            <span class="clock-note">Clocks run · every move counts</span>
-          </div>
-          <div class="round-dots" aria-hidden="true" title="Seven rounds">
-            <i class="next"></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-          <div class="hud" data-countdown="2026-09-26T09:00:00+03:00" style="margin-top:26px; padding:20px 24px;">
-            <span class="hud-label"><span class="ok-dot"></span> FIRST ROUND IN</span>
-            <div class="hud-pair">
-              <div class="hud-stack"><span class="hud-value cd-d">00</span><span class="hud-label">DAYS</span></div>
-              <div class="hud-stack"><span class="hud-value cd-h">00</span><span class="hud-label">HRS</span></div>
-              <div class="hud-stack"><span class="hud-value cd-m">00</span><span class="hud-label">MIN</span></div>
-              <div class="hud-stack"><span class="hud-value cd-s">00</span><span class="hud-label">SEC</span></div>
-            </div>
-          </div>
-          <div class="hud" data-countdown="2026-09-19T18:00:00+03:00" style="margin-top:14px; padding:16px 24px;">
-            <span class="hud-label"><i class="fas fa-hourglass-half" style="color:var(--orange-hi);"></i>&nbsp;REGISTRATION CLOSES IN</span>
-            <div class="hud-pair">
-              <div class="hud-stack"><span class="hud-value cd-d" style="color:var(--orange-hi);">00</span><span class="hud-label">DAYS</span></div>
-              <div class="hud-stack"><span class="hud-value cd-h">00</span><span class="hud-label">HRS</span></div>
-              <div class="hud-stack"><span class="hud-value cd-m">00</span><span class="hud-label">MIN</span></div>
-              <div class="hud-stack"><span class="hud-value cd-s">00</span><span class="hud-label">SEC</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="hud card reveal d1" style="padding:40px;">
-          <span class="eyebrow">HOW ENTRY WORKS</span>
-          <div class="timeline" style="margin-top:26px; padding-left:30px;">
-            <div class="tl-item" style="padding-bottom:26px;">
-              <span class="tl-k">STEP 01</span>
-              <h3 style="font-size:17px;">Submit the form below</h3>
-              <p>Name, age, category and school. Two minutes, no account needed.</p>
-            </div>
-            <div class="tl-item" style="padding-bottom:26px;">
-              <span class="tl-k">STEP 02</span>
-              <h3 style="font-size:17px;">Pay via M-Pesa Paybill</h3>
-              <p>Paybill <b style="color:var(--neon); font-family:var(--f-mono);">880100</b> · Account <b style="color:var(--neon); font-family:var(--f-mono);">123003#LearnersName</b>.</p>
-            </div>
-            <div class="tl-item">
-              <span class="tl-k">STEP 03</span>
-              <h3 style="font-size:17px;">Confirmation on WhatsApp</h3>
-              <p>Shem confirms your category slot directly and shares the fixture card.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CATEGORIES ============ -->
-    <section class="section tight bg-dots">
-      <div class="sec-head center reveal">
-        <span class="eyebrow">EIGHT BOARDS, EVERY AGE</span>
-        <h2>Categories</h2>
-      </div>
-      <div class="cat-grid reveal">
-        <div class="hud cat-chip"><b>Under 7 / U-8</b><span>Development</span></div>
-        <div class="hud cat-chip"><b>Under 9 / U-10</b><span>Development</span></div>
-        <div class="hud cat-chip"><b>Under 11 / U-12</b><span>Junior</span></div>
-        <div class="hud cat-chip"><b>Under 13 / U-14</b><span>Junior</span></div>
-        <div class="hud cat-chip"><b>Under 15 / U-16</b><span>Senior junior</span></div>
-        <div class="hud cat-chip"><b>Under 17 / U-18</b><span>Senior junior</span></div>
-        <div class="hud cat-chip"><b>Open</b><span>Adults &amp; seniors</span></div>
-        <div class="hud cat-chip"><b>Ladies</b><span>Adults &amp; seniors</span></div>
-      </div>
-    </section>
-
-    <!-- ============ REGISTRATION ============ -->
-    <section class="section bg-mint" id="register">
+    <!-- ============ NEXT FIXTURE SPOTLIGHT ============ -->
+    <section class="fixture-section">
       <div class="wrap">
-        <div class="hud reg-card reveal">
-          <div class="reg-side">
-            <span class="eyebrow">TOURNAMENT REGISTRATION</span>
-            <h2>Register a learner</h2>
-            <p>Every entry is recorded automatically. Shem confirms your category slot directly on WhatsApp. Payment is via M-Pesa Paybill.</p>
-            <ul class="perk-list">
-              <li><i class="fas fa-circle-check"></i> Swiss format, everyone plays every round</li>
-              <li><i class="fas fa-circle-check"></i> Clocks and scoresheets provided</li>
-              <li><i class="fas fa-circle-check"></i> Medals per category + circuit points</li>
-              <li><i class="fas fa-circle-check"></i> Top boards streamed live for parents at home</li>
-            </ul>
-          </div>
-          <form class="reg-form" id="tournamentForm">
-            <div class="field"><label for="t_name">Full name</label><input type="text" id="t_name" placeholder="Learner's full name" required></div>
-            <div class="field-row">
-              <div class="field"><label for="t_age">Age</label><input type="text" id="t_age" placeholder="Age" required></div>
-              <div class="field"><label for="t_gender">Gender</label>
-                <select id="t_gender" required><option value="">Select</option><option>Male</option><option>Female</option></select>
+        <div class="grid-2" style="align-items:stretch; gap:32px;">
+          <!-- Fixture Card -->
+          <div class="fixture-spotlight-card reveal">
+            <div class="fixture-topbar">
+              <span class="fixture-badge-open"><span class="ok-dot"></span> NEXT MAJOR FIXTURE · REGISTRATION OPEN</span>
+              <span class="fixture-date-tag"><i class="fas fa-calendar-check"></i> Saturday, 26 September 2026</span>
+            </div>
+            <div class="fixture-body">
+              <h2 class="fixture-title">Kericho Inter-Schools Rapid Championship 2026</h2>
+              <p class="fixture-subtitle">
+                The flagship county tournament uniting primary, junior secondary, and high school learners from across Kericho, Litein, and surrounding sub-counties. Every competitor plays seven full rounds.
+              </p>
+
+              <!-- Specifications Matrix -->
+              <div class="fixture-specs-grid">
+                <div class="spec-item">
+                  <div class="spec-icon green"><i class="fas fa-calendar-day"></i></div>
+                  <div class="spec-text">
+                    <span class="spec-label">Date &amp; Schedule</span>
+                    <span class="spec-val">Sat 26 Sep · 9:00 AM – 4:30 PM</span>
+                  </div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-icon blue"><i class="fas fa-location-dot"></i></div>
+                  <div class="spec-text">
+                    <span class="spec-label">Venue</span>
+                    <span class="spec-val">Kericho High School Great Hall</span>
+                  </div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-icon amber"><i class="fas fa-chess"></i></div>
+                  <div class="spec-text">
+                    <span class="spec-label">Format</span>
+                    <span class="spec-val">7-Round Swiss (No Knockouts)</span>
+                  </div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-icon purple"><i class="fas fa-stopwatch"></i></div>
+                  <div class="spec-text">
+                    <span class="spec-label">Time Control</span>
+                    <span class="spec-val">15 min + 10s increment (Rapid)</span>
+                  </div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-icon coral"><i class="fas fa-trophy"></i></div>
+                  <div class="spec-text">
+                    <span class="spec-label">Prizes &amp; Awards</span>
+                    <span class="spec-val">Trophies, Medals &amp; Certificates</span>
+                  </div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-icon teal"><i class="fas fa-ticket"></i></div>
+                  <div class="spec-text">
+                    <span class="spec-label">Entry Fee</span>
+                    <span class="spec-val">KES 500 per player (All Inclusive)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Tournament Clocks Preview -->
+              <div class="t-clocks-preview">
+                <div class="t-clock-unit active">
+                  <span style="font-size:12px; font-weight:700; color:#1E293B;">WHITE</span>
+                  <div class="t-clock-screen">15:00</div>
+                </div>
+                <span class="t-clock-caption"><i class="fas fa-clock" style="color:var(--jade);"></i> Electronic DGT Clocks Provided</span>
+                <div class="t-clock-unit">
+                  <span style="font-size:12px; font-weight:700; color:#1E293B;">BLACK</span>
+                  <div class="t-clock-screen">14:48</div>
+                </div>
+              </div>
+
+              <!-- Countdown 1: Kickoff -->
+              <div class="t-countdown-box" data-countdown="2026-09-26T09:00:00+03:00">
+                <div class="t-cd-header"><span class="ok-dot"></span> TOURNAMENT KICKOFF IN</div>
+                <div class="t-cd-row">
+                  <div class="t-cd-digit"><span class="t-cd-num cd-d">00</span><span class="t-cd-lbl">Days</span></div>
+                  <div class="t-cd-digit"><span class="t-cd-num cd-h">00</span><span class="t-cd-lbl">Hours</span></div>
+                  <div class="t-cd-digit"><span class="t-cd-num cd-m">00</span><span class="t-cd-lbl">Minutes</span></div>
+                  <div class="t-cd-digit"><span class="t-cd-num cd-s">00</span><span class="t-cd-lbl">Seconds</span></div>
+                </div>
+              </div>
+
+              <!-- Countdown 2: Registration Deadline -->
+              <div class="t-countdown-box amber" data-countdown="2026-09-25T18:00:00+03:00">
+                <div class="t-cd-header"><i class="fas fa-hourglass-half" style="color:#B45309;"></i> REGISTRATION CLOSES: FRIDAY 25 SEP, 6:00 PM EAT</div>
+                <div class="t-cd-row">
+                  <div class="t-cd-digit"><span class="t-cd-num cd-d">00</span><span class="t-cd-lbl">Days</span></div>
+                  <div class="t-cd-digit"><span class="t-cd-num cd-h">00</span><span class="t-cd-lbl">Hours</span></div>
+                  <div class="t-cd-digit"><span class="t-cd-num cd-m">00</span><span class="t-cd-lbl">Minutes</span></div>
+                  <div class="t-cd-digit"><span class="t-cd-num cd-s">00</span><span class="t-cd-lbl">Seconds</span></div>
+                </div>
+              </div>
+
+              <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
+                <a href="#register" class="btn btn-orange attn" style="flex:1;"><i class="fas fa-check-circle"></i> Register a Learner Now</a>
+                <a href="live.html" class="btn btn-ghost"><i class="fas fa-broadcast-tower"></i> View Live Board Relay</a>
               </div>
             </div>
-            <div class="field"><label for="t_category">Category</label>
+          </div>
+
+          <!-- Step-by-Step Registration Guide Card -->
+          <div class="steps-card reveal d1">
+            <span class="eyebrow"><i class="fas fa-list-check"></i> HOW ENTRY WORKS</span>
+            <h2 style="font-family:var(--f-display); font-size:clamp(22px, 2.5vw, 28px); margin:16px 0 10px; color:#0F172A;">
+              Simple 3-Step Registration
+            </h2>
+            <p style="color:#475569; font-size:15px; margin-bottom:28px;">
+              No accounts or complicated forms. Parents and school coaches can register individual players or teams in two minutes.
+            </p>
+
+            <div class="step-item-card">
+              <div class="step-num-badge">1</div>
+              <div class="step-content">
+                <h3>Submit Learner Details</h3>
+                <p>Fill out the registration form below with the learner's name, school, age division, and your phone number.</p>
+              </div>
+            </div>
+
+            <div class="step-item-card">
+              <div class="step-num-badge" style="background:#DCFCE7; color:#15803D; border-color:#86EFAC;">2</div>
+              <div class="step-content">
+                <h3>Pay via M-Pesa Paybill</h3>
+                <p>Send KES 500 entry fee per participant directly to our official academy Paybill:</p>
+                <div class="step-paybill-callout">
+                  <span>Paybill: <b>880100</b> · Account: <b>123003#LearnerName</b></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-item-card" style="padding-bottom:10px;">
+              <div class="step-num-badge" style="background:#FFE4E6; color:#BE123C; border-color:#FDA4AF;">3</div>
+              <div class="step-content">
+                <h3>WhatsApp Confirmation</h3>
+                <p>Coach Shem verifies your category slot, sends your official digital fixture card, and adds you to the tournament broadcast list.</p>
+              </div>
+            </div>
+
+            <div class="arbiter-trust-box" style="margin-top:24px;">
+              <i class="fas fa-shield-halved"></i>
+              <p>
+                <b>Guided by Certified Arbiters:</b> First-time competitors receive friendly orientation on clock usage, touch-move rules, and notation recording before Round 1 begins.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TOURNAMENT AMENITIES ============ -->
+    <section class="t-perks-section">
+      <div class="wrap">
+        <div class="sec-head center reveal">
+          <span class="eyebrow"><i class="fas fa-star"></i> COMPETITOR EXPERIENCE</span>
+          <h2 style="font-size:clamp(26px, 3.2vw, 38px); margin-top:12px;">What Every Entrant Receives</h2>
+          <p style="max-width:680px; margin:12px auto 0; font-size:16px;">
+            We provide a world-class, professional tournament experience for young chess enthusiasts in Kericho County.
+          </p>
+        </div>
+
+        <div class="t-perks-grid reveal">
+          <div class="t-perk-card">
+            <div class="t-perk-icon green"><i class="fas fa-chess-board"></i></div>
+            <h3>Tournament Sets &amp; Boards</h3>
+            <p>Full FIDE-approved weighted pieces and non-glare roll-up vinyl boards provided at every single board.</p>
+          </div>
+          <div class="t-perk-card">
+            <div class="t-perk-icon blue"><i class="fas fa-stopwatch"></i></div>
+            <h3>Digital Chess Clocks</h3>
+            <p>Official DGT digital clocks configured with 15-minute time controls plus 10-second increments for fair matchplay.</p>
+          </div>
+          <div class="t-perk-card">
+            <div class="t-perk-icon amber"><i class="fas fa-clipboard-list"></i></div>
+            <h3>Official Scoresheets &amp; Pens</h3>
+            <p>Personal scoresheets to record moves and analyze games with academy coaches between rounds.</p>
+          </div>
+          <div class="t-perk-card">
+            <div class="t-perk-icon purple"><i class="fas fa-trophy"></i></div>
+            <h3>Trophies &amp; Medals</h3>
+            <p>Gold, silver, and bronze trophies for the top 3 in every division, plus merit medals for top finishers.</p>
+          </div>
+          <div class="t-perk-card">
+            <div class="t-perk-icon rose"><i class="fas fa-certificate"></i></div>
+            <h3>Certificate of Participation</h3>
+            <p>Official stamped Kericho Chess Academy certificates awarded to every participant recognising their sportsmanship.</p>
+          </div>
+          <div class="t-perk-card">
+            <div class="t-perk-icon teal"><i class="fas fa-video"></i></div>
+            <h3>Live Board Streaming</h3>
+            <p>Top boards 1 through 4 relayed live on our broadcast room so family, teachers, and schoolmates can watch.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CATEGORIES & DIVISIONS ============ -->
+    <section class="t-categories-section">
+      <div class="wrap">
+        <div class="sec-head center reveal">
+          <span class="eyebrow"><i class="fas fa-layer-group"></i> FAIR &amp; BALANCED PLAY</span>
+          <h2 style="font-size:clamp(26px, 3.2vw, 38px); margin-top:12px;">Official Age Categories &amp; Divisions</h2>
+          <p style="max-width:680px; margin:12px auto 0; font-size:16px;">
+            Eight distinct divisions ensure appropriate, competitive matchups for everyone from 6-year-old beginners to senior players.
+          </p>
+        </div>
+
+        <div class="t-division-grid reveal">
+          <!-- U8 -->
+          <div class="t-division-card cat-u8">
+            <div class="t-div-header">
+              <div class="t-div-icon"><i class="fas fa-chess-pawn"></i></div>
+              <span class="t-div-badge">Cadet Division</span>
+            </div>
+            <h3>Under 8 (U-7 / U-8)</h3>
+            <div class="t-div-age"><i class="fas fa-id-card"></i> Born 2018 or later</div>
+            <div class="t-div-rounds"><i class="fas fa-rotate"></i> 5 Swiss Rounds</div>
+            <p class="t-div-desc">Focuses on piece movement confidence, touch-move awareness, and having fun in a positive, supportive setting.</p>
+          </div>
+
+          <!-- U10 -->
+          <div class="t-division-card cat-u10">
+            <div class="t-div-header">
+              <div class="t-div-icon"><i class="fas fa-chess-knight"></i></div>
+              <span class="t-div-badge">Junior Development</span>
+            </div>
+            <h3>Under 10 (U-9 / U-10)</h3>
+            <div class="t-div-age"><i class="fas fa-id-card"></i> Born 2016 – 2017</div>
+            <div class="t-div-rounds"><i class="fas fa-rotate"></i> 6 Swiss Rounds</div>
+            <p class="t-div-desc">Drills tactical patterns: forks, pins, basic endgames, and managing the clock without rushing.</p>
+          </div>
+
+          <!-- U12 -->
+          <div class="t-division-card cat-u12">
+            <div class="t-div-header">
+              <div class="t-div-icon"><i class="fas fa-chess-bishop"></i></div>
+              <span class="t-div-badge">Primary Championship</span>
+            </div>
+            <h3>Under 12 (U-11 / U-12)</h3>
+            <div class="t-div-age"><i class="fas fa-id-card"></i> Born 2014 – 2015</div>
+            <div class="t-div-rounds"><i class="fas fa-rotate"></i> 7 Swiss Rounds</div>
+            <p class="t-div-desc">Our most popular school bracket. Focuses on structured opening principles, king safety, and scoresheet recording.</p>
+          </div>
+
+          <!-- U14 -->
+          <div class="t-division-card cat-u14">
+            <div class="t-div-header">
+              <div class="t-div-icon"><i class="fas fa-chess-rook"></i></div>
+              <span class="t-div-badge">Intermediate Squad</span>
+            </div>
+            <h3>Under 14 (U-13 / U-14)</h3>
+            <div class="t-div-age"><i class="fas fa-id-card"></i> Born 2012 – 2013</div>
+            <div class="t-div-rounds"><i class="fas fa-rotate"></i> 7 Swiss Rounds</div>
+            <p class="t-div-desc">Transition to deep tactical calculation, positional understanding, and competitive inter-school rivalry.</p>
+          </div>
+
+          <!-- U16 -->
+          <div class="t-division-card cat-u16">
+            <div class="t-div-header">
+              <div class="t-div-icon"><i class="fas fa-chess-queen"></i></div>
+              <span class="t-div-badge">Senior Junior</span>
+            </div>
+            <h3>Under 16 (U-15 / U-16)</h3>
+            <div class="t-div-age"><i class="fas fa-id-card"></i> Born 2010 – 2011</div>
+            <div class="t-div-rounds"><i class="fas fa-rotate"></i> 7 Swiss Rounds</div>
+            <p class="t-div-desc">Advanced opening repertoire, clock composure under tight time pressure, and endgame conversion technique.</p>
+          </div>
+
+          <!-- U18 -->
+          <div class="t-division-card cat-u18">
+            <div class="t-div-header">
+              <div class="t-div-icon"><i class="fas fa-chess-king"></i></div>
+              <span class="t-div-badge">Youth Elite</span>
+            </div>
+            <h3>Under 18 (U-17 / U-18)</h3>
+            <div class="t-div-age"><i class="fas fa-id-card"></i> Born 2008 – 2009</div>
+            <div class="t-div-rounds"><i class="fas fa-rotate"></i> 7 Swiss Rounds</div>
+            <p class="t-div-desc">Senior high school competitors preparing for regional qualifiers, national youth games, and university circuits.</p>
+          </div>
+
+          <!-- Open -->
+          <div class="t-division-card cat-open">
+            <div class="t-div-header">
+              <div class="t-div-icon"><i class="fas fa-award"></i></div>
+              <span class="t-div-badge">Open Championship</span>
+            </div>
+            <h3>Open Division</h3>
+            <div class="t-div-age"><i class="fas fa-users"></i> All Ages &amp; Adults</div>
+            <div class="t-div-rounds"><i class="fas fa-rotate"></i> 7 Swiss Rounds</div>
+            <p class="t-div-desc">Open to teachers, coaches, adult club players, and ambitious junior masters testing their skill against seasoned veterans.</p>
+          </div>
+
+          <!-- Ladies -->
+          <div class="t-division-card cat-ladies">
+            <div class="t-div-header">
+              <div class="t-div-icon"><i class="fas fa-crown"></i></div>
+              <span class="t-div-badge">Women &amp; Girls Open</span>
+            </div>
+            <h3>Ladies Championship</h3>
+            <div class="t-div-age"><i class="fas fa-female"></i> Female Players (All Ages)</div>
+            <div class="t-div-rounds"><i class="fas fa-rotate"></i> 7 Swiss Rounds</div>
+            <p class="t-div-desc">A dedicated division fostering female chess excellence, leadership, and camaraderie across Kericho schools.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REGISTRATION FORM ============ -->
+    <section class="section bg-mint" id="register">
+      <div class="wrap">
+        <div class="hud reg-card reveal" style="background:#FFFFFF; border:1.5px solid rgba(15, 118, 110, 0.2); box-shadow:0 16px 44px -6px rgba(15, 76, 58, 0.12);">
+          <div class="reg-side">
+            <span class="eyebrow"><i class="fas fa-file-pen"></i> OFFICIAL REGISTRATION</span>
+            <h2>Register a Learner</h2>
+            <p style="font-size:15px; color:#475569; line-height:1.6;">
+              Entries are confirmed in real-time. Once submitted, Coach Shem verifies your details and sends your player's round schedule directly on WhatsApp.
+            </p>
+
+            <!-- M-Pesa Highlight Box -->
+            <div class="reg-pay-highlight">
+              <div class="reg-pay-head"><i class="fas fa-mobile-screen-button"></i> M-PESA PAYBILL PAYMENT</div>
+              <div class="reg-pay-row"><span>Paybill Number:</span> <b>880100</b></div>
+              <div class="reg-pay-row"><span>Account Format:</span> <b>123003#LearnerName</b></div>
+              <div class="reg-pay-row"><span>Entry Fee:</span> <b>KES 500 per player</b></div>
+            </div>
+
+            <ul class="perk-list" style="margin-top:20px;">
+              <li><i class="fas fa-circle-check" style="color:var(--jade);"></i> Swiss format: everyone plays every round, no eliminations</li>
+              <li><i class="fas fa-circle-check" style="color:var(--jade);"></i> Full equipment provided: boards, pieces, clocks, and scoresheets</li>
+              <li><i class="fas fa-circle-check" style="color:var(--jade);"></i> Official trophies, medals, and participation certificates awarded</li>
+              <li><i class="fas fa-circle-check" style="color:var(--jade);"></i> Top boards streamed live online for family and supporters</li>
+            </ul>
+          </div>
+
+          <form class="reg-form" id="tournamentForm">
+            <div class="field">
+              <label for="t_name">Learner's Full Name</label>
+              <input type="text" id="t_name" placeholder="e.g. Brian Kiprono Koech" required>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="t_age">Age</label>
+                <input type="number" id="t_age" placeholder="e.g. 11" min="5" max="99" required>
+              </div>
+              <div class="field">
+                <label for="t_gender">Gender</label>
+                <select id="t_gender" required>
+                  <option value="">Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="t_category">Tournament Division</label>
               <select id="t_category" required>
-                <option value="">Select category</option>
-                <option>Under 7 or Under 8</option>
-                <option>Under 9 or Under 10</option>
-                <option>Under 11 or Under 12</option>
-                <option>Under 13 or Under 14</option>
-                <option>Under 15 or Under 16</option>
-                <option>Under 17 or Under 18</option>
-                <option>Open (Adults/Seniors)</option>
-                <option>Ladies (Adults/Seniors)</option>
+                <option value="">Select division</option>
+                <option value="Under 7 or Under 8">Under 7 / Under 8 (Cadet)</option>
+                <option value="Under 9 or Under 10">Under 9 / Under 10 (Junior Development)</option>
+                <option value="Under 11 or Under 12">Under 11 / Under 12 (Junior Championship)</option>
+                <option value="Under 13 or Under 14">Under 13 / Under 14 (Intermediate)</option>
+                <option value="Under 15 or Under 16">Under 15 / Under 16 (Senior Junior)</option>
+                <option value="Under 17 or Under 18">Under 17 / Under 18 (Youth Elite)</option>
+                <option value="Open (Adults/Seniors)">Open Championship (Adults &amp; Seniors)</option>
+                <option value="Ladies (Adults/Seniors)">Ladies Championship (All Ages)</option>
               </select>
             </div>
-            <div class="field"><label for="t_school">School / club</label><input type="text" id="t_school" placeholder="School or chess club" required></div>
+            <div class="field">
+              <label for="t_school">School or Chess Club</label>
+              <input type="text" id="t_school" placeholder="e.g. Kericho Primary School" required>
+            </div>
             <div class="field-row">
-              <div class="field"><label for="t_email">Email (optional)</label><input type="email" id="t_email" placeholder="Email address"></div>
-              <div class="field"><label for="t_phone">Phone</label><input type="text" id="t_phone" placeholder="Tel number" required></div>
+              <div class="field">
+                <label for="t_email">Parent / Guardian Email (Optional)</label>
+                <input type="email" id="t_email" placeholder="email@example.com">
+              </div>
+              <div class="field">
+                <label for="t_phone">Parent / Coach Phone Number</label>
+                <input type="tel" id="t_phone" placeholder="e.g. 0722 000 000" required>
+              </div>
             </div>
-            <div class="pay-box">
-              <span class="pay-label">PAYMENT · M-PESA PAYBILL</span>
-              <span class="pay-line">Paybill: <b>880100</b></span>
-              <span class="pay-line">Account: <b>123003#LearnersName</b></span>
-            </div>
+
             <div class="form-msg" id="t_msg" role="status"></div>
-            <button type="submit" class="btn btn-orange btn-block" id="t_submit">Submit Registration</button>
-            <a href="#" target="_blank" rel="noopener" class="btn btn-wa btn-block wa-confirm" id="t_wa"><i class="fab fa-whatsapp"></i> Send entry on WhatsApp</a>
+            <button type="submit" class="btn btn-orange btn-block attn" id="t_submit">
+              <i class="fas fa-paper-plane"></i> Submit Tournament Registration
+            </button>
+            <a href="#" target="_blank" rel="noopener" class="btn btn-wa btn-block wa-confirm" id="t_wa">
+              <i class="fab fa-whatsapp"></i> Send Entry Details via WhatsApp
+            </a>
           </form>
         </div>
       </div>
     </section>
 
-    <!-- ============ HONOUR ROLL ============ -->
-    <section class="section tight bg-peach">
-      <div class="sec-head reveal">
-        <span class="eyebrow">SEASON 25 · FINAL TABLE SAMPLE</span>
-        <h2><i class="fas fa-trophy trophy-spark"></i> Circuit honour roll</h2>
-        <p>A sample of last season's standings. Full tables are shared in the academy's WhatsApp group after every fixture.</p>
-      </div>
-      <div class="hud spotlight-card reveal" style="max-width:860px; margin:0 auto; overflow-x:auto; padding:10px;">
-        <table class="res-table">
-          <thead><tr><th>Pos</th><th>Player</th><th>School</th><th>Category</th><th>Pts</th></tr></thead>
-          <tbody>
-            <tr><td class="pos-1">01</td><td>Barasa K.</td><td>Kapsaos Boys</td><td>U-14</td><td>6.5 / 7</td></tr>
-            <tr><td class="pos-2">02</td><td>Chebet A.</td><td>Kericho Primary</td><td>U-12</td><td>6.0 / 7</td></tr>
-            <tr><td class="pos-3">03</td><td>Mutai D.</td><td>Litein Academy</td><td>U-16</td><td>5.5 / 7</td></tr>
-            <tr><td>04</td><td>Wanjiru F.</td><td>Greenhill Girls</td><td>U-12</td><td>5.0 / 7</td></tr>
-            <tr><td>05</td><td>Kiprono E.</td><td>Kericho Primary</td><td>U-10</td><td>5.0 / 7</td></tr>
-          </tbody>
-        </table>
+    <!-- ============ HONOUR ROLL & LEADERBOARD ============ -->
+    <section class="t-honour-section">
+      <div class="wrap">
+        <div class="sec-head center reveal">
+          <span class="eyebrow"><i class="fas fa-trophy"></i> SEASON STANDINGS</span>
+          <h2 style="font-size:clamp(26px, 3.2vw, 38px); margin-top:12px;">Junior Circuit Leaderboard</h2>
+          <p style="max-width:680px; margin:12px auto 0; font-size:16px;">
+            Recognising dedication and competitive excellence. Standings from the most recent inter-school county championship.
+          </p>
+        </div>
+
+        <!-- Top 3 Podium Cards -->
+        <div class="t-podium-row reveal">
+          <!-- 2nd Place -->
+          <div class="t-podium-card second">
+            <div class="podium-medal silver"><i class="fas fa-medal"></i></div>
+            <span class="rank-badge rank-2">2nd</span>
+            <h3>Chebet A.</h3>
+            <p class="t-podium-school">Kericho Primary · U-12 Champion</p>
+            <span class="t-podium-score">6.0 / 7.0 Pts</span>
+          </div>
+
+          <!-- 1st Place (Center / Highlighted) -->
+          <div class="t-podium-card first">
+            <div class="podium-medal gold"><i class="fas fa-trophy"></i></div>
+            <span class="rank-badge rank-1" style="width:32px; height:32px; font-size:15px;">1st</span>
+            <h3 style="font-size:20px;">Barasa K.</h3>
+            <p class="t-podium-school">Kapsaos Boys · U-14 Champion</p>
+            <span class="t-podium-score" style="font-size:16px; background:#FEF3C7; color:#92400E; border-color:#FCD34D;">6.5 / 7.0 Pts</span>
+          </div>
+
+          <!-- 3rd Place -->
+          <div class="t-podium-card third">
+            <div class="podium-medal bronze"><i class="fas fa-medal"></i></div>
+            <span class="rank-badge rank-3">3rd</span>
+            <h3>Mutai D.</h3>
+            <p class="t-podium-school">Litein Academy · U-16 Champion</p>
+            <span class="t-podium-score">5.5 / 7.0 Pts</span>
+          </div>
+        </div>
+
+        <!-- Leaderboard Table -->
+        <div class="t-leaderboard-card reveal">
+          <div class="t-table-header">
+            <span class="t-table-title"><i class="fas fa-award" style="color:var(--brass);"></i> Official Final Standings</span>
+            <span class="t-table-arbiter-tag"><i class="fas fa-circle-check"></i> Certified by Chief Arbiter Kipkorir · Buchholz Tiebreak</span>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="t-res-table">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Player Name</th>
+                  <th>School / Club</th>
+                  <th>Division</th>
+                  <th>Score</th>
+                  <th>Award</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="rank-badge rank-1">01</span></td>
+                  <td><b>Barasa K.</b></td>
+                  <td>Kapsaos Boys High School</td>
+                  <td><span class="cat-tag-pill">U-14 Junior</span></td>
+                  <td><span class="score-badge">6.5 / 7.0</span></td>
+                  <td><span style="color:#B45309; font-weight:700;"><i class="fas fa-trophy"></i> Gold Trophy</span></td>
+                </tr>
+                <tr>
+                  <td><span class="rank-badge rank-2">02</span></td>
+                  <td><b>Chebet A.</b></td>
+                  <td>Kericho Primary School</td>
+                  <td><span class="cat-tag-pill">U-12 Junior</span></td>
+                  <td><span class="score-badge">6.0 / 7.0</span></td>
+                  <td><span style="color:#475569; font-weight:700;"><i class="fas fa-medal"></i> Silver Trophy</span></td>
+                </tr>
+                <tr>
+                  <td><span class="rank-badge rank-3">03</span></td>
+                  <td><b>Mutai D.</b></td>
+                  <td>Litein Academy</td>
+                  <td><span class="cat-tag-pill">U-16 Senior</span></td>
+                  <td><span class="score-badge">5.5 / 7.0</span></td>
+                  <td><span style="color:#C2410C; font-weight:700;"><i class="fas fa-medal"></i> Bronze Trophy</span></td>
+                </tr>
+                <tr>
+                  <td><span class="rank-badge rank-sub">04</span></td>
+                  <td><b>Wanjiru F.</b></td>
+                  <td>Greenhill Girls Academy</td>
+                  <td><span class="cat-tag-pill">U-12 Junior</span></td>
+                  <td><span class="score-badge">5.0 / 7.0</span></td>
+                  <td><span style="color:#C026D3; font-weight:700;"><i class="fas fa-star"></i> Top Girl Trophy</span></td>
+                </tr>
+                <tr>
+                  <td><span class="rank-badge rank-sub">05</span></td>
+                  <td><b>Kiprono E.</b></td>
+                  <td>Kericho Primary School</td>
+                  <td><span class="cat-tag-pill">U-10 Cadet</span></td>
+                  <td><span class="score-badge">5.0 / 7.0</span></td>
+                  <td><span style="color:#15803D; font-weight:600;"><i class="fas fa-award"></i> Merit Medal</span></td>
+                </tr>
+                <tr>
+                  <td><span class="rank-badge rank-sub">06</span></td>
+                  <td><b>Koech B.</b></td>
+                  <td>Moi Tea Secondary School</td>
+                  <td><span class="cat-tag-pill">U-14 Junior</span></td>
+                  <td><span class="score-badge">4.5 / 7.0</span></td>
+                  <td><span style="color:#15803D; font-weight:600;"><i class="fas fa-award"></i> Merit Medal</span></td>
+                </tr>
+                <tr>
+                  <td><span class="rank-badge rank-sub">07</span></td>
+                  <td><b>Cherotich L.</b></td>
+                  <td>Highlands Academy</td>
+                  <td><span class="cat-tag-pill">U-10 Cadet</span></td>
+                  <td><span class="score-badge">4.5 / 7.0</span></td>
+                  <td><span style="color:#15803D; font-weight:600;"><i class="fas fa-award"></i> Merit Medal</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="padding:16px 24px; background:#F8FAFC; border-top:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <span style="font-size:13px; color:#64748B;">Complete cross-tables and FIDE rating calculations are distributed in the academy WhatsApp group.</span>
+            <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20please%20share%20the%20full%20tournament%20results%20sheet." target="_blank" rel="noopener" style="font-size:13px; font-weight:700; color:var(--jade-deep);"><i class="fab fa-whatsapp"></i> Request Full Table PDF →</a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ============ TOURNAMENT PREP GALLERY ============ -->
+    <!-- ============ TOURNAMENT ACTION GALLERY ============ -->
     <section class="section tight bg-sky">
-      <div class="sec-head center reveal">
-        <span class="eyebrow">BEHIND THE BOARDS</span>
-        <h2>Tournament prep<br>in action</h2>
-        <p>Real sessions, real learners, real focus. This is what preparation looks like before the clocks start.</p>
-      </div>
-      <div class="gallery-grid reveal">
-        <div class="gallery-item gi-wide"><img src="assets/tournament-prep-01.jpg" alt="Learners focused on their chess positions during tournament prep"></div>
-        <div class="gallery-item"><img src="assets/tournament-prep-02.jpg" alt="Young players studying opening positions together"></div>
-        <div class="gallery-item"><img src="assets/tournament-prep-03.jpg" alt="Tournament preparation session in progress"></div>
-        <div class="gallery-item"><img src="assets/tournament-prep-04.jpg" alt="Coach guiding learners through a competitive position"></div>
-        <div class="gallery-item gi-wide"><img src="assets/tournament-prep-05.jpg" alt="Learners analysing games during prep session"></div>
-        <div class="gallery-item"><img src="assets/tournament-prep-06.jpg" alt="Clock practice during tournament preparation"></div>
-        <div class="gallery-item"><img src="assets/tournament-prep-07.jpg" alt="Inter-school tournament prep group photo"></div>
-        <div class="gallery-item gi-wide"><img src="assets/tournament-prep-08.jpg" alt="Learners competing in practice rounds"></div>
-        <div class="gallery-item"><img src="assets/tournament-prep-09.jpg" alt="Focused tournament preparation at the board"></div>
-        <div class="gallery-item"><img src="assets/tournament-prep-10.jpg" alt="Academy learners ready for competition"></div>
+      <div class="wrap">
+        <div class="sec-head center reveal">
+          <span class="eyebrow"><i class="fas fa-camera"></i> TOURNAMENT ACTION</span>
+          <h2 style="font-size:clamp(26px, 3.2vw, 38px); margin-top:12px;">Behind the Boards in Kericho</h2>
+          <p style="max-width:680px; margin:12px auto 0; font-size:16px;">
+            Real moments, intense concentration, and inspiring sportsmanship from county tournaments and preparatory sessions.
+          </p>
+        </div>
+        <div class="gallery-grid reveal">
+          <div class="gallery-item gi-wide"><img src="assets/tournament-prep-01.jpg" alt="Learners deeply focused on their chess positions during tournament play in Kericho"></div>
+          <div class="gallery-item"><img src="assets/tournament-prep-02.jpg" alt="Young competitors studying opening moves together before the round"></div>
+          <div class="gallery-item"><img src="assets/tournament-prep-03.jpg" alt="Tournament hall atmosphere during competitive round"></div>
+          <div class="gallery-item"><img src="assets/tournament-prep-04.jpg" alt="Coach Shem guiding young learners through a tactical analysis"></div>
+          <div class="gallery-item gi-wide"><img src="assets/tournament-prep-05.jpg" alt="Competitors analyzing their games on scoresheets after a tense match"></div>
+          <div class="gallery-item"><img src="assets/tournament-prep-06.jpg" alt="Practicing with digital chess clocks under match conditions"></div>
+          <div class="gallery-item"><img src="assets/tournament-prep-07.jpg" alt="School chess team posing together at an inter-school fixture"></div>
+          <div class="gallery-item gi-wide"><img src="assets/tournament-prep-08.jpg" alt="Excited learners celebrating their match victories"></div>
+          <div class="gallery-item"><img src="assets/tournament-prep-09.jpg" alt="Intense concentration over the board in an endgame round"></div>
+          <div class="gallery-item"><img src="assets/tournament-prep-10.jpg" alt="Kericho Chess Academy learners ready for tournament competition"></div>
+        </div>
       </div>
     </section>
 
-    <!-- ============ CTA ============ -->
+    <!-- ============ TOURNAMENT FAQ ============ -->
+    <section class="section tight bg-dots">
+      <div class="wrap">
+        <div class="sec-head center reveal">
+          <span class="eyebrow"><i class="fas fa-circle-question"></i> PARENT &amp; COACH GUIDE</span>
+          <h2 style="font-size:clamp(26px, 3.2vw, 38px); margin-top:12px;">Frequently Asked Questions</h2>
+          <p style="max-width:680px; margin:12px auto 0; font-size:16px;">
+            Common questions from parents, teachers, and first-time tournament entrants.
+          </p>
+        </div>
+
+        <div class="faq reveal" style="margin-top:32px;">
+          <div class="hud faq-item">
+            <button class="faq-q" type="button">What should a learner bring on tournament day?<span class="cnt">+</span></button>
+            <div class="faq-a">
+              <p>Just themselves and a water bottle! The academy supplies all boards, weighted pieces, digital clocks, scoresheets, and pens. Learners should arrive 20 minutes before Round 1 for the arbiter briefing.</p>
+            </div>
+          </div>
+          <div class="hud faq-item">
+            <button class="faq-q" type="button">What happens if a child loses a round in the Swiss system?<span class="cnt">+</span></button>
+            <div class="faq-a">
+              <p>In a Swiss tournament, no one is knocked out! Every participant plays all scheduled rounds. If a player loses a match, they are paired against someone with a similar score in the next round, ensuring balanced and encouraging games throughout the day.</p>
+            </div>
+          </div>
+          <div class="hud faq-item">
+            <button class="faq-q" type="button">Can parents and teachers stay to watch the matches?<span class="cnt">+</span></button>
+            <div class="faq-a">
+              <p>Yes! We have a dedicated spectator gallery in the hall where parents and teachers can observe. Top boards 1 to 4 are also streamed live with digital clocks and analysis directly to our live broadcast page on mobile phones.</p>
+            </div>
+          </div>
+          <div class="hud faq-item">
+            <button class="faq-q" type="button">How can a school register a team of learners together?<span class="cnt">+</span></button>
+            <div class="faq-a">
+              <p>Teachers or school patrons can send a list of player names, ages, and categories directly to Coach Shem on WhatsApp. We provide a single consolidated invoice and team registration receipt.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CLOSING CTA ============ -->
     <section class="cta-band">
       <img class="cta-photo" src="assets/tournament-focus.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 45%;">
       <div class="boardwave" aria-hidden="true"></div>
-      <span class="eyebrow" style="justify-content:center;">CLOCK IS RUNNING</span>
-      <h2 class="display">Claim a board<br>in the next fixture</h2>
-      <p class="lead">Registration closes before the draw is made. Put the learner's name in early.</p>
+      <span class="eyebrow" style="justify-content:center;"><i class="fas fa-chess-clock"></i> REGISTRATION IS OPEN</span>
+      <h2 class="display" style="margin-top:16px;">Claim a Board in<br>the Next Fixture</h2>
+      <p class="lead" style="margin:16px auto 32px; max-width:620px;">
+        Registration closes promptly before Round 1 pairings are drawn. Give your learner the unforgettable thrill of competing for their school and winning their first tournament medal.
+      </p>
       <div class="cta-row">
-        <a href="#register" class="btn btn-orange">REGISTER NOW <i class="fas fa-trophy"></i></a>
-        <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20a%20question%20about%20the%20next%20tournament." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Ask on WhatsApp</a>
+        <a href="#register" class="btn btn-orange attn"><i class="fas fa-trophy"></i> REGISTER A LEARNER NOW</a>
+        <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%20have%20a%20question%20about%20the%20upcoming%20tournament." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Chat with Coach Shem</a>
       </div>
     </section>
   </main>
 
+  <!-- ============ FOOTER ============ -->
   <footer>
     <div class="foot-grid">
       <div class="foot-brand">
@@ -259,13 +697,13 @@
         <h4>PLATFORM</h4>
         <a href="live.html">Live broadcasts</a>
         <a href="play.html">Play the board</a>
-        <a href="tournaments.html">Tournaments</a>
-        <a href="shop.html">Shop</a>
+        <a href="tournaments.html">Tournaments &amp; Circuit</a>
+        <a href="shop.html">Shop equipment</a>
       </div>
       <div class="foot-col">
         <h4>ACADEMY</h4>
-        <a href="coaching.html">Coaching</a>
-        <a href="about.html">About Shem</a>
+        <a href="coaching.html">Coaching programmes</a>
+        <a href="about.html">About Coach Shem</a>
         <a href="contact.html">Enrol &amp; contact</a>
         <a href="index.html">Home</a>
       </div>
@@ -280,8 +718,8 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 KERICHO CHESS CLUB &amp; ACADEMY</span>
-      <span>KERICHO · KENYA · EAT (UTC+3)</span>
+      <span>© 2026 Kericho Chess Club &amp; Academy · Kericho, Kenya</span>
+      <span>Official School Chess Circuit · East Africa Time (UTC+3)</span>
     </div>
   </footer>
 

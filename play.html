@@ -20,6 +20,7 @@
   <nav class="nav">
     <div class="nav-inner">
       <a href="index.html" class="brand" aria-label="Kericho Chess Club &amp; Academy home">
+        <span class="brand-mark"><i class="fas fa-chess-knight"></i></span>
         <span class="brand-name">KERICHO <b>CHESS</b><span class="brand-sub">CLUB &amp; ACADEMY</span></span>
       </a>
       <div class="nav-links">
@@ -50,8 +51,8 @@
     <!-- ============ PAGE HERO ============ -->
     <header class="page-hero" style="padding-bottom:60px;">
       <div class="wrap">
-        <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>PLAY</span></div>
-        <span class="eyebrow">THE PRACTICE HALL</span>
+        <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>PLAY THE BOARD</span></div>
+        <span class="eyebrow"><i class="fas fa-chess-board"></i> INTERACTIVE TRAINING BOARD</span>
         <h1 style="margin-top:16px;">Play a real game,<br>right here</h1>
         <p class="lead">Pass-and-play on one device, with full rules on castling, en passant and promotion. Tap a piece, then a highlighted square. The same drills learners use between coaching sessions.</p>
       </div>
@@ -62,14 +63,14 @@
       <div class="bc-grid">
         <div class="hud board-shell reveal">
           <div class="board-frame">
-            <div class="board3d-stage" id="stage3d"><span class="b3d-tag">3D BOARD &#183; WEBGL</span><span class="b3d-hint">drag pointer to tilt &#183; tap to move</span></div>
+            <div class="board3d-stage" id="stage3d"><span class="b3d-tag"><i class="fas fa-cube"></i> Interactive 3D Board</span><span class="b3d-hint">Drag to rotate · Tap pieces to move</span></div>
             <div class="play-board" id="playBoard"></div>
           </div>
         </div>
         <div class="board-side">
           <div class="hud bc-panel reveal d1">
-            <span class="hud-label">GAME STATE</span>
-            <div class="metric-row"><span class="metric-k">Turn</span><span class="metric-v play-turn" id="playTurn">WHITE TO MOVE</span></div>
+            <span class="hud-label"><i class="fas fa-chess"></i>&nbsp;GAME STATUS</span>
+            <div class="metric-row"><span class="metric-k">Current Turn</span><span class="metric-v play-turn" id="playTurn">WHITE TO MOVE</span></div>
             <p class="play-status" id="playStatus" style="margin-top:12px;">Tap a piece, then tap a highlighted square to move it.</p>
             <div class="side-actions">
               <button class="btn btn-orange attn" id="playNewGame"><i class="fas fa-rotate"></i> New Game</button>
@@ -77,12 +78,12 @@
             </div>
           </div>
           <div class="hud bc-panel reveal d2">
-            <span class="hud-label">NOTATION</span>
+            <span class="hud-label"><i class="fas fa-list-ol"></i>&nbsp;MOVE HISTORY</span>
             <div class="movelist" id="playMoves" style="height:280px;"></div>
           </div>
           <div class="hud bc-panel reveal d3">
-            <span class="hud-label"><i class="fas fa-circle-info" style="color:var(--orange-hi);"></i>&nbsp;COACH'S NOTE</span>
-            <p style="color:var(--sub); font-size:13.5px; font-weight:300;">Warm-up habit from the academy: before every move, name your opponent's threat out loud. Ten minutes here beats an hour of casual play.</p>
+            <span class="hud-label"><i class="fas fa-lightbulb" style="color:var(--orange-deep);"></i>&nbsp;COACH SHEM'S WARM-UP TIP</span>
+            <p style="color:var(--sub); font-size:14px; line-height:1.6;">Warm-up habit from the academy: before every single move, name your opponent's primary threat out loud. Ten minutes here beats an hour of casual blitz.</p>
           </div>
         </div>
       </div>
@@ -91,13 +92,13 @@
     <!-- ============ LICHESS ============ -->
     <section class="section bg-sky">
       <div class="sec-head reveal">
-        <span class="eyebrow">BEYOND THE SITE</span>
+        <span class="eyebrow"><i class="fas fa-puzzle-piece"></i> ONLINE TACTICS &amp; CLUB</span>
         <h2>Practice here, play for real on Lichess</h2>
         <p>Free, no adverts, works on any phone. The academy's team plays and trains there daily.</p>
       </div>
       <div class="grid-2" style="align-items:stretch;">
         <div class="hud card reveal" style="padding:30px;">
-          <span class="hud-label" style="margin-bottom:16px;"><i class="fas fa-puzzle-piece" style="color:var(--neon);"></i>&nbsp;LICHESS.ORG · DAILY WARM-UP</span>
+          <span class="hud-label" style="margin-bottom:16px;"><i class="fas fa-puzzle-piece" style="color:var(--jade);"></i>&nbsp;LICHESS TACTICAL PUZZLE</span>
           <h3>Puzzle of the day</h3>
           <p style="margin-bottom:18px;">A fresh tactical puzzle every day, straight from Lichess. The same daily rep the squad does.</p>
           <div style="border-radius:10px; overflow:hidden; border:1px solid var(--line-2);">
@@ -105,12 +106,12 @@
           </div>
         </div>
         <div class="hud card reveal d1" style="padding:30px; display:flex; flex-direction:column;">
-          <span class="hud-label" style="margin-bottom:16px;"><i class="fas fa-users" style="color:var(--orange-hi);"></i>&nbsp;ACADEMY TEAM</span>
+          <span class="hud-label" style="margin-bottom:16px;"><i class="fas fa-users" style="color:var(--orange-deep);"></i>&nbsp;KERICHO ACADEMY LICHESS TEAM</span>
           <h3>Play academy members online</h3>
           <p style="margin-bottom:18px;">Join the Kericho Chess Club &amp; Academy team on Lichess to challenge other learners, track ratings and join team tournaments. Free account, works on any phone.</p>
           <div style="flex:1; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px; border-radius:10px; border:1px solid var(--line-2); padding:34px; background:radial-gradient(circle at 30% 20%, rgba(43,245,160,.08), transparent 60%); margin-bottom:18px;">
-            <i class="fas fa-chess-knight" style="font-size:42px; color:var(--neon);"></i>
-            <span style="font-family:var(--f-mono); font-size:10.5px; letter-spacing:.2em; color:var(--dim); text-transform:uppercase;">Team link added once created</span>
+            <i class="fas fa-chess-knight" style="font-size:42px; color:var(--jade);"></i>
+            <span style="font-family:var(--f-body); font-size:13px; color:#475569; font-weight:600;">Free student team on Lichess · Open to all enrolled learners</span>
           </div>
           <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20please%20send%20me%20the%20academy%20Lichess%20team%20link." target="_blank" rel="noopener" class="btn btn-wa btn-block"><i class="fab fa-whatsapp"></i> Ask for the team link</a>
         </div>
@@ -121,7 +122,7 @@
     <section class="cta-band">
       <img class="cta-photo" src="assets/hero-dark-board.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 60%;">
       <div class="boardwave" aria-hidden="true"></div>
-      <span class="eyebrow" style="justify-content:center;">YOUR TURN</span>
+      <span class="eyebrow" style="justify-content:center;"><i class="fas fa-chess-pawn"></i> READY TO LEVEL UP?</span>
       <h2 class="display">Warmed up?<br>Get coached</h2>
       <p class="lead">The board shows you the game. The academy shows you how to win it.</p>
       <div class="cta-row">
@@ -165,8 +166,8 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 KERICHO CHESS CLUB &amp; ACADEMY</span>
-      <span>KERICHO · KENYA · EAT (UTC+3)</span>
+      <span>© 2026 Kericho Chess Club &amp; Academy · Kericho, Kenya</span>
+      <span>Junior Chess Development · East Africa Time (UTC+3)</span>
     </div>
   </footer>
 
