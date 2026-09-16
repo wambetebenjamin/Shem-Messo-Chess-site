@@ -8,6 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232BF5A0'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%2304160D' font-family='serif'%3E&#9822;%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <script>(function(){try{var t=localStorage.getItem('kcc_theme')||'sunrise';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 </head>
 <body data-page="live">
 
@@ -32,8 +33,14 @@
         <a href="shop.html" data-nav="shop">Shop</a>
         <a href="about.html" data-nav="about">About</a>
       </div>
-      <a href="contact.html" class="btn btn-orange nav-cta">Enrol Now</a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Switch Theme" title="Switch Theme (Sunrise / Midnight / Highland)">
+          <i class="fas fa-sun" id="themeIcon"></i>
+          <span class="theme-name" id="themeName">Sunrise</span>
+        </button>
+        <a href="contact.html" class="btn btn-orange nav-cta">Enrol Now</a>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
+      </div>
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html" data-nav="home">Home</a>
@@ -44,6 +51,13 @@
       <a href="shop.html" data-nav="shop">Shop</a>
       <a href="about.html" data-nav="about">About</a>
       <a href="contact.html" style="color:var(--orange-hi);">Enrol Now →</a>
+      <div class="mobile-theme-row">
+        <span>Visual Theme:</span>
+        <button class="theme-btn" id="mobileThemeToggle" type="button">
+          <i class="fas fa-sun" id="mobileThemeIcon"></i>
+          <span class="theme-name" id="mobileThemeName">Sunrise</span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -51,8 +65,8 @@
     <!-- ============ BROADCAST HEADER ============ -->
     <header class="page-hero" style="padding-bottom:60px;">
       <div class="wrap">
-        <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>LIVE BROADCAST</span></div>
-        <span class="badge-live" style="margin-bottom:18px;"><span class="live-dot"></span> LIVE RELAY · BOARD 1</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+        <div class="crumb"><a href="index.html">Home</a> <span>/</span> <span>Live Broadcast</span></div>
+        <span class="badge-live" style="margin-bottom:18px;"><span class="live-dot"></span> Live Relay · Board 1</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
         <h1 style="margin-top:16px;">The broadcast room</h1>
         <p class="lead">Fixture days, the top boards stream here with live clocks, an evaluation bar and the spectator feed. Tonight's replay: the Opera Game line the juniors studied in week six.</p>
       </div>
@@ -118,20 +132,20 @@
         <!-- Side rail -->
         <div class="bc-side">
           <div class="hud bc-panel reveal d1">
-            <span class="hud-label"><i class="fas fa-chart-simple" style="color:var(--jade);"></i>&nbsp;MATCH DETAILS &amp; STATS</span>
+            <span class="hud-label"><i class="fas fa-chart-simple" style="color:var(--jade);"></i>&nbsp;Match Details &amp; Stats</span>
             <div class="metric-row"><span class="metric-k">Active Viewers</span><span class="metric-v warm" id="liveViewers">128</span></div>
             <div class="metric-row"><span class="metric-k">Streamed Boards</span><span class="metric-v">4</span></div>
             <div class="metric-row"><span class="metric-k">Time Control</span><span class="metric-v cold">10 + 0 Rapid</span></div>
-            <div class="metric-row"><span class="metric-k">Match Status</span><span class="metric-v"><span class="ok-dot"></span>&nbsp;ROUND 4 IN PROGRESS</span></div>
+            <div class="metric-row"><span class="metric-k">Match Status</span><span class="metric-v"><span class="ok-dot"></span>&nbsp;Round 4 in progress</span></div>
           </div>
 
           <div class="hud bc-panel reveal d2">
-            <span class="hud-label"><i class="fas fa-list-ol"></i>&nbsp;MOVE HISTORY</span>
+            <span class="hud-label"><i class="fas fa-list-ol"></i>&nbsp;Move History</span>
             <div class="movelist" id="liveMoves" style="height:300px;"></div>
           </div>
 
           <div class="hud bc-panel reveal d3">
-            <span class="hud-label"><i class="fas fa-comments"></i>&nbsp;COMMUNITY &amp; SPECTATOR CHAT</span>
+            <span class="hud-label"><i class="fas fa-comments"></i>&nbsp;Community &amp; Spectator Chat</span>
             <div class="chat-feed" id="liveChat"></div>
           </div>
         </div>
@@ -141,7 +155,7 @@
     <!-- ============ SCHEDULE ============ -->
     <section class="section bg-checker">
       <div class="sec-head reveal">
-        <span class="eyebrow"><i class="fas fa-calendar-days"></i> UPCOMING MATCH BROADCASTS</span>
+        <span class="eyebrow"><i class="fas fa-calendar-days"></i> Upcoming Match Broadcasts</span>
         <h2>Upcoming broadcasts</h2>
         <p>Ask for a reminder on WhatsApp and you'll get a message the moment a board goes live.</p>
       </div>
@@ -177,11 +191,11 @@
     <section class="cta-band">
       <img class="cta-photo" src="assets/orig-03.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 40%;">
       <div class="boardwave" aria-hidden="true"></div>
-      <span class="eyebrow" style="justify-content:center;"><i class="fas fa-chess"></i> READY FOR YOUR OWN MATCH?</span>
+      <span class="eyebrow" style="justify-content:center;"><i class="fas fa-chess"></i> Ready for Your Own Match?</span>
       <h2 class="display">Play your own<br>game live</h2>
       <p class="lead">Step off the spectator bench. The same engine runs the practice board, and the circuit is open.</p>
       <div class="cta-row">
-        <a href="play.html" class="btn btn-orange attn"><i class="fas fa-play"></i> SEE IT IN ACTION</a>
+        <a href="play.html" class="btn btn-orange attn"><i class="fas fa-chess-knight"></i> Explore the Board</a>
         <a href="tournaments.html#register" class="btn btn-ghost">Enter a tournament</a>
       </div>
     </section>

@@ -8,6 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232BF5A0'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%2304160D' font-family='serif'%3E&#9822;%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <script>(function(){try{var t=localStorage.getItem('kcc_theme')||'sunrise';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 </head>
 <body data-page="tournaments">
 
@@ -33,8 +34,14 @@
         <a href="shop.html" data-nav="shop">Shop</a>
         <a href="about.html" data-nav="about">About</a>
       </div>
-      <a href="contact.html" class="btn btn-orange nav-cta">Enrol Now</a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Switch Theme" title="Switch Theme (Sunrise / Midnight / Highland)">
+          <i class="fas fa-sun" id="themeIcon"></i>
+          <span class="theme-name" id="themeName">Sunrise</span>
+        </button>
+        <a href="contact.html" class="btn btn-orange nav-cta">Enrol Now</a>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
+      </div>
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html" data-nav="home">Home</a>
@@ -45,6 +52,13 @@
       <a href="shop.html" data-nav="shop">Shop</a>
       <a href="about.html" data-nav="about">About</a>
       <a href="contact.html" style="color:var(--orange-hi);">Enrol Now →</a>
+      <div class="mobile-theme-row">
+        <span>Visual Theme:</span>
+        <button class="theme-btn" id="mobileThemeToggle" type="button">
+          <i class="fas fa-sun" id="mobileThemeIcon"></i>
+          <span class="theme-name" id="mobileThemeName">Sunrise</span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -199,10 +213,10 @@
               <div class="steps-banner-badge"><i class="fas fa-user-check"></i> Registration Open for All Schools</div>
             </div>
             <span class="eyebrow"><i class="fas fa-list-check"></i> How Entry Works</span>
-            <h2 style="font-family:var(--f-body); font-size:clamp(22px, 2.5vw, 28px); font-weight:800; margin:16px 0 10px; color:#0F172A;">
+            <h2 style="font-family:var(--f-body); font-size:clamp(22px, 2.5vw, 28px); font-weight:800; margin:16px 0 10px; color:var(--ink-deep);">
               Simple 3-Step Registration
             </h2>
-            <p style="color:#475569; font-size:15px; margin-bottom:28px;">
+            <p style="color:var(--sub); font-size:15px; margin-bottom:28px;">
               No accounts or complicated forms. Parents and school coaches can register individual players or teams in two minutes.
             </p>
 
@@ -215,7 +229,7 @@
             </div>
 
             <div class="step-item-card">
-              <div class="step-num-badge" style="background:#DCFCE7; color:#15803D; border-color:#86EFAC;">2</div>
+              <div class="step-num-badge" style="background:var(--mint); color:var(--jade-deep); border-color:var(--jade);">2</div>
               <div class="step-content">
                 <h3>Pay via M-Pesa Paybill</h3>
                 <p>Send KES 500 entry fee per participant directly to our official academy Paybill:</p>
@@ -226,7 +240,7 @@
             </div>
 
             <div class="step-item-card" style="padding-bottom:10px;">
-              <div class="step-num-badge" style="background:#FFE4E6; color:#BE123C; border-color:#FDA4AF;">3</div>
+              <div class="step-num-badge" style="background:var(--peach); color:var(--orange-deep); border-color:var(--orange);">3</div>
               <div class="step-content">
                 <h3>WhatsApp Confirmation</h3>
                 <p>Coach Shem verifies your category slot, sends your official digital fixture card, and adds you to the tournament broadcast list.</p>
@@ -404,11 +418,11 @@
     <!-- ============ REGISTRATION FORM ============ -->
     <section class="section bg-mint" id="register">
       <div class="wrap">
-        <div class="hud reg-card reveal" style="background:#FFFFFF; border:1.5px solid rgba(15, 118, 110, 0.2); box-shadow:0 16px 44px -6px rgba(15, 76, 58, 0.12);">
+        <div class="hud reg-card reveal">
           <div class="reg-side">
             <span class="eyebrow"><i class="fas fa-file-pen"></i> Official Registration</span>
             <h2>Register a Learner</h2>
-            <p style="font-size:15px; color:#475569; line-height:1.6;">
+            <p style="font-size:15px; color:var(--sub); line-height:1.6;">
               Entries are confirmed in real-time. Once submitted, Coach Shem verifies your details and sends your player's round schedule directly on WhatsApp.
             </p>
 
@@ -615,8 +629,8 @@
               </tbody>
             </table>
           </div>
-          <div style="padding:16px 24px; background:#F8FAFC; border-top:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-            <span style="font-size:13px; color:#64748B;">Complete cross-tables and FIDE rating calculations are distributed in the academy WhatsApp group.</span>
+          <div style="padding:16px 24px; background:var(--cream); border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <span style="font-size:13px; color:var(--dim);">Complete cross-tables and FIDE rating calculations are distributed in the academy WhatsApp group.</span>
             <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20please%20share%20the%20full%20tournament%20results%20sheet." target="_blank" rel="noopener" style="font-size:13px; font-weight:700; color:var(--jade-deep);"><i class="fab fa-whatsapp"></i> Request Full Table PDF →</a>
           </div>
         </div>

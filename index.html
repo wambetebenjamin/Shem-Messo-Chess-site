@@ -8,6 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232BF5A0'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%2304160D' font-family='serif'%3E&#9822;%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <script>(function(){try{var t=localStorage.getItem('kcc_theme')||'sunrise';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 </head>
 <body data-page="home">
 
@@ -33,8 +34,14 @@
         <a href="shop.html" data-nav="shop">Shop</a>
         <a href="about.html" data-nav="about">About</a>
       </div>
-      <a href="contact.html" class="btn btn-orange nav-cta">Enrol Now</a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Switch Theme" title="Switch Theme (Sunrise / Midnight / Highland)">
+          <i class="fas fa-sun" id="themeIcon"></i>
+          <span class="theme-name" id="themeName">Sunrise</span>
+        </button>
+        <a href="contact.html" class="btn btn-orange nav-cta">Enrol Now</a>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
+      </div>
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html" data-nav="home">Home</a>
@@ -45,6 +52,13 @@
       <a href="shop.html" data-nav="shop">Shop</a>
       <a href="about.html" data-nav="about">About</a>
       <a href="contact.html" style="color:var(--orange-hi);">Enrol Now →</a>
+      <div class="mobile-theme-row">
+        <span>Visual Theme:</span>
+        <button class="theme-btn" id="mobileThemeToggle" type="button">
+          <i class="fas fa-sun" id="mobileThemeIcon"></i>
+          <span class="theme-name" id="mobileThemeName">Sunrise</span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -60,7 +74,7 @@
         <p class="hero-blurb">School clubs, private lessons and inter-school tournaments across Kericho. Coached by Shem Messo, streamed like a grandmaster broadcast, delivered right inside your school.</p>
         <div class="hero-ctas">
           <a href="live.html" class="btn btn-orange attn">Watch Live Broadcast</a>
-          <a href="play.html" class="btn btn-ghost"><i class="fas fa-play"></i> SEE IT IN ACTION</a>
+          <a href="play.html" class="btn btn-ghost"><i class="fas fa-chess-knight"></i> Explore the Board</a>
         </div>
       </div>
     </section>
@@ -76,7 +90,7 @@
     <!-- ============ PROGRAMS ============ -->
     <section class="section bg-checker" id="programs">
       <div class="sec-head reveal">
-        <span class="eyebrow"><i class="fas fa-chess"></i> TRAINING PATHWAYS</span>
+        <span class="eyebrow"><i class="fas fa-chess"></i> Training Pathways</span>
         <h2>Three ways to<br>bring chess in</h2>
         <p>Every programme is built to fit a real school week, not compete with it. Pick the track that fits your school, your child, or your season.</p>
       </div>
@@ -128,13 +142,13 @@
       <div class="grid-2">
         <div class="split-media reveal">
           <div class="hud float-tag">
-            <span class="hud-label"><i class="fas fa-award"></i> ACTIVE TERM COACHING</span>
-            <span class="hud-value">1,900<span class="unit">+ HOURS COACHED</span></span>
+            <span class="hud-label"><i class="fas fa-award"></i> Active Term Coaching</span>
+            <span class="hud-value">1,900<span class="unit">+ hours coached</span></span>
           </div>
           <img src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round">
         </div>
         <div class="split-copy reveal d1">
-          <span class="eyebrow"><i class="fas fa-book-open-reader"></i> THE KERICHO STORY</span>
+          <span class="eyebrow"><i class="fas fa-book-open-reader"></i> The Kericho Story</span>
           <h2 class="display" style="font-size:clamp(26px,3.2vw,40px); margin:18px 0 18px;">Quiet classrooms,<br>turned competitive</h2>
           <p class="lead">Shem Messo has spent years turning quiet classrooms into competitive chess clubs across Kericho. It starts with how each piece <em>thinks</em>, not just how it moves.</p>
           <p class="lead">Sessions run directly inside partner schools, fitted around the timetable, with materials and a clear progression path for every learner.</p>
@@ -164,7 +178,7 @@
     <!-- ============ PLATFORM FEATURES ============ -->
     <section class="section bg-mint">
       <div class="sec-head center reveal">
-        <span class="eyebrow"><i class="fas fa-laptop-code"></i> INTERACTIVE PLATFORM</span>
+        <span class="eyebrow"><i class="fas fa-laptop-code"></i> Interactive Platform</span>
         <h2>One academy.<br>Four screens of premium.</h2>
         <p>The site itself is part of the coaching toolkit: watch boards live, play right here, follow the circuit and kit out your club.</p>
       </div>
@@ -207,7 +221,7 @@
     <!-- ============ TESTIMONIALS ============ -->
     <section class="section tight bg-peach">
       <div class="sec-head reveal">
-        <span class="eyebrow"><i class="fas fa-quote-left"></i> VOICES FROM OUR COMMUNITY</span>
+        <span class="eyebrow"><i class="fas fa-quote-left"></i> Voices From Our Community</span>
         <h2>From the scoresheets</h2>
       </div>
       <div class="grid-3">
@@ -238,7 +252,7 @@
     <!-- ============ FAQ ============ -->
     <section class="section tight bg-dots">
       <div class="sec-head center reveal">
-        <span class="eyebrow"><i class="fas fa-circle-question"></i> FREQUENTLY ASKED QUESTIONS</span>
+        <span class="eyebrow"><i class="fas fa-circle-question"></i> Frequently Asked Questions</span>
         <h2>Questions, answered</h2>
       </div>
       <div class="faq reveal">
@@ -265,7 +279,7 @@
     <section class="cta-band">
       <img class="cta-photo" src="assets/hero-morning.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 30%;">
       <div class="boardwave" aria-hidden="true"></div>
-      <span class="eyebrow" style="justify-content:center;"><i class="fas fa-flag-checkered"></i> START YOUR CHESS JOURNEY</span>
+      <span class="eyebrow" style="justify-content:center;"><i class="fas fa-flag-checkered"></i> Start Your Chess Journey</span>
       <h2 class="display">Ready to make<br>your move?</h2>
       <p class="lead">Enrol a learner, enter the next tournament, or bring the academy to your school. It all starts with one message.</p>
       <div class="cta-row">

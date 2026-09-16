@@ -8,6 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232BF5A0'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%2304160D' font-family='serif'%3E&#9822;%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <script>(function(){try{var t=localStorage.getItem('kcc_theme')||'sunrise';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 </head>
 <body data-page="about">
 
@@ -32,8 +33,14 @@
         <a href="shop.html" data-nav="shop">Shop</a>
         <a href="about.html" data-nav="about">About</a>
       </div>
-      <a href="contact.html" class="btn btn-orange nav-cta">Enrol Now</a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Switch Theme" title="Switch Theme (Sunrise / Midnight / Highland)">
+          <i class="fas fa-sun" id="themeIcon"></i>
+          <span class="theme-name" id="themeName">Sunrise</span>
+        </button>
+        <a href="contact.html" class="btn btn-orange nav-cta">Enrol Now</a>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
+      </div>
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html" data-nav="home">Home</a>
@@ -44,6 +51,13 @@
       <a href="shop.html" data-nav="shop">Shop</a>
       <a href="about.html" data-nav="about">About</a>
       <a href="contact.html" style="color:var(--orange-hi);">Enrol Now →</a>
+      <div class="mobile-theme-row">
+        <span>Visual Theme:</span>
+        <button class="theme-btn" id="mobileThemeToggle" type="button">
+          <i class="fas fa-sun" id="mobileThemeIcon"></i>
+          <span class="theme-name" id="mobileThemeName">Sunrise</span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -52,8 +66,8 @@
     <header class="page-hero">
       <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1758101308935-692ed18dad48?auto=format&fit=crop&w=1600&q=80');"></div>
       <div class="wrap">
-        <div class="crumb"><a href="index.html">HOME</a> <span>/</span> <span>ABOUT COACH SHEM</span></div>
-        <span class="eyebrow"><i class="fas fa-chess-knight"></i> ABOUT KERICHO CHESS ACADEMY</span>
+        <div class="crumb"><a href="index.html">Home</a> <span>/</span> <span>About Coach Shem</span></div>
+        <span class="eyebrow"><i class="fas fa-chess-knight"></i> About Kericho Chess Academy</span>
         <h1 style="margin-top:16px;">One coach.<br><span class="outline">Sixty-four squares.</span></h1>
         <p class="lead">Shem Messo has spent years turning quiet Kericho classrooms into competitive chess clubs, one board, one learner, one school at a time.</p>
       </div>
@@ -63,7 +77,7 @@
     <section class="section bg-dots">
       <div class="grid-2">
         <div class="split-copy reveal">
-          <span class="eyebrow"><i class="fas fa-book-open"></i> OUR ORIGIN &amp; MISSION</span>
+          <span class="eyebrow"><i class="fas fa-book-open"></i> Our Origin &amp; Mission</span>
           <h2 class="display" style="font-size:clamp(26px,3.2vw,40px); margin:18px 0;">Chess deserves more<br>than a spare period</h2>
           <p class="lead">The academy began with a single board carried between schools. The question was always the same: what happens when children get real coaching instead of a borrowed lunch hour?</p>
           <p class="lead">The answer is on the results tables. Clubs that started with four curious learners now field full squads at inter-school fixtures. Learners who once watched from the corridor now stream their games to their parents' phones.</p>
@@ -75,8 +89,8 @@
         </div>
         <div class="split-media reveal d1">
           <div class="hud float-tag">
-            <span class="hud-label"><i class="fas fa-user-tie"></i> MENTORSHIP IN ACTION</span>
-            <span class="hud-value">MOVE <span class="unit">BY MOVE GROWTH</span></span>
+            <span class="hud-label"><i class="fas fa-user-tie"></i> Mentorship in Action</span>
+            <span class="hud-value">Move <span class="unit">by move growth</span></span>
           </div>
           <img src="assets/orig-01.jpg" alt="Coach Shem Messo coaching a learner">
         </div>
@@ -86,7 +100,7 @@
     <!-- ============ VALUES ============ -->
     <section class="section tight bg-mint">
       <div class="sec-head center reveal">
-        <span class="eyebrow"><i class="fas fa-heart"></i> CORE ACADEMY VALUES</span>
+        <span class="eyebrow"><i class="fas fa-heart"></i> Core Academy Values</span>
         <h2>More than a game</h2>
       </div>
       <div class="grid-3">
@@ -111,25 +125,25 @@
     <!-- ============ GALLERY ============ -->
     <section class="section tight bg-sky">
       <div class="sec-head reveal">
-        <span class="eyebrow"><i class="fas fa-images"></i> ACTION FROM THE SEASON</span>
+        <span class="eyebrow"><i class="fas fa-images"></i> Action From the Season</span>
         <h2>From the season's album</h2>
       </div>
       <div class="grid-4 reveal">
         <figure class="hud prod-card" style="margin:0;">
           <div class="prod-media" style="height:230px;"><img src="assets/tournament-prep-03.jpg" alt="Learners and coaches at an inter-school chess tournament"></div>
-          <figcaption style="padding:14px 18px; font-family:var(--f-body); font-size:13px; color:#334155; font-weight:600;"><i class="fas fa-camera" style="color:var(--jade); margin-right:8px;"></i>Inter-school tournament round in Kericho</figcaption>
+          <figcaption style="padding:14px 18px; font-family:var(--f-body); font-size:13px; color:var(--sub); font-weight:600;"><i class="fas fa-camera" style="color:var(--jade); margin-right:8px;"></i>Inter-school tournament round in Kericho</figcaption>
         </figure>
         <figure class="hud prod-card" style="margin:0;">
           <div class="prod-media" style="height:230px;"><img src="assets/orig-03.jpg" alt="Learners in school uniform waiting for their next round"></div>
-          <figcaption style="padding:14px 18px; font-family:var(--f-body); font-size:13px; color:#334155; font-weight:600;"><i class="fas fa-camera" style="color:var(--jade); margin-right:8px;"></i>Team review and pairings between rounds</figcaption>
+          <figcaption style="padding:14px 18px; font-family:var(--f-body); font-size:13px; color:var(--sub); font-weight:600;"><i class="fas fa-camera" style="color:var(--jade); margin-right:8px;"></i>Team review and pairings between rounds</figcaption>
         </figure>
         <figure class="hud prod-card" style="margin:0;">
           <div class="prod-media" style="height:230px;"><img src="assets/tournament-prep-08.jpg" alt="Learners celebrating during a tournament"></div>
-          <figcaption style="padding:14px 18px; font-family:var(--f-body); font-size:13px; color:#334155; font-weight:600;"><i class="fas fa-camera" style="color:var(--jade); margin-right:8px;"></i>Celebration and medals presentation</figcaption>
+          <figcaption style="padding:14px 18px; font-family:var(--f-body); font-size:13px; color:var(--sub); font-weight:600;"><i class="fas fa-camera" style="color:var(--jade); margin-right:8px;"></i>Celebration and medals presentation</figcaption>
         </figure>
         <figure class="hud prod-card" style="margin:0;">
           <div class="prod-media" style="height:230px;"><img src="assets/orig-05.jpg" alt="Learners sitting together at a competition"></div>
-          <figcaption style="padding:14px 18px; font-family:var(--f-body); font-size:13px; color:#334155; font-weight:600;"><i class="fas fa-camera" style="color:var(--jade); margin-right:8px;"></i>Peer analysis and tactical discussion</figcaption>
+          <figcaption style="padding:14px 18px; font-family:var(--f-body); font-size:13px; color:var(--sub); font-weight:600;"><i class="fas fa-camera" style="color:var(--jade); margin-right:8px;"></i>Peer analysis and tactical discussion</figcaption>
         </figure>
       </div>
     </section>
@@ -138,7 +152,7 @@
     <section class="cta-band">
       <img class="cta-photo" src="assets/tournament-prep-10.jpg" alt="" loading="lazy" decoding="async" style="object-position:center 40%;">
       <div class="boardwave" aria-hidden="true"></div>
-      <span class="eyebrow" style="justify-content:center;"><i class="fas fa-handshake"></i> BECOME PART OF OUR CLUB</span>
+      <span class="eyebrow" style="justify-content:center;"><i class="fas fa-handshake"></i> Become Part of Our Club</span>
       <h2 class="display">Be the next<br>chapter</h2>
       <p class="lead">School, parent or learner: there is a seat at the board for you.</p>
       <div class="cta-row">

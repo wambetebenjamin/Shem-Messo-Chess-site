@@ -6,6 +6,62 @@
 (function () {
   'use strict';
 
+  /* ---------- Theme Switcher (Sunrise, Midnight, Highland) ---------- */
+  const THEMES = [
+    { id: 'sunrise', name: 'Sunrise', icon: 'fa-sun' },
+    { id: 'midnight', name: 'Midnight', icon: 'fa-moon' },
+    { id: 'highland', name: 'Highland', icon: 'fa-feather-pointed' }
+  ];
+
+  function getActiveTheme() {
+    return localStorage.getItem('kcc_theme') || 'sunrise';
+  }
+
+  function applyTheme(themeId) {
+    const theme = THEMES.find(t => t.id === themeId) || THEMES[0];
+    document.documentElement.setAttribute('data-theme', theme.id);
+    localStorage.setItem('kcc_theme', theme.id);
+
+    const themeName = document.getElementById('themeName');
+    const themeIcon = document.getElementById('themeIcon');
+    if (themeName) themeName.textContent = theme.name;
+    if (themeIcon) themeIcon.className = `fas ${theme.icon}`;
+
+    const mobileThemeName = document.getElementById('mobileThemeName');
+    const mobileThemeIcon = document.getElementById('mobileThemeIcon');
+    if (mobileThemeName) mobileThemeName.textContent = theme.name;
+    if (mobileThemeIcon) mobileThemeIcon.className = `fas ${theme.icon}`;
+  }
+
+  function cycleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'sunrise';
+    const currentIndex = THEMES.findIndex(t => t.id === current);
+    const nextIndex = (currentIndex + 1) % THEMES.length;
+    applyTheme(THEMES[nextIndex].id);
+  }
+
+  applyTheme(getActiveTheme());
+
+  const initThemeButtons = () => {
+    applyTheme(getActiveTheme());
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle && !themeToggle.dataset.bound) {
+      themeToggle.dataset.bound = 'true';
+      themeToggle.addEventListener('click', cycleTheme);
+    }
+    const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+    if (mobileThemeToggle && !mobileThemeToggle.dataset.bound) {
+      mobileThemeToggle.dataset.bound = 'true';
+      mobileThemeToggle.addEventListener('click', cycleTheme);
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThemeButtons);
+  } else {
+    initThemeButtons();
+  }
+
   /* ---------- Page transitions ---------- */
   document.documentElement.classList.add('js');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
