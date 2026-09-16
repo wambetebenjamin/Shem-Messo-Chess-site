@@ -1,5 +1,5 @@
 /* ============================================================================
-   SHEM MESSO CHESS ACADEMY · "SUNRISE CLUB" DESIGN SYSTEM
+   KERICHO CHESS CLUB & ACADEMY · "SUNRISE CLUB" DESIGN SYSTEM
    Bright, warm and uplifting: cream paper, white cards, jade + brass + coral
    accents. Built for parents and learners: friendly cards, generous spacing,
    gentle background animation. Dark accents kept where they add contrast.
@@ -1066,3 +1066,37 @@ footer .brand-sub{ color:rgba(244,240,230,.4); }
     linear-gradient(0deg, rgba(242,247,246,.22), rgba(242,247,246,.32));
 }
 .cta-band > .eyebrow, .cta-band h2, .cta-band .lead{ position:relative; z-index:3; }
+
+/* ============ PHOTO GALLERY ============ */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+  gap:14px;
+  margin-top:30px;
+}
+.gallery-item{
+  position:relative;
+  overflow:hidden;
+  border-radius:14px;
+  aspect-ratio:4/3;
+  box-shadow:0 4px 18px rgba(4,22,13,.10);
+  border:1px solid rgba(4,22,13,.08);
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+.gallery-item:hover{
+  transform:translateY(-4px) scale(1.02);
+  box-shadow:0 10px 32px rgba(4,22,13,.18);
+}
+.gallery-item img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .5s ease;
+}
+.gallery-item:hover img{ transform:scale(1.08); }
+.gi-wide{
+  grid-column:span 2;
+  aspect-ratio:16/9;
+}
+@media (max-width:680px){
+  .gallery-grid{ grid-template-columns:repeat(2, 1fr); gap:10px; }
+  .gi-wide{ grid-column:span 2; }
+}

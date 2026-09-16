@@ -1,6 +1,6 @@
-# Shem Messo Chess Academy
+# Kericho Chess Club & Academy
 
-A premium multi-page website for Shem Messo Chess Academy in Kericho, Kenya, rebuilt as a
+A premium multi-page website for Kericho Chess Club & Academy, Kenya, rebuilt as a
 futuristic, broadcast-HUD style chess platform ("Night Circuit" design system).
 
 ## Design language
