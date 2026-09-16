@@ -1,5 +1,5 @@
 /* ============================================================================
-   SHEM MESSO CHESS ACADEMY · shared runtime
+   KERICHO CHESS CLUB & ACADEMY · shared runtime
    nav · reveals · counters · countdowns · HUD jitter · FAQ · forms ·
    form handling (Google Apps Script endpoint + WhatsApp fallback)
    ============================================================================ */
