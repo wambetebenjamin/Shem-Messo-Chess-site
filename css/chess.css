@@ -663,6 +663,10 @@
   margin-top:10px;
 }
 .footer-fine{ color:rgba(255,255,255,.55); font-size:12px; letter-spacing:.14em; text-transform:uppercase; }
+.footer-brand-tag{ color:rgba(255,255,255,.7); font-size:14px; line-height:1.7; margin:14px 0 0; }
+
+/* counters — trailing plus for milestone figures ("1,900+") */
+.block-18 .text strong.with-plus::after{ content:'+'; margin-left:2px; }
 
 /* =============================================================
    MOTION SAFETY + RESPONSIVE POLISH
