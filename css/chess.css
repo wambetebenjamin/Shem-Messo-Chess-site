@@ -664,6 +664,47 @@
 .footer-fine{ color:rgba(255,255,255,.55); font-size:12px; letter-spacing:.14em; text-transform:uppercase; }
 .footer-brand-tag{ color:rgba(255,255,255,.7); font-size:14px; line-height:1.7; margin:14px 0 0; }
 
+/* =============================================================
+   PHOTO OVERLAYS + TEXT LEGIBILITY
+   Replace the template's red photo tint and low-opacity overlays
+   with neutral dark ones so photos look natural and text reads.
+   ============================================================= */
+.hero-wrap .overlay{
+  background:linear-gradient(rgba(13,24,34,.52), rgba(13,24,34,.66)) !important;
+  opacity:1 !important;
+}
+.owl-carousel.home-slider .slider-item .overlay{
+  background:linear-gradient(rgba(13,24,34,.40), rgba(13,24,34,.62)) !important;
+  opacity:1 !important;
+}
+.ftco-intro .overlay{
+  background:rgba(13,24,34,.52) !important;
+  opacity:1 !important;
+}
+
+/* hero copy: the template ships it dark gray (rgba(0,0,0,.8)) for a pale demo
+   photo — over real photos it must be light to stay visible */
+.owl-carousel.home-slider .slider-item .slider-text p,
+.owl-carousel.home-slider .slider-item .slider-text .subheading{
+  color:rgba(255,255,255,.94) !important;
+  text-shadow:0 2px 16px rgba(13,24,34,.6);
+}
+.owl-carousel.home-slider .slider-item .slider-text h1{
+  text-shadow:0 3px 24px rgba(13,24,34,.6);
+}
+.hero-wrap .slider-text h1.bread,
+.hero-wrap .slider-text .breadcrumbs{
+  text-shadow:0 2px 14px rgba(13,24,34,.6);
+}
+
+/* consult form: options must be dark when the dropdown opens,
+   while the closed select stays light on the primary panel */
+.appointment-form select.form-control option{ color:#22303c; }
+
+/* footer subscribe input: explicit light text over the dark footer */
+.ftco-footer .subscribe-form .form-control{ color:#fff !important; }
+.ftco-footer .subscribe-form .form-control::placeholder{ color:rgba(255,255,255,.65); }
+
 /* counters — trailing plus for milestone figures ("1,900+") */
 .block-18 .text strong.with-plus::after{ content:'+'; margin-left:2px; }
 
