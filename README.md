@@ -44,6 +44,13 @@ The site displays the academy's own photography throughout: `assets/orig-01.jpg`
 `orig-05.jpg`, `assets/tournament-prep-01.jpg` … `tournament-prep-10.jpg` and the hero,
 coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is not used.
 
+- **Club shelf product shots:** `assets/shelf-workbook.jpg`, `shelf-clock.jpg` and
+  `shelf-kit.jpg` illustrate the workbook, digital clock and club kit cards;
+  the set card uses the academy's own `chess-materials.jpg` photo.
+- **Board piece art:** the 2D boards on Live and Play render local PNG pieces
+  (`assets/pieces/`), so pieces show on every device without relying on system
+  chess-glyph fonts.
+
 ## Forms
 
 Registration/membership forms POST to a Google Apps Script endpoint; paste your deployed
@@ -95,5 +102,4 @@ Then open `http://localhost:8000`.
 └── kiddos-master.zip   (uploaded source template, for reference)
 ```
 
-Template: **Kiddos** by [Colorlib](https://colorlib.com) (CC BY 3.0) — the attribution line
-is kept in the footer of every page.
+Site structure follows the **Kiddos** template (Bootstrap 4), restyled with the club's palette and components.

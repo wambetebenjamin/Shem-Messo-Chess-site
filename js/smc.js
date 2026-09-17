@@ -3,7 +3,7 @@
    countdown timers · FAQ accordion · registration forms
    (Google Apps Script endpoint + WhatsApp fallback)
    Nav, carousels, reveals and loaders are handled by the template's own
-   js/kiddos-main.js — this file only carries the academy-specific logic.
+   js/kiddos-main.js; this file only carries the academy-specific logic.
    ============================================================================ */
 (function () {
   'use strict';

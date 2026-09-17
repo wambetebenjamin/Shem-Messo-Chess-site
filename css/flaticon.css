@@ -5,6 +5,7 @@
 
 
 @font-face {
+  font-display: swap;
   font-family: "Flaticon";
   src: url("../fonts/flaticon/font/Flaticon.eot");
   src: url("../fonts/flaticon/font/Flaticon.eot?#iefix") format("embedded-opentype"),
