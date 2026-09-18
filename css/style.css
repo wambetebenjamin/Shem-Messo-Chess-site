@@ -1497,3 +1497,101 @@ footer .brand-sub{ color:rgba(244,240,230,.4); }
 @media (prefers-reduced-motion:reduce){
   .mobile-dock{ animation:none; }
 }
+
+/* ============================================================================
+   ACADEMY CREST  ·  brand logo in the nav, footer and poster lockups
+   ============================================================================ */
+.brand-logo{
+  width:44px; height:44px; object-fit:contain; flex-shrink:0;
+  filter:drop-shadow(0 5px 12px rgba(31,138,109,.24));
+}
+footer .brand-mark{
+  width:42px; height:42px; border-radius:0; background:none; box-shadow:none;
+  object-fit:contain; flex-shrink:0;
+}
+.ad-present{ display:inline-flex; align-items:center; gap:10px; }
+.ad-logo{ width:38px; height:38px; object-fit:contain; flex-shrink:0; }
+
+/* crest feature band (about page) */
+.crest-card{
+  display:grid; grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr); gap:44px;
+  align-items:center; padding:44px 46px; max-width:var(--max); margin:0 auto;
+}
+.crest-logo{
+  width:100%; max-width:290px; justify-self:center;
+  filter:drop-shadow(0 20px 40px rgba(24,58,50,.16));
+}
+.crest-copy h2{ font-size:clamp(26px,3.4vw,42px); margin:16px 0; }
+.crest-copy .lead + .lead{ margin-top:14px; }
+.crest-facts{ display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
+
+/* ============================================================================
+   SECRETARY  ·  photo card + Samarkand gallery (contact page)
+   ============================================================================ */
+.team-photo-wrap{ position:relative; display:inline-block; margin-bottom:6px; }
+.team-photo{
+  width:108px; height:108px; border-radius:22px; object-fit:cover; object-position:top center;
+  border:3px solid #fff; box-shadow:0 14px 30px rgba(24,58,50,.2);
+}
+.team-badge{
+  position:absolute; right:-10px; bottom:-8px;
+  font-family:var(--f-mono); font-size:8.5px; font-weight:700; letter-spacing:.16em;
+  background:linear-gradient(135deg,var(--orange-hi),var(--orange-deep)); color:#fff;
+  padding:5px 10px; border-radius:999px; box-shadow:0 8px 18px rgba(222,97,86,.38);
+}
+.sec-gallery{
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px;
+  max-width:var(--max); margin:0 auto;
+}
+.sec-gallery figure{
+  position:relative; margin:0; overflow:hidden; border-radius:16px; background:#0F201C;
+  border:1px solid rgba(255,255,255,.7); box-shadow:var(--shadow-card);
+}
+.sec-gallery img{
+  width:100%; aspect-ratio:3/4; object-fit:cover; display:block;
+  transition:transform .6s var(--ease);
+}
+.sec-gallery figure:hover img{ transform:scale(1.05); }
+.sec-gallery figcaption{
+  position:absolute; inset:auto 0 0 0; padding:30px 16px 14px;
+  display:flex; flex-direction:column; gap:3px;
+  background:linear-gradient(180deg, transparent, rgba(9,22,19,.86));
+}
+.sec-gallery figcaption b{ font-family:var(--f-display); font-size:14px; color:#F3FBF7; }
+.sec-gallery figcaption span{
+  font-family:var(--f-mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase;
+  color:rgba(233,248,239,.74);
+}
+.sec-quote{ padding:34px 36px; display:flex; flex-direction:column; gap:18px; }
+.sec-quote .q{ font-family:var(--f-display); font-size:19px; line-height:1.6; color:var(--ink-deep); }
+.sec-quote .q::before{
+  content:'\201C'; color:var(--brass); font-family:var(--f-display); font-size:38px;
+  display:block; line-height:.6; margin-bottom:12px;
+}
+.sec-cta{ display:flex; gap:12px; flex-wrap:wrap; }
+.foot-new{
+  font-style:normal; font-family:var(--f-mono); font-size:8px; font-weight:700; letter-spacing:.14em;
+  background:rgba(222,97,86,.85); color:#fff; border-radius:999px; padding:3px 7px; margin-left:6px;
+}
+
+@media (max-width:900px){
+  .crest-card{ grid-template-columns:1fr; gap:26px; padding:32px 26px; text-align:center; }
+  .crest-logo{ max-width:230px; }
+  .crest-facts{ justify-content:center; }
+  .sec-gallery{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px; }
+}
+@media (max-width:600px){
+  .brand-logo{ width:36px; height:36px; }
+  .crest-card{ padding:26px 18px; }
+  .crest-logo{ max-width:190px; }
+  .sec-quote{ padding:24px 20px; }
+  .sec-quote .q{ font-size:16.5px; }
+  .sec-cta{ flex-direction:column; }
+  .sec-gallery img{ aspect-ratio:4/5; }
+  .sec-gallery figcaption{ padding:24px 12px 11px; }
+  .sec-gallery figcaption b{ font-size:12.5px; }
+  .sec-gallery figcaption span{ font-size:8px; letter-spacing:.1em; }
+  .team-photo{ width:92px; height:92px; }
+  .ad-present{ flex-direction:row; }
+  .ad-logo{ width:32px; height:32px; }
+}

@@ -16,6 +16,9 @@ animations (drifting chess pieces and soft pastel orbs on the hero, page headers
   squares, like the academy's real tournament sets
 - **Typography:** Space Grotesk display headlines, readable Inter body text, JetBrains Mono
   for counters, labels and notation
+- **Academy crest:** the official Kericho Chess Academy crest (pawn, king, knight, motto
+  *Forward Ever Backward Never*) sits in the nav, the footer, the event poster lockup and a
+  dedicated crest band on the about page; it doubles as the site favicon
 - **One moody band:** only the page headers and footer go dark, for contrast
 - **Mobile first-class:** dedicated breakpoints at 1100px / 900px / 600px / 420px, full-width
   tap targets, 16px form inputs (no iOS zoom), horizontally scrollable results table, stacked
@@ -65,7 +68,7 @@ Secretary/Treasurer, or email.
 | Who | Role | Number / email |
 | --- | --- | --- |
 | Shem Meso | Head Coach & Founder | 0729 037 585 · shemeso26@gmail.com |
-| Gladys Langat | Secretary | 0723 397 573 · WhatsApp |
+| Gladys Langat | Secretary | 0723 397 573 (**new line**, flagged on the site) · WhatsApp |
 | Julieann Njambi | Treasurer | 0722 709 727 · WhatsApp |
 | Academy office | General & schools | kerichochessacademy@gmail.com |
 
@@ -88,6 +91,15 @@ Then open `http://localhost:8000`.
 ## Content notes
 
 - The coach's name is spelled **Shem Meso** (single "s" in both names) across every page.
+- **Logo:** `assets/Kericho Chess Academy logo.jpg` is the supplied source artwork. The site uses
+  derived files: `assets/logo.png` (black ink, transparent — light backgrounds), `assets/logo-light.png`
+  (white knockout — the dark footer) and `assets/favicon.png` (touch icon + favicon). Regenerate them
+  with sharp if the source crest changes.
+- **Secretary gallery:** the five photos in `assets/pics for Gladys Langat secretary.zip` were
+  cropped and compressed to `gladys-langat-portrait.jpg`, `gladys-avatar.jpg`,
+  `gladys-samarkand-olympiad.jpg`, `gladys-samarkand-hall.jpg`, `gladys-registan.jpg` and
+  `gladys-uzbekistan.jpg`. They show Gladys Langat at the 46th FIDE Chess Olympiad in
+  Samarkand, Uzbekistan, and are used on the contact page (`#team` card and the `#secretary` gallery).
 - WhatsApp and phone links use `+254 729 037 585` for the coach, plus the Secretary and Treasurer lines above.
 - On phones a floating action dock (`.mobile-dock`) offers the page's main action plus WhatsApp; it is shown below 600px only.
 - Product prices are carried over from the previous site and should be confirmed before launch.
@@ -114,6 +126,11 @@ Then open `http://localhost:8000`.
 │   ├── main.js       chess.js         play.js            live.js
 ├── README.md
 └── assets/
+    ├── Kericho Chess Academy logo.jpg     # supplied crest source artwork
+    ├── logo.png / logo-light.png          # crest cut-outs (light + dark backgrounds)
+    ├── favicon.png                        # touch icon + favicon
+    ├── gladys-*.jpg                       # Secretary photos (card + Samarkand gallery)
+    ├── pics for Gladys Langat secretary.zip  # original upload, kept for reference
     ├── orig-01.jpg … orig-05.jpg          # original site photos (displayed)
     ├── hero-morning.jpg                   # sunlit classroom hero photo (displayed)
     ├── hero-dark-board.jpg                # dark board hero variant (spare)
