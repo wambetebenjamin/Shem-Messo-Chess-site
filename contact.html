@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Enrol &amp; Contact · Kericho Chess Club &amp; Academy</title>
   <meta name="description" content="Enrol a learner, become an academy member or bring coaching to your school. Contact Kericho Chess Club &amp; Academy in Kericho via WhatsApp, phone or the forms here.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232BF5A0'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%2304160D' font-family='serif'%3E&#9822;%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <meta name="theme-color" content="#1F8A6D">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-page="contact">
+<body class="has-dock" data-page="contact">
 
   <div class="atmo" aria-hidden="true">
     <div class="atmo-glow-a"></div><div class="atmo-glow-b"></div><div class="atmo-glow-c"></div>
@@ -17,9 +19,10 @@
   </div>
   <div class="grain" aria-hidden="true"></div>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="brand" aria-label="Kericho Chess Club &amp; Academy home">
+        <img class="brand-logo" src="assets/logo.png" alt="" width="44" height="44" decoding="async">
         <span class="brand-name">KERICHO <b>CHESS</b><span class="brand-sub">CLUB &amp; ACADEMY</span></span>
       </a>
       <div class="nav-links">
@@ -32,7 +35,7 @@
         <a href="about.html" data-nav="about">ABOUT</a>
       </div>
       <a href="contact.html" class="btn btn-orange nav-cta">ENROL NOW</a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
+      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html" data-nav="home">HOME</a>
@@ -62,19 +65,74 @@
       <div class="grid-4">
         <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%20have%20a%20question%20about%20the%20academy." target="_blank" rel="noopener" class="hud contact-card reveal">
           <div class="card-ico" style="margin:0;"><i class="fab fa-whatsapp"></i></div>
-          <div><h3>WhatsApp</h3><p>Fastest route for orders, enrolment, everything.</p><span style="font-family:var(--f-mono); font-size:12px; color:var(--neon);">+254 729 037 585</span></div>
+          <div><h3>WhatsApp</h3><p>Fastest route for orders, enrolment, everything.</p><span class="contact-line">+254 729 037 585</span></div>
         </a>
         <a href="tel:+254729037585" class="hud contact-card reveal d1">
           <div class="card-ico warm" style="margin:0;"><i class="fas fa-phone"></i></div>
-          <div><h3>Call</h3><p>Weekdays after school hours are best.</p><span style="font-family:var(--f-mono); font-size:12px; color:var(--orange-hi);">+254 729 037 585</span></div>
+          <div><h3>Call the coach</h3><p>Weekdays after school hours are best.</p><span class="contact-line warm">+254 729 037 585</span></div>
         </a>
-        <div class="hud contact-card reveal d2">
-          <div class="card-ico" style="margin:0;"><i class="fas fa-location-dot"></i></div>
-          <div><h3>Based in</h3><p>Kericho town, with coaching delivered across the county's schools.</p></div>
-        </div>
+        <a href="mailto:kerichochessacademy@gmail.com" class="hud contact-card reveal d2">
+          <div class="card-ico" style="margin:0;"><i class="fas fa-envelope"></i></div>
+          <div><h3>Email</h3><p>Documents, invoices, school letters and quotations.</p><span class="contact-line wrap-mail">kerichochessacademy@gmail.com</span></div>
+        </a>
         <div class="hud contact-card reveal d3">
-          <div class="card-ico" style="margin:0;"><i class="fas fa-bolt"></i></div>
-          <div><h3>Response time</h3><p>Usually same day on WhatsApp. Fixture days: after the last round.</p></div>
+          <div class="card-ico warm" style="margin:0;"><i class="fas fa-location-dot"></i></div>
+          <div><h3>Based in</h3><p>Kericho town, coaching delivered across the county's schools.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DIRECT LINES / OFFICE BEARERS ============ -->
+    <section class="section tight bg-dots" id="team">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">WHO TO TALK TO</span>
+        <h2>Direct lines</h2>
+        <p>One academy, four ways in. Call or WhatsApp the person closest to your question.</p>
+      </div>
+      <div class="grid-4">
+        <div class="hud team-card reveal">
+          <span class="team-ava">SM</span>
+          <h3>Shem Meso</h3>
+          <span class="team-role">Head Coach &amp; Founder</span>
+          <p>Coaching, tournaments, school partnerships and everything on the board.</p>
+          <div class="team-links">
+            <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%20have%20a%20question%20about%20the%20academy." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="tel:+254729037585" class="btn btn-ghost"><i class="fas fa-phone"></i> Call</a>
+            <a href="mailto:shemeso26@gmail.com" class="team-mail">shemeso26@gmail.com</a>
+          </div>
+        </div>
+        <div class="hud team-card reveal d1">
+          <span class="team-photo-wrap">
+            <img class="team-photo" src="assets/gladys-avatar.jpg" alt="Gladys Langat, Secretary of Kericho Chess Academy" width="320" height="320" loading="lazy" decoding="async">
+            <span class="team-badge">NEW LINE</span>
+          </span>
+          <h3>Gladys Langat</h3>
+          <span class="team-role">Secretary</span>
+          <p>Enrolment, membership records, fixture schedules and learner registration.</p>
+          <div class="team-links">
+            <a href="tel:+254723397573" class="btn btn-orange"><i class="fas fa-phone"></i> 0723&nbsp;397&nbsp;573</a>
+            <a href="https://wa.me/254723397573?text=Hi%20Gladys%2C%20a%20question%20about%20enrolment%20at%20the%20academy." target="_blank" rel="noopener" class="team-mail"><i class="fab fa-whatsapp"></i> WhatsApp the Secretary</a>
+          </div>
+        </div>
+        <div class="hud team-card reveal d2">
+          <span class="team-ava o">JN</span>
+          <h3>Julieann Njambi</h3>
+          <span class="team-role">Treasurer</span>
+          <p>M-Pesa payments, receipts, membership fees and tournament entries.</p>
+          <div class="team-links">
+            <a href="tel:+254722709727" class="btn btn-orange"><i class="fas fa-phone"></i> 0722&nbsp;709&nbsp;727</a>
+            <a href="https://wa.me/254722709727?text=Hi%20Julieann%2C%20a%20question%20about%20payment%20at%20the%20academy." target="_blank" rel="noopener" class="team-mail"><i class="fab fa-whatsapp"></i> WhatsApp the Treasurer</a>
+          </div>
+        </div>
+        <div class="hud team-card reveal d3">
+          <span class="team-ava b">KA</span>
+          <h3>Academy Office</h3>
+          <span class="team-role">General &amp; Schools</span>
+          <p>Quotations, club kits, invoices and partnership request letters.</p>
+          <div class="team-links">
+            <a href="mailto:kerichochessacademy@gmail.com" class="btn btn-ghost"><i class="fas fa-envelope"></i> Email us</a>
+            <a href="mailto:kerichochessacademy@gmail.com" class="team-mail wrap-mail">kerichochessacademy@gmail.com</a>
+          </div>
         </div>
       </div>
     </section>
@@ -116,6 +174,44 @@
             <button type="submit" class="btn btn-orange attn btn-block" id="m_submit">Submit Membership</button>
             <a href="#" target="_blank" rel="noopener" class="btn btn-wa btn-block wa-confirm" id="m_wa"><i class="fab fa-whatsapp"></i> Send membership on WhatsApp</a>
           </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECRETARY · SAMARKAND GALLERY ============ -->
+    <section class="section tight bg-peach" id="secretary">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">OUR SECRETARY ON THE WORLD STAGE</span>
+        <h2>Gladys Langat<br>in Samarkand</h2>
+        <p>Our Secretary travelled with Team Kenya to the 46th FIDE Chess Olympiad in Samarkand, Uzbekistan. It is the same standard of play, organisation and courtesy we bring to every Kericho fixture.</p>
+      </div>
+      <div class="sec-gallery reveal">
+        <figure>
+          <img src="assets/gladys-samarkand-olympiad.jpg" alt="Gladys Langat at the Expo Center entrance of the 46th FIDE Chess Olympiad, Samarkand 2026" loading="lazy" decoding="async">
+          <figcaption><b>Expo Center</b><span>46th FIDE Chess Olympiad · Samarkand 2026</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/gladys-samarkand-hall.jpg" alt="Gladys Langat inside the Samarkand Olympiad venue beneath the Uzbekistan welcome sign" loading="lazy" decoding="async">
+          <figcaption><b>Inside the hall</b><span>Team Kenya at the Olympiad venue</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/gladys-registan.jpg" alt="Gladys Langat at the Registan in Samarkand, Uzbekistan" loading="lazy" decoding="async">
+          <figcaption><b>Registan</b><span>Samarkand, Uzbekistan</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/gladys-uzbekistan.jpg" alt="Gladys Langat at the Uzbekistan welcome sign" loading="lazy" decoding="async">
+          <figcaption><b>Karibu Uzbekistan</b><span>Representing Kericho abroad</span></figcaption>
+        </figure>
+      </div>
+      <div class="hud sec-quote reveal" style="max-width:900px; margin:26px auto 0;">
+        <p class="q">Chess took me from Kericho to an Olympiad hall. That is exactly the road we are opening for our learners.</p>
+        <div class="quote-who">
+          <span class="quote-ava j">GL</span>
+          <div><b>Gladys Langat</b><span>Secretary · Kericho Chess Academy</span></div>
+        </div>
+        <div class="sec-cta">
+          <a href="tel:+254723397573" class="btn btn-orange"><i class="fas fa-phone"></i> Call Gladys · 0723&nbsp;397&nbsp;573</a>
+          <a href="https://wa.me/254723397573?text=Hi%20Gladys%2C%20I%27d%20like%20to%20enrol%20a%20learner." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp about enrolment</a>
         </div>
       </div>
     </section>
@@ -187,7 +283,9 @@
       <div class="cta-row">
         <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20a%20question%20about%20the%20academy." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp Shem</a>
         <a href="tel:+254729037585" class="btn btn-ghost"><i class="fas fa-phone"></i> Call +254 729 037 585</a>
+        <a href="mailto:kerichochessacademy@gmail.com" class="btn btn-ghost"><i class="fas fa-envelope"></i> Email the academy</a>
       </div>
+      <p class="cta-mail">shemeso26@gmail.com &nbsp;·&nbsp; kerichochessacademy@gmail.com</p>
     </section>
   </main>
 
@@ -195,7 +293,7 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <a href="index.html" class="brand">
-          <span class="brand-mark"><i class="fas fa-chess-knight"></i></span>
+          <img class="brand-mark" src="assets/logo-light.png" alt="" width="42" height="42" loading="lazy" decoding="async">
           <span class="brand-name">KERICHO <b>CHESS</b><span class="brand-sub">CLUB &amp; ACADEMY</span></span>
         </a>
         <p>Chess coaching, live broadcasts, tournaments and materials for schools across Kericho County, Kenya.</p>
@@ -216,12 +314,21 @@
       </div>
       <div class="foot-col">
         <h4>CONTACT</h4>
-        <a href="https://wa.me/254729037585" target="_blank" rel="noopener">WhatsApp +254 729 037 585</a>
-        <a href="tel:+254729037585">Call +254 729 037 585</a>
+        <a href="https://wa.me/254729037585" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp +254 729 037 585</a>
+        <a href="tel:+254729037585"><i class="fas fa-phone"></i> Call +254 729 037 585</a>
+        <a href="mailto:shemeso26@gmail.com"><i class="fas fa-envelope"></i> shemeso26@gmail.com</a>
+        <a href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i> kerichochessacademy@gmail.com</a>
         <a href="contact.html">Become a member</a>
         <a href="tournaments.html#register">Register a learner</a>
         <a href="https://www.tiktok.com/@kericho.chess.clu" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i> TikTok</a>
         <a href="https://www.facebook.com/smesso" target="_blank" rel="noopener"><i class="fab fa-facebook"></i> Facebook</a>
+      </div>
+      <div class="foot-col foot-team">
+        <h4>OFFICE BEARERS</h4>
+        <a href="tel:+254723397573"><b>Gladys Langat</b><span>Secretary &middot; 0723&nbsp;397&nbsp;573<em class="foot-new">NEW</em></span></a>
+        <a href="tel:+254722709727"><b>Julieann Njambi</b><span>Treasurer &middot; 0722&nbsp;709&nbsp;727</span></a>
+        <a href="https://wa.me/254723397573" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Message the Secretary</a>
+        <a href="contact.html#team">All direct lines &rarr;</a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -229,6 +336,12 @@
       <span>KERICHO · KENYA · EAT (UTC+3)</span>
     </div>
   </footer>
+
+    <!-- ============ MOBILE CONVERSION DOCK (small screens) ============ -->
+  <nav class="mobile-dock" aria-label="Quick actions">
+    <a href="#membership" class="btn btn-orange attn">BECOME A MEMBER</a>
+    <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20a%20question%20about%20the%20academy." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  </nav>
 
   <script src="js/main.js"></script>
 </body>
