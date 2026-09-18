@@ -14,6 +14,10 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 - **Club layer:** `css/chess.css` restyles it with the academy palette and adds the
   chess-specific components: broadcast stage, countdown cards, ticker, FAQ accordion,
   registration forms, honour-roll table, steps strip, product shelf and the nav "Enrol" pill.
+- **Academy crest:** the official Kericho Chess Academy crest (pawn, king, knight, motto
+  *Forward Ever Backward Never*) sits in the nav, the footer, the event poster lockup and a
+  dedicated crest band on the about page; it doubles as the site favicon
+  (`assets/logo.png`, `assets/logo-light.png`, `assets/favicon.png`).
 - **Template runtime:** `js/kiddos-main.js` (nav, sliders, counters, reveals, loader) on the
   jQuery/Bootstrap/owl/aos/waypoints stack shipped in `js/`.
 - **Academy runtime:** `js/smc.js` (countdowns, FAQ accordion, registration / membership /
@@ -28,15 +32,16 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 | --- | --- |
 | `index.html` | Photo hero slider, service strip, welcome + offerings, the coach & the platform, programmes, season counters, testimonials, enquiry form, club shelf, academy updates, gallery |
 | `coaching.html` | The three coaching tracks, four-phase method, fees & FAQ |
-| `tournaments.html` | Next fixture with live countdown, eight age categories, M-Pesa entry steps, registration form, honour roll |
+| `tournaments.html` | **Event advert (poster band)** with live countdowns and response buttons, next fixture with live countdown, eight age categories, M-Pesa entry steps, registration form, honour roll |
 | `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list, spectator feed — plus the broadcast card |
 | `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo) + the daily puzzle |
 | `shop.html` | Materials & kits with one-tap WhatsApp ordering + Complete Club Kit quote banner |
-| `about.html` | Academy story, the people & squads, values and the season gallery |
-| `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ and contact cards |
+| `about.html` | Academy story, **crest band with the academy motto**, the people & squads, values and the season gallery |
+| `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ, contact cards, **direct lines for the office bearers** and the **Secretary's Samarkand Olympiad gallery** |
 
-All eight pages share the Kiddos navbar (with the **Enrol Now** pill) and the four-column
-template footer.
+All eight pages share the Kiddos navbar (with the **Enrol Now** pill) and the template
+footer, which carries phone/WhatsApp/email contacts and an **Office Bearers** column
+(Secretary, Treasurer, Head Coach — Gladys's new line is flagged).
 
 ## Photos
 
@@ -50,6 +55,32 @@ coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is n
 - **Board piece art:** the 2D boards on Live and Play render local PNG pieces
   (`assets/pieces/`), so pieces show on every device without relying on system
   chess-glyph fonts.
+
+## Event advert (poster band)
+
+`index.html` and `tournaments.html` carry a poster-style advert for the next fixture
+(`#event`). It mirrors the site's own fixture card, so the **single place to edit an
+event** is:
+
+1. the `#event` block in `tournaments.html` (the full poster) and the `compact` copy in
+   `index.html`;
+2. the two `data-countdown` targets in each block: first round and entries-close time;
+3. the M-Pesa line in the poster footer, if the entry reference changes.
+
+The poster artwork is currently `assets/tournament-prep-01.jpg` as a stand-in — the
+designed event poster has not arrived yet; swap that `src` (both blocks) to drop it in.
+Both blocks are marked with an `EVENT ADVERT` comment. Visitors can respond from the
+advert itself: registration form, WhatsApp entry, a Google Calendar "add to calendar"
+link, phone calls to the Secretary/Treasurer, or email.
+
+## Contacts shown on the site
+
+| Who | Role | Number / email |
+| --- | --- | --- |
+| Shem Meso | Head Coach & Founder | 0729 037 585 · shemeso26@gmail.com |
+| Gladys Langat | Secretary | 0723 397 573 (**new line**, flagged on the site) · WhatsApp |
+| Julieann Njambi | Treasurer | 0722 709 727 · WhatsApp |
+| Academy office | General & schools | kerichochessacademy@gmail.com |
 
 ## Forms
 
@@ -76,7 +107,10 @@ Then open `http://localhost:8000`.
 
 ## Content notes
 
-- WhatsApp and phone links use `+254 729 037 585`.
+- The coach's name is spelt **Shem Meso** (single `s`) in all titles, headings and alt text.
+- WhatsApp and phone links use `+254 729 037 585` (Head Coach), `+254 723 397 573`
+  (Secretary) and `+254 722 709 727` (Treasurer); email links use
+  `shemeso26@gmail.com` and `kerichochessacademy@gmail.com`.
 - Product prices are carried over from the previous site and should be confirmed before launch.
 - Season metrics (schools, learners, tournaments, coached hours) are marketing figures; adjust to taste.
 - The live broadcast room replays a scripted demo game between fixtures; wire in a real feed
@@ -98,7 +132,9 @@ Then open `http://localhost:8000`.
 │   ├── kiddos-main.js (template runtime)   smc.js        (academy runtime)
 │   └── chess.js · play.js · live.js · board3d.js         (the chess core)
 ├── fonts/   (flaticon · icomoon · ionicons · open-iconic)
-├── assets/  (academy photography — original pictures from the previous build)
+├── assets/  (academy photography — original pictures from the previous build;
+│            crest logo.png / logo-light.png / favicon.png and the Secretary's
+│            gladys-*.jpg photos from Samarkand 2026)
 └── kiddos-master.zip   (uploaded source template, for reference)
 ```
 

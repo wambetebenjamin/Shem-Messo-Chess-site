@@ -734,3 +734,405 @@
   .reg-form .field-row{ grid-template-columns:1fr; }
   .player-row{ padding:10px 12px; }
 }
+
+/* =============================================================
+   ACADEMY CREST  ·  nav tile, footer knockout, poster lockup
+   The crest is black line-art on transparency, so it always sits
+   on a small white tile to stay legible on light AND dark bars.
+   ============================================================= */
+.navbar-brand .brand-crest{
+  width:38px; height:39px; object-fit:contain;
+  background:#fff; border-radius:10px; padding:3px;
+  margin-right:9px; vertical-align:-11px;
+  box-shadow:0 4px 12px rgba(34,48,60,.22);
+}
+.footer-crest{ display:inline-block; margin-bottom:16px; }
+.footer-crest img{
+  width:56px; height:57px; object-fit:contain;
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.45));
+}
+
+/* anchored sections land below the sticky nav when jumped to */
+html{ scroll-padding-top:96px; }
+
+/* =============================================================
+   FOOTER  ·  office bearers column
+   ============================================================= */
+.foot-team{ margin-bottom:0; }
+.foot-team li{ margin-bottom:15px; }
+.foot-team li:last-child{ margin-bottom:0; }
+.foot-team a{ display:flex; flex-direction:column; gap:3px; }
+.foot-team a b{ font-size:14.5px; color:rgba(255,255,255,.92); }
+.foot-team a span{ font-size:12px; color:rgba(255,255,255,.58); letter-spacing:.03em; }
+.foot-new{
+  font-style:normal; font-size:9px; font-weight:800; letter-spacing:.14em;
+  background:var(--kc-quaternary); color:#fff; border-radius:20px;
+  padding:2px 8px; vertical-align:1px; white-space:nowrap;
+}
+.foot-team a.foot-more{
+  flex-direction:row; align-items:center; gap:6px;
+  font-weight:700; color:#fdbf6b; font-size:13.5px;
+}
+.foot-team a.foot-more:hover{ color:#ffd9a3; }
+
+/* =============================================================
+   CREST FEATURE CARD (about page)
+   ============================================================= */
+.crest-card{
+  display:grid; grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr); gap:48px;
+  align-items:center; background:#fff; border:1px solid var(--kc-line);
+  border-radius:20px; box-shadow:var(--kc-shadow-lg); padding:48px 52px;
+}
+.crest-logo{
+  width:100%; max-width:250px; justify-self:center;
+  filter:drop-shadow(0 18px 36px rgba(33,50,68,.14));
+}
+.crest-copy h2{ font-weight:900; margin:12px 0 16px; }
+.crest-copy p{ color:var(--kc-sub); font-size:15px; }
+.crest-facts{ display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
+.crest-tag{
+  display:inline-block; font-size:10px; font-weight:800; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--kc-primary);
+  background:#f4fafd; border:1px solid var(--kc-line);
+  border-radius:20px; padding:7px 14px;
+}
+
+/* =============================================================
+   DIRECT LINES / OFFICE BEARERS (contact page #team)
+   ============================================================= */
+.team-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+.team-card{
+  background:#fff; border:1px solid var(--kc-line); border-radius:var(--kc-radius);
+  box-shadow:var(--kc-shadow); padding:26px 24px;
+  display:flex; flex-direction:column; align-items:flex-start; gap:9px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.team-card:hover{ transform:translateY(-5px); box-shadow:var(--kc-shadow-lg); }
+.team-ava{
+  width:54px; height:54px; border-radius:16px; flex:0 0 auto;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-weight:900; font-size:17px; letter-spacing:.04em; color:#fff;
+  background:linear-gradient(135deg, var(--kc-primary), #1573b8);
+  box-shadow:0 10px 22px rgba(30,170,241,.28);
+}
+.team-ava.o{ background:linear-gradient(135deg, var(--kc-secondary), #d8861e); box-shadow:0 10px 22px rgba(253,166,56,.3); }
+.team-ava.b{ background:linear-gradient(135deg, #7a68e0, var(--kc-fifth)); box-shadow:0 10px 22px rgba(93,80,198,.3); }
+.team-ava.sm{ width:44px; height:44px; font-size:14px; border-radius:13px; }
+.team-card h3{ font-size:18px; font-weight:800; color:var(--kc-ink); margin:4px 0 0; }
+.team-role{
+  font-size:10px; font-weight:800; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--kc-primary);
+}
+.team-card p{ font-size:13.5px; color:var(--kc-sub); margin:0; }
+.team-links{ margin-top:auto; padding-top:12px; width:100%; display:flex; flex-direction:column; gap:9px; }
+.team-links .btn{ font-size:13px; padding:11px 14px; }
+.team-mail{
+  display:inline-flex; align-items:center; gap:8px; align-self:flex-start;
+  font-size:12.5px; font-weight:700; color:var(--kc-primary);
+}
+.team-mail:hover{ color:#1573b8; text-decoration:underline; }
+.team-photo-wrap{ position:relative; display:inline-block; margin-bottom:4px; }
+.team-photo{
+  width:104px; height:104px; border-radius:22px; object-fit:cover; object-position:center 22%;
+  border:3px solid #fff; box-shadow:0 14px 30px rgba(33,50,68,.2);
+}
+.team-badge{
+  position:absolute; right:-12px; bottom:-6px;
+  font-size:8.5px; font-weight:800; letter-spacing:.16em; color:#fff;
+  background:linear-gradient(135deg, var(--kc-quaternary), #c22d26);
+  padding:5px 10px; border-radius:999px; box-shadow:0 8px 18px rgba(241,69,61,.38);
+}
+.wrap-mail{ word-break:break-all; overflow-wrap:anywhere; }
+@media (max-width: 991.98px){ .team-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width: 575.98px){
+  .team-grid{ grid-template-columns:1fr; }
+  .team-photo{ width:88px; height:88px; }
+}
+
+/* =============================================================
+   SECRETARY · SAMARKAND GALLERY (contact page #secretary)
+   ============================================================= */
+.bg-softpeach{ background:#fdf6ec; }
+.sec-gallery{
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px;
+}
+.sec-shot{
+  position:relative; display:block; overflow:hidden; border-radius:16px;
+  background:var(--kc-screen); box-shadow:var(--kc-shadow);
+}
+.sec-shot img{
+  width:100%; aspect-ratio:3/4; object-fit:cover; display:block;
+  transition:transform .5s ease;
+}
+.sec-shot:hover img{ transform:scale(1.05); }
+.sec-cap{
+  position:absolute; left:0; right:0; bottom:0; z-index:2;
+  display:flex; flex-direction:column; gap:3px; padding:30px 15px 13px;
+  background:linear-gradient(180deg, transparent, rgba(13,24,34,.88));
+}
+.sec-cap b{ font-size:13.5px; font-weight:800; color:#fff; }
+.sec-cap span{
+  font-size:9px; font-weight:700; letter-spacing:.13em; text-transform:uppercase;
+  color:rgba(255,255,255,.78);
+}
+.sec-quote{
+  display:flex; gap:30px; align-items:center; padding:34px 38px;
+}
+.sec-quote-photo{
+  width:150px; height:188px; object-fit:cover; object-position:center 18%;
+  border-radius:16px; flex:0 0 auto;
+  border:3px solid #fff; box-shadow:0 14px 30px rgba(33,50,68,.18);
+}
+.sec-quote-body{ display:flex; flex-direction:column; gap:16px; min-width:0; }
+.sec-quote .q{
+  font-size:19px; font-weight:700; line-height:1.55; color:var(--kc-ink); margin:0;
+}
+.sec-quote .q::before{
+  content:'\201C'; display:block; line-height:.55; margin-bottom:12px;
+  font-size:44px; font-weight:900; color:var(--kc-secondary);
+}
+.sec-quote-who{ display:flex; align-items:center; gap:14px; }
+.sec-quote-who .who b{ display:block; font-size:14.5px; color:var(--kc-ink); }
+.sec-quote-who .who span{ font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--kc-sub); }
+.sec-cta{ display:flex; gap:12px; flex-wrap:wrap; }
+@media (max-width: 991.98px){ .sec-gallery{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px; } }
+@media (max-width: 767.98px){
+  .sec-quote{ flex-direction:column; align-items:flex-start; padding:26px 22px; }
+  .sec-quote-photo{ width:128px; height:160px; }
+  .sec-quote .q{ font-size:16.5px; }
+  .sec-cta{ flex-direction:column; align-items:stretch; }
+  .sec-cap b{ font-size:12px; }
+  .sec-cap span{ font-size:8px; }
+}
+
+/* =============================================================
+   EVENT ADVERT BAND (#event on home + tournaments)
+   A dark "poster wall" band with a bright poster card: artwork,
+   facts strip, live countdowns, response buttons, contact rows and
+   the M-Pesa line. Palette follows the club template.
+   ============================================================= */
+.ad-section{
+  position:relative; overflow:hidden;
+  background:
+    radial-gradient(70% 60% at 8% 0%, rgba(30,170,241,.16), transparent 62%),
+    radial-gradient(60% 55% at 96% 100%, rgba(253,166,56,.14), transparent 60%),
+    linear-gradient(160deg, #16232f 0%, #1e3040 52%, #141d27 100%);
+}
+.ad-section::before{
+  content:''; position:absolute; inset:0; opacity:.35; pointer-events:none;
+  background-image:
+    linear-gradient(45deg, rgba(30,170,241,.06) 25%, transparent 25%, transparent 75%, rgba(30,170,241,.06) 75%),
+    linear-gradient(45deg, rgba(30,170,241,.06) 25%, transparent 25%, transparent 75%, rgba(30,170,241,.06) 75%);
+  background-size:64px 64px; background-position:0 0, 32px 32px;
+}
+.ad-section .container{ position:relative; z-index:2; }
+
+.ad-poster{
+  position:relative; overflow:hidden;
+  display:grid; grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);
+  grid-template-areas:"art copy" "foot foot";
+  border-radius:22px; background:#fff;
+  box-shadow:0 34px 90px rgba(6,14,20,.55), 0 0 0 1px rgba(255,255,255,.16);
+}
+.ad-poster::before{
+  content:''; position:absolute; left:0; right:0; top:0; height:6px; z-index:4;
+  background:linear-gradient(90deg, var(--kc-primary), var(--kc-tertiary), var(--kc-secondary), var(--kc-quaternary), var(--kc-fifth), var(--kc-primary));
+  background-size:300% 100%; animation:kcRibbon 14s linear infinite;
+}
+@keyframes kcRibbon{ from{ background-position:0 0; } to{ background-position:300% 0; } }
+
+/* artwork side */
+.ad-art{ grid-area:art; position:relative; min-height:100%; margin:0; background:var(--kc-screen); }
+.ad-art img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center 42%; display:block;
+}
+.ad-art::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(190deg, rgba(13,24,34,.04) 0%, rgba(13,24,34,.26) 55%, rgba(13,24,34,.7) 100%);
+}
+.ad-art-tag{
+  position:absolute; left:16px; bottom:16px; z-index:2;
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:9.5px; font-weight:800; letter-spacing:.2em; text-transform:uppercase;
+  color:#fff; background:rgba(13,24,34,.62); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.28); border-radius:999px; padding:8px 14px;
+}
+.ad-art-badge{
+  position:absolute; left:16px; top:18px; z-index:2;
+  font-size:10px; font-weight:800; letter-spacing:.24em; color:#5b3a05;
+  background:linear-gradient(135deg, #ffd98a, var(--kc-secondary));
+  border-radius:999px; padding:8px 14px;
+  box-shadow:0 10px 24px rgba(253,166,56,.4);
+}
+
+/* copy side */
+.ad-copy{ grid-area:copy; padding:44px 46px 32px; display:flex; flex-direction:column; min-width:0; }
+.ad-present{
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:10px; font-weight:800; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--kc-primary);
+}
+.ad-logo{
+  width:38px; height:39px; object-fit:contain; flex:0 0 auto;
+  background:#fff; border-radius:9px; padding:2px;
+  box-shadow:0 3px 10px rgba(34,48,60,.18);
+}
+.ad-title{
+  font-weight:900; text-transform:uppercase; letter-spacing:-.012em;
+  font-size:clamp(30px,4vw,52px); line-height:1.03;
+  margin:14px 0 12px; color:var(--kc-ink);
+  display:flex; flex-direction:column;
+}
+.ad-title-line2{
+  background:linear-gradient(100deg, #1573b8 4%, var(--kc-primary) 45%, var(--kc-tertiary) 92%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.ad-tagline{
+  font-style:italic; font-size:16.5px; color:#51646f;
+  padding-left:16px; border-left:3px solid var(--kc-tertiary); margin-bottom:24px;
+}
+.ad-strip{
+  list-style:none; padding:0; margin:0 0 20px;
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px;
+}
+.ad-strip li{
+  display:flex; flex-direction:column; gap:3px; align-items:flex-start;
+  background:#fff; border:1px solid var(--kc-line); border-radius:14px; padding:13px 16px;
+  box-shadow:0 6px 18px rgba(33,50,68,.06);
+}
+.ad-strip li i{ color:var(--kc-primary); font-size:14px; margin-bottom:5px; }
+.ad-strip li:nth-child(2) i{ color:var(--kc-tertiary); }
+.ad-strip li:nth-child(3) i{ color:#e08f1e; }
+.ad-strip li b{ font-size:12.5px; letter-spacing:.06em; color:var(--kc-ink); }
+.ad-strip li span{
+  font-size:9px; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--kc-sub);
+}
+
+.ad-clock{
+  background:#f4fafd; border:1px solid var(--kc-line); border-radius:14px;
+  padding:18px 22px 20px;
+}
+.ad-clock .cd-band{
+  display:block; font-size:11px; font-weight:800; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--kc-sub); margin-bottom:14px;
+}
+.ad-clock .cd-grid{ gap:9px; }
+.ad-clock .cd-num{ font-size:27px; }
+.ad-closing{
+  display:flex; align-items:center; gap:9px; flex-wrap:wrap;
+  margin:14px 0 0; font-size:13.5px; color:var(--kc-sub);
+}
+.ad-closing i{ color:var(--kc-quaternary); }
+.ad-closing b{ font-size:13px; color:var(--kc-quaternary); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
+
+.ad-facts{ list-style:none; padding:0; margin:20px 0 0; }
+.ad-facts li{
+  display:flex; gap:11px; align-items:flex-start; margin-bottom:10px;
+  font-size:14px; color:#40555f;
+}
+.ad-facts li i{ color:var(--kc-tertiary); margin-top:3px; font-size:13px; }
+
+.ad-ctas{ display:flex; gap:12px; flex-wrap:wrap; margin-top:26px; }
+.ad-ctas .btn{ font-size:13px; }
+
+.ad-contact{
+  margin-top:24px; padding-top:20px; border-top:1px dashed #cfdde6;
+  display:flex; flex-direction:column; gap:11px;
+}
+.ad-contact-label{
+  font-size:9.5px; font-weight:800; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--kc-sub);
+}
+.ad-contact-row{ display:flex; flex-wrap:wrap; gap:9px 22px; }
+.ad-contact-row a{
+  display:inline-flex; align-items:center; gap:9px;
+  font-size:12.5px; font-weight:700; color:var(--kc-primary);
+}
+.ad-contact-row a:hover{ color:#1573b8; text-decoration:underline; }
+.ad-contact-row a i{ color:#e08f1e; }
+.ad-contact-row.mails a{ color:#52656f; font-weight:600; }
+.ad-contact-row.mails a:hover{ color:var(--kc-primary); }
+
+/* poster footer strip */
+.ad-footer{
+  grid-area:foot; display:flex; align-items:center; justify-content:space-between; gap:18px;
+  padding:15px 30px; background:linear-gradient(90deg, #16232f, #1e3040 50%, #16232f);
+  flex-wrap:wrap;
+}
+.ad-coords{ font-size:11px; letter-spacing:.3em; color:rgba(30,170,241,.6); }
+.ad-fee{ font-size:11.5px; letter-spacing:.06em; color:rgba(232,243,250,.85); text-align:center; }
+.ad-fee b{ color:#ffd98a; letter-spacing:.2em; margin-right:8px; }
+
+/* compact placement (home page): tighter copy, fact list folded away */
+.ad-poster.compact .ad-copy{ padding:38px 40px 28px; }
+.ad-poster.compact .ad-title{ font-size:clamp(27px,3.4vw,44px); }
+.ad-poster.compact .ad-facts{ display:none; }
+.ad-poster.compact .ad-ctas{ margin-top:22px; }
+
+@media (max-width: 991.98px){
+  .ad-poster{ grid-template-columns:1fr; grid-template-areas:"art" "copy" "foot"; }
+  .ad-art{ min-height:0; height:280px; }
+  .ad-copy{ padding:34px 32px 26px; }
+  .ad-poster.compact .ad-copy{ padding:30px 28px 24px; }
+  .ad-footer{ justify-content:center; text-align:center; }
+}
+@media (max-width: 767.98px){
+  .ad-art{ height:220px; }
+  .ad-clock .cd-num{ font-size:22px; }
+  .ad-title{ font-size:clamp(26px,8vw,36px); }
+  .ad-strip{ grid-template-columns:1fr; gap:8px; }
+  .ad-strip li{ flex-direction:row; align-items:center; gap:10px; padding:11px 14px; }
+  .ad-strip li i{ margin-bottom:0; }
+  .ad-strip li span{ margin-left:auto; text-align:right; }
+  .ad-ctas{ flex-direction:column; }
+  .ad-ctas .btn{ width:100%; }
+  .ad-contact-row{ flex-direction:column; gap:11px; }
+  .ad-coords{ display:none; }
+  .ad-fee b{ display:block; margin:0 0 3px; }
+}
+
+/* =============================================================
+   CTA BAND EMAIL LINE (contact page ftco-intro)
+   ============================================================= */
+.band-mails{ margin-top:12px; font-size:14px; color:rgba(255,255,255,.85); }
+.band-mails i{ color:#ffd98a; margin-right:4px; }
+.band-mails a{ color:#fff; text-decoration:underline; text-underline-offset:3px; }
+.band-mails a:hover{ color:#ffd98a; }
+
+/* =============================================================
+   MOBILE CONVERSION PASS (phones)
+   16px inputs stop iOS auto-zoom; roomier tap targets; stacked
+   poster / team / crest blocks. Sizing and spacing only.
+   ============================================================= */
+@media (max-width: 767.98px){
+  .reg-form input[type="text"],
+  .reg-form input[type="email"],
+  .reg-form select,
+  .reg-form textarea{ font-size:16px; padding:13px 15px; }
+  .appointment-form input.form-control,
+  .appointment-form select.form-control,
+  .appointment-form textarea.form-control{ font-size:16px !important; }
+  .ftco-footer .subscribe-form .form-control{ font-size:16px; }
+  .navbar-toggler{ min-width:50px; min-height:48px; font-size:16px; }
+  .ftco-navbar-light .navbar-nav .nav-link{ padding-top:14px; padding-bottom:14px; }
+  .navbar-brand .brand-crest{ width:34px; height:35px; }
+  .crest-card{ grid-template-columns:1fr; gap:26px; padding:32px 24px; text-align:center; }
+  .crest-logo{ max-width:200px; }
+  .crest-facts{ justify-content:center; }
+  .foot-team li{ margin-bottom:13px; }
+  .band-mails{ font-size:13px; }
+}
+@media (max-width: 575.98px){
+  .ad-section{ padding-left:0; padding-right:0; }
+  .ad-poster{ border-radius:18px; }
+  .ad-art{ height:200px; }
+  .ad-copy{ padding:26px 20px 22px; }
+  .ad-present{ font-size:9px; letter-spacing:.2em; }
+  .ad-logo{ width:32px; height:33px; }
+  .ad-tagline{ font-size:14.5px; margin-bottom:20px; }
+  .ad-closing{ font-size:12.5px; }
+  .ad-facts li{ font-size:13.5px; }
+  .ad-contact-row a{ font-size:12px; }
+}
