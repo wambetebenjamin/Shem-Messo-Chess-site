@@ -1,0 +1,156 @@
+/* ============================================================================
+   KERICHO CHESS CLUB & ACADEMY · shared runtime (Kiddos structure edition)
+   countdown timers · FAQ accordion · registration forms
+   (Google Apps Script endpoint + WhatsApp fallback)
+   Nav, carousels, reveals and loaders are handled by the template's own
+   js/kiddos-main.js; this file only carries the academy-specific logic.
+   ============================================================================ */
+(function () {
+  'use strict';
+
+  /* ---------- Config ---------- */
+  const WHATSAPP = '254729037585';
+  // STEP 1: Deploy a Google Apps Script web app (instructions provided separately).
+  // STEP 2: Paste the deployed Web App URL below, replacing the placeholder.
+  const SHEETS_ENDPOINT = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+  /* ---------- Countdown timers ---------- */
+  const clocks = document.querySelectorAll('[data-countdown]');
+  const pad = n => String(n).padStart(2, '0');
+  const tickCountdowns = () => {
+    const now = Date.now();
+    clocks.forEach(el => {
+      const target = new Date(el.dataset.countdown).getTime();
+      let diff = Math.max(0, target - now);
+      const d = Math.floor(diff / 86400000); diff -= d * 86400000;
+      const h = Math.floor(diff / 3600000);  diff -= h * 3600000;
+      const m = Math.floor(diff / 60000);    diff -= m * 60000;
+      const s = Math.floor(diff / 1000);
+      const set = (cls, val) => { const n = el.querySelector(cls); if (n) n.textContent = pad(val); };
+      set('.cd-d', d); set('.cd-h', h); set('.cd-m', m); set('.cd-s', s);
+    });
+  };
+  if (clocks.length) { tickCountdowns(); setInterval(tickCountdowns, 1000); }
+
+  /* ---------- FAQ accordion ---------- */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    if (!q || !a) return;
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => {
+        o.classList.remove('open');
+        const oa = o.querySelector('.faq-a'); if (oa) oa.style.maxHeight = null;
+      });
+      if (!isOpen) { item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    });
+  });
+
+  /* ---------- Forms: Sheets endpoint + WhatsApp fallback ---------- */
+  const waLink = text => 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(text);
+
+  async function submitEntry(form, endpointFormType, collect, btn, msg, waBtn, waSummary) {
+    // Not connected yet → offer the WhatsApp confirmation path.
+    if (SHEETS_ENDPOINT.indexOf('PASTE_YOUR') === 0) {
+      msg.textContent = 'Details captured. Online submission is not connected yet. Tap below to send your entry straight to Shem on WhatsApp.';
+      msg.className = 'form-msg show';
+      if (waBtn) { waBtn.href = waLink(waSummary()); waBtn.classList.add('show'); }
+      return;
+    }
+    btn.disabled = true;
+    const original = btn.textContent;
+    btn.textContent = 'Submitting…';
+    msg.className = 'form-msg show'; msg.textContent = '';
+    try {
+      const payload = { formType: endpointFormType, timestamp: new Date().toISOString(), ...collect() };
+      await fetch(SHEETS_ENDPOINT, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      });
+      msg.textContent = 'Submitted. Shem will confirm your slot once payment is received on M-Pesa.';
+      msg.className = 'form-msg show success';
+      form.reset();
+    } catch (err) {
+      msg.textContent = 'Something went wrong. Please try again or message Shem directly on WhatsApp.';
+      msg.className = 'form-msg show error';
+    } finally {
+      btn.disabled = false; btn.textContent = original;
+    }
+  }
+
+  const val = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+
+  // Tournament registration (tournaments.html)
+  const tForm = document.getElementById('tournamentForm');
+  if (tForm) {
+    tForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const collect = () => ({
+        name: val('t_name'), age: val('t_age'), gender: val('t_gender'),
+        category: val('t_category'), school: val('t_school'),
+        email: val('t_email'), phone: val('t_phone')
+      });
+      submitEntry(tForm, 'Tournament', collect,
+        document.getElementById('t_submit'),
+        document.getElementById('t_msg'),
+        document.getElementById('t_wa'),
+        () => 'Hi Shem, tournament entry for ' + collect().name +
+              ' · Category: ' + collect().category +
+              ' · School/Club: ' + collect().school +
+              ' · Phone: ' + collect().phone +
+              ' · Age: ' + collect().age + ' (' + collect().gender + ').'
+      );
+    });
+  }
+
+  // Membership (contact.html)
+  const mForm = document.getElementById('membershipForm');
+  if (mForm) {
+    mForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const collect = () => ({
+        name: val('m_name'), age: val('m_age'), gender: val('m_gender'),
+        school: val('m_school'), email: val('m_email'), phone: val('m_phone')
+      });
+      submitEntry(mForm, 'Membership', collect,
+        document.getElementById('m_submit'),
+        document.getElementById('m_msg'),
+        document.getElementById('m_wa'),
+        () => 'Hi Shem, academy membership for ' + collect().name +
+              ' · School/Club: ' + collect().school +
+              ' · Phone: ' + collect().phone +
+              ' · Age: ' + collect().age + ' (' + collect().gender + ').'
+      );
+    });
+  }
+
+  // Coaching enquiry → pure WhatsApp composer (contact.html + index.html)
+  const cForm = document.getElementById('coachingForm');
+  if (cForm) {
+    cForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const phone = val('c_phone_note');
+      const text = 'Hi Shem, coaching enquiry from ' + val('c_name') +
+                   ' · School/Club: ' + val('c_school') +
+                   ' · Interested in: ' + val('c_program') +
+                   (phone ? ' · Phone: ' + phone : '') +
+                   ' · Message: ' + val('c_notes');
+      window.open(waLink(text), '_blank');
+      const msg = document.getElementById('c_msg');
+      if (msg) { msg.textContent = 'Opening WhatsApp with your enquiry. Just press send.'; msg.className = 'form-msg show success'; }
+    });
+  }
+
+  // Newsletter subscribe → WhatsApp nudge (footer)
+  const subForm = document.getElementById('subscribeForm');
+  if (subForm) {
+    subForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const text = 'Hi Shem, please add ' + val('sub_email') +
+                   ' to the academy updates list (fixtures & enrolment news).';
+      window.open(waLink(text), '_blank');
+    });
+  }
+})();

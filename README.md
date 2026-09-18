@@ -1,67 +1,77 @@
 # Kericho Chess Club & Academy
 
-A premium multi-page website for Kericho Chess Club & Academy, Kenya, rebuilt as a
-futuristic, broadcast-HUD style chess platform ("Night Circuit" design system).
+A multi-page website for Kericho Chess Club & Academy, Kenya — academy content carried
+onto the **Kiddos** template structure (Bootstrap 4, Colorlib, CC BY 3.0), restyled with
+the club palette.
 
-## Design language
+## Structure
 
-"Sunrise Club": a bright, uplifting theme tuned for parents and learners. Warm cream paper,
-white cards with soft shadows, jade, brass and warm-coral accents, and gentle background
-animations (drifting chess pieces and soft pastel orbs on the hero, page headers and CTA bands).
+The site now follows the uploaded **Kiddos** (Colorlib) template: a shared top bar,
+ftco navbar, owl-carousel hero slider, service strips, course/staff cards, counters,
+testimony carousel, gallery strip and the four-column ftco footer on every page.
 
-- **Cinematic photo hero:** a sunlit classroom chessboard photo with a right-aligned giant
-  wordmark, spaced subtitle, gradient hairline rule and coral buttons
-- **Friendly cards:** rounded white cards with jade corner accents, hover lift and icon pop
-- **Classic board colours:** the play and broadcast boards use cream and dusty-green vinyl
-  squares, like the academy's real tournament sets
-- **Typography:** Space Grotesk display headlines, readable Inter body text, JetBrains Mono
-  for counters, labels and notation
+- **Theme layer:** `css/kiddos.css` (the template's stylesheet) drives layout and components.
+- **Club layer:** `css/chess.css` restyles it with the academy palette and adds the
+  chess-specific components: broadcast stage, countdown cards, ticker, FAQ accordion,
+  registration forms, honour-roll table, steps strip, product shelf and the nav "Enrol" pill.
 - **Academy crest:** the official Kericho Chess Academy crest (pawn, king, knight, motto
   *Forward Ever Backward Never*) sits in the nav, the footer, the event poster lockup and a
   dedicated crest band on the about page; it doubles as the site favicon
-- **One moody band:** only the page headers and footer go dark, for contrast
-- **Mobile first-class:** dedicated breakpoints at 1100px / 900px / 600px / 420px, full-width
-  tap targets, 16px form inputs (no iOS zoom), horizontally scrollable results table, stacked
-  poster and footer, and a thumb-reach action dock on small screens
-- Motion respects `prefers-reduced-motion` throughout
+  (`assets/logo.png`, `assets/logo-light.png`, `assets/favicon.png`).
+- **Template runtime:** `js/kiddos-main.js` (nav, sliders, counters, reveals, loader) on the
+  jQuery/Bootstrap/owl/aos/waypoints stack shipped in `js/`.
+- **Academy runtime:** `js/smc.js` (countdowns, FAQ accordion, registration / membership /
+  subscribe and WhatsApp-composer forms).
+- The chess engine lives in `js/chess.js` (chess.js by Jeff Hlywa, BSD license) and powers
+  `js/play.js` (playable board) and `js/live.js` (broadcast room); `js/board3d.js` renders
+  the 3D board stage.
 
 ## Pages
 
 | Page | What's on it |
 | --- | --- |
-| `index.html` | 3D hero + HUD overlays, notation ticker, programmes, stats counters, testimonials, FAQ |
-| `coaching.html` | The three coaching tracks, four-phase method timeline, fees & FAQ |
-| `tournaments.html` | **Event advert (poster band)** with live countdowns and response buttons, at-a-glance schedule, categories, M-Pesa entry steps, registration form, honour roll |
-| `live.html` | **Broadcast room:** simulated live Board 1 with clocks, eval bar, move list, spectator feed and viewer telemetry |
-| `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo) + Lichess daily puzzle |
+| `index.html` | Photo hero slider, service strip, welcome + offerings, the coach & the platform, programmes, season counters, testimonials, enquiry form, club shelf, academy updates, gallery |
+| `coaching.html` | The three coaching tracks, four-phase method, fees & FAQ |
+| `tournaments.html` | **Event advert (poster band)** with live countdowns and response buttons, next fixture with live countdown, eight age categories, M-Pesa entry steps, registration form, honour roll |
+| `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list, spectator feed — plus the broadcast card |
+| `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo) + the daily puzzle |
 | `shop.html` | Materials & kits with one-tap WhatsApp ordering + Complete Club Kit quote banner |
-| `about.html` | Academy story, values and season gallery using the local photography |
-| `contact.html` | Membership form, WhatsApp coaching-enquiry composer, contact cards and **direct lines for the office bearers** |
+| `about.html` | Academy story, **crest band with the academy motto**, the people & squads, values and the season gallery |
+| `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ, contact cards, **direct lines for the office bearers** and the **Secretary's Samarkand Olympiad gallery** |
 
-All pages share `css/style.css` (design system) and `js/main.js` (nav, reveals, counters,
-countdowns, FAQ, hero board, form handling). The chess engine lives in `js/chess.js`
-(chess.js by Jeff Hlywa, BSD license) and powers `js/play.js` and `js/live.js`.
+All eight pages share the Kiddos navbar (with the **Enrol Now** pill) and the template
+footer, which carries phone/WhatsApp/email contacts and an **Office Bearers** column
+(Secretary, Treasurer, Head Coach — Gladys's new line is flagged).
 
-## Forms
+## Photos
 
-Registration/membership forms POST to a Google Apps Script endpoint; paste your deployed
-Web App URL into `SHEETS_ENDPOINT` in `js/main.js`. Until then, forms gracefully fall back to a
-**WhatsApp confirmation button** pre-filled with the entrant's details (Nothing is lost, no
-backend required). Payments reference M-Pesa Paybill **880100**.
+The site displays the academy's own photography throughout: `assets/orig-01.jpg` …
+`orig-05.jpg`, `assets/tournament-prep-01.jpg` … `tournament-prep-10.jpg` and the hero,
+coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is not used.
+
+- **Club shelf product shots:** `assets/shelf-workbook.jpg`, `shelf-clock.jpg` and
+  `shelf-kit.jpg` illustrate the workbook, digital clock and club kit cards;
+  the set card uses the academy's own `chess-materials.jpg` photo.
+- **Board piece art:** the 2D boards on Live and Play render local PNG pieces
+  (`assets/pieces/`), so pieces show on every device without relying on system
+  chess-glyph fonts.
 
 ## Event advert (poster band)
 
 `index.html` and `tournaments.html` carry a poster-style advert for the next fixture
-(`#event`). It reuses the site's own event card, so the **single place to edit an event** is:
+(`#event`). It mirrors the site's own fixture card, so the **single place to edit an
+event** is:
 
-1. the `#event` block in `tournaments.html` (the full poster) and the `compact` copy in `index.html`;
+1. the `#event` block in `tournaments.html` (the full poster) and the `compact` copy in
+   `index.html`;
 2. the two `data-countdown` targets in each block: first round and entries-close time;
 3. the M-Pesa line in the poster footer, if the entry reference changes.
 
-The poster artwork is `assets/tournament-prep-01.jpg` — swap that `src` (both blocks) to drop in
-a different photo or a designed event poster. Visitors can respond from the advert itself:
-registration form, WhatsApp entry, a Google Calendar "add to event" link, phone calls to the
-Secretary/Treasurer, or email.
+The poster artwork is currently `assets/tournament-prep-01.jpg` as a stand-in — the
+designed event poster has not arrived yet; swap that `src` (both blocks) to drop it in.
+Both blocks are marked with an `EVENT ADVERT` comment. Visitors can respond from the
+advert itself: registration form, WhatsApp entry, a Google Calendar "add to calendar"
+link, phone calls to the Secretary/Treasurer, or email.
 
 ## Contacts shown on the site
 
@@ -71,6 +81,13 @@ Secretary/Treasurer, or email.
 | Gladys Langat | Secretary | 0723 397 573 (**new line**, flagged on the site) · WhatsApp |
 | Julieann Njambi | Treasurer | 0722 709 727 · WhatsApp |
 | Academy office | General & schools | kerichochessacademy@gmail.com |
+
+## Forms
+
+Registration/membership forms POST to a Google Apps Script endpoint; paste your deployed
+Web App URL into `SHEETS_ENDPOINT` in `js/smc.js`. Until then, forms gracefully fall back
+to a **WhatsApp confirmation button** pre-filled with the entrant's details (nothing is
+lost, no backend required). Payments reference M-Pesa Paybill **880100**.
 
 ## Run locally
 
@@ -90,29 +107,16 @@ Then open `http://localhost:8000`.
 
 ## Content notes
 
-- The coach's name is spelled **Shem Meso** (single "s" in both names) across every page.
-- **Logo:** `assets/Kericho Chess Academy logo.jpg` is the supplied source artwork. The site uses
-  derived files: `assets/logo.png` (black ink, transparent — light backgrounds), `assets/logo-light.png`
-  (white knockout — the dark footer) and `assets/favicon.png` (touch icon + favicon). Regenerate them
-  with sharp if the source crest changes.
-- **Secretary gallery:** the five photos in `assets/pics for Gladys Langat secretary.zip` were
-  cropped and compressed to `gladys-langat-portrait.jpg`, `gladys-avatar.jpg`,
-  `gladys-samarkand-olympiad.jpg`, `gladys-samarkand-hall.jpg`, `gladys-registan.jpg` and
-  `gladys-uzbekistan.jpg`. They show Gladys Langat at the 46th FIDE Chess Olympiad in
-  Samarkand, Uzbekistan, and are used on the contact page (`#team` card and the `#secretary` gallery).
-- WhatsApp and phone links use `+254 729 037 585` for the coach, plus the Secretary and Treasurer lines above.
-- On phones a floating action dock (`.mobile-dock`) offers the page's main action plus WhatsApp; it is shown below 600px only.
+- The coach's name is spelt **Shem Meso** (single `s`) in all titles, headings and alt text.
+- WhatsApp and phone links use `+254 729 037 585` (Head Coach), `+254 723 397 573`
+  (Secretary) and `+254 722 709 727` (Treasurer); email links use
+  `shemeso26@gmail.com` and `kerichochessacademy@gmail.com`.
 - Product prices are carried over from the previous site and should be confirmed before launch.
-- Season metrics (schools, learners, tournaments) are marketing figures; adjust to taste.
+- Season metrics (schools, learners, tournaments, coached hours) are marketing figures; adjust to taste.
 - The live broadcast room replays a scripted demo game between fixtures; wire in a real feed
   when streaming hardware/accounts are ready.
 - The site does not collect or store form submissions unless the Apps Script endpoint is set;
   otherwise it prepares a WhatsApp message for the visitor to review and send.
-- The site displays the **original photos from the previous build**: `assets/orig-01.jpg` up to `orig-05.jpg`
-  (coach-with-learner plus the four gallery shots) were extracted from the old page; the hero and three
-  product photos are hotlinked from Unsplash exactly as the original site served them.
-- `assets/hero-chess-academy.jpg`, `coaching-session.jpg`, `tournament-focus.jpg`, `chess-materials.jpg`
-  are spare editorial images, currently unreferenced.
 
 ## Files
 
@@ -121,21 +125,17 @@ Then open `http://localhost:8000`.
 ├── index.html        coaching.html    tournaments.html   live.html
 ├── play.html         shop.html        about.html         contact.html
 ├── css/
-│   └── style.css
+│   ├── kiddos.css    (template theme)      chess.css     (club restyle + chess components)
+│   └── animate.css · aos.css · owl carousel · magnific-popup · icon fonts css
 ├── js/
-│   ├── main.js       chess.js         play.js            live.js
-├── README.md
-└── assets/
-    ├── Kericho Chess Academy logo.jpg     # supplied crest source artwork
-    ├── logo.png / logo-light.png          # crest cut-outs (light + dark backgrounds)
-    ├── favicon.png                        # touch icon + favicon
-    ├── gladys-*.jpg                       # Secretary photos (card + Samarkand gallery)
-    ├── pics for Gladys Langat secretary.zip  # original upload, kept for reference
-    ├── orig-01.jpg … orig-05.jpg          # original site photos (displayed)
-    ├── hero-morning.jpg                   # sunlit classroom hero photo (displayed)
-    ├── hero-dark-board.jpg                # dark board hero variant (spare)
-    ├── hero-chess-academy.jpg             # spare editorial images
-    ├── coaching-session.jpg
-    ├── tournament-focus.jpg
-    └── chess-materials.jpg
+│   ├── jquery · bootstrap · owl · aos · waypoints · stellar · scrollax (template stack)
+│   ├── kiddos-main.js (template runtime)   smc.js        (academy runtime)
+│   └── chess.js · play.js · live.js · board3d.js         (the chess core)
+├── fonts/   (flaticon · icomoon · ionicons · open-iconic)
+├── assets/  (academy photography — original pictures from the previous build;
+│            crest logo.png / logo-light.png / favicon.png and the Secretary's
+│            gladys-*.jpg photos from Samarkand 2026)
+└── kiddos-master.zip   (uploaded source template, for reference)
 ```
+
+Site structure follows the **Kiddos** template (Bootstrap 4), restyled with the club's palette and components.

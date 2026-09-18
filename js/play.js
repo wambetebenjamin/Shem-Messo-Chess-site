@@ -8,10 +8,17 @@
   const boardEl = document.getElementById('playBoard');
   if (!boardEl || typeof Chess === 'undefined') return;
 
-  const PIECE_GLYPHS = {
-    p: { w: '♙', b: '♟' }, n: { w: '♘', b: '♞' }, b: { w: '♗', b: '♝' },
-    r: { w: '♖', b: '♜' }, q: { w: '♕', b: '♛' }, k: { w: '♔', b: '♚' }
+  /* Piece art: local PNGs so pieces render on every device,
+     no dependence on system chess-glyph fonts. */
+  const PIECE_IMAGES = {
+    p: { w: 'assets/pieces/wp.png', b: 'assets/pieces/bp.png' },
+    n: { w: 'assets/pieces/wn.png', b: 'assets/pieces/bn.png' },
+    b: { w: 'assets/pieces/wb.png', b: 'assets/pieces/bb.png' },
+    r: { w: 'assets/pieces/wr.png', b: 'assets/pieces/br.png' },
+    q: { w: 'assets/pieces/wq.png', b: 'assets/pieces/bq.png' },
+    k: { w: 'assets/pieces/wk.png', b: 'assets/pieces/bk.png' }
   };
+  const PIECE_NAMES = { p: 'pawn', n: 'knight', b: 'bishop', r: 'rook', q: 'queen', k: 'king' };
   const FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   const game = new Chess();
   let selected = null, legalTargets = [], lastMove = null;
@@ -36,9 +43,10 @@
         if (lastMove && (lastMove.from === sq || lastMove.to === sq)) div.classList.add('lastmove');
         div.dataset.sq = sq;
         if (cell) {
-          const p = document.createElement('span');
-          p.className = 'piece ' + (cell.color === 'w' ? 'white' : 'black');
-          p.textContent = PIECE_GLYPHS[cell.type][cell.color];
+          const p = document.createElement('img');
+          p.className = 'piece-img';
+          p.src = PIECE_IMAGES[cell.type][cell.color];
+          p.alt = (cell.color === 'w' ? 'White ' : 'Black ') + PIECE_NAMES[cell.type];
           div.appendChild(p);
         }
         if (legalTargets.includes(sq)) {
