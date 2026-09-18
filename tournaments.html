@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-page="tournaments">
+<body class="has-dock" data-page="tournaments">
 
   <div class="atmo" aria-hidden="true">
     <div class="atmo-glow-a"></div><div class="atmo-glow-b"></div><div class="atmo-glow-c"></div>
@@ -17,7 +17,7 @@
   </div>
   <div class="grain" aria-hidden="true"></div>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="brand" aria-label="Kericho Chess Club &amp; Academy home">
         <span class="brand-name">KERICHO <b>CHESS</b><span class="brand-sub">CLUB &amp; ACADEMY</span></span>
@@ -32,7 +32,7 @@
         <a href="about.html" data-nav="about">ABOUT</a>
       </div>
       <a href="contact.html" class="btn btn-orange nav-cta">ENROL NOW</a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
+      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html" data-nav="home">HOME</a>
@@ -62,12 +62,93 @@
       </div>
     </header>
 
-    <!-- ============ NEXT FIXTURE ============ -->
+    <!-- ============ EVENT ADVERT (the poster, rebuilt as a page ad) ============ -->
+    <!-- EVENT ADVERT: dates, start time, rounds and the M-Pesa line below come from the
+         academy's current fixture card. To announce a different event, edit THIS block, the
+         matching one in index.html (search "EVENT ADVERT"), and both data-countdown targets. -->
+    <section class="section tight ad-section" id="event">
+      <div class="ad-wrap reveal">
+
+        <div class="ad-poster">
+          <!-- Poster artwork -->
+          <figure class="ad-art">
+            <img src="assets/tournament-prep-01.jpg" alt="Tournament hall at Kericho Chess Academy with boards, clocks and blue-draped tables set for the next round" loading="eager" decoding="async">
+            <span class="ad-art-badge">SEASON 26</span>
+            <figcaption class="ad-art-tag"><i class="fas fa-camera"></i> THE HALL · KERICHO</figcaption>
+          </figure>
+
+          <!-- Poster copy -->
+          <div class="ad-copy">
+            <span class="ad-present">KERICHO CHESS CLUB &amp; ACADEMY PRESENTS</span>
+
+            <h2 class="ad-title">
+              <span class="ad-title-line1">Kericho</span>
+              <span class="ad-title-line2">Inter-Schools Open</span>
+            </h2>
+
+            <p class="ad-tagline">Eight boards. Eight age categories. One trophy table.</p>
+
+            <ul class="ad-strip">
+              <li><i class="fas fa-calendar-day"></i><b>SAT 26 SEP 2026</b><span>Match day</span></li>
+              <li><i class="fas fa-clock"></i><b>9:00 AM EAT</b><span>First round</span></li>
+              <li><i class="fas fa-chess-board"></i><b>SWISS · 7 ROUNDS</b><span>Everyone plays</span></li>
+            </ul>
+
+            <div class="ad-countdown hud" data-countdown="2026-09-26T09:00:00+03:00">
+              <span class="hud-label"><span class="ok-dot"></span> FIRST ROUND IN</span>
+              <div class="hud-pair">
+                <div class="hud-stack"><span class="hud-value cd-d">00</span><span class="hud-label">DAYS</span></div>
+                <div class="hud-stack"><span class="hud-value cd-h">00</span><span class="hud-label">HRS</span></div>
+                <div class="hud-stack"><span class="hud-value cd-m">00</span><span class="hud-label">MIN</span></div>
+                <div class="hud-stack"><span class="hud-value cd-s">00</span><span class="hud-label">SEC</span></div>
+              </div>
+            </div>
+
+            <p class="ad-closing"><i class="fas fa-hourglass-half"></i> Entries close <b data-countdown="2026-09-19T18:00:00+03:00"><span class="cd-d">00</span>d <span class="cd-h">00</span>h <span class="cd-m">00</span>m <span class="cd-s">00</span>s</b> before the draw is made.</p>
+
+            <ul class="ad-facts">
+              <li><i class="fas fa-circle-check"></i> Learners in school uniform welcome · U-8 to Open &amp; Ladies</li>
+              <li><i class="fas fa-circle-check"></i> Clocks, scoresheets and arbiters provided · medals per category</li>
+              <li><i class="fas fa-circle-check"></i> Top boards streamed live so parents can watch from home</li>
+              <li><i class="fas fa-circle-check"></i> Venue confirmed to every registered player on WhatsApp</li>
+            </ul>
+
+            <div class="ad-ctas">
+              <a href="#register" class="btn btn-orange attn">REGISTER A LEARNER <i class="fas fa-chess-knight"></i></a>
+              <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%20want%20to%20enter%20a%20learner%20in%20the%20Kericho%20Inter-Schools%20Open%20on%2026%20September%202026." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp entry</a>
+              <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Kericho%20Inter-Schools%20Open%202026&amp;dates=20260926T060000Z%2F20260926T130000Z&amp;details=Chess%20tournament%20run%20by%20Kericho%20Chess%20Club%20%26%20Academy.%20First%20round%209%3A00%20AM%20EAT.%20Register%3A%20https%3A%2F%2Fkerichochess.co.ke%2Ftournaments.html%23register&amp;location=Kericho%2C%20Kenya" target="_blank" rel="noopener" class="btn btn-ghost"><i class="fas fa-calendar-plus"></i> Add to calendar</a>
+            </div>
+
+            <div class="ad-contact">
+              <span class="ad-contact-label">ENTRIES &amp; ENQUIRIES</span>
+              <div class="ad-contact-row">
+                <a href="https://wa.me/254729037585" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Shem Meso · 0729&nbsp;037&nbsp;585</a>
+                <a href="tel:+254723397573"><i class="fas fa-phone"></i> Gladys Langat (Secretary) · 0723&nbsp;397&nbsp;573</a>
+                <a href="tel:+254722709727"><i class="fas fa-phone"></i> Julieann Njambi (Treasurer) · 0722&nbsp;709&nbsp;727</a>
+              </div>
+              <div class="ad-contact-row mails">
+                <a href="mailto:shemeso26@gmail.com"><i class="fas fa-envelope"></i> shemeso26@gmail.com</a>
+                <a href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i> kerichochessacademy@gmail.com</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Poster footer: board coordinates + entry fee -->
+          <div class="ad-footer">
+            <span class="ad-coords" aria-hidden="true">a&nbsp;&nbsp;b&nbsp;&nbsp;c&nbsp;&nbsp;d&nbsp;&nbsp;e&nbsp;&nbsp;f&nbsp;&nbsp;g&nbsp;&nbsp;h</span>
+            <span class="ad-fee"><b>ENTER VIA M-PESA</b> Paybill 880100 · Account 123003#LearnersName</span>
+            <span class="ad-coords" aria-hidden="true">1&nbsp;&nbsp;2&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;5&nbsp;&nbsp;6&nbsp;&nbsp;7&nbsp;&nbsp;8</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW ENTRY WORKS ============ -->
     <section class="section tight arena">
       <div class="grid-2" style="align-items:stretch;">
         <div class="hud card reveal" style="padding:40px;">
           <span class="badge-live"><span class="live-dot"></span> NEXT FIXTURE</span>
-          <h2 class="display" style="font-size:clamp(24px,3vw,36px); margin:20px 0 10px;">Kericho Inter-Schools Open</h2>
+          <h2 class="display" style="font-size:clamp(24px,3vw,36px); margin:20px 0 10px;">At a glance</h2>
           <p class="lead" style="font-size:15px;">Saturday 26 September 2026 · Rounds start 9:00 AM EAT · Swiss format · Venue confirmed to registered players on WhatsApp.</p>
           <div class="clock-toggle" aria-hidden="true">
             <span class="mini-clock w"></span><span class="mini-clock b"></span>
@@ -76,23 +157,12 @@
           <div class="round-dots" aria-hidden="true" title="Seven rounds">
             <i class="next"></i><i></i><i></i><i></i><i></i><i></i><i></i>
           </div>
-          <div class="hud" data-countdown="2026-09-26T09:00:00+03:00" style="margin-top:26px; padding:20px 24px;">
-            <span class="hud-label"><span class="ok-dot"></span> FIRST ROUND IN</span>
-            <div class="hud-pair">
-              <div class="hud-stack"><span class="hud-value cd-d">00</span><span class="hud-label">DAYS</span></div>
-              <div class="hud-stack"><span class="hud-value cd-h">00</span><span class="hud-label">HRS</span></div>
-              <div class="hud-stack"><span class="hud-value cd-m">00</span><span class="hud-label">MIN</span></div>
-              <div class="hud-stack"><span class="hud-value cd-s">00</span><span class="hud-label">SEC</span></div>
-            </div>
-          </div>
-          <div class="hud" data-countdown="2026-09-19T18:00:00+03:00" style="margin-top:14px; padding:16px 24px;">
-            <span class="hud-label"><i class="fas fa-hourglass-half" style="color:var(--orange-hi);"></i>&nbsp;REGISTRATION CLOSES IN</span>
-            <div class="hud-pair">
-              <div class="hud-stack"><span class="hud-value cd-d" style="color:var(--orange-hi);">00</span><span class="hud-label">DAYS</span></div>
-              <div class="hud-stack"><span class="hud-value cd-h">00</span><span class="hud-label">HRS</span></div>
-              <div class="hud-stack"><span class="hud-value cd-m">00</span><span class="hud-label">MIN</span></div>
-              <div class="hud-stack"><span class="hud-value cd-s">00</span><span class="hud-label">SEC</span></div>
-            </div>
+          <div class="hud" style="margin-top:26px; padding:20px 24px;">
+            <span class="hud-label"><span class="ok-dot"></span> ON THE DAY</span>
+            <div class="metric-row"><span class="metric-k">Registration &amp; seating</span><span class="metric-v">08:00</span></div>
+            <div class="metric-row"><span class="metric-k">First round</span><span class="metric-v cold">09:00</span></div>
+            <div class="metric-row"><span class="metric-k">Rounds</span><span class="metric-v cold">7 · Swiss</span></div>
+            <div class="metric-row"><span class="metric-k">Prize giving</span><span class="metric-v warm">After last round</span></div>
           </div>
         </div>
         <div class="hud card reveal d1" style="padding:40px;">
@@ -271,12 +341,21 @@
       </div>
       <div class="foot-col">
         <h4>CONTACT</h4>
-        <a href="https://wa.me/254729037585" target="_blank" rel="noopener">WhatsApp +254 729 037 585</a>
-        <a href="tel:+254729037585">Call +254 729 037 585</a>
+        <a href="https://wa.me/254729037585" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp +254 729 037 585</a>
+        <a href="tel:+254729037585"><i class="fas fa-phone"></i> Call +254 729 037 585</a>
+        <a href="mailto:shemeso26@gmail.com"><i class="fas fa-envelope"></i> shemeso26@gmail.com</a>
+        <a href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i> kerichochessacademy@gmail.com</a>
         <a href="contact.html">Become a member</a>
         <a href="tournaments.html#register">Register a learner</a>
         <a href="https://www.tiktok.com/@kericho.chess.clu" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i> TikTok</a>
         <a href="https://www.facebook.com/smesso" target="_blank" rel="noopener"><i class="fab fa-facebook"></i> Facebook</a>
+      </div>
+      <div class="foot-col foot-team">
+        <h4>OFFICE BEARERS</h4>
+        <a href="tel:+254723397573"><b>Gladys Langat</b><span>Secretary &middot; 0723&nbsp;397&nbsp;573</span></a>
+        <a href="tel:+254722709727"><b>Julieann Njambi</b><span>Treasurer &middot; 0722&nbsp;709&nbsp;727</span></a>
+        <a href="https://wa.me/254723397573" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Message the Secretary</a>
+        <a href="contact.html#team">All direct lines &rarr;</a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -284,6 +363,12 @@
       <span>KERICHO · KENYA · EAT (UTC+3)</span>
     </div>
   </footer>
+
+    <!-- ============ MOBILE CONVERSION DOCK (small screens) ============ -->
+  <nav class="mobile-dock" aria-label="Quick actions">
+    <a href="#register" class="btn btn-orange attn">REGISTER A LEARNER</a>
+    <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%20want%20to%20enter%20a%20learner%20in%20the%20next%20tournament." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Entry</a>
+  </nav>
 
   <script src="js/main.js"></script>
 </body>

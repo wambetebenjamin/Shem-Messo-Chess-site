@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-page="coaching">
+<body class="has-dock" data-page="coaching">
 
   <div class="atmo" aria-hidden="true">
     <div class="atmo-glow-a"></div><div class="atmo-glow-b"></div><div class="atmo-glow-c"></div>
@@ -17,7 +17,7 @@
   </div>
   <div class="grain" aria-hidden="true"></div>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="brand" aria-label="Kericho Chess Club &amp; Academy home">
         <span class="brand-name">KERICHO <b>CHESS</b><span class="brand-sub">CLUB &amp; ACADEMY</span></span>
@@ -32,7 +32,7 @@
         <a href="about.html" data-nav="about">ABOUT</a>
       </div>
       <a href="contact.html" class="btn btn-orange nav-cta">ENROL NOW</a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
+      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars"></i></button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html" data-nav="home">HOME</a>
@@ -84,7 +84,7 @@
           </div>
         </div>
         <div class="hud prod-card reveal d1">
-          <div class="prod-media" style="height:200px;"><img src="assets/orig-01.jpg" alt="One-on-one coaching with Shem Messo"></div>
+          <div class="prod-media" style="height:200px;"><img src="assets/orig-01.jpg" alt="One-on-one coaching with Shem Meso"></div>
           <div class="prod-body">
           <h3>Private Lessons</h3>
           <span class="mono-tag">1-ON-1 · FLEXIBLE</span>
@@ -213,12 +213,21 @@
       </div>
       <div class="foot-col">
         <h4>CONTACT</h4>
-        <a href="https://wa.me/254729037585" target="_blank" rel="noopener">WhatsApp +254 729 037 585</a>
-        <a href="tel:+254729037585">Call +254 729 037 585</a>
+        <a href="https://wa.me/254729037585" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp +254 729 037 585</a>
+        <a href="tel:+254729037585"><i class="fas fa-phone"></i> Call +254 729 037 585</a>
+        <a href="mailto:shemeso26@gmail.com"><i class="fas fa-envelope"></i> shemeso26@gmail.com</a>
+        <a href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i> kerichochessacademy@gmail.com</a>
         <a href="contact.html">Become a member</a>
         <a href="tournaments.html#register">Register a learner</a>
         <a href="https://www.tiktok.com/@kericho.chess.clu" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i> TikTok</a>
         <a href="https://www.facebook.com/smesso" target="_blank" rel="noopener"><i class="fab fa-facebook"></i> Facebook</a>
+      </div>
+      <div class="foot-col foot-team">
+        <h4>OFFICE BEARERS</h4>
+        <a href="tel:+254723397573"><b>Gladys Langat</b><span>Secretary &middot; 0723&nbsp;397&nbsp;573</span></a>
+        <a href="tel:+254722709727"><b>Julieann Njambi</b><span>Treasurer &middot; 0722&nbsp;709&nbsp;727</span></a>
+        <a href="https://wa.me/254723397573" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Message the Secretary</a>
+        <a href="contact.html#team">All direct lines &rarr;</a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -226,6 +235,12 @@
       <span>KERICHO · KENYA · EAT (UTC+3)</span>
     </div>
   </footer>
+
+    <!-- ============ MOBILE CONVERSION DOCK (small screens) ============ -->
+  <nav class="mobile-dock" aria-label="Quick actions">
+    <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20please%20share%20current%20coaching%20fees." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> ASK ABOUT FEES</a>
+    <a href="contact.html" class="btn btn-ghost">ENROL</a>
+  </nav>
 
   <script src="js/main.js"></script>
 </body>
