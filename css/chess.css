@@ -1232,3 +1232,6 @@ html{ scroll-padding-top:96px; }
   .mat-img img{ height:260px; }
   .mat-body{ padding:22px 20px 24px; }
 }
+
+/* Leadership portraits (uploaded Sep 2026) */
+.team-photo.duo{ object-position:30% 30%; }

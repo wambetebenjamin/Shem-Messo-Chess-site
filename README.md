@@ -52,6 +52,13 @@ coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is n
 - **Club shelf product shots:** `assets/shelf-workbook.jpg`, `shelf-clock.jpg` and
   `shelf-kit.jpg` illustrate the workbook, digital clock and club kit cards;
   the set card uses the academy's own `chess-materials.jpg` photo.
+- **Leadership portraits:** `assets/leadership/president-shem-meso.jpg` (President &
+  Head Coach Shem Meso at a tournament table) and
+  `assets/leadership/president-vice-chair.jpg` (Vice Chair Barnabas Ochieng in blue,
+  with the President). They arrived on `main` as the root files `Shem Meso President.jpeg`
+  and `Shem and Barnabas Ochieng.jpg` and were moved into `assets/leadership/`. They carry
+  the index coach card, the about people row (now four-across) and season gallery, and the
+  President / Vice Chair cards in the contact Direct Lines grid.
 - **Board piece art:** the 2D boards on Live and Play render local PNG pieces
   (`assets/pieces/`), so pieces show on every device without relying on system
   chess-glyph fonts.
