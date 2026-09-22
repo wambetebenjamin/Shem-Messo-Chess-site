@@ -30,12 +30,12 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 
 | Page | What's on it |
 | --- | --- |
-| `index.html` | Photo hero slider, service strip, welcome + offerings, the coach & the platform, programmes, season counters, testimonials, enquiry form, club shelf, academy updates, gallery |
+| `index.html` | Photo hero slider, service strip, welcome + offerings, **In-the-News band (KNA, World Chess Day)**, the coach & the platform, programmes, season counters, testimonials, enquiry form, club shelf, academy updates, gallery |
 | `coaching.html` | The three coaching tracks, four-phase method, fees & FAQ |
 | `tournaments.html` | **Event advert (poster band)** with live countdowns and response buttons, next fixture with live countdown, eight age categories, M-Pesa entry steps, registration form, honour roll |
 | `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list, spectator feed — plus the broadcast card |
 | `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo) + the daily puzzle |
-| `shop.html` | Materials & kits with one-tap WhatsApp ordering + Complete Club Kit quote banner |
+| `shop.html` | Materials & kits with one-tap WhatsApp ordering, **tournament mats (vinyl & rubber) with was/now pricing**, Complete Club Kit quote banner |
 | `about.html` | Academy story, **crest band with the academy motto**, the people & squads, values and the season gallery |
 | `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ, contact cards, **direct lines for the office bearers** and the **Secretary's Samarkand Olympiad gallery** |
 
@@ -77,10 +77,40 @@ link, phone calls to the Secretary/Treasurer, or email.
 
 | Who | Role | Number / email |
 | --- | --- | --- |
-| Shem Meso | Head Coach & Founder | 0729 037 585 · shemeso26@gmail.com |
+| Shem Meso | President & Head Coach | 0729 037 585 · shemeso26@gmail.com |
+| Barnabas Ochieng | Vice Chair | 0735 700 505 |
 | Gladys Langat | Secretary | 0723 397 573 (**new line**, flagged on the site) · WhatsApp |
 | Julieann Njambi | Treasurer | 0722 709 727 · WhatsApp |
 | Academy office | General & schools | kerichochessacademy@gmail.com |
+
+## In the news (Kenya News Agency, 20 July 2026)
+
+`index.html#news` carries a dark feature band summarising the Kenya News Agency story
+*"Kericho schools shine at U17 African Chess Qualifiers on World Chess Day"* (Kibe Mburu,
+20 July 2026): the podium (Kericho High, Londiani Girls, Upper Hill Academy, Kericho
+Academy, Kericho Montessori), John Ndumbi's 6/6 best-player score, Hanin Ismail as best
+girl, the President's quote, the pathway to the National Championships (Alliance Boys' &
+Girls', 1–3 Aug 2026) and on to Team Kenya for the African U17 Championship in Namibia,
+plus the eleven schools represented. A button links out to the full KNA article, and the
+footer "Latest from the Academy" column on every page points at the band.
+
+The two photos in the band are the club's own tournament files (`assets/orig-02.jpg`,
+`assets/tournament-prep-02.jpg`) because the KNA-hosted JPEGs could not be downloaded
+into this workspace; drop press photos over those two `src`s (or add files under
+`assets/`) to swap them in.
+
+## Merchandise (tournament mats)
+
+`shop.html#mats` sells the two mats from the uploaded `merchandise.zip`, extracted to
+`assets/merch/`:
+
+| Product | Price | Was | Photo |
+| --- | --- | --- | --- |
+| Vinyl Chess Mats | Ksh 1,650.00 | Ksh 2,000.00 | `assets/merch/vinyl-chess-mats.jpg` |
+| Rubber Chess Mat | Ksh 2,500.00 | Ksh 2,700.00 | `assets/merch/rubber-chess-mat.jpg` |
+
+Each card shows the was-price struck through with a save badge and a one-tap WhatsApp
+order button. The index Club Shelf heading links to the mats section.
 
 ## Forms
 

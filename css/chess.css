@@ -1136,3 +1136,99 @@ html{ scroll-padding-top:96px; }
   .ad-facts li{ font-size:13.5px; }
   .ad-contact-row a{ font-size:12px; }
 }
+
+/* =============================================================
+   IN THE NEWS — Kenya News Agency feature band (World Chess Day)
+   ============================================================= */
+.news-band{ background:var(--kc-screen); color:#e8f1f8; }
+.news-band .heading-section h2,
+.news-band .heading-section h2 span{ color:#fff; }
+.news-band .heading-section p{ color:rgba(232,241,248,.82); }
+.news-band .eyebrow-tag{ color:#ffd98a; }
+.news-src{ margin-top:6px; }
+.news-src a{
+  display:inline-block; color:#fff; background:var(--kc-quaternary);
+  border-radius:30px; padding:10px 22px; font-weight:700; font-size:14px;
+  letter-spacing:.04em; text-decoration:none;
+}
+.news-src a:hover{ background:#d63a32; }
+.news-src i{ margin-right:6px; }
+.news-photo{ margin:0 0 26px; }
+.news-photo img{
+  width:100%; border-radius:var(--kc-radius); box-shadow:var(--kc-shadow-lg);
+  border:1px solid rgba(255,255,255,.14);
+}
+.news-photo figcaption{
+  font-size:13.5px; color:rgba(232,241,248,.72); padding-top:10px; line-height:1.55;
+}
+.news-photo figcaption span{
+  display:inline-block; margin-left:6px; padding:2px 10px; border-radius:20px;
+  background:rgba(255,255,255,.12); color:#ffd98a; font-size:11px;
+  letter-spacing:.12em; text-transform:uppercase;
+}
+.news-copy h3{ color:#fff; font-weight:800; margin-bottom:14px; }
+.news-copy p{ color:rgba(232,241,248,.85); }
+.news-results{
+  display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:22px 0;
+}
+.news-result{
+  background:var(--kc-screen-2); border:1px solid rgba(255,255,255,.10);
+  border-radius:14px; padding:14px 16px;
+}
+.news-result span{
+  display:block; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:#ffd98a; margin-bottom:5px;
+}
+.news-result b{ color:#fff; font-size:15.5px; line-height:1.35; }
+.news-quote{
+  border-left:4px solid var(--kc-secondary); background:var(--kc-screen-2);
+  border-radius:0 14px 14px 0; padding:18px 20px; margin:0 0 20px;
+}
+.news-quote p{ font-style:italic; color:#fff; margin-bottom:8px; }
+.news-quote cite{ font-style:normal; font-size:13px; color:#ffd98a; }
+.news-path{ margin-bottom:18px; }
+.news-path p{ margin-bottom:0; font-size:15px; }
+.news-path b{ color:#fff; }
+.school-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.school-chips span{
+  font-size:12.5px; padding:6px 14px; border-radius:20px;
+  border:1px solid rgba(255,255,255,.22); color:rgba(232,241,248,.85);
+}
+
+/* =============================================================
+   MERCH SHELF — tournament mats with was/now pricing
+   ============================================================= */
+.mat-card{
+  background:#fff; border-radius:var(--kc-radius); overflow:hidden;
+  box-shadow:var(--kc-shadow); height:100%;
+  display:flex; flex-direction:column;
+}
+.mat-img{ position:relative; }
+.mat-img img{ width:100%; height:340px; object-fit:cover; display:block; }
+.save-badge{
+  position:absolute; top:14px; right:14px; background:var(--kc-quaternary);
+  color:#fff; font-size:12px; font-weight:800; letter-spacing:.1em;
+  text-transform:uppercase; padding:7px 14px; border-radius:20px;
+  box-shadow:0 8px 18px rgba(241,69,61,.35);
+}
+.mat-body{ padding:26px 28px 28px; display:flex; flex-direction:column; flex:1; }
+.mat-body h3{ font-weight:800; }
+.mat-price{ margin-bottom:10px; }
+.mat-price .price{ font-size:26px; font-weight:900; color:var(--kc-ink); }
+.price-was{
+  text-decoration:line-through; color:var(--kc-sub); font-size:16px;
+  font-weight:600; margin-left:8px;
+}
+.mat-body .shelf-specs{ margin:14px 0 20px; }
+.mat-body .button{ margin-top:auto; }
+.shelf-note{ margin-top:18px; font-size:15px; }
+.shelf-note a{ color:var(--kc-quaternary); font-weight:700; }
+
+/* Vice Chair avatar tint (leadership grid) */
+.team-ava.g{ background:linear-gradient(135deg, var(--kc-tertiary), #4f8a2c); box-shadow:0 10px 22px rgba(140,193,82,.3); }
+
+@media (max-width: 767.98px){
+  .news-results{ grid-template-columns:1fr; }
+  .mat-img img{ height:260px; }
+  .mat-body{ padding:22px 20px 24px; }
+}
