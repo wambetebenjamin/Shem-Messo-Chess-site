@@ -800,6 +800,8 @@ html{ scroll-padding-top:96px; }
 /* =============================================================
    DIRECT LINES / OFFICE BEARERS (contact page #team)
    ============================================================= */
+/* Four leadership cards: President & Head Coach, Vice Chairperson, Secretary, Treasurer.
+   The general Academy Office line sits in the band underneath. */
 .team-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
 .team-card{
   background:#fff; border:1px solid var(--kc-line); border-radius:var(--kc-radius);
@@ -832,8 +834,11 @@ html{ scroll-padding-top:96px; }
 }
 .team-mail:hover{ color:#1573b8; text-decoration:underline; }
 .team-photo-wrap{ position:relative; display:inline-block; margin-bottom:4px; }
+/* Leadership portraits are shot 2:3 (600×900); the card frame is 3:4 so the
+   faces stay the subject and one card size fits every bearer. */
 .team-photo{
-  width:104px; height:104px; border-radius:22px; object-fit:cover; object-position:center 22%;
+  width:104px; height:139px; border-radius:20px;
+  object-fit:cover; object-position:center 25%;
   border:3px solid #fff; box-shadow:0 14px 30px rgba(33,50,68,.2);
 }
 .team-badge{
@@ -843,10 +848,24 @@ html{ scroll-padding-top:96px; }
   padding:5px 10px; border-radius:999px; box-shadow:0 8px 18px rgba(241,69,61,.38);
 }
 .wrap-mail{ word-break:break-all; overflow-wrap:anywhere; }
+/* Academy Office: general line under the leadership cards */
+.office-band{
+  margin-top:20px; background:#fff; border:1px solid var(--kc-line);
+  border-radius:var(--kc-radius); box-shadow:var(--kc-shadow); padding:22px 26px;
+  display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+}
+.office-band .ob-text{ flex:1 1 280px; min-width:220px; }
+.office-band h3{ font-size:18px; font-weight:800; color:var(--kc-ink); margin:0 0 3px; }
+.office-band p{ font-size:13.5px; color:var(--kc-sub); margin:6px 0 0; }
+.office-band .ob-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+.office-band .ob-actions .btn{ font-size:13px; padding:11px 16px; }
 @media (max-width: 991.98px){ .team-grid{ grid-template-columns:1fr 1fr; } }
 @media (max-width: 575.98px){
   .team-grid{ grid-template-columns:1fr; }
-  .team-photo{ width:88px; height:88px; }
+  .team-photo{ width:92px; height:123px; }
+  .office-band{ padding:20px 18px; gap:14px; }
+  .office-band .ob-actions{ width:100%; }
+  .office-band .ob-actions .btn{ flex:1 1 100%; }
 }
 
 /* =============================================================

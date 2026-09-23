@@ -36,12 +36,34 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 | `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list, spectator feed — plus the broadcast card |
 | `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo) + the daily puzzle |
 | `shop.html` | Materials & kits with one-tap WhatsApp ordering + Complete Club Kit quote banner |
-| `about.html` | Academy story, **crest band with the academy motto**, the people & squads, values and the season gallery |
-| `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ, contact cards, **direct lines for the office bearers** and the **Secretary's Samarkand Olympiad gallery** |
+| `about.html` | Academy story, **crest band with the academy motto**, **the office bearers with portraits**, the partner schools, the squads, values and the season gallery |
+| `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ, contact cards, **direct lines for the office bearers (portrait cards)** and the **Secretary's Samarkand Olympiad gallery** |
 
 All eight pages share the Kiddos navbar (with the **Enrol Now** pill) and the template
 footer, which carries phone/WhatsApp/email contacts and an **Office Bearers** column
-(Secretary, Treasurer, Head Coach — Gladys's new line is flagged).
+(President & Head Coach, Vice Chairperson, Secretary, Treasurer — Gladys's new line is
+flagged; the Vice Chairperson routes through the academy office).
+
+### The leadership cards (contact.html#team)
+
+Four portrait cards in club order, each with its real contact actions, plus the general
+Academy Office line in a band underneath:
+
+| Card | Role | Photo | Contact actions |
+| --- | --- | --- | --- |
+| Shem Meso | President & Head Coach | `assets/leadership/president-shem-meso.jpg` (600×900) | WhatsApp · 0729 037 585 · shemeso26@gmail.com |
+| Barnabas Ochieng | Vice Chairperson | `assets/leadership/vice-chairperson-barnabas-ochieng.jpg` (600×900) | Routed through the academy office (no published personal line yet) |
+| Gladys Langat | Secretary | `assets/gladys-avatar.jpg` + **NEW LINE** badge | 0723 397 573 · WhatsApp |
+| Julieann Njambi | Treasurer | initials avatar (portrait pending) | 0722 709 727 · WhatsApp |
+| Academy Office (band) | General & schools | crest-coloured initials | kerichochessacademy@gmail.com · 0729 037 585 |
+
+The Treasurer's card is kept on `contact.html#team` only, per the club's decision. A
+`PORTRAIT SLOT` comment marks the exact spot inside her card where a portrait goes when
+one arrives (the same comment marks the fourth card in the about-page grid).
+
+Shem's "The Coach & The Platform" section on `index.html` is retitled **The President & The
+Platform**, and his card there reads **President & Head Coach**, so the two sections agree. His title reads **President & Head Coach** in every card,
+heading, footer entry and alt text on the site.
 
 ## Photos
 
@@ -55,6 +77,26 @@ coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is n
 - **Board piece art:** the 2D boards on Live and Play render local PNG pieces
   (`assets/pieces/`), so pieces show on every device without relying on system
   chess-glyph fonts.
+- **Leadership portraits:** `assets/leadership/` holds the two card-sized portraits, both
+  cropped to 600×900 (2:3) for the contact and about cards. The full-resolution originals
+  the club uploaded are kept beside them in `assets/leadership/source/`:
+
+  | Card portrait | Source original | How it was made |
+  | --- | --- | --- |
+  | `president-shem-meso.jpg` | `source/president-shem-meso-original.jpg` (1066×1600) | Resized to 600×900 |
+  | `vice-chairperson-barnabas-ochieng.jpg` | `source/barnabas-and-shem-pair-original.jpg` (1066×1600) | Cropped to the figure on the left, so President Shem is trimmed out of frame |
+
+  To regenerate the Vice Chairperson crop:
+
+  ```bash
+  convert assets/leadership/source/barnabas-and-shem-pair-original.jpg \
+    -crop 300x450+205+415 +repage -resize 600x900 \
+    -unsharp 0x0.75+0.5+0.015 -strip -quality 90 \
+    assets/leadership/vice-chairperson-barnabas-ochieng.jpg
+  ```
+
+  Cards render the portraits at 104×139 (3:4) with `object-fit:cover`, so one frame size
+  suits every bearer, portrait or square.
 
 ## Event advert (poster band)
 
@@ -77,7 +119,8 @@ link, phone calls to the Secretary/Treasurer, or email.
 
 | Who | Role | Number / email |
 | --- | --- | --- |
-| Shem Meso | Head Coach & Founder | 0729 037 585 · shemeso26@gmail.com |
+| Shem Meso | President & Head Coach | 0729 037 585 · shemeso26@gmail.com |
+| Barnabas Ochieng | Vice Chairperson | no published line yet — routed through the academy office |
 | Gladys Langat | Secretary | 0723 397 573 (**new line**, flagged on the site) · WhatsApp |
 | Julieann Njambi | Treasurer | 0722 709 727 · WhatsApp |
 | Academy office | General & schools | kerichochessacademy@gmail.com |
@@ -108,9 +151,12 @@ Then open `http://localhost:8000`.
 ## Content notes
 
 - The coach's name is spelt **Shem Meso** (single `s`) in all titles, headings and alt text.
-- WhatsApp and phone links use `+254 729 037 585` (Head Coach), `+254 723 397 573`
-  (Secretary) and `+254 722 709 727` (Treasurer); email links use
+- WhatsApp and phone links use `+254 729 037 585` (President & Head Coach),
+  `+254 723 397 573` (Secretary) and `+254 722 709 727` (Treasurer); email links use
   `shemeso26@gmail.com` and `kerichochessacademy@gmail.com`.
+- The Vice Chairperson, Barnabas Ochieng, has no published personal number: his card and
+  his footer entry both route through `kerichochessacademy@gmail.com`. Give him a direct
+  line on `contact.html#team` (and the footers) as soon as one is published.
 - Product prices are carried over from the previous site and should be confirmed before launch.
 - Season metrics (schools, learners, tournaments, coached hours) are marketing figures; adjust to taste.
 - The live broadcast room replays a scripted demo game between fixtures; wire in a real feed
@@ -135,6 +181,8 @@ Then open `http://localhost:8000`.
 ├── assets/  (academy photography — original pictures from the previous build;
 │            crest logo.png / logo-light.png / favicon.png and the Secretary's
 │            gladys-*.jpg photos from Samarkand 2026)
+│   └── leadership/  (board portraits: 600×900 president-shem-meso.jpg and
+│                    vice-chairperson-barnabas-ochieng.jpg, plus source/ originals)
 └── kiddos-master.zip   (uploaded source template, for reference)
 ```
 
