@@ -1235,3 +1235,32 @@ html{ scroll-padding-top:96px; }
 
 /* Leadership portraits (uploaded Sep 2026) */
 .team-photo.duo{ object-position:30% 30%; }
+
+/* =============================================================
+   HERO TRANSITION — slow cinematic crossfade + Ken Burns drift
+   The template blinked between photos with animate.css' default
+   1s fade and never paused. Now: 1.6s eased crossfade (outgoing
+   photo dissolves over the incoming one), an 8.5s slow push-in on
+   the active photo that settles gently as it leaves, a 7s hold,
+   and hover-pause so nobody loses a slide mid-read.
+   ============================================================= */
+.hero-bg{
+  position:absolute; top:0; left:0; right:0; bottom:0; z-index:-1;
+  background-size:cover; background-position:center center; background-repeat:no-repeat;
+  transform:scale(1.02);
+  transition:transform 1.6s cubic-bezier(.45,.05,.35,.95);
+  will-change:transform;
+}
+.owl-carousel.home-slider .owl-item.active .hero-bg{
+  transform:scale(1.12);
+  transition-duration:8.5s;
+}
+.owl-carousel.home-slider .animated{
+  animation-duration:1.6s !important;
+  animation-timing-function:cubic-bezier(.45,.05,.35,.95) !important;
+}
+.owl-carousel.home-slider .owl-item{ backface-visibility:hidden; }
+@media (prefers-reduced-motion: reduce){
+  .hero-bg{ transition:none; transform:none; }
+  .owl-carousel.home-slider .animated{ animation-duration:.01s !important; }
+}
