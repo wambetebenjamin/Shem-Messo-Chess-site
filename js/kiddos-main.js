@@ -41,7 +41,11 @@
    $.Scrollax();
 
 	var carousel = function() {
-		$('.home-slider').owlCarousel({
+		// The homepage hero (.home-slider.hero-slider) is NOT an owl carousel
+		// anymore: js/hero-slider.js cross-fades it (styles in css/chess.css).
+		// Owl would wrap + clone its slides and restart the old blink, so the
+		// selector skips it while any other .home-slider keeps working.
+		$('.home-slider:not(.hero-slider)').owlCarousel({
 	    loop:true,
 	    autoplay: true,
 	    margin:0,
