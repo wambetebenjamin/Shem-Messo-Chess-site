@@ -20,6 +20,9 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
   (`assets/logo.png`, `assets/logo-light.png`, `assets/favicon.png`).
 - **Template runtime:** `js/kiddos-main.js` (nav, sliders, counters, reveals, loader) on the
   jQuery/Bootstrap/owl/aos/waypoints stack shipped in `js/`.
+- **Hero transition:** the home slider crossfades over 1.6s while the active photo does a
+  slow 8.5s push-in (`.hero-bg` layer inside each `.slider-item`), holds 7s per slide and
+  pauses on hover; `prefers-reduced-motion` visitors get an instant, static swap.
 - **Academy runtime:** `js/smc.js` (countdowns, FAQ accordion, registration / membership /
   subscribe and WhatsApp-composer forms).
 - The chess engine lives in `js/chess.js` (chess.js by Jeff Hlywa, BSD license) and powers
