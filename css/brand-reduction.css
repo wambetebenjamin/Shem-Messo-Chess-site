@@ -1,0 +1,89 @@
+/* Shared-page palette reduction.
+   Keeps the academy's original blue and gold, adds only deep navy, and maps the
+   old template's green/red/purple component variants back to those tones. */
+:root {
+  --kc-primary: #1eaaf1;
+  --kc-secondary: #fda638;
+  --kc-tertiary: #102a43;
+  --kc-quaternary: #fda638;
+  --kc-fifth: #102a43;
+  --kc-ink: #10212f;
+  --kc-sub: #667684;
+  --kc-screen: #102a43;
+  --kc-screen-2: #16364f;
+  --kc-line: #dfe7eb;
+}
+
+.bg-primary, .bg-quarternary { background: var(--kc-primary) !important; }
+.bg-secondary { background: var(--kc-secondary) !important; }
+.bg-tertiary, .bg-fifth { background: var(--kc-screen) !important; }
+.text-primary { color: var(--kc-primary) !important; }
+.bg-light { background: #f2f6f8 !important; }
+
+.btn.btn-primary,
+.btn.btn-quarternary {
+  border-color: var(--kc-primary);
+  background: var(--kc-primary);
+  color: #fff;
+}
+.btn.btn-secondary {
+  border-color: var(--kc-secondary);
+  background: var(--kc-secondary);
+  color: var(--kc-screen);
+}
+.btn.btn-tertiary,
+.btn.btn-fifth {
+  border-color: var(--kc-screen);
+  background: var(--kc-screen);
+  color: #fff;
+}
+.btn.btn-primary:hover,
+.btn.btn-quarternary:hover,
+.btn.btn-tertiary:hover,
+.btn.btn-fifth:hover {
+  border-color: var(--kc-screen);
+  background: var(--kc-screen);
+  color: #fff;
+}
+.btn.btn-secondary:hover { border-color: #e58f25; background: #e58f25; color: var(--kc-screen); }
+
+.ftco-navbar-light .navbar-nav > .nav-item.active > a,
+.ftco-navbar-light.scrolled .nav-item.active > a,
+.heading-section h2 span,
+.course .text .subheading span,
+.staff .text .position,
+.staff:hover .text h3,
+.staff:focus .text h3 { color: var(--kc-primary) !important; }
+
+.ftco-navbar-light .navbar-nav > .nav-item.cta > a,
+.ftco-navbar-light.scrolled .nav-item.cta > a,
+.ftco-footer .subscribe-form .form-group .submit { background: var(--kc-secondary) !important; color: var(--kc-screen) !important; }
+
+.ftco-footer { background: var(--kc-screen); }
+.ftco-intro .overlay,
+.hero-wrap .overlay { background: var(--kc-screen); }
+.services-2 .icon { background: var(--kc-primary); }
+.ftco-services .services:nth-child(3) { background: var(--kc-screen) !important; }
+.ftco-services .services:nth-child(4) { background: var(--kc-secondary) !important; }
+.ftco-services .services:nth-child(4),
+.ftco-services .services:nth-child(4) p { color: var(--kc-screen) !important; }
+
+.live-dot { background: var(--kc-secondary); box-shadow: 0 0 0 0 rgba(253,166,56,.5); }
+.badge-live { background: var(--kc-secondary); color: var(--kc-screen); }
+.user-initials,
+.user-initials.initials-2,
+.user-initials.initials-3,
+.team-ava,
+.team-ava.o,
+.team-ava.b { background: var(--kc-primary) !important; }
+
+.cat-chip:nth-child(n) span { background: var(--kc-primary); }
+.chess-timeline::before { background: linear-gradient(180deg, var(--kc-primary), var(--kc-screen), var(--kc-secondary)); }
+.chess-timeline .tl-item:nth-child(n)::before { border-color: var(--kc-primary); }
+.chess-timeline .tl-item:nth-child(n) .tl-k { color: var(--kc-primary); }
+
+#ftco-loader .path { stroke: var(--kc-primary); }
+
+@media (max-width: 991.98px) {
+  .ftco-navbar-light { background: var(--kc-screen) !important; }
+}
