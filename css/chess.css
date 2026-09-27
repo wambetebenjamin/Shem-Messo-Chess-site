@@ -2,21 +2,22 @@
    KERICHO CHESS CLUB & ACADEMY · custom chess layer
    Built on top of the "Kiddos" (Colorlib) Bootstrap structure.
    Board · broadcast room · countdowns · forms · FAQ · tables · accents.
-   Palette is inherited from the template:
-     primary #1eaaf1 · secondary #fda638 · tertiary #8cc152
-     quarternary #f1453d · fifth #5d50c6
+   Reduced academy palette:
+     primary #1eaaf1 · secondary #fda638 · deep navy #102a43
+   The original club blue and tournament gold are retained; the template's
+   extra green, red and purple accents now resolve to those three brand tones.
    ============================================================================ */
 
 :root{
   --kc-primary:#1eaaf1;
   --kc-secondary:#fda638;
-  --kc-tertiary:#8cc152;
-  --kc-quaternary:#f1453d;
-  --kc-fifth:#5d50c6;
-  --kc-ink:#22303c;
-  --kc-sub:#6c757d;
-  --kc-screen:#16232f;      /* broadcast "TV" panels */
-  --kc-screen-2:#1e3040;
+  --kc-tertiary:#1eaaf1;
+  --kc-quaternary:#fda638;
+  --kc-fifth:#102a43;
+  --kc-ink:#10212f;
+  --kc-sub:#667684;
+  --kc-screen:#102a43;      /* broadcast "TV" panels */
+  --kc-screen-2:#16364f;
   --kc-cream:#f0e7cf;       /* vinyl board light square */
   --kc-green:#5e9276;       /* vinyl board dark square */
   --kc-line:#e6eef4;

@@ -1,19 +1,23 @@
 # Kericho Chess Club & Academy
 
-A multi-page website for Kericho Chess Club & Academy, Kenya — academy content carried
-onto the **Kiddos** template structure (Bootstrap 4, Colorlib, CC BY 3.0), restyled with
-the club palette.
+A multi-page website for Kericho Chess Club & Academy, Kenya. The home page uses a
+custom editorial layout, while the inner pages retain the proven Bootstrap 4 / Colorlib
+content system and the club's chess-specific components.
 
 ## Structure
 
-The site now follows the uploaded **Kiddos** (Colorlib) template: a shared top bar,
-ftco navbar, owl-carousel hero slider, service strips, course/staff cards, counters,
-testimony carousel, gallery strip and the four-column ftco footer on every page.
+The redesigned home page is an inset, rounded-card landing experience with an immersive
+photo hero, editorial academy story, numbered programme list, circuit photography, season
+stats, testimonials, fullscreen menu and WhatsApp enquiry modal. The former contact strip
+has been removed from every page so navigation begins cleanly with the academy brand.
 
-- **Theme layer:** `css/kiddos.css` (the template's stylesheet) drives layout and components.
-- **Club layer:** `css/chess.css` restyles it with the academy palette and adds the
-  chess-specific components: broadcast stage, countdown cards, ticker, FAQ accordion,
-  registration forms, honour-roll table, steps strip, product shelf and the nav "Enrol" pill.
+- **Home theme:** `css/site.css` and `js/site.js` drive the new landing page, loader,
+  reveals, parallax, fullscreen menu and enquiry modal.
+- **Inner-page theme:** `css/kiddos.css` plus `css/chess.css` retain the existing content
+  components; `css/brand-reduction.css` reduces the visual palette to academy blue,
+  tournament gold and deep navy.
+- **Club layer:** `css/chess.css` adds the broadcast stage, countdown cards, ticker, FAQ
+  accordion, registration forms, honour-roll table, steps strip and product shelf.
 - **Academy crest:** the official Kericho Chess Academy crest (pawn, king, knight, motto
   *Forward Ever Backward Never*) sits in the nav, the footer, the event poster lockup and a
   dedicated crest band on the about page; it doubles as the site favicon
@@ -30,7 +34,7 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 
 | Page | What's on it |
 | --- | --- |
-| `index.html` | Photo hero slider, service strip, welcome + offerings, the coach & the platform, programmes, season counters, testimonials, enquiry form, club shelf, academy updates, gallery |
+| `index.html` | Editorial photo hero, academy story and President, programme list, circuit feature, event card, season counters, testimonials, fullscreen menu and WhatsApp enquiry modal |
 | `coaching.html` | The three coaching tracks, four-phase method, fees & FAQ |
 | `tournaments.html` | **Event advert (poster band)** with live countdowns and response buttons, next fixture with live countdown, eight age categories, M-Pesa entry steps, registration form, honour roll |
 | `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list, spectator feed — plus the broadcast card |
@@ -39,10 +43,10 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 | `about.html` | Academy story, **crest band with the academy motto**, **the office bearers with portraits**, the partner schools, the squads, values and the season gallery |
 | `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ, contact cards, **direct lines for the office bearers (portrait cards)** and the **Secretary's Samarkand Olympiad gallery** |
 
-All eight pages share the Kiddos navbar (with the **Enrol Now** pill) and the template
-footer, which carries phone/WhatsApp/email contacts and an **Office Bearers** column
-(President & Head Coach, Vice Chairperson, Secretary, Treasurer — Gladys's new line is
-flagged; the Vice Chairperson routes through the academy office).
+The seven inner pages share the Kiddos navbar (with the **Enrol Now** pill) and template
+footer. The home page uses the new compact header, fullscreen navigation and editorial
+footer. Contact routes remain available in both versions, and inner-page footers retain the
+**Office Bearers** column (President & Head Coach, Vice Chairperson, Secretary, Treasurer).
 
 ### The leadership cards (contact.html#team)
 
