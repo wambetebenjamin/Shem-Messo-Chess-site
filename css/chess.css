@@ -63,6 +63,34 @@
 }
 
 /* =============================================================
+   ICON-ONLY NAVIGATION
+   Links are glyphs; the page name lives in title/aria-label.
+   Same template bar and colours — only the labels are gone.
+   ============================================================= */
+.ftco-navbar-light .navbar-nav > .nav-item > .nav-link{
+  text-align:center; white-space:nowrap;
+}
+.ftco-navbar-light .navbar-nav > .nav-item > .nav-link .fas{
+  font-size:19px; line-height:1; vertical-align:middle;
+}
+.ftco-navbar-light .navbar-nav > .nav-item > .nav-link .live-dot{
+  margin-left:7px; margin-right:0; vertical-align:2px;
+}
+.ftco-navbar-light .navbar-nav > .nav-item.cta > a .fas{ font-size:16px; }
+@media (max-width: 991.98px){
+  /* collapsed menu: icons sit in a centred wrap instead of a text list */
+  .ftco-navbar-light .navbar-collapse .navbar-nav{
+    display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+    row-gap:2px; padding-bottom:6px;
+  }
+  .ftco-navbar-light .navbar-nav > .nav-item > .nav-link{
+    padding:.7rem .85rem !important;
+  }
+  .ftco-navbar-light .navbar-nav > .nav-item.cta > a{ margin:6px 4px 2px; }
+  .ftco-navbar-light .navbar-nav > .nav-item.cta > a .fas{ font-size:15px; }
+}
+
+/* =============================================================
    BUTTONS (WhatsApp + track colours)
    ============================================================= */
 .btn.btn-wa{
@@ -603,23 +631,6 @@
 .pricing-entry ul.shelf-specs li:last-child{ border-bottom:none; }
 .pricing-entry ul.shelf-specs li .fas{ color:var(--kc-tertiary); margin-right:8px; }
 
-/* kit banner */
-.kit-banner{
-  background:linear-gradient(120deg, var(--kc-primary), #1573b8);
-  border-radius:20px; color:#fff; padding:40px;
-  display:flex; gap:30px; align-items:center; justify-content:space-between; flex-wrap:wrap;
-  box-shadow:var(--kc-shadow-lg); position:relative; overflow:hidden;
-}
-.kit-banner::before, .kit-banner::after{ content:none; }
-.kit-banner h3{ color:#fff; font-size:26px; font-weight:900; margin:12px 0 8px; }
-.kit-banner p{ color:rgba(255,255,255,.88); font-size:14.5px; max-width:640px; margin-bottom:0; }
-.kit-banner .eyebrow-tag{
-  display:inline-block; font-size:10.5px; font-weight:800; letter-spacing:.24em;
-  text-transform:uppercase; padding:6px 14px; border-radius:20px;
-  background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
-}
-.kit-banner .btn{ flex:0 0 auto; }
-
 /* =============================================================
    SECTION HELPERS
    ============================================================= */
@@ -925,194 +936,6 @@ html{ scroll-padding-top:96px; }
 }
 
 /* =============================================================
-   EVENT ADVERT BAND (#event on home + tournaments)
-   A dark "poster wall" band with a bright poster card: artwork,
-   facts strip, live countdowns, response buttons, contact rows and
-   the M-Pesa line. Palette follows the club template.
-   ============================================================= */
-.ad-section{
-  position:relative; overflow:hidden;
-  background:
-    radial-gradient(70% 60% at 8% 0%, rgba(30,170,241,.16), transparent 62%),
-    radial-gradient(60% 55% at 96% 100%, rgba(253,166,56,.14), transparent 60%),
-    linear-gradient(160deg, #16232f 0%, #1e3040 52%, #141d27 100%);
-}
-.ad-section::before{
-  content:''; position:absolute; inset:0; opacity:.35; pointer-events:none;
-  background-image:
-    linear-gradient(45deg, rgba(30,170,241,.06) 25%, transparent 25%, transparent 75%, rgba(30,170,241,.06) 75%),
-    linear-gradient(45deg, rgba(30,170,241,.06) 25%, transparent 25%, transparent 75%, rgba(30,170,241,.06) 75%);
-  background-size:64px 64px; background-position:0 0, 32px 32px;
-}
-.ad-section .container{ position:relative; z-index:2; }
-
-.ad-poster{
-  position:relative; overflow:hidden;
-  display:grid; grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);
-  grid-template-areas:"art copy" "foot foot";
-  border-radius:22px; background:#fff;
-  box-shadow:0 34px 90px rgba(6,14,20,.55), 0 0 0 1px rgba(255,255,255,.16);
-}
-.ad-poster::before{
-  content:''; position:absolute; left:0; right:0; top:0; height:6px; z-index:4;
-  background:linear-gradient(90deg, var(--kc-primary), var(--kc-tertiary), var(--kc-secondary), var(--kc-quaternary), var(--kc-fifth), var(--kc-primary));
-  background-size:300% 100%; animation:kcRibbon 14s linear infinite;
-}
-@keyframes kcRibbon{ from{ background-position:0 0; } to{ background-position:300% 0; } }
-
-/* artwork side */
-.ad-art{ grid-area:art; position:relative; min-height:100%; margin:0; background:var(--kc-screen); }
-.ad-art img{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; object-position:center 42%; display:block;
-}
-.ad-art::after{
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(190deg, rgba(13,24,34,.04) 0%, rgba(13,24,34,.26) 55%, rgba(13,24,34,.7) 100%);
-}
-.ad-art-tag{
-  position:absolute; left:16px; bottom:16px; z-index:2;
-  display:inline-flex; align-items:center; gap:8px;
-  font-size:9.5px; font-weight:800; letter-spacing:.2em; text-transform:uppercase;
-  color:#fff; background:rgba(13,24,34,.62); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,.28); border-radius:999px; padding:8px 14px;
-}
-.ad-art-badge{
-  position:absolute; left:16px; top:18px; z-index:2;
-  font-size:10px; font-weight:800; letter-spacing:.24em; color:#5b3a05;
-  background:linear-gradient(135deg, #ffd98a, var(--kc-secondary));
-  border-radius:999px; padding:8px 14px;
-  box-shadow:0 10px 24px rgba(253,166,56,.4);
-}
-
-/* copy side */
-.ad-copy{ grid-area:copy; padding:44px 46px 32px; display:flex; flex-direction:column; min-width:0; }
-.ad-present{
-  display:inline-flex; align-items:center; gap:10px;
-  font-size:10px; font-weight:800; letter-spacing:.26em; text-transform:uppercase;
-  color:var(--kc-primary);
-}
-.ad-logo{
-  width:38px; height:39px; object-fit:contain; flex:0 0 auto;
-  background:#fff; border-radius:9px; padding:2px;
-  box-shadow:0 3px 10px rgba(34,48,60,.18);
-}
-.ad-title{
-  font-weight:900; text-transform:uppercase; letter-spacing:-.012em;
-  font-size:clamp(30px,4vw,52px); line-height:1.03;
-  margin:14px 0 12px; color:var(--kc-ink);
-  display:flex; flex-direction:column;
-}
-.ad-title-line2{
-  background:linear-gradient(100deg, #1573b8 4%, var(--kc-primary) 45%, var(--kc-tertiary) 92%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-.ad-tagline{
-  font-style:italic; font-size:16.5px; color:#51646f;
-  padding-left:16px; border-left:3px solid var(--kc-tertiary); margin-bottom:24px;
-}
-.ad-strip{
-  list-style:none; padding:0; margin:0 0 20px;
-  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px;
-}
-.ad-strip li{
-  display:flex; flex-direction:column; gap:3px; align-items:flex-start;
-  background:#fff; border:1px solid var(--kc-line); border-radius:14px; padding:13px 16px;
-  box-shadow:0 6px 18px rgba(33,50,68,.06);
-}
-.ad-strip li i{ color:var(--kc-primary); font-size:14px; margin-bottom:5px; }
-.ad-strip li:nth-child(2) i{ color:var(--kc-tertiary); }
-.ad-strip li:nth-child(3) i{ color:#e08f1e; }
-.ad-strip li b{ font-size:12.5px; letter-spacing:.06em; color:var(--kc-ink); }
-.ad-strip li span{
-  font-size:9px; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--kc-sub);
-}
-
-.ad-clock{
-  background:#f4fafd; border:1px solid var(--kc-line); border-radius:14px;
-  padding:18px 22px 20px;
-}
-.ad-clock .cd-band{
-  display:block; font-size:11px; font-weight:800; letter-spacing:.22em;
-  text-transform:uppercase; color:var(--kc-sub); margin-bottom:14px;
-}
-.ad-clock .cd-grid{ gap:9px; }
-.ad-clock .cd-num{ font-size:27px; }
-.ad-closing{
-  display:flex; align-items:center; gap:9px; flex-wrap:wrap;
-  margin:14px 0 0; font-size:13.5px; color:var(--kc-sub);
-}
-.ad-closing i{ color:var(--kc-quaternary); }
-.ad-closing b{ font-size:13px; color:var(--kc-quaternary); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
-
-.ad-facts{ list-style:none; padding:0; margin:20px 0 0; }
-.ad-facts li{
-  display:flex; gap:11px; align-items:flex-start; margin-bottom:10px;
-  font-size:14px; color:#40555f;
-}
-.ad-facts li i{ color:var(--kc-tertiary); margin-top:3px; font-size:13px; }
-
-.ad-ctas{ display:flex; gap:12px; flex-wrap:wrap; margin-top:26px; }
-.ad-ctas .btn{ font-size:13px; }
-
-.ad-contact{
-  margin-top:24px; padding-top:20px; border-top:1px dashed #cfdde6;
-  display:flex; flex-direction:column; gap:11px;
-}
-.ad-contact-label{
-  font-size:9.5px; font-weight:800; letter-spacing:.24em; text-transform:uppercase;
-  color:var(--kc-sub);
-}
-.ad-contact-row{ display:flex; flex-wrap:wrap; gap:9px 22px; }
-.ad-contact-row a{
-  display:inline-flex; align-items:center; gap:9px;
-  font-size:12.5px; font-weight:700; color:var(--kc-primary);
-}
-.ad-contact-row a:hover{ color:#1573b8; text-decoration:underline; }
-.ad-contact-row a i{ color:#e08f1e; }
-.ad-contact-row.mails a{ color:#52656f; font-weight:600; }
-.ad-contact-row.mails a:hover{ color:var(--kc-primary); }
-
-/* poster footer strip */
-.ad-footer{
-  grid-area:foot; display:flex; align-items:center; justify-content:space-between; gap:18px;
-  padding:15px 30px; background:linear-gradient(90deg, #16232f, #1e3040 50%, #16232f);
-  flex-wrap:wrap;
-}
-.ad-coords{ font-size:11px; letter-spacing:.3em; color:rgba(30,170,241,.6); }
-.ad-fee{ font-size:11.5px; letter-spacing:.06em; color:rgba(232,243,250,.85); text-align:center; }
-.ad-fee b{ color:#ffd98a; letter-spacing:.2em; margin-right:8px; }
-
-/* compact placement (home page): tighter copy, fact list folded away */
-.ad-poster.compact .ad-copy{ padding:38px 40px 28px; }
-.ad-poster.compact .ad-title{ font-size:clamp(27px,3.4vw,44px); }
-.ad-poster.compact .ad-facts{ display:none; }
-.ad-poster.compact .ad-ctas{ margin-top:22px; }
-
-@media (max-width: 991.98px){
-  .ad-poster{ grid-template-columns:1fr; grid-template-areas:"art" "copy" "foot"; }
-  .ad-art{ min-height:0; height:280px; }
-  .ad-copy{ padding:34px 32px 26px; }
-  .ad-poster.compact .ad-copy{ padding:30px 28px 24px; }
-  .ad-footer{ justify-content:center; text-align:center; }
-}
-@media (max-width: 767.98px){
-  .ad-art{ height:220px; }
-  .ad-clock .cd-num{ font-size:22px; }
-  .ad-title{ font-size:clamp(26px,8vw,36px); }
-  .ad-strip{ grid-template-columns:1fr; gap:8px; }
-  .ad-strip li{ flex-direction:row; align-items:center; gap:10px; padding:11px 14px; }
-  .ad-strip li i{ margin-bottom:0; }
-  .ad-strip li span{ margin-left:auto; text-align:right; }
-  .ad-ctas{ flex-direction:column; }
-  .ad-ctas .btn{ width:100%; }
-  .ad-contact-row{ flex-direction:column; gap:11px; }
-  .ad-coords{ display:none; }
-  .ad-fee b{ display:block; margin:0 0 3px; }
-}
-
-/* =============================================================
    CTA BAND EMAIL LINE (contact page ftco-intro)
    ============================================================= */
 .band-mails{ margin-top:12px; font-size:14px; color:rgba(255,255,255,.85); }
@@ -1142,18 +965,6 @@ html{ scroll-padding-top:96px; }
   .crest-facts{ justify-content:center; }
   .foot-team li{ margin-bottom:13px; }
   .band-mails{ font-size:13px; }
-}
-@media (max-width: 575.98px){
-  .ad-section{ padding-left:0; padding-right:0; }
-  .ad-poster{ border-radius:18px; }
-  .ad-art{ height:200px; }
-  .ad-copy{ padding:26px 20px 22px; }
-  .ad-present{ font-size:9px; letter-spacing:.2em; }
-  .ad-logo{ width:32px; height:33px; }
-  .ad-tagline{ font-size:14.5px; margin-bottom:20px; }
-  .ad-closing{ font-size:12.5px; }
-  .ad-facts li{ font-size:13.5px; }
-  .ad-contact-row a{ font-size:12px; }
 }
 
 /* =============================================================
