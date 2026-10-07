@@ -293,8 +293,9 @@
 
 .f-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
 .f-grid.one{ grid-template-columns:1fr; }
+.f-grid.two{ grid-template-columns:1fr 1fr; }
 .f-grid.three{ grid-template-columns:1fr 1fr 1fr; }
-@media (max-width: 575.98px){ .f-grid, .f-grid.three{ grid-template-columns:1fr; } }
+@media (max-width: 575.98px){ .f-grid, .f-grid.two, .f-grid.three{ grid-template-columns:1fr; } }
 .f-span2{ grid-column:span 2; }
 @media (max-width: 575.98px){ .f-span2{ grid-column:span 1; } }
 

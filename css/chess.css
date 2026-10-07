@@ -1126,3 +1126,126 @@ html{ scroll-padding-top:96px; }
   .owl-carousel.hero-slider .owl-dots .owl-dot{ width:20px; }
   .owl-carousel.hero-slider .owl-dots .owl-dot.active{ width:30px; }
 }
+
+/* =============================================================================
+   PLAY  ·  MODE CHOOSER, ONLINE PANEL, COACH BOOKING
+   Three ways to play (pass & play, live online, versus the computer) plus the
+   form for booking time with the coach.
+   ============================================================================= */
+.play-modes{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:26px;
+}
+@media (max-width: 991.98px){ .play-modes{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width: 575.98px){ .play-modes{ grid-template-columns:1fr 1fr; gap:10px; } }
+
+.play-mode{
+  display:flex; align-items:center; gap:12px; text-align:left; font-family:inherit;
+  background:#fff; border:1.5px solid var(--kc-line); border-radius:14px;
+  padding:14px 16px; cursor:pointer; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+.play-mode:hover{ border-color:var(--kc-primary); transform:translateY(-2px); box-shadow:var(--kc-shadow); }
+.play-mode.is-active{
+  border-color:var(--kc-primary); background:#f4fafd;
+  box-shadow:0 8px 22px rgba(30,170,241,.16);
+}
+.play-mode:focus-visible{ outline:none; box-shadow:0 0 0 4px rgba(30,170,241,.22); }
+.pm-ico{
+  width:38px; height:38px; border-radius:11px; flex:none; color:#fff;
+  display:inline-flex; align-items:center; justify-content:center; font-size:16px;
+}
+.pm-txt b{ display:block; font-size:14px; font-weight:800; color:var(--kc-ink); line-height:1.25; }
+.pm-txt small{ display:block; font-size:11.5px; color:var(--kc-sub); margin-top:2px; line-height:1.35; }
+
+/* the strip under the board ("waiting for your opponent", results…) */
+.board-banner{
+  margin-top:14px; border-radius:12px; padding:11px 16px; text-align:center;
+  background:#fff8ef; border:1px solid #f6dcae; color:#5d4108;
+  font-size:13px; font-weight:700;
+}
+
+/* pass & play: who is holding which side */
+.name-swap{ display:flex; flex-direction:column; gap:8px; }
+.ns-row{ display:flex; align-items:center; gap:9px; }
+.ns-chip, .seat-badge{
+  width:26px; height:26px; border-radius:8px; flex:none; font-weight:900; font-size:12px;
+  display:inline-flex; align-items:center; justify-content:center;
+}
+.ns-chip.w, .seat-badge.w{
+  background:linear-gradient(135deg,#fff,#e9eef2); color:var(--kc-ink);
+  box-shadow:inset 0 0 0 1.5px #c3d2dc;
+}
+.ns-chip.b, .seat-badge.b{ background:linear-gradient(135deg,#3b4e63,#16232f); color:#fff; }
+.ns-input{
+  flex:1; min-width:0; padding:9px 12px; font-size:13.5px; color:var(--kc-ink);
+  background:#fbfdfe; border:1.5px solid var(--kc-line); border-radius:9px; font-family:inherit;
+}
+.ns-input:focus, .net-input:focus{
+  outline:none; background:#fff; border-color:var(--kc-primary);
+  box-shadow:0 0 0 3px rgba(30,170,241,.13);
+}
+
+/* online panel */
+.net-state{ display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:800; color:var(--kc-sub); }
+.net-state .dot{ width:9px; height:9px; border-radius:50%; background:#7b8a94; flex:none; }
+.net-state.good{ color:#3e7d2e; }  .net-state.good .dot{ background:var(--kc-tertiary); }
+.net-state.warn{ color:#a06a12; }  .net-state.warn .dot{ background:var(--kc-secondary); }
+.net-state.bad{ color:#b02a24; }   .net-state.bad .dot{ background:var(--kc-quaternary); }
+
+.room-box{ background:#f4fafd; border:1px dashed var(--kc-primary); border-radius:12px; padding:14px 16px; }
+.room-label{
+  display:block; font-size:10.5px; font-weight:800; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--kc-sub); margin-bottom:6px;
+}
+.room-code-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.room-code-row b{
+  font-size:26px; font-weight:900; letter-spacing:.18em; color:var(--kc-ink);
+  font-variant-numeric:tabular-nums;
+}
+.room-hint{ font-size:12px; color:var(--kc-sub); margin:8px 0 0; }
+
+.join-row{ display:flex; gap:8px; }
+.net-input{
+  flex:1; min-width:0; padding:10px 13px; font-size:13.5px; color:var(--kc-ink);
+  background:#fbfdfe; border:1.5px solid var(--kc-line); border-radius:10px; font-family:inherit;
+}
+#netCode{ text-transform:uppercase; letter-spacing:.18em; font-weight:800; }
+
+.seat-row{ display:flex; align-items:center; gap:10px; }
+.seat-txt{ font-size:13.5px; font-weight:800; color:var(--kc-ink); }
+
+.net-chat{ border-top:1px solid var(--kc-line); padding-top:14px; }
+.chat-log{ max-height:132px; overflow-y:auto; display:flex; flex-direction:column; gap:6px; }
+.chat-msg{ font-size:12.5px; color:var(--kc-ink); background:#f6fbfe; border-radius:9px; padding:7px 11px; word-break:break-word; }
+.chat-msg b{ font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; margin-right:4px; }
+.chat-msg.w b{ color:var(--kc-primary); }
+.chat-msg.b b{ color:#3b4e63; }
+
+/* coach booking */
+.book-card{
+  display:grid; grid-template-columns:1fr 1.15fr;
+  background:#fff; border:1px solid var(--kc-line);
+  border-radius:var(--kc-radius); overflow:hidden; box-shadow:var(--kc-shadow-lg);
+}
+@media (max-width: 991.98px){ .book-card{ grid-template-columns:1fr; } }
+.book-side{
+  padding:40px 38px; color:#fff;
+  background:linear-gradient(155deg, var(--kc-primary) 0%, #2f7ec2 60%, var(--kc-fifth) 130%);
+}
+.book-side .eyebrow-tag{
+  display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.24em;
+  text-transform:uppercase; color:#fff; padding:7px 15px; border-radius:20px;
+  background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.3);
+}
+.book-side h2{ color:#fff; font-weight:800; margin:14px 0 12px; font-size:26px; }
+.book-side p{ color:rgba(255,255,255,.85); font-size:14.5px; }
+.book-side .perk-list li .fas{ color:#c9f79a; margin-top:3px; }
+.book-contact{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+.book-contact a{
+  display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:700;
+  background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.3);
+  color:#fff; border-radius:30px; padding:9px 16px;
+}
+.book-contact a:hover{ background:rgba(255,255,255,.24); color:#fff; text-decoration:none; }
+.book-form{ padding:40px 38px; }
+@media (max-width: 575.98px){ .book-form, .book-side{ padding:28px 22px; } }
+.book-fine{ font-size:11.5px; color:var(--kc-sub); margin:12px 0 0; text-align:center; }

@@ -16,7 +16,8 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
   registration forms, honour-roll table, steps strip, product shelf and the nav "Enrol" pill.
 - **Events layer:** `css/events.css` carries the events listing cards, the event detail page
   (fact strip, entry-fee table, prose blocks, sticky side rail) and the stepped form shell
-  shared by `register.html` and `consent.html`. Linked on those four pages only.
+  shared by `register.html` and `consent.html`. Linked on those four pages plus `play.html`,
+  which reuses the same `.f` / `.f-grid` field shell for the coach-booking form.
 - **Academy crest:** the official Kericho Chess Academy crest (pawn, king, knight, motto
   *Forward Ever Backward Never*) sits in the nav, the footer, the event poster lockup and a
   dedicated crest band on the about page; it doubles as the site favicon
@@ -26,8 +27,11 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 - **Academy runtime:** `js/smc.js` (countdowns, FAQ accordion, registration / membership /
   subscribe and WhatsApp-composer forms).
 - The chess engine lives in `js/chess.js` (chess.js by Jeff Hlywa, BSD license) and powers
-  `js/play.js` (playable board) and `js/live.js` (broadcast room); `js/board3d.js` renders
-  the 3D board stage.
+  `js/play.js` (playable board), `js/live.js` (broadcast room) and the computer opponent
+  (`js/engine.js`); `js/board3d.js` renders the 3D board stage.
+- **Live multiplayer:** `js/online.js` is the browser side and `server/server.js` the room
+  server — a dependency-free Node process that serves the site and the `/ws` game channel.
+  Nothing is required for pass-and-play or the computer, so the rest of the site stays static.
 
 ## Pages
 
@@ -41,7 +45,7 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 | `register.html` | **Membership registration** — 4-step wizard (details → verify email → category & payment → review & submit) ending in a confirmation with a membership reference |
 | `consent.html` | **Photo & video consent** — 3-step wizard (player & guardian → permissions → sign & submit) ending in a consent reference and withdrawal instructions |
 | `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list, spectator feed — plus the broadcast card |
-| `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo) + the daily puzzle |
+| `play.html` | **Playable board:** three ways to play — live online against a friend, pass-and-play on one device, or against the computer (easy / medium / hard) — plus the **coach-booking form** and the daily puzzle |
 | `shop.html` | Materials & kits with one-tap WhatsApp ordering + Complete Club Kit quote banner |
 | `about.html` | Academy story, **crest band with the academy motto**, **the office bearers with portraits**, the partner schools, the squads, values and the season gallery |
 | `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ, contact cards, **direct lines for the office bearers (portrait cards)** and the **Secretary's Samarkand Olympiad gallery** |
@@ -73,6 +77,55 @@ Shem's "The Coach & The Platform" section on `index.html` is retitled **The Pres
 Platform**, and his card there reads **President & Head Coach**, so the two sections agree. His title reads **President & Head Coach** in every card,
 heading, footer entry and alt text on the site.
 
+## Playing on the site
+
+`play.html` offers three ways to play on one board, plus a way to book time with the coach.
+Pick one from the tile row above the board.
+
+| Mode | What it is | Needs |
+| --- | --- | --- |
+| **Pass & play** | Two players share one device and take turns on the same board. Full rules: check, checkmate, castling, en passant, promotion and undo. | nothing |
+| **Play a friend** | Two players on **separate devices**, in real time. Create a game to get a five-character code, share it however you like, and the other player types it in. Moves, chat, resignation and rematch all sync instantly. A third or later visitor to the same code joins as a **spectator** and watches without moving. | `node server/server.js` |
+| **Play the computer** | One player against a built-in engine at **easy**, **medium** or **hard**. Choose your side (white, black or random); the engine thinks in a Web Worker so the board keeps animating, and falls back to the main thread if workers are unavailable. | nothing |
+
+The fourth tile, **Book with the coach**, scrolls to a booking form — name, phone, preferred
+date, time of day, session type and what to work on — that opens WhatsApp with the request
+already filled in.
+
+### The live-play server
+
+Two browsers cannot talk straight to each other, so *Play a friend* needs a small always-on
+process. It is deliberately boring:
+
+```bash
+node server/server.js                    # site + /ws game channel on port 8080
+PORT=3000 node server/server.js          # or wherever you want it
+```
+
+- **Zero dependencies.** Plain Node `http` plus a hand-rolled WebSocket implementation, so
+  there is nothing to install and no supply chain to audit.
+- It serves every static file in the repository, so it is a drop-in replacement for
+  `python3 -m http.server`.
+- The server is **authoritative**: it holds the real `Chess` game, assigns White and Black,
+  and rejects illegal or out-of-turn moves. A browser cannot cheat by sending a move the
+  server disagrees with.
+- Rooms are five-character codes, expire after six hours of inactivity, and are swept by a
+  timer; heartbeats drop dead sockets and free the seat.
+- Clients reconnect with exponential backoff and rejoin their room automatically, so a
+  phone sleeping or switching networks does not end the game.
+
+**Hosting note.** Everything except *Play a friend* is plain static files and works on
+GitHub Pages or Vercel exactly as before. For live multiplayer, run `server/server.js` on
+any Node host (Render, Railway, Fly.io, a small VPS) and point the play page at it:
+
+```html
+<script>window.SMC_ONLINE_URL = 'wss://your-host.example/ws';</script>
+<script src="js/online.js"></script>
+```
+
+With no server reachable the page says so plainly and suggests pass-and-play — it never
+leaves a dead board on screen.
+
 ## Events & programmes
 
 The way events are listed and opened follows the federation's own pattern
@@ -96,15 +149,16 @@ To add a second event, copy the `<article class="ev-card">` block in `events.htm
 
 ## Forms
 
-Three forms, all posting to the same Google Apps Script endpoint; until it is filled in they
-fall back to a pre-filled **WhatsApp** message so no entry is ever lost (nothing is stored on
-the site itself).
+Four forms. Three of them post to the same Google Apps Script endpoint; until it is filled in
+they fall back to a pre-filled **WhatsApp** message so no entry is ever lost (nothing is
+stored on the site itself). The fourth — coach booking — is WhatsApp-only by design.
 
 | Form | Where | Shape |
 | --- | --- | --- |
 | Event entry | `event.html` | Single-page form (name, DOB, gender, section, FIDE ID, school, CKF membership) over the M-Pesa paybill box |
 | **Membership registration** | `register.html` | **4-step wizard**: your details → verify your email → membership category & payment → review & submit. Ends on a confirmation carrying a `KCA-2026-XXXX` reference |
 | **Photo & video consent** | `consent.html` | **3-step wizard**: the player & you → permissions → sign & submit. Ends on a confirmation carrying a `CON-2026-XXXX` reference |
+| **Coach booking** | `play.html` | One-page form (name, phone, preferred date, time of day, session type, focus) that opens WhatsApp with the whole request filled in |
 
 The two wizards share one runtime, `js/forms.js`:
 
@@ -223,10 +277,12 @@ Paybill **880100**.
 ## Run locally
 
 ```bash
-python3 -m http.server 8000
+python3 -m http.server 8000          # static site only
+node server/server.js                # static site + live multiplayer (/ws)
 ```
 
-Then open `http://localhost:8000`.
+Then open `http://localhost:8000` (or `http://localhost:8080` for the Node server). The Node
+server needs no install step — it has no dependencies.
 
 ## Deploy with GitHub Pages
 
@@ -267,7 +323,10 @@ Then open `http://localhost:8000`.
 │   ├── jquery · bootstrap · owl · aos · waypoints · stellar · scrollax (template stack)
 │   ├── kiddos-main.js (template runtime)   smc.js        (academy runtime)
 │   ├── forms.js      (stepped runtime for register.html + consent.html)
-│   └── chess.js · play.js · live.js · board3d.js         (the chess core)
+│   ├── chess.js · play.js · live.js · board3d.js         (the chess core)
+│   ├── engine.js     (computer opponent: alpha-beta, 3 levels, no deps)
+│   ├── engine.worker.js  (runs the engine off the main thread)
+│   └── online.js     (browser side of live multiplayer)
 ├── fonts/   (flaticon · icomoon · ionicons · open-iconic)
 ├── assets/  (crest logo.png / logo-light.png / favicon.png, the Secretary's
 │            gladys-*.jpg photos from Samarkand 2026, event-poster.jpg,
@@ -275,6 +334,8 @@ Then open `http://localhost:8000`.
 │   ├── photos/      (Pexels-licensed replacement photography — drop-in slot)
 │   └── leadership/  (board portraits: 600×900 president-shem-meso.jpg and
 │                    vice-chairperson-barnabas-ochieng.jpg, plus source/ originals)
+├── server/
+│   └── server.js     (static file server + WebSocket game rooms, zero dependencies)
 └── kiddos-master.zip   (uploaded source template, for reference)
 ```
 
