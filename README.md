@@ -14,6 +14,11 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 - **Club layer:** `css/chess.css` restyles it with the academy palette and adds the
   chess-specific components: broadcast stage, countdown cards, ticker, FAQ accordion,
   registration forms, honour-roll table, steps strip, product shelf and the nav "Enrol" pill.
+- **System layer:** `css/system.css` is the shared design system — palette, container,
+  spacing rhythm, type scale, the three-zone nav, heroes, cards, the compact footer and the
+  motion utilities. It is linked **last** on every page so it wins over the older layers, and
+  `js/site.js` is the one shared runtime (nav, preloader, scroll progress, reveals, FAQ,
+  filters, WhatsApp forms, view transitions). New and converted pages use it on its own.
 - **Events layer:** `css/events.css` carries the events listing cards, the event detail page
   (fact strip, entry-fee table, prose blocks, sticky side rail) and the stepped form shell
   shared by `register.html` and `consent.html`. Linked on those four pages plus `play.html`,
@@ -35,20 +40,30 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 
 ## Pages
 
-| Page | What's on it |
-| --- | --- |
-| `index.html` | Photo hero slider, service strip, welcome + offerings, the coach & the platform, programmes, season counters, testimonials, enquiry form, club shelf, academy updates, gallery |
-| `coaching.html` | The three coaching tracks, four-phase method, fees & FAQ |
-| `tournaments.html` | **Event advert (poster band)** with live countdowns and response buttons, next fixture with live countdown, eight age categories, M-Pesa entry steps, registration form, honour roll |
-| `events.html` | **Upcoming Events listing** — a poster card per fixture (image, title, date, venue, entries-close, entry fee, Register), how-entry-works steps, past-results table |
-| `event.html` | **Event detail** — poster + intro, six-cell fact strip, registration form, entry-fee table (CKF member / NON-CKF member), deadline + date-of-event, poster, long-form description, sticky side rail with two countdowns |
-| `register.html` | **Membership registration** — 4-step wizard (details → verify email → category & payment → review & submit) ending in a confirmation with a membership reference |
-| `consent.html` | **Photo & video consent** — 3-step wizard (player & guardian → permissions → sign & submit) ending in a consent reference and withdrawal instructions |
-| `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list, spectator feed — plus the broadcast card |
-| `play.html` | **Playable board:** three ways to play — live online against a friend, pass-and-play on one device, or against the computer (easy / medium / hard) — plus the **coach-booking form** and the daily puzzle |
-| `shop.html` | Materials & kits with one-tap WhatsApp ordering + Complete Club Kit quote banner |
-| `about.html` | Academy story, **crest band with the academy motto**, **the office bearers with portraits**, the partner schools, the squads, values and the season gallery |
-| `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ, contact cards, **direct lines for the office bearers (portrait cards)** and the **Secretary's Samarkand Olympiad gallery** |
+| Page | What's on it | System |
+| --- | --- | --- |
+| `index.html` | **Home** — split hero with 2 CTAs and 3 trust metrics, why-us highlights, programs overview (4), upcoming tournaments (3), coaches teaser, testimonials, registration band | new |
+| `about.html` | **About** — mission, story timeline, **all four office bearers**, partner schools, testimonials, **FAQ**, **feedback form**, contact band | new |
+| `programs.html` | **Programs** — filterable category grid, detail strips, weekly schedule table, join CTA | new |
+| `membership.html` | **Membership** — value proposition, three tiers, benefits, FAQ accordion, join CTA | new |
+| `junior.html` | **Junior section** — learning tracks, safeguarding policy, parent resources, enrolment CTA | new |
+| `news.html` | **News** — featured article, filterable article grid, newsletter CTA | new |
+| `404.html` | Branded error page with recovery links, marked `noindex` | new |
+| `coaching.html` | Coaching tracks, four-phase method, fees & FAQ | legacy |
+| `tournaments.html` | Event advert with countdowns, age categories, M-Pesa entry steps, honour roll | legacy |
+| `events.html` | Upcoming-events listing — a poster card per fixture | legacy |
+| `event.html` | Event detail — fact strip, registration form, entry-fee table, sticky rail | legacy |
+| `register.html` | **Membership registration** — 4-step wizard ending in a `KCA-2026-XXXX` reference | legacy |
+| `consent.html` | **Photo & video consent** — 3-step wizard ending in a `CON-2026-XXXX` reference | legacy |
+| `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list | legacy |
+| `play.html` | **Playable board:** live online vs a friend, pass & play, or vs the computer, plus coach booking | legacy |
+| `shop.html` | Materials & kits with one-tap WhatsApp ordering | legacy |
+| `contact.html` | Membership form, WhatsApp enquiry composer, FAQ, contact cards, office bearers | legacy |
+
+The **new** pages are built on `css/system.css` alone — no template CSS, no jQuery, no
+Bootstrap. The **legacy** pages still carry the Kiddos markup but now share the same nav,
+footer, skip link, preloader and runtime, so the site reads as one thing while they are
+converted.
 
 All twelve pages share the Kiddos navbar — now with an **Events** item (`fas fa-calendar-days`)
 beside Tournaments, and the **Enrol Now** pill pointed at `register.html` — and the template
@@ -125,6 +140,57 @@ any Node host (Render, Railway, Fly.io, a small VPS) and point the play page at 
 
 With no server reachable the page says so plainly and suggests pass-and-play — it never
 leaves a dead board on screen.
+
+## Design system
+
+Everything visual lives in `css/system.css`, driven by custom properties at the top of that
+file. Change a token there and the whole site follows.
+
+| Token group | Values |
+| --- | --- |
+| Palette | deep forest `--brand-600 #1B6B4F` with amber `--accent-500 #C8791B`, on a near-black navy ink `#10202E`. Every text/background pairing clears **WCAG AA** (body 16.6:1, secondary 8.5:1, brand-on-white 6.4:1; amber text uses the darker `#8A5310` at 6.2:1) |
+| Container | `1320px` centred; gutters 32px desktop → 20px tablet → 16px mobile |
+| Rhythm | `clamp(48px, 6vw, 72px)` between major sections |
+| Radius | 8 / 12 / 18px, plus pills |
+| Type | hero `clamp(38px, 6.2vw, 68px)`, section headings `clamp(27px, 3.4vw, 42px)`, body `clamp(16px, 1.1vw, 18px)` |
+| Buttons | two only — primary and ghost (plus an amber accent) |
+
+**Nav** is three zones: brand left, menu centre, actions right. It sticks, turns glass once
+you scroll, and has a solid fallback where `backdrop-filter` is unsupported. **About sits
+second**, immediately after Home. **Footer** is four columns plus a legal strip.
+
+### Motion
+
+`js/site.js` implements the shared effects, each with a reduced-motion path:
+
+| | Effect |
+| --- | --- |
+| EFFECT-06 | ambient gradient blobs, paused while the tab is hidden |
+| EFFECT-10 | crest pops once on load, replays on click |
+| EFFECT-11/12 | animated icons and 120–320ms control microinteractions |
+| EFFECT-15 | scroll-snap rail with arrow / Home / End keyboard support |
+| EFFECT-18 | animated gradients on the hero and CTA bands |
+| EFFECT-20 | section SVG backdrops animate only while in the viewport |
+| EFFECT-22 | View Transitions API with a CSS fallback; focus moves to the new heading and the route change is announced |
+| EFFECT-23 | hero sequenced reveal, under 1.6s, never blocks the CTAs |
+| EFFECT-24 | skeleton loaders and deferred media, zero layout shift |
+| EFFECT-25 | branded preloader (skips after 3s) plus a thin scroll progress bar |
+| EFFECT-28 | glass nav on scroll, solid fallback |
+
+Expensive work runs through `IntersectionObserver` only. A single
+`@media (prefers-reduced-motion: reduce)` block neutralises every animation, and `site.js`
+reads the same query in JS.
+
+### Image rules
+
+- **Repository images only.** No generated people images, nothing pulled in at build time.
+- Priority for subject matter: coaches and officials → adult members and mixed-age groups →
+  training and tournament environments → boards and kit → neutral chess fallback.
+  Photographs whose primary subjects are children are not used.
+- Every `<img>` carries `width`, `height`, meaningful `alt` (or `alt=""` when decorative) and
+  `loading="lazy"` below the fold. Hero images are eager with `fetchpriority="high"`.
+- `assets/leadership/` holds the official portraits at 600×900; full-resolution originals stay
+  in `assets/leadership/source/`.
 
 ## Events & programmes
 
@@ -318,6 +384,7 @@ server needs no install step — it has no dependencies.
 ├── css/
 │   ├── kiddos.css    (template theme)      chess.css     (club restyle + chess components)
 │   ├── events.css    (events listing · event detail · stepped form shell)
+│   ├── system.css    (design system: tokens, 3-zone nav, heroes, cards, footer, motion)
 │   └── animate.css · aos.css · owl carousel · magnific-popup · icon fonts css
 ├── js/
 │   ├── jquery · bootstrap · owl · aos · waypoints · stellar · scrollax (template stack)
@@ -326,7 +393,8 @@ server needs no install step — it has no dependencies.
 │   ├── chess.js · play.js · live.js · board3d.js         (the chess core)
 │   ├── engine.js     (computer opponent: alpha-beta, 3 levels, no deps)
 │   ├── engine.worker.js  (runs the engine off the main thread)
-│   └── online.js     (browser side of live multiplayer)
+│   ├── online.js     (browser side of live multiplayer)
+│   └── site.js       (shared chrome + motion utilities for every page)
 ├── fonts/   (flaticon · icomoon · ionicons · open-iconic)
 ├── assets/  (crest logo.png / logo-light.png / favicon.png, the Secretary's
 │            gladys-*.jpg photos from Samarkand 2026, event-poster.jpg,

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script>document.documentElement.classList.add("js");</script>
+    <title>Programs — Kericho Chess Club &amp; Academy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="School coaching, private lessons, tournament preparation and online sessions from the Kericho Chess Club and Academy.">
+    <meta name="theme-color" content="#0B2E24">
+
+    <link rel="icon" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <meta property="og:title" content="Programs — Kericho Chess Club &amp; Academy">
+    <meta property="og:description" content="School coaching, private lessons, tournament preparation and online sessions from the Kericho Chess Club and Academy.">
+    <meta property="og:image" content="assets/chess-materials.jpg">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/system.css">
+</head>
+<body>
+
+  <div class="preloader" id="preloader" role="status" aria-live="polite">
+    <img src="assets/logo-light.png" alt="" width="640" height="650">
+    <p>Kericho Chess Club &amp; Academy</p>
+  </div>
+
+  <!-- ============ SHARED NAV · brand | menu | actions ============ -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <nav class="nav" aria-label="Primary">
+    <div class="wrap nav__bar">
+      <a class="nav__brand" href="index.html" aria-label="Kericho Chess Club and Academy — home">
+        <img class="nav__crest" src="assets/logo.png" alt="" width="640" height="650" decoding="async">
+        <span class="nav__wordmark"><b>Kericho Chess</b><span>Club &amp; Academy</span></span>
+      </a>
+
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open the menu">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="about.html">About</a></li>
+						<li><a href="programs.html" aria-current="page">Programs</a></li>
+						<li><a href="coaching.html">Coaching</a></li>
+						<li><a href="tournaments.html">Tournaments</a></li>
+						<li><a href="membership.html">Membership</a></li>
+						<li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <a class="icon-btn" href="play.html" aria-label="Play chess online" title="Play online"><i class="fas fa-chess" aria-hidden="true"></i></a>
+        <a class="btn btn--primary btn--sm" href="register.html"><i class="fas fa-user-plus" aria-hidden="true"></i> Enrol Now</a>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+
+  <main id="main">
+
+    <section class="phero">
+      <div class="wrap phero__inner">
+        <span class="eyebrow">Programs</span>
+        <h1>A route in, wherever you are starting from</h1>
+        <p>Six programs, one teaching sequence — from a first school club session to rated county competition.</p>
+      </div>
+    </section>
+
+
+    <!-- ================= PROGRAM CATEGORIES + FILTERS ================= -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="eyebrow">Programs</span>
+          <h2>Choose the route that fits</h2>
+          <p>Every program is coached by the academy's own team, uses the same teaching
+             sequence, and leads somewhere — a school team, a rating, or a county fixture.</p>
+        </div>
+
+        <div class="filters" data-filter-group="#program-grid" role="group" aria-label="Filter programs">
+          <button type="button" data-filter="all" aria-pressed="true">All programs</button>
+          <button type="button" data-filter="schools" aria-pressed="false">In schools</button>
+          <button type="button" data-filter="private" aria-pressed="false">Private</button>
+          <button type="button" data-filter="competitive" aria-pressed="false">Competitive</button>
+          <button type="button" data-filter="online" aria-pressed="false">Online</button>
+          <p class="sr-only filters__status" role="status"></p>
+        </div>
+
+        <div class="grid g-4" id="program-grid">
+          <article class="card" data-cat="schools" data-reveal>
+            <div class="card__media">
+              <img src="assets/photos/duel-wooden-table.jpg" alt="Two players study a position over a wooden chess set"
+                   width="500" height="333" loading="lazy" decoding="async">
+            </div>
+            <div class="card__body">
+              <span class="chip">In schools</span>
+              <h3>School Coaching</h3>
+              <p>A taught weekly session at your school: a short lesson, then supervised games with feedback on the board.</p>
+              <div class="card__foot"><span class="chip chip--line">Weekly · term time</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-cat="private" data-reveal>
+            <div class="card__media">
+              <img src="assets/photos/strategy-thought.jpg" alt="An adult player considering their next move"
+                   width="500" height="750" loading="lazy" decoding="async">
+            </div>
+            <div class="card__body">
+              <span class="chip">Private</span>
+              <h3>Private Lessons</h3>
+              <p>One-to-one or pairs, built around the learner's own games. The fastest route to real improvement.</p>
+              <div class="card__foot"><span class="chip chip--line">By appointment</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-cat="competitive" data-reveal>
+            <div class="card__media">
+              <img src="assets/photos/focused-move.jpg" alt="A player's hand making a move during a game"
+                   width="500" height="333" loading="lazy" decoding="async">
+            </div>
+            <div class="card__body">
+              <span class="chip">Competitive</span>
+              <h3>Tournament Prep</h3>
+              <p>Repertoire, clock discipline and the nerves. Focused work in the weeks before a rated event.</p>
+              <div class="card__foot"><span class="chip chip--line">4–6 week blocks</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-cat="online" data-reveal>
+            <div class="card__media">
+              <img src="assets/photos/man-indoors.jpg" alt="A member playing chess online indoors on a laptop"
+                   width="500" height="750" loading="lazy" decoding="async">
+            </div>
+            <div class="card__body">
+              <span class="chip">Online</span>
+              <h3>Online Sessions</h3>
+              <p>Coaching over a shared board and a call — for learners outside Kericho town or during school holidays.</p>
+              <div class="card__foot"><span class="chip chip--line">Anywhere</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-cat="competitive" data-reveal>
+            <div class="card__media">
+              <img src="assets/photos/two-players-move.jpg" alt="Two academy members playing a game together"
+                   width="500" height="333" loading="lazy" decoding="async">
+            </div>
+            <div class="card__body">
+              <span class="chip">Competitive</span>
+              <h3>Saturday Academy</h3>
+              <p>The weekly internal ladder. Rated games, honest opposition, and a fresh pairing every Saturday.</p>
+              <div class="card__foot"><span class="chip chip--line">Saturdays · weekly</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-cat="schools" data-reveal>
+            <div class="card__media">
+              <img src="assets/photos/mirror-strategy.jpg" alt="Two players mirroring each other's thinking across a board"
+                   width="500" height="750" loading="lazy" decoding="async">
+            </div>
+            <div class="card__body">
+              <span class="chip">In schools</span>
+              <h3>Teacher Training</h3>
+              <p>We train a teacher at each partner school to run the club between our visits, so it survives the term.</p>
+              <div class="card__foot"><span class="chip chip--line">Two sessions per term</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DETAIL STRIPS ================= -->
+    <section class="section section--tint">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="eyebrow">How it runs</span>
+          <h2>What a program actually looks like</h2>
+        </div>
+
+        <div class="split" style="margin-bottom:clamp(36px,4vw,64px);">
+          <div>
+            <h3>The school club, week by week</h3>
+            <p>One hour, one theme, one habit. We open with a short taught point on the demonstration board, then learners play it out on their own boards while the coach walks the room.</p>
+            <ul class="ticks">
+              <li><i class="fas fa-circle-check" aria-hidden="true"></i> <span>10 minutes of teaching on one idea</span></li>
+              <li><i class="fas fa-circle-check" aria-hidden="true"></i> <span>30 minutes of coached games</span></li>
+              <li><i class="fas fa-circle-check" aria-hidden="true"></i> <span>15 minutes reviewing one game on the demo board</span></li>
+              <li><i class="fas fa-circle-check" aria-hidden="true"></i> <span>5 minutes recording results for the term report</span></li>
+            </ul>
+          </div>
+          <div class="split__media">
+            <img src="assets/chess-materials.jpg" alt="Academy chess sets, clocks and workbooks laid out on a table"
+                 width="1200" height="896" loading="lazy" decoding="async">
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="split__media">
+            <img src="assets/photos/top-view-round-table.jpg" alt="Chess boards laid out on a round table seen from above"
+                 width="500" height="333" loading="lazy" decoding="async">
+          </div>
+          <div>
+            <h3>The teaching sequence</h3>
+            <p>Every learner moves through the same order, at their own pace. Nobody gets tactics before they can see a hanging piece, and nobody gets openings before they understand development.</p>
+            <ol>
+              <li><b>Board craft</b> — how the pieces move, and how to see the whole board.</li>
+              <li><b>Basic tactics</b> — forks, pins, skewers, and the hanging piece.</li>
+              <li><b>Opening principles</b> — development, the centre, and king safety.</li>
+              <li><b>Endgames</b> — king and pawn, then the basic mates.</li>
+              <li><b>Clock and competition</b> — playing a rated game properly, start to finish.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= WEEKLY SCHEDULE ================= -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="eyebrow">Weekly Schedule</span>
+          <h2>When the academy runs</h2>
+          <p>Times are the same every week during term. Private lessons are booked separately.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <caption class="sr-only">Weekly academy schedule</caption>
+            <thead>
+              <tr><th scope="col">Day</th><th scope="col">Time</th><th scope="col">Session</th><th scope="col">Where</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Monday – Friday</td><td>4:00 – 6:00 PM</td><td>School clubs</td><td>Partner schools</td></tr>
+              <tr><td>Saturday</td><td>9:00 – 11:00 AM</td><td>Beginners &amp; improvers</td><td>Academy room</td></tr>
+              <tr><td>Saturday</td><td>2:00 – 5:00 PM</td><td>Saturday Academy ladder (rated)</td><td>Academy room</td></tr>
+              <tr><td>Sunday</td><td>10:00 AM – 12:00 PM</td><td>Private lessons</td><td>By appointment</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap band__inner">
+        <div>
+          <h2>Ready to join a program?</h2>
+          <p>Registration takes about four minutes and gives you a membership reference straight away.</p>
+        </div>
+        <div class="band__actions">
+          <a class="btn btn--primary" href="register.html"><i class="fas fa-user-plus" aria-hidden="true"></i> Enrol now</a>
+          <a class="btn btn--ghost" href="contact.html">Ask a question first</a>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <!-- ============ SHARED FOOTER · 4 columns + legal strip ============ -->
+  <footer class="foot" id="site-footer">
+    <div class="wrap">
+      <div class="foot__grid">
+        <div>
+          <a class="foot__brand" href="index.html">
+            <img src="assets/logo-light.png" alt="" width="640" height="650" loading="lazy" decoding="async">
+            <span><b>Kericho Chess</b><span>Club &amp; Academy</span></span>
+          </a>
+          <p>Teaching children to think before they move. School clubs, private lessons and
+             tournament preparation across Kericho County.</p>
+          <p><i class="fas fa-location-dot" aria-hidden="true"></i> Kericho Town, Kericho County, Kenya</p>
+        </div>
+
+        <div>
+          <h3>The Academy</h3>
+          <ul>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="coaching.html">Coaching</a></li>
+            <li><a href="membership.html">Membership</a></li>
+            <li><a href="junior.html">Junior section</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Compete &amp; Follow</h3>
+          <ul>
+            <li><a href="tournaments.html">Tournaments</a></li>
+            <li><a href="events.html">Upcoming events</a></li>
+            <li><a href="live.html">Live broadcast</a></li>
+            <li><a href="play.html">Play online</a></li>
+            <li><a href="shop.html">Club shop</a></li>
+            <li><a href="news.html">News</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Get In Touch</h3>
+          <ul>
+            <li><a href="contact.html">Contact us</a></li>
+            <li><a href="https://wa.me/254729037585" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> 0729 037 585</a></li>
+            <li><a href="tel:+254729037585"><i class="fas fa-phone" aria-hidden="true"></i> 0729 037 585</a></li>
+            <li><a href="mailto:shemeso26@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> shemeso26@gmail.com</a></li>
+            <li><a href="consent.html">Photo &amp; video consent</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="foot__legal">
+        <p>&copy; <span data-year>2026</span> Kericho Chess Club &amp; Academy. Forward Ever, Backward Never.</p>
+        <ul>
+          <li><a href="consent.html">Consent</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="mailto:kerichochessacademy@gmail.com">Academy office</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+
+</body>
+</html>
