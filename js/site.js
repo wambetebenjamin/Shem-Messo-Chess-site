@@ -32,6 +32,11 @@
   var reduced = function () { return reduceMQ.matches; };
   var $  = function (s, c) { return (c || doc).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)); };
+  /* Form wrappers were renamed to .sfield / .smsg to avoid colliding with the
+     legacy template's own .field / .form-msg. Accept both, so a page that has
+     not been converted yet still validates. */
+  var FIELD = '.sfield, .field';
+  var MSG   = '.smsg, .form-msg';
 
   /* ------------------------------------------------------------------ *
    * EFFECT-25 · branded preloader + thin scroll progress bar
@@ -347,7 +352,7 @@
       form.addEventListener('submit', function (e) {
         var bad = null;
         $$('[required]', form).forEach(function (el) {
-          var field = el.closest('.field');
+          var field = el.closest(FIELD);
           var empty = !String(el.value || '').trim();
           if (field) field.classList.toggle('is-bad', empty);
           el.setAttribute('aria-invalid', empty ? 'true' : 'false');
@@ -356,12 +361,12 @@
         if (bad) {
           e.preventDefault();
           bad.focus();
-          var msg = $('.form-msg', form);
-          if (msg) { msg.textContent = 'Please fill in the highlighted fields.'; msg.className = 'form-msg is-on is-bad'; }
+          var msg = $(MSG, form);
+          if (msg) { msg.textContent = 'Please fill in the highlighted fields.'; msg.className = 'smsg is-on is-bad'; }
         }
       });
       form.addEventListener('input', function (e) {
-        var field = e.target.closest && e.target.closest('.field');
+        var field = e.target.closest && e.target.closest(FIELD);
         if (field && field.classList.contains('is-bad') && String(e.target.value || '').trim()) {
           field.classList.remove('is-bad');
           e.target.setAttribute('aria-invalid', 'false');
@@ -380,15 +385,15 @@
     $$('form[data-whatsapp]').forEach(function (form) {
       var number = form.getAttribute('data-whatsapp') || '254729037585';
       var title = form.getAttribute('data-whatsapp-title') || 'Website message';
-      var msg = $('.form-msg', form);
+      var msg = $(MSG, form);
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         // the shared validator above has already flagged empties
-        if ($('.field.is-bad', form)) return;
+        if ($('.sfield.is-bad, .field.is-bad', form)) return;
 
         var lines = [title, ''];
-        $$('.field', form).forEach(function (field) {
+        $$(FIELD, form).forEach(function (field) {
           var input = $('input, select, textarea', field);
           var label = $('label', field);
           if (!input || !label) return;
@@ -404,7 +409,7 @@
                     '_blank', 'noopener');
         if (msg) {
           msg.textContent = 'Opening WhatsApp with your message — just press send.';
-          msg.className = 'form-msg is-on is-good';
+          msg.className = 'smsg is-on is-good';
         }
       });
     });
