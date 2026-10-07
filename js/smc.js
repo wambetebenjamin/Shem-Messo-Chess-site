@@ -14,6 +14,10 @@
   // STEP 2: Paste the deployed Web App URL below, replacing the placeholder.
   const SHEETS_ENDPOINT = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
 
+  // Published so js/forms.js (register.html + consent.html) posts to the same
+  // endpoint and uses the same WhatsApp fallback number. Set it once here.
+  window.SMC = { WHATSAPP: WHATSAPP, SHEETS_ENDPOINT: SHEETS_ENDPOINT };
+
   /* ---------- Countdown timers ---------- */
   const clocks = document.querySelectorAll('[data-countdown]');
   const pad = n => String(n).padStart(2, '0');
@@ -122,6 +126,35 @@
               ' · School/Club: ' + collect().school +
               ' · Phone: ' + collect().phone +
               ' · Age: ' + collect().age + ' (' + collect().gender + ').'
+      );
+    });
+  }
+
+  // Event registration (event.html)
+  const evForm = document.getElementById('eventForm');
+  if (evForm) {
+    evForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const collect = () => ({
+        event: 'Kericho County Open Chess Championship 2026',
+        name: val('e_name'), phone: val('e_phone'), dob: val('e_dob'),
+        gender: val('e_gender'), section: val('e_section'), fide: val('e_fide'),
+        school: val('e_school'), email: val('e_email'), membership: val('e_member')
+      });
+      submitEntry(evForm, 'Event', collect,
+        document.getElementById('e_submit'),
+        document.getElementById('e_msg'),
+        document.getElementById('e_wa'),
+        () => 'Hi Shem, entry for the Kericho County Open 2026:\n' +
+              'Name: ' + collect().name +
+              ' · DOB: ' + collect().dob +
+              ' · Gender: ' + collect().gender +
+              '\nSection: ' + collect().section +
+              ' · CKF: ' + collect().membership +
+              '\nSchool/Club: ' + collect().school +
+              (collect().fide ? ' · FIDE ID: ' + collect().fide : '') +
+              '\nPhone: ' + collect().phone +
+              (collect().email ? ' · Email: ' + collect().email : '')
       );
     });
   }

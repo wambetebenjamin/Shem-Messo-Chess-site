@@ -14,6 +14,9 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 - **Club layer:** `css/chess.css` restyles it with the academy palette and adds the
   chess-specific components: broadcast stage, countdown cards, ticker, FAQ accordion,
   registration forms, honour-roll table, steps strip, product shelf and the nav "Enrol" pill.
+- **Events layer:** `css/events.css` carries the events listing cards, the event detail page
+  (fact strip, entry-fee table, prose blocks, sticky side rail) and the stepped form shell
+  shared by `register.html` and `consent.html`. Linked on those four pages only.
 - **Academy crest:** the official Kericho Chess Academy crest (pawn, king, knight, motto
   *Forward Ever Backward Never*) sits in the nav, the footer, the event poster lockup and a
   dedicated crest band on the about page; it doubles as the site favicon
@@ -33,13 +36,18 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 | `index.html` | Photo hero slider, service strip, welcome + offerings, the coach & the platform, programmes, season counters, testimonials, enquiry form, club shelf, academy updates, gallery |
 | `coaching.html` | The three coaching tracks, four-phase method, fees & FAQ |
 | `tournaments.html` | **Event advert (poster band)** with live countdowns and response buttons, next fixture with live countdown, eight age categories, M-Pesa entry steps, registration form, honour roll |
+| `events.html` | **Upcoming Events listing** — a poster card per fixture (image, title, date, venue, entries-close, entry fee, Register), how-entry-works steps, past-results table |
+| `event.html` | **Event detail** — poster + intro, six-cell fact strip, registration form, entry-fee table (CKF member / NON-CKF member), deadline + date-of-event, poster, long-form description, sticky side rail with two countdowns |
+| `register.html` | **Membership registration** — 4-step wizard (details → verify email → category & payment → review & submit) ending in a confirmation with a membership reference |
+| `consent.html` | **Photo & video consent** — 3-step wizard (player & guardian → permissions → sign & submit) ending in a consent reference and withdrawal instructions |
 | `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list, spectator feed — plus the broadcast card |
 | `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo) + the daily puzzle |
 | `shop.html` | Materials & kits with one-tap WhatsApp ordering + Complete Club Kit quote banner |
 | `about.html` | Academy story, **crest band with the academy motto**, **the office bearers with portraits**, the partner schools, the squads, values and the season gallery |
 | `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ, contact cards, **direct lines for the office bearers (portrait cards)** and the **Secretary's Samarkand Olympiad gallery** |
 
-All eight pages share the Kiddos navbar (with the **Enrol Now** pill) and the template
+All twelve pages share the Kiddos navbar — now with an **Events** item (`fas fa-calendar-days`)
+beside Tournaments, and the **Enrol Now** pill pointed at `register.html` — and the template
 footer, which carries phone/WhatsApp/email contacts and an **Office Bearers** column
 (President & Head Coach, Vice Chairperson, Secretary, Treasurer — Gladys's new line is
 flagged; the Vice Chairperson routes through the academy office).
@@ -65,11 +73,89 @@ Shem's "The Coach & The Platform" section on `index.html` is retitled **The Pres
 Platform**, and his card there reads **President & Head Coach**, so the two sections agree. His title reads **President & Head Coach** in every card,
 heading, footer entry and alt text on the site.
 
+## Events & programmes
+
+The way events are listed and opened follows the federation's own pattern
+([chesskenya.co.ke/Events/upcoming](https://chesskenya.co.ke/Events/upcoming) and
+[chesskenya.co.ke/Event/51](https://chesskenya.co.ke/Event/51)):
+
+- **Listing (`events.html`)** — one card per event: poster image, title, **Date**, **Venue**,
+  format, entries-close and a **Register** button. Nothing else competes with the card.
+- **Detail (`event.html`)** — in the same order the federation uses: **Registration Form**,
+  then **Entry fees** (a `# · Payment Category · CKF Member (KES) · NON-CKF Member (KES)`
+  table), then **Registration Deadline** and **Date of Event**, then the poster image, then
+  the long-form description sections. A sticky side rail carries the countdowns.
+
+`event.html` currently holds **one sample event** (Kericho County Open Chess Championship
+2026). Everything about it is marked with a `SAMPLE EVENT` comment at the top of the page —
+the title, poster, six fact cells, two `data-countdown` targets, the five fee rows, the
+deadline lines and the description paragraphs. Replace those values and the page is real.
+
+To add a second event, copy the `<article class="ev-card">` block in `events.html` — the
+`ADD THE NEXT EVENT` comment above it lists the five things to change.
+
+## Forms
+
+Three forms, all posting to the same Google Apps Script endpoint; until it is filled in they
+fall back to a pre-filled **WhatsApp** message so no entry is ever lost (nothing is stored on
+the site itself).
+
+| Form | Where | Shape |
+| --- | --- | --- |
+| Event entry | `event.html` | Single-page form (name, DOB, gender, section, FIDE ID, school, CKF membership) over the M-Pesa paybill box |
+| **Membership registration** | `register.html` | **4-step wizard**: your details → verify your email → membership category & payment → review & submit. Ends on a confirmation carrying a `KCA-2026-XXXX` reference |
+| **Photo & video consent** | `consent.html` | **3-step wizard**: the player & you → permissions → sign & submit. Ends on a confirmation carrying a `CON-2026-XXXX` reference |
+
+The two wizards share one runtime, `js/forms.js`:
+
+- Each step is a `<section class="wz-panel" data-step="N">`; the rail on the left marks where
+  you are, and a **Step N of M** counter sits in the footer of the pane.
+- Validation runs on the panel you are leaving. Offending fields turn red, radio groups raise
+  an inline error, and the page scrolls to the first problem instead of failing silently.
+- **Email verification** (step 2 of `register.html`) is wired but dormant: while
+  `SHEETS_ENDPOINT` is unset the panel says so plainly and offers **Skip for now**. Set the
+  endpoint and the same UI sends a real code.
+- The consent form captures **internal use** and **publicity** as separate opt-ins plus a
+  naming choice (first name only / full name / no names), mirroring the printed form. A typed
+  name counts as the signature and previews as a signature block.
+- No `localStorage`, no cookies. Form state lives in the page only — which matters most on
+  the consent form, so a child's details are never left on a shared device.
+- Both pages ship a `<noscript>` panel pointing at WhatsApp, phone and email.
+
 ## Photos
 
-The site displays the academy's own photography throughout: `assets/orig-01.jpg` …
-`orig-05.jpg`, `assets/tournament-prep-01.jpg` … `tournament-prep-10.jpg` and the hero,
-coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is not used.
+**No photographs of learners.** Every picture that showed academy children — the
+`assets/orig-0*.jpg`, `assets/tournament-prep-*.jpg`, `assets/coaching-session.jpg`,
+`assets/tournament-focus.jpg`, `assets/hero-chess-academy.jpg` and
+`assets/hero-morning.jpg` set — has been deleted from the repository and replaced with
+freely-licensed stock photography of adult players in `assets/photos/`.
+
+| Slot | File |
+| --- | --- |
+| Event poster (listing card, detail page, footers) | `assets/event-poster.jpg` |
+| Cards, gallery tiles, schedule thumbs | `assets/photos/*.jpg` |
+| Page heroes, parallax bands, counters | `assets/hero-dark-board.jpg` (the academy's own board shot) |
+
+Full-bleed slots deliberately reuse `assets/hero-dark-board.jpg`: free stock only exists at
+≈500 px and blurs badly across a 1 920 px hero, whereas this one is the academy's own
+1 376×768 photograph and carries no faces at all.
+
+### Licensing
+
+The `assets/photos/` set comes from **Pexels** under the
+[Pexels License](https://www.pexels.com/license/) — free for commercial use, no watermark, no
+attribution required. They are placeholders: **drop your own photographs straight into
+`assets/photos/` (keeping the filenames) or overwrite `assets/event-poster.jpg`** and the
+site picks them up with no code changes.
+
+> Heads-up worth acting on: the photos were placed by search, not by eye, so the *subjects*
+> have not been visually confirmed. Swap in the academy's own photography — or the images you
+> upload to the repository — before you go live.
+
+Still in `assets/` and untouched: the crest (`logo.png`, `logo-light.png`, `favicon.png`),
+the Secretary's Samarkand 2026 photographs (`gladys-*.jpg`), the board portraits in
+`assets/leadership/`, the product shots (`shelf-*.jpg`, `chess-materials.jpg`) and the chess
+piece PNGs in `assets/pieces/`.
 
 - **Club shelf product shots:** `assets/shelf-workbook.jpg`, `shelf-clock.jpg` and
   `shelf-kit.jpg` illustrate the workbook, digital clock and club kit cards;
@@ -125,12 +211,14 @@ link, phone calls to the Secretary/Treasurer, or email.
 | Julieann Njambi | Treasurer | 0722 709 727 · WhatsApp |
 | Academy office | General & schools | kerichochessacademy@gmail.com |
 
-## Forms
+## Where submissions go
 
-Registration/membership forms POST to a Google Apps Script endpoint; paste your deployed
-Web App URL into `SHEETS_ENDPOINT` in `js/smc.js`. Until then, forms gracefully fall back
-to a **WhatsApp confirmation button** pre-filled with the entrant's details (nothing is
-lost, no backend required). Payments reference M-Pesa Paybill **880100**.
+Every form POSTs to a Google Apps Script endpoint; paste your deployed Web App URL into
+`SHEETS_ENDPOINT` in `js/smc.js`. `js/forms.js` reads the same setting (and the same WhatsApp
+number) from `window.SMC`, so **one line turns the whole site's forms on at once**. Until
+then, every form gracefully falls back to a **WhatsApp confirmation button** pre-filled with
+the entrant's details (nothing is lost, no backend required). Payments reference M-Pesa
+Paybill **880100**.
 
 ## Run locally
 
@@ -170,17 +258,21 @@ Then open `http://localhost:8000`.
 .
 ├── index.html        coaching.html    tournaments.html   live.html
 ├── play.html         shop.html        about.html         contact.html
+├── events.html       event.html       register.html      consent.html
 ├── css/
 │   ├── kiddos.css    (template theme)      chess.css     (club restyle + chess components)
+│   ├── events.css    (events listing · event detail · stepped form shell)
 │   └── animate.css · aos.css · owl carousel · magnific-popup · icon fonts css
 ├── js/
 │   ├── jquery · bootstrap · owl · aos · waypoints · stellar · scrollax (template stack)
 │   ├── kiddos-main.js (template runtime)   smc.js        (academy runtime)
+│   ├── forms.js      (stepped runtime for register.html + consent.html)
 │   └── chess.js · play.js · live.js · board3d.js         (the chess core)
 ├── fonts/   (flaticon · icomoon · ionicons · open-iconic)
-├── assets/  (academy photography — original pictures from the previous build;
-│            crest logo.png / logo-light.png / favicon.png and the Secretary's
-│            gladys-*.jpg photos from Samarkand 2026)
+├── assets/  (crest logo.png / logo-light.png / favicon.png, the Secretary's
+│            gladys-*.jpg photos from Samarkand 2026, event-poster.jpg,
+│            hero-dark-board.jpg and the free-stock photos/ set)
+│   ├── photos/      (Pexels-licensed replacement photography — drop-in slot)
 │   └── leadership/  (board portraits: 600×900 president-shem-meso.jpg and
 │                    vice-chairperson-barnabas-ochieng.jpg, plus source/ originals)
 └── kiddos-master.zip   (uploaded source template, for reference)

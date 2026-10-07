@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Live Broadcast Room · Kericho Chess Club &amp; Academy</title>
+    <title>Upcoming Events · Kericho Chess Club &amp; Academy</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Watch academy chess live: Board 1 with live clocks, evaluation bar, move list and spectator feed: a grandmaster-style broadcast for school chess in Kericho.">
+    <meta name="description" content="Upcoming chess events from Kericho Chess Club &amp; Academy: fixtures, venues, entry fees and online registration.">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
     <meta name="theme-color" content="#1eaaf1">
@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/kiddos.css">
     <link rel="stylesheet" href="css/chess.css">
+    <link rel="stylesheet" href="css/events.css">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
@@ -41,8 +42,8 @@
 	        	<li class="nav-item"><a href="index.html" class="nav-link" aria-label="Home" title="Home"><span class="fas fa-house"></span></a></li>
 	        	<li class="nav-item"><a href="coaching.html" class="nav-link" aria-label="Coaching" title="Coaching"><span class="fas fa-graduation-cap"></span></a></li>
 	        	<li class="nav-item"><a href="tournaments.html" class="nav-link" aria-label="Tournaments" title="Tournaments"><span class="fas fa-trophy"></span></a></li>
-	        	<li class="nav-item"><a href="events.html" class="nav-link" aria-label="Events" title="Events"><span class="fas fa-calendar-days"></span></a></li>
-	        	<li class="nav-item active"><a href="live.html" class="nav-link" aria-label="Live" title="Live"><span class="fas fa-tower-broadcast"></span><span class="live-dot"></span></a></li>
+	        	<li class="nav-item active"><a href="events.html" class="nav-link" aria-label="Events" title="Events"><span class="fas fa-calendar-days"></span></a></li>
+	        	<li class="nav-item"><a href="live.html" class="nav-link" aria-label="Live" title="Live"><span class="fas fa-tower-broadcast"></span><span class="live-dot"></span></a></li>
 	        	<li class="nav-item"><a href="play.html" class="nav-link" aria-label="Play" title="Play"><span class="fas fa-chess"></span></a></li>
 	        	<li class="nav-item"><a href="shop.html" class="nav-link" aria-label="Shop" title="Shop"><span class="fas fa-bag-shopping"></span></a></li>
 	        	<li class="nav-item"><a href="about.html" class="nav-link" aria-label="About" title="About"><span class="fas fa-circle-info"></span></a></li>
@@ -59,145 +60,130 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <p class="text-center mb-2"><span class="badge-live"><span class="live-dot"></span> BROADCASTING · BOARD 1</span></p>
-            <h1 class="mb-2 bread">The Broadcast Room</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Live <i class="ion-ios-arrow-forward"></i></span></p>
+            <h1 class="mb-2 bread">Upcoming Events</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Events <i class="ion-ios-arrow-forward"></i></span></p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ NOTATION TICKER ============ -->
-    <div class="chess-ticker" aria-hidden="true">
-      <div class="ticker-track">
-        <span>BOARD 1 <i>&#9670;</i> BARASA K vs CHEBET A</span><span>OPERA GAME <i>&#9670;</i> MORPHY 1858 LINE</span><span>EVAL <i>&#9670;</i> WHITE +5.6</span><span>ROUND 7 <i>&#9670;</i> SWISS FORMAT</span><span>CLOCKS <i>&#9670;</i> 10 MIN EACH</span><span>STUDIED IN WEEK SIX <i>&#9670;</i> JUNIOR CURRICULUM</span>
-        <span>BOARD 1 <i>&#9670;</i> BARASA K vs CHEBET A</span><span>OPERA GAME <i>&#9670;</i> MORPHY 1858 LINE</span><span>EVAL <i>&#9670;</i> WHITE +5.6</span><span>ROUND 7 <i>&#9670;</i> SWISS FORMAT</span><span>CLOCKS <i>&#9670;</i> 10 MIN EACH</span><span>STUDIED IN WEEK SIX <i>&#9670;</i> JUNIOR CURRICULUM</span>
-      </div>
-    </div>
-
-    <!-- ============ BROADCAST ============ -->
-		<section class="ftco-section bg-light">
+    <!-- ============ UPCOMING EVENTS ============ -->
+		<section class="ftco-section">
 			<div class="container">
-        <div class="bc-grid">
-          <!-- Stage -->
-          <div class="bc-stage ftco-animate">
-            <div class="bc-topbar">
-              <span class="bc-title"><i class="fas fa-satellite-dish"></i> Kericho Inter-Schools League · Round 4</span>
-              <span class="bc-note"><span class="live-dot"></span> <span id="liveState">LIVE · ROUND 4 IN PROGRESS</span></span>
-            </div>
-
-            <!-- Black player + clock -->
-            <div class="player-row">
-              <div class="player-id">
-                <span class="player-chip b">CA</span>
-                <div><b>Chebet A.</b><span>Kericho Primary · U-12</span></div>
-              </div>
-              <div class="clock" id="clockB">10:00</div>
-            </div>
-
-            <div class="board-frame">
-              <div class="board3d-stage" id="stage3d"><span class="b3d-tag">3D Board · WebGL</span><span class="b3d-hint">drag to tilt · auto replay</span></div>
-              <div class="play-board" id="liveBoard"></div>
-            </div>
-
-            <!-- White player + clock -->
-            <div class="player-row">
-              <div class="player-id">
-                <span class="player-chip w">BK</span>
-                <div><b>Barasa K.</b><span>Kapsaos Boys · U-14</span></div>
-              </div>
-              <div class="clock" id="clockW">10:00</div>
-            </div>
-
-            <!-- Eval bar -->
-            <div class="eval-wrap">
-              <div class="eval-bar"><div class="eval-fill" id="evalFill"></div></div>
-              <div class="eval-readout">
-                <span>Engine</span><b id="evalNum">+0.2</b><span>10+0 Rapid</span>
-              </div>
-            </div>
-
-            <div class="result-banner" id="liveResult"></div>
-
-            <div class="bc-controls">
-              <button class="btn btn-outline-chess py-2 px-4" id="bcPause"><i class="fas fa-pause"></i> Pause Feed</button>
-              <button class="btn btn-outline-chess py-2 px-4" id="bcRestart"><i class="fas fa-rotate-left"></i> Restart Game</button>
-            </div>
-          </div>
-
-          <!-- Side rail -->
-          <div class="bc-side">
-            <div class="bc-panel ftco-animate">
-              <span class="panel-label"><i class="fas fa-eye"></i>Telemetry</span>
-              <div class="metric-row"><span class="metric-k">Spectators</span><span class="metric-v warm" id="liveViewers">128</span></div>
-              <div class="metric-row"><span class="metric-k">Boards live</span><span class="metric-v">4</span></div>
-              <div class="metric-row"><span class="metric-k">Time control</span><span class="metric-v cold">10 + 0</span></div>
-              <div class="metric-row"><span class="metric-k">Feed quality</span><span class="metric-v"><span class="ok-dot"></span>&nbsp;Stable</span></div>
-            </div>
-
-            <div class="bc-panel ftco-animate">
-              <span class="panel-label"><i class="fas fa-list-ol"></i>Move List</span>
-              <div class="movelist" id="liveMoves" style="height:300px;"></div>
-            </div>
-
-            <div class="bc-panel ftco-animate">
-              <span class="panel-label"><i class="fas fa-comments"></i>Spectator Feed · Simulated</span>
-              <div class="chat-feed" id="liveChat"></div>
-            </div>
+				<div class="row justify-content-center mb-5 pb-2">
+          <div class="col-md-8 text-center heading-section ftco-animate">
+            <h2 class="mb-4"><span>Upcoming</span> Events</h2>
+            <p>Check em out! Every fixture below is open for registration until the draw is made. Pick an event to see the full schedule, the entry fees and the registration form.</p>
           </div>
         </div>
-        <div class="row mt-4">
-          <div class="col-12 text-center ftco-animate">
-            <p class="text-muted mb-0">Fixture days, the top boards stream here with live clocks and evaluation. Tonight's replay: the Opera Game line the juniors studied in week six.</p>
+
+        <!--
+          ADD THE NEXT EVENT: copy the whole <article class="ev-card"> block below,
+          drop it straight under this one, then change only these five things:
+            1. the poster image  (background-image url + the img alt text fallback)
+            2. the status badge   (open · soon · closed)
+            3. the date chip      (day number + three-letter month)
+            4. the title, date line and venue line
+            5. the "Register" link → event.html (or a dedicated event page)
+          Nothing else needs to move; the grid reflows on its own.
+        -->
+        <div class="ev-toolbar ftco-animate">
+          <span class="ev-count"><b>1</b> event open for registration</span>
+          <a href="#how-entry" class="btn btn-outline-chess px-4 py-2"><i class="fas fa-circle-question"></i> How entry works</a>
+        </div>
+
+        <div class="ev-grid">
+          <article class="ev-card ftco-animate">
+            <div class="ev-poster" style="background-image: url('assets/event-poster.jpg');">
+              <span class="ev-badge open"><i class="fas fa-circle-check"></i> Entries open</span>
+              <span class="ev-datechip"><span class="d">14</span><span class="m">Nov</span></span>
+            </div>
+            <div class="ev-body">
+              <h3><a href="event.html">Kericho County Open Chess Championship 2026</a></h3>
+              <ul class="ev-meta">
+                <li><i class="fas fa-calendar-day"></i><span><b>Date</b> &middot; 14/11/2026, 0900 hrs</span></li>
+                <li><i class="fas fa-location-dot"></i><span><b>Venue</b> &middot; Kericho Green Stadium Hall, Kericho Town</span></li>
+                <li><i class="fas fa-chess-board"></i><span><b>Format</b> &middot; 7 rounds Swiss, 30+0</span></li>
+                <li><i class="fas fa-hourglass-half"></i><span><b>Entries close</b> &middot; 07/11/2026, 1800 hrs</span></li>
+              </ul>
+              <div class="ev-foot">
+                <span class="ev-fee">From<b>KES 500 <span>CKF member</span></b></span>
+                <a href="event.html" class="btn btn-secondary px-4 py-2">Register <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+          <!-- /event card -->
+        </div>
+			</div>
+		</section>
+
+    <!-- ============ HOW ENTRY WORKS ============ -->
+		<section class="ftco-section bg-light" id="how-entry">
+			<div class="container">
+				<div class="row justify-content-center mb-5 pb-2">
+          <div class="col-md-8 text-center heading-section ftco-animate">
+            <h2 class="mb-4"><span>How</span> Entry Works</h2>
+            <p>Three steps from reading the fixture to sitting at the board. Nothing is posted anywhere without your say-so.</p>
+          </div>
+        </div>
+        <div class="steps-strip ftco-animate">
+          <div class="step-card">
+            <span class="step-n">01</span>
+            <h3><i class="fas fa-file-pen"></i> Fill the entry form</h3>
+            <p>Open the event page and complete the registration form. Two minutes, no account needed.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-n">02</span>
+            <h3><i class="fas fa-mobile-screen-button"></i> Pay the entry fee</h3>
+            <p>M-Pesa Paybill <b>880100</b>, account <b>123003#YourName</b>. Keep the confirmation message.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-n">03</span>
+            <h3><i class="fas fa-circle-check"></i> Get confirmed</h3>
+            <p>Shem confirms your section on WhatsApp and shares the venue card before the first round.</p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+          <div class="col-lg-9">
+            <div class="notice info">
+              <i class="fas fa-shield-halved"></i>
+              <div>
+                <p><b>Every player under 18 needs a signed consent form.</b> We photograph and film our events for coaching review, the club website and tournament reports. One consent form covers a player for the whole season.</p>
+                <p><a href="consent.html">Photo &amp; video consent form</a> &middot; <a href="register.html">Academy membership registration</a></p>
+              </div>
+            </div>
           </div>
         </div>
 			</div>
 		</section>
 
-    <!-- ============ UPCOMING BROADCASTS ============ -->
+    <!-- ============ PAST EVENTS ============ -->
 		<section class="ftco-section">
 			<div class="container">
 				<div class="row justify-content-center mb-5 pb-2">
           <div class="col-md-8 text-center heading-section ftco-animate">
-            <h2 class="mb-4"><span>On The</span> Card</h2>
-            <p>Ask for a reminder on WhatsApp and you'll get a message the moment a board goes live.</p>
+            <h2 class="mb-4"><i class="fas fa-trophy troph"></i><span>Past</span> Events</h2>
+            <p>Results from the last fixture are posted here and in the academy WhatsApp group.</p>
           </div>
         </div>
-				<div class="row">
-					<div class="col-md-4 ftco-animate mb-4">
-            <div class="sched-card h-100">
-              <div class="sched-img" style="background-image: url(assets/photos/duel-wooden-table.jpg);"></div>
-              <div class="sched-body">
-                <span class="sched-when">Sat 26 Sep · 09:00 EAT</span>
-                <h3>Kericho Inter-Schools Open · Boards 1 to 4</h3>
-                <p>Full-day Swiss across eight categories. The flagship stream of the season.</p>
-                <a class="btn btn-wa py-2 px-3" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20remind%20me%20when%20the%20Kericho%20Open%20goes%20live%20on%20Sep%2026." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify Me</a>
-              </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-9 ftco-animate">
+            <div class="res-card">
+              <table class="res-table">
+                <thead><tr><th>Pos</th><th>Player</th><th>School / Club</th><th>Section</th><th>Pts</th></tr></thead>
+                <tbody>
+                  <tr><td class="pos pos-1">01</td><td>Barasa K.</td><td>Kapsaos Boys</td><td>U-14</td><td>6.5 / 7</td></tr>
+                  <tr><td class="pos pos-2">02</td><td>Chebet A.</td><td>Kericho Primary</td><td>U-12</td><td>6.0 / 7</td></tr>
+                  <tr><td class="pos pos-3">03</td><td>Mutai D.</td><td>Litein Academy</td><td>U-16</td><td>5.5 / 7</td></tr>
+                  <tr><td>04</td><td>Wanjiru F.</td><td>Greenhill Girls</td><td>U-12</td><td>5.0 / 7</td></tr>
+                  <tr><td>05</td><td>Kiprono E.</td><td>Kericho Primary</td><td>U-10</td><td>5.0 / 7</td></tr>
+                </tbody>
+              </table>
             </div>
-					</div>
-					<div class="col-md-4 ftco-animate mb-4">
-            <div class="sched-card h-100">
-              <div class="sched-img" style="background-image: url(assets/photos/two-players-move.jpg);"></div>
-              <div class="sched-body">
-                <span class="sched-when">Every Saturday · 10:00 EAT</span>
-                <h3>Saturday Club Challenge · Board 1</h3>
-                <p>The academy's weekly internal ladder, streamed from the club room.</p>
-                <a class="btn btn-wa py-2 px-3" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20add%20me%20to%20the%20Saturday%20club%20stream%20reminders." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify Me</a>
-              </div>
-            </div>
-					</div>
-					<div class="col-md-4 ftco-animate mb-4">
-            <div class="sched-card h-100">
-              <div class="sched-img" style="background-image: url(assets/photos/focused-move.jpg);"></div>
-              <div class="sched-body">
-                <span class="sched-when">Term 3 · Date TBC</span>
-                <h3>Kericho vs Litein Friendly Dual</h3>
-                <p>Two counties, ten boards, one stream. The fixture every learner talks about.</p>
-                <a class="btn btn-wa py-2 px-3" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20notify%20me%20when%20the%20Kericho%20vs%20Litein%20dual%20is%20scheduled." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify Me</a>
-              </div>
-            </div>
-					</div>
-				</div>
+            <p class="text-center mt-4 mb-0"><a href="tournaments.html" class="btn btn-outline-chess px-4 py-3"><i class="fas fa-trophy"></i> Full circuit &amp; honour roll</a></p>
+          </div>
+        </div>
 			</div>
 		</section>
 
@@ -206,11 +192,11 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9">
-						<h2>Play your own game live</h2>
-						<p class="mb-0">Step off the spectator bench. The same engine runs the practice board, and the circuit is open for entries.</p>
+						<h2>Running an event of your own?</h2>
+						<p class="mb-0">Schools and county associations: we supply the arbiters, the clocks and the pairing software. Talk to the academy office about a joint fixture.</p>
 					</div>
 					<div class="col-md-3 d-flex align-items-center">
-						<p class="mb-0"><a href="play.html" class="btn btn-secondary px-4 py-3"><i class="fas fa-play"></i> See It In Action</a></p>
+						<p class="mb-0"><a href="contact.html" class="btn btn-secondary px-4 py-3">Talk To Us</a></p>
 					</div>
 				</div>
 			</div>
@@ -225,12 +211,12 @@
             	<h2 class="ftco-heading-2">Have a Question?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">Kericho town · coaching across Kericho County, Kenya</span></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Kericho town &middot; coaching across Kericho County, Kenya</span></li>
 	                <li><a href="tel:+254729037585"><span class="icon icon-phone"></span><span class="text">+254 729 037 585</span></a></li>
 	                <li><a href="https://wa.me/254729037585" target="_blank" rel="noopener"><span class="icon icon-chat"></span><span class="text">WhatsApp +254 729 037 585</span></a></li>
 	                <li><a href="mailto:shemeso26@gmail.com"><span class="icon icon-envelope"></span><span class="text">shemeso26@gmail.com</span></a></li>
 	                <li><a href="mailto:kerichochessacademy@gmail.com"><span class="icon icon-envelope"></span><span class="text">kerichochessacademy@gmail.com</span></a></li>
-	                <li><span class="icon icon-clock"></span><span class="text">Replies usually same day · fixture days after the last round</span></li>
+	                <li><span class="icon icon-clock"></span><span class="text">Replies usually same day &middot; fixture days after the last round</span></li>
 	              </ul>
 	            </div>
 	            <p class="footer-brand-tag">Chess coaching, live broadcasts, tournaments and materials for schools across Kericho County, Kenya.</p>
@@ -240,17 +226,17 @@
             <div class="ftco-footer-widget mb-5">
               <h2 class="ftco-heading-2">Latest from the Academy</h2>
               <div class="block-21 mb-4 d-flex">
-                <a href="tournaments.html" class="blog-img mr-4" style="background-image: url(assets/photos/woman-outdoors.jpg);"></a>
+                <a href="event.html" class="blog-img mr-4" style="background-image: url(assets/event-poster.jpg);"></a>
                 <div class="text">
-                  <h3 class="heading"><a href="tournaments.html">Kericho Inter-Schools Open · registration closes 19 Sep</a></h3>
+                  <h3 class="heading"><a href="event.html">Kericho County Open &middot; entries close 07 Nov</a></h3>
                   <div class="meta">
-                    <div><a href="tournaments.html"><span class="icon-calendar"></span> Sep 26, 2026</a></div>
-                    <div><a href="tournaments.html"><span class="icon-person"></span> Coach Shem</a></div>
+                    <div><a href="event.html"><span class="icon-calendar"></span> Nov 14, 2026</a></div>
+                    <div><a href="events.html"><span class="icon-person"></span> Academy</a></div>
                   </div>
                 </div>
               </div>
               <div class="block-21 mb-5 d-flex">
-                <a href="play.html" class="blog-img mr-4" style="background-image: url(assets/photos/contrasting-outfits.jpg);"></a>
+                <a href="play.html" class="blog-img mr-4" style="background-image: url(assets/hero-dark-board.jpg);"></a>
                 <div class="text">
                   <h3 class="heading"><a href="play.html">Daily warm-up: the puzzle of the day is live on the Play page</a></h3>
                   <div class="meta">
@@ -273,7 +259,7 @@
                 <li><a href="consent.html"><span class="ion-ios-arrow-round-forward mr-2"></span>Photo &amp; Video Consent</a></li>
                 <li><a href="live.html"><span class="ion-ios-arrow-round-forward mr-2"></span>Live Broadcasts</a></li>
                 <li><a href="play.html"><span class="ion-ios-arrow-round-forward mr-2"></span>Play The Board</a></li>
-                <li><a href="https://www.kwaarena.com/?ref=b95ae9f671df7b255e15a188" target="_blank" rel="noopener"><span class="ion-ios-arrow-round-forward mr-2"></span>Play &amp; Earn · Kwaarena</a></li>
+                <li><a href="https://www.kwaarena.com/?ref=b95ae9f671df7b255e15a188" target="_blank" rel="noopener"><span class="ion-ios-arrow-round-forward mr-2"></span>Play &amp; Earn &middot; Kwaarena</a></li>
                 <li><a href="shop.html"><span class="ion-ios-arrow-round-forward mr-2"></span>Shop</a></li>
                 <li><a href="contact.html"><span class="ion-ios-arrow-round-forward mr-2"></span>Contact &amp; Enrol</a></li>
               </ul>
@@ -314,7 +300,7 @@
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Kericho Chess Club &amp; Academy · Kericho · Kenya · EAT (UTC+3)</p>
+            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Kericho Chess Club &amp; Academy &middot; Kericho &middot; Kenya &middot; EAT (UTC+3)</p>
           </div>
         </div>
       </div>
@@ -323,7 +309,6 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#1eaaf1"/></svg></div>
 
-  <script type="module" src="js/board3d.js"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>
@@ -336,10 +321,8 @@
   <script src="js/aos.js"></script>
   <script src="js/jquery.animateNumber.min.js"></script>
   <script src="js/scrollax.min.js"></script>
-  <script src="js/chess.js"></script>
   <script src="js/kiddos-main.js"></script>
   <script src="js/smc.js"></script>
-  <script src="js/live.js"></script>
 
   </body>
 </html>
