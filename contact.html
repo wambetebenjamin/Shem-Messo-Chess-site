@@ -8,7 +8,7 @@
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
-    <meta name="theme-color" content="#05121f">
+    <meta name="theme-color" content="#05101d">
     <meta property="og:title" content="Enrol &amp; Contact · Kericho Chess Club &amp; Academy">
     <meta property="og:description" content="Enrol a learner, become an academy member or bring coaching to your school. Contact Kericho Chess Club &amp; Academy by WhatsApp, phone or the forms here.">
     <meta property="og:type" content="website">
@@ -24,22 +24,21 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/kiddos.css">
-    <link rel="stylesheet" href="css/chess.css">
-    <link rel="stylesheet" href="css/night.css">
+    <link rel="stylesheet" href="css/site.css">
     <noscript><style>.ftco-animate{ opacity:1 !important; visibility:visible !important; }</style></noscript>
   </head>
-  <body class="nk">
+  <body>
 
-    <a class="nk-skip" href="#main">Skip to content</a>
+    <a class="kc-skip" href="#main">Skip to content</a>
 
     <!-- ============ TOP BAR ============ -->
-    <div class="nk-topbar">
-      <div class="container">
-        <span class="tb-item"><i class="fas fa-location-dot"></i> Kericho town · coaching across Kericho County</span>
-        <a class="tb-item" href="tel:+254729037585"><i class="fas fa-phone"></i> +254 729 037 585</a>
-        <a class="tb-item" href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i> kerichochessacademy@gmail.com</a>
-        <span class="tb-grow"></span>
-        <span class="tb-item tb-social">
+    <div class="kc-top">
+      <div class="kc-wrap kc-top__row">
+        <span><i class="fas fa-location-dot"></i>Kericho town, Kenya</span>
+        <a href="tel:+254729037585"><i class="fas fa-phone"></i>+254 729 037 585</a>
+        <a href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i>kerichochessacademy@gmail.com</a>
+        <span class="kc-top__spacer"></span>
+        <span class="kc-top__social">
           <a href="https://wa.me/254729037585" target="_blank" rel="noopener" aria-label="WhatsApp the academy"><i class="fab fa-whatsapp"></i></a>
           <a href="https://www.facebook.com/smesso" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.tiktok.com/@kericho.chess.clu" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
@@ -48,294 +47,286 @@
     </div>
 
     <!-- ============ NAV ============ -->
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light nk-nav" id="ftco-navbar">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <img class="brand-crest" src="assets/logo-gold.png" alt="Kericho Chess Academy crest: a pawn, king and knight over the motto Forward Ever, Backward Never" width="640" height="650" decoding="async">
-          <span>Kericho Chess<small>Club &amp; Academy</small></span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="oi oi-menu"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="coaching.html" class="nav-link">Coaching</a></li>
-            <li class="nav-item"><a href="tournaments.html" class="nav-link">Tournaments</a></li>
-            <li class="nav-item"><a href="live.html" class="nav-link">Live</a></li>
-            <li class="nav-item"><a href="play.html" class="nav-link">Play</a></li>
-            <li class="nav-item"><a href="shop.html" class="nav-link">Shop</a></li>
-            <li class="nav-item active"><a href="contact.html" class="nav-link">Contact</a></li>
-            <li class="nav-item cta"><a href="contact.html" class="nav-link">Join Us</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- END nav -->
-
-  <main id="main">
-    <!-- ============ BANNER ============ -->
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('assets/tournament-prep-08.jpg');">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-10 ftco-animate text-center">
-            <h1 class="mb-2 bread">Contact Us</h1>
-            <p class="nk-banner-sub">Message the office, or an office bearer directly</p>
+    <header class="kc-header">
+      <nav class="navbar navbar-expand-lg kc-nav" id="ftco-navbar" aria-label="Main">
+        <div class="kc-wrap kc-nav__inner">
+          <a class="navbar-brand kc-brand" href="index.html">
+            <img src="assets/logo-gold.png" alt="Kericho Chess Academy crest: a pawn, king and knight over the motto Forward Ever, Backward Never" width="640" height="650" decoding="async">
+            <span class="kc-brand__text"><b>Kericho Chess</b><span>Club &amp; Academy</span></span>
+          </a>
+          <button class="navbar-toggler kc-burger" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav kc-nav__links">
+              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+              <li class="nav-item"><a class="nav-link" href="coaching.html">Coaching</a></li>
+              <li class="nav-item"><a class="nav-link" href="tournaments.html">Events</a></li>
+              <li class="nav-item"><a class="nav-link" href="live.html">Live</a></li>
+              <li class="nav-item"><a class="nav-link" href="play.html">Play</a></li>
+              <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+              <li class="nav-item"><a class="nav-link is-active" href="contact.html">Contact</a></li>
+              <li class="nav-item kc-nav__cta"><a class="nav-link" href="contact.html#membership">Join Us</a></li>
+            </ul>
           </div>
         </div>
+      </nav>
+    </header>
+  <main id="main">
+
+    <!-- ============ PAGE TITLE ============ -->
+    <section class="kc-banner">
+      <div class="kc-wrap">
+        <h1 class="kc-banner__title">Contact Us</h1>
+        <p class="kc-banner__sub">Message the office, or an office bearer directly</p>
       </div>
     </section>
 
     <!-- ============ OFFICE BEARERS ============ -->
-    <section class="nk-sec" id="team">
-      <div class="container">
-        <div class="nk-head ftco-animate">
-          <span class="nk-eyebrow">The people to talk to</span>
-          <h2 class="nk-h2">Office bearers</h2>
-          <p>Every enquiry reaches a person, not a ticket queue. Pick whoever fits your question and message them directly.</p>
+    <section class="kc-sec" id="team">
+      <div class="kc-wrap">
+        <div class="kc-head kc-head--row">
+          <div class="kc-head__text">
+            <span class="kc-label">The people to talk to</span>
+            <h2 class="kc-h2 kc-mb-0">Office bearers</h2>
+          </div>
+          <a class="kc-btn kc-btn--gold kc-btn--sm" href="#membership">Become a member</a>
         </div>
 
-        <div class="team-grid">
-          <article class="team-card ftco-animate">
-            <div class="team-photo-wrap">
-              <img class="team-photo" src="assets/leadership/president-shem-meso.jpg" alt="Shem Meso, President and Head Coach of Kericho Chess Club &amp; Academy" width="600" height="900" loading="lazy">
-            </div>
+        <div class="kc-team">
+          <article class="kc-member ftco-animate">
+            <img class="kc-member__photo" src="assets/leadership/president-shem-meso.jpg" alt="Shem Meso, President and Head Coach of Kericho Chess Club &amp; Academy" width="600" height="900" loading="lazy">
             <h3>Shem Meso</h3>
-            <span class="team-role">President &amp; Head Coach</span>
+            <span class="kc-member__role">President &amp; Head Coach</span>
             <p>Coaching programmes, private lessons, tournament preparation and club partnerships.</p>
-            <div class="team-links">
-              <a class="btn btn-wa" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20a%20question%20about%20the%20academy." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp Shem</a>
-              <a class="team-mail" href="mailto:shemeso26@gmail.com"><i class="fas fa-envelope"></i> shemeso26@gmail.com</a>
-              <a class="team-mail" href="tel:+254729037585"><i class="fas fa-phone"></i> 0729 037 585</a>
+            <div class="kc-member__links">
+              <a class="kc-btn kc-btn--wa kc-btn--sm" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20a%20question%20about%20the%20academy." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp Shem</a>
+              <a class="kc-member__line" href="mailto:shemeso26@gmail.com"><i class="fas fa-envelope"></i> shemeso26@gmail.com</a>
+              <a class="kc-member__line" href="tel:+254729037585"><i class="fas fa-phone"></i> 0729 037 585</a>
             </div>
           </article>
-          <article class="team-card ftco-animate">
-            <div class="team-photo-wrap">
-              <img class="team-photo" src="assets/leadership/vice-chairperson-barnabas-ochieng.jpg" alt="Barnabas Ochieng, Vice Chairperson of Kericho Chess Club &amp; Academy" width="600" height="900" loading="lazy">
-            </div>
+
+          <article class="kc-member ftco-animate">
+            <img class="kc-member__photo" src="assets/leadership/vice-chairperson-barnabas-ochieng.jpg" alt="Barnabas Ochieng, Vice Chairperson of Kericho Chess Club &amp; Academy" width="600" height="900" loading="lazy">
             <h3>Barnabas Ochieng</h3>
-            <span class="team-role">Vice Chairperson</span>
+            <span class="kc-member__role">Vice Chairperson</span>
             <p>Club programmes, partner schools and fixture-day logistics.</p>
-            <div class="team-links">
-              <a class="btn btn-tertiary" href="mailto:kerichochessacademy@gmail.com?subject=Message%20for%20the%20Vice%20Chairperson%2C%20Barnabas%20Ochieng"><i class="fas fa-envelope"></i> Route via the office</a>
-              <a class="team-mail" href="tel:+254729037585"><i class="fas fa-phone"></i> Academy office · 0729 037 585</a>
+            <div class="kc-member__links">
+              <a class="kc-btn kc-btn--ghost kc-btn--sm" href="mailto:kerichochessacademy@gmail.com?subject=Message%20for%20the%20Vice%20Chairperson%2C%20Barnabas%20Ochieng"><i class="fas fa-envelope"></i> Route via the office</a>
+              <a class="kc-member__line" href="tel:+254729037585"><i class="fas fa-phone"></i> Academy office · 0729 037 585</a>
             </div>
           </article>
-          <article class="team-card ftco-animate">
-            <div class="team-photo-wrap">
-              <img class="team-photo" src="assets/gladys-langat-portrait.jpg" alt="Gladys Langat, Secretary of Kericho Chess Academy" width="600" height="900" loading="lazy">
-            </div>
+
+          <article class="kc-member ftco-animate">
+            <img class="kc-member__photo" src="assets/gladys-langat-portrait.jpg" alt="Gladys Langat, Secretary of Kericho Chess Academy" width="600" height="900" loading="lazy">
             <h3>Gladys Langat</h3>
-            <span class="team-role">Secretary</span>
+            <span class="kc-member__role">Secretary</span>
             <p>Enrolment, membership records, fixture schedules and federation matters.</p>
-            <div class="team-links">
-              <a class="btn btn-wa" href="https://wa.me/254723397573?text=Hi%20Gladys%2C%20a%20question%20about%20enrolment%20at%20the%20academy." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp the Secretary</a>
-              <a class="team-mail" href="tel:+254723397573"><i class="fas fa-phone"></i> 0723 397 573</a>
+            <div class="kc-member__links">
+              <a class="kc-btn kc-btn--wa kc-btn--sm" href="https://wa.me/254723397573?text=Hi%20Gladys%2C%20a%20question%20about%20enrolment%20at%20the%20academy." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp the Secretary</a>
+              <a class="kc-member__line" href="tel:+254723397573"><i class="fas fa-phone"></i> 0723 397 573 · new line</a>
             </div>
           </article>
-          <article class="team-card ftco-animate">
-            <div class="team-photo-wrap">
-              <img class="team-photo" src="assets/njambi-treasurer.jpg" alt="Julieann Njambi, Treasurer of Kericho Chess Club &amp; Academy" width="600" height="900" loading="lazy">
-            </div>
+
+          <article class="kc-member ftco-animate">
+            <img class="kc-member__photo" src="assets/njambi-treasurer.jpg" alt="Julieann Njambi, Treasurer of Kericho Chess Club &amp; Academy" width="600" height="900" loading="lazy">
             <h3>Julieann Njambi</h3>
-            <span class="team-role">Treasurer</span>
+            <span class="kc-member__role">Treasurer</span>
             <p>M-Pesa payments, receipts, membership fees and tournament entries.</p>
-            <div class="team-links">
-              <a class="btn btn-wa" href="https://wa.me/254722709727?text=Hi%20Julieann%2C%20a%20question%20about%20payment%20at%20the%20academy." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp the Treasurer</a>
-              <a class="team-mail" href="tel:+254722709727"><i class="fas fa-phone"></i> 0722 709 727</a>
+            <div class="kc-member__links">
+              <a class="kc-btn kc-btn--wa kc-btn--sm" href="https://wa.me/254722709727?text=Hi%20Julieann%2C%20a%20question%20about%20payment%20at%20the%20academy." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp the Treasurer</a>
+              <a class="kc-member__line" href="tel:+254722709727"><i class="fas fa-phone"></i> 0722 709 727</a>
             </div>
           </article>
         </div>
 
-        <div class="office-band ftco-animate">
-          <div class="team-ava sm" aria-hidden="true">KA</div>
-          <div class="ob-text">
+        <div class="kc-office">
+          <span class="kc-office__mark" aria-hidden="true">KA</span>
+          <div class="kc-office__text">
             <h3>Academy office</h3>
             <p>General enquiries, quotations, school kit orders and partnership request letters.</p>
           </div>
-          <div class="ob-actions">
-            <a class="btn btn-primary px-4 py-2" href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i> kerichochessacademy@gmail.com</a>
-            <a class="btn btn-outline-chess px-4 py-2" href="tel:+254729037585"><i class="fas fa-phone"></i> 0729 037 585</a>
+          <div class="kc-office__actions">
+            <a class="kc-btn kc-btn--gold kc-btn--sm" href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i> kerichochessacademy@gmail.com</a>
+            <a class="kc-btn kc-btn--ghost kc-btn--sm" href="tel:+254729037585"><i class="fas fa-phone"></i> 0729 037 585</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ============ MEMBERSHIP ============ -->
-    <section class="nk-sec nk-sec--alt" id="membership">
-      <div class="container">
-        <div class="nk-head ftco-animate">
-          <span class="nk-eyebrow">Academy membership</span>
-          <h2 class="nk-h2">Become a member</h2>
-          <p>Separate from tournament entry: membership keeps a learner enrolled year-round, with priority on everything.</p>
+    <section class="kc-sec kc-sec--alt" id="membership">
+      <div class="kc-wrap">
+        <div class="kc-head kc-head--row">
+          <div class="kc-head__text">
+            <span class="kc-label">Academy membership</span>
+            <h2 class="kc-h2 kc-mb-0">Become a member</h2>
+          </div>
+          <a class="kc-btn kc-btn--wa kc-btn--sm" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%27d%20like%20to%20join%20the%20academy." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Ask on WhatsApp</a>
         </div>
 
-        <div class="nk-grid nk-grid--4 ftco-animate" style="margin-bottom:34px;">
-          <div class="nk-value"><b>Priority slots</b><span>First call on every tournament entry list.</span></div>
-          <div class="nk-value"><b>Lichess team</b><span>Access to the academy's online team and puzzle ladder.</span></div>
-          <div class="nk-value"><b>Shop discount</b><span>Discounted materials, boards and clocks.</span></div>
-          <div class="nk-value"><b>Progress reports</b><span>Term-by-term notes on rating and next steps.</span></div>
-        </div>
-
-        <div class="reg-card ftco-animate">
-          <div class="reg-side">
-            <span class="eyebrow-tag">Annual membership</span>
-            <h2>Fees &amp; how to join</h2>
-            <ul class="perk-list">
-              <li><span class="fas fa-check"></span> Fill the form and confirm the band</li>
-              <li><span class="fas fa-check"></span> Pay on M-Pesa Paybill <b>880100</b></li>
-              <li><span class="fas fa-check"></span> Account <b>123003#MemberName</b> — the office confirms same day</li>
-            </ul>
-            <div class="table-responsive">
-              <table class="table nk-table">
+        <div class="kc-split kc-split--top">
+          <div class="kc-split__text">
+            <p>Separate from tournament entry: membership keeps a learner enrolled year-round, with priority on everything the academy runs.</p>
+            <div class="kc-table-wrap">
+              <table class="kc-table">
                 <thead><tr><th>Member</th><th>Fee</th><th>Covers</th></tr></thead>
                 <tbody>
-                  <tr><td>Learner</td><td>KES 1,000</td><td>One calendar year</td></tr>
-                  <tr><td>Adult / senior</td><td>KES 1,500</td><td>One calendar year</td></tr>
-                  <tr><td>School club</td><td>Custom</td><td>Whole squad, per term</td></tr>
+                  <tr><td class="kc-table__name">Learner</td><td>KES 1,000</td><td>One calendar year</td></tr>
+                  <tr><td class="kc-table__name">Adult / senior</td><td>KES 1,500</td><td>One calendar year</td></tr>
+                  <tr><td class="kc-table__name">School club</td><td>Custom</td><td>Whole squad, per term</td></tr>
                 </tbody>
               </table>
             </div>
+            <ul class="kc-list" style="margin-top:24px;">
+              <li><i class="fas fa-check"></i> Priority slots in every tournament</li>
+              <li><i class="fas fa-check"></i> Access to the academy's Lichess team</li>
+              <li><i class="fas fa-check"></i> Discounted materials from the shop</li>
+              <li><i class="fas fa-check"></i> Term-by-term progress reports</li>
+            </ul>
           </div>
-          <form class="reg-form" id="membershipForm" action="#">
-            <div class="field">
-              <label for="m_name">Full name</label>
-              <input type="text" id="m_name" placeholder="Member's full name" required>
-            </div>
-            <div class="field-row">
-              <div class="field">
-                <label for="m_age">Age</label>
-                <input type="text" id="m_age" placeholder="Age" required>
+
+          <div class="kc-split__media">
+            <form class="kc-form" id="membershipForm" action="#">
+              <div class="kc-form__grid">
+                <div class="kc-field kc-field--full">
+                  <label for="m_name">Full name</label>
+                  <input type="text" id="m_name" placeholder="Member's full name" required>
+                </div>
+                <div class="kc-field">
+                  <label for="m_age">Age</label>
+                  <input type="text" id="m_age" placeholder="Age" required>
+                </div>
+                <div class="kc-field">
+                  <label for="m_gender">Gender</label>
+                  <select id="m_gender" required>
+                    <option value="">Select</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                </div>
+                <div class="kc-field kc-field--full">
+                  <label for="m_school">School / club</label>
+                  <input type="text" id="m_school" placeholder="School or chess club" required>
+                </div>
+                <div class="kc-field">
+                  <label for="m_email">Email (optional)</label>
+                  <input type="email" id="m_email" placeholder="Email address">
+                </div>
+                <div class="kc-field">
+                  <label for="m_phone">Phone</label>
+                  <input type="text" id="m_phone" placeholder="Tel number" required>
+                </div>
+                <div class="kc-field kc-field--full">
+                  <div class="kc-pay">
+                    <span>Payment · M-Pesa Paybill</span>
+                    <b>Paybill: 880100 · Account: 123003#MemberName</b>
+                  </div>
+                </div>
               </div>
-              <div class="field">
-                <label for="m_gender">Gender</label>
-                <select id="m_gender" required>
-                  <option value="">Select</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
+              <p class="form-msg" id="m_msg" role="status"></p>
+              <div class="kc-form__foot">
+                <button type="submit" class="kc-btn kc-btn--gold" id="m_submit">Submit Membership</button>
+                <a class="kc-btn kc-btn--wa" id="m_wa" href="#" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Send membership on WhatsApp</a>
               </div>
-            </div>
-            <div class="field">
-              <label for="m_school">School / club</label>
-              <input type="text" id="m_school" placeholder="School or chess club" required>
-            </div>
-            <div class="field-row">
-              <div class="field">
-                <label for="m_email">Email (optional)</label>
-                <input type="email" id="m_email" placeholder="Email address">
-              </div>
-              <div class="field">
-                <label for="m_phone">Phone</label>
-                <input type="text" id="m_phone" placeholder="Tel number" required>
-              </div>
-            </div>
-            <div class="pay-box">
-              <span class="pay-label">Payment · M-Pesa Paybill</span>
-              <span class="pay-line">Paybill: <b>880100</b> · Account: <b>123003#MemberName</b></span>
-            </div>
-            <div class="form-msg" id="m_msg" role="status"></div>
-            <div class="d-flex flex-wrap" style="gap:12px;">
-              <button type="submit" class="btn btn-primary px-4 py-3" id="m_submit">Submit Membership</button>
-              <a class="btn btn-wa px-4 py-3 wa-confirm" id="m_wa" href="#" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Send membership on WhatsApp</a>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ============ QUICK ENQUIRY ============ -->
-    <section class="nk-sec" id="enquiry">
-      <div class="container">
-        <div class="reg-card ftco-animate">
-          <div class="reg-side">
-            <span class="eyebrow-tag">Quick enquiry</span>
-            <h2>How can we help?</h2>
-            <p>School coaching, private lessons, tournament prep or materials: tell us what you're planning and get a same-day answer.</p>
-            <ul class="perk-list">
-              <li><span class="fas fa-check"></span> No account or email needed</li>
-              <li><span class="fas fa-check"></span> This form composes a WhatsApp message — you press send</li>
-              <li><span class="fas fa-check"></span> Fees and schedules quoted per school or learner</li>
-            </ul>
+    <section class="kc-sec" id="enquiry">
+      <div class="kc-wrap">
+        <div class="kc-head kc-head--row">
+          <div class="kc-head__text">
+            <span class="kc-label">Quick enquiry</span>
+            <h2 class="kc-h2 kc-mb-0">How can we help?</h2>
           </div>
-          <form class="reg-form" id="coachingForm" action="#">
-            <div class="field">
+          <span class="kc-small">School coaching · private lessons · tournament prep · materials</span>
+        </div>
+
+        <form class="kc-form ftco-animate" id="coachingForm" action="#">
+          <div class="kc-form__grid">
+            <div class="kc-field">
               <label for="c_name">Your name</label>
               <input type="text" id="c_name" placeholder="Parent, teacher or learner" required>
             </div>
-            <div class="field">
+            <div class="kc-field">
               <label for="c_school">School / club (if any)</label>
               <input type="text" id="c_school" placeholder="School or chess club">
             </div>
-            <div class="field-row">
-              <div class="field">
-                <label for="c_program">Interested in</label>
-                <select id="c_program" required>
-                  <option value="">Select a programme</option>
-                  <option>School Coaching</option>
-                  <option>Private Lessons</option>
-                  <option>Tournament Prep</option>
-                  <option>Materials / Club Kit</option>
-                  <option>Something else</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="c_phone_note">Phone (optional)</label>
-                <input type="text" id="c_phone_note" placeholder="Phone">
-              </div>
+            <div class="kc-field">
+              <label for="c_program">Interested in</label>
+              <select id="c_program" required>
+                <option value="">Select a programme</option>
+                <option>School Coaching</option>
+                <option>Private Lessons</option>
+                <option>Tournament Prep</option>
+                <option>Materials / Club Kit</option>
+                <option>Something else</option>
+              </select>
             </div>
-            <div class="field">
+            <div class="kc-field">
+              <label for="c_phone_note">Phone (optional)</label>
+              <input type="text" id="c_phone_note" placeholder="Phone">
+            </div>
+            <div class="kc-field kc-field--full">
               <label for="c_notes">Message</label>
               <textarea id="c_notes" rows="4" placeholder="Learner's age, school and goal…"></textarea>
             </div>
-            <div class="form-msg" id="c_msg" role="status"></div>
-            <button type="submit" class="btn btn-primary px-4 py-3">Compose WhatsApp Message</button>
-          </form>
-        </div>
+            <div class="kc-field kc-field--full">
+              <p class="kc-note kc-mb-0"><i class="fas fa-circle-info"></i>This form composes a WhatsApp message — you press send. No account or email needed.</p>
+            </div>
+          </div>
+          <p class="form-msg" id="c_msg" role="status"></p>
+          <div class="kc-form__foot">
+            <button type="submit" class="kc-btn kc-btn--gold">Compose WhatsApp Message</button>
+          </div>
+        </form>
       </div>
     </section>
 
     <!-- ============ SECRETARY · SAMARKAND ============ -->
-    <section class="nk-sec nk-sec--alt" id="secretary">
-      <div class="container">
-        <div class="nk-head ftco-animate">
-          <span class="nk-eyebrow">Our Secretary on the world stage</span>
-          <h2 class="nk-h2">Gladys Langat in Samarkand</h2>
-          <p>Our Secretary travelled with Team Kenya to the 46th FIDE Chess Olympiad in Samarkand, Uzbekistan. It is the same standard of play, organisation and courtesy we bring to every Kericho fixture.</p>
+    <section class="kc-sec kc-sec--alt" id="secretary">
+      <div class="kc-wrap">
+        <div class="kc-head kc-head--center">
+          <span class="kc-label">Our Secretary on the world stage</span>
+          <h2 class="kc-h2">Gladys Langat in Samarkand</h2>
+          <p class="kc-lead">Our Secretary travelled with Team Kenya to the 46th FIDE Chess Olympiad in Samarkand, Uzbekistan. It is the same standard of play, organisation and courtesy we bring to every Kericho fixture.</p>
         </div>
 
-        <div class="sec-gallery ftco-animate">
-          <a class="sec-shot image-popup" href="assets/gladys-samarkand-olympiad.jpg">
+        <div class="kc-gallery ftco-animate">
+          <a class="kc-gallery__item image-popup" href="assets/gladys-samarkand-olympiad.jpg">
             <img src="assets/gladys-samarkand-olympiad.jpg" alt="Gladys Langat at the Expo Center entrance of the 46th FIDE Chess Olympiad in Samarkand" width="900" height="1200" loading="lazy">
-            <span class="sec-cap"><b>Expo Center</b><span>46th FIDE Chess Olympiad · Samarkand</span></span>
+            <span class="kc-gallery__cap"><b>Expo Center</b>46th FIDE Chess Olympiad</span>
           </a>
-          <a class="sec-shot image-popup" href="assets/gladys-samarkand-hall.jpg">
+          <a class="kc-gallery__item image-popup" href="assets/gladys-samarkand-hall.jpg">
             <img src="assets/gladys-samarkand-hall.jpg" alt="Gladys Langat inside the Samarkand Olympiad venue beneath the Team Kenya banner" width="900" height="1200" loading="lazy">
-            <span class="sec-cap"><b>Inside the hall</b><span>Team Kenya at the Olympiad venue</span></span>
+            <span class="kc-gallery__cap"><b>Inside the hall</b>Team Kenya at the venue</span>
           </a>
-          <a class="sec-shot image-popup" href="assets/gladys-registan.jpg">
+          <a class="kc-gallery__item image-popup" href="assets/gladys-registan.jpg">
             <img src="assets/gladys-registan.jpg" alt="Gladys Langat at the Registan in Samarkand, Uzbekistan" width="900" height="1200" loading="lazy">
-            <span class="sec-cap"><b>Registan</b><span>Samarkand, Uzbekistan</span></span>
+            <span class="kc-gallery__cap"><b>Registan</b>Samarkand, Uzbekistan</span>
           </a>
-          <a class="sec-shot image-popup" href="assets/gladys-uzbekistan.jpg">
+          <a class="kc-gallery__item image-popup" href="assets/gladys-uzbekistan.jpg">
             <img src="assets/gladys-uzbekistan.jpg" alt="Gladys Langat at the Uzbekistan welcome sign" width="900" height="1200" loading="lazy">
-            <span class="sec-cap"><b>Karibu Uzbekistan</b><span>Representing Kericho abroad</span></span>
+            <span class="kc-gallery__cap"><b>Karibu Uzbekistan</b>Representing Kericho abroad</span>
           </a>
         </div>
 
-        <div class="sec-quote ftco-animate" style="margin-top:26px;">
-          <img class="sec-quote-photo" src="assets/gladys-langat-portrait.jpg" alt="Portrait of Gladys Langat, Secretary of Kericho Chess Academy" width="600" height="900" loading="lazy">
-          <div class="sec-quote-body">
-            <p class="q">Chess took me from Kericho to an Olympiad hall. That is exactly the road we are opening for our learners.</p>
-            <div class="sec-quote-who">
-              <span class="team-ava sm" aria-hidden="true">GL</span>
-              <div class="who"><b>Gladys Langat</b><span>Secretary · Kericho Chess Academy</span></div>
+        <div class="kc-quote ftco-animate" style="margin-top:30px;">
+          <img src="assets/gladys-langat-portrait.jpg" alt="Portrait of Gladys Langat, Secretary of Kericho Chess Academy" width="600" height="900" loading="lazy">
+          <div>
+            <blockquote>Chess took me from Kericho to an Olympiad hall. That is exactly the road we are opening for our learners.</blockquote>
+            <div class="kc-quote__who">
+              <span class="kc-quote__ava" aria-hidden="true">GL</span>
+              <span><b>Gladys Langat</b><span>Secretary · Kericho Chess Academy</span></span>
             </div>
-            <div class="sec-cta">
-              <a class="btn btn-tertiary px-4 py-2" href="tel:+254723397573"><i class="fas fa-phone"></i> Call Gladys · 0723 397 573</a>
-              <a class="btn btn-wa px-4 py-2" href="https://wa.me/254723397573?text=Hi%20Gladys%2C%20I%27d%20like%20to%20enrol%20a%20learner." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp about enrolment</a>
+            <div class="kc-actions">
+              <a class="kc-btn kc-btn--ghost kc-btn--sm" href="tel:+254723397573"><i class="fas fa-phone"></i> Call Gladys · 0723 397 573</a>
+              <a class="kc-btn kc-btn--wa kc-btn--sm" href="https://wa.me/254723397573?text=Hi%20Gladys%2C%20I%27d%20like%20to%20enrol%20a%20learner." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp about enrolment</a>
             </div>
           </div>
         </div>
@@ -343,20 +334,21 @@
     </section>
 
     <!-- ============ FAQ ============ -->
-    <section class="nk-sec" id="faq">
-      <div class="container">
-        <div class="nk-head ftco-animate">
-          <span class="nk-eyebrow">Before you ask</span>
-          <h2 class="nk-h2">The questions parents and heads ask most</h2>
+    <section class="kc-sec" id="faq">
+      <div class="kc-wrap">
+        <div class="kc-head kc-head--center">
+          <span class="kc-label">Before you ask</span>
+          <h2 class="kc-h2">The questions parents and heads ask most</h2>
         </div>
-        <div class="chess-faq ftco-animate">
+
+        <div class="kc-faq ftco-animate" style="max-width:900px;margin-inline:auto;">
           <div class="faq-item">
             <button class="faq-q" type="button">Which schools does the academy work with?<span class="cnt">+</span></button>
             <div class="faq-a"><p>We partner with primary and secondary schools in and around Kericho town, Litein and the wider county. If your school is not yet a partner, a teacher or parent only needs to message us on WhatsApp to start a conversation.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-q" type="button">How do tournament entries and payments work?<span class="cnt">+</span></button>
-            <div class="faq-a"><p>Enter on the <a href="tournaments.html#register">tournaments page</a>, pay via M-Pesa Paybill 880100 with the reference shown on the form, and Shem confirms your category slot on WhatsApp. No accounts, no checkout pages.</p></div>
+            <div class="faq-a"><p>Enter on the <a href="tournaments.html#register">tournaments page</a>, pay via M-Pesa Paybill 880100 with the reference shown on the form, and the office confirms your category slot on WhatsApp. No accounts, no checkout pages.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-q" type="button">Can we really watch games live on this site?<span class="cnt">+</span></button>
@@ -381,39 +373,28 @@
         </div>
       </div>
     </section>
-
-    <!-- ============ CLOSING CALL TO ACTION ============ -->
-    <section class="nk-cta">
-      <div class="container">
-        <div class="nk-cta--split">
-          <div class="nk-cta-inner">
-            <div>
-              <h2>Say hello to the coach</h2>
-              <p class="mb-0">Questions about enrolment, fees, boards or the next fixture: WhatsApp is the fastest route, and calls are always welcome.</p>
-            </div>
-            <div class="nk-cta-actions">
-              <a class="btn btn-primary px-4 py-3" href="#membership"><i class="fas fa-user-plus"></i> Enrol a learner</a>
-              <a class="btn btn-tertiary px-4 py-3" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20a%20question%20about%20the%20academy." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp Shem</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
     <!-- ============ FOOTER ============ -->
-    <footer class="ftco-footer nk-footer">
-      <div class="container">
-        <div class="nk-footer__bottom">
-          <p class="nk-footer__copy">
+    <footer class="kc-footer">
+      <div class="kc-wrap">
+        <div class="kc-footer__row">
+          <div class="kc-footer__brand">
             <img src="assets/logo-gold.png" alt="" width="640" height="650" loading="lazy" decoding="async" aria-hidden="true">
-            &copy; <span id="nkYear">2026</span> Kericho Chess Club &amp; Academy &middot; Forward Ever, Backward Never
-          </p>
-          <div class="nk-footer__social">
+            <span class="kc-footer__text">
+              <b>Kericho Chess Club &amp; Academy</b>
+              <span>Forward Ever, Backward Never</span>
+            </span>
+          </div>
+          <div class="kc-footer__social">
             <a href="https://wa.me/254729037585" target="_blank" rel="noopener" aria-label="WhatsApp the academy"><i class="fab fa-whatsapp"></i></a>
             <a href="https://www.facebook.com/smesso" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.tiktok.com/@kericho.chess.clu" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
           </div>
+        </div>
+        <div class="kc-footer__rule"></div>
+        <div class="kc-footer__bottom">
+          <span>&copy; <span id="nkYear">2026</span> Kericho Chess Club &amp; Academy · Forward Ever, Backward Never</span>
         </div>
       </div>
     </footer>

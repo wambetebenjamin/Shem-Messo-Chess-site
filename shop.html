@@ -8,7 +8,7 @@
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
-    <meta name="theme-color" content="#05121f">
+    <meta name="theme-color" content="#05101d">
     <meta property="og:title" content="Materials &amp; Kits · Kericho Chess Club &amp; Academy Shop">
     <meta property="og:description" content="Tournament chess sets, digital clocks and training workbooks for schools building a chess club — ordered with one WhatsApp message. Kericho, Kenya.">
     <meta property="og:type" content="website">
@@ -24,22 +24,21 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/kiddos.css">
-    <link rel="stylesheet" href="css/chess.css">
-    <link rel="stylesheet" href="css/night.css">
+    <link rel="stylesheet" href="css/site.css">
     <noscript><style>.ftco-animate{ opacity:1 !important; visibility:visible !important; }</style></noscript>
   </head>
-  <body class="nk">
+  <body>
 
-    <a class="nk-skip" href="#main">Skip to content</a>
+    <a class="kc-skip" href="#main">Skip to content</a>
 
     <!-- ============ TOP BAR ============ -->
-    <div class="nk-topbar">
-      <div class="container">
-        <span class="tb-item"><i class="fas fa-location-dot"></i> Kericho town · coaching across Kericho County</span>
-        <a class="tb-item" href="tel:+254729037585"><i class="fas fa-phone"></i> +254 729 037 585</a>
-        <a class="tb-item" href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i> kerichochessacademy@gmail.com</a>
-        <span class="tb-grow"></span>
-        <span class="tb-item tb-social">
+    <div class="kc-top">
+      <div class="kc-wrap kc-top__row">
+        <span><i class="fas fa-location-dot"></i>Kericho town, Kenya</span>
+        <a href="tel:+254729037585"><i class="fas fa-phone"></i>+254 729 037 585</a>
+        <a href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i>kerichochessacademy@gmail.com</a>
+        <span class="kc-top__spacer"></span>
+        <span class="kc-top__social">
           <a href="https://wa.me/254729037585" target="_blank" rel="noopener" aria-label="WhatsApp the academy"><i class="fab fa-whatsapp"></i></a>
           <a href="https://www.facebook.com/smesso" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.tiktok.com/@kericho.chess.clu" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
@@ -48,187 +47,164 @@
     </div>
 
     <!-- ============ NAV ============ -->
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light nk-nav" id="ftco-navbar">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <img class="brand-crest" src="assets/logo-gold.png" alt="Kericho Chess Academy crest: a pawn, king and knight over the motto Forward Ever, Backward Never" width="640" height="650" decoding="async">
-          <span>Kericho Chess<small>Club &amp; Academy</small></span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="oi oi-menu"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="coaching.html" class="nav-link">Coaching</a></li>
-            <li class="nav-item"><a href="tournaments.html" class="nav-link">Tournaments</a></li>
-            <li class="nav-item"><a href="live.html" class="nav-link">Live</a></li>
-            <li class="nav-item"><a href="play.html" class="nav-link">Play</a></li>
-            <li class="nav-item active"><a href="shop.html" class="nav-link">Shop</a></li>
-            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-            <li class="nav-item cta"><a href="contact.html" class="nav-link">Join Us</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- END nav -->
-
-  <main id="main">
-    <!-- ============ BANNER ============ -->
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('assets/shelf-kit.jpg');">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-10 ftco-animate text-center">
-            <h1 class="mb-2 bread">Club Shop</h1>
-            <p class="nk-banner-sub">Boards, clocks and workbooks — ordered with one WhatsApp message</p>
+    <header class="kc-header">
+      <nav class="navbar navbar-expand-lg kc-nav" id="ftco-navbar" aria-label="Main">
+        <div class="kc-wrap kc-nav__inner">
+          <a class="navbar-brand kc-brand" href="index.html">
+            <img src="assets/logo-gold.png" alt="Kericho Chess Academy crest: a pawn, king and knight over the motto Forward Ever, Backward Never" width="640" height="650" decoding="async">
+            <span class="kc-brand__text"><b>Kericho Chess</b><span>Club &amp; Academy</span></span>
+          </a>
+          <button class="navbar-toggler kc-burger" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav kc-nav__links">
+              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+              <li class="nav-item"><a class="nav-link" href="coaching.html">Coaching</a></li>
+              <li class="nav-item"><a class="nav-link" href="tournaments.html">Events</a></li>
+              <li class="nav-item"><a class="nav-link" href="live.html">Live</a></li>
+              <li class="nav-item"><a class="nav-link" href="play.html">Play</a></li>
+              <li class="nav-item"><a class="nav-link is-active" href="shop.html">Shop</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+              <li class="nav-item kc-nav__cta"><a class="nav-link" href="contact.html#membership">Join Us</a></li>
+            </ul>
           </div>
         </div>
+      </nav>
+    </header>
+  <main id="main">
+
+    <!-- ============ PAGE TITLE ============ -->
+    <section class="kc-banner">
+      <div class="kc-wrap">
+        <h1 class="kc-banner__title">Club Shop</h1>
+        <p class="kc-banner__sub">Boards, clocks and workbooks — ordered with one WhatsApp message</p>
       </div>
     </section>
 
-    <!-- ============ SHELF ============ -->
-    <section class="nk-sec" id="shelf">
-      <div class="container">
-        <div class="nk-head ftco-animate">
-          <span class="nk-eyebrow">The shelf</span>
-          <h2 class="nk-h2">Everything a club needs to start</h2>
-          <p>Equipment is bought in bulk and passed on at academy rates. Schools pay by M-Pesa and collect at the club room, or arrange delivery within Kericho.</p>
+    <!-- ============ THE SHELF ============ -->
+    <section class="kc-sec" id="shelf">
+      <div class="kc-wrap">
+        <div class="kc-head kc-head--center">
+          <span class="kc-label">The shelf</span>
+          <h2 class="kc-h2">Everything a club needs to start</h2>
+          <p class="kc-lead">Equipment is bought in bulk and passed on at academy rates. Schools pay by M-Pesa and collect at the club room, or arrange delivery within Kericho.</p>
         </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="pricing-entry active pb-4 text-center">
-              <div style="padding:26px 18px 12px;">
-                <span class="price-note">Best seller · Classroom</span>
-                <h3 class="mb-2">Tournament Chess Set</h3>
-                <p><span class="price">KES 1,800</span> <span class="per">/ set</span></p>
-              </div>
-              <div class="img" style="height:170px;background-image: url(assets/chess-materials.jpg);"></div>
-              <ul class="shelf-specs" style="padding:18px 22px 0;margin:0;list-style:none;">
+
+        <div class="kc-products">
+          <article class="kc-product kc-product--featured ftco-animate">
+            <div class="kc-product__media" style="background-image:url(assets/chess-materials.jpg)"></div>
+            <div class="kc-product__body">
+              <span class="kc-tag">Best seller · Classroom</span>
+              <h3>Tournament Chess Set</h3>
+              <p class="kc-product__price">KES 1,800<small>/ set</small></p>
+              <ul>
                 <li><i class="fas fa-check"></i> Weighted pieces, folding board &amp; carry pouch</li>
                 <li><i class="fas fa-check"></i> Built for daily classroom use</li>
                 <li><i class="fas fa-check"></i> The same set used at academy fixtures</li>
               </ul>
-              <p class="button" style="padding:18px;">
-                <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%27d%20like%20to%20order%20the%20Tournament%20Chess%20Set%20%28KES%201%2C800%29." target="_blank" rel="noopener" class="btn btn-primary px-4 py-3"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
-              </p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="pricing-entry pb-4 text-center">
-              <div style="padding:26px 18px 12px;">
-                <span class="price-note">Self-paced · Drills</span>
-                <h3 class="mb-2">Openings Workbook</h3>
-                <p><span class="price">KES 450</span> <span class="per">/ copy</span></p>
+              <div class="kc-product__foot">
+                <a class="kc-btn kc-btn--gold kc-btn--sm kc-btn--block" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%27d%20like%20to%20order%20the%20Tournament%20Chess%20Set%20%28KES%201%2C800%29." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
               </div>
-              <div class="img" style="height:170px;background-image: url(assets/shelf-workbook.jpg);"></div>
-              <ul class="shelf-specs" style="padding:18px 22px 0;margin:0;list-style:none;">
+            </div>
+          </article>
+
+          <article class="kc-product ftco-animate">
+            <div class="kc-product__media" style="background-image:url(assets/shelf-workbook.jpg)"></div>
+            <div class="kc-product__body">
+              <span class="kc-tag">Self-paced · Drills</span>
+              <h3>Openings Workbook</h3>
+              <p class="kc-product__price">KES 450<small>/ copy</small></p>
+              <ul>
                 <li><i class="fas fa-check"></i> Opening principles workbook</li>
                 <li><i class="fas fa-check"></i> Tactics puzzles &amp; self-paced drills</li>
                 <li><i class="fas fa-check"></i> Phase-by-phase companion to lessons</li>
               </ul>
-              <p class="button" style="padding:18px;">
-                <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%27d%20like%20to%20order%20the%20Opening%20Principles%20Workbook%20%28KES%20450%29." target="_blank" rel="noopener" class="btn btn-primary px-4 py-3"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
-              </p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="pricing-entry pb-4 text-center">
-              <div style="padding:26px 18px 12px;">
-                <span class="price-note">Match-ready · Timed play</span>
-                <h3 class="mb-2">Digital Chess Clock</h3>
-                <p><span class="price">KES 2,600</span> <span class="per">/ clock</span></p>
+              <div class="kc-product__foot">
+                <a class="kc-btn kc-btn--gold kc-btn--sm kc-btn--block" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%27d%20like%20to%20order%20the%20Opening%20Principles%20Workbook%20%28KES%20450%29." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
               </div>
-              <div class="img" style="height:170px;background-image: url(assets/shelf-clock.jpg);"></div>
-              <ul class="shelf-specs" style="padding:18px 22px 0;margin:0;list-style:none;">
+            </div>
+          </article>
+
+          <article class="kc-product ftco-animate">
+            <div class="kc-product__media" style="background-image:url(assets/shelf-clock.jpg)"></div>
+            <div class="kc-product__body">
+              <span class="kc-tag">Match-ready · Timed play</span>
+              <h3>Digital Chess Clock</h3>
+              <p class="kc-product__price">KES 2,600<small>/ clock</small></p>
+              <ul>
                 <li><i class="fas fa-check"></i> Tournament-grade for timed games</li>
                 <li><i class="fas fa-check"></i> Ideal for squads and fixture days</li>
                 <li><i class="fas fa-check"></i> Serious prep starts on the clock</li>
               </ul>
-              <p class="button" style="padding:18px;">
-                <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%27d%20like%20to%20order%20the%20Digital%20Chess%20Clock%20%28KES%202%2C600%29." target="_blank" rel="noopener" class="btn btn-primary px-4 py-3"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
-              </p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="pricing-entry pb-4 text-center">
-              <div style="padding:26px 18px 12px;">
-                <span class="price-note">For schools · Custom quote</span>
-                <h3 class="mb-2">Complete Club Kit</h3>
-                <p><span class="price">Custom</span> <span class="per">/ school</span></p>
+              <div class="kc-product__foot">
+                <a class="kc-btn kc-btn--gold kc-btn--sm kc-btn--block" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%27d%20like%20to%20order%20the%20Digital%20Chess%20Clock%20%28KES%202%2C600%29." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
               </div>
-              <div class="img" style="height:170px;background-image: url(assets/shelf-kit.jpg);"></div>
-              <ul class="shelf-specs" style="padding:18px 22px 0;margin:0;list-style:none;">
+            </div>
+          </article>
+
+          <article class="kc-product ftco-animate">
+            <div class="kc-product__media" style="background-image:url(assets/shelf-kit.jpg)"></div>
+            <div class="kc-product__body">
+              <span class="kc-tag">For schools · Custom quote</span>
+              <h3>Complete Club Kit</h3>
+              <p class="kc-product__price">Custom<small>/ school</small></p>
+              <ul>
                 <li><i class="fas fa-check"></i> 8 tournament sets + 2 clocks</li>
                 <li><i class="fas fa-check"></i> Workbooks for the founding squad</li>
                 <li><i class="fas fa-check"></i> A starter coaching visit included</li>
               </ul>
-              <p class="button" style="padding:18px;">
-                <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20we%27d%20like%20a%20quote%20for%20the%20Complete%20Club%20Kit%20for%20our%20school." target="_blank" rel="noopener" class="btn btn-primary px-4 py-3"><i class="fab fa-whatsapp"></i> Get a School Quote</a>
-              </p>
+              <div class="kc-product__foot">
+                <a class="kc-btn kc-btn--gold kc-btn--sm kc-btn--block" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20we%27d%20like%20a%20quote%20for%20the%20Complete%20Club%20Kit%20for%20our%20school." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Get a School Quote</a>
+              </div>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- ============ HOW ORDERING WORKS ============ -->
-    <section class="nk-sec nk-sec--alt" id="ordering">
-      <div class="container">
-        <div class="nk-head ftco-animate">
-          <span class="nk-eyebrow">Ordering</span>
-          <h2 class="nk-h2">Three steps, one message</h2>
-          <p>No cart, no checkout screens. Message the academy office, confirm the total, and the kit is reserved for you.</p>
+    <!-- ============ ORDERING ============ -->
+    <section class="kc-sec kc-sec--alt" id="ordering">
+      <div class="kc-wrap">
+        <div class="kc-head kc-head--center">
+          <span class="kc-label">Ordering</span>
+          <h2 class="kc-h2">Three steps, one message</h2>
+          <p class="kc-lead">No cart, no checkout screens. Message the academy office, confirm the total, and the kit is reserved for you.</p>
         </div>
-        <div class="nk-grid nk-grid--3">
-          <div class="step-card ftco-animate">
-            <span class="step-n">01</span>
+
+        <div class="kc-steps">
+          <div class="kc-step ftco-animate">
+            <span class="kc-step__n">01</span>
             <h3><i class="fab fa-whatsapp"></i> Message on WhatsApp</h3>
             <p>Send the item, the quantity and your school. Schools get a written quotation the same day.</p>
           </div>
-          <div class="step-card ftco-animate">
-            <span class="step-n">02</span>
+          <div class="kc-step ftco-animate">
+            <span class="kc-step__n">02</span>
             <h3><i class="fas fa-mobile-screen"></i> Confirm &amp; pay</h3>
             <p>Pay by M-Pesa Paybill <strong>880100</strong>, account <strong>123003#LearnersName</strong> — or by arrangement for school invoices.</p>
           </div>
-          <div class="step-card ftco-animate">
-            <span class="step-n">03</span>
+          <div class="kc-step ftco-animate">
+            <span class="kc-step__n">03</span>
             <h3><i class="fas fa-box-open"></i> Kit arrives</h3>
             <p>Collect at the club room or arrange delivery within Kericho. Every kit comes with a starter coaching visit.</p>
           </div>
         </div>
 
-        <div class="row mt-5">
-          <div class="col-lg-6 ftco-animate">
-            <img class="nk-photo" src="assets/chess-materials.jpg" alt="Chess sets, boards and clocks laid out ready for a school club" width="1200" height="675" loading="lazy">
+        <div class="kc-split kc-split--top" style="margin-top:56px;">
+          <div class="kc-split__media">
+            <img src="assets/chess-materials.jpg" alt="Chess sets, boards and clocks laid out ready for a school club" width="1200" height="896" loading="lazy">
           </div>
-          <div class="col-lg-6 mt-4 mt-lg-0 ftco-animate">
-            <div class="pay-box">
-              <span class="pay-label">Payment · M-Pesa Paybill</span>
-              <span class="pay-line">Paybill: <b>880100</b></span>
-              <span class="pay-line">Account: <b>123003#LearnersName</b></span>
+          <div class="kc-split__text">
+            <div class="kc-pay">
+              <span>Payment · M-Pesa Paybill</span>
+              <b>Paybill: 880100</b>
+              <b>Account: 123003#LearnersName</b>
             </div>
-            <p>For school clubs, ask about bulk rates on ten sets or more, plus workbooks for the whole founding squad.</p>
-            <a class="btn btn-wa px-4 py-3" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%27d%20like%20to%20order%20chess%20equipment%20for%20a%20school." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
-            <a class="btn btn-outline-chess px-4 py-3" href="contact.html#enquiry">Ask a question</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CLOSING CALL TO ACTION ============ -->
-    <section class="nk-cta">
-      <div class="container">
-        <div class="nk-cta--split">
-          <div class="nk-cta-inner">
-            <div>
-              <h2>Your club starts with one set</h2>
-              <p class="mb-0">One board in a classroom is how every academy story on this site began.</p>
-            </div>
-            <div class="nk-cta-actions">
-              <a class="btn btn-primary px-4 py-3" href="contact.html#enquiry"><i class="fas fa-comments"></i> Talk to Shem</a>
-              <a class="btn btn-tertiary px-4 py-3" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20help%20us%20choose%20materials%20for%20a%20new%20school%20club." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp about materials</a>
+            <p style="margin-top:22px;">For school clubs, ask about bulk rates on ten sets or more, plus workbooks for the whole founding squad.</p>
+            <div class="kc-actions">
+              <a class="kc-btn kc-btn--wa" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%27d%20like%20to%20order%20chess%20equipment%20for%20a%20school." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
+              <a class="kc-btn kc-btn--ghost" href="contact.html#enquiry">Ask a question</a>
             </div>
           </div>
         </div>
@@ -237,18 +213,25 @@
   </main>
 
     <!-- ============ FOOTER ============ -->
-    <footer class="ftco-footer nk-footer">
-      <div class="container">
-        <div class="nk-footer__bottom">
-          <p class="nk-footer__copy">
+    <footer class="kc-footer">
+      <div class="kc-wrap">
+        <div class="kc-footer__row">
+          <div class="kc-footer__brand">
             <img src="assets/logo-gold.png" alt="" width="640" height="650" loading="lazy" decoding="async" aria-hidden="true">
-            &copy; <span id="nkYear">2026</span> Kericho Chess Club &amp; Academy &middot; Forward Ever, Backward Never
-          </p>
-          <div class="nk-footer__social">
+            <span class="kc-footer__text">
+              <b>Kericho Chess Club &amp; Academy</b>
+              <span>Forward Ever, Backward Never</span>
+            </span>
+          </div>
+          <div class="kc-footer__social">
             <a href="https://wa.me/254729037585" target="_blank" rel="noopener" aria-label="WhatsApp the academy"><i class="fab fa-whatsapp"></i></a>
             <a href="https://www.facebook.com/smesso" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.tiktok.com/@kericho.chess.clu" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
           </div>
+        </div>
+        <div class="kc-footer__rule"></div>
+        <div class="kc-footer__bottom">
+          <span>&copy; <span id="nkYear">2026</span> Kericho Chess Club &amp; Academy · Forward Ever, Backward Never</span>
         </div>
       </div>
     </footer>

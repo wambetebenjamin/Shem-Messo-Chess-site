@@ -8,7 +8,7 @@
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
-    <meta name="theme-color" content="#05121f">
+    <meta name="theme-color" content="#05101d">
     <meta property="og:title" content="Play The Board · Kericho Chess Club &amp; Academy">
     <meta property="og:description" content="Play a real chess game right on the site: full rules, legal-move hints, check and mate detection — plus the daily Lichess puzzle and the academy team.">
     <meta property="og:type" content="website">
@@ -24,22 +24,21 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/kiddos.css">
-    <link rel="stylesheet" href="css/chess.css">
-    <link rel="stylesheet" href="css/night.css">
+    <link rel="stylesheet" href="css/site.css">
     <noscript><style>.ftco-animate{ opacity:1 !important; visibility:visible !important; }</style></noscript>
   </head>
-  <body class="nk">
+  <body>
 
-    <a class="nk-skip" href="#main">Skip to content</a>
+    <a class="kc-skip" href="#main">Skip to content</a>
 
     <!-- ============ TOP BAR ============ -->
-    <div class="nk-topbar">
-      <div class="container">
-        <span class="tb-item"><i class="fas fa-location-dot"></i> Kericho town · coaching across Kericho County</span>
-        <a class="tb-item" href="tel:+254729037585"><i class="fas fa-phone"></i> +254 729 037 585</a>
-        <a class="tb-item" href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i> kerichochessacademy@gmail.com</a>
-        <span class="tb-grow"></span>
-        <span class="tb-item tb-social">
+    <div class="kc-top">
+      <div class="kc-wrap kc-top__row">
+        <span><i class="fas fa-location-dot"></i>Kericho town, Kenya</span>
+        <a href="tel:+254729037585"><i class="fas fa-phone"></i>+254 729 037 585</a>
+        <a href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i>kerichochessacademy@gmail.com</a>
+        <span class="kc-top__spacer"></span>
+        <span class="kc-top__social">
           <a href="https://wa.me/254729037585" target="_blank" rel="noopener" aria-label="WhatsApp the academy"><i class="fab fa-whatsapp"></i></a>
           <a href="https://www.facebook.com/smesso" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.tiktok.com/@kericho.chess.clu" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
@@ -48,142 +47,147 @@
     </div>
 
     <!-- ============ NAV ============ -->
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light nk-nav" id="ftco-navbar">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <img class="brand-crest" src="assets/logo-gold.png" alt="Kericho Chess Academy crest: a pawn, king and knight over the motto Forward Ever, Backward Never" width="640" height="650" decoding="async">
-          <span>Kericho Chess<small>Club &amp; Academy</small></span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="oi oi-menu"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="coaching.html" class="nav-link">Coaching</a></li>
-            <li class="nav-item"><a href="tournaments.html" class="nav-link">Tournaments</a></li>
-            <li class="nav-item"><a href="live.html" class="nav-link">Live</a></li>
-            <li class="nav-item active"><a href="play.html" class="nav-link">Play</a></li>
-            <li class="nav-item"><a href="shop.html" class="nav-link">Shop</a></li>
-            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-            <li class="nav-item cta"><a href="contact.html" class="nav-link">Join Us</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- END nav -->
-
-  <main id="main">
-    <!-- ============ BANNER ============ -->
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('assets/hero-dark-board.jpg');">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-10 ftco-animate text-center">
-            <h1 class="mb-2 bread">Play a Board</h1>
-            <p class="nk-banner-sub">Pass-and-play on one device, full rules included</p>
+    <header class="kc-header">
+      <nav class="navbar navbar-expand-lg kc-nav" id="ftco-navbar" aria-label="Main">
+        <div class="kc-wrap kc-nav__inner">
+          <a class="navbar-brand kc-brand" href="index.html">
+            <img src="assets/logo-gold.png" alt="Kericho Chess Academy crest: a pawn, king and knight over the motto Forward Ever, Backward Never" width="640" height="650" decoding="async">
+            <span class="kc-brand__text"><b>Kericho Chess</b><span>Club &amp; Academy</span></span>
+          </a>
+          <button class="navbar-toggler kc-burger" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav kc-nav__links">
+              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+              <li class="nav-item"><a class="nav-link" href="coaching.html">Coaching</a></li>
+              <li class="nav-item"><a class="nav-link" href="tournaments.html">Events</a></li>
+              <li class="nav-item"><a class="nav-link" href="live.html">Live</a></li>
+              <li class="nav-item"><a class="nav-link is-active" href="play.html">Play</a></li>
+              <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+              <li class="nav-item kc-nav__cta"><a class="nav-link" href="contact.html#membership">Join Us</a></li>
+            </ul>
           </div>
         </div>
+      </nav>
+    </header>
+  <main id="main">
+
+    <!-- ============ PAGE TITLE ============ -->
+    <section class="kc-banner">
+      <div class="kc-wrap">
+        <h1 class="kc-banner__title">Play a Board</h1>
+        <p class="kc-banner__sub">Pass-and-play on one device, full rules included</p>
       </div>
     </section>
 
     <!-- ============ BOARD ============ -->
-    <section class="nk-sec" id="board">
-      <div class="container">
-        <div class="bc-grid">
-          <div class="bc-stage ftco-animate">
+    <section class="kc-sec" id="board">
+      <div class="kc-wrap">
+        <div class="kc-head kc-head--row">
+          <div class="kc-head__text">
+            <span class="kc-label">Pass and play</span>
+            <h2 class="kc-h2 kc-mb-0">Play a real game, right here</h2>
+          </div>
+          <a class="kc-btn kc-btn--ghost kc-btn--sm" href="coaching.html#tracks">Get coached</a>
+        </div>
+
+        <div class="kc-live">
+          <div class="kc-stage ftco-animate">
             <div class="board-frame">
               <div class="board3d-stage" id="stage3d"><span class="b3d-tag">3D Board · WebGL</span><span class="b3d-hint">drag to tilt · tap to move</span></div>
               <div class="play-board" id="playBoard"></div>
             </div>
           </div>
-          <div class="bc-side">
-            <div class="bc-panel ftco-animate">
-              <span class="panel-label"><i class="fas fa-chess-board"></i>Game State</span>
-              <div class="metric-row"><span class="metric-k">Turn</span><span class="metric-v cold" id="playTurn">WHITE TO MOVE</span></div>
-              <p class="mt-3 mb-3 small" id="playStatus" style="color:var(--nk-dim);">Tap a piece, then tap a highlighted square to move it.</p>
-              <div class="d-flex flex-wrap" style="gap:10px;">
-                <button class="btn btn-primary py-2 px-4" id="playNewGame" type="button"><i class="fas fa-rotate"></i> New Game</button>
-                <button class="btn btn-tertiary py-2 px-4" id="playUndo" type="button"><i class="fas fa-rotate-left"></i> Undo</button>
+
+          <div class="kc-rail">
+            <div class="kc-panel kc-panel--tight ftco-animate">
+              <span class="kc-panel__label"><i class="fas fa-chess-board"></i>Game State</span>
+              <div class="kc-metric"><span class="kc-metric__k">Turn</span><span class="kc-metric__v kc-metric__v--gold" id="playTurn">WHITE TO MOVE</span></div>
+              <p class="kc-small" id="playStatus" style="margin:14px 0 18px;">Tap a piece, then tap a highlighted square to move it.</p>
+              <div class="kc-stage__controls">
+                <button class="kc-btn kc-btn--gold kc-btn--sm" id="playNewGame" type="button"><i class="fas fa-rotate"></i> New Game</button>
+                <button class="kc-btn kc-btn--ghost kc-btn--sm" id="playUndo" type="button"><i class="fas fa-rotate-left"></i> Undo</button>
               </div>
             </div>
-            <div class="bc-panel ftco-animate">
-              <span class="panel-label"><i class="fas fa-list-ol"></i>Notation</span>
-              <div class="movelist" id="playMoves" style="height:280px;"></div>
+
+            <div class="kc-panel kc-panel--tight ftco-animate">
+              <span class="kc-panel__label"><i class="fas fa-list-ol"></i>Notation</span>
+              <div class="movelist" id="playMoves"></div>
             </div>
-            <div class="note-card ftco-animate">
-              <i class="fas fa-circle-info" style="color:var(--nk-gold); margin-right:8px;"></i><b>Coach's note:</b> warm-up habit from the academy — before every move, name your opponent's threat out loud. Ten minutes here beats an hour of casual play.
+
+            <div class="kc-panel kc-panel--tight ftco-animate">
+              <p class="kc-small kc-mb-0"><i class="fas fa-circle-info" style="color:var(--kc-gold);margin-right:8px;"></i><b>Coach's note:</b> before every move, name your opponent's threat out loud. Ten minutes here beats an hour of casual play.</p>
             </div>
           </div>
         </div>
-        <p class="nk-small mt-4 mb-0 ftco-animate">Castling, en passant and promotion are all handled by the board. Nothing to install, nothing to sign up for — the same drills our learners run between coaching sessions.</p>
+
+        <p class="kc-small" style="margin-top:20px;">Castling, en passant and promotion are all handled by the board. Nothing to install, nothing to sign up for — the same drills our learners run between coaching sessions.</p>
       </div>
     </section>
 
     <!-- ============ BEYOND THE SITE ============ -->
-    <section class="nk-sec nk-sec--alt" id="beyond">
-      <div class="container">
-        <div class="nk-head ftco-animate">
-          <span class="nk-eyebrow">Beyond the board</span>
-          <h2 class="nk-h2">Practise here, then play for real</h2>
-          <p>The board on this page is for warm-ups. The real thing is on the circuit — or in the coaching room, against a coach who will find every hole in your opening.</p>
+    <section class="kc-sec kc-sec--alt" id="beyond">
+      <div class="kc-wrap">
+        <div class="kc-head kc-head--center">
+          <span class="kc-label">Beyond the board</span>
+          <h2 class="kc-h2">Practise here, then play for real</h2>
+          <p class="kc-lead">The board on this page is for warm-ups. The real thing is on the circuit — or in the coaching room, against a coach who will find every hole in your opening.</p>
         </div>
-        <div class="nk-grid nk-grid--2">
-          <article class="nk-card ftco-animate"><div class="nk-card__body">
-            <span class="nk-tag">Free · online</span>
-            <h3>Play rated games</h3>
-            <p>Take the habits you drill here into rated games on Lichess, where academy learners keep their own accounts and puzzle streaks.</p>
-            <div class="nk-card__foot"><a class="btn btn-primary px-4 py-2" href="https://lichess.org" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Open Lichess</a></div>
-          </div></article>
-          <article class="nk-card ftco-animate"><div class="nk-card__body">
-            <span class="nk-tag">Coaching · school or private</span>
-            <h3>Get coached properly</h3>
-            <p>School programmes, private lessons, tournament preparation and the Saturday Academy Club — all four tracks run on the same four-phase method.</p>
-            <div class="nk-card__foot">
-              <a class="btn btn-primary px-4 py-2" href="coaching.html#tracks">See the tracks</a>
-              <a class="btn btn-outline-chess px-4 py-2" href="contact.html#membership">Enrol a Learner</a>
-            </div>
-          </div></article>
-        </div>
-        <div class="nk-more ftco-animate">
-          <a class="btn btn-outline-chess px-4 py-2" href="live.html">Watch the live boards</a>
-        </div>
-      </div>
-    </section>
 
-    <!-- ============ CLOSING CALL TO ACTION ============ -->
-    <section class="nk-cta">
-      <div class="container">
-        <div class="nk-cta--split">
-          <div class="nk-cta-inner">
-            <div>
-              <h2>Warmed up? Get coached</h2>
-              <p class="mb-0">The board shows you the game. The academy shows you how to win it.</p>
+        <div class="kc-grid kc-grid--2">
+          <article class="kc-card ftco-animate">
+            <div class="kc-card__media" style="background-image:url(assets/hero-dark-board.jpg)"></div>
+            <div class="kc-card__body">
+              <span class="kc-tag">Free · online</span>
+              <h3>Play rated games</h3>
+              <p>Take the habits you drill here into rated games on Lichess, where academy learners keep their own accounts and puzzle streaks.</p>
+              <div class="kc-card__foot"><a class="kc-btn kc-btn--gold kc-btn--sm" href="https://lichess.org" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Open Lichess</a></div>
             </div>
-            <div class="nk-cta-actions">
-              <a class="btn btn-primary px-4 py-3" href="contact.html"><i class="fas fa-user-plus"></i> Enrol Now</a>
-              <a class="btn btn-tertiary px-4 py-3" href="https://www.kwaarena.com/?ref=b95ae9f671df7b255e15a188" target="_blank" rel="noopener"><i class="fas fa-coins"></i> Play &amp; Earn on Kwaarena</a>
+          </article>
+          <article class="kc-card ftco-animate">
+            <div class="kc-card__media" style="background-image:url(assets/tournament-prep-08.jpg)"></div>
+            <div class="kc-card__body">
+              <span class="kc-tag">Coaching · school or private</span>
+              <h3>Get coached properly</h3>
+              <p>School programmes, private lessons, tournament preparation and the Saturday Academy Club — all four tracks run on the same four-phase method.</p>
+              <div class="kc-card__foot">
+                <a class="kc-btn kc-btn--gold kc-btn--sm" href="coaching.html#tracks">See the tracks</a>
+                <a class="kc-btn kc-btn--ghost kc-btn--sm" href="contact.html#membership">Enrol a Learner</a>
+              </div>
             </div>
-          </div>
+          </article>
+        </div>
+
+        <div class="kc-actions" style="justify-content:center;margin-top:36px;">
+          <a class="kc-btn kc-btn--ghost" href="live.html">Watch the live boards</a>
         </div>
       </div>
     </section>
   </main>
 
     <!-- ============ FOOTER ============ -->
-    <footer class="ftco-footer nk-footer">
-      <div class="container">
-        <div class="nk-footer__bottom">
-          <p class="nk-footer__copy">
+    <footer class="kc-footer">
+      <div class="kc-wrap">
+        <div class="kc-footer__row">
+          <div class="kc-footer__brand">
             <img src="assets/logo-gold.png" alt="" width="640" height="650" loading="lazy" decoding="async" aria-hidden="true">
-            &copy; <span id="nkYear">2026</span> Kericho Chess Club &amp; Academy &middot; Forward Ever, Backward Never
-          </p>
-          <div class="nk-footer__social">
+            <span class="kc-footer__text">
+              <b>Kericho Chess Club &amp; Academy</b>
+              <span>Forward Ever, Backward Never</span>
+            </span>
+          </div>
+          <div class="kc-footer__social">
             <a href="https://wa.me/254729037585" target="_blank" rel="noopener" aria-label="WhatsApp the academy"><i class="fab fa-whatsapp"></i></a>
             <a href="https://www.facebook.com/smesso" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.tiktok.com/@kericho.chess.clu" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
           </div>
+        </div>
+        <div class="kc-footer__rule"></div>
+        <div class="kc-footer__bottom">
+          <span>&copy; <span id="nkYear">2026</span> Kericho Chess Club &amp; Academy · Forward Ever, Backward Never</span>
         </div>
       </div>
     </footer>

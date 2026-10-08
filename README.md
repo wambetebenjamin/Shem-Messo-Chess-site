@@ -1,55 +1,57 @@
 # Kericho Chess Club & Academy
 
-A multi-page website for Kericho Chess Club & Academy, Kenya. The structure follows
-**Chess Kenya's site** (chesskenya.co.ke) section for section — hero slider, counters / links
-row, image band, About + Values, **PARTNERS**, **CALENDER** event cards with `Date` and
-`Venue`, **TOP PLAYERS**, **News** with `on:` / `By:` / *Get the Whole Story* — while the
-content, palette and photography are the academy's own: **dark navy + gold** ("night") theme.
+A multi-page website for Kericho Chess Club & Academy, Kenya. The layout is copied from
+**Chess Kenya's site** (chesskenya.co.ke) section for section — hero slider, counters /
+links row, image band, About + Our Values + *Read More*, **PARTNERS**, **CALENDER** event
+cards with `Date` and `Venue`, **TOP PLAYERS**, **News** with `on:` / `By:` /
+*Get the Whole Story...* — while the content, photography and palette are the academy's own:
+a deep **navy + gold** skin in Work Sans.
 
 ## Structure
 
 Every page shares the same furniture, in the same order:
 
-1. **Top bar** — location, phone, email, socials (`nk-topbar`).
-2. **Nav** — crest, wordmark, eight links, gold *Join Us* pill (`nk-nav`, sticky).
-3. **Page banner** — a *plain centred title* with one line under it
-   (e.g. `Upcoming Events / Check em out!`), on a darkened band (`hero-wrap hero-wrap-2`).
-   No breadcrumb, no kicker, no invented overlay copy.
+1. **Top bar** — location, phone, email, socials (`.kc-top`).
+2. **Nav** — crest, wordmark, eight links, gold *Join Us* pill (`.kc-header` / `.kc-nav`,
+   sticky).
+3. **Page title** — inner pages open with a *plain centred title* and one line under it
+   (e.g. `Upcoming Events / Check em out!`) on a flat navy band (`.kc-banner`). No
+   breadcrumb, no photo hero, no kicker.
 4. **Body** — the sections for that page (see the table below).
-5. **CTA band** — one line + one button (`nk-cta`).
-6. **Slim footer** — crest, `© YEAR Kericho Chess Club & Academy · Forward Ever, Backward
-   Never`, and the three social icons (`nk-footer`). **There is deliberately no link row or
-   menu at the bottom** — navigation lives in the nav bar, contacts live on
-   `contact.html#team`.
+5. **Footer** — crest, `© YEAR Kericho Chess Club & Academy · Forward Ever, Backward Never`,
+   and the three social icons (`.kc-footer`). **There is deliberately no link row or menu at
+   the bottom** — navigation lives in the nav bar, contacts live on `contact.html#team`.
+   There is no closing call-to-action band either: the page ends where Chess Kenya's does.
 
 ### Homepage section order (mirrors chesskenya.co.ke)
 
-`hero slider` (3 slides, *Join Us*) → `#section-counter` (Learners · Events · Schools ·
-Boards) → **image band** → `#about` (About + **Our Values** list + *Read More*) →
-**PARTNERS** strip → `#calendar` (**Calender** — event cards with `Date`, `Venue`,
-*Register*, *More Events*) → `#players` (**Top players** + *All Players*) → `#news`
-(News rows with `on: dd/mm/yyyy`, `By: …`, long excerpt, *Get the Whole Story*).
+`hero slider` (3 slides, *Join Us*) → `#section-counter` (Learners coached · Events this
+year · Partner schools · Boards streamed) → **image band** → `#about` (About + **Our
+Values.** list + *Read More....*) → **PARTNERS** strip → `#calendar` (**Calender** — event
+cards with image, title, `Date`, `Venue`, *Register* + *More Events*) → `#players` (**Top
+Players** table + *All Players*) → `#news` (News rows with `on: dd/mm/yyyy`, `By: …`, long
+excerpt, *Get the Whole Story...* + *More Articles*) → footer.
 
 ### Layers
 
-- **Template layer:** `css/kiddos.css` (Kiddos / Colorlib, Bootstrap 4, CC BY 3.0) — grid,
-  buttons, owl carousel, counters, utility classes. Untouched.
-- **Club components:** `css/chess.css` — the academy components (broadcast room, countdown
-  cards, ticker, FAQ accordion, registration forms, honour roll, steps strip, product shelf,
-  team cards, Samarkand gallery) and their light-theme paint. Kept for backwards safety.
-- **Night theme:** `css/night.css` — loads last and repaints everything dark navy + gold, and
-  defines the shared furniture (`nk-topbar`, `nk-nav`, `nk-cta`, `nk-footer`, `nk-sec`,
-  `nk-card`, `nk-event`, `nk-newsitem`, `nk-player`, `nk-strip`, `nk-counter`, `nk-band`).
-  Section 12 of the file holds the reference-site blocks added in this round: plain banner,
-  counters row, image band, partners strip, values list, chips, dark table, countdown bands.
-  Tokens live at the top of the file: `--nk-gold:#f0b64a`, `--nk-bg:#05121f`, etc.
+- **Template layer:** `css/kiddos.css` (Kiddos / Colorlib, Bootstrap 4, CC BY 3.0) — kept
+  only for Bootstrap's grid and collapse plugin, the icon-font plumbing and the
+  `animate.css` reveal classes. Its theme is overridden wholesale by `site.css`.
+- **The look:** **`css/site.css`** — one stylesheet, the whole design: tokens, page shell,
+  the Chess Kenya section set (hero slider, counters, image band, partners, event cards,
+  players table, news list, plain page-title bands), cards, forms, tables, the broadcast
+  room and the playable board, and the footer. Everything is prefixed `kc-`. If you want to
+  change how the site looks, that is the only file you need to open.
+- **Removed:** the old `css/chess.css` and `css/night.css` layers (and the `body.nk` skin)
+  are gone — they were fighting the template and each other. They remain in the git history.
 - **Academy crest:** `assets/logo.png` (black line art), `assets/logo-light.png` (white) and
-  **`assets/logo-gold.png`** (the gold knockout the night theme uses in the nav and footer);
-  `assets/favicon.png` is the site icon.
-- **Runtime:** `js/kiddos-main.js` (nav, reveals, counters, owl on the testimony slider),
-  `js/smc.js` (countdowns, FAQ accordion, registration / membership / enquiry forms),
-  `js/hero-slider.js` (home hero crossfade), `js/chess.js` + `js/play.js` + `js/live.js` +
-  `js/board3d.js` (playable board, broadcast room, WebGL board).
+  **`assets/logo-gold.png`** (the gold knockout the nav and footer use); `assets/favicon.png`
+  is the site icon.
+- **Runtime:** `js/kiddos-main.js` (mobile nav, `animate.css` reveals, the counters on
+  `#section-counter`, magnific-popup galleries), `js/smc.js` (countdowns, FAQ accordion,
+  registration / membership / enquiry forms), `js/hero-slider.js` (home hero crossfade),
+  `js/chess.js` + `js/play.js` + `js/live.js` + `js/board3d.js` (playable board, broadcast
+  room, WebGL board).
 
 ### Page generator
 
@@ -204,10 +206,8 @@ Then open `http://localhost:8000`.
 │   ├── shell.mjs     (head · nav · banner · CTA band · slim footer · scripts)
 │   └── pages/        (the body block of each of the eight pages)
 ├── css/
-│   ├── kiddos.css    (template theme)      chess.css     (club components + light paint)
-│   ├── night.css     (dark navy + gold theme: repaints every component, adds the
-│   │                  top bar / nav / CTA / slim footer / cards / calendar furniture,
-│   │                  plus the reference-site sections in §12)
+│   ├── site.css      (the whole look: navy + gold, Chess Kenya's section set, prefixed kc-)
+│   ├── kiddos.css    (Bootstrap 4 + template base, overridden by site.css)
 │   └── animate.css · aos.css · owl carousel · magnific-popup · icon fonts css
 ├── js/
 │   ├── jquery · bootstrap · owl · aos · waypoints · stellar · scrollax (template stack)
