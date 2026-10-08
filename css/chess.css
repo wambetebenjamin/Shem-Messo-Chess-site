@@ -1112,6 +1112,7 @@ html{ scroll-padding-top:96px; }
   --tpl-night:#16232f;         /* the template's near-black */
   --tpl-night-2:#101b24;
   --tpl-blue:#16232f;
+  --tpl-line:rgba(22,35,47,.12);   /* hairline on white cards */
 }
 
 /* =============================================================
@@ -1501,3 +1502,77 @@ html{ scroll-padding-top:96px; }
 
 /* ---- body copy takes the navy ink, so even plain text is on-palette ---- */
 body{ color:#16232f; }
+
+
+/* =============================================================
+   NEXT EVENT PANEL  ·  the Mashujaa championship advert
+   (two colours: navy and gold, white as the paper)
+   ============================================================= */
+.ev-panel{
+  display:grid; grid-template-columns:1.55fr 1fr; gap:0; overflow:hidden;
+  background:#fff; border:1px solid var(--tpl-line,rgba(22,35,47,.12));
+  border-radius:20px; box-shadow:0 20px 50px rgba(22,35,47,.12);
+}
+.ev-body{ padding:38px 40px 34px; }
+.ev-kicker{
+  display:inline-flex; align-items:center; gap:9px; font-size:10.5px; font-weight:800;
+  letter-spacing:.24em; text-transform:uppercase; color:var(--tpl-gold-deep);
+}
+.ev-title{
+  font-size:38px; line-height:1.06; font-weight:900; letter-spacing:-.015em;
+  color:var(--tpl-night); margin:12px 0 6px;
+}
+.ev-title span{ display:block; color:var(--tpl-gold-deep); }
+.ev-tag{
+  font-size:15px; font-style:italic; font-weight:600; color:var(--tpl-night);
+  opacity:.75; margin-bottom:14px;
+}
+.ev-lede{ font-size:15px; line-height:1.75; color:var(--tpl-night); opacity:.8; max-width:60ch; }
+.ev-facts{
+  list-style:none; padding:0; margin:24px 0 0; display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px 22px;
+}
+.ev-facts li{ display:flex; gap:12px; align-items:flex-start; }
+.ev-ico{
+  flex:0 0 auto; width:34px; height:34px; border-radius:10px; display:inline-flex;
+  align-items:center; justify-content:center; background:var(--tpl-gold); color:var(--tpl-night);
+  font-size:14px;
+}
+.ev-facts b{
+  display:block; font-size:10px; font-weight:800; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--tpl-gold-deep); margin-bottom:2px;
+}
+.ev-facts span{ font-size:14px; font-weight:600; color:var(--tpl-night); }
+.ev-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+.ev-lines{
+  font-size:12.5px; color:var(--tpl-night); opacity:.72; margin:18px 0 0;
+  padding-top:16px; border-top:1px dashed rgba(22,35,47,.18);
+}
+.ev-side{
+  background:var(--tpl-night); color:#fff; padding:38px 34px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:20px;
+}
+.ev-crest{ width:118px; height:auto; opacity:.95; }
+.ev-motto{
+  font-size:13px; line-height:1.7; letter-spacing:.02em; color:var(--tpl-gold);
+  font-style:italic; margin:0;
+}
+.ev-poster{ width:100%; height:auto; border-radius:12px; box-shadow:0 14px 34px rgba(0,0,0,.35); }
+@media (max-width: 991.98px){
+  .ev-panel{ grid-template-columns:1fr; }
+  .ev-body{ padding:30px 26px 26px; }
+  .ev-title{ font-size:30px; }
+  .ev-facts{ grid-template-columns:1fr; }
+}
+.award-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.award-card{
+  background:#fff; border:1px solid rgba(22,35,47,.12); border-radius:16px;
+  padding:24px 24px 22px; box-shadow:0 12px 30px rgba(22,35,47,.08);
+}
+.award-ico{
+  display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px;
+  border-radius:12px; background:var(--tpl-gold); color:var(--tpl-night); font-size:17px; margin-bottom:12px;
+}
+.award-card h3{ font-size:17px; font-weight:800; color:var(--tpl-night); margin:0 0 6px; }
+.award-card p{ font-size:13.5px; line-height:1.7; color:var(--tpl-night); opacity:.75; margin:0; }
+@media (max-width: 767.98px){ .award-grid{ grid-template-columns:1fr; } }

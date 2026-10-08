@@ -138,21 +138,28 @@ convert "new-portrait.jpeg" -resize 853x1280^ -gravity center -extent 853x1280 \
   assets/leadership/<role>-<name>.jpg
 ```
 
-## Event advert (poster band)
+## The next event
 
-`index.html` and `tournaments.html` carry a poster-style advert for the next fixture
-(`#event`). It mirrors the site's own fixture card, so the **single place to edit an event** is:
+The site carries one event at a time. For the Mashujaa Championship (Tuesday 20 October
+2026, ACK Grace Hotel) the facts live in these places — change them together:
 
-1. the `#event` block in `tournaments.html` (the full poster) and the `compact` copy in
-   `index.html`;
-2. the two `data-countdown` targets in each block: first round and entries-close time;
-3. the M-Pesa line in the poster footer, if the entry reference changes.
+1. **`tournaments.html` · `#mashujaa`** — the event panel: venue, date, time, categories,
+   entry fee, payment line and the registration-desk numbers, plus the club crest and motto.
+2. **`tournaments.html` · the countdown card** — the two `data-countdown` targets
+   (`2026-10-20T08:00:00+03:00` first round, `2026-10-19T18:00:00+03:00` entry closes) and the
+   two `cd-band` labels above them.
+3. **`tournaments.html` · categories and awards** — the six `cat-chip`s and the two
+   `award-card`s.
+4. **`tournaments.html` · `#register`** — the category dropdown, the KES 500 line and the
+   Paybill 880100 / `123003#PlayersName` payment box.
+5. **`index.html`** — the first season-calendar card and the latest-updates card.
+6. **`live.html`** — the first `sched-card` (the fixture being streamed).
+7. **the footer row on every page** — "Kericho Mashujaa Chess Championship · entry closes
+   19 Oct".
 
-The poster artwork is currently `assets/tournament-prep-01.jpg` as a stand-in — the
-designed event poster has not arrived yet; swap that `src` (both blocks) to drop it in.
-Both blocks are marked with an `EVENT ADVERT` comment. Visitors can respond from the
-advert itself: registration form, WhatsApp entry, a Google Calendar "add to calendar"
-link, phone calls to the Secretary/Treasurer, or email.
+The printed poster drops into the panel's right-hand column: save it as
+`assets/mashujaa-2026-poster.jpg` and un-comment the `<img class="ev-poster">` line in
+`#mashujaa` (both are marked with a comment).
 
 ## Contacts shown on the site
 
