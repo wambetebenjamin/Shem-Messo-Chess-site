@@ -1505,3 +1505,11 @@ body.nk .chess-form select.form-control{
 body.nk .chess-form select.form-control option{ background:#0b2540; color:var(--nk-ink); }
 body.nk .chess-form .btn{ margin-right:10px; margin-bottom:8px; }
 body.nk .chess-form .form-msg{ margin:0; }
+
+/* ---- 12.14 · link-decoration safety for the new blocks ---- */
+a.nk-count, a.nk-count:hover,
+.nk-partner a, .nk-partner--cta a,
+.nk-imageband__cap, .nk-newsitem h3 a, .nk-event h3 a,
+.crest-copy a, .nk-quick a{ text-decoration:none; }
+.nk-newsitem h3 a:hover, .nk-event h3 a:hover{ color:var(--nk-gold); }
+.nk-count:focus-visible, .nk-partner--cta a:focus-visible{ outline:2px solid var(--nk-gold); outline-offset:3px; }
