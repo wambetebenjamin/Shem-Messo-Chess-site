@@ -23,10 +23,18 @@ Every page shares the same furniture, in the same order:
    (e.g. `Upcoming Events / Check em out!`) written straight onto the page background. No
    band, no strip, no tinted bar, no breadcrumb, no photo hero, no kicker (`.kc-banner`).
 3. **Body**: the sections for that page (see the table below).
-4. **Footer**: crest, `© YEAR Kericho Chess Club & Academy · Forward Ever, Backward Never`,
-   and the three social icons (`.kc-footer`). **There is deliberately no link row or menu at
-   the bottom.** Navigation lives in the nav bar, contacts live on `contact.html#team`.
-   There is no closing call-to-action band either: the page ends where Chess Kenya's does.
+4. **Footer**: a blue closing block with the crest in a soft disc, the club name and the
+   motto, and the three socials as labelled pills (WhatsApp · Facebook · TikTok). Under the
+   hairline sits the copyright line and a **Back to top** control (`.kc-totop`), which is an
+   in-page jump to `#main` rather than a navigation link. **There is deliberately no link row
+   or menu at the bottom.** Navigation lives in the nav bar, contacts live on
+   `contact.html#team`. There is no closing call-to-action band either: the page ends where
+   Chess Kenya's does.
+
+   The bottom also behaves: `body` is a flex column with `main{flex:1 0 auto}`, so on short
+   pages (shop, play) the footer sits on the bottom edge of the window instead of floating
+   above a gap, and every in-page jump (dropdown anchors, Back to top) lands 96px down so the
+   target is not hidden under the sticky nav.
 
 ### Homepage section order (mirrors chesskenya.co.ke)
 
