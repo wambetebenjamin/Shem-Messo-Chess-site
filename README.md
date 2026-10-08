@@ -94,12 +94,13 @@ the site.
   updates; the Tournament Floor wall uses tournament-prep 01/03/04/07/08 plus the mats.
 - **Mats (uploaded):** `assets/mats-vinyl.jpg` and `assets/mats-rubber.jpg`, extracted from
   `merchandise.zip` and used on the club shelf and in the photo wall.
-- **Tone:** the tournament-hall photographs (`tournament-prep-01…10`) carry one light
-  harmonisation — saturation 55% with a 6% gold tone — so the royal-blue tablecloths and red
-  chairs sit with the navy-and-gold palette instead of fighting it. The untouched originals
-  are kept privately outside the site. Product photographs (the mats, the shelf items and the
-  board still-life) are left at their true colours, because a buyer needs to see what the
-  product actually looks like.
+- **Tone:** every photograph on the site is graded to the two-colour palette. The
+  tournament-hall set carries saturation 55% with a 6% gold tone, so the royal-blue
+  tablecloths and red chairs sit with the navy and gold instead of fighting them, and every
+  green in the library — the roll-up boards, the club-kit bag, the workbooks, the foliage
+  behind the portraits and the classroom plants — is neutralised to warm stone and charcoal,
+  so no page shows a third hue. The untouched originals of every graded photograph are kept
+  privately outside the site; say the word and they go back.
 - **Club trips (uploaded):** `assets/club/vice-chairperson-on-the-road.jpg` and
   `assets/club/vice-chairperson-out-of-town.jpg`, cropped from the two 8 October uploads
   (`Mr. Ochieng 2.jpeg` and `Mr. Ochieng 3.jpeg`), shown in the about-page gallery.
