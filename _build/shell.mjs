@@ -1,23 +1,103 @@
 /* ============================================================================
-   PAGE SHELL — head · top bar · nav · page banner · footer · scripts
+   PAGE SHELL — head · top bar · dropdown nav · page title · footer · scripts
    ----------------------------------------------------------------------------
-   Layout follows chesskenya.co.ke: slim utility bar, one-row nav, plain
-   centred page-title bands on the inner pages, news at the foot of the page,
-   then a quiet footer with no link row. The look is css/site.css.
+   Layout follows chesskenya.co.ke: slim utility bar, a nav with **dropdown
+   groups** (About · Coaching · Events · Players · News · Contact), plain
+   centred page-title bands on the inner pages, and a quiet footer with no
+   link row. The look is css/site.css — off-white #F8F9FA + strategic blue
+   #4A90E2.
    ============================================================================ */
 
 const NAV = [
-  { key: 'home',        href: 'index.html',        label: 'Home' },
-  { key: 'about',       href: 'about.html',        label: 'About' },
-  { key: 'coaching',    href: 'coaching.html',     label: 'Coaching' },
-  { key: 'tournaments', href: 'tournaments.html',  label: 'Events' },
-  { key: 'live',        href: 'live.html',         label: 'Live' },
-  { key: 'play',        href: 'play.html',         label: 'Play' },
-  { key: 'shop',        href: 'shop.html',         label: 'Shop' },
-  { key: 'contact',     href: 'contact.html',      label: 'Contact' },
+  { key: 'home', href: 'index.html', label: 'Home' },
+  {
+    key: 'about', href: 'about.html', label: 'About',
+    items: [
+      { href: 'about.html#story', label: 'Our story', note: 'One coach, sixty-four squares' },
+      { href: 'about.html#tenets', label: 'Vision, mission & values' },
+      { href: 'about.html#objectives', label: 'Aims & objectives', note: 'What we actually do, in order' },
+      { href: 'about.html#milestones', label: 'Milestones', note: 'What we have built so far' },
+      { href: 'about.html#people', label: 'Office bearers' },
+      { href: 'about.html#gallery', label: 'Club gallery', note: 'Boards, halls and kit' },
+    ],
+  },
+  {
+    key: 'coaching', href: 'coaching.html', label: 'Coaching',
+    items: [
+      { href: 'coaching.html#includes', label: 'Included in every track' },
+      { href: 'coaching.html#tracks', label: 'The tracks', note: 'School · private · prep · Saturday club' },
+      { href: 'coaching.html#method', label: 'The four-phase method' },
+      { href: 'coaching.html#fees', label: 'Fees & payment' },
+    ],
+  },
+  {
+    key: 'tournaments', href: 'tournaments.html', label: 'Events',
+    items: [
+      { href: 'tournaments.html#next', label: 'Upcoming events', note: 'Next fixture and countdowns' },
+      { href: 'tournaments.html#calendar', label: 'Calender' },
+      { href: 'tournaments.html#categories', label: 'Categories & entry fees' },
+      { href: 'tournaments.html#register', label: 'Register a learner' },
+      { href: 'tournaments.html#honour-roll', label: 'Honour roll & standings' },
+    ],
+  },
+  {
+    key: 'players', href: 'index.html#players', label: 'Players',
+    activeOn: ['players', 'live', 'play'],
+    align: 'right',
+    items: [
+      { href: 'index.html#players', label: 'Top players' },
+      { href: 'tournaments.html#honour-roll', label: 'All players', note: 'Circuit standings table' },
+      { href: 'live.html', label: 'Live broadcast', note: 'Boards 1 to 4 on fixture days' },
+      { href: 'play.html', label: 'Play a board', note: 'Pass-and-play on one device' },
+    ],
+  },
+  {
+    key: 'news', href: 'index.html#news', label: 'News',
+    align: 'right',
+    items: [
+      { href: 'index.html#news', label: 'Latest news' },
+      { href: 'about.html#milestones', label: 'More articles', note: 'The club so far' },
+    ],
+  },
+  { key: 'shop', href: 'shop.html', label: 'Shop' },
+  {
+    key: 'contact', href: 'contact.html', label: 'Contact',
+    align: 'right',
+    items: [
+      { href: 'contact.html#team', label: 'Contact us', note: 'Office bearers and direct lines' },
+      { href: 'contact.html#membership', label: 'Membership', note: 'Join the academy' },
+      { href: 'contact.html#enquiry', label: 'Send an enquiry' },
+      { href: 'contact.html#secretary', label: 'Our Secretary in Samarkand' },
+      { href: 'contact.html#faq', label: 'Questions & answers' },
+    ],
+  },
 ];
 
 const CREST_ALT = 'Kericho Chess Academy crest: a pawn, king and knight over the motto Forward Ever, Backward Never';
+
+function navItem(n, active) {
+  const isActive = active === n.key || (n.activeOn || []).includes(active);
+  if (!n.items) {
+    return `              <li class="nav-item"><a class="nav-link${isActive ? ' is-active' : ''}" href="${n.href}">${n.label}</a></li>`;
+  }
+  const id = `nv-${n.key}`;
+  const base = n.href.split('#')[0];
+  const rows = [{ href: n.href, label: `${n.label} — overview`, note: 'Jump to the page', itemActive: isActive }]
+    .concat(n.items.map(it => ({
+      href: it.href, label: it.label, note: it.note,
+      itemActive: isActive && it.href.startsWith(base),
+    })));
+  const items = rows.map(it =>
+    `                  <a class="dropdown-item${it.itemActive ? ' is-active' : ''}" href="${it.href}">${it.label}${it.note ? `<small>${it.note}</small>` : ''}</a>`
+  ).join('\n');
+  const menuClass = n.align === 'right' ? 'dropdown-menu dropdown-menu--right' : 'dropdown-menu';
+  return `              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle${isActive ? ' is-active' : ''}" href="${n.href}" id="${id}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${n.label}</a>
+                <div class="${menuClass}" aria-labelledby="${id}">
+${items}
+                </div>
+              </li>`;
+}
 
 export function head({ title, desc, active = '' }) {
   return `<!DOCTYPE html>
@@ -30,7 +110,7 @@ export function head({ title, desc, active = '' }) {
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
-    <meta name="theme-color" content="#05101d">
+    <meta name="theme-color" content="#F8F9FA">
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="${desc}">
     <meta property="og:type" content="website">
@@ -73,7 +153,7 @@ export function head({ title, desc, active = '' }) {
       <nav class="navbar navbar-expand-lg kc-nav" id="ftco-navbar" aria-label="Main">
         <div class="kc-wrap kc-nav__inner">
           <a class="navbar-brand kc-brand" href="index.html">
-            <img src="assets/logo-gold.png" alt="${CREST_ALT}" width="640" height="650" decoding="async">
+            <img src="assets/logo.png" alt="${CREST_ALT}" width="640" height="650" decoding="async">
             <span class="kc-brand__text"><b>Kericho Chess</b><span>Club &amp; Academy</span></span>
           </a>
           <button class="navbar-toggler kc-burger" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +161,7 @@ export function head({ title, desc, active = '' }) {
           </button>
           <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav kc-nav__links">
-${NAV.map(n => `              <li class="nav-item"><a class="nav-link${active === n.key ? ' is-active' : ''}" href="${n.href}">${n.label}</a></li>`).join('\n')}
+${NAV.map(n => navItem(n, active)).join('\n')}
               <li class="nav-item kc-nav__cta"><a class="nav-link" href="contact.html#membership">Join Us</a></li>
             </ul>
           </div>
@@ -112,7 +192,7 @@ export function footer() {
       <div class="kc-wrap">
         <div class="kc-footer__row">
           <div class="kc-footer__brand">
-            <img src="assets/logo-gold.png" alt="" width="640" height="650" loading="lazy" decoding="async" aria-hidden="true">
+            <img src="assets/logo.png" alt="" width="640" height="650" loading="lazy" decoding="async" aria-hidden="true">
             <span class="kc-footer__text">
               <b>Kericho Chess Club &amp; Academy</b>
               <span>Forward Ever, Backward Never</span>

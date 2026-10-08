@@ -4,18 +4,23 @@ A multi-page website for Kericho Chess Club & Academy, Kenya. The layout is copi
 **Chess Kenya's site** (chesskenya.co.ke) section for section — hero slider, counters /
 links row, image band, About + Our Values + *Read More*, **PARTNERS**, **CALENDER** event
 cards with `Date` and `Venue`, **TOP PLAYERS**, **News** with `on:` / `By:` /
-*Get the Whole Story...* — while the content, photography and palette are the academy's own:
-a deep **navy + gold** skin in Work Sans.
+*Get the Whole Story...* — while the content and photography are the academy's own. The
+palette is **Off-White `#F8F9FA` + Strategic Blue `#4A90E2`** in Work Sans: off-white page
+backgrounds, white cards, blue accents, buttons, links, numbers and a solid blue footer.
 
 ## Structure
 
 Every page shares the same furniture, in the same order:
 
 1. **Top bar** — location, phone, email, socials (`.kc-top`).
-2. **Nav** — crest, wordmark, eight links, gold *Join Us* pill (`.kc-header` / `.kc-nav`,
-   sticky).
+2. **Nav** — crest, wordmark, **dropdown groups** (About · Coaching · Events · Players ·
+   News · Shop · Contact), blue *Join Us* pill (`.kc-header` / `.kc-nav`, sticky). Same
+   Bootstrap 4 dropdown mechanics Chess Kenya's nav uses: a `data-toggle="dropdown"` parent
+   link plus a `.dropdown-menu` of `.dropdown-item` links, each panel opening with the
+   group's own overview link. On phones the burger opens the collapse and the panels fall
+   open as plain stacked lists.
 3. **Page title** — inner pages open with a *plain centred title* and one line under it
-   (e.g. `Upcoming Events / Check em out!`) on a flat navy band (`.kc-banner`). No
+   (e.g. `Upcoming Events / Check em out!`) on a flat off-white band (`.kc-banner`). No
    breadcrumb, no photo hero, no kicker.
 4. **Body** — the sections for that page (see the table below).
 5. **Footer** — crest, `© YEAR Kericho Chess Club & Academy · Forward Ever, Backward Never`,
@@ -35,8 +40,8 @@ excerpt, *Get the Whole Story...* + *More Articles*) → footer.
 ### Layers
 
 - **Template layer:** `css/kiddos.css` (Kiddos / Colorlib, Bootstrap 4, CC BY 3.0) — kept
-  only for Bootstrap's grid and collapse plugin, the icon-font plumbing and the
-  `animate.css` reveal classes. Its theme is overridden wholesale by `site.css`.
+  only for Bootstrap's grid, the collapse and dropdown plugins, the icon-font plumbing and
+  the `animate.css` reveal classes. Its theme is overridden wholesale by `site.css`.
 - **The look:** **`css/site.css`** — one stylesheet, the whole design: tokens, page shell,
   the Chess Kenya section set (hero slider, counters, image band, partners, event cards,
   players table, news list, plain page-title bands), cards, forms, tables, the broadcast
@@ -44,9 +49,10 @@ excerpt, *Get the Whole Story...* + *More Articles*) → footer.
   change how the site looks, that is the only file you need to open.
 - **Removed:** the old `css/chess.css` and `css/night.css` layers (and the `body.nk` skin)
   are gone — they were fighting the template and each other. They remain in the git history.
-- **Academy crest:** `assets/logo.png` (black line art), `assets/logo-light.png` (white) and
-  **`assets/logo-gold.png`** (the gold knockout the nav and footer use); `assets/favicon.png`
-  is the site icon.
+- **Academy crest:** `assets/logo.png` (dark line art — the one the nav, footer and the
+  `about.html#crest` chip use, because it is the only knockout with contrast on off-white);
+  `assets/logo-light.png` (white) and `assets/logo-gold.png` (gold) are the older knockouts,
+  kept but unused; `assets/favicon.png` is the site icon.
 - **Runtime:** `js/kiddos-main.js` (mobile nav, `animate.css` reveals, the counters on
   `#section-counter`, magnific-popup galleries), `js/smc.js` (countdowns, FAQ accordion,
   registration / membership / enquiry forms), `js/hero-slider.js` (home hero crossfade),
@@ -62,7 +68,8 @@ identical everywhere; only the body differs.
 node _build/build.mjs        # writes the 8 pages into the site root
 ```
 
-- `_build/shell.mjs` — `head`, `banner`, `ctaBand`, `footer`, `scripts`
+- `_build/shell.mjs` — `head`, `banner`, `footer`, `scripts`, plus the `NAV` array that
+  builds the dropdown menu
 - `_build/build.mjs` — assembles each page (titles, descriptions, active nav item)
 - `_build/pages/*.html` — the body block of each page
 
@@ -206,7 +213,8 @@ Then open `http://localhost:8000`.
 │   ├── shell.mjs     (head · nav · banner · CTA band · slim footer · scripts)
 │   └── pages/        (the body block of each of the eight pages)
 ├── css/
-│   ├── site.css      (the whole look: navy + gold, Chess Kenya's section set, prefixed kc-)
+│   ├── site.css      (the whole look: off-white + strategic blue, Chess Kenya's section
+│   │                  set and its dropdown nav, all prefixed kc-)
 │   ├── kiddos.css    (Bootstrap 4 + template base, overridden by site.css)
 │   └── animate.css · aos.css · owl carousel · magnific-popup · icon fonts css
 ├── js/

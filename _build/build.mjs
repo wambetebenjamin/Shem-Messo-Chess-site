@@ -17,6 +17,7 @@ const PAGES = [
     title: 'Kericho Chess Club &amp; Academy · Chess coaching, tournaments and live boards in Kericho',
     desc: 'Kericho Chess Club & Academy: school chess coaching, inter-school tournaments, live broadcast boards, a playable board and club kits for schools across Kericho County, Kenya.',
     active: 'home',
+    page: 'hero-slider',
     // the homepage opens with the hero slider, so it takes no title band
   },
   {
