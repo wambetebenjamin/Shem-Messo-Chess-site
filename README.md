@@ -2,8 +2,10 @@
 
 A multi-page website for Kericho Chess Club & Academy, Kenya — academy content on the
 **Kiddos** template structure (Bootstrap 4, Colorlib, CC BY 3.0), wearing the club's own
-light design: a white header, white cards, and the Kiddos palette
-(`#1eaaf1` blue, `#fda638` gold, `#8cc152` green, `#f1453d` red, `#5d50c6` purple).
+light design: a white header, white cards, and a two-colour palette — navy `#16232f` for
+structure and gold `#fda638` for accent, with white and greys doing the neutral work. No
+other hue survives anywhere in the stylesheets or the pages: the template's blue, green, red
+and purple are all gone.
 
 ## What this build is
 
@@ -78,12 +80,18 @@ the last item, and the pill routes to `contact.html`.
 
 ## Photos
 
-Every photograph on the site is the academy's own.
+Every photograph on the site is the academy's own, and **no photograph shows a learner**.
 
-- **Homepage:** `assets/hero-dark-board.jpg` in the hero frame; `assets/orig-0*.jpg`,
-  `assets/hero-chess-academy.jpg` and `assets/tournament-prep-0*.jpg` through the cards,
-  programmes and updates; the Tournament Floor wall uses tournament-prep 01/03/04/07/08 plus
-  the mats.
+On 8 October 2026, at the club's request, every picture of children was taken off the site:
+the old page-header photograph, the coaching-session and tournament-focus shots, and
+`orig-01`…`orig-05` (the classroom and tournament frames). They were replaced with the
+academy's own empty-hall, table-and-clock, mats, shelf and adult-portrait photographs, and
+the files were deleted from the repository — the club's originals are kept privately outside
+the site.
+
+- **Homepage:** `assets/hero-dark-board.jpg` in the hero frame; `assets/tournament-prep-0*.jpg`
+  and `assets/hero-morning.jpg` (the empty classroom) through the cards, programme blocks and
+  updates; the Tournament Floor wall uses tournament-prep 01/03/04/07/08 plus the mats.
 - **Mats (uploaded):** `assets/mats-vinyl.jpg` and `assets/mats-rubber.jpg`, extracted from
   `merchandise.zip` and used on the club shelf and in the photo wall.
 - **Club trips (uploaded):** `assets/club/vice-chairperson-on-the-road.jpg` and
@@ -91,7 +99,9 @@ Every photograph on the site is the academy's own.
   (`Mr. Ochieng 2.jpeg` and `Mr. Ochieng 3.jpeg`), shown in the about-page gallery.
 - The club's untouched uploads stay in the repository root (`Mr. Ochieng*.jpeg`,
   `Njambi.jpeg`, `njambi 2.jpeg`, `chess website template for pages.jpeg`); the web-ready
-  copies live under `assets/`, so nothing is lost when a picture is re-cropped.
+  copies live under `assets/`, so nothing is lost when a picture is re-cropped. The uploaded
+  `kiddos-master.zip` is no longer published: it carries the template's own stock photographs
+  of children, so it is git-ignored and stays on the working copy only.
 - **Board piece art:** the 2D boards on Live and Play render local PNG pieces
   (`assets/pieces/`), so pieces show on every device without relying on system chess-glyph fonts.
 
@@ -215,7 +225,7 @@ Then open `http://localhost:8000`.
 │   ├── leadership/      (600×900 office-bearer portraits + source/ originals)
 │   ├── pieces/          (2D board piece art)
 │   └── logo.png · logo-light.png · favicon.png
-└── kiddos-master.zip   (uploaded source template, for reference)
+└── kiddos-master.zip   (uploaded template archive — git-ignored, not published)
 ```
 
 Site structure follows the **Kiddos** template (Bootstrap 4); the homepage borrowed the page

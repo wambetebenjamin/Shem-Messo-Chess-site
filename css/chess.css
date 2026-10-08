@@ -3,23 +3,23 @@
    Built on top of the "Kiddos" (Colorlib) Bootstrap structure.
    Board · broadcast room · countdowns · forms · FAQ · tables · accents.
    Palette is inherited from the template:
-     primary #1eaaf1 · secondary #fda638 · tertiary #8cc152
-     quarternary #f1453d · fifth #5d50c6
+     primary #16232f · secondary #fda638 · tertiary #fda638
+     quarternary #fda638 · fifth #16232f
    ============================================================================ */
 
 :root{
-  --kc-primary:#1eaaf1;
+  --kc-primary:#16232f;
   --kc-secondary:#fda638;
-  --kc-tertiary:#8cc152;
-  --kc-quaternary:#f1453d;
-  --kc-fifth:#5d50c6;
+  --kc-tertiary:#fda638;
+  --kc-quaternary:#fda638;
+  --kc-fifth:#16232f;
   --kc-ink:#22303c;
   --kc-sub:#6c757d;
   --kc-screen:#16232f;      /* broadcast "TV" panels */
   --kc-screen-2:#1e3040;
   --kc-cream:#f0e7cf;       /* vinyl board light square */
-  --kc-green:#5e9276;       /* vinyl board dark square */
-  --kc-line:#e6eef4;
+  --kc-green:#16232f;       /* vinyl board dark square */
+  --kc-line:#e6eaee;
   --kc-radius:16px;
   --kc-shadow:0 14px 34px rgba(33,50,68,.10);
   --kc-shadow-lg:0 22px 60px rgba(33,50,68,.16);
@@ -94,10 +94,10 @@
    BUTTONS (WhatsApp + track colours)
    ============================================================= */
 .btn.btn-wa{
-  background:#25d366; border:1px solid #25d366; color:#fff;
+  background:#fda638; border:1px solid #fda638; color:#fff;
 }
 .btn.btn-wa:hover, .btn.btn-wa:focus{
-  background:#1eb856; border:1px solid #1eb856; color:#fff;
+  background:#e8971f; border:1px solid #e8971f; color:#fff;
 }
 .btn.btn-outline-chess{
   background:transparent; border:1px solid rgba(34,48,60,.35); color:var(--kc-ink);
@@ -106,7 +106,7 @@
 .btn.btn-fifth{
   background:var(--kc-fifth); border:1px solid var(--kc-fifth); color:#fff;
 }
-.btn.btn-fifth:hover, .btn.btn-fifth:focus{ background:#4a41ab; border-color:#4a41ab; color:#fff; }
+.btn.btn-fifth:hover, .btn.btn-fifth:focus{ background:#0d1620; border-color:#0d1620; color:#fff; }
 .btn-block{ display:block; width:100%; }
 .btn .fas,.btn .fab{ margin-right:6px; }
 
@@ -114,12 +114,12 @@
 .live-dot{
   display:inline-block; width:8px; height:8px; border-radius:50%;
   background:var(--kc-quaternary); margin-right:2px; vertical-align:1px;
-  box-shadow:0 0 0 0 rgba(241,69,61,.5);
+  box-shadow:0 0 0 0 rgba(253,166,56,.5);
   animation:livePulse 1.8s ease-out infinite;
 }
 @keyframes livePulse{
-  0%{ box-shadow:0 0 0 0 rgba(241,69,61,.5);}
-  100%{ box-shadow:0 0 0 9px rgba(241,69,61,0);}
+  0%{ box-shadow:0 0 0 0 rgba(253,166,56,.5);}
+  100%{ box-shadow:0 0 0 9px rgba(253,166,56,0);}
 }
 .badge-live{
   display:inline-flex; align-items:center; gap:9px;
@@ -132,7 +132,7 @@
    NOTATION TICKER
    ============================================================= */
 .chess-ticker{
-  overflow:hidden; background:var(--kc-screen); color:#dcebf4;
+  overflow:hidden; background:var(--kc-screen); color:#efe3cf;
   border-top:3px solid var(--kc-primary);
 }
 .chess-ticker .ticker-track{
@@ -179,9 +179,9 @@
 /* round dots + clock toggle garnish */
 .round-dots{ display:flex; gap:8px; margin-top:18px; }
 .round-dots i{
-  width:12px; height:12px; border-radius:50%; background:#dcecf6;
+  width:12px; height:12px; border-radius:50%; background:#efe3cf;
 }
-.round-dots i.next{ background:var(--kc-tertiary); box-shadow:0 0 0 4px rgba(140,193,82,.22); }
+.round-dots i.next{ background:var(--kc-tertiary); box-shadow:0 0 0 4px rgba(253,166,56,.22); }
 .clock-flips{ display:flex; gap:10px; align-items:center; margin-top:20px; }
 .mini-clock{
   width:34px; height:34px; border-radius:10px; background:#fff;
@@ -189,7 +189,7 @@
 }
 .mini-clock.b{ animation-delay:2s; }
 @keyframes clockSide{
-  0%,50%{ opacity:1; box-shadow:0 0 0 5px rgba(30,170,241,.16); }
+  0%,50%{ opacity:1; box-shadow:0 0 0 5px rgba(22,35,47,.16); }
   50.1%,100%{ opacity:.4; box-shadow:none; }
 }
 .clock-note{ font-size:10.5px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--kc-sub); }
@@ -286,7 +286,7 @@
 }
 .reg-side{
   padding:44px 40px;
-  background:linear-gradient(155deg, var(--kc-primary) 0%, #2f7ec2 60%, var(--kc-fifth) 130%);
+  background:linear-gradient(155deg, var(--kc-primary) 0%, #16232f 60%, var(--kc-fifth) 130%);
   color:#fff;
 }
 .reg-side h2{ color:#fff; font-weight:800; margin:14px 0 12px; }
@@ -302,7 +302,7 @@
   display:flex; gap:12px; align-items:flex-start; margin-bottom:13px;
   color:rgba(255,255,255,.92); font-size:14px; font-weight:500;
 }
-.perk-list li .fas{ color:#c9f79a; margin-top:3px; }
+.perk-list li .fas{ color:#16232f; margin-top:3px; }
 .reg-form{ padding:44px 40px; }
 .reg-form .field{ margin-bottom:18px; }
 .reg-form .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
@@ -321,7 +321,7 @@
 }
 .reg-form textarea{ min-height:110px; resize:vertical; }
 .reg-form input:focus, .reg-form select:focus, .reg-form textarea:focus{
-  border-color:var(--kc-primary); box-shadow:0 0 0 4px rgba(30,170,241,.14); outline:none;
+  border-color:var(--kc-primary); box-shadow:0 0 0 4px rgba(22,35,47,.14); outline:none;
 }
 .pay-box{
   background:#fff8ef; border:1px solid #f6e2c0; border-radius:12px;
@@ -339,8 +339,8 @@
   border-radius:10px; padding:12px 16px; margin-bottom:16px;
 }
 .form-msg.show{ display:block; }
-.form-msg.success{ color:#3e7d2e; background:#f3fbec; border-color:var(--kc-tertiary); }
-.form-msg.error{ color:#b02a24; background:#fdf1f0; border-color:var(--kc-quaternary); }
+.form-msg.success{ color:#16232f; background:#e6eaee; border-color:var(--kc-tertiary); }
+.form-msg.error{ color:#c47f1a; background:#f7ddb8; border-color:var(--kc-quaternary); }
 .wa-confirm{ display:none; margin-top:12px; }
 .wa-confirm.show{ display:block; }
 @media (max-width: 991.98px){
@@ -369,7 +369,7 @@
 .res-table .pos{ font-weight:800; }
 .res-table .pos-1{ color:#c0930a; }
 .res-table .pos-2{ color:#7b8a94; }
-.res-table .pos-3{ color:#b06a30; }
+.res-table .pos-3{ color:#c47f1a; }
 
 /* =============================================================
    STEPS STRIP (ordering / how-it-works)
@@ -381,7 +381,7 @@
 }
 .step-card .step-n{
   position:absolute; top:10px; right:18px; font-size:58px; font-weight:900;
-  color:rgba(30,170,241,.12); line-height:1;
+  color:rgba(22,35,47,.12); line-height:1;
 }
 .step-card h3{ font-size:19px; font-weight:800; color:var(--kc-ink); margin-bottom:10px; }
 .step-card h3 .fas{ color:var(--kc-primary); margin-right:10px; }
@@ -449,8 +449,8 @@
   display:inline-flex; align-items:center; justify-content:center;
   font-weight:900; font-size:13px; letter-spacing:.05em;
 }
-.player-chip.w{ background:linear-gradient(135deg, var(--kc-primary), #1573b8); }
-.player-chip.b{ background:linear-gradient(135deg, #3b4e63, var(--kc-screen)); }
+.player-chip.w{ background:linear-gradient(135deg, var(--kc-primary), #0d1620); }
+.player-chip.b{ background:linear-gradient(135deg, #16232f, var(--kc-screen)); }
 .clock{
   font-variant-numeric:tabular-nums; font-weight:900; font-size:26px;
   color:var(--kc-ink); background:#fff; border:2px solid var(--kc-line);
@@ -458,7 +458,7 @@
 }
 .clock.active{
   border-color:var(--kc-primary); color:var(--kc-primary);
-  box-shadow:0 0 0 5px rgba(30,170,241,.13);
+  box-shadow:0 0 0 5px rgba(22,35,47,.13);
 }
 
 /* board frame + 2D board (classic vinyl colours) */
@@ -482,10 +482,10 @@
   filter:drop-shadow(0 2px 3px rgba(20,28,36,.38));
 }
 .sq.selected{ box-shadow:inset 0 0 0 4px var(--kc-secondary); }
-.sq.lastmove{ box-shadow:inset 0 0 0 4px rgba(30,170,241,.75); }
+.sq.lastmove{ box-shadow:inset 0 0 0 4px rgba(22,35,47,.75); }
 .sq .dot{
   position:absolute; width:26%; height:26%; border-radius:50%;
-  background:rgba(30,170,241,.45);
+  background:rgba(22,35,47,.45);
 }
 .sq .ring{
   position:absolute; inset:12%; border-radius:50%;
@@ -495,15 +495,15 @@
 /* 3D stage (progressive enhancement, hidden unless WebGL mounts) */
 .board3d-stage{
   position:relative; display:none; aspect-ratio:1/1; border-radius:8px; overflow:hidden;
-  background:radial-gradient(120% 90% at 50% 0%, #eaf4f0 0%, #ddede8 52%, #e4eff6 100%);
-  box-shadow:inset 0 0 0 1px rgba(30,170,241,.18);
+  background:radial-gradient(120% 90% at 50% 0%, #e6eaee 0%, #e6eaee 52%, #e6eaee 100%);
+  box-shadow:inset 0 0 0 1px rgba(22,35,47,.18);
 }
 .has-3d .board3d-stage{ display:block; }
 .has-3d .play-board{ display:none; }
 .board3d-stage canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; touch-action:none; cursor:pointer; }
 .b3d-tag, .b3d-hint{
   position:absolute; z-index:2; font-size:9.5px; letter-spacing:.22em; font-weight:800;
-  color:#1573b8; background:rgba(255,255,255,.85); border:1px solid rgba(30,170,241,.3);
+  color:#0d1620; background:rgba(255,255,255,.85); border:1px solid rgba(22,35,47,.3);
   padding:6px 11px; border-radius:20px; pointer-events:none; text-transform:uppercase;
 }
 .b3d-tag{ top:12px; left:12px; }
@@ -517,7 +517,7 @@
 }
 .eval-fill{
   position:absolute; left:0; right:0; top:0; height:52%;
-  background:linear-gradient(180deg,#fff,#eaf6ff);
+  background:linear-gradient(180deg,#fff,#e6eaee);
   transition:height .9s ease;
 }
 .eval-readout{
@@ -563,7 +563,7 @@
 .metric-v.cold{ color:var(--kc-primary); }
 .ok-dot{
   display:inline-block; width:9px; height:9px; border-radius:50%;
-  background:var(--kc-tertiary); box-shadow:0 0 0 3px rgba(140,193,82,.25);
+  background:var(--kc-tertiary); box-shadow:0 0 0 3px rgba(253,166,56,.25);
 }
 
 /* move list */
@@ -587,14 +587,14 @@
    ============================================================= */
 .testimony-wrap .user-img.user-initials{
   display:flex; align-items:center; justify-content:center;
-  background:linear-gradient(135deg, var(--kc-primary), #1573b8);
+  background:linear-gradient(135deg, var(--kc-primary), #0d1620);
 }
 .testimony-wrap .user-img.user-initials b{
   font-size:34px; font-weight:900; color:#fff; letter-spacing:.02em;
   font-family:'Work Sans', sans-serif;
 }
 .initials-2{ background:linear-gradient(135deg, var(--kc-secondary), #d8861e) !important; }
-.initials-3{ background:linear-gradient(135deg, var(--kc-tertiary), #5f9730) !important; }
+.initials-3{ background:linear-gradient(135deg, var(--kc-tertiary), #16232f) !important; }
 
 /* =============================================================
    SCHEDULE CARDS (upcoming broadcasts)
@@ -825,11 +825,11 @@ html{ scroll-padding-top:96px; }
   width:54px; height:54px; border-radius:16px; flex:0 0 auto;
   display:inline-flex; align-items:center; justify-content:center;
   font-weight:900; font-size:17px; letter-spacing:.04em; color:#fff;
-  background:linear-gradient(135deg, var(--kc-primary), #1573b8);
-  box-shadow:0 10px 22px rgba(30,170,241,.28);
+  background:linear-gradient(135deg, var(--kc-primary), #0d1620);
+  box-shadow:0 10px 22px rgba(22,35,47,.28);
 }
 .team-ava.o{ background:linear-gradient(135deg, var(--kc-secondary), #d8861e); box-shadow:0 10px 22px rgba(253,166,56,.3); }
-.team-ava.b{ background:linear-gradient(135deg, #7a68e0, var(--kc-fifth)); box-shadow:0 10px 22px rgba(93,80,198,.3); }
+.team-ava.b{ background:linear-gradient(135deg, #0d1620, var(--kc-fifth)); box-shadow:0 10px 22px rgba(22,35,47,.3); }
 .team-ava.sm{ width:44px; height:44px; font-size:14px; border-radius:13px; }
 .team-card h3{ font-size:18px; font-weight:800; color:var(--kc-ink); margin:4px 0 0; }
 .team-role{
@@ -843,7 +843,7 @@ html{ scroll-padding-top:96px; }
   display:inline-flex; align-items:center; gap:8px; align-self:flex-start;
   font-size:12.5px; font-weight:700; color:var(--kc-primary);
 }
-.team-mail:hover{ color:#1573b8; text-decoration:underline; }
+.team-mail:hover{ color:#0d1620; text-decoration:underline; }
 .team-photo-wrap{ position:relative; display:inline-block; margin-bottom:4px; }
 /* Leadership portraits are shot 2:3 (600×900); the card frame is 3:4 so the
    faces stay the subject and one card size fits every bearer. */
@@ -855,8 +855,8 @@ html{ scroll-padding-top:96px; }
 .team-badge{
   position:absolute; right:-12px; bottom:-6px;
   font-size:8.5px; font-weight:800; letter-spacing:.16em; color:#fff;
-  background:linear-gradient(135deg, var(--kc-quaternary), #c22d26);
-  padding:5px 10px; border-radius:999px; box-shadow:0 8px 18px rgba(241,69,61,.38);
+  background:linear-gradient(135deg, var(--kc-quaternary), #e8971f);
+  padding:5px 10px; border-radius:999px; box-shadow:0 8px 18px rgba(253,166,56,.38);
 }
 .wrap-mail{ word-break:break-all; overflow-wrap:anywhere; }
 /* Academy Office: general line under the leadership cards */
@@ -1099,8 +1099,8 @@ html{ scroll-padding-top:96px; }
    and adds the section shapes the club asked for from the uploaded page
    template: framed hero with a board panel, a row of service cards, a row of
    fixture cards, and a dark poster band. Colours are the Kiddos template
-   palette already in use site wide: primary #1eaaf1, secondary/gold #fda638,
-   tertiary #8cc152, quarternary #f1453d, fifth #5d50c6.
+   palette already in use site wide: primary #16232f, secondary/gold #fda638,
+   tertiary #fda638, quarternary #fda638, fifth #16232f.
    Loaded last, so equal-specificity rules here win.
    ============================================================================ */
 
@@ -1111,7 +1111,7 @@ html{ scroll-padding-top:96px; }
   --tpl-pale:#ffd9a3;
   --tpl-night:#16232f;         /* the template's near-black */
   --tpl-night-2:#101b24;
-  --tpl-blue:#1eaaf1;
+  --tpl-blue:#16232f;
 }
 
 /* =============================================================
@@ -1352,7 +1352,7 @@ html{ scroll-padding-top:96px; }
    ============================================================= */
 .sec-night{
   position:relative; color:rgba(255,255,255,.78);
-  background:radial-gradient(900px 420px at 12% 8%, rgba(30,170,241,.14), transparent 60%),
+  background:radial-gradient(900px 420px at 12% 8%, rgba(22,35,47,.14), transparent 60%),
              linear-gradient(180deg, var(--tpl-night) 0%, var(--tpl-night-2) 100%);
 }
 .sec-night h2, .sec-night h3, .sec-night h4{ color:#fff; }
@@ -1442,3 +1442,62 @@ html{ scroll-padding-top:96px; }
   .svc-card, .fix-card, .hall-wall a, .fix-card:hover, .svc-card:hover{ transform:none !important; }
   .tpl-hero h1, .tpl-hero .lede{ animation:none !important; }
 }
+
+
+/* ============================================================================
+   TWO-COLOUR PASS  ·  navy #16232f + gold #fda638
+   ----------------------------------------------------------------------------
+   The page now runs on two colours only:
+
+     navy   #16232f   everything structural: text, dark bands, the primary button
+     gold   #fda638   the accent: secondary buttons, chips, rules, highlights
+
+   White and the near-white surfaces are the paper, and the only other values in
+   the stylesheets are lighter or darker tints of those same two hues
+   (gold-deep #c47f1a for small gold text on white, pale gold #f7ddb8 for gold
+   tints, #0d1620 for a deeper navy). Green, blue, red, purple and the WhatsApp
+   green are all gone.
+
+   The template and club layers above were remapped to the palette; the rules
+   below fix the places where a remapped colour needs a different partner to
+   stay legible.
+   ============================================================================ */
+
+/* ---- gold buttons carry navy text (white on gold cannot be read) ---- */
+.btn.btn-secondary, .btn.btn-tertiary, .btn.btn-quarternary,
+.btn.btn-wa, .btn.btn-gold,
+.btn.btn-secondary:focus, .btn.btn-tertiary:focus,
+.btn.btn-quarternary:focus, .btn.btn-wa:focus{
+  background:var(--tpl-gold); border-color:var(--tpl-gold); color:var(--tpl-night);
+}
+.btn.btn-secondary:hover, .btn.btn-secondary:active,
+.btn.btn-tertiary:hover, .btn.btn-tertiary:active,
+.btn.btn-quarternary:hover, .btn.btn-quarternary:active,
+.btn.btn-wa:hover, .btn.btn-wa:active{
+  background:#e8971f; border-color:#e8971f; color:var(--tpl-night);
+}
+
+/* ---- chips and badges that sit on gold ---- */
+.badge-live, .foot-new, .team-badge{ color:var(--tpl-night); }
+.badge-live{ background:var(--tpl-gold); }
+.badge-live .live-dot{ background:var(--tpl-night); box-shadow:none; animation:none; }
+.checkline li .fas{ color:var(--tpl-night); }
+
+/* ---- season counters: the figures sit on a dark photograph ---- */
+.ftco-counter .text strong.number{ color:var(--tpl-gold); }
+.ftco-counter .block-18 .icon span{ color:var(--tpl-gold); }
+
+/* ---- notation ticker: its top rule was navy on a navy screen ---- */
+.chess-ticker{ border-top-color:var(--tpl-gold); }
+
+/* ---- heading accents: gold-deep on light sections, gold on dark bands ---- */
+.heading-section h2 span,
+.course .text .subheading span,
+.staff .ftco-social li a{ color:var(--tpl-gold-deep); }
+.heading-section.heading-section-white h2 span{ color:var(--tpl-gold); }
+
+/* ---- countdown figures in the warning state ---- */
+.cd-cell.warn .cd-num{ color:var(--tpl-gold-deep); }
+
+/* ---- body copy takes the navy ink, so even plain text is on-palette ---- */
+body{ color:#16232f; }
