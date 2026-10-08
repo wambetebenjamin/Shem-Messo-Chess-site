@@ -531,7 +531,8 @@ body.nk .hero-wrap .slider-text .breadcrumbs span{ color:var(--nk-faint); }
   align-items:center; justify-content:center; font-size:19px;
   background:rgba(240,182,74,.12); color:var(--nk-gold); border:1px solid var(--nk-line);
 }
-.nk-quicklink b{ display:block; font-size:15px; font-weight:800; }
+.nk-quicklink > span{ min-width:0; }
+.nk-quicklink b{ display:block; font-size:15px; font-weight:800; color:var(--nk-ink); }
 .nk-quicklink span{ display:block; font-size:12.5px; color:var(--nk-dim); line-height:1.45; }
 .nk-quicklink:nth-child(2) i{ background:rgba(74,168,232,.12); color:var(--nk-blue); border-color:rgba(74,168,232,.28); }
 .nk-quicklink:nth-child(3) i{ background:rgba(127,196,91,.12); color:var(--nk-green); border-color:rgba(127,196,91,.28); }
