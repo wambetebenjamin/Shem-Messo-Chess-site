@@ -3,9 +3,9 @@
 A multi-page website for Kericho Chess Club & Academy, Kenya — academy content on the
 **Kiddos** template structure (Bootstrap 4, Colorlib, CC BY 3.0), wearing the club's own
 light design: a white header, white cards, and a two-colour palette — navy `#16232f` for
-structure and gold `#fda638` for accent, with white and greys doing the neutral work. No
-other hue survives anywhere in the stylesheets or the pages: the template's blue, green, red
-and purple are all gone.
+structure and green `#3aa85c` for accent, with white and greys doing the neutral work. No
+other hue survives anywhere in the stylesheets or the pages: the template's blue, red and
+purple are all gone.
 
 ## What this build is
 
@@ -13,13 +13,13 @@ The homepage was rebuilt on the **uploaded page template** (`chess website templ
 pages.jpeg`), with the club's own palette and features. The homepage holding page
 ("Coming Soon") is gone: the real site is back, and every page is reachable again.
 
-- **Header:** white bar, dark labels, gold underline on the current page, and the gold
+- **Header:** white bar, dark labels, green underline on the current page, and the green
   **Enrol Now** pill. No dark header. Sticks to the top on scroll.
-- **Home hero:** framed dark panel — gold "Master the Game." over a white
-  "Elevate Your Strategy.", two calls to action, a proof strip, and the board picture in a
-  gold-edged frame with a small caption chip.
+- **Home hero:** dark panel — green "Master the Game." over a white
+  "Elevate Your Strategy.", two calls to action, a proof strip, and the board picture with a
+  small caption chip.
 - **Service cards:** four white cards on a row (Weekly School Coaching, Private Lessons,
-  Inter-School Tournaments, Saturday Academy Club), gold-tinted icon tiles, hover lift.
+  Inter-School Tournaments, Saturday Academy Club), green-tinted icon tiles, hover lift.
 - **Season calendar:** three cards (next fixture, the weekly club night, the next friendly)
   with a small chip, a date/format meta row and a link, plus a **View all tournaments** link.
 - **Night band — "The Tournament Floor":** a dark band of the academy's own photographs:
@@ -74,8 +74,8 @@ carousel runtime.
 ### Navigation
 
 All eight pages share one bar: **Home · Coaching · Tournaments · Live · Play · Shop · About ·
-Contact**, then the gold **Enrol Now** pill. Links are labelled (the short-lived icon-only
-pass is gone), the bar is white, and the current page is marked with gold. Contact stays as
+Contact**, then the green **Enrol Now** pill. Links are labelled (the short-lived icon-only
+pass is gone), the bar is white, and the current page is marked with green. Contact stays as
 the last item, and the pill routes to `contact.html`.
 
 ## Photos
@@ -94,13 +94,9 @@ the site.
   updates; the Tournament Floor wall uses tournament-prep 01/03/04/07/08 plus the mats.
 - **Mats (uploaded):** `assets/mats-vinyl.jpg` and `assets/mats-rubber.jpg`, extracted from
   `merchandise.zip` and used on the club shelf and in the photo wall.
-- **Tone:** every photograph on the site is graded to the two-colour palette. The
-  tournament-hall set carries saturation 55% with a 6% gold tone, so the royal-blue
-  tablecloths and red chairs sit with the navy and gold instead of fighting them, and every
-  green in the library — the roll-up boards, the club-kit bag, the workbooks, the foliage
-  behind the portraits and the classroom plants — is neutralised to warm stone and charcoal,
-  so no page shows a third hue. The untouched originals of every graded photograph are kept
-  privately outside the site; say the word and they go back.
+- **Tone:** the photographs are the club's own, at their true colours — no grading, no
+  colour cast. The roll-up boards, the mats, the kit bag and the classroom are as they came
+  off the camera, and their greens now sit with the site's own green.
 - **Club trips (uploaded):** `assets/club/vice-chairperson-on-the-road.jpg` and
   `assets/club/vice-chairperson-out-of-town.jpg`, cropped from the two 8 October uploads
   (`Mr. Ochieng 2.jpeg` and `Mr. Ochieng 3.jpeg`), shown in the about-page gallery.
