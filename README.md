@@ -1,10 +1,10 @@
 # Kericho Chess Club & Academy
 
 A multi-page website for Kericho Chess Club & Academy, Kenya. The layout is copied from
-**Chess Kenya's site** (chesskenya.co.ke) section for section — hero slider, counters /
-links row, image band, About + Our Values + *Read More*, **PARTNERS**, **CALENDER** event
+**Chess Kenya's site** (chesskenya.co.ke) section for section: hero slider, counters /
+links row, About + Our Values + *Read More*, **PARTNERS**, **CALENDER** event
 cards with `Date` and `Venue`, **TOP PLAYERS**, **News** with `on:` / `By:` /
-*Get the Whole Story...* — while the content and photography are the academy's own. The
+*Get the Whole Story...*. The content and photography are the academy's own. The
 palette is **Off-White `#F8F9FA` + Strategic Blue `#4A90E2`** in Work Sans: off-white page
 backgrounds, white cards, blue accents, buttons, links, numbers and a solid blue footer.
 
@@ -12,44 +12,44 @@ backgrounds, white cards, blue accents, buttons, links, numbers and a solid blue
 
 Every page shares the same furniture, in the same order:
 
-1. **Top bar** — location, phone, email, socials (`.kc-top`).
-2. **Nav** — crest, wordmark, **dropdown groups** (About · Coaching · Events · Players ·
+1. **Nav**: the nav is the first element on every page; there is no contact strip, no
+   utility bar and no announcement bar above it. Crest, wordmark, **dropdown groups** (About · Coaching · Events · Players ·
    News · Shop · Contact), blue *Join Us* pill (`.kc-header` / `.kc-nav`, sticky). Same
    Bootstrap 4 dropdown mechanics Chess Kenya's nav uses: a `data-toggle="dropdown"` parent
    link plus a `.dropdown-menu` of `.dropdown-item` links, each panel opening with the
    group's own overview link. On phones the burger opens the collapse and the panels fall
    open as plain stacked lists.
-3. **Page title** — inner pages open with a *plain centred title* and one line under it
-   (e.g. `Upcoming Events / Check em out!`) on a flat off-white band (`.kc-banner`). No
-   breadcrumb, no photo hero, no kicker.
-4. **Body** — the sections for that page (see the table below).
-5. **Footer** — crest, `© YEAR Kericho Chess Club & Academy · Forward Ever, Backward Never`,
+2. **Page title**: inner pages open with a *plain centred title* and one line under it
+   (e.g. `Upcoming Events / Check em out!`) written straight onto the page background. No
+   band, no strip, no tinted bar, no breadcrumb, no photo hero, no kicker (`.kc-banner`).
+3. **Body**: the sections for that page (see the table below).
+4. **Footer**: crest, `© YEAR Kericho Chess Club & Academy · Forward Ever, Backward Never`,
    and the three social icons (`.kc-footer`). **There is deliberately no link row or menu at
-   the bottom** — navigation lives in the nav bar, contacts live on `contact.html#team`.
+   the bottom.** Navigation lives in the nav bar, contacts live on `contact.html#team`.
    There is no closing call-to-action band either: the page ends where Chess Kenya's does.
 
 ### Homepage section order (mirrors chesskenya.co.ke)
 
 `hero slider` (3 slides, *Join Us*) → `#section-counter` (Learners coached · Events this
-year · Partner schools · Boards streamed) → **image band** → `#about` (About + **Our
-Values.** list + *Read More....*) → **PARTNERS** strip → `#calendar` (**Calender** — event
+year · Partner schools · Boards streamed) → `#about` (About + **Our
+Values.** list + *Read More....*) → **PARTNERS** strip → `#calendar` (**Calender** event
 cards with image, title, `Date`, `Venue`, *Register* + *More Events*) → `#players` (**Top
 Players** table + *All Players*) → `#news` (News rows with `on: dd/mm/yyyy`, `By: …`, long
 excerpt, *Get the Whole Story...* + *More Articles*) → footer.
 
 ### Layers
 
-- **Template layer:** `css/kiddos.css` (Kiddos / Colorlib, Bootstrap 4, CC BY 3.0) — kept
+- **Template layer:** `css/kiddos.css` (Kiddos / Colorlib, Bootstrap 4, CC BY 3.0), kept
   only for Bootstrap's grid, the collapse and dropdown plugins, the icon-font plumbing and
   the `animate.css` reveal classes. Its theme is overridden wholesale by `site.css`.
-- **The look:** **`css/site.css`** — one stylesheet, the whole design: tokens, page shell,
-  the Chess Kenya section set (hero slider, counters, image band, partners, event cards,
+- **The look:** **`css/site.css`**, one stylesheet: tokens, page shell,
+  the Chess Kenya section set (hero slider, counters, partners, event cards,
   players table, news list, plain page-title bands), cards, forms, tables, the broadcast
   room and the playable board, and the footer. Everything is prefixed `kc-`. If you want to
   change how the site looks, that is the only file you need to open.
 - **Removed:** the old `css/chess.css` and `css/night.css` layers (and the `body.nk` skin)
-  are gone — they were fighting the template and each other. They remain in the git history.
-- **Academy crest:** `assets/logo.png` (dark line art — the one the nav, footer and the
+  are gone. They were fighting the template and each other. They remain in the git history.
+- **Academy crest:** `assets/logo.png` (dark line art, the one the nav, footer and the
   `about.html#crest` chip use, because it is the only knockout with contrast on off-white);
   `assets/logo-light.png` (white) and `assets/logo-gold.png` (gold) are the older knockouts,
   kept but unused; `assets/favicon.png` is the site icon.
@@ -68,10 +68,10 @@ identical everywhere; only the body differs.
 node _build/build.mjs        # writes the 8 pages into the site root
 ```
 
-- `_build/shell.mjs` — `head`, `banner`, `footer`, `scripts`, plus the `NAV` array that
+- `_build/shell.mjs`: `head`, `banner`, `footer`, `scripts`, plus the `NAV` array that
   builds the dropdown menu
-- `_build/build.mjs` — assembles each page (titles, descriptions, active nav item)
-- `_build/pages/*.html` — the body block of each page
+- `_build/build.mjs`: assembles each page (titles, descriptions, active nav item)
+- `_build/pages/*.html`: the body block of each page
 
 Edit the body blocks (or `shell.mjs` for global furniture), then re-run the command.
 
@@ -83,7 +83,7 @@ Edit the body blocks (or `shell.mjs` for global furniture), then re-run the comm
 | `about.html` | Story, crest band, **vision / mission / values**, **twelve aims & objectives**, **milestones**, office bearers with portraits, club & kit gallery |
 | `coaching.html` | Six inclusions, **four tracks** (school, private, prep, Saturday club), the four-phase method, fees + M-Pesa box, FAQ |
 | `tournaments.html` | Next fixture with two live countdowns, **Calender** cards, eight categories + fee table, registration form, honour roll |
-| `live.html` | **Broadcast room:** Board 1 with clocks, eval bar, move list, spectator feed, notation ticker, controls, how-to-watch |
+| `live.html` | **Broadcast room:** Board 1 with clocks, eval bar, move list, spectator feed, controls, how-to-watch |
 | `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo), game state, notation, coach's note, Lichess + coaching cards |
 | `shop.html` | Four products with one-tap WhatsApp ordering, three-step ordering strip, M-Pesa box |
 | `contact.html` | **Office bearers** (four portrait cards + academy office band), membership form + fee table, WhatsApp enquiry composer, FAQ, **Secretary's Samarkand gallery + quote** |
@@ -105,9 +105,8 @@ plain words, so visitors understand why the gallery shows boards and halls rathe
 Everything on the pages is the academy's own photography:
 
 - **Heroes and page banners:** `hero-morning.jpg` (classroom + board), `hero-dark-board.jpg`
-  (pieces on a board), `tournament-prep-01/02/03/04/05/06/08/09/10.jpg` — empty halls, laid
+  (pieces on a board), `tournament-prep-01/02/03/04/05/06/08/09/10.jpg`: empty halls, laid
   tables, boards and clocks.
-- **Image band on the homepage:** `tournament-prep-05.jpg` (the hall, set for round one).
 - **Club & kit gallery, products:** `chess-materials.jpg`, `shelf-workbook.jpg`,
   `shelf-clock.jpg`, `shelf-kit.jpg`.
 - **Board piece art:** the 2D boards on Live and Play render local PNG pieces
@@ -121,12 +120,12 @@ Everything on the pages is the academy's own photography:
   | --- | --- | --- | --- |
   | Shem Meso · President & Head Coach | `leadership/president-shem-meso.jpg` | `source/president-shem-meso-original.jpg` | Resized to 600×900 |
   | Barnabas Ochieng · Vice Chairperson | `leadership/vice-chairperson-barnabas-ochieng.jpg` | `source/vice-chairperson-barnabas-event-original.jpg` (from `Mr. Ochieng 3.jpeg`) | Full-length event crop to 600×900 |
-  | Gladys Langat · Secretary | `gladys-langat-portrait.jpg` | — | Cropped to 600×900 for the card frame |
+  | Gladys Langat · Secretary | `gladys-langat-portrait.jpg` | n/a | Cropped to 600×900 for the card frame |
   | Julieann Njambi · Treasurer | `njambi-treasurer.jpg` | `Njambi.jpeg` (960×1440) | Resized to 600×900 |
 
   **Portrait correction (Oct 2026):** the Vice Chairperson card first showed a mis-cropped
   portrait (a figure from the President's pair photo who is not Barnabas), then a bathroom
-  selfie. It now uses the club's own photograph of him at the wetlands event — the same shot
+  selfie. It now uses the club's own photograph of him at the wetlands event, the same shot
   the club uploaded, cropped in full length. The superseded crops stay in `source/` for the
   record. Regenerate with:
 
@@ -154,7 +153,7 @@ The **single place to edit an event** is:
 | Who | Role | Number / email |
 | --- | --- | --- |
 | Shem Meso | President & Head Coach | 0729 037 585 · shemeso26@gmail.com |
-| Barnabas Ochieng | Vice Chairperson | no published line yet — routed through the academy office |
+| Barnabas Ochieng | Vice Chairperson | no published line yet, routed through the academy office |
 | Gladys Langat | Secretary | 0723 397 573 (**new line**) · WhatsApp |
 | Julieann Njambi | Treasurer | 0722 709 727 · WhatsApp |
 | Academy office | General & schools | 0729 037 585 · kerichochessacademy@gmail.com |
@@ -185,6 +184,17 @@ Then open `http://localhost:8000`.
 3. Under **Build and deployment**, choose **Deploy from a branch**.
 4. Select the `main` branch and `/ (root)` folder.
 5. Save. GitHub will publish the site at the Pages URL shown there.
+
+## House style
+
+- **No strips.** Nothing sits above the navigation, and no page uses a full-width band,
+  banner strip, marquee or ticker. The nav is the first element, inner-page titles are plain
+  text on the page background, and the footers are quiet. The only full-width colour blocks
+  left are the hero slider, the counters row, the partners row and the blue footer.
+- **No dashes.** The visible copy on every page is written without em dashes, en dashes or
+  dangling hyphens, in headings and in body text alike. The hyphens that stay are the ones
+  that are part of the spelling: `M-Pesa`, `sixty-four`, `four-phase`, `inter-school`.
+- Keep it that way when you edit `_build/pages/*.html` or `_build/shell.mjs`.
 
 ## Content notes
 
@@ -222,7 +232,7 @@ Then open `http://localhost:8000`.
 │   ├── kiddos-main.js (template runtime)   smc.js        (academy runtime)
 │   └── chess.js · play.js · live.js · board3d.js         (the chess core)
 ├── fonts/   (flaticon · icomoon · ionicons · open-iconic)
-├── assets/  (academy photography — empty halls, boards, kit and non-learner shots only;
+├── assets/  (academy photography: empty halls, boards, kit and non-learner shots only;
 │            crest logo.png / logo-light.png / logo-gold.png / favicon.png, the
 │            Treasurer's njambi-treasurer.jpg and the Secretary's gladys-*.jpg
 │            photos from Samarkand 2026)

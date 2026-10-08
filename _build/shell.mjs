@@ -1,11 +1,11 @@
 /* ============================================================================
-   PAGE SHELL — head · top bar · dropdown nav · page title · footer · scripts
+   PAGE SHELL · head · dropdown nav · page title · footer · scripts
    ----------------------------------------------------------------------------
-   Layout follows chesskenya.co.ke: slim utility bar, a nav with **dropdown
-   groups** (About · Coaching · Events · Players · News · Contact), plain
-   centred page-title bands on the inner pages, and a quiet footer with no
-   link row. The look is css/site.css — off-white #F8F9FA + strategic blue
-   #4A90E2.
+   Layout follows chesskenya.co.ke: the nav sits at the very top of the page
+   with **dropdown groups** (About · Coaching · Events · Players · News ·
+   Shop · Contact), inner pages open with a plain centred title over the page
+   background, and the footer is quiet, with no link row. The look is
+   css/site.css: off-white #F8F9FA + strategic blue #4A90E2.
    ============================================================================ */
 
 const NAV = [
@@ -48,7 +48,7 @@ const NAV = [
       { href: 'index.html#players', label: 'Top players' },
       { href: 'tournaments.html#honour-roll', label: 'All players', note: 'Circuit standings table' },
       { href: 'live.html', label: 'Live broadcast', note: 'Boards 1 to 4 on fixture days' },
-      { href: 'play.html', label: 'Play a board', note: 'Pass-and-play on one device' },
+      { href: 'play.html', label: 'Play a board', note: 'Pass and play on one device' },
     ],
   },
   {
@@ -82,7 +82,7 @@ function navItem(n, active) {
   }
   const id = `nv-${n.key}`;
   const base = n.href.split('#')[0];
-  const rows = [{ href: n.href, label: `${n.label} — overview`, note: 'Jump to the page', itemActive: isActive }]
+  const rows = [{ href: n.href, label: `${n.label} overview`, note: 'Jump to the page', itemActive: isActive }]
     .concat(n.items.map(it => ({
       href: it.href, label: it.label, note: it.note,
       itemActive: isActive && it.href.startsWith(base),
@@ -133,21 +133,6 @@ export function head({ title, desc, active = '' }) {
 
     <a class="kc-skip" href="#main">Skip to content</a>
 
-    <!-- ============ TOP BAR ============ -->
-    <div class="kc-top">
-      <div class="kc-wrap kc-top__row">
-        <span><i class="fas fa-location-dot"></i>Kericho town, Kenya</span>
-        <a href="tel:+254729037585"><i class="fas fa-phone"></i>+254 729 037 585</a>
-        <a href="mailto:kerichochessacademy@gmail.com"><i class="fas fa-envelope"></i>kerichochessacademy@gmail.com</a>
-        <span class="kc-top__spacer"></span>
-        <span class="kc-top__social">
-          <a href="https://wa.me/254729037585" target="_blank" rel="noopener" aria-label="WhatsApp the academy"><i class="fab fa-whatsapp"></i></a>
-          <a href="https://www.facebook.com/smesso" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.tiktok.com/@kericho.chess.clu" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-        </span>
-      </div>
-    </div>
-
     <!-- ============ NAV ============ -->
     <header class="kc-header">
       <nav class="navbar navbar-expand-lg kc-nav" id="ftco-navbar" aria-label="Main">
@@ -172,7 +157,8 @@ ${NAV.map(n => navItem(n, active)).join('\n')}
 }
 
 /* Inner pages open with a plain centred title + one line under it, the way
-   chesskenya.co.ke opens "Upcoming Events / Check em out!". */
+   chesskenya.co.ke opens "Upcoming Events / Check em out!". No band, no
+   strip, no tinted bar: the title sits straight on the page background. */
 export function banner({ title, sub }) {
   return `
     <!-- ============ PAGE TITLE ============ -->

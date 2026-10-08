@@ -30,9 +30,9 @@ const PAGES = [
   {
     file: 'coaching.html',
     title: 'Coaching Programmes · Kericho Chess Club &amp; Academy',
-    desc: 'School coaching, private lessons, tournament prep and the Saturday club. A structured four-phase method that builds real players — Kericho, Kenya.',
+    desc: 'School coaching, private lessons, tournament prep and the Saturday club. A structured four-phase method that builds real players. Kericho, Kenya.',
     active: 'coaching',
-    banner: { title: 'Coaching', sub: 'Three tracks and a club night — one method, fitted to the school week' },
+    banner: { title: 'Coaching', sub: 'Three tracks and a club night, one method fitted to the school week' },
   },
   {
     file: 'tournaments.html',
@@ -44,7 +44,7 @@ const PAGES = [
   {
     file: 'live.html',
     title: 'Live Broadcast Room · Kericho Chess Club &amp; Academy',
-    desc: 'Watch academy chess live: Board 1 with live clocks, an evaluation bar, the move list and a spectator feed — a grandmaster-style broadcast for school chess in Kericho.',
+    desc: 'Watch academy chess live: Board 1 with live clocks, an evaluation bar, the move list and a spectator feed: a grandmaster broadcast for school chess in Kericho.',
     active: 'live',
     board3d: true, chessCore: true, page: 'live',
     banner: { title: 'Live Broadcast', sub: 'Boards 1 to 4, streamed with clocks on fixture days' },
@@ -52,7 +52,7 @@ const PAGES = [
   {
     file: 'play.html',
     title: 'Play The Board · Kericho Chess Club &amp; Academy',
-    desc: 'Play a real chess game right on the site: full rules, legal-move hints, check and mate detection — plus the daily Lichess puzzle and the academy team.',
+    desc: 'Play a real chess game right on the site: full rules, legal-move hints, check and mate detection, plus the daily Lichess puzzle and the academy team.',
     active: 'play',
     board3d: true, chessCore: true, page: 'play',
     banner: { title: 'Play a Board', sub: 'Pass-and-play on one device, full rules included' },
@@ -60,9 +60,9 @@ const PAGES = [
   {
     file: 'shop.html',
     title: 'Materials &amp; Kits · Kericho Chess Club &amp; Academy Shop',
-    desc: 'Tournament chess sets, digital clocks and training workbooks for schools building a chess club — ordered with one WhatsApp message. Kericho, Kenya.',
+    desc: 'Tournament chess sets, digital clocks and training workbooks for schools building a chess club, ordered with one WhatsApp message. Kericho, Kenya.',
     active: 'shop',
-    banner: { title: 'Club Shop', sub: 'Boards, clocks and workbooks — ordered with one WhatsApp message' },
+    banner: { title: 'Club Shop', sub: 'Boards, clocks and workbooks, ordered with one WhatsApp message' },
   },
   {
     file: 'contact.html',
