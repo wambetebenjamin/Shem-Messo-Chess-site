@@ -1,0 +1,76 @@
+    <!-- ============ BANNER ============ -->
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('assets/hero-dark-board.jpg');">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-10 ftco-animate text-center">
+            <h1 class="mb-2 bread">Play a Board</h1>
+            <p class="nk-banner-sub">Pass-and-play on one device, full rules included</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BOARD ============ -->
+    <section class="nk-sec" id="board">
+      <div class="container">
+        <div class="bc-grid">
+          <div class="bc-stage ftco-animate">
+            <div class="board-frame">
+              <div class="board3d-stage" id="stage3d"><span class="b3d-tag">3D Board · WebGL</span><span class="b3d-hint">drag to tilt · tap to move</span></div>
+              <div class="play-board" id="playBoard"></div>
+            </div>
+          </div>
+          <div class="bc-side">
+            <div class="bc-panel ftco-animate">
+              <span class="panel-label"><i class="fas fa-chess-board"></i>Game State</span>
+              <div class="metric-row"><span class="metric-k">Turn</span><span class="metric-v cold" id="playTurn">WHITE TO MOVE</span></div>
+              <p class="mt-3 mb-3 small" id="playStatus" style="color:var(--nk-dim);">Tap a piece, then tap a highlighted square to move it.</p>
+              <div class="d-flex flex-wrap" style="gap:10px;">
+                <button class="btn btn-primary py-2 px-4" id="playNewGame" type="button"><i class="fas fa-rotate"></i> New Game</button>
+                <button class="btn btn-tertiary py-2 px-4" id="playUndo" type="button"><i class="fas fa-rotate-left"></i> Undo</button>
+              </div>
+            </div>
+            <div class="bc-panel ftco-animate">
+              <span class="panel-label"><i class="fas fa-list-ol"></i>Notation</span>
+              <div class="movelist" id="playMoves" style="height:280px;"></div>
+            </div>
+            <div class="note-card ftco-animate">
+              <i class="fas fa-circle-info" style="color:var(--nk-gold); margin-right:8px;"></i><b>Coach's note:</b> warm-up habit from the academy — before every move, name your opponent's threat out loud. Ten minutes here beats an hour of casual play.
+            </div>
+          </div>
+        </div>
+        <p class="nk-small mt-4 mb-0 ftco-animate">Castling, en passant and promotion are all handled by the board. Nothing to install, nothing to sign up for — the same drills our learners run between coaching sessions.</p>
+      </div>
+    </section>
+
+    <!-- ============ BEYOND THE SITE ============ -->
+    <section class="nk-sec nk-sec--alt" id="beyond">
+      <div class="container">
+        <div class="nk-head ftco-animate">
+          <span class="nk-eyebrow">Beyond the board</span>
+          <h2 class="nk-h2">Practise here, then play for real</h2>
+          <p>The board on this page is for warm-ups. The real thing is on the circuit — or in the coaching room, against a coach who will find every hole in your opening.</p>
+        </div>
+        <div class="nk-grid nk-grid--2">
+          <article class="nk-card ftco-animate"><div class="nk-card__body">
+            <span class="nk-tag">Free · online</span>
+            <h3>Play rated games</h3>
+            <p>Take the habits you drill here into rated games on Lichess, where academy learners keep their own accounts and puzzle streaks.</p>
+            <div class="nk-card__foot"><a class="btn btn-primary px-4 py-2" href="https://lichess.org" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Open Lichess</a></div>
+          </div></article>
+          <article class="nk-card ftco-animate"><div class="nk-card__body">
+            <span class="nk-tag">Coaching · school or private</span>
+            <h3>Get coached properly</h3>
+            <p>School programmes, private lessons, tournament preparation and the Saturday Academy Club — all four tracks run on the same four-phase method.</p>
+            <div class="nk-card__foot">
+              <a class="btn btn-primary px-4 py-2" href="coaching.html#tracks">See the tracks</a>
+              <a class="btn btn-outline-chess px-4 py-2" href="contact.html#membership">Enrol a Learner</a>
+            </div>
+          </div></article>
+        </div>
+        <div class="nk-more ftco-animate">
+          <a class="btn btn-outline-chess px-4 py-2" href="live.html">Watch the live boards</a>
+        </div>
+      </div>
+    </section>

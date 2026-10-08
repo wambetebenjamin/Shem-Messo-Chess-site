@@ -1168,12 +1168,14 @@ body.nk .ftco-footer,
   display:block; font-size:11px; font-weight:700; letter-spacing:.22em;
   text-transform:uppercase; color:var(--nk-dim);
 }
-.nk-footer .nk-footer__links{
-  display:flex; align-items:center; gap:22px; flex-wrap:wrap;
-  font-size:13.5px; font-weight:600;
+.nk-footer .nk-footer__copy{
+  display:flex; align-items:center; gap:14px; margin:0;
+  font-size:12.5px; font-weight:600; color:var(--nk-dim);
 }
-.nk-footer .nk-footer__links a{ color:var(--nk-text); }
-.nk-footer .nk-footer__links a:hover{ color:var(--nk-gold); }
+.nk-footer .nk-footer__copy img{
+  width:32px; height:33px; object-fit:contain; flex:none; opacity:.95;
+}
+
 .nk-footer .nk-footer__social{ display:flex; gap:10px; }
 .nk-footer .nk-footer__social a{
   width:40px; height:40px; border-radius:50%; display:inline-flex;
@@ -1193,8 +1195,7 @@ body.nk .ftco-footer,
 .nk-footer .nk-footer__bottom a{ color:var(--nk-dim); }
 .nk-footer .nk-footer__bottom a:hover{ color:var(--nk-gold); }
 @media (max-width: 767.98px){
-  .nk-footer .nk-footer__top{ flex-direction:column; align-items:flex-start; gap:22px; }
-  .nk-footer .nk-footer__links{ gap:14px 18px; }
+  .nk-footer .nk-footer__bottom{ flex-direction:column; align-items:flex-start; gap:16px; }
 }
 
 /* =============================================================
@@ -1216,3 +1217,291 @@ body.nk .ftco-footer,
   body.nk, body{ background:#fff !important; color:#111 !important; }
   body.nk h1, body.nk h2, body.nk h3{ color:#111 !important; }
 }
+
+/* =============================================================
+   12 · REFERENCE-SITE SECTIONS  (round 3)
+   -----------------------------------------------------------------
+   The blocks chesskenya.co.ke opens every page with: a plain centred
+   title banner, the links/counters row, an image band, the partners
+   strip, event cards with Date + Venue, the standings table, the news
+   rows. Same club photography, restyled for the navy + gold theme.
+   ============================================================= */
+
+/* ---- 12.1 · plain centred page-title banner ---- */
+body.nk .hero-wrap.hero-wrap-2{ background-color:#071a2c; }
+body.nk .hero-wrap.hero-wrap-2 .overlay{
+  background:linear-gradient(180deg, rgba(4,13,23,.86) 0%, rgba(5,18,31,.92) 60%, rgba(5,18,31,.98) 100%);
+}
+body.nk .hero-wrap.hero-wrap-2 .slider-text{ height:auto; }
+body.nk .hero-wrap.hero-wrap-2 h1.bread,
+body.nk .hero-wrap.hero-wrap-2 h1{
+  font-size:clamp(30px,4.6vw,46px); font-weight:900; letter-spacing:-.02em;
+  color:var(--nk-ink); margin:0 0 10px; text-transform:none;
+}
+.nk-banner-sub{
+  margin:0 auto; max-width:720px; font-size:clamp(14px,1.6vw,17px);
+  color:var(--nk-dim); font-weight:500;
+}
+.nk-banner-sub::after{
+  content:''; display:block; width:64px; height:3px; margin:20px auto 0;
+  border-radius:3px; background:var(--nk-grad);
+}
+
+/* ---- 12.2 · headings used inside content ---- */
+.nk-h2{
+  font-size:clamp(24px,3vw,34px); font-weight:900; letter-spacing:-.02em;
+  color:var(--nk-ink); margin:0 0 14px; line-height:1.2;
+}
+.nk-h3{
+  font-size:clamp(18px,2.1vw,23px); font-weight:800; letter-spacing:-.01em;
+  color:var(--nk-ink); margin:0 0 12px; line-height:1.3;
+}
+.nk-h3 .fas, .nk-h3 .fab{ color:var(--nk-gold); margin-right:8px; }
+
+/* ---- 12.3 · counters / links row (Members · Events · Branches) ---- */
+.nk-counters{
+  background:linear-gradient(120deg,#0a2540 0%,#071c31 55%,#04121f 100%);
+  border-top:1px solid var(--nk-line); border-bottom:1px solid var(--nk-line-2);
+  padding:34px 0;
+}
+.nk-counters__row{
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px;
+}
+.nk-count{
+  display:flex; flex-direction:column; gap:4px; align-items:center; text-align:center;
+  padding:14px 10px; border-radius:var(--nk-r-sm);
+  border:1px solid transparent; transition:border-color .25s ease, background .25s ease;
+}
+.nk-count:hover{ border-color:var(--nk-line); background:rgba(240,182,74,.05); }
+.nk-count .number{
+  font-size:clamp(26px,3.4vw,40px); font-weight:900; line-height:1;
+  letter-spacing:-.02em; font-variant-numeric:tabular-nums;
+  background:var(--nk-grad); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.nk-count span{
+  font-size:11px; font-weight:800; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--nk-dim);
+}
+.nk-count:hover span{ color:var(--nk-gold); }
+@media (max-width: 767.98px){
+  .nk-counters__row{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 14px; }
+}
+
+/* ---- 12.4 · full-width image band ---- */
+.nk-imageband{ position:relative; overflow:hidden; background:#061627; }
+.nk-imageband img{
+  display:block; width:100%; height:clamp(240px,42vw,520px); object-fit:cover;
+  filter:saturate(.92) brightness(.86);
+}
+.nk-imageband::after{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(180deg, rgba(5,18,31,.55) 0%, rgba(5,18,31,.15) 45%, rgba(5,18,31,.85) 100%);
+}
+.nk-imageband__cap{
+  position:absolute; left:50%; bottom:clamp(18px,4vw,40px); transform:translateX(-50%);
+  z-index:1; display:block; width:max-content; max-width:88%; text-align:center;
+  font-size:clamp(11px,1.3vw,13px); font-weight:800; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--nk-gold);
+}
+
+/* ---- 12.5 · partners strip ---- */
+.nk-partners{
+  padding:44px 0 46px; border-bottom:1px solid var(--nk-line-2);
+  background:linear-gradient(180deg, rgba(6,20,34,.9), rgba(5,18,31,.94));
+}
+.nk-partners__label{
+  display:block; text-align:center; margin:0 0 22px;
+  font-size:11px; font-weight:800; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--nk-dim);
+}
+.nk-partners__row{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px;
+}
+.nk-partner{
+  font-size:13.5px; font-weight:800; letter-spacing:.02em; color:var(--nk-text);
+  background:rgba(255,255,255,.04); border:1px solid var(--nk-line-2);
+  border-radius:30px; padding:11px 22px; transition:all .25s ease;
+}
+.nk-partner:hover{ color:var(--nk-gold); border-color:var(--nk-line); background:var(--nk-gold-soft); }
+.nk-partner--cta{ background:transparent; border-style:dashed; border-color:var(--nk-line); }
+.nk-partner--cta a{ color:var(--nk-gold); }
+.nk-partner--cta a:hover{ color:var(--nk-gold-2); }
+.nk-partner--cta .fas{ margin-left:6px; font-size:11px; }
+
+/* ---- 12.6 · values list (About + membership perks) ---- */
+.nk-values{
+  list-style:none; margin:0; padding:0;
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 22px;
+}
+.nk-values li{
+  position:relative; padding-left:22px; font-size:14.5px; color:var(--nk-text);
+}
+.nk-values li::before{
+  content:''; position:absolute; left:0; top:.55em; width:9px; height:9px;
+  border-radius:2px; background:var(--nk-grad); transform:rotate(45deg);
+}
+@media (max-width: 575.98px){ .nk-values{ grid-template-columns:1fr; } }
+
+.nk-value{
+  display:flex; flex-direction:column; gap:4px; padding:18px 20px;
+  background:linear-gradient(180deg, rgba(12,38,63,.7), rgba(8,26,45,.78));
+  border:1px solid var(--nk-line-2); border-radius:var(--nk-r-sm);
+}
+.nk-value b{ color:var(--nk-ink); font-size:15px; font-weight:800; }
+.nk-value b::before{
+  content:''; display:inline-block; width:8px; height:8px; margin-right:10px;
+  border-radius:2px; background:var(--nk-grad); transform:rotate(45deg);
+}
+.nk-value span{ color:var(--nk-dim); font-size:13.5px; }
+
+/* ---- 12.7 · category chips ---- */
+.nk-chip{
+  text-align:center; padding:15px 10px; border-radius:var(--nk-r-sm);
+  font-weight:800; font-size:14px; color:var(--nk-ink);
+  background:rgba(240,182,74,.06); border:1px solid var(--nk-line-2);
+  transition:all .25s ease;
+}
+.nk-chip:hover{ border-color:var(--nk-line); color:var(--nk-gold); transform:translateY(-3px); }
+@media (max-width: 575.98px){ .nk-grid--4 .nk-chip{ font-size:13px; padding:12px 8px; } }
+
+/* ---- 12.8 · dark data table ---- */
+body.nk .nk-table{
+  width:100%; margin:0; border-collapse:separate; border-spacing:0;
+  background:linear-gradient(180deg, rgba(12,38,63,.7), rgba(8,26,45,.78));
+  border:1px solid var(--nk-line-2); border-radius:var(--nk-r-sm); overflow:hidden;
+  color:var(--nk-text); font-size:14px;
+}
+body.nk .nk-table thead th{
+  border:0; border-bottom:1px solid var(--nk-line-2); background:rgba(240,182,74,.06);
+  color:var(--nk-dim); font-size:10.5px; font-weight:800; letter-spacing:.2em;
+  text-transform:uppercase; padding:14px 18px; white-space:nowrap;
+}
+body.nk .nk-table td{
+  border:0; border-bottom:1px solid rgba(255,255,255,.05);
+  padding:14px 18px; color:var(--nk-text); vertical-align:middle;
+}
+body.nk .nk-table tbody tr:last-child td{ border-bottom:0; }
+body.nk .nk-table tbody tr:hover td{ background:rgba(240,182,74,.04); color:var(--nk-ink); }
+body.nk .nk-table td:first-child{ color:var(--nk-ink); font-weight:700; }
+
+/* ---- 12.9 · photos, icons, notes, plain lists ---- */
+.nk-photo{
+  display:block; width:100%; height:auto; border-radius:var(--nk-r);
+  border:1px solid var(--nk-line-2); box-shadow:var(--nk-shadow); object-fit:cover;
+}
+.nk-ico{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:52px; height:52px; border-radius:14px; font-size:22px;
+  color:var(--nk-gold); background:var(--nk-gold-soft); border:1px solid var(--nk-line);
+}
+.nk-card__body .nk-ico{ margin-bottom:4px; }
+.fmt-note{
+  font-size:13px; color:var(--nk-dim); line-height:1.6;
+}
+.fmt-note .fas, .fmt-note .fab{ color:var(--nk-gold); margin-right:7px; }
+.nk-list{ list-style:none; margin:0 0 22px; padding:0; display:grid; gap:9px; }
+.nk-list li{ position:relative; padding-left:26px; font-size:14.5px; color:var(--nk-text); }
+.nk-list li .fas{
+  position:absolute; left:0; top:.28em; font-size:12px; color:var(--nk-gold);
+}
+.nk-list--tight li{ font-size:14px; }
+.nk-card__img--tall{ aspect-ratio:4/3; }
+
+/* ---- 12.10 · event cards: gold "Date / Venue" labels ---- */
+.nk-event__meta b{ color:var(--nk-ink); font-weight:800; }
+.nk-ev .nk-card__body h3{ line-height:1.25; }
+.nk-ev-meta{ margin:0; font-size:13.5px; color:var(--nk-text); display:flex; gap:8px; }
+.nk-ev-meta b{
+  color:var(--nk-gold); font-weight:800; font-size:10.5px; letter-spacing:.16em;
+  text-transform:uppercase; padding-top:2px; min-width:52px;
+}
+.nk-ev .nk-card__body .btn{ margin-top:6px; align-self:flex-start; }
+
+/* ---- 12.11 · countdown bands (tournaments page) ---- */
+.cd-band{
+  display:block; background:linear-gradient(150deg, rgba(14,44,75,.85), rgba(7,23,40,.92));
+  border:1px solid var(--nk-line-2); border-radius:var(--nk-r); padding:24px 26px;
+  box-shadow:var(--nk-shadow);
+}
+.cd-k{
+  display:block; margin-bottom:14px; font-size:10.5px; font-weight:800;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--nk-dim);
+}
+.cd-band .cd-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.cd-band .cd-cell{
+  text-align:center; padding:14px 4px; border-radius:var(--nk-r-sm);
+  background:rgba(4,13,23,.55); border:1px solid var(--nk-line-2);
+}
+.cd-band .cd-cell small{
+  display:block; margin-top:6px; font-size:9.5px; font-weight:800;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--nk-faint);
+}
+.cd-band .cd-d, .cd-band .cd-h, .cd-band .cd-m, .cd-band .cd-s{
+  display:block; font-size:clamp(22px,3vw,32px); font-weight:900; line-height:1;
+  color:var(--nk-ink); font-variant-numeric:tabular-nums;
+}
+.cd-band .cd-s{ color:var(--nk-gold); }
+@media (max-width: 575.98px){
+  .cd-band{ padding:20px 16px; }
+  .cd-band .cd-grid{ gap:6px; }
+  .cd-band .cd-d, .cd-band .cd-h, .cd-band .cd-m,
+  .cd-band .cd-s{ font-size:20px; }
+  .cd-band .cd-cell small{ letter-spacing:.1em; font-size:8.5px; }
+}
+
+/* ---- 12.12 · crest facts, team extras, live badge ---- */
+.crest-facts{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+.crest-tag{
+  font-size:10.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+  border-radius:30px; padding:8px 16px;
+}
+.team-photo-wrap--icon{
+  display:flex; align-items:center; justify-content:center;
+  height:132px; border-radius:var(--nk-r-sm);
+  background:linear-gradient(150deg, rgba(14,44,75,.7), rgba(7,23,40,.85));
+  border:1px dashed var(--nk-line);
+}
+.team-ava.lg{ width:78px; height:78px; font-size:24px; border-radius:22px; }
+.team-card--link .team-links .btn{ width:100%; justify-content:center; }
+.live-badge{
+  display:inline-flex; align-items:center; gap:9px; flex:none;
+  font-size:11px; font-weight:900; letter-spacing:.24em; text-transform:uppercase;
+  color:#fff; background:rgba(242,96,79,.16); border:1px solid rgba(242,96,79,.55);
+  border-radius:30px; padding:10px 20px;
+}
+.live-badge .fas{ font-size:8px; color:var(--nk-red); animation:nkPulse 1.9s ease-out infinite; }
+
+/* ---- 12.13 · "at a glance" facts panel + inline registration form ---- */
+.nk-quick{
+  background:linear-gradient(180deg, rgba(13,40,68,.85), rgba(8,26,45,.9));
+  border:1px solid var(--nk-line-2); border-radius:var(--nk-r);
+  padding:26px 26px 24px; box-shadow:var(--nk-shadow);
+}
+.nk-quick .nk-h3{ margin-bottom:16px; }
+.nk-fact{
+  display:flex; gap:11px; align-items:flex-start; margin:0 0 12px;
+  font-size:13.5px; color:var(--nk-text); line-height:1.5;
+}
+.nk-fact .fas, .nk-fact .fab{ color:var(--nk-gold); margin-top:3px; flex:none; }
+.nk-fact a{ color:var(--nk-ink); font-weight:700; }
+.nk-fact a:hover{ color:var(--nk-gold); }
+.nk-fact b, .nk-fact strong{ color:var(--nk-ink); }
+
+body.nk .chess-form label{
+  display:block; margin:0 0 7px; font-size:10.5px; font-weight:800;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--nk-dim);
+}
+body.nk .chess-form .col-md-4,
+body.nk .chess-form .col-md-6,
+body.nk .chess-form .col-12{ margin-bottom:16px; }
+body.nk .chess-form select.form-control{
+  appearance:none; -webkit-appearance:none;
+  background-image:linear-gradient(45deg, transparent 50%, var(--nk-dim) 50%),
+                   linear-gradient(135deg, var(--nk-dim) 50%, transparent 50%);
+  background-position:calc(100% - 20px) calc(50% + 1px), calc(100% - 14px) calc(50% + 1px);
+  background-size:6px 6px, 6px 6px; background-repeat:no-repeat;
+  padding-right:44px;
+}
+body.nk .chess-form select.form-control option{ background:#0b2540; color:var(--nk-ink); }
+body.nk .chess-form .btn{ margin-right:10px; margin-bottom:8px; }
+body.nk .chess-form .form-msg{ margin:0; }
