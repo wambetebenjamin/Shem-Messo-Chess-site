@@ -1,6 +1,6 @@
 /* ============================================================================
    SMC3D · lightweight 3D chessboard for the academy (three.js)
-   Glossy lathe-turned pieces, soft shadows, jade glows under the white army,
+   Glossy lathe-turned pieces, soft shadows, gold glows on a navy board,
    gentle camera sway, click-to-move with legal-target markers and animated
    captures/promotion/castling. Drives both the Play board and the Live room.
    Falls back silently: if WebGL or the CDN is unavailable, callers keep 2D.
@@ -115,9 +115,9 @@ function glowTexture() {
   const c = document.createElement('canvas'); c.width = c.height = 128;
   const ctx = c.getContext('2d');
   const grad = ctx.createRadialGradient(64, 64, 4, 64, 64, 62);
-  grad.addColorStop(0, 'rgba(43,245,160,.85)');
-  grad.addColorStop(0.45, 'rgba(43,245,160,.28)');
-  grad.addColorStop(1, 'rgba(43,245,160,0)');
+  grad.addColorStop(0, 'rgba(240,182,74,.85)');
+  grad.addColorStop(0.45, 'rgba(240,182,74,.30)');
+  grad.addColorStop(1, 'rgba(240,182,74,0)');
   ctx.fillStyle = grad; ctx.fillRect(0, 0, 128, 128);
   const t = new THREE.CanvasTexture(c);
   return t;
@@ -141,7 +141,7 @@ function mount(container, opts = {}) {
   camera.lookAt(0, 0, 0);
 
   /* lights */
-  scene.add(new THREE.HemisphereLight(0xEAFBF3, 0x1E3A30, 0.85));
+  scene.add(new THREE.HemisphereLight(0xE9F2FB, 0x0E1B2A, 0.85));
   const key = new THREE.DirectionalLight(0xFFF6E8, 1.6);
   key.position.set(5, 10, 4);
   key.castShadow = true;
@@ -150,7 +150,7 @@ function mount(container, opts = {}) {
   key.shadow.camera.right = key.shadow.camera.top = 6;
   key.shadow.radius = 5;
   scene.add(key);
-  const rim = new THREE.PointLight(0x2BF5A0, 8, 14);
+  const rim = new THREE.PointLight(0xF0B64A, 8, 14);
   rim.position.set(-4, 3.5, -5);
   scene.add(rim);
 
@@ -159,8 +159,8 @@ function mount(container, opts = {}) {
     white: new THREE.MeshPhysicalMaterial({ color: 0xF6F1E2, roughness: 0.3, clearcoat: 0.55, clearcoatRoughness: 0.25 }),
     black: new THREE.MeshPhysicalMaterial({ color: 0x242C33, roughness: 0.26, clearcoat: 0.6, clearcoatRoughness: 0.22 }),
     sqL: new THREE.MeshStandardMaterial({ color: 0xEFE7D2, roughness: 0.55 }),
-    sqD: new THREE.MeshStandardMaterial({ color: 0x3F7A5E, roughness: 0.5 }),
-    frame: new THREE.MeshStandardMaterial({ color: 0x16222D, roughness: 0.6 }),
+    sqD: new THREE.MeshStandardMaterial({ color: 0x2C4A6E, roughness: 0.5 }),
+    frame: new THREE.MeshStandardMaterial({ color: 0x0A1A2B, roughness: 0.6 }),
   };
   const glowTex = glowTexture();
   const glowMat = new THREE.MeshBasicMaterial({ map: glowTex, transparent: true, opacity: 0.9, depthWrite: false });
@@ -199,10 +199,10 @@ function mount(container, opts = {}) {
   const ringGeo = new THREE.RingGeometry(0.30, 0.37, 26);
   const selGeo = new THREE.PlaneGeometry(0.92, 0.92);
   const lastGeo = new THREE.PlaneGeometry(0.96, 0.96);
-  const dotMat = new THREE.MeshBasicMaterial({ color: 0x1F8A6D, transparent: true, opacity: 0.75, depthWrite: false });
-  const ringMat = new THREE.MeshBasicMaterial({ color: 0xDE6156, transparent: true, opacity: 0.85, depthWrite: false, side: THREE.DoubleSide });
-  const selMat = new THREE.MeshBasicMaterial({ color: 0x1F8A6D, transparent: true, opacity: 0.28, depthWrite: false });
-  const lastMat = new THREE.MeshBasicMaterial({ color: 0xC9A227, transparent: true, opacity: 0.30, depthWrite: false });
+  const dotMat = new THREE.MeshBasicMaterial({ color: 0xF0B64A, transparent: true, opacity: 0.75, depthWrite: false });
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0x4AA8E8, transparent: true, opacity: 0.85, depthWrite: false, side: THREE.DoubleSide });
+  const selMat = new THREE.MeshBasicMaterial({ color: 0xF0B64A, transparent: true, opacity: 0.30, depthWrite: false });
+  const lastMat = new THREE.MeshBasicMaterial({ color: 0x4AA8E8, transparent: true, opacity: 0.28, depthWrite: false });
   function flat(geo, mat, sq) {
     const m = new THREE.Mesh(geo, mat);
     const { x, z } = sqToWorld(sq);

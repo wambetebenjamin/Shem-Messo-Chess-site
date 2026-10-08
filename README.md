@@ -1,69 +1,64 @@
 # Kericho Chess Club & Academy
 
-A multi-page website for Kericho Chess Club & Academy, Kenya — academy content carried
-onto the **Kiddos** template structure (Bootstrap 4, Colorlib, CC BY 3.0), restyled with
-the club palette.
+A multi-page website for Kericho Chess Club & Academy, Kenya. The markup skeleton follows
+**Chess Kenya's site structure** (chesskenya.co.ke): a slim utility top bar, a sticky nav with
+an *Enrol* pill, a photo hero with quick-link strip, an About block, a calendar of events, a
+standings block, a news list and a quiet footer. The content, palette and photography are the
+academy's own — **dark navy + gold** ("night") theme.
 
 ## Structure
 
-The site now follows the uploaded **Kiddos** (Colorlib) template: a shared top bar,
-ftco navbar, owl-carousel hero slider, service strips, course/staff cards, counters,
-testimony carousel, gallery strip and the four-column ftco footer on every page.
+Every page shares the same furniture, in the same order:
 
-- **Theme layer:** `css/kiddos.css` (the template's stylesheet) drives layout and components.
-- **Club layer:** `css/chess.css` restyles it with the academy palette and adds the
-  chess-specific components: broadcast stage, countdown cards, ticker, FAQ accordion,
-  registration forms, honour-roll table, steps strip, product shelf and the nav "Enrol" pill.
-- **Academy crest:** the official Kericho Chess Academy crest (pawn, king, knight, motto
-  *Forward Ever Backward Never*) sits in the nav, the footer, the event poster lockup and a
-  dedicated crest band on the about page; it doubles as the site favicon
-  (`assets/logo.png`, `assets/logo-light.png`, `assets/favicon.png`).
-- **Template runtime:** `js/kiddos-main.js` (nav, sliders, counters, reveals, loader) on the
-  jQuery/Bootstrap/owl/aos/waypoints stack shipped in `js/`.
-- **Academy runtime:** `js/smc.js` (countdowns, FAQ accordion, registration / membership /
-  subscribe and WhatsApp-composer forms).
-- The chess engine lives in `js/chess.js` (chess.js by Jeff Hlywa, BSD license) and powers
-  `js/play.js` (playable board) and `js/live.js` (broadcast room); `js/board3d.js` renders
-  the 3D board stage.
+1. **Top bar** — location, phone, email, socials (`nk-topbar`).
+2. **Nav** — crest, wordmark, eight links, gold *Enrol* pill (`nk-nav`, sticky).
+3. **Page banner** — photo + kicker + breadcrumb (`hero-wrap hero-wrap-2`).
+4. **Body** — section per page (see the table below).
+5. **CTA band** — one line + one button, in place of the old photo-intro band (`nk-cta`).
+6. **Slim footer** — crest, the academy name, eight links, three socials, one contact line
+   on a dark bar (`nk-footer`). The crowded four-column footer (news blocks, newsletter box,
+   duplicate socials, office-bearer list) is **gone**; the same information now lives on
+   `about.html#people` and `contact.html#team`.
+
+### Layers
+
+- **Template layer:** `css/kiddos.css` (Kiddos / Colorlib, Bootstrap 4, CC BY 3.0) — grid,
+  buttons, owl carousel, counters, utility classes. Untouched.
+- **Club components:** `css/chess.css` — the academy components (broadcast room, countdown
+  cards, ticker, FAQ accordion, registration forms, honour roll, steps strip, product shelf,
+  team cards, Samarkand gallery) and their light-theme paint. Kept for backwards safety.
+- **Night theme:** `css/night.css` — loads last and repaints everything dark navy + gold. It
+  also defines the shared furniture (`nk-topbar`, `nk-nav`, `nk-cta`, `nk-footer`, `nk-sec`,
+  `nk-card`, `nk-event`, `nk-newsitem`, `nk-player`, `nk-strip`, `nk-ticker`, `nk-stats`).
+  Tokens live at the top of the file: `--nk-gold:#f0b64a`, `--nk-bg:#05121f`, etc.
+- **Academy crest:** `assets/logo.png` (black line art), `assets/logo-light.png` (white) and
+  **`assets/logo-gold.png`** (the gold knockout the night theme uses in the nav and footer);
+  `assets/favicon.png` is the site icon.
+- **Runtime:** `js/kiddos-main.js` (nav, reveals, counters, owl on the testimony slider),
+  `js/smc.js` (countdowns, FAQ accordion, registration / membership / enquiry forms),
+  `js/hero-slider.js` (home hero crossfade), `js/chess.js` + `js/play.js` + `js/live.js` +
+  `js/board3d.js` (playable board, broadcast room, WebGL board).
+
+The page files are generated from `index/about/coaching/tournaments/live/play/shop/contact`,
+so the head, nav, CTA and footer stay identical across the eight pages; only the body differs.
 
 ## Pages
 
 | Page | What's on it |
 | --- | --- |
-| `index.html` | Photo hero slider, service strip, welcome + offerings, the coach & the platform, programmes, season counters, testimonials, enquiry form, club shelf, academy updates, gallery |
-| `coaching.html` | The three coaching tracks, four-phase method, fees & FAQ |
-| `tournaments.html` | **Event advert (poster band)** with live countdowns and response buttons, next fixture with live countdown, eight age categories, M-Pesa entry steps, registration form, honour roll |
-| `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list, spectator feed — plus the broadcast card |
-| `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo) + the daily puzzle |
-| `shop.html` | Materials & kits with one-tap WhatsApp ordering + Complete Club Kit quote banner |
-| `about.html` | Academy story, **crest band with the academy motto**, **the office bearers with portraits**, the partner schools, the squads, values and the season gallery |
-| `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ, contact cards, **direct lines for the office bearers (portrait cards)** and the **Secretary's Samarkand Olympiad gallery** |
+| `index.html` | Hero crossfade slider with stat badges, news ticker, four quick links, About block, "what we do", **calendar** (three event cards + live countdown), **standings** (top of the tables), programmes, Season 26 stat band, testimonies, news list, gallery strip, enquiry form |
+| `about.html` | Story, crest band, **vision / mission / values**, **twelve aims & objectives**, **milestones timeline**, the office bearers with portraits, partner schools band, season gallery |
+| `coaching.html` | Six inclusions, photo band, **four tracks** (school, private, prep, Saturday club), the four-phase method, fees + M-Pesa box, FAQ |
+| `tournaments.html` | Next fixture with two live countdowns, three-step entry, **event advert** (poster band with response buttons: register, WhatsApp, calendar, calls, email), eight age categories, registration form, honour roll, gallery |
+| `live.html` | **Broadcast room:** Board 1 with clocks, eval bar, move list, spectator feed, notation ticker, controls — plus "on the card" schedule cards |
+| `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo), game state, notation, coach's note, Lichess puzzle + Kwaarena cards |
+| `shop.html` | Four products with one-tap WhatsApp ordering, three-step ordering strip, school quote band |
+| `contact.html` | Four ways in, **direct lines** (portrait cards for the four bearers + academy office band), membership form, WhatsApp enquiry composer, FAQ, **Secretary's Samarkand gallery + quote** |
 
-All eight pages share the Kiddos navbar (with the **Enrol Now** pill) and the template
-footer, which carries phone/WhatsApp/email contacts and an **Office Bearers** column
-(President & Head Coach, Vice Chairperson, Secretary, Treasurer — Gladys's new line is
-flagged; the Vice Chairperson routes through the academy office).
-
-### The leadership cards (contact.html#team)
-
-Four portrait cards in club order, each with its real contact actions, plus the general
-Academy Office line in a band underneath:
-
-| Card | Role | Photo | Contact actions |
-| --- | --- | --- | --- |
-| Shem Meso | President & Head Coach | `assets/leadership/president-shem-meso.jpg` (600×900) | WhatsApp · 0729 037 585 · shemeso26@gmail.com |
-| Barnabas Ochieng | Vice Chairperson | `assets/leadership/vice-chairperson-barnabas-ochieng.jpg` (600×900) | Routed through the academy office (no published personal line yet) |
-| Gladys Langat | Secretary | `assets/gladys-avatar.jpg` + **NEW LINE** badge | 0723 397 573 · WhatsApp |
-| Julieann Njambi | Treasurer | initials avatar (portrait pending) | 0722 709 727 · WhatsApp |
-| Academy Office (band) | General & schools | crest-coloured initials | kerichochessacademy@gmail.com · 0729 037 585 |
-
-The Treasurer's card is kept on `contact.html#team` only, per the club's decision. A
-`PORTRAIT SLOT` comment marks the exact spot inside her card where a portrait goes when
-one arrives (the same comment marks the fourth card in the about-page grid).
-
-Shem's "The Coach & The Platform" section on `index.html` is retitled **The President & The
-Platform**, and his card there reads **President & Head Coach**, so the two sections agree. His title reads **President & Head Coach** in every card,
-heading, footer entry and alt text on the site.
+Anchor targets used by the rest of the site: `contact.html#team`, `contact.html#membership`,
+`contact.html#enquiry`, `contact.html#secretary`, `tournaments.html#register`,
+`tournaments.html#honour-roll`, `about.html#people`, `about.html#objectives`,
+`about.html#crest`, `index.html#calendar`, `index.html#players`.
 
 ## Photos
 
@@ -77,21 +72,28 @@ coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is n
 - **Board piece art:** the 2D boards on Live and Play render local PNG pieces
   (`assets/pieces/`), so pieces show on every device without relying on system
   chess-glyph fonts.
-- **Leadership portraits:** `assets/leadership/` holds the two card-sized portraits, both
-  cropped to 600×900 (2:3) for the contact and about cards. The full-resolution originals
-  the club uploaded are kept beside them in `assets/leadership/source/`:
+- **Leadership portraits:** `assets/leadership/` and `assets/` hold the four card-sized
+  portraits, all cropped to 600×900 (2:3) for the contact and about cards. The
+  full-resolution originals the club uploaded are kept beside them in
+  `assets/leadership/source/`:
 
-  | Card portrait | Source original | How it was made |
-  | --- | --- | --- |
-  | `president-shem-meso.jpg` | `source/president-shem-meso-original.jpg` (1066×1600) | Resized to 600×900 |
-  | `vice-chairperson-barnabas-ochieng.jpg` | `source/barnabas-and-shem-pair-original.jpg` (1066×1600) | Cropped to the figure on the left, so President Shem is trimmed out of frame |
+  | Card | Portrait file | Source original | How it was made |
+  | --- | --- | --- | --- |
+  | Shem Meso · President & Head Coach | `leadership/president-shem-meso.jpg` | `source/president-shem-meso-original.jpg` | Resized to 600×900 |
+  | Barnabas Ochieng · Vice Chairperson | `leadership/vice-chairperson-barnabas-ochieng.jpg` | `source/vice-chairperson-barnabas-selfie-original.jpg` (from `Mr. Ochieng.jpeg`) | Portrait crop, 600×900 |
+  | Gladys Langat · Secretary | `gladys-langat-portrait.jpg` | — | Cropped to 600×900 for the card frame |
+  | Julieann Njambi · Treasurer | `njambi-treasurer.jpg` | `Njambi.jpeg` (960×1440) | Resized to 600×900 |
 
-  To regenerate the Vice Chairperson crop:
+  **Portrait correction (Oct 2026):** the Vice Chairperson card previously showed a
+  mis-cropped portrait (the figure on the left of the President's pair photo, who is not
+  Barnabas). It now uses the club's own photo of him at the wetlands event — see
+  `source/vice-chairperson-barnabas-selfie-original.jpg` and
+  `source/vice-chairperson-barnabas-event-original.jpg`; the old crop is kept at
+  `source/vice-chairperson-previous-crop.jpg` for the record. Regenerate with:
 
   ```bash
-  convert assets/leadership/source/barnabas-and-shem-pair-original.jpg \
-    -crop 300x450+205+415 +repage -resize 600x900 \
-    -unsharp 0x0.75+0.5+0.015 -strip -quality 90 \
+  convert "Mr. Ochieng.jpeg" -crop 660x990+150+200 +repage -resize 600x900 \
+    -modulate 104,102 -unsharp 0x0.7+0.5+0.02 -strip -quality 90 \
     assets/leadership/vice-chairperson-barnabas-ochieng.jpg
   ```
 
@@ -100,17 +102,20 @@ coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is n
 
 ## Event advert (poster band)
 
-`index.html` and `tournaments.html` carry a poster-style advert for the next fixture
-(`#event`). It mirrors the site's own fixture card, so the **single place to edit an
-event** is:
+`tournaments.html#event` carries a poster-style advert for the next fixture, and
+`index.html#calendar` mirrors it as an event card. The **single place to edit an event** is:
 
-1. the `#event` block in `tournaments.html` (the full poster) and the `compact` copy in
-   `index.html`;
-2. the two `data-countdown` targets in each block: first round and entries-close time;
-3. the M-Pesa line in the poster footer, if the entry reference changes.
+1. the `#event` block in `tournaments.html` (full advert) and the matching card in
+   `index.html#calendar`;
+2. the `data-countdown` targets: first round (28 Nov 2026, 09:00 EAT) and entries-close
+   (21 Nov 2026, 18:00 EAT). `js/smc.js` fills `.cd-d/.cd-h/.cd-m/.cd-s` inside each
+   `[data-countdown]` element, so any block with those four spans works;
+3. the dates, venue and M-Pesa reference in the copy, and the Google Calendar link
+   (`dates=` parameter, UTC).
 
 The poster artwork is currently `assets/tournament-prep-01.jpg` as a stand-in — the
-designed event poster has not arrived yet; swap that `src` (both blocks) to drop it in.
+designed event poster has not arrived yet; swap that background image (both blocks) to
+drop it in.
 Both blocks are marked with an `EVENT ADVERT` comment. Visitors can respond from the
 advert itself: registration form, WhatsApp entry, a Google Calendar "add to calendar"
 link, phone calls to the Secretary/Treasurer, or email.
@@ -171,7 +176,9 @@ Then open `http://localhost:8000`.
 ├── index.html        coaching.html    tournaments.html   live.html
 ├── play.html         shop.html        about.html         contact.html
 ├── css/
-│   ├── kiddos.css    (template theme)      chess.css     (club restyle + chess components)
+│   ├── kiddos.css    (template theme)      chess.css     (club components + light paint)
+│   ├── night.css     (dark navy + gold theme: repaints every component, adds the
+│   │                  top bar / nav / CTA / slim footer / cards / calendar furniture)
 │   └── animate.css · aos.css · owl carousel · magnific-popup · icon fonts css
 ├── js/
 │   ├── jquery · bootstrap · owl · aos · waypoints · stellar · scrollax (template stack)
@@ -179,9 +186,10 @@ Then open `http://localhost:8000`.
 │   └── chess.js · play.js · live.js · board3d.js         (the chess core)
 ├── fonts/   (flaticon · icomoon · ionicons · open-iconic)
 ├── assets/  (academy photography — original pictures from the previous build;
-│            crest logo.png / logo-light.png / favicon.png and the Secretary's
-│            gladys-*.jpg photos from Samarkand 2026)
-│   └── leadership/  (board portraits: 600×900 president-shem-meso.jpg and
+│            crest logo.png / logo-light.png / logo-gold.png / favicon.png, the
+│            Treasurer's njambi-treasurer.jpg and the Secretary's gladys-*.jpg
+│            photos from Samarkand 2026)
+│   └── leadership/  (board portraits, 600×900: president-shem-meso.jpg and
 │                    vice-chairperson-barnabas-ochieng.jpg, plus source/ originals)
 └── kiddos-master.zip   (uploaded source template, for reference)
 ```
