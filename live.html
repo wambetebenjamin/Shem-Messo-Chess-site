@@ -8,7 +8,7 @@
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
-    <meta name="theme-color" content="#F8F9FA">
+    <meta name="theme-color" content="#FFFFFF">
     <meta property="og:title" content="Live Broadcast Room · Kericho Chess Club &amp; Academy">
     <meta property="og:description" content="Watch academy chess live: Board 1 with live clocks, an evaluation bar, the move list and a spectator feed: a grandmaster broadcast for school chess in Kericho.">
     <meta property="og:type" content="website">
@@ -25,7 +25,19 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/kiddos.css">
     <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/motion.css">
     <noscript><style>.ftco-animate{ opacity:1 !important; visibility:visible !important; }</style></noscript>
+    <!-- the motion layer only paints over content this flag is set, so a
+         visitor with prefers-reduced-motion (or without js/motion.js) never
+         sees a hidden element waiting for a class that will not arrive -->
+    <script>
+      (function () {
+        try {
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+            document.documentElement.className += ' kc-motion';
+        } catch (e) { }
+      })();
+    </script>
   </head>
   <body>
 
@@ -85,7 +97,7 @@
                   <a class="dropdown-item is-active" href="index.html#players">Top players</a>
                   <a class="dropdown-item" href="tournaments.html#honour-roll">All players<small>Circuit standings table</small></a>
                   <a class="dropdown-item" href="live.html">Live broadcast<small>Boards 1 to 4 on fixture days</small></a>
-                  <a class="dropdown-item" href="play.html">Play a board<small>Pass and play on one device</small></a>
+                  <a class="dropdown-item" href="play.html">Play a board<small>The computer, or a person after a contribution</small></a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -201,7 +213,7 @@
             </div>
 
             <div class="kc-panel kc-panel--tight ftco-animate">
-              <p class="kc-small kc-mb-0"><i class="fas fa-circle-info" style="color:var(--kc-gold);margin-right:8px;"></i><b>Parents:</b> ask for a reminder on <a href="https://wa.me/254729037585?text=Please%20remind%20me%20when%20the%20next%20live%20boards%20start." target="_blank" rel="noopener">WhatsApp</a> and you'll get a message the moment a board goes live.</p>
+              <p class="kc-small kc-mb-0"><i class="fas fa-circle-info" style="margin-right:8px;"></i><b>Parents:</b> ask for a reminder on <a href="https://wa.me/254729037585?text=Please%20remind%20me%20when%20the%20next%20live%20boards%20start." target="_blank" rel="noopener">WhatsApp</a> and you'll get a message the moment a board goes live.</p>
             </div>
           </div>
         </div>
@@ -288,5 +300,6 @@
   <script src="js/kiddos-main.js"></script>
   <script src="js/smc.js"></script>
   <script src="js/live.js"></script>
+  <script src="js/motion.js"></script>
   </body>
 </html>

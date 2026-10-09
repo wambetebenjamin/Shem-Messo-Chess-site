@@ -54,7 +54,7 @@ const PAGES = [
     title: 'Play The Board · Kericho Chess Club &amp; Academy',
     desc: 'Play a real chess game right on the site: full rules, legal-move hints, check and mate detection, plus the daily Lichess puzzle and the academy team.',
     active: 'play',
-    board3d: true, chessCore: true, page: 'play',
+    board3d: true, chessCore: true, engine: true, page: 'play',
     banner: { title: 'Play a Board', sub: 'Pass-and-play on one device, full rules included' },
   },
   {
@@ -83,7 +83,7 @@ for (const p of PAGES) {
     body + '\n' +
     '  </main>\n' +
     footer() +
-    scripts({ board3d: !!p.board3d, page: p.page || false, chessCore: !!p.chessCore });
+    scripts({ board3d: !!p.board3d, page: p.page || false, chessCore: !!p.chessCore, engine: !!p.engine });
   writeFileSync(`${OUT}/${p.file}`, html);
   count++;
   console.log('wrote', p.file, html.length, 'bytes');

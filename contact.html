@@ -8,7 +8,7 @@
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
-    <meta name="theme-color" content="#F8F9FA">
+    <meta name="theme-color" content="#FFFFFF">
     <meta property="og:title" content="Enrol &amp; Contact · Kericho Chess Club &amp; Academy">
     <meta property="og:description" content="Enrol a learner, become an academy member or bring coaching to your school. Contact Kericho Chess Club &amp; Academy by WhatsApp, phone or the forms here.">
     <meta property="og:type" content="website">
@@ -25,7 +25,19 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/kiddos.css">
     <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/motion.css">
     <noscript><style>.ftco-animate{ opacity:1 !important; visibility:visible !important; }</style></noscript>
+    <!-- the motion layer only paints over content this flag is set, so a
+         visitor with prefers-reduced-motion (or without js/motion.js) never
+         sees a hidden element waiting for a class that will not arrive -->
+    <script>
+      (function () {
+        try {
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+            document.documentElement.className += ' kc-motion';
+        } catch (e) { }
+      })();
+    </script>
   </head>
   <body>
 
@@ -85,7 +97,7 @@
                   <a class="dropdown-item" href="index.html#players">Top players</a>
                   <a class="dropdown-item" href="tournaments.html#honour-roll">All players<small>Circuit standings table</small></a>
                   <a class="dropdown-item" href="live.html">Live broadcast<small>Boards 1 to 4 on fixture days</small></a>
-                  <a class="dropdown-item" href="play.html">Play a board<small>Pass and play on one device</small></a>
+                  <a class="dropdown-item" href="play.html">Play a board<small>The computer, or a person after a contribution</small></a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -463,5 +475,6 @@
   <script src="js/scrollax.min.js"></script>
   <script src="js/kiddos-main.js"></script>
   <script src="js/smc.js"></script>
+  <script src="js/motion.js"></script>
   </body>
 </html>

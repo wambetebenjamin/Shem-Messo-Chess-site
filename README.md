@@ -5,8 +5,9 @@ A multi-page website for Kericho Chess Club & Academy, Kenya. The layout is copi
 links row, About + Our Values + *Read More*, **PARTNERS**, **CALENDER** event
 cards with `Date` and `Venue`, **TOP PLAYERS**, **News** with `on:` / `By:` /
 *Get the Whole Story...*. The content and photography are the academy's own. The
-palette is **Off-White `#F8F9FA` + Strategic Blue `#4A90E2`** in Work Sans: off-white page
-backgrounds, white cards, blue accents, buttons, links, numbers and a solid blue footer.
+palette is **black and white** in Work Sans: `#F4F4F2` page, white cards, `#101214` ink for
+every accent, button, link, number and the footer. There is no blue on the site, and
+photography is desaturated until you touch it.
 
 ## Structure
 
@@ -14,7 +15,7 @@ Every page shares the same furniture, in the same order:
 
 1. **Nav**: the nav is the first element on every page; there is no contact strip, no
    utility bar and no announcement bar above it. Crest, wordmark, **dropdown groups** (About · Coaching · Events · Players ·
-   News · Shop · Contact), blue *Join Us* button (`.kc-header` / `.kc-nav`, sticky). Same
+   News · Shop · Contact), ink *Join Us* button (`.kc-header` / `.kc-nav`, sticky). Same
    Bootstrap 4 dropdown mechanics Chess Kenya's nav uses: a `data-toggle="dropdown"` parent
    link plus a `.dropdown-menu` of `.dropdown-item` links, each panel opening with the
    group's own overview link. On phones the burger opens the collapse and the panels fall
@@ -23,7 +24,7 @@ Every page shares the same furniture, in the same order:
    (e.g. `Upcoming Events / Check em out!`) written straight onto the page background. No
    band, no strip, no tinted bar, no breadcrumb, no photo hero, no kicker (`.kc-banner`).
 3. **Body**: the sections for that page (see the table below).
-4. **Footer**: a flat blue closing block with the crest, the club name and the motto, and
+4. **Footer**: a flat ink closing block with the crest, the club name and the motto, and
    the three socials as labelled links (WhatsApp · Facebook · TikTok). Under the
    hairline sits the copyright line and a **Back to top** control (`.kc-totop`), which is an
    in-page jump to `#main` rather than a navigation link. **There is deliberately no link row
@@ -50,7 +51,9 @@ excerpt, *Get the Whole Story...* + *More Articles*) → footer.
 - **Template layer:** `css/kiddos.css` (Kiddos / Colorlib, Bootstrap 4, CC BY 3.0), kept
   only for Bootstrap's grid, the collapse and dropdown plugins, the icon-font plumbing and
   the `animate.css` reveal classes. Its theme is overridden wholesale by `site.css`.
-- **The look:** **`css/site.css`**, one stylesheet: tokens, page shell,
+- **The look:** **`css/site.css`**, one stylesheet: tokens, page shell, the black and white
+  palette (`--kc-ink` is both the heading colour and the accent, `--kc-grey-100/150/500` are
+  the tints),
   the Chess Kenya section set (hero slider, counters, partners, event cards,
   players table, news list, plain page-title bands), cards, forms, tables, the broadcast
   room and the playable board, and the footer. Everything is prefixed `kc-`. If you want to
@@ -61,11 +64,20 @@ excerpt, *Get the Whole Story...* + *More Articles*) → footer.
   `about.html#crest` chip use, because it is the only knockout with contrast on off-white);
   `assets/logo-light.png` (white) and `assets/logo-gold.png` (gold) are the older knockouts,
   kept but unused; `assets/favicon.png` is the site icon.
+- **The movement:** **`css/motion.css`** + **`js/motion.js`**, an additive layer only. It
+  carries the reveals, the heading word masks, the dropdown and button wipes, the photo
+  colour return, the board and clock motion, and the morph between two pages (the outgoing
+  page is covered by an ink panel that grows from the click point, the incoming page peels
+  the same panel away). A tiny script in the head sets `html.kc-motion` only when the visitor
+  has not asked for less movement, so with `prefers-reduced-motion`, without JS, or without
+  this file, the pages read exactly as `site.css` alone describes. Nothing in it is needed to
+  read the site.
 - **Runtime:** `js/kiddos-main.js` (mobile nav, `animate.css` reveals, the counters on
   `#section-counter`, magnific-popup galleries), `js/smc.js` (countdowns, FAQ accordion,
   registration / membership / enquiry forms), `js/hero-slider.js` (home hero crossfade),
   `js/chess.js` + `js/play.js` + `js/live.js` + `js/board3d.js` (playable board, broadcast
-  room, WebGL board).
+  room, WebGL board), `js/engine.js` (the opponent, see below), `js/motion.js` (the layer
+  above).
 
 ### Page generator
 
@@ -92,7 +104,7 @@ Edit the body blocks (or `shell.mjs` for global furniture), then re-run the comm
 | `coaching.html` | Six inclusions, **four tracks** (school, private, prep, Saturday club), the four-phase method, fees + M-Pesa box, FAQ |
 | `tournaments.html` | Next fixture with two live countdowns, **Calender** cards, eight categories + fee table, registration form, honour roll |
 | `live.html` | **Broadcast room:** Board 1 with clocks, eval bar, move list, spectator feed, controls, how-to-watch |
-| `play.html` | **Playable board:** full-rules pass-and-play chess (check, mate, castling, undo), game state, notation, coach's note, Lichess + coaching cards |
+| `play.html` | **Two tables:** play the computer (`js/engine.js`, colour and three levels, hint, undo, new game) or play another person on one device, which opens behind a contribution (M-Pesa Paybill, code checked for shape on the device). Full rules: check, mate, castling, en passant, promotion. Game state, notation, result banner, Lichess + coaching cards |
 | `shop.html` | Four products with one-tap WhatsApp ordering, three-step ordering strip, M-Pesa box |
 | `contact.html` | **Office bearers** (four portrait cards + academy office band), membership form + fee table, WhatsApp enquiry composer, FAQ, **Secretary's Samarkand gallery + quote** |
 
@@ -177,6 +189,34 @@ to a **WhatsApp confirmation button** pre-filled with the entrant's details (not
 lost, no backend required). Payments reference M-Pesa Paybill **880100**,
 account `123003#LearnersName`.
 
+## Playing on the board
+
+`play.html` has two tables, and both are real chess: `js/chess.js` holds the rules
+(castle, en passant, promotion to queen, check, mate, stalemate, draw), `js/play.js` runs
+the table you picked, and `js/board3d.js` renders the same position in WebGL when the browser
+has it.
+
+- **The computer** (`#playModeCpu`): free, no account. `#playSide` picks White, Black or a
+  coin flip; `#playLevel` picks **Warm-up** (shallow, and it takes one of twenty games at
+  random so a beginner can win), **Club** or **Tournament**. `#playHint` asks the engine what
+  it would play for you and marks those two squares. `js/engine.js` is an alpha-beta search
+  over chess.js with material, piece-square tables, doubled and isolated pawns, the bishop
+  pair and quiescence, plus iterative deepening on a time budget. It runs in a Web Worker
+  (`js/engine.js` importScripts `js/chess.js`) so the page keeps painting, and on the main
+  thread when there is no worker. No network.
+- **Another person** (`#playModePerson`): pass and play on one device. This table opens behind
+  a contribution (`#playGate`): M-Pesa Paybill **880100**, account `123003#YourName`, tier
+  picked in `input[name="kcTier"]`, then the confirmation code in `#gateRef` and a name in
+  `#gateName`. There is no payment gateway on this site, so the code is checked for **shape
+  only** (6 to 12 characters, at least four digits) and remembered in
+  `localStorage['kcPassPlay']` for thirty days on that device. Shem reads the M-Pesa messages
+  and the WhatsApp note (`#gateWa`); if the academy ever gets a real gateway, replace the
+  check in `refreshGate()` with the verification call and keep everything else.
+- Hooks: `#playBoard` `#playTurn` `#playStatus` `#playMoves` `#playResult` `#playWho`
+  `#playThink` `#playNewGame` `#playUndo` `#playModes` `#playMorph` `#playSetup`. The board is
+  dimmed with `.is-locked` while a table is closed, and every piece that moves is slid from
+  the square it left (the 3D board already animates its own moves).
+
 ## Run locally
 
 ```bash
@@ -198,7 +238,10 @@ Then open `http://localhost:8000`.
 - **No strips.** Nothing sits above the navigation, and no page uses a full-width band,
   banner strip, marquee or ticker. The nav is the first element, inner-page titles are plain
   text on the page background, and the footers are quiet. The only full-width colour blocks
-  left are the hero slider, the counters row, the partners row and the blue footer.
+  left are the hero slider, the counters row, the partners row and the ink footer.
+- **Black and white only.** No blue, no brand colour accents: `--kc-ink` is the accent and
+  `--kc-grey-100/150/500` are the tints. Green and red survive only where a state has to be
+  read at a glance (live board, valid and invalid form messages).
 - **No dashes.** The visible copy on every page is written without em dashes, en dashes or
   dangling hyphens, in headings and in body text alike. The hyphens that stay are the ones
   that are part of the spelling: `M-Pesa`, `sixty-four`, `four-phase`, `inter-school`.
@@ -236,14 +279,16 @@ Then open `http://localhost:8000`.
 │   ├── shell.mjs     (head · nav · banner · CTA band · slim footer · scripts)
 │   └── pages/        (the body block of each of the eight pages)
 ├── css/
-│   ├── site.css      (the whole look: off-white + strategic blue, Chess Kenya's section
-│   │                  set and its dropdown nav, all prefixed kc-)
+│   ├── site.css      (the whole look: black and white, Chess Kenya's section set
+│   │                  and its dropdown nav, all prefixed kc-)
+│   ├── motion.css    (additive movement only: reveals, wipes, morph page transition)
 │   ├── kiddos.css    (Bootstrap 4 + template base, overridden by site.css)
 │   └── animate.css · aos.css · owl carousel · magnific-popup · icon fonts css
 ├── js/
 │   ├── jquery · bootstrap · owl · aos · waypoints · stellar · scrollax (template stack)
 │   ├── kiddos-main.js (template runtime)   smc.js        (academy runtime)
-│   └── chess.js · play.js · live.js · board3d.js         (the chess core)
+│   ├── motion.js     (reveals, morph between pages, scroll progress)
+│   └── chess.js · engine.js · play.js · live.js · board3d.js  (the chess core)
 ├── fonts/   (flaticon · icomoon · ionicons · open-iconic)
 ├── assets/  (academy photography: empty halls, boards, kit and non-learner shots only;
 │            crest logo.png / logo-light.png / logo-gold.png / favicon.png, the

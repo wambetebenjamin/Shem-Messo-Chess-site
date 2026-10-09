@@ -5,7 +5,9 @@
    with **dropdown groups** (About · Coaching · Events · Players · News ·
    Shop · Contact), inner pages open with a plain centred title over the page
    background, and the footer is quiet, with no link row. The look is
-   css/site.css: off-white #F8F9FA + strategic blue #4A90E2.
+   css/site.css: black and white, ink for every accent. Movement is an
+   additive layer, css/motion.css with js/motion.js, switched off for anyone
+   who asked for less of it.
    ============================================================================ */
 
 const NAV = [
@@ -48,7 +50,7 @@ const NAV = [
       { href: 'index.html#players', label: 'Top players' },
       { href: 'tournaments.html#honour-roll', label: 'All players', note: 'Circuit standings table' },
       { href: 'live.html', label: 'Live broadcast', note: 'Boards 1 to 4 on fixture days' },
-      { href: 'play.html', label: 'Play a board', note: 'Pass and play on one device' },
+      { href: 'play.html', label: 'Play a board', note: 'The computer, or a person after a contribution' },
     ],
   },
   {
@@ -110,7 +112,7 @@ export function head({ title, desc, active = '' }) {
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
-    <meta name="theme-color" content="#F8F9FA">
+    <meta name="theme-color" content="#FFFFFF">
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="${desc}">
     <meta property="og:type" content="website">
@@ -127,7 +129,19 @@ export function head({ title, desc, active = '' }) {
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/kiddos.css">
     <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/motion.css">
     <noscript><style>.ftco-animate{ opacity:1 !important; visibility:visible !important; }</style></noscript>
+    <!-- the motion layer only paints over content this flag is set, so a
+         visitor with prefers-reduced-motion (or without js/motion.js) never
+         sees a hidden element waiting for a class that will not arrive -->
+    <script>
+      (function () {
+        try {
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+            document.documentElement.className += ' kc-motion';
+        } catch (e) { }
+      })();
+    </script>
   </head>
   <body>
 
@@ -204,7 +218,7 @@ export function footer() {
 `;
 }
 
-export function scripts({ board3d = false, page = false, chessCore = false } = {}) {
+export function scripts({ board3d = false, page = false, chessCore = false, engine = false } = {}) {
   return `
   <script>
     (function () {
@@ -224,9 +238,10 @@ ${board3d ? '  <script type="module" src="js/board3d.js"></script>\n' : ''}  <sc
   <script src="js/aos.js"></script>
   <script src="js/jquery.animateNumber.min.js"></script>
   <script src="js/scrollax.min.js"></script>
-${chessCore ? '  <script src="js/chess.js"></script>\n' : ''}  <script src="js/kiddos-main.js"></script>
+${chessCore ? '  <script src="js/chess.js"></script>\n' : ''}${engine ? '  <script src="js/engine.js"></script>\n' : ''}  <script src="js/kiddos-main.js"></script>
   <script src="js/smc.js"></script>
-${page ? `  <script src="js/${page}.js"></script>\n` : ''}  </body>
+${page ? `  <script src="js/${page}.js"></script>\n` : ''}  <script src="js/motion.js"></script>
+  </body>
 </html>
 `;
 }

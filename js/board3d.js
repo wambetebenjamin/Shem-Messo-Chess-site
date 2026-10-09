@@ -1,10 +1,11 @@
 /* ============================================================================
    SMC3D · lightweight 3D chessboard for the academy (three.js)
-   Glossy lathe-turned pieces, soft shadows, gold glows on a navy board,
-   gentle camera sway, click-to-move with legal-target markers and animated
-   captures/promotion/castling. Drives both the Play board and the Live room.
-   Falls back silently: if WebGL or the CDN is unavailable, callers keep 2D.
-   ============================================================================ */
+   Glossy lathe-turned pieces, soft shadows, grey markers on a black and
+   white board, gentle camera sway, click-to-move with legal-target markers,
+   animated captures, promotion and castling. The palette is monochrome, like
+   the rest of the site. Drives both the Play board and the Live room, and it
+   falls back silently: no WebGL or no CDN means the 2D board stays.
+   ========================================================================== */
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 
 const FILES = 'abcdefgh';
@@ -141,8 +142,8 @@ function mount(container, opts = {}) {
   camera.lookAt(0, 0, 0);
 
   /* lights */
-  scene.add(new THREE.HemisphereLight(0xE9F2FB, 0x0E1B2A, 0.85));
-  const key = new THREE.DirectionalLight(0xFFF6E8, 1.6);
+  scene.add(new THREE.HemisphereLight(0xF4F4F2, 0x0A0B0C, 0.9));
+  const key = new THREE.DirectionalLight(0xFFFFFF, 1.7);
   key.position.set(5, 10, 4);
   key.castShadow = true;
   key.shadow.mapSize.set(1024, 1024);
@@ -150,17 +151,17 @@ function mount(container, opts = {}) {
   key.shadow.camera.right = key.shadow.camera.top = 6;
   key.shadow.radius = 5;
   scene.add(key);
-  const rim = new THREE.PointLight(0xF0B64A, 8, 14);
+  const rim = new THREE.PointLight(0xCED2D6, 7, 14);
   rim.position.set(-4, 3.5, -5);
   scene.add(rim);
 
   /* materials */
   const MAT = {
-    white: new THREE.MeshPhysicalMaterial({ color: 0xF6F1E2, roughness: 0.3, clearcoat: 0.55, clearcoatRoughness: 0.25 }),
-    black: new THREE.MeshPhysicalMaterial({ color: 0x242C33, roughness: 0.26, clearcoat: 0.6, clearcoatRoughness: 0.22 }),
-    sqL: new THREE.MeshStandardMaterial({ color: 0xEFE7D2, roughness: 0.55 }),
-    sqD: new THREE.MeshStandardMaterial({ color: 0x2C4A6E, roughness: 0.5 }),
-    frame: new THREE.MeshStandardMaterial({ color: 0x0A1A2B, roughness: 0.6 }),
+    white: new THREE.MeshPhysicalMaterial({ color: 0xF8F8F5, roughness: 0.3, clearcoat: 0.55, clearcoatRoughness: 0.25 }),
+    black: new THREE.MeshPhysicalMaterial({ color: 0x14171A, roughness: 0.26, clearcoat: 0.6, clearcoatRoughness: 0.22 }),
+    sqL: new THREE.MeshStandardMaterial({ color: 0xEDEDEA, roughness: 0.55 }),
+    sqD: new THREE.MeshStandardMaterial({ color: 0x2A2E33, roughness: 0.5 }),
+    frame: new THREE.MeshStandardMaterial({ color: 0x0B0C0D, roughness: 0.6 }),
   };
   const glowTex = glowTexture();
   const glowMat = new THREE.MeshBasicMaterial({ map: glowTex, transparent: true, opacity: 0.9, depthWrite: false });
@@ -199,10 +200,11 @@ function mount(container, opts = {}) {
   const ringGeo = new THREE.RingGeometry(0.30, 0.37, 26);
   const selGeo = new THREE.PlaneGeometry(0.92, 0.92);
   const lastGeo = new THREE.PlaneGeometry(0.96, 0.96);
-  const dotMat = new THREE.MeshBasicMaterial({ color: 0xF0B64A, transparent: true, opacity: 0.75, depthWrite: false });
-  const ringMat = new THREE.MeshBasicMaterial({ color: 0x4AA8E8, transparent: true, opacity: 0.85, depthWrite: false, side: THREE.DoubleSide });
-  const selMat = new THREE.MeshBasicMaterial({ color: 0xF0B64A, transparent: true, opacity: 0.30, depthWrite: false });
-  const lastMat = new THREE.MeshBasicMaterial({ color: 0x4AA8E8, transparent: true, opacity: 0.28, depthWrite: false });
+  /* marks are mid grey: they have to read on a white square and on a black one */
+  const dotMat = new THREE.MeshBasicMaterial({ color: 0x8E949B, transparent: true, opacity: 0.95, depthWrite: false });
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0x8E949B, transparent: true, opacity: 0.95, depthWrite: false, side: THREE.DoubleSide });
+  const selMat = new THREE.MeshBasicMaterial({ color: 0x8E949B, transparent: true, opacity: 0.42, depthWrite: false });
+  const lastMat = new THREE.MeshBasicMaterial({ color: 0x8E949B, transparent: true, opacity: 0.30, depthWrite: false });
   function flat(geo, mat, sq) {
     const m = new THREE.Mesh(geo, mat);
     const { x, z } = sqToWorld(sq);

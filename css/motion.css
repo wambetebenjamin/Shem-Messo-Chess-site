@@ -1,0 +1,306 @@
+/* ============================================================================
+   KERICHO CHESS CLUB & ACADEMY · MOTION LAYER      (css/motion.css)
+   ----------------------------------------------------------------------------
+   Additive by design. Nothing here is needed to read the site: if JS is off,
+   if the browser is old, or if the visitor asked for less movement, every rule
+   in this file is inside a `prefers-reduced-motion: no-preference` query and
+   the `html.kc-motion` flag that a tiny script in the head sets. Base state
+   always comes from css/site.css.
+
+     1  page morph (the transition between two pages)
+     2  reveals
+     3  nav, dropdowns, links
+     4  buttons
+     5  cards and photography
+     6  counters, countdown, clock
+     7  board and pieces
+     8  hero
+   ============================================================================ */
+
+@media (prefers-reduced-motion: no-preference){
+
+/* =============================================================
+   1 · PAGE MORPH
+   the outgoing page is covered by an ink panel that grows from the point you
+   clicked; the incoming page starts covered and the same panel is peeled away
+   downwards, so the two pages read as one continuous shape change
+   ============================================================= */
+.kc-morph-layer{
+  position:fixed; inset:0; z-index:1600; pointer-events:none;
+  background:var(--kc-ink);
+  clip-path:circle(0 at var(--mx, 50%) var(--my, 50%));
+  will-change:clip-path;
+}
+html.kc-morph-out .kc-morph-layer{
+  animation:kcMorphCover .42s cubic-bezier(.66,0,.24,1) forwards;
+}
+html.kc-morph-in .kc-morph-layer{
+  animation:kcMorphReveal .52s cubic-bezier(.66,0,.24,1) forwards;
+}
+html.kc-morph-out{ overflow:hidden; }
+html.kc-morph-out body{ animation:kcPageOut .42s ease-in forwards; }
+@keyframes kcMorphCover{
+  from{ clip-path:circle(0 at var(--mx,50%) var(--my,50%)); }
+  to{ clip-path:circle(152% at var(--mx,50%) var(--my,50%)); }
+}
+@keyframes kcMorphReveal{
+  0%,42%{ clip-path:circle(152% at var(--mx,50%) var(--my,50%)); transform:translateY(0); }
+  100%{ clip-path:circle(152% at var(--mx,50%) var(--my,50%)); transform:translateY(-101%); }
+}
+@keyframes kcPageOut{ to{ opacity:.25; transform:scale(.992); } }
+
+/* scroll progress, drawn under the sticky nav */
+.kc-progress{
+  position:fixed; left:0; right:0; top:0; height:2px; z-index:1040;
+  background:var(--kc-ink); transform-origin:0 50%; transform:scaleX(0);
+  pointer-events:none;
+}
+
+/* =============================================================
+   2 · REVEALS
+   js/motion.js tags blocks with data-reveal and an index (--i), then flips
+   .is-in as they enter. Three shapes: rise, mask (left to right) and wipe
+   (top to bottom, used on media so a photo draws itself in)
+   ============================================================= */
+html.kc-motion [data-reveal]{
+  opacity:0; transform:translateY(24px);
+  transition:opacity .72s var(--kc-ease) calc(var(--i,0) * .055s),
+             transform .86s cubic-bezier(.16,.84,.24,1) calc(var(--i,0) * .055s),
+             clip-path .95s cubic-bezier(.66,0,.18,1) calc(var(--i,0) * .055s);
+}
+html.kc-motion [data-reveal="mask"]{ opacity:1; transform:none; clip-path:inset(0 100% 0 0); }
+html.kc-motion [data-reveal="wipe"]{ opacity:1; transform:none; clip-path:inset(0 0 100% 0); }
+html.kc-motion [data-reveal="grow"]{ transform:scale(.94); }
+html.kc-motion [data-reveal].is-in{ opacity:1; transform:none; clip-path:inset(0 0 0 0); }
+
+/* headings draw word by word out of a mask */
+.kc-w{ display:inline-block; overflow:hidden; vertical-align:bottom; }
+.kc-w > i{
+  display:inline-block; font-style:inherit; transform:translateY(108%);
+  transition:transform .82s cubic-bezier(.16,.86,.2,1);
+  transition-delay:calc(var(--w,0) * .055s);
+}
+.is-lined .kc-w > i{ transform:translateY(0); }
+
+/* =============================================================
+   3 · NAV, DROPDOWNS, LINKS
+   ============================================================= */
+.kc-nav .dropdown-menu.show{ animation:kcMenu .3s cubic-bezier(.2,.9,.3,1) both; }
+@keyframes kcMenu{
+  from{ opacity:0; transform:translateY(10px) scaleY(.94); }
+  to{ opacity:1; transform:none; }
+}
+.kc-nav .dropdown-menu.show .dropdown-item{ animation:kcMenuItem .42s cubic-bezier(.2,.9,.3,1) both; }
+.kc-nav .dropdown-menu.show .dropdown-item:nth-child(1){ animation-delay:.02s; }
+.kc-nav .dropdown-menu.show .dropdown-item:nth-child(2){ animation-delay:.05s; }
+.kc-nav .dropdown-menu.show .dropdown-item:nth-child(3){ animation-delay:.08s; }
+.kc-nav .dropdown-menu.show .dropdown-item:nth-child(4){ animation-delay:.11s; }
+.kc-nav .dropdown-menu.show .dropdown-item:nth-child(5){ animation-delay:.14s; }
+.kc-nav .dropdown-menu.show .dropdown-item:nth-child(6){ animation-delay:.17s; }
+.kc-nav .dropdown-menu.show .dropdown-item:nth-child(n+7){ animation-delay:.2s; }
+@keyframes kcMenuItem{
+  from{ opacity:0; transform:translateX(-10px); }
+  to{ opacity:1; transform:none; }
+}
+/* the panel morphs out of the toggle it belongs to */
+.kc-nav .dropdown-toggle::after{ transition:transform .3s cubic-bezier(.4,0,.2,1); }
+.kc-nav .nav-link{ position:relative; }
+.kc-nav .nav-link::after{
+  content:''; position:absolute; left:0; right:0; bottom:2px; height:1px;
+  background:currentColor; transform:scaleX(0); transform-origin:0 50%;
+  transition:transform .34s cubic-bezier(.66,0,.18,1);
+}
+.kc-nav .nav-link:hover::after,
+.kc-nav .nav-link.is-active::after{ transform:scaleX(1); }
+
+/* underline that draws itself instead of appearing */
+.kc-more, .kc-partner, .kc-footer__social a, .kc-totop, .kc-member__line{
+  position:relative;
+}
+.kc-more::after, .kc-partner::after, .kc-footer__social a::after,
+.kc-totop::after, .kc-member__line::after{
+  content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px;
+  background:currentColor; transform:scaleX(0); transform-origin:0 50%;
+  transition:transform .36s cubic-bezier(.66,0,.18,1);
+}
+.kc-more:hover::after, .kc-partner:hover::after, .kc-footer__social a:hover::after,
+.kc-totop:hover::after, .kc-member__line:hover::after{ transform:scaleX(1); }
+.kc-footer__social a, .kc-totop{ border-bottom:0 !important; }
+.kc-more:hover i{ transform:translateX(5px); }
+.kc-more i{ transition:transform .3s var(--kc-ease); }
+
+/* burger lines morph into a cross */
+.kc-burger .oi::before{ transition:transform .3s var(--kc-ease); }
+
+/* =============================================================
+   4 · BUTTONS
+   an outline button is filled by a panel that wipes in from the left, and the
+   label only turns white once the panel has arrived, so no half painted frame
+   has white on white. the solid button is the opposite: its ink face stays and
+   a sheen passes over it
+   ============================================================= */
+.kc-btn{ position:relative; isolation:isolate; overflow:hidden; }
+.kc-btn::after{
+  content:''; position:absolute; inset:-1px; z-index:-1;
+  background:var(--kc-ink); transform:scaleX(0); transform-origin:0 50%;
+  transition:transform .42s cubic-bezier(.66,0,.18,1);
+}
+.kc-btn:hover::after, .kc-btn:focus-visible::after{ transform:scaleX(1); }
+.kc-btn i{ transition:transform .4s var(--kc-ease); }
+.kc-btn:hover i{ transform:scale(1.14); }
+.kc-btn--ghost::after, .kc-btn--wa::after{ background:var(--kc-ink); }
+.kc-btn--ghost:hover, .kc-btn--wa:hover{
+  color:#fff; border-color:var(--kc-ink);
+  transition:background .15s linear, border-color .15s linear, color .12s linear .32s;
+}
+.kc-btn--ghost:active, .kc-btn--wa:active{ color:var(--kc-white); }
+/* the solid button keeps its face: the sheen is the whole gesture */
+.kc-btn--gold::after{
+  inset:0 -34%; background:linear-gradient(100deg, transparent 18%, rgba(255,255,255,.42) 50%, transparent 82%);
+  transform:translateX(-72%); opacity:0; transition:none;
+}
+.kc-btn--gold:hover::after, .kc-btn--gold:focus-visible::after{
+  animation:kcSheen .78s cubic-bezier(.36,0,.2,1) both;
+}
+@keyframes kcSheen{
+  0%{ opacity:0; transform:translateX(-72%); }
+  18%{ opacity:1; }
+  100%{ opacity:0; transform:translateX(72%); }
+}
+/* the rotate icons actually rotate */
+#playNewGame:hover i, #bcRestart:hover i{ transform:rotate(-360deg); transition:transform .7s cubic-bezier(.4,0,.2,1); }
+#playUndo:hover i{ transform:translateX(-4px); }
+
+/* =============================================================
+   5 · CARDS AND PHOTOGRAPHY
+   the frame is fixed, so the picture moves inside it instead of the card
+   lifting off the page
+   ============================================================= */
+.kc-card, .kc-event, .kc-product, .kc-newsitem, .kc-member, .kc-row, .kc-step,
+.kc-panel, .kc-gate, .kc-stage, .kc-countdown__band, .kc-office, .kc-quote,
+.kc-gallery__item, .kc-table-wrap, .kc-modes, .kc-form{ transition:border-color .2s linear, transform .5s var(--kc-ease); }
+.kc-card:hover, .kc-event:hover, .kc-product:hover, .kc-newsitem:hover,
+.kc-member:hover, .kc-row:hover{ border-color:var(--kc-line-2); }
+.kc-card__media, .kc-event__media, .kc-product__media, .kc-newsitem__img,
+.kc-split__media img, .kc-gallery__item img, .kc-member__photo, .kc-quote img{
+  transition:transform .95s cubic-bezier(.16,.8,.2,1), filter .55s linear;
+}
+.kc-card:hover .kc-card__media, .kc-event:hover .kc-event__media,
+.kc-product:hover .kc-product__media, .kc-newsitem:hover .kc-newsitem__img,
+.kc-card:hover .kc-member__photo, .kc-member:hover .kc-member__photo,
+.kc-gallery__item:hover img{ transform:scale(1.07); filter:grayscale(0) contrast(1); }
+.kc-member:hover .kc-member__photo, .kc-quote:hover img{ filter:grayscale(0) contrast(1); }
+.kc-split__media:hover img{ filter:grayscale(0) contrast(1); }
+/* a light sweep across the photo on hover */
+.kc-card__media, .kc-event__media, .kc-product__media{ position:relative; overflow:hidden; }
+.kc-card__media::after, .kc-event__media::after, .kc-product__media::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(105deg, transparent 34%, rgba(255,255,255,.5) 48%, transparent 62%);
+  transform:translateX(-110%); transition:transform .85s cubic-bezier(.4,0,.2,1);
+}
+.kc-card:hover .kc-card__media::after, .kc-event:hover .kc-event__media::after,
+.kc-product:hover .kc-product__media::after{ transform:translateX(110%); }
+/* partners row: a slow grey flicker rather than a lift */
+.kc-partner{ transition:color .25s linear, letter-spacing .35s var(--kc-ease); }
+.kc-partner:hover{ letter-spacing:.1em; }
+
+/* =============================================================
+   6 · COUNTERS, COUNTDOWN, CLOCK
+   ============================================================= */
+.kc-stat{ position:relative; }
+.kc-stat::after{
+  content:''; position:absolute; left:0; right:0; bottom:0; height:2px;
+  background:var(--kc-ink); transform:scaleX(0); transform-origin:0 50%;
+  transition:transform .45s cubic-bezier(.66,0,.18,1);
+}
+.kc-stat:hover::after{ transform:scaleX(1); }
+.kc-stat__num{ transition:transform .5s var(--kc-ease); }
+.kc-stat:hover .kc-stat__num{ transform:translateY(-3px); }
+/* the countdown cell is flipped with WAAPI in js/motion.js, which keeps the
+   two paths (CSS off, CSS on) from fighting over the same property */
+.kc-countdown .cd-cell{ transition:background .3s linear, transform .3s var(--kc-ease); }
+.clock{ transition:color .2s linear, border-color .2s linear, background .2s linear; }
+.clock.active{ animation:kcClock 2.4s ease-in-out infinite; }
+@keyframes kcClock{ 0%,100%{ box-shadow:inset 0 -2px 0 0 var(--kc-ink); } 50%{ box-shadow:inset 0 -2px 0 0 transparent; } }
+.kc-think__bars i{ animation:kcBars 1s cubic-bezier(.5,0,.5,1) infinite; transform-origin:50% 100%; }
+.kc-think__bars i:nth-child(2){ animation-delay:.14s; }
+.kc-think__bars i:nth-child(3){ animation-delay:.28s; }
+@keyframes kcBars{
+  0%,100%{ transform:scaleY(.3); border-radius:0; }
+  50%{ transform:scaleY(1); border-radius:50%; }
+}
+
+/* =============================================================
+   7 · BOARD AND PIECES
+   ============================================================= */
+/* first paint: the squares deal themselves out from the near corner */
+.play-board.is-dealt .sq{ animation:kcSqIn .5s var(--kc-ease) both; animation-delay:calc(var(--d,0) * .022s); }
+@keyframes kcSqIn{ from{ opacity:0; transform:scale(.7); } to{ opacity:1; transform:none; } }
+.play-board.is-dealt .piece-img{ animation:kcPieceIn .55s var(--kc-ease) both; animation-delay:calc(var(--d,0) * .022s + .1s); }
+@keyframes kcPieceIn{ from{ opacity:0; transform:translateY(10px) scale(.7); } to{ opacity:1; transform:none; } }
+
+/* the move itself is a slide plus a hop, done with WAAPI in play.js */
+.sq.selected{ transition:outline-color .2s linear; }
+.sq.selected::after{
+  content:''; position:absolute; inset:0; border:2px solid var(--kc-ink);
+  animation:kcSel .6s var(--ease, ease) 1; pointer-events:none;
+}
+@keyframes kcSel{ from{ transform:scale(1.16); opacity:0; } to{ transform:scale(1); opacity:1; } }
+.sq .dot, .sq .ring{ animation:kcMark .34s cubic-bezier(.2,1.5,.4,1) both; }
+@keyframes kcMark{ from{ opacity:0; transform:scale(.4); } to{ opacity:1; transform:scale(1); } }
+.sq.is-check{ animation:kcCheck .55s steps(1, end) 2; }
+@keyframes kcCheck{ 0%,49%{ background:var(--kc-ink) !important; } 50%,100%{ background:inherit; } }
+.result-banner.show{ animation:kcResult .5s cubic-bezier(.2,.9,.3,1) both; }
+@keyframes kcResult{ from{ opacity:0; transform:translateY(-8px) scaleY(.7); } to{ opacity:1; transform:none; } }
+.movelist .move-row{ animation:kcMoveIn .35s var(--kc-ease) both; }
+@keyframes kcMoveIn{ from{ opacity:0; transform:translateX(-8px); } to{ opacity:1; transform:none; } }
+
+/* mode morph + the gate opening */
+.kc-tier{ transition:border-color .2s linear, background .2s linear, transform .3s var(--kc-ease); }
+.kc-tier:hover{ transform:translateX(4px); }
+.kc-gate.is-paid{ animation:kcUnlock .7s cubic-bezier(.2,.9,.3,1) both; }
+@keyframes kcUnlock{
+  from{ clip-path:inset(0 100% 0 0); }
+  to{ clip-path:inset(0 0 0 0); }
+}
+.kc-modes__morph{ --kc-morph:cubic-bezier(.62,.02,.16,1); }
+.kc-gate .kc-btn i{ animation:kcNudge 2.6s ease-in-out infinite; }
+@keyframes kcNudge{ 0%,80%,100%{ transform:none; } 88%{ transform:translateX(4px); } }
+
+/* =============================================================
+   8 · HERO
+   ============================================================= */
+.kc-slide.is-active .kc-slide__bg{ animation:kcHeroZoom 12s linear both; }
+@keyframes kcHeroZoom{ from{ transform:scale(1); } to{ transform:scale(1.06); } }
+.kc-slide.is-active .kc-slide__inner > *{ animation:kcHeroUp .9s cubic-bezier(.16,.84,.24,1) both; }
+.kc-slide.is-active .kc-slide__inner > *:nth-child(2){ animation-delay:.1s; }
+.kc-slide.is-active .kc-slide__inner > *:nth-child(3){ animation-delay:.2s; }
+.kc-slide.is-active .kc-slide__inner > *:nth-child(4){ animation-delay:.3s; }
+@keyframes kcHeroUp{ from{ opacity:0; transform:translateY(26px); } to{ opacity:1; transform:none; } }
+/* the active dot doubles as the timer for that slide (7s, js/hero-slider.js) */
+.kc-hero .owl-dots .owl-dot{ position:relative; overflow:hidden; }
+.kc-hero .owl-dots .owl-dot.active::after{
+  content:''; position:absolute; inset:0; background:#fff;
+  transform-origin:0 50%; animation:kcHold 7s linear both;
+}
+.kc-hero .owl-dots .owl-dot.active{ background:rgba(255,255,255,.35); }
+@keyframes kcHold{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+
+/* page title on inner pages: the rule under it draws itself */
+.kc-banner__title{ overflow:visible; }
+@keyframes kcLine{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+
+/* the table of events and standings paints row by row */
+table.kc-table tbody tr{ animation:kcRowIn .5s var(--kc-ease) both; }
+table.kc-table tbody tr:nth-child(1){ animation-delay:.02s; }
+table.kc-table tbody tr:nth-child(2){ animation-delay:.07s; }
+table.kc-table tbody tr:nth-child(3){ animation-delay:.12s; }
+table.kc-table tbody tr:nth-child(4){ animation-delay:.17s; }
+table.kc-table tbody tr:nth-child(5){ animation-delay:.22s; }
+table.kc-table tbody tr:nth-child(n+6){ animation-delay:.27s; }
+@keyframes kcRowIn{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:none; } }
+
+}
+
+/* the morph layer must never print or block a mouse */
+@media print{ .kc-morph-layer, .kc-progress{ display:none !important; } }
