@@ -1219,7 +1219,8 @@ img, .kc-card__media, .kc-event__media, .kc-product__media,
 .kc-turncard__who.is-deciding{ border-color:var(--kc-ink); }
 
 /* focus + extras for the two tables */
-.kc-mode__text{ flex:1 1 auto; min-width:0; }
+/* the wrapper is a span too, so the .kc-mode span rule must not push it */
+.kc-mode__text{ flex:1 1 auto; min-width:0; margin-top:0; }
 .kc-mode:focus-visible{ outline:2px solid var(--kc-ink); outline-offset:3px; }
 .kc-mode[aria-pressed="true"]:focus-visible{ outline-color:#fff; }
 .kc-tier:focus-within{ border-color:var(--kc-ink); }
