@@ -14,7 +14,7 @@ Every page shares the same furniture, in the same order:
 
 1. **Nav**: the nav is the first element on every page; there is no contact strip, no
    utility bar and no announcement bar above it. Crest, wordmark, **dropdown groups** (About · Coaching · Events · Players ·
-   News · Shop · Contact), blue *Join Us* pill (`.kc-header` / `.kc-nav`, sticky). Same
+   News · Shop · Contact), blue *Join Us* button (`.kc-header` / `.kc-nav`, sticky). Same
    Bootstrap 4 dropdown mechanics Chess Kenya's nav uses: a `data-toggle="dropdown"` parent
    link plus a `.dropdown-menu` of `.dropdown-item` links, each panel opening with the
    group's own overview link. On phones the burger opens the collapse and the panels fall
@@ -23,8 +23,8 @@ Every page shares the same furniture, in the same order:
    (e.g. `Upcoming Events / Check em out!`) written straight onto the page background. No
    band, no strip, no tinted bar, no breadcrumb, no photo hero, no kicker (`.kc-banner`).
 3. **Body**: the sections for that page (see the table below).
-4. **Footer**: a blue closing block with the crest in a soft disc, the club name and the
-   motto, and the three socials as labelled pills (WhatsApp · Facebook · TikTok). Under the
+4. **Footer**: a flat blue closing block with the crest, the club name and the motto, and
+   the three socials as labelled links (WhatsApp · Facebook · TikTok). Under the
    hairline sits the copyright line and a **Back to top** control (`.kc-totop`), which is an
    in-page jump to `#main` rather than a navigation link. **There is deliberately no link row
    or menu at the bottom.** Navigation lives in the nav bar, contacts live on
@@ -202,7 +202,12 @@ Then open `http://localhost:8000`.
 - **No dashes.** The visible copy on every page is written without em dashes, en dashes or
   dangling hyphens, in headings and in body text alike. The hyphens that stay are the ones
   that are part of the spelling: `M-Pesa`, `sixty-four`, `four-phase`, `inter-school`.
-- Keep it that way when you edit `_build/pages/*.html` or `_build/shell.mjs`.
+- **No soft card chrome.** Panels are square and flat: `--kc-r:0`, `--kc-shadow:none`, a
+  single 1px `--kc-line` hairline, and a hover that only darkens that hairline. No rounded
+  corners, no drop shadows, no lift or scale on hover, no tinted icon tiles, no glass blur on
+  the header, no gradient fills, no Ken Burns zoom on the hero. The only elevation on the
+  site is the open dropdown panel.
+- Keep all of that when you edit `_build/pages/*.html` or `_build/shell.mjs`.
 
 ## Content notes
 
