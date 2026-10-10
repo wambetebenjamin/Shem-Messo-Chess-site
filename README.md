@@ -1,19 +1,22 @@
 # Kericho Chess Club & Academy
 
-A multi-page website for Kericho Chess Club & Academy, Kenya — academy content carried
-onto the **Kiddos** template structure (Bootstrap 4, Colorlib, CC BY 3.0), restyled with
-the club palette.
+A multi-page website for Kericho Chess Club & Academy, Kenya. The seven content pages use
+the **Kiddos** template structure (Bootstrap 4, Colorlib, CC BY 3.0); the homepage follows
+the uploaded `chess website template for pages.jpeg` mockup with a premium black surface,
+warm gold highlights and the Academy's original full-colour photography.
 
 ## Structure
 
-The site now follows the uploaded **Kiddos** (Colorlib) template: a shared top bar,
-ftco navbar, owl-carousel hero slider, service strips, course/staff cards, counters,
-testimony carousel, gallery strip and the four-column ftco footer on every page.
+The homepage has a responsive, labelled navigation, a full-colour looping video hero with
+a photo-poster fallback, programme cards, photo stories and a contact call-to-action. The
+seven inner pages use the Kiddos layout and shared navbar/footer, with the club's chess
+components and retained blue/orange/green/red accent colours on controls. Photo assets are
+never grayscale-filtered.
 
-- **Theme layer:** `css/kiddos.css` (the template's stylesheet) drives layout and components.
-- **Club layer:** `css/chess.css` restyles it with the academy palette and adds the
-  chess-specific components: broadcast stage, countdown cards, ticker, FAQ accordion,
-  registration forms, honour-roll table, steps strip, product shelf and the nav "Enrol" pill.
+- **Template layer:** `css/kiddos.css` drives layout and components on the inner pages.
+- **Club layer:** `css/chess.css` provides the dark interface, gold highlights, original
+  accent colours and chess-specific components: broadcast stage, countdown cards, ticker,
+  FAQ accordion, registration forms, honour-roll table, steps strip and product shelf.
 - **Academy crest:** the official Kericho Chess Academy crest (pawn, king, knight, motto
   *Forward Ever Backward Never*) sits in the nav, the footer, the event poster lockup and a
   dedicated crest band on the about page; it doubles as the site favicon
@@ -30,7 +33,7 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 
 | Page | What's on it |
 | --- | --- |
-| `index.html` | Photo hero slider, service strip, welcome + offerings, the coach & the platform, programmes, season counters, testimonials, enquiry form, club shelf, academy updates, gallery |
+| `index.html` | Full-colour looping video hero with academy-poster fallback, school/coaching/tournament highlights, full-colour photo stories and community call-to-action |
 | `coaching.html` | The three coaching tracks, four-phase method, fees & FAQ |
 | `tournaments.html` | **Event advert (poster band)** with live countdowns and response buttons, next fixture with live countdown, eight age categories, M-Pesa entry steps, registration form, honour roll |
 | `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list, spectator feed — plus the broadcast card |
@@ -39,10 +42,19 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 | `about.html` | Academy story, **crest band with the academy motto**, **the office bearers with portraits**, the partner schools, the squads, values and the season gallery |
 | `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ, contact cards, **direct lines for the office bearers (portrait cards)** and the **Secretary's Samarkand Olympiad gallery** |
 
-All eight pages share the Kiddos navbar (with the **Enrol Now** pill) and the template
-footer, which carries phone/WhatsApp/email contacts and an **Office Bearers** column
-(President & Head Coach, Vice Chairperson, Secretary, Treasurer — Gladys's new line is
-flagged; the Vice Chairperson routes through the academy office).
+The seven inner pages share the Kiddos navbar (with the **Enrol Now** pill) and the
+academy footer, which carries phone/WhatsApp/email contacts and an **Office Bearers**
+column (President & Head Coach, Vice Chairperson, Secretary, Treasurer — Gladys's new line
+is flagged; the Vice Chairperson routes through the academy office). The homepage uses a
+simplified labelled navigation and a compact footer in the uploaded visual style.
+
+### Homepage hero video
+
+The user-provided MP4 (`125+ Free Templates for 'Chess website'_2.mp4` from the repository's
+`main` branch) is installed as `assets/hero-background.mp4`. The homepage plays it muted in
+a loop, inline on mobile and without controls; the full-colour `assets/hero-chess-academy.jpg`
+remains the poster/background fallback, including for visitors who prefer reduced motion.
+The video is shown without grayscale or colour filters.
 
 ### The leadership cards (contact.html#team)
 
@@ -61,9 +73,8 @@ The Treasurer's card is kept on `contact.html#team` only, per the club's decisio
 `PORTRAIT SLOT` comment marks the exact spot inside her card where a portrait goes when
 one arrives (the same comment marks the fourth card in the about-page grid).
 
-Shem's "The Coach & The Platform" section on `index.html` is retitled **The President & The
-Platform**, and his card there reads **President & Head Coach**, so the two sections agree. His title reads **President & Head Coach** in every card,
-heading, footer entry and alt text on the site.
+Shem's title reads **President & Head Coach** in every staff card, heading, footer entry
+and alt text used across the site.
 
 ## Photos
 
@@ -100,20 +111,11 @@ coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is n
 
 ## Event advert (poster band)
 
-`index.html` and `tournaments.html` carry a poster-style advert for the next fixture
-(`#event`). It mirrors the site's own fixture card, so the **single place to edit an
-event** is:
-
-1. the `#event` block in `tournaments.html` (the full poster) and the `compact` copy in
-   `index.html`;
-2. the two `data-countdown` targets in each block: first round and entries-close time;
-3. the M-Pesa line in the poster footer, if the entry reference changes.
-
-The poster artwork is currently `assets/tournament-prep-01.jpg` as a stand-in — the
-designed event poster has not arrived yet; swap that `src` (both blocks) to drop it in.
-Both blocks are marked with an `EVENT ADVERT` comment. Visitors can respond from the
-advert itself: registration form, WhatsApp entry, a Google Calendar "add to calendar"
-link, phone calls to the Secretary/Treasurer, or email.
+`tournaments.html` carries the full poster-style event advert (`#event`) and its
+registration actions. Update the event date, countdown targets and M-Pesa reference there.
+The poster artwork is currently `assets/tournament-prep-01.jpg` as a stand-in; replace that
+image when the designed poster is ready. The homepage links visitors through to the
+Tournaments page rather than duplicating a second, potentially stale advert.
 
 ## Contacts shown on the site
 
