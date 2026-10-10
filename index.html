@@ -1,356 +1,850 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kericho Chess Club &amp; Academy · Play, Learn, Compete</title>
-  <meta name="description" content="Chess coaching, school clubs, tournaments and live play with Kericho Chess Club &amp; Academy in Kericho County, Kenya.">
-  <meta name="theme-color" content="#0b0b0c">
-  <link rel="icon" href="assets/favicon.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      color-scheme:dark;
-      --black:#0b0b0c;
-      --surface:#141415;
-      --surface-raised:#1b1b1d;
-      --paper:#f5f2ea;
-      --muted:#b7b3aa;
-      --gold:#d7b66f;
-      --gold-bright:#f0d493;
-      --border:rgba(215,182,111,.22);
-      --blue:#6cbbe8;
-      --green:#9fbd78;
-      --radius:18px;
-      --content:1160px;
-    }
-    *,*::before,*::after{box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%}
-    body{margin:0;background:var(--black);color:var(--paper);font:16px/1.65 'DM Sans',Arial,sans-serif;overflow-x:hidden}
-    a{color:inherit;text-decoration:none}
-    img{display:block;max-width:100%;height:auto}
-    button,a{-webkit-tap-highlight-color:transparent}
-    button:focus-visible,a:focus-visible{outline:3px solid var(--gold-bright);outline-offset:4px}
-    .skip-link{position:absolute;left:12px;top:-60px;z-index:20;padding:10px 14px;background:var(--gold);color:#17130b;border-radius:8px}
-    .skip-link:focus{top:12px}
-    .wrap{width:min(var(--content),calc(100% - 44px));margin-inline:auto}
+  <head>
+    <title>Kericho Chess Club &amp; Academy · Chess Has Never Looked Like This</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Premium chess coaching, school clubs, inter-school tournaments and materials in Kericho, Kenya. Watch live boards, play on the site, and enrol a learner today.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <meta name="theme-color" content="#1eaaf1">
 
-    /* Header follows the uploaded chess-academy visual: dark, simple, clear. */
-    .site-header{position:sticky;top:0;z-index:10;background:rgba(11,11,12,.96);backdrop-filter:blur(14px)}
-    .header-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:30px}
-    .brand{display:inline-flex;align-items:center;gap:12px;flex:none}
-    .brand img{width:45px;height:46px;object-fit:contain}
-    .brand-copy{font:800 18px/1.05 'Manrope',sans-serif;letter-spacing:-.025em}
-    .brand-copy small{display:block;margin-top:5px;color:#aaa69d;font:700 9px/1 'DM Sans',sans-serif;letter-spacing:.2em;text-transform:uppercase}
-    .nav-links{display:flex;align-items:center;gap:clamp(18px,2.6vw,36px)}
-    .nav-links a{color:#e8e5dd;font-size:14px;font-weight:600;transition:color .2s ease}
-    .nav-links a:hover,.nav-links a[aria-current="page"]{color:var(--gold-bright)}
-    .nav-links .nav-cta{display:inline-flex;align-items:center;justify-content:center;padding:11px 20px;border-radius:9px;background:var(--gold);color:#17130b;font-weight:800;box-shadow:0 8px 24px rgba(215,182,111,.14)}
-    .nav-links .nav-cta:hover{background:var(--gold-bright);color:#17130b}
-    .nav-toggle{display:none;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:0 13px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--paper);font:700 13px 'DM Sans',sans-serif;cursor:pointer}
-    .nav-toggle svg{width:18px;height:18px}
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    /* Full-colour hero motion layer. The academy still is the poster fallback. */
-    .hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:650px;padding:72px 0;overflow:hidden;background:#0b0b0c url("assets/hero-chess-academy.jpg") center/cover no-repeat}
-    .hero-background-video{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 45%;filter:none}
-    .hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(7,7,8,.8) 0%,rgba(7,7,8,.58) 42%,rgba(7,7,8,.18) 75%,rgba(7,7,8,.08) 100%)}
-    .hero-grid{position:relative;z-index:1;display:block;width:min(var(--content),calc(100% - 44px));margin-inline:auto}
-    .hero-copy-block{max-width:720px;padding:22px 24px 22px 0}
-    .hero-video-label{position:absolute;right:25px;bottom:23px;display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid rgba(255,255,255,.2);border-radius:10px;background:rgba(12,12,12,.64);color:#f5f2ea;font-size:11px;font-weight:700;backdrop-filter:blur(6px)}
-    .hero-video-label b{color:var(--gold-bright)}
-    .eyebrow{display:inline-flex;align-items:center;gap:9px;margin:0 0 18px;color:var(--gold-bright);font-size:11px;font-weight:800;letter-spacing:.21em;text-transform:uppercase}
-    .eyebrow::before{content:"";width:22px;height:1px;background:var(--gold)}
-    h1,h2,h3{font-family:'Manrope','DM Sans',Arial,sans-serif}
-    h1{max-width:600px;margin:0;color:var(--paper);font-size:clamp(42px,5.4vw,70px);line-height:1.06;letter-spacing:-.055em;font-weight:800}
-    h1 .gold{display:block;color:var(--gold-bright)}
-    .hero-copy{max-width:540px;margin:22px 0 0;color:#cbc7be;font-size:17px;line-height:1.75}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-    .button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:51px;padding:0 22px;border:1px solid transparent;border-radius:9px;font-weight:800;font-size:14px;transition:transform .2s ease,background-color .2s ease,border-color .2s ease}
-    .button:hover{transform:translateY(-2px)}
-    .button-primary{background:var(--gold);color:#17130b}
-    .button-primary:hover{background:var(--gold-bright)}
-    .button-quiet{border-color:rgba(215,182,111,.6);background:rgba(11,11,12,.24);color:#f0dfbb}
-    .button-quiet:hover{background:rgba(215,182,111,.1);border-color:var(--gold-bright)}
-    .hero-highlights{display:flex;flex-wrap:wrap;gap:0;margin-top:36px}
-    .highlight{display:flex;align-items:center;gap:10px;min-height:40px;padding-right:22px;margin-right:22px;border-right:1px solid rgba(255,255,255,.14);color:#e6e2d9;font-size:12px;font-weight:700}
-    .highlight:last-child{border:0;margin-right:0;padding-right:0}
-    .highlight svg{width:20px;height:20px;flex:none;color:var(--gold)}
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
 
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
 
-    /* Three routes to get involved. Card surfaces stay dark; accents stay varied. */
-    .features{padding:24px 0 50px}
-    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .feature-card{position:relative;display:block;min-height:170px;padding:25px 24px;border:1px solid rgba(255,255,255,.12);border-radius:15px;background:linear-gradient(145deg,#171719,#111112);transition:transform .22s ease,border-color .22s ease,background .22s ease}
-    .feature-card:hover{transform:translateY(-4px);border-color:rgba(215,182,111,.46);background:#19191a}
-    .feature-top{display:flex;align-items:center;gap:13px;margin-bottom:14px}
-    .feature-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgba(215,182,111,.12);color:var(--gold-bright)}
-    .feature-card:nth-child(2) .feature-icon{background:rgba(108,187,232,.14);color:var(--blue)}
-    .feature-card:nth-child(3) .feature-icon{background:rgba(159,189,120,.14);color:var(--green)}
-    .feature-icon svg{width:23px;height:23px}
-    .feature-card h2{margin:0;color:var(--paper);font-size:17px;letter-spacing:-.02em}
-    .feature-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
-    .card-arrow{position:absolute;right:22px;top:29px;color:#d8bb7c;font-size:20px;line-height:1;transition:transform .2s ease}
-    .feature-card:hover .card-arrow{transform:translateX(3px)}
+    <link rel="stylesheet" href="css/aos.css">
 
-    .section{padding:56px 0 68px}
-    .section-heading{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:23px}
-    .section-heading .eyebrow{margin-bottom:8px}
-    .section-heading h2{margin:0;color:var(--gold-bright);font-size:clamp(24px,3vw,34px);letter-spacing:-.04em}
-    .section-heading p{max-width:480px;margin:0;color:var(--muted);font-size:13px}
-    .view-all{display:inline-flex;align-items:center;gap:8px;flex:none;color:#e7d5b0;font-size:13px;font-weight:700;text-decoration:underline;text-decoration-color:rgba(215,182,111,.45);text-underline-offset:5px}
-    .view-all:hover{color:var(--gold-bright)}
-    .story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .story-card{overflow:hidden;border:1px solid rgba(255,255,255,.12);border-radius:15px;background:var(--surface);transition:transform .22s ease,border-color .22s ease}
-    .story-card:hover{transform:translateY(-4px);border-color:rgba(215,182,111,.44)}
-    .story-photo{position:relative;aspect-ratio:16/9;overflow:hidden;background:#202020}
-    .story-photo img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
-    .story-card:hover .story-photo img{transform:scale(1.035)}
-    .story-content{padding:19px 20px 21px}
-    .story-tag{display:inline-block;margin-bottom:8px;color:var(--gold-bright);font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
-    .story-content h3{margin:0 0 8px;color:var(--paper);font-size:17px;line-height:1.35;letter-spacing:-.02em}
-    .story-content p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.65}
+    <link rel="stylesheet" href="css/ionicons.min.css">
 
-    .community{padding:4px 0 76px}
-    .community-panel{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:36px;padding:30px;border:1px solid rgba(215,182,111,.24);border-radius:18px;background:linear-gradient(120deg,#181716,#111112 62%)}
-    .community-copy .eyebrow{margin-bottom:10px}
-    .community-copy h2{margin:0;color:var(--paper);font-size:clamp(25px,3.2vw,38px);line-height:1.15;letter-spacing:-.04em}
-    .community-copy p{max-width:500px;margin:15px 0 22px;color:#bcb8ae;font-size:14px}
-    .community-photo{margin:0;overflow:hidden;border-radius:13px;aspect-ratio:16/9}
-    .community-photo img{width:100%;height:100%;object-fit:cover;object-position:center 44%}
-
-    .site-footer{padding:24px 0 27px;background:#080809}
-    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
-    .footer-brand{display:flex;align-items:center;gap:10px;color:#e8e4da;font-size:12px;font-weight:700}
-    .footer-brand img{width:32px;height:33px;object-fit:contain}
-    .footer-links{display:flex;flex-wrap:wrap;gap:20px;color:#aaa69d;font-size:11px}
-    .footer-links a:hover{color:var(--gold-bright)}
-    .copyright{color:#858179;font-size:10px;white-space:nowrap}
-
-    @media(max-width:900px){
-      .header-inner{min-height:74px}
-      .nav-toggle{display:inline-flex}
-      .nav-links{display:none;position:absolute;top:100%;left:0;right:0;align-items:stretch;gap:0;padding:10px 22px 18px;background:#101011}
-      .nav-links.is-open{display:flex;flex-direction:column}
-      .nav-links a{padding:12px 4px}
-      .nav-links .nav-cta{justify-content:center;margin-top:8px;padding:12px}
-      .hero{min-height:610px;padding:58px 0}
-      .hero-copy-block{max-width:660px}
-      .community-panel{gap:22px;padding:24px}
-    }
-    @media(max-width:680px){
-      .wrap{width:min(var(--content),calc(100% - 32px))}
-      .header-inner{gap:12px}
-      .brand-copy{font-size:16px}
-      .brand img{width:39px;height:40px}
-      .hero{min-height:680px;padding:48px 0 74px;background-position:57% center}
-      .hero::before{background:linear-gradient(90deg,rgba(7,7,8,.76),rgba(7,7,8,.48) 68%,rgba(7,7,8,.3))}
-      .hero-grid{width:min(var(--content),calc(100% - 32px))}
-      .hero-copy-block{max-width:100%;padding:22px 18px;border-radius:16px;background:rgba(10,10,11,.46)}
-      h1{font-size:clamp(40px,12vw,58px)}
-      .hero-copy{font-size:15px;margin-top:16px}
-      .hero-highlights{gap:10px 0;margin-top:25px}
-      .highlight{font-size:10px;padding-right:12px;margin-right:12px}
-      .hero-video-label{right:16px;bottom:16px;left:16px;justify-content:center}
-      .feature-grid,.story-grid{grid-template-columns:1fr;gap:12px}
-      .feature-card{min-height:0;padding:20px}
-      .feature-card h2{font-size:16px}
-      .section{padding:42px 0 48px}
-      .section-heading{align-items:flex-start;flex-direction:column;gap:10px;margin-bottom:18px}
-      .section-heading p{font-size:12.5px}
-      .community{padding-bottom:48px}
-      .community-panel{grid-template-columns:1fr;padding:20px;gap:20px}
-      .community-copy h2{font-size:29px}
-      .footer-inner{align-items:flex-start;flex-direction:column;gap:15px}
-      .footer-links{gap:14px}
-      .copyright{white-space:normal}
-    }
-    @media(prefers-reduced-motion:reduce){
-      *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
-      .hero-background-video{display:none!important}
-    }
-  </style>
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <a class="brand" href="index.html" aria-label="Kericho Chess Club and Academy home">
-        <img src="assets/logo-light.png" width="640" height="650" alt="" fetchpriority="high">
-        <span class="brand-copy">Kericho Chess<small>Club &amp; Academy</small></span>
-      </a>
-      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-        Menu
-      </button>
-      <nav class="nav-links" id="site-nav" aria-label="Main navigation">
-        <a href="play.html">Play Online</a>
-        <a href="tournaments.html">Tournaments</a>
-        <a href="coaching.html">Lessons</a>
-        <a href="about.html">Community</a>
-        <a href="live.html">Live</a>
-        <a href="shop.html">Shop</a>
-        <a class="nav-cta" href="contact.html">Join the Academy</a>
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/kiddos.css">
+    <link rel="stylesheet" href="css/chess.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
+        <div class="container d-flex align-items-center">
+            <a class="navbar-brand" href="index.html"><img class="brand-crest" src="assets/logo.png" alt="Kericho Chess Academy crest: pawn, king and knight over the motto Forward Ever Backward Never" width="640" height="650" decoding="async">Kericho Chess<small>CLUB &amp; ACADEMY</small></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a href="index.html" class="nav-link" aria-label="Home" title="Home"><span class="fas fa-house"></span></a></li>
+                <li class="nav-item"><a href="coaching.html" class="nav-link" aria-label="Coaching" title="Coaching"><span class="fas fa-graduation-cap"></span></a></li>
+                <li class="nav-item"><a href="tournaments.html" class="nav-link" aria-label="Tournaments" title="Tournaments"><span class="fas fa-trophy"></span></a></li>
+                <li class="nav-item"><a href="live.html" class="nav-link" aria-label="Live" title="Live"><span class="fas fa-tower-broadcast"></span><span class="live-dot"></span></a></li>
+                <li class="nav-item"><a href="play.html" class="nav-link" aria-label="Play" title="Play"><span class="fas fa-chess"></span></a></li>
+                <li class="nav-item"><a href="shop.html" class="nav-link" aria-label="Shop" title="Shop"><span class="fas fa-bag-shopping"></span></a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link" aria-label="About" title="About"><span class="fas fa-circle-info"></span></a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link" aria-label="Contact" title="Contact"><span class="fas fa-envelope"></span></a></li>
+              <li class="nav-item cta"><a href="contact.html" class="nav-link" aria-label="Enrol Now" title="Enrol Now"><span class="fas fa-user-plus"></span></a></li>
+            </ul>
+          </div>
+        </div>
       </nav>
-    </div>
-  </header>
+    <!-- END nav -->
 
-  <main id="main">
-    <section class="hero" aria-labelledby="hero-title">
-      <video id="hero-background-video" class="hero-background-video" data-video-src="assets/hero-background.mp4" autoplay muted loop playsinline preload="none" poster="assets/hero-chess-academy.jpg" aria-hidden="true"></video>
-      <div class="wrap hero-grid">
-        <div class="hero-copy-block">
-          <p class="eyebrow">Kericho Chess Club &amp; Academy</p>
-          <h1 id="hero-title">Master the game.<span class="gold">Grow through chess.</span></h1>
-          <p class="hero-copy">Learn, play and compete with a chess community built for learners and schools across Kericho County.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="play.html">Play online <span aria-hidden="true">↗</span></a>
-            <a class="button button-quiet" href="contact.html">Join the academy</a>
+    <!-- The original homepage hero and slide copy remain intact; one full-colour
+         tournament video now plays behind both slides. The carousel script changes
+         the copy only, while this video stays in the same background position. -->
+    <section class="home-slider hero-slider owl-carousel" aria-roledescription="carousel" aria-label="Kericho Chess Academy highlights">
+      <video id="hero-background-video" class="hero-video-background" data-video-src="assets/hero-background.mp4" autoplay muted loop playsinline preload="none" poster="assets/chess-materials.jpg" aria-hidden="true" tabindex="-1"></video>
+      <div class="slider-item" role="group" aria-roledescription="slide" aria-label="1 of 2">
+        <div class="container">
+          <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-8 text-center ftco-animate">
+            <h1 class="mb-4">Chess Has Never <span>Looked Like This</span></h1>
+            <p>School clubs, private lessons and inter-school tournaments across Kericho, coached by Shem Meso and streamed like a grandmaster broadcast.</p>
+            <p><a href="live.html" class="btn btn-secondary px-4 py-3 mt-3"><i class="fas fa-satellite-dish"></i> Watch Live Now</a> <a href="contact.html" class="btn btn-primary px-4 py-3 mt-3">Enrol a Learner</a></p>
           </div>
-          <div class="hero-highlights" aria-label="Academy programmes">
-            <div class="highlight">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20V8l8-5 8 5v12M8 20v-7h8v7M2 20h20"/></svg>
-              <span>School clubs</span>
+        </div>
+        </div>
+      </div>
+
+      <div class="slider-item" role="group" aria-roledescription="slide" aria-label="2 of 2">
+        <div class="container">
+          <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-8 text-center ftco-animate">
+            <h1 class="mb-4">Quiet Classrooms <span>Turned Competitive</span></h1>
+            <p>The Kericho Inter-Schools Open returns 26 September 2026. Eight age categories, seven Swiss rounds, boards streamed live.</p>
+            <p><a href="tournaments.html" class="btn btn-secondary px-4 py-3 mt-3"><i class="fas fa-trophy"></i> Enter the Circuit</a></p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-services ftco-no-pb">
+            <div class="container-wrap">
+                <div class="row no-gutters">
+          <div class="col-md-3 d-flex services align-self-stretch pb-4 px-4 ftco-animate bg-primary">
+            <div class="media block-6 d-block text-center">
+              <div class="icon d-flex justify-content-center align-items-center">
+                    <span class="flaticon-teacher"></span>
+              </div>
+              <div class="media-body p-2 mt-3">
+                <h3 class="heading">School Coaching</h3>
+                <p>Weekly in-school sessions that build a full chess club from the ground up: curriculum, ladders and house tournaments.</p>
+              </div>
             </div>
-            <div class="highlight">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v8h16v-8a2 2 0 0 0-2-2h-2V7a4 4 0 0 0-4-4Z"/><path d="M8 9h8M9 14h.01M15 14h.01"/></svg>
-              <span>Coaching</span>
+          </div>
+          <div class="col-md-3 d-flex services align-self-stretch pb-4 px-4 ftco-animate bg-tertiary">
+            <div class="media block-6 d-block text-center">
+              <div class="icon d-flex justify-content-center align-items-center">
+                    <span class="flaticon-reading"></span>
+              </div>
+              <div class="media-body p-2 mt-3">
+                <h3 class="heading">Private Lessons</h3>
+                <p>One-on-one work with Coach Shem Meso: a personal study plan and analysis of every game the learner plays.</p>
+              </div>
             </div>
-            <div class="highlight">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 4h8l-1 7 4 3v2H5v-2l4-3-1-7ZM8 20h8M12 16v4"/></svg>
-              <span>Tournaments</span>
+          </div>
+          <div class="col-md-3 d-flex services align-self-stretch pb-4 px-4 ftco-animate bg-fifth">
+            <div class="media block-6 d-block text-center">
+              <div class="icon d-flex justify-content-center align-items-center">
+                    <span class="flaticon-kids"></span>
+              </div>
+              <div class="media-body p-2 mt-3">
+                <h3 class="heading">Tournament Prep</h3>
+                <p>Seasonal squads by age category, clock management, scoresheets and simulated match play under real pressure.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 d-flex services align-self-stretch pb-4 px-4 ftco-animate bg-quarternary">
+            <div class="media block-6 d-block text-center">
+              <div class="icon d-flex justify-content-center align-items-center">
+                    <span class="flaticon-books"></span>
+              </div>
+              <div class="media-body p-2 mt-3">
+                <h3 class="heading">Materials &amp; Kits</h3>
+                <p>Tournament sets, clocks and workbooks for schools building a club, ordered with one WhatsApp message.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+            </div>
+        </section>
+
+        <section class="ftco-section ftco-no-pt ftc-no-pb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 order-md-last wrap-about py-5 wrap-about bg-light">
+                        <div class="text px-4 ftco-animate">
+                <h2 class="mb-4">Welcome to Kericho Chess Club &amp; Academy</h2>
+                            <p>Shem Meso has spent years turning quiet classrooms into competitive chess clubs across Kericho. It starts with how each piece thinks, not just how it moves.</p>
+                            <p>Sessions run directly inside partner schools, fitted around the timetable, with materials and a clear progression path for every learner. On fixture days, Boards 1 to 4 stream live right here on this site.</p>
+                            <p><a href="about.html" class="btn btn-secondary px-4 py-3">Meet the Coach</a> <a href="live.html" class="btn btn-primary px-4 py-3"><span class="live-dot"></span> Watch a Board</a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-7 wrap-about py-5 pr-md-4 ftco-animate">
+            <h2 class="mb-4">What We Offer</h2>
+                        <p>Every programme is built to fit a real school week, not compete with it. Pick the track that fits your school, your child, or your season.</p>
+                        <div class="row mt-5">
+                            <div class="col-lg-6">
+                                <div class="services-2 d-flex">
+                                    <div class="icon mt-2 mr-3 d-flex justify-content-center align-items-center"><span class="flaticon-teacher"></span></div>
+                                    <div class="text">
+                                        <h3>Weekly School Sessions</h3>
+                                        <p>Coaching delivered inside partner schools, fitted around the school timetable.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="services-2 d-flex">
+                                    <div class="icon mt-2 mr-3 d-flex justify-content-center align-items-center"><span class="flaticon-reading"></span></div>
+                                    <div class="text">
+                                        <h3>A Real Curriculum</h3>
+                                        <p>Fundamentals first, tactics second, composure always. Phase by phase.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="services-2 d-flex">
+                                    <div class="icon mt-2 mr-3 d-flex justify-content-center align-items-center"><span class="flaticon-diploma"></span></div>
+                                    <div class="text">
+                                        <h3>Progress Reports</h3>
+                                        <p>Learner ratings tracked across the season, with term-by-term notes for parents.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="services-2 d-flex">
+                                    <div class="icon mt-2 mr-3 d-flex justify-content-center align-items-center"><span class="flaticon-kids"></span></div>
+                                    <div class="text">
+                                        <h3>The Circuit</h3>
+                                        <p>Inter-school fixtures across Kericho County in eight age categories.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="services-2 d-flex">
+                                    <div class="icon mt-2 mr-3 d-flex justify-content-center align-items-center"><span class="flaticon-jigsaw"></span></div>
+                                    <div class="text">
+                                        <h3>Live Broadcasts</h3>
+                                        <p>Boards 1 to 4 streamed live on this site, with clocks and evaluation.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="services-2 d-flex">
+                                    <div class="icon mt-2 mr-3 d-flex justify-content-center align-items-center"><span class="flaticon-books"></span></div>
+                                    <div class="text">
+                                        <h3>Materials Supply</h3>
+                                        <p>Boards, clocks and workbooks supplied to schools at academy rates.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ftco-intro" style="background-image: url(assets/chess-materials.jpg);" data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h2>Teaching children to think before they move</h2>
+                        <p class="mb-0">Chess is a quiet classroom turned competitive: every position a small problem with real consequences, and a habit of thinking first that learners carry back into classwork.</p>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-center">
+                        <p class="mb-0"><a href="contact.html" class="btn btn-secondary px-4 py-3">Enrol a Learner</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ftco-section ftco-no-pb">
+            <div class="container">
+                <div class="row justify-content-center mb-5 pb-2">
+          <div class="col-md-8 text-center heading-section ftco-animate">
+            <h2 class="mb-4"><span>The President</span> &amp; The Platform</h2>
+            <p>One club president and head coach, one scrambling-bus schedule of partner schools, and a site that carries the academy to parents' phones on fixture days.</p>
+          </div>
+        </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                        <div class="staff">
+                            <div class="img-wrap d-flex align-items-stretch">
+                                <div class="img align-self-stretch" style="background-image: url(assets/leadership/president-shem-meso.jpg);"></div>
+                            </div>
+                            <div class="text pt-3 text-center">
+                                <h3>Shem Meso</h3>
+                                <span class="position mb-2">President &amp; Head Coach</span>
+                                <div class="faded">
+                                    <p>Chairs the executive and leads the coaching: turning quiet Kericho classrooms into competitive chess clubs, one board, one learner, one school at a time.</p>
+                                    <ul class="ftco-social text-center">
+                        <li class="ftco-animate"><a href="https://wa.me/254729037585" target="_blank" rel="noopener"><span class="fab fa-whatsapp"></span></a></li>
+                        <li class="ftco-animate"><a href="https://www.facebook.com/smesso" target="_blank" rel="noopener"><span class="fab fa-facebook-f"></span></a></li>
+                        <li class="ftco-animate"><a href="https://www.tiktok.com/@kericho.chess.clu" target="_blank" rel="noopener"><span class="fab fa-tiktok"></span></a></li>
+                      </ul>
+                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                        <div class="staff">
+                            <div class="img-wrap d-flex align-items-stretch">
+                                <div class="img align-self-stretch" style="background-image: url(assets/shelf-clock.jpg);"></div>
+                            </div>
+                            <div class="text pt-3 text-center">
+                                <h3>Live Broadcasts</h3>
+                                <span class="position mb-2">Boards 1 to 4 · On Air</span>
+                                <div class="faded">
+                                    <p>Grandmaster-style streams with live clocks, an evaluation bar and a spectator feed for parents at home.</p>
+                                    <ul class="ftco-social text-center">
+                        <li class="ftco-animate"><a href="live.html"><span class="fas fa-eye"></span></a></li>
+                        <li class="ftco-animate"><a href="live.html"><span class="fas fa-satellite-dish"></span></a></li>
+                      </ul>
+                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                        <div class="staff">
+                            <div class="img-wrap d-flex align-items-stretch">
+                                <div class="img align-self-stretch" style="background-image: url(assets/hero-dark-board.jpg);"></div>
+                            </div>
+                            <div class="text pt-3 text-center">
+                                <h3>The Circuit</h3>
+                                <span class="position mb-2">Inter-School · Season 26</span>
+                                <div class="faded">
+                                    <p>Fixtures all across the county, eight age categories, medals per category and circuit points all season.</p>
+                                    <ul class="ftco-social text-center">
+                        <li class="ftco-animate"><a href="tournaments.html"><span class="fas fa-trophy"></span></a></li>
+                        <li class="ftco-animate"><a href="tournaments.html#register"><span class="fas fa-clipboard-list"></span></a></li>
+                      </ul>
+                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                        <div class="staff">
+                            <div class="img-wrap d-flex align-items-stretch">
+                                <div class="img align-self-stretch" style="background-image: url(assets/hero-dark-board.jpg);"></div>
+                            </div>
+                            <div class="text pt-3 text-center">
+<h3>Play The Board</h3>
+                                    <span class="position mb-2">The Practice Hall</span>
+                                    <div class="faded">
+                                        <p>A full-rules game right on the site, with castling, en passant, promotion, check and mate, plus the daily puzzle. Off the board, Kwaarena turns that same skill into real rewards.</p>
+                                        <ul class="ftco-social text-center">
+                                            <li class="ftco-animate"><a href="play.html"><span class="fas fa-play"></span></a></li>
+                                            <li class="ftco-animate"><a href="play.html"><span class="fas fa-puzzle-piece"></span></a></li>
+                                            <li class="ftco-animate"><a href="https://www.kwaarena.com/?ref=b95ae9f671df7b255e15a188" target="_blank" rel="noopener" aria-label="Play &amp; Earn on Kwaarena" title="Play &amp; Earn on Kwaarena"><span class="fas fa-coins"></span></a></li>
+                                        </ul>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row justify-content-center mb-5 pb-2">
+          <div class="col-md-8 text-center heading-section ftco-animate">
+            <h2 class="mb-4"><span>Our</span> Programmes</h2>
+            <p>Three coaching tracks and a weekly club night. Every programme follows the same four-phase method, fitted around the Kenyan school calendar.</p>
+          </div>
+        </div>
+                <div class="row">
+                    <div class="col-md-6 course d-lg-flex ftco-animate">
+                        <div class="img" style="background-image: url(assets/shelf-kit.jpg);"></div>
+                        <div class="text bg-light p-4">
+                            <h3><a href="coaching.html">School Coaching</a></h3>
+                            <p class="subheading"><span>Runs:</span> weekly · inside your school</p>
+                            <p>Full club setup with a structured curriculum, learner progress reports and a house tournament every term.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 course d-lg-flex ftco-animate">
+                        <div class="img" style="background-image: url(assets/chess-materials.jpg);"></div>
+                        <div class="text bg-light p-4">
+                            <h3><a href="coaching.html">Private Lessons</a></h3>
+                            <p class="subheading"><span>Runs:</span> 1-on-1 · home, school or club</p>
+                            <p>A personal study plan built around the learner's own games, with analysis after every single session.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 course d-lg-flex ftco-animate">
+                        <div class="img" style="background-image: url(assets/chess-materials.jpg);"></div>
+                        <div class="text bg-light p-4">
+                            <h3><a href="tournaments.html">Tournament Prep</a></h3>
+                            <p class="subheading"><span>Runs:</span> seasonal · by age category</p>
+                            <p>Opening repertoires, clock management, scoresheets and simulated match play under real time pressure.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 course d-lg-flex ftco-animate">
+                        <div class="img" style="background-image: url(assets/shelf-clock.jpg);"></div>
+                        <div class="text bg-light p-4">
+                            <h3><a href="live.html">Saturday Academy Club</a></h3>
+                            <p class="subheading"><span>Runs:</span> every Saturday · 10:00 EAT</p>
+                            <p>The academy's weekly internal ladder, played in the club room and streamed to the site between fixtures.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(assets/chess-materials.jpg);" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row justify-content-center mb-5 pb-2">
+          <div class="col-md-8 text-center heading-section heading-section-white ftco-animate">
+            <h2 class="mb-4"><span>Season 26</span> By The Numbers</h2>
+            <p>The quiet count behind the noise: partner schools, coached hours, learners in progress, fixtures run and categories on the circuit.</p>
+          </div>
+        </div>
+            <div class="row d-md-flex align-items-center justify-content-center">
+                <div class="col-lg-10">
+                    <div class="row d-md-flex align-items-center">
+                  <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18">
+                        <div class="icon"><span class="flaticon-teacher"></span></div>
+                      <div class="text">
+                        <strong class="number" data-number="12">0</strong>
+                        <span>Schools Coached</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18">
+                        <div class="icon"><span class="flaticon-kids"></span></div>
+                      <div class="text">
+                        <strong class="number" data-number="340">0</strong>
+                        <span>Learners Trained</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18">
+                        <div class="icon"><span class="flaticon-diploma"></span></div>
+                      <div class="text">
+                        <strong class="number" data-number="15">0</strong>
+                        <span>Tournaments Run</span>
+                      </div>
+                    </div>
+                  </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+                <div class="icon"><span class="flaticon-reading"></span></div>
+              <div class="text">
+                <strong class="number" data-number="8">0</strong>
+                <span>Age Categories</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+                <div class="icon"><span class="flaticon-education"></span></div>
+              <div class="text">
+                <strong class="number with-plus" data-number="1900">0</strong>
+                <span>Coached Hours</span>
+              </div>
+            </div>
+          </div>
+              </div>
+          </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="ftco-section testimony-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-2">
+          <div class="col-md-8 text-center heading-section ftco-animate">
+            <h2 class="mb-4"><span>What Parents</span> &amp; Players Say</h2>
+            <p>From the scoresheets: a head teacher, a parent and one of the U-14 squad on what the club has changed.</p>
+          </div>
+        </div>
+        <div class="row ftco-animate justify-content-center">
+          <div class="col-md-12">
+            <div class="carousel-testimony owl-carousel">
+              <div class="item">
+                <div class="testimony-wrap d-flex">
+                  <div class="user-img mr-4 user-initials"><b>MK</b></div>
+                  <div class="text ml-2 bg-light">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                    <p>Our library used to empty at lunch. Now the queue for Shem's boards runs out the door. Learners plan their whole week around chess club.</p>
+                    <p class="name">Mrs. M. Korir</p>
+                    <span class="position">Head Teacher · Kericho</span>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap d-flex">
+                  <div class="user-img mr-4 user-initials initials-2"><b>DB</b></div>
+                  <div class="text ml-2 bg-light">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                    <p>My son came home explaining backwards pawns at dinner. Three months later he finished third in the U-12 circuit. Money well spent.</p>
+                    <p class="name">D. Bett</p>
+                    <span class="position">Parent · Litein</span>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap d-flex">
+                  <div class="user-img mr-4 user-initials initials-3"><b>FC</b></div>
+                  <div class="text ml-2 bg-light">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                    <p>Coach Shem taught us that losing a queen is not losing a game. I stopped panicking over the board and started winning endgames.</p>
+                    <p class="name">Faith C., 14</p>
+                    <span class="position">U-14 Squad · Season 25</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="hero-video-label" aria-hidden="true"><b>♞</b> Learning at the board · Kericho County</div>
     </section>
 
-    <section class="features" aria-label="Explore the academy">
-      <div class="wrap feature-grid">
-        <a class="feature-card" href="play.html">
-          <span class="card-arrow" aria-hidden="true">↗</span>
-          <div class="feature-top">
-            <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3h10v4H7zM6 7h12l2 13H4L6 7Z"/><path d="M9 12h6M9 16h4"/></svg></span>
-            <h2>Play Online</h2>
-          </div>
-          <p>Practice on the board, explore the daily puzzle and sharpen your next move.</p>
-        </a>
-        <a class="feature-card" href="coaching.html">
-          <span class="card-arrow" aria-hidden="true">↗</span>
-          <div class="feature-top">
-            <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20M8 7h8M8 10h6"/></svg></span>
-            <h2>Expert Lessons</h2>
-          </div>
-          <p>Build strong fundamentals with coaching for learners, school clubs and squads.</p>
-        </a>
-        <a class="feature-card" href="tournaments.html">
-          <span class="card-arrow" aria-hidden="true">↗</span>
-          <div class="feature-top">
-            <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3h10l-1 7 4 3v2H4v-2l4-3-1-7ZM8 20h8M12 15v5"/><path d="M7 6H4v2a4 4 0 0 0 4 4M17 6h3v2a4 4 0 0 1-4 4"/></svg></span>
-            <h2>Tournaments</h2>
-          </div>
-          <p>Take part in structured fixtures, learn tournament etiquette and celebrate progress.</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="academy-highlights-title">
-      <div class="wrap">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Learn · compete · belong</p>
-            <h2 id="academy-highlights-title">A place for every learner</h2>
-          </div>
-          <p>From a first chess lesson to a tournament board, explore what the Academy offers.</p>
+    <section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb" style="background-image: url(assets/hero-dark-board.jpg);" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-md-6 py-5 px-md-5 bg-primary">
+              <div class="heading-section heading-section-white ftco-animate mb-5">
+                <h2 class="mb-4">Ask About Coaching</h2>
+                <p>School coaching is quoted per term, private lessons per session. This form composes a WhatsApp message with your answers. Nothing is stored; you press send yourself.</p>
+              </div>
+              <form action="#" class="appointment-form ftco-animate" id="coachingForm">
+                    <div class="d-md-flex">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="c_name" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group ml-md-4">
+                            <input type="text" class="form-control" id="c_school" placeholder="School / club (if any)">
+                        </div>
+                    </div>
+                    <div class="d-md-flex">
+                        <div class="form-group">
+                            <div class="form-field">
+                        <div class="select-wrap">
+                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                      <select id="c_program" class="form-control" required>
+                        <option value="">Interested in…</option>
+                        <option>School Coaching</option>
+                        <option>Private Lessons</option>
+                        <option>Tournament Prep</option>
+                        <option>Materials / Club Kit</option>
+                        <option>Something else</option>
+                      </select>
+                    </div>
+                  </div>
+                        </div>
+                        <div class="form-group ml-md-4">
+                            <input type="text" class="form-control" id="c_phone_note" placeholder="Phone (optional)">
+                        </div>
+                    </div>
+                    <div class="d-md-flex">
+                        <div class="form-group">
+                  <textarea id="c_notes" cols="30" rows="2" class="form-control" placeholder="Learner's age, school and goal…"></textarea>
+                </div>
+                <div class="form-group ml-md-4">
+                  <input type="submit" value="Compose WhatsApp Message" class="btn btn-secondary py-3 px-4">
+                </div>
+                    </div>
+                    <div class="form-msg" id="c_msg" role="status"></div>
+                </form>
+                </div>
         </div>
-        <div class="story-grid">
-          <a class="story-card" href="coaching.html">
-            <div class="story-photo"><img src="assets/coaching-session.jpg" width="800" height="450" loading="lazy" alt="A learner and coach working through a chess position"></div>
-            <div class="story-content"><span class="story-tag">Lessons</span><h3>Coaching that builds confidence</h3><p>Practical lessons, focused study and game analysis for every stage.</p></div>
-          </a>
-          <a class="story-card" href="tournaments.html">
-            <div class="story-photo"><img src="assets/tournament-prep-01.jpg" width="800" height="450" loading="lazy" alt="Chess learners preparing for a tournament round"></div>
-            <div class="story-content"><span class="story-tag">Competition</span><h3>Real games. Real growth.</h3><p>Explore the inter-school circuit and the path from club play to competition.</p></div>
-          </a>
-          <a class="story-card" href="live.html">
-            <div class="story-photo"><img src="assets/orig-02.jpg" width="800" height="450" loading="lazy" alt="Learners concentrating over a chessboard at an academy event"></div>
-            <div class="story-content"><span class="story-tag">Live &amp; analysis</span><h3>Follow the game</h3><p>Visit the broadcast room for clocks, move lists and a closer look at chess in action.</p></div>
-          </a>
         </div>
-      </div>
     </section>
 
-    <section class="community" aria-labelledby="community-title">
-      <div class="wrap community-panel">
-        <div class="community-copy">
-          <p class="eyebrow">Forward Ever, Backward Never</p>
-          <h2 id="community-title">Your next move starts here.</h2>
-          <p>Bring chess to your school, enrol a learner or simply ask us how to get started. The Academy is based in Kericho and welcomes curious minds at every level.</p>
-          <a class="button button-primary" href="contact.html">Talk to the Academy <span aria-hidden="true">↗</span></a>
+        <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center mb-5 pb-2">
+          <div class="col-md-8 text-center heading-section ftco-animate">
+            <h2 class="mb-4"><span>The</span> Club Shelf</h2>
+            <p>Stocked for schools building a chess club. Tap a product and a WhatsApp message opens addressed to Shem. No checkout, no cart.</p>
+          </div>
         </div>
-        <figure class="community-photo">
-          <img src="assets/tournament-focus.jpg" width="1200" height="675" loading="lazy" alt="Learners focused on a chess game during a tournament">
-        </figure>
-      </div>
+            <div class="row">
+            <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="pricing-entry bg-light active pb-4 text-center">
+                    <div>
+                        <span class="price-note">Best Seller · Classroom</span>
+                        <h3 class="mb-3">Tournament Chess Set</h3>
+                        <p><span class="price">KES 1,800</span> <span class="per">/ set</span></p>
+                    </div>
+                    <div class="img" style="background-image: url(assets/chess-materials.jpg);"></div>
+                    <div class="px-4">
+                        <ul class="shelf-specs">
+                            <li>Weighted pieces, folding board &amp; carry pouch</li>
+                            <li>Built for daily classroom use</li>
+                            <li>The same set used at academy fixtures</li>
+                        </ul>
+                    </div>
+                    <p class="button text-center"><a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%27d%20like%20to%20order%20the%20Tournament%20Chess%20Set%20%28KES%201%2C800%29." target="_blank" rel="noopener" class="btn btn-primary px-4 py-3"><i class="fab fa-whatsapp"></i> Order</a></p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="pricing-entry bg-light pb-4 text-center">
+                    <div>
+                        <span class="price-note">Self-Paced · Drills</span>
+                        <h3 class="mb-3">Openings Workbook</h3>
+                        <p><span class="price">KES 450</span> <span class="per">/ copy</span></p>
+                    </div>
+                    <div class="img" style="background-image: url(assets/shelf-workbook.jpg);"></div>
+                    <div class="px-4">
+                        <ul class="shelf-specs">
+                            <li>Openings, tactics puzzles &amp; self-paced drills</li>
+                            <li>Phase-by-phase companion to lessons</li>
+                            <li>Printed and ready for the school bag</li>
+                        </ul>
+                    </div>
+                    <p class="button text-center"><a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%27d%20like%20to%20order%20the%20Opening%20Principles%20Workbook%20%28KES%20450%29." target="_blank" rel="noopener" class="btn btn-secondary px-4 py-3"><i class="fab fa-whatsapp"></i> Order</a></p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="pricing-entry bg-light pb-4 text-center">
+                    <div>
+                        <span class="price-note">Match-Ready · Timed Play</span>
+                        <h3 class="mb-3">Digital Chess Clock</h3>
+                        <p><span class="price">KES 2,600</span> <span class="per">/ clock</span></p>
+                    </div>
+                    <div class="img" style="background-image: url(assets/shelf-clock.jpg);"></div>
+                    <div class="px-4">
+                        <ul class="shelf-specs">
+                            <li>Tournament-grade, reliable and loud enough</li>
+                            <li>Ideal for squads and fixture days</li>
+                            <li>Once timed play starts, there's no going back</li>
+                        </ul>
+                    </div>
+                    <p class="button text-center"><a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20I%27d%20like%20to%20order%20the%20Digital%20Chess%20Clock%20%28KES%202%2C600%29." target="_blank" rel="noopener" class="btn btn-tertiary px-4 py-3"><i class="fab fa-whatsapp"></i> Order</a></p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="pricing-entry bg-light pb-4 text-center">
+                    <div>
+                        <span class="price-note">For Schools · Custom Quote</span>
+                        <h3 class="mb-3">Complete Club Kit</h3>
+                        <p><span class="price">Custom</span> <span class="per">/ school</span></p>
+                    </div>
+                    <div class="img" style="background-image: url(assets/shelf-kit.jpg);"></div>
+                    <div class="px-4">
+                        <ul class="shelf-specs">
+                            <li>8 tournament sets + 2 clocks</li>
+                            <li>Workbooks for the founding squad</li>
+                            <li>A starter coaching visit included</li>
+                        </ul>
+                    </div>
+                    <p class="button text-center"><a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20we%27d%20like%20a%20quote%20for%20the%20Complete%20Club%20Kit%20for%20our%20school." target="_blank" rel="noopener" class="btn btn-quarternary px-4 py-3"><i class="fab fa-whatsapp"></i> Get a Quote</a></p>
+                </div>
+            </div>
+        </div>
+        </div>
     </section>
-  </main>
 
-  <footer class="site-footer">
-    <div class="wrap footer-inner">
-      <a class="footer-brand" href="index.html"><img src="assets/logo-light.png" width="640" height="650" loading="lazy" alt="">Kericho Chess Club &amp; Academy</a>
-      <nav class="footer-links" aria-label="Footer navigation">
-        <a href="about.html">About</a><a href="coaching.html">Lessons</a><a href="tournaments.html">Tournaments</a><a href="contact.html">Contact</a>
-      </nav>
-      <span class="copyright">&copy; 2026 · Kericho, Kenya</span>
-    </div>
-  </footer>
+        <section class="ftco-section bg-light">
+            <div class="container">
+                <div class="row justify-content-center mb-5 pb-2">
+          <div class="col-md-8 text-center heading-section ftco-animate">
+            <h2 class="mb-4"><span>Latest</span> From The Academy</h2>
+            <p>Fixtures, club nights and what to watch next, straight from the academy's season calendar.</p>
+          </div>
+        </div>
+                <div class="row">
+          <div class="col-md-6 col-lg-4 ftco-animate">
+            <div class="blog-entry">
+              <a href="tournaments.html" class="block-20 d-flex align-items-end" style="background-image: url('assets/hero-dark-board.jpg');">
+                                <div class="meta-date text-center p-2">
+                  <span class="day">26</span>
+                  <span class="mos">September</span>
+                  <span class="yr">2026</span>
+                </div>
+              </a>
+              <div class="text bg-white p-4">
+                <h3 class="heading"><a href="tournaments.html">Kericho Inter-Schools Open · registration closes 19 Sep</a></h3>
+                <p>Seven Swiss rounds across eight age categories. Entry via M-Pesa Paybill 880100, confirmed with Shem on WhatsApp.</p>
+                <div class="d-flex align-items-center mt-4">
+                    <p class="mb-0"><a href="tournaments.html#register" class="btn btn-secondary">Register <span class="ion-ios-arrow-round-forward"></span></a></p>
+                    <p class="ml-auto mb-0">
+                        <a href="tournaments.html" class="mr-2">Coach Shem</a>
+                        <a href="tournaments.html" class="meta-chat"><span class="fas fa-trophy"></span> 8 cats</a>
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 ftco-animate">
+            <div class="blog-entry">
+              <a href="live.html" class="block-20 d-flex align-items-end" style="background-image: url('assets/shelf-clock.jpg');">
+                                <div class="meta-date text-center p-2">
+                  <span class="day">Sat</span>
+                  <span class="mos">Weekly</span>
+                  <span class="yr">10:00 EAT</span>
+                </div>
+              </a>
+              <div class="text bg-white p-4">
+                <h3 class="heading"><a href="live.html">Saturday Academy Club: the weekly internal ladder</a></h3>
+                <p>Board 1 streams from the club room every Saturday. Ask on WhatsApp for a reminder the moment it goes live.</p>
+                <div class="d-flex align-items-center mt-4">
+                    <p class="mb-0"><a href="live.html" class="btn btn-secondary">Watch Live <span class="ion-ios-arrow-round-forward"></span></a></p>
+                    <p class="ml-auto mb-0">
+                        <a href="live.html" class="mr-2">Academy</a>
+                        <a href="live.html" class="meta-chat"><span class="fas fa-satellite-dish"></span> Live</a>
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 ftco-animate">
+            <div class="blog-entry">
+              <a href="live.html" class="block-20 d-flex align-items-end" style="background-image: url('assets/chess-materials.jpg');">
+                                <div class="meta-date text-center p-2">
+                  <span class="day">T3</span>
+                  <span class="mos">Date</span>
+                  <span class="yr">TBC</span>
+                </div>
+              </a>
+              <div class="text bg-white p-4">
+                <h3 class="heading"><a href="live.html">Kericho vs Litein Friendly Dual: two counties, ten boards</a></h3>
+                <p>The fixture every learner talks about. One stream, one bragging right. Date to be confirmed for Term 3.</p>
+                <div class="d-flex align-items-center mt-4">
+                    <p class="mb-0"><a href="live.html" class="btn btn-secondary">Notify Me <span class="ion-ios-arrow-round-forward"></span></a></p>
+                    <p class="ml-auto mb-0">
+                        <a href="live.html" class="mr-2">Coach Shem</a>
+                        <a href="live.html" class="meta-chat"><span class="icon-chat"></span> Soon</a>
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+            </div>
+        </section>
 
-  <script>
-    (function(){
-      var button=document.querySelector('.nav-toggle');
-      var nav=document.getElementById('site-nav');
-      if(!button||!nav)return;
-      function closeMenu(){
-        nav.classList.remove('is-open');
-        button.setAttribute('aria-expanded','false');
-      }
-      button.addEventListener('click',function(){
-        var open=button.getAttribute('aria-expanded')==='true';
-        button.setAttribute('aria-expanded',String(!open));
-        nav.classList.toggle('is-open',!open);
-      });
-      nav.addEventListener('click',function(event){
-        if(event.target.closest('a')) closeMenu();
-      });
-      document.addEventListener('click',function(event){
-        if(!nav.contains(event.target)&&!button.contains(event.target)) closeMenu();
-      });
-      document.addEventListener('keydown',function(event){
-        if(event.key==='Escape'&&button.getAttribute('aria-expanded')==='true'){
-          closeMenu();
-          button.focus();
-        }
-      });
-      window.addEventListener('resize',function(){
-        if(window.innerWidth>900) closeMenu();
-      });
-    })();
-    (function(){
-      var video=document.getElementById('hero-background-video');
-      var reducedMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(!video||reducedMotion||!window.fetch) return;
-      var source=video.getAttribute('data-video-src');
-      if(!source) return;
-      window.fetch(source,{method:'HEAD'}).then(function(response){
-        if(!response.ok) return;
-        video.src=source;
-        video.load();
-        var play=video.play();
-        if(play&&typeof play.catch==='function') play.catch(function(){});
-      }).catch(function(){});
-    })();
-  </script>
-</body>
+        <section class="ftco-gallery">
+        <div class="container-wrap">
+            <div class="row no-gutters">
+                    <div class="col-md-3 ftco-animate">
+                        <a href="assets/shelf-clock.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(assets/shelf-clock.jpg);">
+                            <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="fas fa-search-plus"></span>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 ftco-animate">
+                        <a href="assets/shelf-kit.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(assets/shelf-kit.jpg);">
+                            <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="fas fa-search-plus"></span>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 ftco-animate">
+                        <a href="assets/shelf-kit.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(assets/shelf-kit.jpg);">
+                            <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="fas fa-search-plus"></span>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 ftco-animate">
+                        <a href="assets/chess-materials.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(assets/chess-materials.jpg);">
+                            <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="fas fa-search-plus"></span>
+                        </div>
+                        </a>
+                    </div>
+        </div>
+        </div>
+    </section>
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-6 col-lg">
+            <div class="ftco-footer-widget mb-5">
+                <a class="footer-crest" href="index.html" aria-label="Kericho Chess Academy home"><img src="assets/logo-light.png" alt="Kericho Chess Academy crest: pawn, king and knight over the motto Forward Ever Backward Never" width="640" height="650" loading="lazy" decoding="async"></a>
+                <h2 class="ftco-heading-2">Have a Question?</h2>
+                <div class="block-23 mb-3">
+                  <ul>
+                    <li><span class="icon icon-map-marker"></span><span class="text">Kericho town · coaching across Kericho County, Kenya</span></li>
+                    <li><a href="tel:+254729037585"><span class="icon icon-phone"></span><span class="text">+254 729 037 585</span></a></li>
+                    <li><a href="https://wa.me/254729037585" target="_blank" rel="noopener"><span class="icon icon-chat"></span><span class="text">WhatsApp +254 729 037 585</span></a></li>
+                    <li><a href="mailto:shemeso26@gmail.com"><span class="icon icon-envelope"></span><span class="text">shemeso26@gmail.com</span></a></li>
+                    <li><a href="mailto:kerichochessacademy@gmail.com"><span class="icon icon-envelope"></span><span class="text">kerichochessacademy@gmail.com</span></a></li>
+                    <li><span class="icon icon-clock"></span><span class="text">Replies usually same day · fixture days after the last round</span></li>
+                  </ul>
+                </div>
+                <p class="footer-brand-tag">Chess coaching, live broadcasts, tournaments and materials for schools across Kericho County, Kenya.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg">
+            <div class="ftco-footer-widget mb-5">
+              <h2 class="ftco-heading-2">Latest from the Academy</h2>
+              <div class="block-21 mb-4 d-flex">
+                <a href="tournaments.html" class="blog-img mr-4" style="background-image: url(assets/hero-dark-board.jpg);"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="tournaments.html">Kericho Inter-Schools Open · registration closes 19 Sep</a></h3>
+                  <div class="meta">
+                    <div><a href="tournaments.html"><span class="icon-calendar"></span> Sep 26, 2026</a></div>
+                    <div><a href="tournaments.html"><span class="icon-person"></span> Coach Shem</a></div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-21 mb-5 d-flex">
+                <a href="play.html" class="blog-img mr-4" style="background-image: url(assets/chess-materials.jpg);"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="play.html">Daily warm-up: the puzzle of the day is live on the Play page</a></h3>
+                  <div class="meta">
+                    <div><a href="play.html"><span class="icon-calendar"></span> Every day</a></div>
+                    <div><a href="play.html"><span class="icon-puzzle"></span> Academy</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg">
+            <div class="ftco-footer-widget mb-5">
+              <h2 class="ftco-heading-2">Links</h2>
+              <ul class="list-unstyled">
+                <li><a href="index.html"><span class="ion-ios-arrow-round-forward mr-2"></span>Home</a></li>
+                <li><a href="coaching.html"><span class="ion-ios-arrow-round-forward mr-2"></span>Coaching</a></li>
+                <li><a href="tournaments.html"><span class="ion-ios-arrow-round-forward mr-2"></span>Tournaments</a></li>
+                <li><a href="live.html"><span class="ion-ios-arrow-round-forward mr-2"></span>Live Broadcasts</a></li>
+                <li><a href="play.html"><span class="ion-ios-arrow-round-forward mr-2"></span>Play The Board</a></li>
+                <li><a href="https://www.kwaarena.com/?ref=b95ae9f671df7b255e15a188" target="_blank" rel="noopener"><span class="ion-ios-arrow-round-forward mr-2"></span>Play &amp; Earn · Kwaarena</a></li>
+                <li><a href="shop.html"><span class="ion-ios-arrow-round-forward mr-2"></span>Shop</a></li>
+                <li><a href="contact.html"><span class="ion-ios-arrow-round-forward mr-2"></span>Contact &amp; Enrol</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg">
+            <div class="ftco-footer-widget mb-5">
+                <h2 class="ftco-heading-2">Academy Updates</h2>
+              <form id="subscribeForm" class="subscribe-form">
+                <div class="form-group">
+                  <input type="email" id="sub_email" class="form-control mb-2 text-center" placeholder="Enter email address" required>
+                  <input type="submit" value="Subscribe" class="form-control submit px-3">
+                </div>
+              </form>
+              <p class="footer-fine">Subscriptions go via one WhatsApp message. Nothing is stored on this site.</p>
+            </div>
+            <div class="ftco-footer-widget mb-5">
+                <h2 class="ftco-heading-2 mb-0">Connect With Us</h2>
+                <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
+                <li class="ftco-animate"><a href="https://wa.me/254729037585" target="_blank" rel="noopener"><span class="fab fa-whatsapp"></span></a></li>
+                <li class="ftco-animate"><a href="https://www.facebook.com/smesso" target="_blank" rel="noopener"><span class="fab fa-facebook-f"></span></a></li>
+                <li class="ftco-animate"><a href="https://www.tiktok.com/@kericho.chess.clu" target="_blank" rel="noopener"><span class="fab fa-tiktok"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg">
+            <div class="ftco-footer-widget mb-5">
+              <h2 class="ftco-heading-2">Office Bearers</h2>
+              <ul class="list-unstyled foot-team">
+                <li><a href="tel:+254729037585"><b>Shem Meso</b><span>President &amp; Head Coach &middot; 0729&nbsp;037&nbsp;585</span></a></li>
+                <li><a href="mailto:kerichochessacademy@gmail.com?subject=Message%20for%20the%20Vice%20Chairperson%2C%20Barnabas%20Ochieng"><b>Barnabas Ochieng</b><span>Vice Chairperson &middot; via the office</span></a></li>
+                <li><a href="tel:+254723397573"><b>Gladys Langat</b><span>Secretary &middot; 0723&nbsp;397&nbsp;573 <em class="foot-new">NEW</em></span></a></li>
+                <li><a href="tel:+254722709727"><b>Julieann Njambi</b><span>Treasurer &middot; 0722&nbsp;709&nbsp;727</span></a></li>
+                <li><a class="foot-more" href="contact.html#team">All direct lines <span class="ion-ios-arrow-round-forward"></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Kericho Chess Club &amp; Academy · Kericho · Kenya · EAT (UTC+3)</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#1eaaf1"/></svg></div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/scrollax.min.js"></script>
+  <script src="js/kiddos-main.js"></script>
+  <script src="js/hero-slider.js"></script>
+  <script src="js/smc.js"></script>
+
+  </body>
 </html>

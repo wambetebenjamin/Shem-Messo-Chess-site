@@ -1,22 +1,20 @@
 # Kericho Chess Club & Academy
 
-A multi-page website for Kericho Chess Club & Academy, Kenya. The seven content pages use
-the **Kiddos** template structure (Bootstrap 4, Colorlib, CC BY 3.0); the homepage follows
-the uploaded `chess website template for pages.jpeg` mockup with a premium black surface,
-warm gold highlights and the Academy's original full-colour photography.
+A multi-page website for Kericho Chess Club & Academy, Kenya — academy content carried
+onto the **Kiddos** template structure (Bootstrap 4, Colorlib, CC BY 3.0), restyled with
+the club palette.
 
 ## Structure
 
-The homepage has a responsive, labelled navigation, a full-colour looping video hero with
-a photo-poster fallback, programme cards, photo stories and a contact call-to-action. The
-seven inner pages use the Kiddos layout and shared navbar/footer, with the club's chess
-components and retained blue/orange/green/red accent colours on controls. Photo assets are
-never grayscale-filtered.
+The site retains its existing **Kiddos** (Colorlib) design: shared navigation, the original
+homepage sections, service strips, course/staff cards, counters, testimony carousel,
+gallery strip and the four-column footer. The homepage hero keeps its two-copy slider over
+the supplied full-colour tournament video.
 
-- **Template layer:** `css/kiddos.css` drives layout and components on the inner pages.
-- **Club layer:** `css/chess.css` provides the dark interface, gold highlights, original
-  accent colours and chess-specific components: broadcast stage, countdown cards, ticker,
-  FAQ accordion, registration forms, honour-roll table, steps strip and product shelf.
+- **Theme layer:** `css/kiddos.css` (the template's stylesheet) drives layout and components.
+- **Club layer:** `css/chess.css` restyles it with the academy palette and adds the
+  chess-specific components: broadcast stage, countdown cards, ticker, FAQ accordion,
+  registration forms, honour-roll table, steps strip, product shelf and the nav "Enrol" pill.
 - **Academy crest:** the official Kericho Chess Academy crest (pawn, king, knight, motto
   *Forward Ever Backward Never*) sits in the nav, the footer, the event poster lockup and a
   dedicated crest band on the about page; it doubles as the site favicon
@@ -33,7 +31,7 @@ never grayscale-filtered.
 
 | Page | What's on it |
 | --- | --- |
-| `index.html` | Full-colour looping video hero with academy-poster fallback, school/coaching/tournament highlights, full-colour photo stories and community call-to-action |
+| `index.html` | Existing Kiddos homepage structure with full-colour video hero, service strip, programmes, counters, testimonials, enquiry form, club shelf, academy updates and gallery |
 | `coaching.html` | The three coaching tracks, four-phase method, fees & FAQ |
 | `tournaments.html` | **Event advert (poster band)** with live countdowns and response buttons, next fixture with live countdown, eight age categories, M-Pesa entry steps, registration form, honour roll |
 | `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list, spectator feed — plus the broadcast card |
@@ -42,19 +40,10 @@ never grayscale-filtered.
 | `about.html` | Academy story, **crest band with the academy motto**, **the office bearers with portraits**, the partner schools, the squads, values and the season gallery |
 | `contact.html` | Membership form, WhatsApp coaching-enquiry composer, FAQ, contact cards, **direct lines for the office bearers (portrait cards)** and the **Secretary's Samarkand Olympiad gallery** |
 
-The seven inner pages share the Kiddos navbar (with the **Enrol Now** pill) and the
-academy footer, which carries phone/WhatsApp/email contacts and an **Office Bearers**
-column (President & Head Coach, Vice Chairperson, Secretary, Treasurer — Gladys's new line
-is flagged; the Vice Chairperson routes through the academy office). The homepage uses a
-simplified labelled navigation and a compact footer in the uploaded visual style.
-
-### Homepage hero video
-
-The user-provided MP4 (`125+ Free Templates for 'Chess website'_2.mp4` from the repository's
-`main` branch) is installed as `assets/hero-background.mp4`. The homepage plays it muted in
-a loop, inline on mobile and without controls; the full-colour `assets/hero-chess-academy.jpg`
-remains the poster/background fallback, including for visitors who prefer reduced motion.
-The video is shown without grayscale or colour filters.
+All eight pages share the Kiddos navbar (with the **Enrol Now** pill) and the template
+footer, which carries phone/WhatsApp/email contacts and an **Office Bearers** column
+(President & Head Coach, Vice Chairperson, Secretary, Treasurer — Gladys's new line is
+flagged; the Vice Chairperson routes through the academy office).
 
 ### The leadership cards (contact.html#team)
 
@@ -73,18 +62,21 @@ The Treasurer's card is kept on `contact.html#team` only, per the club's decisio
 `PORTRAIT SLOT` comment marks the exact spot inside her card where a portrait goes when
 one arrives (the same comment marks the fourth card in the about-page grid).
 
-Shem's title reads **President & Head Coach** in every staff card, heading, footer entry
-and alt text used across the site.
+Shem's "The Coach & The Platform" section on `index.html` is retitled **The President & The
+Platform**, and his card there reads **President & Head Coach**, so the two sections agree. His title reads **President & Head Coach** in every card,
+heading, footer entry and alt text on the site.
 
 ## Photos
 
-The site displays the academy's own photography throughout: `assets/orig-01.jpg` …
-`orig-05.jpg`, `assets/tournament-prep-01.jpg` … `tournament-prep-10.jpg` and the hero,
-coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is not used.
+Static photo areas use chessboards, materials and club equipment rather than photos of
+children. Adult office-bearer portraits remain in their existing leadership/contact sections.
+The homepage hero uses the supplied tournament video with a full-colour board image as its
+poster fallback. No black tint or grayscale filter is applied to photographs.
 
 - **Club shelf product shots:** `assets/shelf-workbook.jpg`, `shelf-clock.jpg` and
-  `shelf-kit.jpg` illustrate the workbook, digital clock and club kit cards;
-  the set card uses the academy's own `chess-materials.jpg` photo.
+  `shelf-kit.jpg` illustrate the workbook, digital clock and club kit cards; the set card
+  uses `assets/chess-materials.jpg`.
+- **Hero video:** `assets/hero-background.mp4` is the user's supplied `Copy of CHESS TOURNAMENT VIDEO.mp4`; it autoplays muted and loops behind the original hero copy.
 - **Board piece art:** the 2D boards on Live and Play render local PNG pieces
   (`assets/pieces/`), so pieces show on every device without relying on system
   chess-glyph fonts.
@@ -111,11 +103,10 @@ coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is n
 
 ## Event advert (poster band)
 
-`tournaments.html` carries the full poster-style event advert (`#event`) and its
-registration actions. Update the event date, countdown targets and M-Pesa reference there.
-The poster artwork is currently `assets/tournament-prep-01.jpg` as a stand-in; replace that
-image when the designed poster is ready. The homepage links visitors through to the
-Tournaments page rather than duplicating a second, potentially stale advert.
+`tournaments.html` carries the poster-style advert for the next fixture (`#event`) and
+its registration actions. Update the event date, countdown targets and M-Pesa reference
+there. The homepage links visitors through to the Tournaments page rather than duplicating
+a second advert.
 
 ## Contacts shown on the site
 

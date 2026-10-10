@@ -2,26 +2,27 @@
    KERICHO CHESS CLUB & ACADEMY · custom chess layer
    Built on top of the "Kiddos" (Colorlib) Bootstrap structure.
    Board · broadcast room · countdowns · forms · FAQ · tables · accents.
-   Brand direction: premium black surfaces with champagne-gold highlights.
-   Academy accent colours and full-colour photography are intentionally retained.
+   Palette is inherited from the template:
+     primary #1eaaf1 · secondary #fda638 · tertiary #8cc152
+     quarternary #f1453d · fifth #5d50c6
    ============================================================================ */
 
 :root{
-  --kc-primary:#d2ae69;
-  --kc-secondary:#efd18d;
-  --kc-tertiary:#83a17a;
-  --kc-quaternary:#d76860;
-  --kc-fifth:#a9874b;
-  --kc-ink:#f2efe7;
-  --kc-sub:#b1aea6;
-  --kc-screen:#111213;      /* broadcast "TV" panels */
-  --kc-screen-2:#1b1c1e;
+  --kc-primary:#1eaaf1;
+  --kc-secondary:#fda638;
+  --kc-tertiary:#8cc152;
+  --kc-quaternary:#f1453d;
+  --kc-fifth:#5d50c6;
+  --kc-ink:#22303c;
+  --kc-sub:#6c757d;
+  --kc-screen:#16232f;      /* broadcast "TV" panels */
+  --kc-screen-2:#1e3040;
   --kc-cream:#f0e7cf;       /* vinyl board light square */
   --kc-green:#5e9276;       /* vinyl board dark square */
-  --kc-line:rgba(220,190,126,.18);
+  --kc-line:#e6eef4;
   --kc-radius:16px;
-  --kc-shadow:0 18px 42px rgba(0,0,0,.34);
-  --kc-shadow-lg:0 24px 60px rgba(0,0,0,.48);
+  --kc-shadow:0 14px 34px rgba(33,50,68,.10);
+  --kc-shadow-lg:0 22px 60px rgba(33,50,68,.16);
 }
 
 /* =============================================================
@@ -662,7 +663,7 @@
 .gallery-cap .cap{
   position:absolute; left:14px; bottom:14px; z-index:2;
   font-size:10px; font-weight:800; letter-spacing:.2em; text-transform:uppercase;
-  color:#fff; background:rgba(22,35,47,.72); padding:8px 14px; border-radius:20px;
+  color:#fff; background:rgba(21,115,184,.9); padding:8px 14px; border-radius:20px;
   pointer-events:none;
 }
 
@@ -675,36 +676,32 @@
 .footer-brand-tag{ color:rgba(255,255,255,.7); font-size:14px; line-height:1.7; margin:14px 0 0; }
 
 /* =============================================================
-   PHOTO OVERLAYS + TEXT LEGIBILITY
-   Replace the template's red photo tint and low-opacity overlays
-   with neutral dark ones so photos look natural and text reads.
+   FULL-COLOUR PHOTOGRAPHY
+   Keep the original photographs and video clear. Copy readability comes
+   from text shadow, not a black tint or grayscale filter on the image.
    ============================================================= */
-.hero-wrap .overlay{
-  background:linear-gradient(rgba(13,24,34,.52), rgba(13,24,34,.66)) !important;
-  opacity:1 !important;
+.hero-wrap .overlay,
+.owl-carousel.home-slider .slider-item .overlay,
+.ftco-intro .overlay,
+.ftco-counter.img .overlay{
+  background:transparent!important;
+  opacity:0!important;
 }
-.owl-carousel.home-slider .slider-item .overlay{
-  background:linear-gradient(rgba(13,24,34,.40), rgba(13,24,34,.62)) !important;
-  opacity:1 !important;
-}
-.ftco-intro .overlay{
-  background:rgba(13,24,34,.52) !important;
-  opacity:1 !important;
-}
-
-/* hero copy: the template ships it dark gray (rgba(0,0,0,.8)) for a pale demo
-   photo — over real photos it must be light to stay visible */
 .owl-carousel.home-slider .slider-item .slider-text p,
 .owl-carousel.home-slider .slider-item .slider-text .subheading{
-  color:rgba(255,255,255,.94) !important;
-  text-shadow:0 2px 16px rgba(13,24,34,.6);
+  color:rgba(255,255,255,.98)!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.72);
 }
 .owl-carousel.home-slider .slider-item .slider-text h1{
-  text-shadow:0 3px 24px rgba(13,24,34,.6);
+  text-shadow:0 3px 18px rgba(0,0,0,.72);
 }
 .hero-wrap .slider-text h1.bread,
-.hero-wrap .slider-text .breadcrumbs{
-  text-shadow:0 2px 14px rgba(13,24,34,.6);
+.hero-wrap .slider-text .breadcrumbs,
+.ftco-intro h2,
+.ftco-intro p,
+.ftco-counter .text,
+.ftco-counter .icon{
+  text-shadow:0 2px 12px rgba(0,0,0,.68);
 }
 
 /* consult form: options must be dark when the dropdown opens,
@@ -718,11 +715,7 @@
 /* counters — trailing plus for milestone figures ("1,900+") */
 .block-18 .text strong.with-plus::after{ content:'+'; margin-left:2px; }
 
-/* counters section — keep text readable over the photo background */
-.ftco-counter.img .overlay{
-  position:absolute; top:0; left:0; right:0; bottom:0;
-  background:rgba(15,28,38,.82); content:'';
-}
+/* Keep counter copy over its photograph without tinting the image. */
 .ftco-counter.img .container{ position:relative; z-index:1; }
 .ftco-counter .icon span{ color:rgba(255,255,255,.92); }
 .ftco-counter .text span{ color:rgba(255,255,255,.85); }
@@ -897,12 +890,13 @@ html{ scroll-padding-top:96px; }
 .sec-cap{
   position:absolute; left:0; right:0; bottom:0; z-index:2;
   display:flex; flex-direction:column; gap:3px; padding:30px 15px 13px;
-  background:linear-gradient(180deg, transparent, rgba(13,24,34,.88));
+  background:transparent;
+  text-shadow:0 2px 10px rgba(0,0,0,.7);
 }
 .sec-cap b{ font-size:13.5px; font-weight:800; color:#fff; }
 .sec-cap span{
   font-size:9px; font-weight:700; letter-spacing:.13em; text-transform:uppercase;
-  color:rgba(255,255,255,.78);
+  color:rgba(255,255,255,.9);
 }
 .sec-quote{
   display:flex; gap:30px; align-items:center; padding:34px 38px;
@@ -967,94 +961,69 @@ html{ scroll-padding-top:96px; }
 }
 
 /* =============================================================
-   HOMEPAGE HERO · slow crossfade + Ken Burns drift
-   Replaces the template's owl-carousel + animate.css hero, which
-   hid the outgoing photo (1s fadeOut) before the next arrived —
-   a hard blink on a two-slide loop.
-
-   Model: the .slider-item layers are stacked (absolute) inside the
-   section. The INCOMING photo sits at the bottom at full opacity and
-   the OUTGOING one (.leaving) dissolves away on top of it, so the
-   two photos are always summed — no blink, no white flash.
-   js/hero-slider.js only moves the .is-active/.leaving classes and
-   holds each slide for 7s (and pauses on hover / tab-focus /
-   background tab). Timings: fade length here (1.6s), hold in the js.
-
-   Selectors are scoped .owl-carousel.hero-slider (0,3,0+) so they
-   outrank or tie-and-win against the template's .owl-carousel.
-   .home-slider rules in css/kiddos.css — chess.css loads last.
+   HOMEPAGE HERO · original slider copy over a shared video background
+   Keep the previous Kiddos layout and cross-fading copy; the colour video
+   stays fixed behind both slides. No dark image overlay or image filter.
    ============================================================= */
 .owl-carousel.hero-slider{
-  display:block;      /* owl.css hides .owl-carousel until .owl-loaded —
-                         owl never initialises on the hero any more */
-  overflow:hidden;    /* the Ken Burns scale must not bleed past the hero */
+  display:block;
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+.owl-carousel.hero-slider .hero-video-background{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  background:#0b2a43 url("../assets/chess-materials.jpg") center/cover no-repeat;
+  filter:none;
+  pointer-events:none;
 }
 .owl-carousel.hero-slider .slider-item{
-  position:absolute;  /* stacked layers, not owl's floated stage items */
+  position:absolute;
   top:0; right:0; bottom:0; left:0;
   height:600px;
-  z-index:0;
-  background:transparent; /* the photo lives on .hero-bg now */
+  z-index:1;
+  background:transparent;
   opacity:1;
   visibility:visible;
   will-change:opacity;
 }
-/* full-bleed photo layer for the Ken Burns move (keeps the copy static) */
-.hero-slider .hero-bg{
-  position:absolute;
-  top:0; right:0; bottom:0; left:0;
-  background-size:cover;
-  background-position:center center;
-  background-repeat:no-repeat;
-  transform:scale(1.02);
-  will-change:transform;
-}
-/* before js/hero-slider.js runs: show only the first photo, statically
-   (also the whole no-JS fallback — the hero never ends up blank) */
+.owl-carousel.hero-slider .slider-item .overlay{ display:none!important; }
 .owl-carousel.hero-slider:not(.hero-ready) .slider-item:nth-child(n+2){ visibility:hidden; }
 
-/* ---- crossfade state machine (class toggling in js/hero-slider.js) ---- */
+/* The slide copy dissolves; the shared video remains fixed underneath. */
 .owl-carousel.hero-slider.hero-ready .slider-item{
-  z-index:0;               /* incoming photo: base layer, already fully visible */
+  z-index:1;
   visibility:hidden;
-  transition:opacity 1.6s ease-in-out, visibility 0s linear 1.6s;
+  transition:opacity 1.6s ease-in-out,visibility 0s linear 1.6s;
 }
 .owl-carousel.hero-slider.hero-ready .slider-item.is-active{
-  z-index:1;
+  z-index:2;
   visibility:visible;
-  transition:opacity 1.6s ease-in-out, visibility 0s;
+  transition:opacity 1.6s ease-in-out,visibility 0s;
 }
 .owl-carousel.hero-slider.hero-ready .slider-item.leaving{
-  z-index:2;               /* outgoing photo: dissolves away over the new one */
+  z-index:3;
   opacity:0;
-  pointer-events:none;     /* its links are gone — don't block the new slide's */
-  transition:opacity 1.6s ease-in-out, visibility 0s linear 1.6s;
+  pointer-events:none;
+  transition:opacity 1.6s ease-in-out,visibility 0s linear 1.6s;
+}
+.owl-carousel.hero-slider .slider-text h1,
+.owl-carousel.hero-slider .slider-text p{
+  text-shadow:0 2px 14px rgba(0,0,0,.72);
 }
 
-/* ---- Ken Burns: gentle 8.5s push-in while a photo holds the hero ---- */
-.hero-slider.hero-ready .slider-item.is-active .hero-bg{
-  animation:hero-drift-in 8.5s linear forwards;
-}
-/* the leaving photo keeps its move, settling softly as it fades out */
-.hero-slider.hero-ready .slider-item.leaving .hero-bg{
-  animation:hero-drift-out 2.4s ease-out forwards;
-}
-@keyframes hero-drift-in{
-  from{ transform:scale(1.02) translate3d(-0.6%, 0.9%, 0); }
-  to  { transform:scale(1.12) translate3d(0.6%, -0.9%, 0); }
-}
-@keyframes hero-drift-out{
-  from{ transform:scale(1.12) translate3d(0.6%, -0.9%, 0); }
-  to  { transform:scale(1.14) translate3d(0.7%, -1.0%, 0); }
-}
-/* the drift waits with the autoplay while a visitor's mouse is on the hero */
-.hero-slider:hover .hero-bg{ animation-play-state:paused; }
-
-/* ---- dots: slim "film frame" bars (js/hero-slider.js renders them) ---- */
+/* Slim slide controls from js/hero-slider.js. */
 .owl-carousel.hero-slider .owl-dots{
   position:absolute;
   left:0; right:0; bottom:26px;
-  z-index:3;
+  z-index:4;
   text-align:center;
   line-height:0;
 }
@@ -1062,326 +1031,28 @@ html{ scroll-padding-top:96px; }
   width:26px; height:6px;
   margin:0 4px; padding:0;
   border:0; border-radius:3px;
-  background:rgba(255,255,255,.38);
-  transition:background .3s ease, width .3s ease;
+  background:rgba(255,255,255,.62);
+  transition:background .3s ease,width .3s ease;
 }
-.owl-carousel.hero-slider .owl-dots .owl-dot:hover{ background:rgba(255,255,255,.65); }
+.owl-carousel.hero-slider .owl-dots .owl-dot:hover{ background:#fff; }
 .owl-carousel.hero-slider .owl-dots .owl-dot.active{ background:#fff; width:38px; }
 .owl-carousel.hero-slider .owl-dots .owl-dot:focus-visible{ outline:2px solid #fff; outline-offset:3px; }
-
-/* visitors who ask for reduced motion: calm, instant swaps — no dissolve,
-   no drift (js also holds slides for the plain 7s with no other change) */
-@media (prefers-reduced-motion: reduce){
-  .hero-slider .hero-bg{
-    animation:none !important;
-    transform:none !important;
-  }
+@media (prefers-reduced-motion:reduce){
   .owl-carousel.hero-slider.hero-ready .slider-item,
   .owl-carousel.hero-slider.hero-ready .slider-item.is-active,
   .owl-carousel.hero-slider.hero-ready .slider-item.leaving{
-    transition-duration:0.001s !important;
-    transition-delay:0s !important;
+    transition-duration:.001s!important;
+    transition-delay:0s!important;
   }
 }
-
-@media (max-width: 575.98px){
+@media (max-width:575.98px){
   .owl-carousel.hero-slider .owl-dots{ bottom:18px; }
   .owl-carousel.hero-slider .owl-dots .owl-dot{ width:20px; }
   .owl-carousel.hero-slider .owl-dots .owl-dot.active{ width:30px; }
 }
 
-/* ============================================================================
-   PREMIUM BLACK + CHAMPAGNE GOLD THEME
-   The dark palette belongs to the interface and card surfaces only. Photos,
-   portraits, logos and chess-piece artwork remain full-colour and unfiltered.
-   ============================================================================ */
-:root{
-  color-scheme:dark;
-  --kc-bg:#0c0c0d;
-  --kc-surface:#151516;
-  --kc-surface-raised:#1b1b1c;
-  --kc-gold:#d2ae69;
-  --kc-gold-bright:#efd18d;
-  --kc-border:rgba(220,190,126,.18);
-}
-
-html, body{ background-color:var(--kc-bg); }
-body{
-  color:#d5d2ca;
-  background:var(--kc-bg) !important;
-}
-body p{ color:var(--kc-sub); }
-h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5{ color:var(--kc-ink); }
-a{ color:var(--kc-gold); }
-a:hover,a:focus{ color:var(--kc-gold-bright); }
-.text-primary,.text-secondary{ color:var(--kc-gold)!important; }
-.text-muted{ color:#aaa69d!important; }
-.text-dark,.text-body{ color:var(--kc-ink)!important; }
-
-/* Quiet charcoal page sections replace the template's bright white panels. */
-.ftco-section{ background-color:var(--kc-bg); color:var(--kc-ink); }
-.ftco-section.bg-light,.bg-light{ background-color:#121314!important; }
-.bg-white{ background-color:var(--kc-surface)!important; }
-.bg-softpeach{ background-color:#171614!important; }
-.bg-dark,.ftco-bg-dark{ background-color:#09090a!important; }
-.bg-primary,.bg-secondary,.bg-fifth{ background-color:var(--kc-gold)!important; color:#17140d!important; }
-.bg-tertiary{ background-color:#788d69!important; }
-.bg-quarternary{ background-color:#bd554d!important; }
-.heading-section .subheading{ color:var(--kc-gold)!important; }
-.heading-section h2{ color:var(--kc-ink)!important; }
-.heading-section h2 span{ color:var(--kc-gold-bright)!important; }
-.heading-section.heading-section-white h2{ color:#fff!important; }
-.heading-section.heading-section-white h2 span{ color:var(--kc-gold-bright)!important; }
-.heading-section.heading-section-black h2{ color:var(--kc-ink)!important; }
-
-/* Near-black nav with warm metallic accents in every scroll state. */
-#ftco-navbar.ftco-navbar-light,
-#ftco-navbar.ftco-navbar-light.scrolled{
-  background:rgba(10,10,11,.97)!important;
-  box-shadow:0 8px 28px rgba(0,0,0,.25);
-}
-#ftco-navbar .navbar-brand,
-#ftco-navbar .navbar-brand:hover,
-#ftco-navbar .navbar-brand:focus,
-#ftco-navbar .navbar-nav>.nav-item>.nav-link,
-#ftco-navbar.ftco-navbar-light.scrolled .nav-link{
-  color:#f2efe7!important;
-}
-#ftco-navbar .navbar-brand small{ color:rgba(242,239,231,.63)!important; }
-#ftco-navbar .navbar-nav>.nav-item.active>.nav-link,
-#ftco-navbar .navbar-nav>.nav-item>.nav-link:hover,
-#ftco-navbar.ftco-navbar-light.scrolled .nav-item.active>a{
-  color:var(--kc-gold-bright)!important;
-}
-#ftco-navbar .navbar-toggler{ color:var(--kc-gold)!important; }
-#ftco-navbar .navbar-nav>.nav-item.cta>a,
-#ftco-navbar.ftco-navbar-light.scrolled .navbar-nav>.nav-item.cta>a{
-  background:var(--kc-gold)!important;
-  color:#18140c!important;
-  border:1px solid var(--kc-gold)!important;
-  box-shadow:0 8px 22px rgba(210,174,105,.2);
-}
-#ftco-navbar .navbar-nav>.nav-item.cta>a:hover{ background:var(--kc-gold-bright)!important; }
-
-/* Gold primary actions; keep the familiar green for WhatsApp actions. */
-.btn.btn-primary,.btn.btn-secondary,.btn.btn-tertiary,
-.btn.btn-quarternary,.btn.btn-fifth,
-.btn-primary,.btn-secondary{
-  background:var(--kc-gold)!important;
-  border-color:var(--kc-gold)!important;
-  color:#17140d!important;
-}
-.btn.btn-primary:hover,.btn.btn-secondary:hover,.btn.btn-tertiary:hover,
-.btn.btn-quarternary:hover,.btn.btn-fifth:hover,
-.btn-primary:hover,.btn-secondary:hover,
-.btn.btn-primary:focus,.btn.btn-secondary:focus{
-  background:var(--kc-gold-bright)!important;
-  border-color:var(--kc-gold-bright)!important;
-  color:#17140d!important;
-}
-.btn.btn-outline-chess{
-  background:transparent!important;
-  border-color:rgba(210,174,105,.55)!important;
-  color:var(--kc-gold-bright)!important;
-}
-.btn.btn-outline-chess:hover{ background:var(--kc-gold)!important; color:#17140d!important; }
-.btn.btn-wa,.btn.btn-wa:hover,.btn.btn-wa:focus{
-  background:#25d366!important;
-  border-color:#25d366!important;
-  color:#fff!important;
-}
-
-/* Re-skin recurring cards and forms without touching their image layers. */
-.cd-card,.faq-item,.cat-chip,.reg-card,.pay-box,.res-card,.step-card,
-.contact-card,.bc-stage,.bc-panel,.eval-readout,.sched-card,.note-card,
-.crest-card,.team-card,.office-band,.ftco-section .staff .text,
-.ftco-section .testimony-wrap,.pricing-entry>div,.blog-entry .text{
-  background-color:var(--kc-surface)!important;
-  color:var(--kc-ink);
-  border-color:var(--kc-border)!important;
-  box-shadow:0 18px 40px rgba(0,0,0,.25);
-}
-.cd-cell,.player-row,.player-row .player-chip,.bc-topbar,
-.reg-form input[type="text"],.reg-form input[type="email"],
-.reg-form select,.reg-form textarea,.eval-readout,.form-msg{
-  background-color:var(--kc-surface-raised)!important;
-  color:var(--kc-ink)!important;
-  border-color:var(--kc-border)!important;
-}
-.cd-cell.warn,.pay-box{ background-color:#211c13!important; }
-.reg-card .reg-side{
-  background:linear-gradient(145deg,#292317 0%,#191817 64%,#141415 100%)!important;
-  color:var(--kc-ink);
-  border-right:1px solid var(--kc-border);
-}
-.reg-card .reg-side .eyebrow-tag{ color:var(--kc-gold-bright)!important; }
-.reg-form label,.pay-label,.panel-label,.cd-band,.cd-lbl{ color:var(--kc-sub)!important; }
-.reg-form input::placeholder,.reg-form textarea::placeholder{ color:#918d84!important; }
-.reg-form input:focus,.reg-form select:focus,.reg-form textarea:focus{
-  border-color:var(--kc-gold)!important;
-  box-shadow:0 0 0 3px rgba(210,174,105,.18)!important;
-}
-.reg-form select option{ background:#191a1b; color:#f2efe7; }
-.pay-box{ border-color:rgba(210,174,105,.22)!important; }
-.pay-label,.pay-line b{ color:var(--kc-gold-bright)!important; }
-.form-msg{ color:var(--kc-ink)!important; }
-.form-msg.success{ background:#172019!important; color:#b8d5a9!important; }
-.form-msg.error{ background:#251716!important; color:#efaaa4!important; }
-.result-banner{ background:linear-gradient(100deg,#d2ae69,#efd18d); color:#17140d; }
-.res-table th{ color:#d1c8b4; border-bottom-color:var(--kc-gold)!important; }
-.res-table td{ color:var(--kc-ink); border-bottom-color:rgba(220,190,126,.13)!important; }
-.res-table tbody tr:hover{ background:#1d1d1e!important; }
-.faq-q{ color:var(--kc-ink); }
-.faq-q .cnt{ background:var(--kc-gold); color:#17140d; }
-.faq-item.open .faq-q .cnt{ background:#987742; }
-
-/* Keep the template's learning and leadership cards aligned with the palette. */
-.course .text .subheading{ color:var(--kc-ink)!important; }
-.course .text .subheading span{ color:var(--kc-gold)!important; }
-.staff .text h3,.staff:hover .text h3,.staff:focus .text h3{ color:var(--kc-ink)!important; }
-.staff .text .position{ color:#aaa69d!important; }
-.staff .ftco-social{ background:#1b1b1c!important; }
-.staff .ftco-social li a,.services-2 .text h3{ color:var(--kc-gold)!important; }
-.services-2 .icon,.ftco-services .services .icon{ background:#211d15!important; border:1px solid rgba(210,174,105,.28); }
-.services-2 .icon span,.ftco-services .services .icon span{ color:var(--kc-gold-bright)!important; }
-.gallery .icon{ background:var(--kc-gold)!important; }
-.pricing-entry p .price,.ftco-counter .text strong.number,.ftco-counter .ftco-number{ color:var(--kc-gold-bright)!important; }
-.blog-entry .text .heading a,.block-21 .text .heading a{ color:var(--kc-ink)!important; }
-.blog-entry .text .heading a:hover,.block-21 .text .heading a:hover{ color:var(--kc-gold-bright)!important; }
-.testimony-wrap{ color:var(--kc-ink)!important; }
-.testimony-wrap .name{ color:var(--kc-ink)!important; }
-.testimony-wrap .position{ color:var(--kc-gold)!important; }
-.testimony-wrap .quote i{ color:rgba(210,174,105,.28)!important; }
-.testimony-section .owl-dots .owl-dot.active{ background:var(--kc-gold)!important; }
-.testimony-section .owl-nav .owl-prev span:before,
-.testimony-section .owl-nav .owl-next span:before{ color:rgba(239,209,141,.5)!important; }
-
-/* Brand gold replaces template blue/purple accents in common UI details. */
-.ftco-navbar-light .navbar-nav>.nav-item.active>a,
-.owl-carousel .owl-nav .owl-prev,.owl-carousel .owl-nav .owl-next,
-.ftco-footer .block-21 .text .heading a:hover,
-.block-21 .text .heading a:hover,.ftco-footer .ftco-heading-2,
-.gallery .icon,.pricing-entry .price-note,.team-role,.team-mail,
-.eyebrow-tag,.cd-num,.eval-readout b,.metric-v.cold,.bc-title .fas{
-  color:var(--kc-gold-bright)!important;
-}
-.ftco-navbar-light .navbar-brand .knight{ background:var(--kc-gold); color:#17140d; }
-.testimony-wrap .user-img.user-initials,.team-ava,.team-ava.o,.team-ava.b,.initials-2,.initials-3{
-  background:linear-gradient(135deg,#d2ae69,#92713c)!important;
-  box-shadow:0 10px 24px rgba(210,174,105,.18)!important;
-}
-.team-photo{ border-color:#2b271e!important; }
-.crest-tag{ background:#1c1b18!important; color:var(--kc-gold-bright)!important; }
-.crest-logo{ filter:drop-shadow(0 18px 36px rgba(0,0,0,.3)); }
-
-/* Preserve natural colour in academy photos: only use a light contrast wash
-   beneath overlaid copy; never grayscale or tint the image itself. */
-.hero-wrap .overlay{
-  background:linear-gradient(rgba(8,8,9,.18),rgba(8,8,9,.34))!important;
-  opacity:1!important;
-}
-.owl-carousel.home-slider .slider-item .overlay{
-  background:linear-gradient(rgba(8,8,9,.12),rgba(8,8,9,.28))!important;
-  opacity:1!important;
-}
-.ftco-intro .overlay{ background:rgba(8,8,9,.24)!important; opacity:1!important; }
-.ftco-counter.img .overlay{ background:rgba(8,8,9,.54)!important; }
-
-/* Footer should finish cleanly: no ornamental bottom rule or list separators. */
-.ftco-footer{
-  background:#09090a!important;
-  border:0!important;
-}
-.ftco-footer .ftco-heading-2{ color:var(--kc-gold-bright)!important; }
-.ftco-footer .categories li{ border-bottom:0!important; }
-.ftco-footer hr,.ftco-footer .row:last-child{ border:0!important; box-shadow:none!important; }
-.ftco-footer .row:last-child p{ margin-bottom:0; }
-.ftco-footer .subscribe-form .submit{ background:var(--kc-gold)!important; color:#17140d!important; }
-.ftco-footer .subscribe-form .submit:hover{ background:var(--kc-gold-bright)!important; }
-.ftco-footer a:hover{ color:var(--kc-gold-bright)!important; }
-
-@media (max-width:991.98px){
-  #ftco-navbar.ftco-navbar-light{ background:#0a0a0b!important; }
-  #ftco-navbar .navbar-nav>.nav-item.cta>a{ color:#17140d!important; }
-}
-
-/* Detail polish for inline template accents and game surfaces. */
-.ftco-section .fa-quote-left,
-.ftco-section [style*="color:#1eaaf1"],
-.ftco-section [style*="color:#fda638"],
-.ftco-section [style*="color:#e08f1e"]{ color:var(--kc-gold-bright)!important; }
-.ftco-section [style*="color:#6c757d"]{ color:var(--kc-sub)!important; }
-.ftco-section .icon[style*="width:64px"]{
-  background:#211d15!important;
-  color:var(--kc-gold-bright)!important;
-  border:1px solid var(--kc-border);
-}
-.ftco-section div[style*="border:1px dashed"]{
-  background:#171819!important;
-  border-color:rgba(210,174,105,.48)!important;
-}
-.board3d-stage{
-  background:radial-gradient(120% 90% at 50% 0%,#29261f 0%,#181819 55%,#101112 100%)!important;
-  box-shadow:inset 0 0 0 1px rgba(210,174,105,.24)!important;
-}
-.b3d-tag,.b3d-hint{
-  color:var(--kc-gold-bright)!important;
-  background:rgba(17,17,18,.9)!important;
-  border-color:rgba(210,174,105,.3)!important;
-}
-.b3d-hint{ color:#c2beb4!important; }
-.sq.lastmove{ box-shadow:inset 0 0 0 4px rgba(210,174,105,.86)!important; }
-.sq .dot{ background:rgba(210,174,105,.42)!important; }
-
-/* Restore the Academy's original colour accents on controls and highlights.
-   Premium black remains the surface palette; content cues stay visibly colourful. */
-:root{
-  --kc-primary:#1eaaf1;
-  --kc-secondary:#fda638;
-  --kc-tertiary:#8cc152;
-  --kc-quaternary:#f1453d;
-  --kc-fifth:#5d50c6;
-}
-.text-primary{ color:#1eaaf1!important; }
-.text-secondary{ color:#fda638!important; }
-.bg-primary{ background:#1eaaf1!important; color:#fff!important; }
-.bg-secondary{ background:#fda638!important; color:#fff!important; }
-.bg-tertiary{ background:#8cc152!important; color:#fff!important; }
-.bg-quarternary{ background:#f1453d!important; color:#fff!important; }
-.bg-fifth{ background:#5d50c6!important; color:#fff!important; }
-.btn.btn-primary,.btn-primary{ background:#1eaaf1!important; border-color:#1eaaf1!important; color:#fff!important; }
-.btn.btn-secondary,.btn-secondary{ background:#fda638!important; border-color:#fda638!important; color:#fff!important; }
-.btn.btn-tertiary{ background:#8cc152!important; border-color:#8cc152!important; color:#fff!important; }
-.btn.btn-quarternary{ background:#f1453d!important; border-color:#f1453d!important; color:#fff!important; }
-.btn.btn-fifth{ background:#5d50c6!important; border-color:#5d50c6!important; color:#fff!important; }
-.btn.btn-primary:hover,.btn-primary:hover{ background:#168ed0!important; border-color:#168ed0!important; color:#fff!important; }
-.btn.btn-secondary:hover,.btn-secondary:hover{ background:#e08e24!important; border-color:#e08e24!important; color:#fff!important; }
-.btn.btn-tertiary:hover{ background:#73a63e!important; border-color:#73a63e!important; color:#fff!important; }
-.btn.btn-quarternary:hover{ background:#d33c35!important; border-color:#d33c35!important; color:#fff!important; }
-.btn.btn-fifth:hover{ background:#4a41ab!important; border-color:#4a41ab!important; color:#fff!important; }
-.cd-num,.eval-readout b,.metric-v.cold{ color:var(--kc-primary)!important; }
-.reg-card .reg-side{ background:linear-gradient(155deg,#8cc152 0%,#5f9730 60%,#22303c 130%)!important; }
-.services-2 .icon{ background:var(--kc-primary)!important; border-color:transparent!important; }
-.services-2 .icon span{ color:#fff!important; }
-.team-ava{ background:linear-gradient(135deg,#1eaaf1,#1573b8)!important; }
-.team-ava.o{ background:linear-gradient(135deg,#fda638,#d8861e)!important; }
-.team-ava.b{ background:linear-gradient(135deg,#7a68e0,#5d50c6)!important; }
-.testimony-wrap .user-img.user-initials{ background:linear-gradient(135deg,#1eaaf1,#1573b8)!important; }
-.testimony-wrap .user-img.user-initials.initials-2{ background:linear-gradient(135deg,#fda638,#d8861e)!important; }
-.testimony-wrap .user-img.user-initials.initials-3{ background:linear-gradient(135deg,#8cc152,#5f9730)!important; }
-.ftco-section .fa-quote-left{ color:#d2ae69!important; }
-.ftco-section [style*="color:#1eaaf1"]{ color:#1eaaf1!important; }
-.ftco-section [style*="color:#fda638"]{ color:#fda638!important; }
-.ftco-section [style*="color:#e08f1e"]{ color:#e08f1e!important; }
-.ftco-section [style*="color:#6c757d"]{ color:#6c757d!important; }
-.ftco-section .icon[style*="#e3f3fe"]{ background:#e3f3fe!important; color:#1eaaf1!important; border:0!important; }
-.ftco-section .icon[style*="#fdf0dd"]{ background:#fdf0dd!important; color:#fda638!important; border:0!important; }
-.ftco-section .icon[style*="#e9f6e0"]{ background:#e9f6e0!important; color:#8cc152!important; border:0!important; }
-.ftco-section div[style*="border:1px dashed"][style*="background:#f4fafd"]{ background:#f4fafd!important; }
-.ftco-section div[style*="border:1px dashed"][style*="background:#fdf7ec"]{ background:#fdf7ec!important; }
-.ftco-section div[style*="border:1px dashed"]{ border-color:var(--kc-primary)!important; }
-
-/* Keep sticky navigation steady and dropdown menus reachable on pointer + touch. */
+/* The old page used a -130px sleep margin, which made the navbar jump away
+   while scrolling. Keep it fixed and reachable through every scroll state. */
 #ftco-navbar.ftco-navbar-light.scrolled,
 #ftco-navbar.ftco-navbar-light.scrolled.sleep,
 #ftco-navbar.ftco-navbar-light.scrolled.awake{
@@ -1389,25 +1060,24 @@ a:hover,a:focus{ color:var(--kc-gold-bright); }
   transition:background-color .2s ease,box-shadow .2s ease!important;
 }
 #ftco-navbar .navbar-nav>.nav-item.dropdown>.dropdown-menu{
+  top:calc(100% - 1px);
   margin-top:0;
   padding:8px;
-  background:#151516!important;
-  border:1px solid rgba(220,190,126,.24)!important;
-  border-radius:10px;
-  box-shadow:0 18px 42px rgba(0,0,0,.45)!important;
+  background:#fff!important;
+  border:1px solid rgba(30,170,241,.22)!important;
+  border-radius:9px;
+  box-shadow:0 12px 30px rgba(34,48,60,.18)!important;
 }
 #ftco-navbar .navbar-nav>.nav-item.dropdown>.dropdown-menu .dropdown-item{
   padding:.62rem .82rem;
   border-radius:6px;
-  color:#e8e5dd!important;
-  transition:background-color .18s ease,color .18s ease;
+  color:#22303c!important;
 }
 #ftco-navbar .navbar-nav>.nav-item.dropdown>.dropdown-menu .dropdown-item:hover,
 #ftco-navbar .navbar-nav>.nav-item.dropdown>.dropdown-menu .dropdown-item:focus{
-  background:rgba(215,182,111,.14)!important;
-  color:var(--kc-gold-bright)!important;
+  background:#e8f4fb!important;
+  color:#1573b8!important;
 }
 @media (min-width:992px){
-  #ftco-navbar .navbar-nav>.nav-item.dropdown{position:relative;}
-  #ftco-navbar .navbar-nav>.nav-item.dropdown>.dropdown-menu{top:calc(100% - 1px);}
+  #ftco-navbar .navbar-nav>.nav-item.dropdown{ position:relative; }
 }
