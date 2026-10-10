@@ -6,9 +6,10 @@ the club palette.
 
 ## Structure
 
-The site now follows the uploaded **Kiddos** (Colorlib) template: a shared top bar,
-ftco navbar, owl-carousel hero slider, service strips, course/staff cards, counters,
-testimony carousel, gallery strip and the four-column ftco footer on every page.
+The site retains its existing **Kiddos** (Colorlib) design: shared navigation, the original
+homepage sections, service strips, course/staff cards, counters, testimony carousel,
+gallery strip and the four-column footer. The homepage hero keeps its two-copy slider over
+the supplied full-colour tournament video.
 
 - **Theme layer:** `css/kiddos.css` (the template's stylesheet) drives layout and components.
 - **Club layer:** `css/chess.css` restyles it with the academy palette and adds the
@@ -30,7 +31,7 @@ testimony carousel, gallery strip and the four-column ftco footer on every page.
 
 | Page | What's on it |
 | --- | --- |
-| `index.html` | Photo hero slider, service strip, welcome + offerings, the coach & the platform, programmes, season counters, testimonials, enquiry form, club shelf, academy updates, gallery |
+| `index.html` | Existing Kiddos homepage structure with full-colour video hero, service strip, programmes, counters, testimonials, enquiry form, club shelf, academy updates and gallery |
 | `coaching.html` | The three coaching tracks, four-phase method, fees & FAQ |
 | `tournaments.html` | **Event advert (poster band)** with live countdowns and response buttons, next fixture with live countdown, eight age categories, M-Pesa entry steps, registration form, honour roll |
 | `live.html` | **Broadcast room:** live-style Board 1 with clocks, eval bar, move list, spectator feed — plus the broadcast card |
@@ -67,13 +68,15 @@ heading, footer entry and alt text on the site.
 
 ## Photos
 
-The site displays the academy's own photography throughout: `assets/orig-01.jpg` …
-`orig-05.jpg`, `assets/tournament-prep-01.jpg` … `tournament-prep-10.jpg` and the hero,
-coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is not used.
+Static photo areas use chessboards, materials and club equipment rather than photos of
+children. Adult office-bearer portraits remain in their existing leadership/contact sections.
+The homepage hero uses the supplied tournament video with a full-colour board image as its
+poster fallback. No black tint or grayscale filter is applied to photographs.
 
 - **Club shelf product shots:** `assets/shelf-workbook.jpg`, `shelf-clock.jpg` and
-  `shelf-kit.jpg` illustrate the workbook, digital clock and club kit cards;
-  the set card uses the academy's own `chess-materials.jpg` photo.
+  `shelf-kit.jpg` illustrate the workbook, digital clock and club kit cards; the set card
+  uses `assets/chess-materials.jpg`.
+- **Hero video:** `assets/hero-background.mp4` is the user's supplied `Copy of CHESS TOURNAMENT VIDEO.mp4`; it autoplays muted and loops behind the original hero copy.
 - **Board piece art:** the 2D boards on Live and Play render local PNG pieces
   (`assets/pieces/`), so pieces show on every device without relying on system
   chess-glyph fonts.
@@ -100,20 +103,10 @@ coaching, tournament and materials shots in `assets/`. Kiddos stock imagery is n
 
 ## Event advert (poster band)
 
-`index.html` and `tournaments.html` carry a poster-style advert for the next fixture
-(`#event`). It mirrors the site's own fixture card, so the **single place to edit an
-event** is:
-
-1. the `#event` block in `tournaments.html` (the full poster) and the `compact` copy in
-   `index.html`;
-2. the two `data-countdown` targets in each block: first round and entries-close time;
-3. the M-Pesa line in the poster footer, if the entry reference changes.
-
-The poster artwork is currently `assets/tournament-prep-01.jpg` as a stand-in — the
-designed event poster has not arrived yet; swap that `src` (both blocks) to drop it in.
-Both blocks are marked with an `EVENT ADVERT` comment. Visitors can respond from the
-advert itself: registration form, WhatsApp entry, a Google Calendar "add to calendar"
-link, phone calls to the Secretary/Treasurer, or email.
+`tournaments.html` carries the poster-style advert for the next fixture (`#event`) and
+its registration actions. Update the event date, countdown targets and M-Pesa reference
+there. The homepage links visitors through to the Tournaments page rather than duplicating
+a second advert.
 
 ## Contacts shown on the site
 

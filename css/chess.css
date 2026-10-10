@@ -663,7 +663,7 @@
 .gallery-cap .cap{
   position:absolute; left:14px; bottom:14px; z-index:2;
   font-size:10px; font-weight:800; letter-spacing:.2em; text-transform:uppercase;
-  color:#fff; background:rgba(22,35,47,.72); padding:8px 14px; border-radius:20px;
+  color:#fff; background:rgba(21,115,184,.9); padding:8px 14px; border-radius:20px;
   pointer-events:none;
 }
 
@@ -676,36 +676,32 @@
 .footer-brand-tag{ color:rgba(255,255,255,.7); font-size:14px; line-height:1.7; margin:14px 0 0; }
 
 /* =============================================================
-   PHOTO OVERLAYS + TEXT LEGIBILITY
-   Replace the template's red photo tint and low-opacity overlays
-   with neutral dark ones so photos look natural and text reads.
+   FULL-COLOUR PHOTOGRAPHY
+   Keep the original photographs and video clear. Copy readability comes
+   from text shadow, not a black tint or grayscale filter on the image.
    ============================================================= */
-.hero-wrap .overlay{
-  background:linear-gradient(rgba(13,24,34,.52), rgba(13,24,34,.66)) !important;
-  opacity:1 !important;
+.hero-wrap .overlay,
+.owl-carousel.home-slider .slider-item .overlay,
+.ftco-intro .overlay,
+.ftco-counter.img .overlay{
+  background:transparent!important;
+  opacity:0!important;
 }
-.owl-carousel.home-slider .slider-item .overlay{
-  background:linear-gradient(rgba(13,24,34,.40), rgba(13,24,34,.62)) !important;
-  opacity:1 !important;
-}
-.ftco-intro .overlay{
-  background:rgba(13,24,34,.52) !important;
-  opacity:1 !important;
-}
-
-/* hero copy: the template ships it dark gray (rgba(0,0,0,.8)) for a pale demo
-   photo — over real photos it must be light to stay visible */
 .owl-carousel.home-slider .slider-item .slider-text p,
 .owl-carousel.home-slider .slider-item .slider-text .subheading{
-  color:rgba(255,255,255,.94) !important;
-  text-shadow:0 2px 16px rgba(13,24,34,.6);
+  color:rgba(255,255,255,.98)!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.72);
 }
 .owl-carousel.home-slider .slider-item .slider-text h1{
-  text-shadow:0 3px 24px rgba(13,24,34,.6);
+  text-shadow:0 3px 18px rgba(0,0,0,.72);
 }
 .hero-wrap .slider-text h1.bread,
-.hero-wrap .slider-text .breadcrumbs{
-  text-shadow:0 2px 14px rgba(13,24,34,.6);
+.hero-wrap .slider-text .breadcrumbs,
+.ftco-intro h2,
+.ftco-intro p,
+.ftco-counter .text,
+.ftco-counter .icon{
+  text-shadow:0 2px 12px rgba(0,0,0,.68);
 }
 
 /* consult form: options must be dark when the dropdown opens,
@@ -719,11 +715,7 @@
 /* counters — trailing plus for milestone figures ("1,900+") */
 .block-18 .text strong.with-plus::after{ content:'+'; margin-left:2px; }
 
-/* counters section — keep text readable over the photo background */
-.ftco-counter.img .overlay{
-  position:absolute; top:0; left:0; right:0; bottom:0;
-  background:rgba(15,28,38,.82); content:'';
-}
+/* Keep counter copy over its photograph without tinting the image. */
 .ftco-counter.img .container{ position:relative; z-index:1; }
 .ftco-counter .icon span{ color:rgba(255,255,255,.92); }
 .ftco-counter .text span{ color:rgba(255,255,255,.85); }
@@ -898,12 +890,13 @@ html{ scroll-padding-top:96px; }
 .sec-cap{
   position:absolute; left:0; right:0; bottom:0; z-index:2;
   display:flex; flex-direction:column; gap:3px; padding:30px 15px 13px;
-  background:linear-gradient(180deg, transparent, rgba(13,24,34,.88));
+  background:transparent;
+  text-shadow:0 2px 10px rgba(0,0,0,.7);
 }
 .sec-cap b{ font-size:13.5px; font-weight:800; color:#fff; }
 .sec-cap span{
   font-size:9px; font-weight:700; letter-spacing:.13em; text-transform:uppercase;
-  color:rgba(255,255,255,.78);
+  color:rgba(255,255,255,.9);
 }
 .sec-quote{
   display:flex; gap:30px; align-items:center; padding:34px 38px;
@@ -968,94 +961,69 @@ html{ scroll-padding-top:96px; }
 }
 
 /* =============================================================
-   HOMEPAGE HERO · slow crossfade + Ken Burns drift
-   Replaces the template's owl-carousel + animate.css hero, which
-   hid the outgoing photo (1s fadeOut) before the next arrived —
-   a hard blink on a two-slide loop.
-
-   Model: the .slider-item layers are stacked (absolute) inside the
-   section. The INCOMING photo sits at the bottom at full opacity and
-   the OUTGOING one (.leaving) dissolves away on top of it, so the
-   two photos are always summed — no blink, no white flash.
-   js/hero-slider.js only moves the .is-active/.leaving classes and
-   holds each slide for 7s (and pauses on hover / tab-focus /
-   background tab). Timings: fade length here (1.6s), hold in the js.
-
-   Selectors are scoped .owl-carousel.hero-slider (0,3,0+) so they
-   outrank or tie-and-win against the template's .owl-carousel.
-   .home-slider rules in css/kiddos.css — chess.css loads last.
+   HOMEPAGE HERO · original slider copy over a shared video background
+   Keep the previous Kiddos layout and cross-fading copy; the colour video
+   stays fixed behind both slides. No dark image overlay or image filter.
    ============================================================= */
 .owl-carousel.hero-slider{
-  display:block;      /* owl.css hides .owl-carousel until .owl-loaded —
-                         owl never initialises on the hero any more */
-  overflow:hidden;    /* the Ken Burns scale must not bleed past the hero */
+  display:block;
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+.owl-carousel.hero-slider .hero-video-background{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  background:#0b2a43 url("../assets/chess-materials.jpg") center/cover no-repeat;
+  filter:none;
+  pointer-events:none;
 }
 .owl-carousel.hero-slider .slider-item{
-  position:absolute;  /* stacked layers, not owl's floated stage items */
+  position:absolute;
   top:0; right:0; bottom:0; left:0;
   height:600px;
-  z-index:0;
-  background:transparent; /* the photo lives on .hero-bg now */
+  z-index:1;
+  background:transparent;
   opacity:1;
   visibility:visible;
   will-change:opacity;
 }
-/* full-bleed photo layer for the Ken Burns move (keeps the copy static) */
-.hero-slider .hero-bg{
-  position:absolute;
-  top:0; right:0; bottom:0; left:0;
-  background-size:cover;
-  background-position:center center;
-  background-repeat:no-repeat;
-  transform:scale(1.02);
-  will-change:transform;
-}
-/* before js/hero-slider.js runs: show only the first photo, statically
-   (also the whole no-JS fallback — the hero never ends up blank) */
+.owl-carousel.hero-slider .slider-item .overlay{ display:none!important; }
 .owl-carousel.hero-slider:not(.hero-ready) .slider-item:nth-child(n+2){ visibility:hidden; }
 
-/* ---- crossfade state machine (class toggling in js/hero-slider.js) ---- */
+/* The slide copy dissolves; the shared video remains fixed underneath. */
 .owl-carousel.hero-slider.hero-ready .slider-item{
-  z-index:0;               /* incoming photo: base layer, already fully visible */
+  z-index:1;
   visibility:hidden;
-  transition:opacity 1.6s ease-in-out, visibility 0s linear 1.6s;
+  transition:opacity 1.6s ease-in-out,visibility 0s linear 1.6s;
 }
 .owl-carousel.hero-slider.hero-ready .slider-item.is-active{
-  z-index:1;
+  z-index:2;
   visibility:visible;
-  transition:opacity 1.6s ease-in-out, visibility 0s;
+  transition:opacity 1.6s ease-in-out,visibility 0s;
 }
 .owl-carousel.hero-slider.hero-ready .slider-item.leaving{
-  z-index:2;               /* outgoing photo: dissolves away over the new one */
+  z-index:3;
   opacity:0;
-  pointer-events:none;     /* its links are gone — don't block the new slide's */
-  transition:opacity 1.6s ease-in-out, visibility 0s linear 1.6s;
+  pointer-events:none;
+  transition:opacity 1.6s ease-in-out,visibility 0s linear 1.6s;
+}
+.owl-carousel.hero-slider .slider-text h1,
+.owl-carousel.hero-slider .slider-text p{
+  text-shadow:0 2px 14px rgba(0,0,0,.72);
 }
 
-/* ---- Ken Burns: gentle 8.5s push-in while a photo holds the hero ---- */
-.hero-slider.hero-ready .slider-item.is-active .hero-bg{
-  animation:hero-drift-in 8.5s linear forwards;
-}
-/* the leaving photo keeps its move, settling softly as it fades out */
-.hero-slider.hero-ready .slider-item.leaving .hero-bg{
-  animation:hero-drift-out 2.4s ease-out forwards;
-}
-@keyframes hero-drift-in{
-  from{ transform:scale(1.02) translate3d(-0.6%, 0.9%, 0); }
-  to  { transform:scale(1.12) translate3d(0.6%, -0.9%, 0); }
-}
-@keyframes hero-drift-out{
-  from{ transform:scale(1.12) translate3d(0.6%, -0.9%, 0); }
-  to  { transform:scale(1.14) translate3d(0.7%, -1.0%, 0); }
-}
-/* the drift waits with the autoplay while a visitor's mouse is on the hero */
-.hero-slider:hover .hero-bg{ animation-play-state:paused; }
-
-/* ---- dots: slim "film frame" bars (js/hero-slider.js renders them) ---- */
+/* Slim slide controls from js/hero-slider.js. */
 .owl-carousel.hero-slider .owl-dots{
   position:absolute;
   left:0; right:0; bottom:26px;
-  z-index:3;
+  z-index:4;
   text-align:center;
   line-height:0;
 }
@@ -1063,30 +1031,53 @@ html{ scroll-padding-top:96px; }
   width:26px; height:6px;
   margin:0 4px; padding:0;
   border:0; border-radius:3px;
-  background:rgba(255,255,255,.38);
-  transition:background .3s ease, width .3s ease;
+  background:rgba(255,255,255,.62);
+  transition:background .3s ease,width .3s ease;
 }
-.owl-carousel.hero-slider .owl-dots .owl-dot:hover{ background:rgba(255,255,255,.65); }
+.owl-carousel.hero-slider .owl-dots .owl-dot:hover{ background:#fff; }
 .owl-carousel.hero-slider .owl-dots .owl-dot.active{ background:#fff; width:38px; }
 .owl-carousel.hero-slider .owl-dots .owl-dot:focus-visible{ outline:2px solid #fff; outline-offset:3px; }
-
-/* visitors who ask for reduced motion: calm, instant swaps — no dissolve,
-   no drift (js also holds slides for the plain 7s with no other change) */
-@media (prefers-reduced-motion: reduce){
-  .hero-slider .hero-bg{
-    animation:none !important;
-    transform:none !important;
-  }
+@media (prefers-reduced-motion:reduce){
   .owl-carousel.hero-slider.hero-ready .slider-item,
   .owl-carousel.hero-slider.hero-ready .slider-item.is-active,
   .owl-carousel.hero-slider.hero-ready .slider-item.leaving{
-    transition-duration:0.001s !important;
-    transition-delay:0s !important;
+    transition-duration:.001s!important;
+    transition-delay:0s!important;
   }
 }
-
-@media (max-width: 575.98px){
+@media (max-width:575.98px){
   .owl-carousel.hero-slider .owl-dots{ bottom:18px; }
   .owl-carousel.hero-slider .owl-dots .owl-dot{ width:20px; }
   .owl-carousel.hero-slider .owl-dots .owl-dot.active{ width:30px; }
+}
+
+/* The old page used a -130px sleep margin, which made the navbar jump away
+   while scrolling. Keep it fixed and reachable through every scroll state. */
+#ftco-navbar.ftco-navbar-light.scrolled,
+#ftco-navbar.ftco-navbar-light.scrolled.sleep,
+#ftco-navbar.ftco-navbar-light.scrolled.awake{
+  margin-top:0!important;
+  transition:background-color .2s ease,box-shadow .2s ease!important;
+}
+#ftco-navbar .navbar-nav>.nav-item.dropdown>.dropdown-menu{
+  top:calc(100% - 1px);
+  margin-top:0;
+  padding:8px;
+  background:#fff!important;
+  border:1px solid rgba(30,170,241,.22)!important;
+  border-radius:9px;
+  box-shadow:0 12px 30px rgba(34,48,60,.18)!important;
+}
+#ftco-navbar .navbar-nav>.nav-item.dropdown>.dropdown-menu .dropdown-item{
+  padding:.62rem .82rem;
+  border-radius:6px;
+  color:#22303c!important;
+}
+#ftco-navbar .navbar-nav>.nav-item.dropdown>.dropdown-menu .dropdown-item:hover,
+#ftco-navbar .navbar-nav>.nav-item.dropdown>.dropdown-menu .dropdown-item:focus{
+  background:#e8f4fb!important;
+  color:#1573b8!important;
+}
+@media (min-width:992px){
+  #ftco-navbar .navbar-nav>.nav-item.dropdown{ position:relative; }
 }
