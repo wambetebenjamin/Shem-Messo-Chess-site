@@ -142,15 +142,4 @@
       if (msg) { msg.textContent = 'Opening WhatsApp with your enquiry. Just press send.'; msg.className = 'form-msg show success'; }
     });
   }
-
-  // Newsletter subscribe → WhatsApp nudge (footer)
-  const subForm = document.getElementById('subscribeForm');
-  if (subForm) {
-    subForm.addEventListener('submit', e => {
-      e.preventDefault();
-      const text = 'Hi Shem, please add ' + val('sub_email') +
-                   ' to the academy updates list (fixtures & enrolment news).';
-      window.open(waLink(text), '_blank');
-    });
-  }
 })();

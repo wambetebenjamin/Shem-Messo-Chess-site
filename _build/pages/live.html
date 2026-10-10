@@ -1,0 +1,112 @@
+
+    <!-- ============ BROADCAST ROOM ============ -->
+    <section class="kc-sec" id="card">
+      <div class="kc-wrap">
+        <div class="kc-head kc-head--row">
+          <div class="kc-head__text">
+            <span class="kc-label">Broadcast room</span>
+            <h2 class="kc-h2 kc-mb-0">Kericho School Chess Open · Round 5</h2>
+          </div>
+          <span class="kc-stage__state"><span class="live-dot"></span> Live</span>
+        </div>
+
+        <div class="kc-live">
+          <!-- Stage -->
+          <div class="kc-stage ftco-animate">
+            <div class="kc-stage__top">
+              <span class="kc-stage__title"><i class="fas fa-satellite-dish"></i> Board 1 · Kericho School Chess Open</span>
+              <span class="kc-stage__state"><span class="live-dot"></span> <span id="liveState">LIVE · ROUND 5 IN PROGRESS</span></span>
+            </div>
+
+            <div class="kc-player">
+              <div class="kc-player__id">
+                <span class="kc-player__chip kc-player__chip--b">MD</span>
+                <span><b>Mutai D.</b><span>Kericho Chess Club · Open</span></span>
+              </div>
+              <div class="clock" id="clockB">30:00</div>
+            </div>
+
+            <div class="board-frame">
+              <div class="board3d-stage" id="stage3d"><span class="b3d-tag">3D Board · WebGL</span><span class="b3d-hint">drag to tilt · auto replay</span></div>
+              <div class="play-board" id="liveBoard"></div>
+            </div>
+
+            <div class="kc-player">
+              <div class="kc-player__id">
+                <span class="kc-player__chip kc-player__chip--w">BK</span>
+                <span><b>Barasa K.</b><span>Kapsaos Boys · Under 15</span></span>
+              </div>
+              <div class="clock" id="clockW">30:00</div>
+            </div>
+
+            <div class="eval-wrap">
+              <div class="eval-bar"><div class="eval-fill" id="evalFill"></div></div>
+              <div class="eval-readout">
+                <span>Engine</span><b id="evalNum">+0.2</b><span>30 + 0 Classic</span>
+              </div>
+            </div>
+
+            <div class="result-banner" id="liveResult"></div>
+
+            <div class="kc-stage__controls">
+              <button class="kc-btn kc-btn--ghost kc-btn--sm" id="bcPause" type="button"><i class="fas fa-pause"></i> Pause Feed</button>
+              <button class="kc-btn kc-btn--ghost kc-btn--sm" id="bcRestart" type="button"><i class="fas fa-rotate-left"></i> Restart Game</button>
+            </div>
+          </div>
+
+          <!-- Rail -->
+          <div class="kc-rail">
+            <div class="kc-panel kc-panel--tight ftco-animate">
+              <span class="kc-panel__label"><i class="fas fa-eye"></i>Telemetry</span>
+              <div class="kc-metric"><span class="kc-metric__k">Spectators</span><span class="kc-metric__v kc-metric__v--gold" id="liveViewers">128</span></div>
+              <div class="kc-metric"><span class="kc-metric__k">Boards live</span><span class="kc-metric__v">4</span></div>
+              <div class="kc-metric"><span class="kc-metric__k">Time control</span><span class="kc-metric__v">30 + 0</span></div>
+              <div class="kc-metric"><span class="kc-metric__k">Feed quality</span><span class="kc-metric__v"><span class="ok-dot"></span>&nbsp;Stable</span></div>
+            </div>
+
+            <div class="kc-panel kc-panel--tight ftco-animate">
+              <span class="kc-panel__label"><i class="fas fa-list-ol"></i>Move List</span>
+              <div class="movelist" id="liveMoves"></div>
+            </div>
+
+            <div class="kc-panel kc-panel--tight ftco-animate">
+              <span class="kc-panel__label"><i class="fas fa-comments"></i>Spectator Feed · Simulated</span>
+              <div class="chat-feed" id="liveChat"></div>
+            </div>
+
+            <div class="kc-panel kc-panel--tight ftco-animate">
+              <p class="kc-small kc-mb-0"><i class="fas fa-circle-info" style="margin-right:8px;"></i><b>Parents:</b> ask for a reminder on <a href="https://wa.me/254729037585?text=Please%20remind%20me%20when%20the%20next%20live%20boards%20start." target="_blank" rel="noopener">WhatsApp</a> and you'll get a message the moment a board goes live.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW TO WATCH ============ -->
+    <section class="kc-sec kc-sec--alt" id="how">
+      <div class="kc-wrap">
+        <div class="kc-head kc-head--center">
+          <span class="kc-label">How to watch</span>
+          <h2 class="kc-h2">Follow a fixture day, wherever you are</h2>
+          <p class="kc-lead">The broadcast room runs on the club's own equipment in the tournament hall. No streaming subscription, no app to install.</p>
+        </div>
+        <div class="kc-grid kc-grid--3">
+          <article class="kc-card ftco-animate"><div class="kc-card__body">
+            <span class="kc-card__icon"><i class="fas fa-tv"></i></span>
+            <h3>Open this page</h3><p>On fixture days the round in progress plays here, board by board, with clocks and the running evaluation.</p>
+          </div></article>
+          <article class="kc-card ftco-animate"><div class="kc-card__body">
+            <span class="kc-card__icon"><i class="fas fa-mobile-screen"></i></span>
+            <h3>Boards 1 to 4</h3><p>The top four boards are covered. Results reach the club's WhatsApp groups within minutes of each finish.</p>
+          </div></article>
+          <article class="kc-card ftco-animate"><div class="kc-card__body">
+            <span class="kc-card__icon"><i class="fas fa-chart-line"></i></span>
+            <h3>Honour roll</h3><p>Final standings, rating movement and prize winners land on the tournaments page at the close of play.</p>
+          </div></article>
+        </div>
+        <div class="kc-actions" style="justify-content:center;margin-top:36px;">
+          <a class="kc-btn kc-btn--gold" href="tournaments.html#honour-roll">See the Honour Roll</a>
+          <a class="kc-btn kc-btn--ghost" href="tournaments.html">Upcoming Events</a>
+        </div>
+      </div>
+    </section>
