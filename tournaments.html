@@ -7,7 +7,7 @@
     <meta name="description" content="Inter-school chess tournaments across Kericho: fixtures, age categories, M-Pesa entry and online registration with Kericho Chess Club &amp; Academy.">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
-    <meta name="theme-color" content="#1eaaf1">
+    <meta name="theme-color" content="#0a0a09">
 
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap" rel="stylesheet">
@@ -28,26 +28,25 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/kiddos.css">
     <link rel="stylesheet" href="css/chess.css">
+    <link rel="stylesheet" href="css/academy-theme.css">
   </head>
-  <body>
+  <body class="academy-site">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
 	    <div class="container d-flex align-items-center">
-	    	<a class="navbar-brand" href="index.html"><img class="brand-crest" src="assets/logo.png" alt="Kericho Chess Academy crest: pawn, king and knight over the motto Forward Ever Backward Never" width="640" height="650" decoding="async">Kericho Chess<small>CLUB &amp; ACADEMY</small></a>
+      <a class="navbar-brand" href="index.html" aria-label="Kericho Chess Club and Academy home"><img class="brand-crest" src="assets/logo.png" alt="" width="44" height="45" decoding="async"><span class="brand-wordmark">Kericho Chess<small>Club &amp; Academy</small></span></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span>
+	        <span class="oi oi-menu" aria-hidden="true"></span><span class="menu-label">Menu</span>
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item"><a href="index.html" class="nav-link" aria-label="Home" title="Home"><span class="fas fa-house"></span></a></li>
-	        	<li class="nav-item"><a href="coaching.html" class="nav-link" aria-label="Coaching" title="Coaching"><span class="fas fa-graduation-cap"></span></a></li>
-	        	<li class="nav-item active"><a href="tournaments.html" class="nav-link" aria-label="Tournaments" title="Tournaments"><span class="fas fa-trophy"></span></a></li>
-	        	<li class="nav-item"><a href="live.html" class="nav-link" aria-label="Live" title="Live"><span class="fas fa-tower-broadcast"></span><span class="live-dot"></span></a></li>
-	        	<li class="nav-item"><a href="play.html" class="nav-link" aria-label="Play" title="Play"><span class="fas fa-chess"></span></a></li>
-	        	<li class="nav-item"><a href="shop.html" class="nav-link" aria-label="Shop" title="Shop"><span class="fas fa-bag-shopping"></span></a></li>
-	        	<li class="nav-item"><a href="about.html" class="nav-link" aria-label="About" title="About"><span class="fas fa-circle-info"></span></a></li>
-	        	<li class="nav-item"><a href="contact.html" class="nav-link" aria-label="Contact" title="Contact"><span class="fas fa-envelope"></span></a></li>
-	          <li class="nav-item cta"><a href="contact.html" class="nav-link" aria-label="Enrol Now" title="Enrol Now"><span class="fas fa-user-plus"></span></a></li>
-	        </ul>
+          <li class="nav-item"><a href="play.html" class="nav-link" title="Play Online"><span class="nav-label">Play Online</span></a></li>
+          <li class="nav-item active"><a href="tournaments.html" class="nav-link" title="Tournaments" aria-current="page"><span class="nav-label">Tournaments</span></a></li>
+          <li class="nav-item"><a href="coaching.html" class="nav-link" title="Lessons"><span class="nav-label">Lessons</span></a></li>
+          <li class="nav-item"><a href="live.html" class="nav-link" title="Live"><span class="nav-label">Live</span><span class="live-dot" aria-hidden="true"></span></a></li>
+          <li class="nav-item"><a href="shop.html" class="nav-link" title="Shop"><span class="nav-label">Shop</span></a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link" title="About"><span class="nav-label">About</span></a></li>
+          <li class="nav-item cta"><a href="contact.html#enquiry" class="nav-link" title="Contact and enrol"><span class="nav-label">Join Academy</span><i class="fas fa-arrow-right" aria-hidden="true"></i></a></li>
+        </ul>
 	      </div>
 	    </div>
 	  </nav>
@@ -65,71 +64,50 @@
       </div>
     </section>
 
-    <!-- ============ NEXT FIXTURE + COUNTDOWN ============ -->
+    <!-- ============ NEXT FIXTURE ============ -->
 		<section class="ftco-section">
 			<div class="container">
 				<div class="row justify-content-center mb-5 pb-2">
           <div class="col-md-8 text-center heading-section ftco-animate">
-            <h2 class="mb-4"><span>Where Learners</span> Become Competitors</h2>
-            <p>Inter-school fixtures across Kericho County, run with real clocks, real scoresheets and real trophies. Boards 1 to 4 stream live on fixture days.</p>
+            <h2 class="mb-4"><span>Where Players</span> Become Competitors</h2>
+            <p>Inter-school fixtures across Kericho County, run with clocks, scoresheets and trophies. Selected boards stream live on fixture days.</p>
           </div>
         </div>
 				<div class="row">
-          <div class="col-md-6 ftco-animate mb-4">
-            <div class="cd-card h-100">
+          <div class="col-lg-6 ftco-animate mb-4">
+            <div class="cd-card h-100 fixture-notice">
               <span class="badge-live"><span class="live-dot"></span> NEXT FIXTURE</span>
               <h3 class="mt-3 mb-2" style="font-weight:900; font-size:28px;">Kericho Inter-Schools Open</h3>
-              <p class="mb-1">Saturday 26 September 2026 · rounds start 9:00 AM EAT · Swiss format.</p>
-              <p class="text-muted small">Venue confirmed to registered players on WhatsApp.</p>
-              <div class="clock-flips">
-                <span class="mini-clock"></span><span class="mini-clock b"></span>
-                <span class="clock-note">Clocks run · every move counts</span>
-              </div>
-              <div class="round-dots" title="Seven rounds">
-                <i class="next"></i><i></i><i></i><i></i><i></i><i></i><i></i>
-              </div>
-              <div class="mt-4" data-countdown="2026-09-26T09:00:00+03:00">
-                <span class="cd-band"><span class="ok-dot"></span>&nbsp; FIRST ROUND IN</span>
-                <div class="cd-grid">
-                  <div class="cd-cell"><span class="cd-num cd-d">00</span><span class="cd-lbl">Days</span></div>
-                  <div class="cd-cell"><span class="cd-num cd-h">00</span><span class="cd-lbl">Hrs</span></div>
-                  <div class="cd-cell"><span class="cd-num cd-m">00</span><span class="cd-lbl">Min</span></div>
-                  <div class="cd-cell"><span class="cd-num cd-s">00</span><span class="cd-lbl">Sec</span></div>
-                </div>
-              </div>
-              <div class="mt-3" data-countdown="2026-09-19T18:00:00+03:00">
-                <span class="cd-band"><i class="fas fa-hourglass-half"></i> REGISTRATION CLOSES IN</span>
-                <div class="cd-grid">
-                  <div class="cd-cell warn"><span class="cd-num cd-d">00</span><span class="cd-lbl">Days</span></div>
-                  <div class="cd-cell warn"><span class="cd-num cd-h">00</span><span class="cd-lbl">Hrs</span></div>
-                  <div class="cd-cell warn"><span class="cd-num cd-m">00</span><span class="cd-lbl">Min</span></div>
-                  <div class="cd-cell warn"><span class="cd-num cd-s">00</span><span class="cd-lbl">Sec</span></div>
-                </div>
+              <p class="mb-1">The next date and venue are being confirmed. Entry details will be posted here when the schedule is announced.</p>
+              <div class="fixture-meta mt-4">
+                <span><i class="fas fa-calendar-day" aria-hidden="true"></i> Date · to be announced</span>
+                <span><i class="fas fa-location-dot" aria-hidden="true"></i> Venue · shared with entrants</span>
+                <span><i class="fas fa-clock" aria-hidden="true"></i> Format · Swiss rounds</span>
               </div>
               <p class="mt-4 mb-0">
-                <a href="#register" class="btn btn-secondary px-4 py-3"><i class="fas fa-trophy"></i> Register a Learner</a>
-                <a href="live.html" class="btn btn-primary px-4 py-3"><span class="live-dot"></span> Watch Live</a>
+                <a href="#register" class="btn btn-secondary px-4 py-3"><i class="fas fa-pen-to-square"></i> Register Interest</a>
+                <a href="https://wa.me/254729037585?text=Hi%20Shem%2C%20please%20let%20me%20know%20when%20the%20next%20Kericho%20Inter-Schools%20Open%20is%20announced." target="_blank" rel="noopener" class="btn btn-wa px-4 py-3"><i class="fab fa-whatsapp"></i> Get an Update</a>
               </p>
             </div>
           </div>
-          <div class="col-md-6 ftco-animate mb-4">
+          <div class="col-lg-6 ftco-animate mb-4">
             <div class="cd-card h-100">
               <span class="eyebrow-tag">How entry works</span>
               <div class="chess-timeline mt-4">
                 <div class="tl-item">
                   <span class="tl-k">Step 01</span>
-                  <h3>Submit the form below</h3>
-                  <p>Name, age, category and school. Two minutes, no account needed.</p>
+                  <h3>Register your interest</h3>
+                  <p>Share a name, category and school so the team can send the next fixture details.</p>
                 </div>
                 <div class="tl-item">
                   <span class="tl-k">Step 02</span>
-                  <h3>Pay via M-Pesa Paybill</h3>
-                  <p>Paybill <b style="color:#c47f1a;">880100</b> · Account <b style="color:#c47f1a;">123003#LearnersName</b>.</p>
+                  <h3>Wait for event confirmation</h3>
+                  <p>The Academy confirms the date, venue, entry fee and payment instructions before payment is due.</p>
                 </div>
                 <div class="tl-item">
                   <span class="tl-k">Step 03</span>
-                  <h3>Confirmation on WhatsApp</h3>
-                  <p>Shem confirms your category slot directly and shares the fixture card.</p>
+                  <h3>Confirm your place</h3>
+                  <p>Once the event is announced, the team will confirm categories and entry status on WhatsApp.</p>
                 </div>
               </div>
             </div>
@@ -167,18 +145,18 @@
           <div class="col-lg-11 ftco-animate">
             <div class="reg-card">
               <div class="reg-side">
-                <span class="eyebrow-tag">Tournament Registration</span>
-                <h2>Register a learner</h2>
-                <p>Every entry is recorded automatically. Shem confirms your category slot directly on WhatsApp. Payment is via M-Pesa Paybill.</p>
+                <span class="eyebrow-tag">Tournament Updates</span>
+                <h2>Register interest</h2>
+                <p>Share your details and the Academy will send the next fixture information. Please wait for event and fee confirmation before making a payment.</p>
                 <ul class="perk-list">
-                  <li><i class="fas fa-circle-check"></i> Swiss format: everyone plays every round</li>
+                  <li><i class="fas fa-circle-check"></i> Tournament format shared with the fixture notice</li>
                   <li><i class="fas fa-circle-check"></i> Clocks and scoresheets provided</li>
                   <li><i class="fas fa-circle-check"></i> Medals per category + circuit points</li>
                   <li><i class="fas fa-circle-check"></i> Top boards streamed live for parents at home</li>
                 </ul>
               </div>
               <form class="reg-form" id="tournamentForm">
-                <div class="field"><label for="t_name">Full name</label><input type="text" id="t_name" placeholder="Learner's full name" required></div>
+                <div class="field"><label for="t_name">Full name</label><input type="text" id="t_name" placeholder="Player's full name" required></div>
                 <div class="field-row">
                   <div class="field"><label for="t_age">Age</label><input type="text" id="t_age" placeholder="Age" required></div>
                   <div class="field"><label for="t_gender">Gender</label>
@@ -204,13 +182,12 @@
                   <div class="field"><label for="t_phone">Phone</label><input type="text" id="t_phone" placeholder="Tel number" required></div>
                 </div>
                 <div class="pay-box">
-                  <span class="pay-label">Payment · M-Pesa Paybill</span>
-                  <span class="pay-line">Paybill: <b>880100</b></span>
-                  <span class="pay-line">Account: <b>123003#LearnersName</b></span>
+                  <span class="pay-label">Payment reminder</span>
+                  <span class="pay-line">Please wait for the Academy to confirm the event date and entry fee before paying.</span>
                 </div>
                 <div class="form-msg" id="t_msg" role="status"></div>
-                <button type="submit" class="btn btn-quarternary btn-block py-3" id="t_submit"><i class="fas fa-trophy"></i> Submit Registration</button>
-                <a href="#" target="_blank" rel="noopener" class="btn btn-wa btn-block py-3 wa-confirm" id="t_wa"><i class="fab fa-whatsapp"></i> Send entry on WhatsApp</a>
+                <button type="submit" class="btn btn-quarternary btn-block py-3" id="t_submit"><i class="fas fa-trophy"></i> Send Tournament Interest</button>
+                <a href="#" target="_blank" rel="noopener" class="btn btn-wa btn-block py-3 wa-confirm" id="t_wa"><i class="fab fa-whatsapp"></i> Send interest on WhatsApp</a>
               </form>
             </div>
           </div>
@@ -252,7 +229,7 @@
 				<div class="row justify-content-center mb-5 pb-2">
           <div class="col-md-8 text-center heading-section ftco-animate">
             <h2 class="mb-4"><span>Behind</span> The Boards</h2>
-            <p>Real sessions, real learners, real focus. This is what preparation looks like before the clocks start.</p>
+            <p>Tournament spaces, boards and clocks are prepared before players arrive.</p>
           </div>
         </div>
       </div>
@@ -267,22 +244,22 @@
 						<a href="assets/tournament-prep-04.jpg" class="gallery image-popup img d-flex align-items-center gallery-cap" style="background-image: url(assets/tournament-prep-04.jpg);"><span class="cap">Clock practice</span><div class="icon mb-4 d-flex align-items-center justify-content-center"><span class="fas fa-search-plus"></span></div></a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="assets/tournament-focus.jpg" class="gallery image-popup img d-flex align-items-center gallery-cap" style="background-image: url(assets/tournament-focus.jpg);"><span class="cap">Fixture day focus</span><div class="icon mb-4 d-flex align-items-center justify-content-center"><span class="fas fa-search-plus"></span></div></a>
+						<a href="assets/hero-dark-board.jpg" class="gallery image-popup img d-flex align-items-center gallery-cap" style="background-image: url(assets/hero-dark-board.jpg);"><span class="cap">Tournament set-up</span><div class="icon mb-4 d-flex align-items-center justify-content-center"><span class="fas fa-search-plus"></span></div></a>
 					</div>
 					<div class="col-md-3 ftco-animate">
 						<a href="assets/tournament-prep-05.jpg" class="gallery image-popup img d-flex align-items-center gallery-cap" style="background-image: url(assets/tournament-prep-05.jpg);"><span class="cap">Row after row</span><div class="icon mb-4 d-flex align-items-center justify-content-center"><span class="fas fa-search-plus"></span></div></a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="assets/orig-02.jpg" class="gallery image-popup img d-flex align-items-center gallery-cap" style="background-image: url(assets/orig-02.jpg);"><span class="cap">Front row nerves</span><div class="icon mb-4 d-flex align-items-center justify-content-center"><span class="fas fa-search-plus"></span></div></a>
+						<a href="assets/tournament-prep-02.jpg" class="gallery image-popup img d-flex align-items-center gallery-cap" style="background-image: url(assets/tournament-prep-02.jpg);"><span class="cap">Boards ready for round one</span><div class="icon mb-4 d-flex align-items-center justify-content-center"><span class="fas fa-search-plus"></span></div></a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="assets/orig-04.jpg" class="gallery image-popup img d-flex align-items-center gallery-cap" style="background-image: url(assets/orig-04.jpg);"><span class="cap">Circuit spirit</span><div class="icon mb-4 d-flex align-items-center justify-content-center"><span class="fas fa-search-plus"></span></div></a>
+						<a href="assets/tournament-prep-04.jpg" class="gallery image-popup img d-flex align-items-center gallery-cap" style="background-image: url(assets/tournament-prep-04.jpg);"><span class="cap">A room set for competition</span><div class="icon mb-4 d-flex align-items-center justify-content-center"><span class="fas fa-search-plus"></span></div></a>
 					</div>
 					<div class="col-md-3 ftco-animate">
 						<a href="assets/tournament-prep-07.jpg" class="gallery image-popup img d-flex align-items-center gallery-cap" style="background-image: url(assets/tournament-prep-07.jpg);"><span class="cap">Ready for round one</span><div class="icon mb-4 d-flex align-items-center justify-content-center"><span class="fas fa-search-plus"></span></div></a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="assets/orig-05.jpg" class="gallery image-popup img d-flex align-items-center gallery-cap" style="background-image: url(assets/orig-05.jpg);"><span class="cap">Between rounds</span><div class="icon mb-4 d-flex align-items-center justify-content-center"><span class="fas fa-search-plus"></span></div></a>
+						<a href="assets/hero-morning.jpg" class="gallery image-popup img d-flex align-items-center gallery-cap" style="background-image: url(assets/hero-morning.jpg);"><span class="cap">Chess materials on the board</span><div class="icon mb-4 d-flex align-items-center justify-content-center"><span class="fas fa-search-plus"></span></div></a>
 					</div>
         </div>
     	</div>
@@ -293,8 +270,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9">
-						<h2>Claim a board in the next fixture</h2>
-						<p class="mb-0">Registration closes when the draw is made. Put the learner's name in early, then pay by M-Pesa Paybill 880100.</p>
+						<h2>Get ready for the next fixture</h2>
+						<p class="mb-0">The next tournament date and entry fee will be confirmed by the Academy. Register your interest and we will share the details.</p>
 					</div>
 					<div class="col-md-3 d-flex align-items-center">
 						<p class="mb-0"><a href="#register" class="btn btn-secondary px-4 py-3">Register Now</a></p>
@@ -329,15 +306,15 @@
               <div class="block-21 mb-4 d-flex">
                 <a href="tournaments.html" class="blog-img mr-4" style="background-image: url(assets/tournament-prep-01.jpg);"></a>
                 <div class="text">
-                  <h3 class="heading"><a href="tournaments.html">Kericho Inter-Schools Open · registration closes 19 Sep</a></h3>
+                  <h3 class="heading"><a href="tournaments.html">Fixture calendar · next date to be announced</a></h3>
                   <div class="meta">
-                    <div><a href="tournaments.html"><span class="icon-calendar"></span> Sep 26, 2026</a></div>
+                    <div><a href="tournaments.html"><span class="icon-calendar"></span> Date to be announced</a></div>
                     <div><a href="tournaments.html"><span class="icon-person"></span> Coach Shem</a></div>
                   </div>
                 </div>
               </div>
               <div class="block-21 mb-5 d-flex">
-                <a href="play.html" class="blog-img mr-4" style="background-image: url(assets/hero-chess-academy.jpg);"></a>
+                <a href="play.html" class="blog-img mr-4" style="background-image: url(assets/hero-dark-board.jpg);"></a>
                 <div class="text">
                   <h3 class="heading"><a href="play.html">Daily warm-up: the puzzle of the day is live on the Play page</a></h3>
                   <div class="meta">
