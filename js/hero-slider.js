@@ -9,7 +9,7 @@
    This controller replaces owl on the hero only (the testimony carousel still
    uses owl). It just moves the .is-active/.leaving classes between the stacked
    .slider-item layers; the 1.6s crossfade and the 8.5s push-in are CSS in
-   css/chess.css, so the timings live in one place each:
+   css/site.css, so the timings live in one place each:
 
       HOLD  = how long a photo is held before the next dissolve (css: nothing)
       FADE  = the css crossfade on .slider-item (keep the two in step)
@@ -21,7 +21,7 @@
   'use strict';
 
   var HOLD = 7000;  // ms per slide - the dissolve happens inside this window
-  var FADE = 1600;  // ms - must match the transition in css/chess.css
+  var FADE = 1600;  // ms - must match the transition in css/site.css
 
   var slider = document.querySelector('.hero-slider');
   if (!slider) return;
