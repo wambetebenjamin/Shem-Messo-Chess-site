@@ -1,21 +1,16 @@
 /* ============================================================================
-   HOMEPAGE HERO · slow crossfade + Ken Burns drift
+   HOMEPAGE HERO · cross-fading copy over a shared video background
    ----------------------------------------------------------------------------
-   The template ran this hero on owl-carousel with animate.css fadeOut/fadeIn.
-   Three problems: the 1s fade dropped the outgoing photo to nothing before the
-   next one arrived (a hard blink every cycle), the photos sat perfectly still,
-   and autoplay carried on switching while you were reading the headline.
-
+   The original Kiddos hero structure and its two text slides stay in place.
    This controller replaces owl on the hero only (the testimony carousel still
-   uses owl). It just moves the .is-active/.leaving classes between the stacked
-   .slider-item layers; the 1.6s crossfade and the 8.5s push-in are CSS in
-   css/chess.css, so the timings live in one place each:
+   uses owl) and moves .is-active/.leaving between the slide-copy layers. The
+   shared tournament video remains fixed behind both slides.
 
-      HOLD  = how long a photo is held before the next dissolve (css: nothing)
-      FADE  = the css crossfade on .slider-item (keep the two in step)
+      HOLD  = how long each slide's copy stays visible
+      FADE  = the CSS crossfade on .slider-item (keep the two in step)
 
-   Everything degrades quietly: no JS (or a single slide) leaves the first
-   photo on screen, and prefers-reduced-motion gets an instant swap from CSS.
+   Without JS, the first slide remains visible over the video poster/background.
+   prefers-reduced-motion gets an instant copy swap from CSS.
    ============================================================================ */
 (function () {
   'use strict';
@@ -77,7 +72,7 @@
     var prev = index;
     index = (next + slides.length) % slides.length;
     if (prev !== index) {
-      // the outgoing photo dissolves away on top of the incoming one
+      // the outgoing slide copy dissolves away over the shared video
       var old = slides[prev];
       old.classList.add('leaving');
       window.setTimeout(function () { old.classList.remove('leaving'); }, FADE);

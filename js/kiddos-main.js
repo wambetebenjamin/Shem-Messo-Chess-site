@@ -92,29 +92,69 @@
 	};
 	carousel();
 
-	$('nav .dropdown').hover(function(){
-		var $this = $(this);
-		// 	 timer;
-		// clearTimeout(timer);
-		$this.addClass('show');
-		$this.find('> a').attr('aria-expanded', true);
-		// $this.find('.dropdown-menu').addClass('animated-fast fadeInUp show');
-		$this.find('.dropdown-menu').addClass('show');
-	}, function(){
-		var $this = $(this);
-			// timer;
-		// timer = setTimeout(function(){
-			$this.removeClass('show');
-			$this.find('> a').attr('aria-expanded', false);
-			// $this.find('.dropdown-menu').removeClass('animated-fast fadeInUp show');
-			$this.find('.dropdown-menu').removeClass('show');
-		// }, 100);
+	// Keep dropdowns open while the pointer or keyboard focus crosses into the menu.
+	$('nav .dropdown').each(function(){
+		var $item = $(this);
+		var $toggle = $item.children('a').first();
+		var $menu = $item.children('.dropdown-menu').first();
+		var closeTimer;
+
+		var closeDropdown = function(){
+			window.clearTimeout(closeTimer);
+			$item.removeClass('show');
+			$toggle.attr('aria-expanded', 'false');
+			$menu.removeClass('show');
+		};
+		var openDropdown = function(){
+			window.clearTimeout(closeTimer);
+			$item.addClass('show');
+			$toggle.attr('aria-expanded', 'true');
+			$menu.addClass('show');
+		};
+		var scheduleClose = function(){
+			window.clearTimeout(closeTimer);
+			closeTimer = window.setTimeout(function(){
+				var focusInside = $item.find(':focus').length > 0;
+				if (!focusInside && !$item.is(':hover')) {
+					closeDropdown();
+				}
+			}, 280);
+		};
+
+		$item.on('mouseenter focusin', openDropdown);
+		$item.on('mouseleave focusout', scheduleClose);
+		$menu.on('click', 'a', closeDropdown);
+		$item.on('keydown', function(event){
+			if (event.key === 'Escape' || event.keyCode === 27) {
+				closeDropdown();
+				$toggle.trigger('focus');
+			}
+		});
+		$(document).on('click.dropdownGuard', function(event){
+			if (!$item[0].contains(event.target)) {
+				closeDropdown();
+			}
+		});
 	});
 
-
-	$('#dropdown04').on('show.bs.dropdown', function () {
-	  console.log('show');
-	});
+	// Attach a real clip only when one has been provided; otherwise keep the
+	// colour poster visible rather than requesting a missing media file.
+	var heroVideo = document.getElementById('hero-background-video');
+	var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	if (heroVideo && window.fetch && !reducedMotion) {
+		var heroVideoSrc = heroVideo.getAttribute('data-video-src');
+		if (heroVideoSrc) {
+			window.fetch(heroVideoSrc, { method: 'HEAD' }).then(function(response){
+				if (!response.ok) return;
+				heroVideo.src = heroVideoSrc;
+				heroVideo.load();
+				var playPromise = heroVideo.play();
+				if (playPromise && typeof playPromise.catch === 'function') {
+					playPromise.catch(function(){});
+				}
+			}).catch(function(){});
+		}
+	}
 
 	// scroll
 	var scrollWindow = function() {
