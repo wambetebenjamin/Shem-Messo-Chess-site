@@ -1,6 +1,6 @@
 # Kericho Chess Club & Academy
 
-A static, multi-page chess site for the Academy in Kericho, Kenya. The home page is organized around a simple visitor path — **play, learn, compete** — and takes visual cues from the supplied chess-site reference: a charcoal-and-gold palette, a photo-led chess hero, straightforward service links and fixture updates. The recently added `eventre-master.zip` directly informs the event-led structure: a fixture-first hero, schedule-style agenda rows, a coach spotlight inspired by its speaker section, event gallery and clear registration actions. The archive layout is adapted for chess and its stock photos are not used. The styling is intentionally restrained, with fewer decorative borders and dividers, simpler image treatments and more direct copy; no child photos are referenced by active pages.
+A static, multi-page chess site for the Academy in Kericho, Kenya. The homepage follows an event-led pattern inspired by the recently added `eventre-master.zip`: a fixture-first hero, schedule-style agenda rows, a coach spotlight, event gallery and clear registration actions. Its palette is purple, orange and white; the ZIP's stock photos are not used. The styling is intentionally restrained, with fewer decorative borders and dividers, simpler image treatments and direct copy; no child photos are referenced by active pages.
 
 ## Pages
 
@@ -15,7 +15,7 @@ A static, multi-page chess site for the Academy in Kericho, Kenya. The home page
 | `about.html` | Academy story, crest, office bearers, partner schools and club values |
 | `contact.html` | Direct contacts, membership form, coaching enquiry and office-bearer portraits |
 
-The shared navigation uses readable labels: Play Online, Tournaments, Lessons, Live, Shop, About and Join Academy. The pages retain their existing chess, registration, contact and WhatsApp features, with the dark/gold theme layered over the original Bootstrap/Kiddos layout.
+The shared navigation uses readable labels: Play Online, Tournaments, Lessons, Live, Shop, About and Join Academy. The pages retain their existing chess, registration, contact and WhatsApp features, with the purple/orange/white theme layered over the original Bootstrap/Kiddos layout.
 
 ## Images
 
@@ -29,7 +29,7 @@ The active website uses the uploaded Academy crest, adult office-bearer portrait
 
 ## Theme and runtime
 
-- `css/academy-theme.css` supplies the shared dark-charcoal / warm-gold theme and bespoke homepage layout.
+- `css/academy-theme.css` supplies the shared Eventre-inspired purple/orange/white theme and bespoke homepage layout.
 - `css/kiddos.css` and `css/chess.css` retain the responsive Bootstrap grid and chess-specific UI components for inner pages.
 - `js/kiddos-main.js` handles the template runtime; `js/smc.js` handles countdowns, FAQ accordions, forms and WhatsApp fallbacks.
 - `js/chess.js`, `js/play.js`, `js/live.js` and `js/board3d.js` provide the chess engine, playable board, broadcast replay and optional 3D board.
