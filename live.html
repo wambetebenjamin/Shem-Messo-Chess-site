@@ -7,7 +7,7 @@
     <meta name="description" content="Watch academy chess live: Board 1 with live clocks, evaluation bar, move list and spectator feed: a grandmaster-style broadcast for school chess in Kericho.">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
-    <meta name="theme-color" content="#1eaaf1">
+    <meta name="theme-color" content="#1a0b25">
 
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap" rel="stylesheet">
@@ -28,26 +28,25 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/kiddos.css">
     <link rel="stylesheet" href="css/chess.css">
+    <link rel="stylesheet" href="css/academy-theme.css">
   </head>
-  <body>
+  <body class="academy-site">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
 	    <div class="container d-flex align-items-center">
-	    	<a class="navbar-brand" href="index.html"><img class="brand-crest" src="assets/logo.png" alt="Kericho Chess Academy crest: pawn, king and knight over the motto Forward Ever Backward Never" width="640" height="650" decoding="async">Kericho Chess<small>CLUB &amp; ACADEMY</small></a>
+      <a class="navbar-brand" href="index.html" aria-label="Kericho Chess Club and Academy home"><img class="brand-crest" src="assets/logo.png" alt="" width="44" height="45" decoding="async"><span class="brand-wordmark">Kericho Chess<small>Club &amp; Academy</small></span></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span>
+	        <span class="oi oi-menu" aria-hidden="true"></span><span class="menu-label">Menu</span>
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item"><a href="index.html" class="nav-link" aria-label="Home" title="Home"><span class="fas fa-house"></span></a></li>
-	        	<li class="nav-item"><a href="coaching.html" class="nav-link" aria-label="Coaching" title="Coaching"><span class="fas fa-graduation-cap"></span></a></li>
-	        	<li class="nav-item"><a href="tournaments.html" class="nav-link" aria-label="Tournaments" title="Tournaments"><span class="fas fa-trophy"></span></a></li>
-	        	<li class="nav-item active"><a href="live.html" class="nav-link" aria-label="Live" title="Live"><span class="fas fa-tower-broadcast"></span><span class="live-dot"></span></a></li>
-	        	<li class="nav-item"><a href="play.html" class="nav-link" aria-label="Play" title="Play"><span class="fas fa-chess"></span></a></li>
-	        	<li class="nav-item"><a href="shop.html" class="nav-link" aria-label="Shop" title="Shop"><span class="fas fa-bag-shopping"></span></a></li>
-	        	<li class="nav-item"><a href="about.html" class="nav-link" aria-label="About" title="About"><span class="fas fa-circle-info"></span></a></li>
-	        	<li class="nav-item"><a href="contact.html" class="nav-link" aria-label="Contact" title="Contact"><span class="fas fa-envelope"></span></a></li>
-	          <li class="nav-item cta"><a href="contact.html" class="nav-link" aria-label="Enrol Now" title="Enrol Now"><span class="fas fa-user-plus"></span></a></li>
-	        </ul>
+	        <ul class="navbar-nav">
+          <li class="nav-item"><a href="play.html" class="nav-link" title="Play Online"><span class="nav-label">Play Online</span></a></li>
+          <li class="nav-item"><a href="tournaments.html" class="nav-link" title="Tournaments"><span class="nav-label">Tournaments</span></a></li>
+          <li class="nav-item"><a href="coaching.html" class="nav-link" title="Lessons"><span class="nav-label">Lessons</span></a></li>
+          <li class="nav-item active"><a href="live.html" class="nav-link" title="Live" aria-current="page"><span class="nav-label">Live</span><span class="live-dot" aria-hidden="true"></span></a></li>
+          <li class="nav-item"><a href="shop.html" class="nav-link" title="Shop"><span class="nav-label">Shop</span></a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link" title="About"><span class="nav-label">About</span></a></li>
+        </ul>
+          <a class="nav-join" href="contact.html#enquiry" title="Contact and enrol"><span>Join Academy</span><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 	      </div>
 	    </div>
 	  </nav>
@@ -147,7 +146,7 @@
         </div>
         <div class="row mt-4">
           <div class="col-12 text-center ftco-animate">
-            <p class="text-muted mb-0">Fixture days, the top boards stream here with live clocks and evaluation. Tonight's replay: the Opera Game line the juniors studied in week six.</p>
+            <p class="text-muted mb-0">Fixture days, the top boards stream here with live clocks and evaluation. Between fixtures, the room replays a study game from the Academy library.</p>
           </div>
         </div>
 			</div>
@@ -165,18 +164,18 @@
 				<div class="row">
 					<div class="col-md-4 ftco-animate mb-4">
             <div class="sched-card h-100">
-              <div class="sched-img" style="background-image: url(assets/orig-02.jpg);"></div>
+              <div class="sched-img" style="background-image: url(assets/tournament-prep-02.jpg);"></div>
               <div class="sched-body">
-                <span class="sched-when">Sat 26 Sep · 09:00 EAT</span>
+                <span class="sched-when">Next fixture · date to be announced</span>
                 <h3>Kericho Inter-Schools Open · Boards 1 to 4</h3>
-                <p>Full-day Swiss across eight categories. The flagship stream of the season.</p>
-                <a class="btn btn-wa py-2 px-3" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20remind%20me%20when%20the%20Kericho%20Open%20goes%20live%20on%20Sep%2026." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify Me</a>
+                <p>Selected boards from the next fixture will stream here once the event is announced.</p>
+                <a class="btn btn-wa py-2 px-3" href="https://wa.me/254729037585?text=Hi%20Shem%2C%20let%20me%20know%20when%20the%20next%20Kericho%20Open%20date%20is%20announced." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Notify Me</a>
               </div>
             </div>
 					</div>
 					<div class="col-md-4 ftco-animate mb-4">
             <div class="sched-card h-100">
-              <div class="sched-img" style="background-image: url(assets/orig-03.jpg);"></div>
+              <div class="sched-img" style="background-image: url(assets/stock-pexels-chessboard-5789688.jpg);"></div>
               <div class="sched-body">
                 <span class="sched-when">Every Saturday · 10:00 EAT</span>
                 <h3>Saturday Club Challenge · Board 1</h3>
@@ -187,7 +186,7 @@
 					</div>
 					<div class="col-md-4 ftco-animate mb-4">
             <div class="sched-card h-100">
-              <div class="sched-img" style="background-image: url(assets/orig-04.jpg);"></div>
+              <div class="sched-img" style="background-image: url(assets/tournament-prep-04.jpg);"></div>
               <div class="sched-body">
                 <span class="sched-when">Term 3 · Date TBC</span>
                 <h3>Kericho vs Litein Friendly Dual</h3>
@@ -200,7 +199,7 @@
 			</div>
 		</section>
 
-		<section class="ftco-intro" style="background-image: url(assets/orig-03.jpg);" data-stellar-background-ratio="0.5">
+		<section class="ftco-intro" style="background-image: url(assets/stock-pexels-chessboard-5789688.jpg);" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row">
@@ -241,15 +240,15 @@
               <div class="block-21 mb-4 d-flex">
                 <a href="tournaments.html" class="blog-img mr-4" style="background-image: url(assets/tournament-prep-01.jpg);"></a>
                 <div class="text">
-                  <h3 class="heading"><a href="tournaments.html">Kericho Inter-Schools Open · registration closes 19 Sep</a></h3>
+                  <h3 class="heading"><a href="tournaments.html">Fixture calendar · next date to be announced</a></h3>
                   <div class="meta">
-                    <div><a href="tournaments.html"><span class="icon-calendar"></span> Sep 26, 2026</a></div>
+                    <div><a href="tournaments.html"><span class="icon-calendar"></span> Date to be announced</a></div>
                     <div><a href="tournaments.html"><span class="icon-person"></span> Coach Shem</a></div>
                   </div>
                 </div>
               </div>
               <div class="block-21 mb-5 d-flex">
-                <a href="play.html" class="blog-img mr-4" style="background-image: url(assets/hero-chess-academy.jpg);"></a>
+                <a href="play.html" class="blog-img mr-4" style="background-image: url(assets/hero-dark-board.jpg);"></a>
                 <div class="text">
                   <h3 class="heading"><a href="play.html">Daily warm-up: the puzzle of the day is live on the Play page</a></h3>
                   <div class="meta">

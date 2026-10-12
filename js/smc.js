@@ -53,7 +53,7 @@
   async function submitEntry(form, endpointFormType, collect, btn, msg, waBtn, waSummary) {
     // Not connected yet → offer the WhatsApp confirmation path.
     if (SHEETS_ENDPOINT.indexOf('PASTE_YOUR') === 0) {
-      msg.textContent = 'Details captured. Online submission is not connected yet. Tap below to send your entry straight to Shem on WhatsApp.';
+      msg.textContent = 'Your details are ready. Online submission is not connected yet. Tap below to send them to Shem on WhatsApp and confirm the next step.';
       msg.className = 'form-msg show';
       if (waBtn) { waBtn.href = waLink(waSummary()); waBtn.classList.add('show'); }
       return;
@@ -69,7 +69,9 @@
         headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(payload)
       });
-      msg.textContent = 'Submitted. Shem will confirm your slot once payment is received on M-Pesa.';
+      msg.textContent = endpointFormType === 'Tournament'
+        ? 'Interest submitted. Shem will share the next fixture date, categories and payment steps on WhatsApp.'
+        : 'Submitted. Shem will confirm your membership once the details are reviewed.';
       msg.className = 'form-msg show success';
       form.reset();
     } catch (err) {
@@ -96,11 +98,11 @@
         document.getElementById('t_submit'),
         document.getElementById('t_msg'),
         document.getElementById('t_wa'),
-        () => 'Hi Shem, tournament entry for ' + collect().name +
+        () => 'Hi Shem, please register my interest in the next tournament for ' + collect().name +
               ' · Category: ' + collect().category +
               ' · School/Club: ' + collect().school +
               ' · Phone: ' + collect().phone +
-              ' · Age: ' + collect().age + ' (' + collect().gender + ').'
+              ' · Age: ' + collect().age + ' (' + collect().gender + '). Please share the event date and entry steps.'
       );
     });
   }
