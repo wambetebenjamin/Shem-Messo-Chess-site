@@ -1,595 +1,1015 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kericho Chess Club &amp; Academy &middot; Coming Soon</title>
-<meta name="description" content="Our website is being rebuilt. The academy is open and training continues. Reach us on WhatsApp, by phone or by email in the meantime.">
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0a2a47">
+<title>Play · Learn · Watch — Kericho Chess Club &amp; Academy</title>
+<meta name="description" content="Kericho Chess Club &amp; Academy: replay classic games move by move, train tactics on the bento board, watch live boards with other spectators, and place a tournament board in your own room.">
+<meta name="theme-color" content="#050b16">
 <link rel="icon" href="assets/favicon.png" type="image/png">
-<!-- Self-contained on purpose: one stylesheet inline, one local image, one tiny
-     script. Nothing is fetched from anywhere else, so this page keeps working
-     even if the rest of the site is mid-deploy. -->
-<style>
-  :root{
-    --navy:#0a2a47;
-    --navy-deep:#061c31;
-    --panel:rgba(8,32,52,.86);
-    --brand:#1573b8;
-    --accent:#fda638;
-    --cream:#e8eef4;
-    --paper:#f4fafd;
-    --dim:rgba(244,250,253,.76);
-    --ring:#ffd98a;
-    --sq-light:#dfe9f2;
-    --sq-dark:#12395c;
-    --tilt:64deg;
-    --untilt:-64deg;
-    --spin-dur:66s;
-    --bw:min(132vw,1080px);
-    --ease-out:cubic-bezier(.2,.85,.3,1);
-  }
+<link rel="apple-touch-icon" href="assets/favicon.png">
 
-  *,*::before,*::after{ box-sizing:border-box; }
+<link rel="stylesheet" href="css/effects.css">
+<link rel="stylesheet" href="css/sections.css">
 
-  html{ -webkit-text-size-adjust:100%; }
-
-  body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:clamp(20px,4vh,52px) 20px;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    font-size:17px;
-    line-height:1.6;
-    color:var(--paper);
-    background:var(--navy);
-    overflow-x:hidden;
-    text-align:center;
-  }
-
-  /* =======================================================================
-     1. THE 3D SCENE
-     ======================================================================= */
-  .scene{
-    position:fixed;
-    inset:0;
-    z-index:0;
-    overflow:hidden;
-    pointer-events:none;
-    perspective:1150px;
-    perspective-origin:50% 28%;
-  }
-  /* Drifts a degree or two toward the pointer. Set from JS. */
-  .stage{
-    position:absolute;
-    inset:0;
-    transform-style:preserve-3d;
-    transition:transform .55s var(--ease-out);
-  }
-
-  .board{
-    position:absolute;
-    left:50%;
-    top:72%;
-    width:var(--bw);
-    aspect-ratio:1;
-    margin:calc(var(--bw) * -.5) 0 0 calc(var(--bw) * -.5);
-    transform-style:preserve-3d;
-    /* base state = the from-frame, so a browser that cannot animate the
-       transform still shows a correctly tilted board */
-    transform:rotateX(var(--tilt)) rotateZ(0deg);
-    animation:boardSpin var(--spin-dur) linear infinite;
-  }
-  @keyframes boardSpin{
-    from{ transform:rotateX(var(--tilt)) rotateZ(0deg); }
-    to  { transform:rotateX(var(--tilt)) rotateZ(360deg); }
-  }
-
-  .board__grid{
-    position:absolute;
-    inset:0;
-    display:grid;
-    grid-template-columns:repeat(8,1fr);
-    grid-template-rows:repeat(8,1fr);
-    transform-style:preserve-3d;
-  }
-  .board__grid i{
-    display:block;
-    background:var(--sq-light);
-    box-shadow:inset 0 0 0 1px rgba(10,42,71,.28);
-    /* The travelling ripple. --i runs row by row, so the crest of the wave
-       walks across the board one square at a time. */
-    animation:ripple 7.5s ease-in-out infinite;
-    animation-delay:calc(var(--i) * -.16s);
-  }
-  .board__grid i.d{ background:var(--sq-dark); }
-  @keyframes ripple{
-    0%, 70%, 100%{ transform:translateZ(0); }
-    85%          { transform:translateZ(11px); }
-  }
-
-  .board__pieces{
-    position:absolute;
-    inset:0;
-    transform-style:preserve-3d;
-  }
-
-  .pc{
-    position:absolute;
-    left:var(--x);
-    top:var(--y);
-    width:calc(var(--w) * 1%);
-    aspect-ratio:1 / 1.5;
-    margin-left:calc(var(--w) * -.5%);
-    transform-style:preserve-3d;
-  }
-  /* Counter-rotation. Same duration and easing as the board, opposite
-     direction, so the piece stands still while the board turns beneath it. */
-  .pc__stand{
-    display:block;
-    width:100%;
-    height:100%;
-    transform:translateZ(var(--h)) rotateZ(0deg) rotateX(var(--untilt));
-    animation:standUp var(--spin-dur) linear infinite;
-  }
-  @keyframes standUp{
-    from{ transform:translateZ(var(--h)) rotateZ(0deg) rotateX(var(--untilt)); }
-    to  { transform:translateZ(var(--h)) rotateZ(-360deg) rotateX(var(--untilt)); }
-  }
-  .pc__shape{
-    display:block;
-    width:100%;
-    height:100%;
-    background:var(--fill,var(--cream));
-    clip-path:var(--shape);
-    animation:bob var(--t) ease-in-out infinite;
-    animation-delay:var(--d);
-  }
-  @keyframes bob{
-    0%, 100%{ transform:translateY(0); }
-    50%     { transform:translateY(-15%); }
-  }
-
-  /* Silhouettes. Drawn with clip-path so no images are needed and the shapes
-     stay crisp at any size. */
-  .pc--pawn  { --shape:polygon(50% 0%, 60% 6%, 64% 16%, 57% 27%, 55% 31%, 68% 53%, 77% 76%, 83% 100%, 17% 100%, 23% 76%, 32% 53%, 45% 31%, 43% 27%, 36% 16%, 40% 6%); }
-  .pc--rook  { --shape:polygon(3% 0%, 21% 0%, 21% 9%, 35% 9%, 35% 0%, 65% 0%, 65% 9%, 79% 9%, 79% 0%, 97% 0%, 97% 19%, 88% 24%, 88% 74%, 97% 79%, 97% 100%, 3% 100%, 3% 79%, 12% 74%, 12% 24%, 3% 19%); }
-  .pc--knight{ --shape:polygon(43% 0%, 51% 8%, 64% 12%, 78% 22%, 89% 38%, 94% 57%, 74% 61%, 65% 54%, 59% 60%, 67% 82%, 84% 100%, 11% 100%, 19% 76%, 30% 54%, 26% 40%, 19% 28%, 27% 10%); }
-  .pc--pawn, .pc--knight{ --fill:var(--accent); }
-  .pc--rook{ --fill:var(--cream); }
-
-  /* Slow matte vignette. Darkens the edges of the room; adds no glow. */
-  .scene::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:radial-gradient(125vw 78vh at 50% 40%,
-      rgba(6,28,49,0) 26%, rgba(6,28,49,.42) 66%, rgba(6,28,49,.82) 100%);
-  }
-
-  /* =======================================================================
-     2. THE PANEL
-     ======================================================================= */
-  main{
-    position:relative;
-    z-index:1;
-    width:100%;
-    max-width:640px;
-  }
-  .panel{
-    padding:clamp(26px,4vw,42px) clamp(20px,3.4vw,38px);
-    border-radius:24px;
-    background:var(--panel);
-    border:1px solid rgba(255,255,255,.07);
-    box-shadow:0 34px 80px rgba(0,0,0,.5);
-  }
-
-  .crest-wrap{ position:relative; margin:0 auto 20px; width:fit-content; }
-  .crest{
-    display:block;
-    width:clamp(78px,11vw,104px);
-    height:auto;
-    animation:crestIn 1s var(--ease-out) both, floaty 6.5s ease-in-out 1s infinite;
-  }
-  @keyframes crestIn{
-    from{ opacity:0; transform:perspective(600px) rotateX(-38deg) translateY(-16px) scale(.9); }
-    to  { opacity:1; transform:none; }
-  }
-  @keyframes floaty{
-    0%, 100%{ transform:translateY(0); }
-    50%     { transform:translateY(-9px); }
-  }
-  /* The shadow under the crest tightens as the crest rises. */
-  .crest-shadow{
-    position:absolute;
-    left:50%;
-    bottom:-9px;
-    width:76%;
-    height:12px;
-    margin-left:-38%;
-    border-radius:50%;
-    background:radial-gradient(closest-side, rgba(0,0,0,.55), rgba(0,0,0,0) 74%);
-    animation:shadowPulse 6.5s ease-in-out 1s infinite;
-  }
-  @keyframes shadowPulse{
-    0%, 100%{ transform:scale(1); opacity:.75; }
-    50%     { transform:scale(.84); opacity:.45; }
-  }
-
-  .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
-    margin:0 0 18px;
-    padding:7px 17px;
-    border:1px solid rgba(253,166,56,.44);
-    border-radius:999px;
-    background:rgba(253,166,56,.1);
-    color:var(--accent);
-    font-size:12.5px;
-    font-weight:700;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-  }
-  .badge::before{
-    content:"";
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:var(--accent);
-    animation:blip 2.6s ease-in-out infinite;
-  }
-  @keyframes blip{
-    0%, 100%{ opacity:1; transform:scale(1); }
-    50%     { opacity:.4; transform:scale(.72); }
-  }
-
-  h1{
-    margin:0 0 16px;
-    font-size:clamp(29px,4.8vw,43px);
-    line-height:1.14;
-    font-weight:800;
-    letter-spacing:-.022em;
-    color:#fff;
-  }
-  /* Letters flip up into place. Words are wrapped so a word cannot break
-     across lines between its letters. */
-  .split .w{ display:inline-block; white-space:nowrap; }
-  .split .w + .w{ margin-left:.26em; }
-  .split .hl{ color:var(--accent); }
-  .split .l{
-    display:inline-block;
-    transform-origin:50% 100%;
-    animation:flipIn .8s var(--ease-out) both;
-    animation-delay:calc(var(--n) * 40ms + 220ms);
-  }
-  @keyframes flipIn{
-    from{ opacity:0; transform:translateY(.6em) rotateX(-88deg); }
-    to  { opacity:1; transform:none; }
-  }
-
-  .lede{
-    margin:0 0 18px;
-    font-size:clamp(16px,1.5vw,17.5px);
-    color:var(--dim);
-    animation:rise .8s var(--ease-out) .62s both;
-  }
-  .reassure{
-    margin:0 0 26px;
-    padding:15px 18px;
-    border-radius:14px;
-    background:rgba(255,255,255,.055);
-    font-size:15.5px;
-    color:var(--paper);
-    animation:rise .8s var(--ease-out) .74s both;
-  }
-  .reassure strong{ color:var(--accent); }
-  @keyframes rise{
-    from{ opacity:0; transform:translateY(16px); }
-    to  { opacity:1; transform:none; }
-  }
-
-  .actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    justify-content:center;
-    margin:0 0 20px;
-    animation:rise .8s var(--ease-out) .86s both;
-  }
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:9px;
-    min-height:52px;
-    padding:0 26px;
-    border-radius:999px;
-    font-size:16px;
-    font-weight:700;
-    text-decoration:none;
-    transition:transform .2s var(--ease-out), background-color .2s ease, border-color .2s ease;
-  }
-  /* Flat fills only. No sheen, no gloss. */
-  .btn--primary{ color:#08213a; background:var(--accent); border:2px solid var(--accent); }
-  .btn--primary:hover{ background:#ffb852; border-color:#ffb852; transform:translateY(-3px); }
-  .btn--primary:active{ transform:translateY(0); }
-  .btn--ghost{ color:#fff; background:transparent; border:2px solid rgba(255,255,255,.3); }
-  .btn--ghost:hover{ border-color:rgba(255,255,255,.72); background:rgba(255,255,255,.08); transform:translateY(-3px); }
-  .btn--ghost:active{ transform:translateY(0); }
-  .btn svg{ width:19px; height:19px; flex:none; }
-
-  .lines{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    justify-content:center;
-    margin:0;
-    padding:0;
-    list-style:none;
-    animation:rise .8s var(--ease-out) .98s both;
-  }
-  .lines a{
-    display:inline-flex;
-    align-items:center;
-    min-height:44px;
-    padding:0 17px;
-    border-radius:999px;
-    background:rgba(255,255,255,.06);
-    color:var(--paper);
-    font-size:14.5px;
-    font-weight:600;
-    text-decoration:none;
-    transition:background-color .2s ease, transform .2s var(--ease-out);
-  }
-  .lines a:hover{ background:rgba(255,255,255,.13); transform:translateY(-2px); }
-
-  a:focus-visible, .btn:focus-visible{
-    outline:3px solid var(--ring);
-    outline-offset:3px;
-  }
-
-  footer{
-    position:relative;
-    z-index:1;
-    margin-top:24px;
-    font-size:14px;
-    line-height:1.75;
-    color:var(--dim);
-    animation:rise .8s var(--ease-out) 1.1s both;
-  }
-  footer strong{ display:block; color:var(--paper); font-weight:600; }
-
-  /* =======================================================================
-     3. SMALL SCREENS AND LOW-POWER DEVICES
-     ======================================================================= */
-  /* The 64-square ripple is the one genuinely expensive effect here, so it
-     switches off first. The board keeps turning, just slower. */
-  @media (max-width:820px){
-    :root{ --spin-dur:120s; --bw:150vw; }
-    .board{ top:76%; }
-    .board__grid i{ animation:none; }
-    .pc:nth-child(even){ display:none; }
-  }
-  @media (max-width:520px){
-    body{ padding:22px 15px; }
-    .panel{ border-radius:20px; }
-    .btn{ width:100%; }
-    .pc:nth-child(3), .pc:nth-child(5){ display:none; }
-  }
-  @media (max-height:760px){
-    .crest{ width:76px; }
-    .crest-wrap{ margin-bottom:16px; }
-    .reassure{ margin-bottom:20px; padding:13px 16px; }
-    footer{ margin-top:18px; }
-  }
-
-  /* =======================================================================
-     4. REDUCED MOTION
-     Everything holds still. Nothing hides, because every animation above
-     starts from a visible base state.
-     ======================================================================= */
-  @media (prefers-reduced-motion:reduce){
-    *,*::before,*::after{
-      animation:none !important;
-      transition:none !important;
-    }
-    .btn:hover, .lines a:hover{ transform:none; }
-    .stage{ transform:none !important; }
-  }
-</style>
+<noscript>
+  <!-- Without JS the preloader would trap the page: hide it and show every
+       hero step outright. Everything else degrades on its own. -->
+  <style>
+    #preloader { display: none !important; }
+    .hero__step { opacity: 1 !important; }
+    .skeleton { display: none !important; }
+    .beat { opacity: 1 !important; }
+  </style>
+</noscript>
 </head>
-<body>
 
-<!-- Decorative: the whole scene is skipped by assistive tech. -->
-<div class="scene" aria-hidden="true">
-  <div class="stage" id="stage">
-    <div class="board">
-      <div class="board__grid">
-        <i style="--i:0"></i>
-        <i style="--i:1" class="d"></i>
-        <i style="--i:2"></i>
-        <i style="--i:3" class="d"></i>
-        <i style="--i:4"></i>
-        <i style="--i:5" class="d"></i>
-        <i style="--i:6"></i>
-        <i style="--i:7" class="d"></i>
-        <i style="--i:8" class="d"></i>
-        <i style="--i:9"></i>
-        <i style="--i:10" class="d"></i>
-        <i style="--i:11"></i>
-        <i style="--i:12" class="d"></i>
-        <i style="--i:13"></i>
-        <i style="--i:14" class="d"></i>
-        <i style="--i:15"></i>
-        <i style="--i:16"></i>
-        <i style="--i:17" class="d"></i>
-        <i style="--i:18"></i>
-        <i style="--i:19" class="d"></i>
-        <i style="--i:20"></i>
-        <i style="--i:21" class="d"></i>
-        <i style="--i:22"></i>
-        <i style="--i:23" class="d"></i>
-        <i style="--i:24" class="d"></i>
-        <i style="--i:25"></i>
-        <i style="--i:26" class="d"></i>
-        <i style="--i:27"></i>
-        <i style="--i:28" class="d"></i>
-        <i style="--i:29"></i>
-        <i style="--i:30" class="d"></i>
-        <i style="--i:31"></i>
-        <i style="--i:32"></i>
-        <i style="--i:33" class="d"></i>
-        <i style="--i:34"></i>
-        <i style="--i:35" class="d"></i>
-        <i style="--i:36"></i>
-        <i style="--i:37" class="d"></i>
-        <i style="--i:38"></i>
-        <i style="--i:39" class="d"></i>
-        <i style="--i:40" class="d"></i>
-        <i style="--i:41"></i>
-        <i style="--i:42" class="d"></i>
-        <i style="--i:43"></i>
-        <i style="--i:44" class="d"></i>
-        <i style="--i:45"></i>
-        <i style="--i:46" class="d"></i>
-        <i style="--i:47"></i>
-        <i style="--i:48"></i>
-        <i style="--i:49" class="d"></i>
-        <i style="--i:50"></i>
-        <i style="--i:51" class="d"></i>
-        <i style="--i:52"></i>
-        <i style="--i:53" class="d"></i>
-        <i style="--i:54"></i>
-        <i style="--i:55" class="d"></i>
-        <i style="--i:56" class="d"></i>
-        <i style="--i:57"></i>
-        <i style="--i:58" class="d"></i>
-        <i style="--i:59"></i>
-        <i style="--i:60" class="d"></i>
-        <i style="--i:61"></i>
-        <i style="--i:62" class="d"></i>
-        <i style="--i:63"></i>
-      </div>
-      <div class="board__pieces">
-      <span class="pc pc--pawn" style="--x:10%;--y:44%;--w:5.6;--h:56px;--t:5.2s;--d:0s">
-        <span class="pc__stand"><span class="pc__shape"></span></span>
-      </span>
-      <span class="pc pc--rook" style="--x:17%;--y:24%;--w:6.4;--h:22px;--t:6.4s;--d:.7s">
-        <span class="pc__stand"><span class="pc__shape"></span></span>
-      </span>
-      <span class="pc pc--knight" style="--x:6%;--y:66%;--w:4.9;--h:34px;--t:5.8s;--d:1.2s">
-        <span class="pc__stand"><span class="pc__shape"></span></span>
-      </span>
-      <span class="pc pc--pawn" style="--x:84%;--y:28%;--w:5.2;--h:44px;--t:5.5s;--d:.4s">
-        <span class="pc__stand"><span class="pc__shape"></span></span>
-      </span>
-      <span class="pc pc--rook" style="--x:92%;--y:56%;--w:6.2;--h:30px;--t:6.9s;--d:1.5s">
-        <span class="pc__stand"><span class="pc__shape"></span></span>
-      </span>
-      <span class="pc pc--knight" style="--x:79%;--y:74%;--w:5.0;--h:62px;--t:6.1s;--d:.9s">
-        <span class="pc__stand"><span class="pc__shape"></span></span>
-      </span>
-      </div>
-    </div>
-  </div>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- Screen-reader channels: one for the boot state, one for route changes. -->
+<p id="bootStatus" class="sr-only" role="status" aria-live="polite"></p>
+<p id="routeStatus" class="sr-only" role="status" aria-live="polite"></p>
+
+<!-- =============================================================================
+     EFFECT-25 · PRELOADER
+     Blocks for at most 2s, offers a skip control at 3s as a safety net, and
+     reuses the self-drawing stroke from EFFECT-08 (card 2).
+     ========================================================================== -->
+<div class="preloader" id="preloader" aria-label="Loading the site" aria-busy="true">
+  <svg class="preloader__mark" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+    <g transform="translate(60,14)">
+      <!-- The same .draw-stroke component the notation card uses. -->
+      <path class="draw-stroke" d="M0 0 L0 42" fill="none" stroke="#1eaaf1" stroke-width="4" stroke-linecap="round"/>
+      <path class="draw-stroke" d="M0 42 L0 92" fill="none" stroke="#fda638" stroke-width="4" stroke-linecap="round"/>
+      <circle class="draw-fill" cx="0" cy="-8" r="9" fill="#fda638"/>
+      <path class="draw-stroke" d="M-16 92 H16" fill="none" stroke="#eaf2fa" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </svg>
+  <p class="preloader__label">Setting up the board</p>
+  <div class="preloader__track"><span class="preloader__fill"></span></div>
+  <p class="preloader__pct" aria-hidden="true">0%</p>
+  <button class="preloader__skip" type="button" hidden>Skip loading</button>
 </div>
 
-<main id="main">
-  <div class="panel">
+<!-- EFFECT-06 · decorative drifting chess-piece silhouettes (aria-hidden) -->
+<canvas id="ambient" class="ambient" aria-hidden="true"></canvas>
 
-    <div class="crest-wrap">
-      <span class="crest-shadow"></span>
-      <img class="crest" src="assets/logo-light.png" width="640" height="650"
-           alt="Kericho Chess Academy crest: a pawn, king and knight over the motto Forward Ever, Backward Never">
+<div class="page-shell">
+
+  <!-- ===========================================================================
+       HEADER · EFFECT-28 glass · EFFECT-10 animated crest · EFFECT-11 icons
+       =========================================================================== -->
+  <header class="nav" id="nav">
+    <!-- EFFECT-10: draws once on first view, replays on click. Always a link. -->
+    <a class="brand" href="index.html" data-crest aria-label="Kericho Chess Club and Academy — home">
+      <svg class="brand__mark crest-draw" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <path class="crest-draw__stroke" d="M32 3.5 57 11.5V32.5C57 46.5 45.5 56.5 32 60.5 18.5 56.5 7 46.5 7 32.5V11.5Z"/>
+        <polygon class="crest-draw__stroke crest-draw__stroke--amber"
+          transform="translate(16,18) scale(0.22,0.36)"
+          points="50,0 60,6 64,16 57,27 55,31 68,53 77,76 83,100 17,100 23,76 32,53 45,31 43,27 36,16 40,6"/>
+        <polygon class="crest-draw__stroke"
+          transform="translate(33,20) scale(0.2,0.24)"
+          points="43,0 51,8 64,12 78,22 89,38 94,57 74,61 65,54 59,60 67,82 84,100 11,100 19,76 30,54 26,40 19,28 27,10"/>
+        <polygon class="crest-draw__fill"
+          transform="translate(16,18) scale(0.22,0.36)"
+          points="50,0 60,6 64,16 57,27 55,31 68,53 77,76 83,100 17,100 23,76 32,53 45,31 43,27 36,16 40,6"/>
+      </svg>
+      <span class="brand__name">Kericho Chess<small>Club &amp; Academy</small></span>
+    </a>
+
+    <nav class="nav__links" aria-label="Main">
+      <ul class="nav__list">
+        <li><a class="icon-btn" href="index.html" aria-label="Home" title="Home" aria-current="page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 11.2 12 4l9 7.2V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>
+          </svg>
+          <path class="icon-btn__spark" d="M19 5.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" fill="currentColor"/>
+        </a></li>
+        <li><a class="icon-btn" href="coaching.html" aria-label="Coaching programmes" title="Coaching">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 9.5 12 5l10 4.5L12 14z"/><path d="M6 11.4V16c0 1.3 2.7 2.4 6 2.4s6-1.1 6-2.4v-4.6"/>
+          </svg>
+          <path class="icon-btn__spark" d="M19 5.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" fill="currentColor"/>
+        </a></li>
+        <li><a class="icon-btn" href="tournaments.html" aria-label="Tournaments and the circuit" title="Tournaments">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4.5V7.8A3.2 3.2 0 0 0 7 11"/><path d="M17 6h2.5V7.8A3.2 3.2 0 0 1 17 11"/><path d="M9.5 20h5M12 14v6"/>
+          </svg>
+          <path class="icon-btn__spark" d="M19 5.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" fill="currentColor"/>
+        </a></li>
+        <li><a class="icon-btn" href="live.html" aria-label="Live broadcast room" title="Live">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="2.2"/><path d="M8.1 8.1a5.5 5.5 0 0 0 0 7.8M15.9 15.9a5.5 5.5 0 0 0 0-7.8M5.4 5.4a9.3 9.3 0 0 0 0 13.2M18.6 18.6a9.3 9.3 0 0 0 0-13.2"/>
+          </svg>
+          <path class="icon-btn__spark" d="M19 5.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" fill="currentColor"/>
+        </a></li>
+        <li><a class="icon-btn" href="play.html" aria-label="Play the board" title="Play">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 3h6l-.8 4.2L16 9l-2 1v8h-4v-8l-2-1 1.8-1.8z"/><path d="M7 20h10"/>
+          </svg>
+          <path class="icon-btn__spark" d="M19 5.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" fill="currentColor"/>
+        </a></li>
+        <li><a class="icon-btn" href="shop.html" aria-label="Materials and kits shop" title="Shop">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5.5 8h13l-1 12.5h-11z"/><path d="M9 8V6.2A3 3 0 0 1 15 6.2V8"/>
+          </svg>
+          <path class="icon-btn__spark" d="M19 5.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" fill="currentColor"/>
+        </a></li>
+        <li><a class="icon-btn" href="about.html" aria-label="About the academy" title="About">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.6"/><path d="M12 11.2v5.4M12 7.9h.01"/>
+          </svg>
+          <path class="icon-btn__spark" d="M19 5.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" fill="currentColor"/>
+        </a></li>
+        <li><a class="icon-btn" href="contact.html" aria-label="Enrol or contact us" title="Contact">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5.5" width="18" height="13" rx="2.4"/><path d="m3.6 7 8.4 6 8.4-6"/>
+          </svg>
+          <path class="icon-btn__spark" d="M19 5.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" fill="currentColor"/>
+        </a></li>
+      </ul>
+    </nav>
+
+    <!-- EFFECT-12 · toggle with aria-pressed; 160ms feedback -->
+    <button class="toggle" type="button" data-toggle-motion aria-pressed="false">
+      <span class="toggle__dot" aria-hidden="true"></span>
+      <span data-toggle-motion-label>Motion on</span>
+    </button>
+
+    <a class="nav__cta" href="contact.html">Enrol a learner</a>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- =========================================================================
+         HERO · EFFECT-18 gradient · EFFECT-04 type · EFFECT-23 sequence · EFFECT-01 board
+         ========================================================================= -->
+    <section class="hero" id="hero" aria-labelledby="heroTitle">
+      <div class="hero__gradient" aria-hidden="true"></div>
+      <div class="hero__veil" aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <div>
+          <p class="hero__eyebrow hero__step"><span class="dot" aria-hidden="true"></span>Kericho, Kenya · Club &amp; Academy</p>
+
+          <!-- EFFECT-04: JS splits this into words and letters, keeps one
+               .sr-only copy of the clean sentence, and glitches "Checkmate". -->
+          <h1 class="hero__title hero__step" id="heroTitle"
+              data-split data-glitch-word="Checkmate"
+              data-text="Master Chess. Learn Tactics. Checkmate.">Master Chess. Learn Tactics. Checkmate.</h1>
+
+          <p class="hero__sub hero__step">
+            Replay a classic game move by move, drill the tactics that decide club
+            games, and sit in a live broadcast room with everyone else watching.
+            No video to buffer, no plugin, no account.
+          </p>
+
+          <div class="hero__cta hero__step">
+            <a class="btn btn--primary" href="play.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 3h6l-.8 4.2L16 9l-2 1v8h-4v-8l-2-1 1.8-1.8z"/><path d="M7 20h10"/>
+              </svg>
+              Open the playable board
+            </a>
+            <a class="btn btn--ghost" href="live.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="2.4"/><path d="M7.6 7.6a6.2 6.2 0 0 0 0 8.8M16.4 16.4a6.2 6.2 0 0 0 0-8.8"/>
+              </svg>
+              Watch the live room
+            </a>
+          </div>
+        </div>
+
+        <!-- EFFECT-01 · WebGL board with a poster fallback ---------------------- -->
+        <div class="hero__step hero__board">
+          <div class="board3d" data-hero3d
+               data-fen="r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 4 3"
+               data-label="Ruy López opening position after 1.e4 e5 2.Nf3 Nc6 3.Bb5, rendered in 3D">
+            <img class="board3d__poster" src="assets/hero-dark-board.jpg" width="1376" height="768"
+                 alt="Ruy López opening position: white bishop on b5 pinning nothing yet, black knight on c6, both sides castled-ready."
+                 fetchpriority="high" decoding="async">
+            <canvas class="board3d__canvas" tabindex="0" role="img"
+                    aria-label="Interactive 3D board showing the Ruy López opening position after 1.e4 e5 2.Nf3 Nc6 3.Bb5. Drag to orbit, or focus it and use the arrow keys."
+                    aria-describedby="board3dHelp"></canvas>
+            <p class="board3d__note">Drag to orbit</p>
+            <p class="board3d__fallback-note" hidden></p>
+            <div class="board3d__hud">
+              <span class="chip">Opening <b>Ruy López</b></span>
+              <span class="chip">3.Bb5</span>
+              <span class="chip">Black to move</span>
+              <span class="board3d__controls">
+                <button class="icon-btn" type="button" data-orbit="left" aria-label="Rotate the board left">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+                </button>
+                <button class="icon-btn" type="button" data-orbit="right" aria-label="Rotate the board right">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+                </button>
+                <button class="icon-btn" type="button" data-orbit="up" aria-label="Tilt the board up">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg>
+                </button>
+                <button class="icon-btn" type="button" data-orbit="down" aria-label="Tilt the board down">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 10l6 6 6-6"/></svg>
+                </button>
+                <button class="icon-btn" type="button" data-orbit="reset" aria-label="Reset the board view">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg>
+                </button>
+              </span>
+            </div>
+          </div>
+          <p id="board3dHelp" class="sr-only">
+            The 3D board is decorative but explorable: drag with a mouse or finger to orbit it, or
+            focus it and press the arrow keys. Plus and minus change the distance and Home resets
+            the view. The same position is described in text by the poster image's alternative text.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         EFFECT-02 · SCROLLYTELLING GAME REPLAY
+         ========================================================================= -->
+    <section class="section replay" id="replay" aria-labelledby="replayTitle">
+      <div class="section__head">
+        <span class="eyebrow">Game replay · no video</span>
+        <h2 id="replayTitle">The Opera Game, four chapters</h2>
+        <p>
+          Paul Morphy, Paris 1858. Seventeen moves, one argument — control of the d-file.
+          Scroll and the board plays itself. Nothing about your wheel is touched.
+        </p>
+      </div>
+
+      <div class="replay__grid">
+        <div class="replay__stage">
+          <div data-replay-panel>
+            <div class="replay__boardwrap">
+              <div class="board2d board-swap" data-replay-board></div>
+              <div class="replay__strip">
+                <span class="replay__ply" data-replay-ply aria-live="polite">Start · 0 / 33</span>
+                <span class="replay__nav">
+                  <button class="icon-btn" type="button" data-replay-prev aria-label="Previous move">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+                  </button>
+                  <button class="icon-btn" type="button" data-replay-next aria-label="Next move">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+                  </button>
+                  <button class="icon-btn" type="button" data-replay-reset aria-label="Back to the start">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg>
+                  </button>
+                </span>
+              </div>
+            </div>
+            <p class="sr-only" data-replay-status role="status" aria-live="polite"></p>
+
+            <!-- EFFECT-26 · hover / focus-visible / tap reveals -->
+            <div class="movecards" data-replay-cards></div>
+
+            <p style="margin-top:14px">
+              <button class="btn btn--ghost btn--sm" type="button" data-replay-analyse>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V9M10 20V4M16 20v-7M22 20H2"/></svg>
+                Open in analysis board
+              </button>
+            </p>
+          </div>
+
+          <!-- EFFECT-22 · the replay → analysis swap shares .board-swap -->
+          <div data-analysis hidden>
+            <h3 style="font-size:20px">Analysis board</h3>
+            <p style="color:var(--muted);font-size:14.5px">
+              Take the position and try your own ideas. Undo puts a move back; reset
+              returns to the opening.
+            </p>
+            <div class="replay__boardwrap">
+              <div class="board-swap" data-analysis-board></div>
+            </div>
+            <p class="replay__strip" data-analysis-note style="border-radius:0 0 26px 26px">White to move.</p>
+            <p style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+              <button class="btn btn--ghost btn--sm" type="button" data-analysis-undo>Undo move</button>
+              <button class="btn btn--ghost btn--sm" type="button" data-analysis-reset>Reset board</button>
+              <button class="btn btn--primary btn--sm" type="button" data-analysis-back>Back to the replay</button>
+            </p>
+          </div>
+        </div>
+
+        <!-- The four beats. Backdrops are injected by js/replay.js (EFFECT-20). -->
+        <div class="beats">
+          <article class="beat">
+            <span class="beat__kicker">Chapter 1 · Opening</span>
+            <h3>Development before anything else</h3>
+            <p>
+              Morphy opens 1.e4, meets 1...e5 with 2.Nf3 hitting the e-pawn, and strikes
+              with 3.d4 while Black is still unpacking. By move four White has three pieces
+              out and Black has one.
+            </p>
+            <ul class="beat__moves"><li>1.e4 e5</li><li>2.Nf3 d6</li><li>3.d4 Bg4</li><li>4.dxe5</li></ul>
+          </article>
+
+          <article class="beat">
+            <span class="beat__kicker">Chapter 2 · Middlegame</span>
+            <h3>Trade on your own terms</h3>
+            <p>
+              4...Bxf3 5.Qxf3 looks like relief, but it develops the white queen for free.
+              6.Bc4 lands on the weak f7 square and 7.Qb3 hits b7 and f7 at once — two
+              threats from one square.
+            </p>
+            <ul class="beat__moves"><li>4...Bxf3</li><li>5.Qxf3 dxe5</li><li>6.Bc4 Nf6</li><li>7.Qb3 Qe7</li></ul>
+          </article>
+
+          <article class="beat">
+            <span class="beat__kicker">Chapter 3 · Tactics</span>
+            <h3>Remove the defender</h3>
+            <p>
+              10.Nxb5! offers a knight to rip open the centre. 11.Bxb5+ pins the replacement,
+              and 12.O-O-O is an attacking move — castling puts the rook opposite the black
+              queen. Every piece has a job.
+            </p>
+            <ul class="beat__moves"><li>8.Nc3 c6</li><li>9.Bg5 b5</li><li>10.Nxb5 cxb5</li><li>11.Bxb5+ Nbd7</li><li>12.O-O-O Rd8</li></ul>
+          </article>
+
+          <article class="beat">
+            <span class="beat__kicker">Chapter 4 · Finish</span>
+            <h3>Mate on the file it was always about</h3>
+            <p>
+              13.Rxd7! takes the only defender of d8. 15.Bxd7+ removes the last guard, and
+              16.Qb8+! forces 16...Nxb8 so that 17.Rd8 is mate. The king never leaves e8.
+            </p>
+            <ul class="beat__moves"><li>13.Rxd7 Rxd7</li><li>14.Rd1 Qe6</li><li>15.Bxd7+ Nxd7</li><li>16.Qb8+ Nxb8</li><li>17.Rd8#</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         BENTO · TACTICS & TRAINING CARDS
+         ========================================================================= -->
+    <section class="section" id="tactics" aria-labelledby="tacticsTitle">
+      <div class="section__head">
+        <span class="eyebrow">Tactics gallery</span>
+        <h2 id="tacticsTitle">Ten ways to see a move</h2>
+        <p>
+          Each card teaches one thing and animates for one reason. Every animation
+          stops when its card leaves the screen, and every one of them holds a
+          readable still frame when your system asks for reduced motion.
+        </p>
+      </div>
+
+      <div class="bento">
+
+        <!-- 1 · EFFECT-07 line animation ------------------------------------- -->
+        <article class="card card--wide card-line" aria-busy="true">
+          <div class="skeleton" aria-hidden="true">
+            <span class="skeleton__bar skeleton__bar--sm"></span>
+            <span class="skeleton__bar skeleton__bar--lg"></span>
+            <span class="skeleton__bar skeleton__art"></span>
+          </div>
+          <div class="card__body">
+            <p class="card__kicker">Move paths</p>
+            <h3>Read the route before you touch the piece</h3>
+            <p>A knight does not jump — it travels an L. The flowing line shows the route a coach traces on a club board.</p>
+          </div>
+          <div class="card__art">
+            <svg class="card-line__svg" viewBox="0 0 320 180" role="img"
+                 aria-label="Board diagram. A knight on b1 has three legal routes; the highlighted route runs up two squares and across one to d2, and it loops to show the direction of travel.">
+              <g aria-hidden="true">
+                <rect x="10" y="10" width="160" height="160" fill="#0d2138" stroke="rgba(234,242,250,.16)"/>
+                <g fill="rgba(234,242,250,.06)">
+                  <rect x="50" y="50" width="40" height="40"/><rect x="130" y="50" width="40" height="40"/>
+                  <rect x="50" y="130" width="40" height="40"/><rect x="130" y="130" width="40" height="40"/>
+                  <rect x="90" y="90" width="40" height="40"/>
+                </g>
+                <!-- discarded alternatives -->
+                <path class="card-line__path" d="M90 130 L90 50 L130 50"/>
+                <path class="card-line__path" d="M90 130 L170 130 L170 90"/>
+                <!-- the recommended route -->
+                <path class="card-line__flow" d="M90 130 L90 50 L130 50"/>
+                <path d="M126 44 L136 50 L126 56 Z" fill="#fda638"/>
+                <circle cx="90" cy="130" r="13" fill="#f6f1e6" stroke="#7a6a4f" stroke-width="2"/>
+                <circle cx="130" cy="50" r="13" fill="#22303c" stroke="#0a1c33" stroke-width="2"/>
+              </g>
+              <text x="196" y="60" fill="#eaf2fa" font-size="15" font-family="ui-monospace, monospace">Nf3–d2</text>
+              <text x="196" y="84" fill="rgba(234,242,250,.6)" font-size="12.5">re-routes toward</text>
+              <text x="196" y="102" fill="rgba(234,242,250,.6)" font-size="12.5">the king side</text>
+            </svg>
+          </div>
+          <div class="card__foot">Runs only while this card is on screen.</div>
+        </article>
+
+        <!-- 2 · EFFECT-08 self-drawing strokes -------------------------------- -->
+        <article class="card card--wide card-draw" aria-busy="true">
+          <div class="skeleton" aria-hidden="true">
+            <span class="skeleton__bar skeleton__bar--sm"></span>
+            <span class="skeleton__bar skeleton__bar--lg"></span>
+            <span class="skeleton__bar skeleton__art"></span>
+          </div>
+          <div class="card__body">
+            <p class="card__kicker">Notation</p>
+            <h3>Written the way a coach writes it</h3>
+            <p>The stroke measures its own length at runtime, so it draws at the right speed whatever the board size.</p>
+          </div>
+          <div class="card__art">
+            <svg class="card-draw__svg" viewBox="0 0 320 170" role="img"
+                 aria-label="Board notation for the move e2 to e4: an arrow is drawn from the e2 square to the e4 square, and the notation e2–e4 appears beside it.">
+              <g aria-hidden="true">
+                <rect x="18" y="22" width="46" height="46" fill="rgba(234,242,250,.07)" stroke="rgba(234,242,250,.2)"/>
+                <rect x="18" y="102" width="46" height="46" fill="rgba(234,242,250,.07)" stroke="rgba(234,242,250,.2)"/>
+                <path class="draw-stroke card-draw__ink card-draw__ink--amber" d="M41 100 L41 50"
+                      fill="none" stroke-width="4" stroke-linecap="round"/>
+                <path class="draw-stroke card-draw__ink" d="M33 56 L41 46 L49 56"
+                      fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path class="draw-stroke card-draw__ink" d="M84 128 L150 128"
+                      fill="none" stroke-width="4" stroke-linecap="round"/>
+                <path class="draw-stroke card-draw__ink" d="M84 128 C110 112 128 96 138 74"
+                      fill="none" stroke-width="4" stroke-linecap="round"/>
+                <path class="draw-stroke card-draw__ink" d="M96 122 C120 108 136 92 146 74"
+                      fill="none" stroke-width="4" stroke-linecap="round"/>
+              </g>
+              <text class="draw-fill" x="176" y="86" fill="#eaf2fa" font-size="21" font-family="ui-monospace, monospace">e2–e4</text>
+              <text class="draw-fill" x="176" y="110" fill="rgba(234,242,250,.6)" font-size="12.5">two squares, no capture</text>
+            </svg>
+          </div>
+          <div class="card__foot">
+            <button class="toggle" type="button" data-draw-replay>
+              <span class="toggle__dot" aria-hidden="true"></span>Draw it again
+            </button>
+            <span>Same component as the page preloader.</span>
+          </div>
+        </article>
+
+        <!-- 3 · EFFECT-09 morphing SVG ---------------------------------------- -->
+        <article class="card card--tall card-morph" aria-busy="true">
+          <div class="skeleton" aria-hidden="true">
+            <span class="skeleton__bar skeleton__bar--sm"></span>
+            <span class="skeleton__bar skeleton__bar--lg"></span>
+            <span class="skeleton__bar skeleton__art"></span>
+          </div>
+          <div class="card__body">
+            <p class="card__kicker">Tactic shapes</p>
+            <h3 data-morph-name>Pin</h3>
+            <p data-morph-caption>A pinned piece cannot move: the king behind it would fall.</p>
+          </div>
+          <div class="card__art">
+            <svg class="card-morph__svg" viewBox="0 0 200 200" role="img"
+                 aria-label="Diagram that morphs between a pin, a fork and a skewer. Hover or focus the card to cycle them; the dot buttons below select one directly.">
+              <g aria-hidden="true">
+                <rect x="14" y="14" width="172" height="172" fill="rgba(234,242,250,.05)" stroke="rgba(234,242,250,.14)"/>
+                <g stroke="rgba(234,242,250,.12)">
+                  <path d="M14 57h172M14 100h172M14 143h172M57 14v172M100 14v172M143 14v172"/>
+                </g>
+                <path data-morph-path class="card-morph__shape" d="M0 0" fill="none" stroke="#1eaaf1" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle data-morph-node cx="34" cy="112" r="9" fill="#f6f1e6" stroke="#7a6a4f" stroke-width="2"/>
+                <circle data-morph-node cx="96" cy="112" r="9" fill="#22303c" stroke="#0a1c33" stroke-width="2"/>
+                <circle data-morph-node cx="176" cy="112" r="11" fill="#fda638" stroke="#7a4a12" stroke-width="2"/>
+              </g>
+            </svg>
+          </div>
+          <div class="morph-dots" role="group" aria-label="Choose a tactic diagram">
+            <button type="button" data-morph-dot aria-pressed="true" aria-label="Show the pin diagram"></button>
+            <button type="button" data-morph-dot aria-pressed="false" aria-label="Show the fork diagram"></button>
+            <button type="button" data-morph-dot aria-pressed="false" aria-label="Show the skewer diagram"></button>
+          </div>
+          <div class="card__foot">Reverses when you leave the card.</div>
+        </article>
+
+        <!-- 4 · EFFECT-13 mascot ---------------------------------------------- -->
+        <article class="card card--tall card-mascot" aria-busy="true">
+          <div class="skeleton" aria-hidden="true">
+            <span class="skeleton__bar skeleton__bar--sm"></span>
+            <span class="skeleton__bar skeleton__bar--lg"></span>
+            <span class="skeleton__bar skeleton__art"></span>
+          </div>
+          <div class="card__body">
+            <p class="card__kicker">Club mascot</p>
+            <h3>Meet the knight</h3>
+            <p>He waves when you are looking. Purely decorative — he never carries information.</p>
+          </div>
+          <div class="card__art">
+            <svg class="mascot" data-mascot viewBox="0 0 200 220" aria-hidden="true" focusable="false">
+              <ellipse cx="100" cy="206" rx="56" ry="9" fill="rgba(0,0,0,.38)"/>
+              <path d="M40 198h120l-14-20H54z" fill="#223047"/>
+              <g class="mascot__head">
+                <g transform="translate(175,26) scale(-1.5,1.5)">
+                  <polygon points="43,0 51,8 64,12 78,22 89,38 94,57 74,61 65,54 59,60 67,82 84,100 11,100 19,76 30,54 26,40 19,28 27,10"
+                           fill="#f6f1e6" stroke="#7a6a4f" stroke-width="1.4" stroke-linejoin="round"/>
+                  <path d="M43 0 51 8 64 12 78 22 89 38 94 57" fill="none" stroke="#1eaaf1" stroke-width="7"
+                        stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+                  <g class="mascot__eye">
+                    <circle cx="34" cy="30" r="4.8" fill="#22303c"/>
+                    <circle cx="35.8" cy="28.2" r="1.6" fill="#fff"/>
+                  </g>
+                  <circle cx="57" cy="55" r="1.7" fill="#7a6a4f"/>
+                  <path d="M50 60q5 4 10 0" fill="none" stroke="#7a6a4f" stroke-width="1.6" stroke-linecap="round"/>
+                  <g transform="translate(30,66)">
+                    <g class="mascot__arm">
+                      <path d="M0 0 -20-26" stroke="#f6f1e6" stroke-width="10" stroke-linecap="round" fill="none"/>
+                      <path d="M0 0 -20-26" stroke="#7a6a4f" stroke-width="1.2" stroke-linecap="round" fill="none" opacity=".45"/>
+                      <circle cx="-22" cy="-28" r="7" fill="#f6f1e6" stroke="#7a6a4f" stroke-width="1.5"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="card__foot">Hover, tap or focus the card to wake him.</div>
+        </article>
+
+        <!-- 5 · EFFECT-14 faux 3D --------------------------------------------- -->
+        <article class="card card--tall card-faux3d" aria-busy="true" data-pawn3d>
+          <div class="skeleton" aria-hidden="true">
+            <span class="skeleton__bar skeleton__bar--sm"></span>
+            <span class="skeleton__bar skeleton__bar--lg"></span>
+            <span class="skeleton__bar skeleton__art"></span>
+          </div>
+          <div class="card__body">
+            <p class="card__kicker">Piece geometry</p>
+            <h3>A pawn from four angles at once</h3>
+            <p>Stacked layers with CSS perspective. Move the pointer to tilt it; the tilt is bounded to 20°.</p>
+          </div>
+          <div class="card__art">
+            <div class="pawn3d" aria-hidden="true">
+              <span class="pawn3d__layer"></span>
+              <span class="pawn3d__layer"></span>
+              <span class="pawn3d__layer"></span>
+              <span class="pawn3d__layer"></span>
+              <span class="pawn3d__layer"></span>
+            </div>
+          </div>
+          <div class="card__foot">Flat silhouette under reduced motion.</div>
+        </article>
+
+        <!-- 6 · EFFECT-15 horizontal rail -------------------------------------- -->
+        <article class="card card--full card-rail" aria-busy="true">
+          <div class="skeleton" aria-hidden="true">
+            <span class="skeleton__bar skeleton__bar--sm"></span>
+            <span class="skeleton__bar skeleton__bar--lg"></span>
+            <span class="skeleton__bar skeleton__art"></span>
+          </div>
+          <div class="card__body">
+            <p class="card__kicker">Puzzle rail</p>
+            <h3>Ten positions from the club folder</h3>
+            <p>Snap-scrolled horizontally with a little parallax depth. Arrow keys move it; the count is announced.</p>
+          </div>
+          <div class="rail" data-rail tabindex="0" role="region" aria-label="Famous puzzle and study positions, horizontally scrollable">
+            <figure class="rail__item" style="margin:0">
+              <span class="rail__layer" style="background-image:url('assets/tournament-prep-01.jpg')" aria-hidden="true"></span>
+              <span class="rail__veil" aria-hidden="true"></span>
+              <span class="rail__badge">Mate in 2</span>
+              <figcaption class="rail__cap"><b>Back-rank classic</b><span>Rook to the eighth, king has no flight square.</span></figcaption>
+            </figure>
+            <figure class="rail__item" style="margin:0">
+              <span class="rail__layer" style="background-image:url('assets/tournament-prep-03.jpg')" aria-hidden="true"></span>
+              <span class="rail__veil" aria-hidden="true"></span>
+              <span class="rail__badge">Fork</span>
+              <figcaption class="rail__cap"><b>Knight on the rim</b><span>One move, two pieces, no defence.</span></figcaption>
+            </figure>
+            <figure class="rail__item" style="margin:0">
+              <span class="rail__layer" style="background-image:url('assets/orig-02.jpg')" aria-hidden="true"></span>
+              <span class="rail__veil" aria-hidden="true"></span>
+              <span class="rail__badge">Pin</span>
+              <figcaption class="rail__cap"><b>Absolute pin</b><span>The bishop cannot step aside.</span></figcaption>
+            </figure>
+            <figure class="rail__item" style="margin:0">
+              <span class="rail__layer" style="background-image:url('assets/orig-04.jpg')" aria-hidden="true"></span>
+              <span class="rail__veil" aria-hidden="true"></span>
+              <span class="rail__badge">Skewer</span>
+              <figcaption class="rail__cap"><b>Through the king</b><span>Attack the king, take what stands behind.</span></figcaption>
+            </figure>
+            <figure class="rail__item" style="margin:0">
+              <span class="rail__layer" style="background-image:url('assets/tournament-focus.jpg')" aria-hidden="true"></span>
+              <span class="rail__veil" aria-hidden="true"></span>
+              <span class="rail__badge">Study</span>
+              <figcaption class="rail__cap"><b>Rook endgame</b><span>Cut the king off before you push.</span></figcaption>
+            </figure>
+            <figure class="rail__item" style="margin:0">
+              <span class="rail__layer" style="background-image:url('assets/tournament-prep-06.jpg')" aria-hidden="true"></span>
+              <span class="rail__veil" aria-hidden="true"></span>
+              <span class="rail__badge">Deflection</span>
+              <figcaption class="rail__cap"><b>Remove the guard</b><span>The defender is the real target.</span></figcaption>
+            </figure>
+            <figure class="rail__item" style="margin:0">
+              <span class="rail__layer" style="background-image:url('assets/orig-01.jpg')" aria-hidden="true"></span>
+              <span class="rail__veil" aria-hidden="true"></span>
+              <span class="rail__badge">Zugzwang</span>
+              <figcaption class="rail__cap"><b>Nothing safe to move</b><span>Every legal move loses something.</span></figcaption>
+            </figure>
+            <figure class="rail__item" style="margin:0">
+              <span class="rail__layer" style="background-image:url('assets/chess-materials.jpg')" aria-hidden="true"></span>
+              <span class="rail__veil" aria-hidden="true"></span>
+              <span class="rail__badge">Opening</span>
+              <figcaption class="rail__cap"><b>Development race</b><span>Tempo counted in pieces, not pawns.</span></figcaption>
+            </figure>
+          </div>
+          <div class="rail__meta">
+            <span class="mono" data-rail-meta aria-live="polite">1 of 8</span>
+            <span>Use the arrow keys or the buttons.</span>
+            <button class="icon-btn" type="button" data-rail-prev aria-label="Previous position">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+            </button>
+            <button class="icon-btn" type="button" data-rail-next aria-label="Next position">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- 7 · EFFECT-16 mixed media ------------------------------------------ -->
+        <article class="card card--xwide card-collage" aria-busy="true">
+          <div class="skeleton" aria-hidden="true">
+            <span class="skeleton__bar skeleton__bar--sm"></span>
+            <span class="skeleton__bar skeleton__bar--lg"></span>
+            <span class="skeleton__bar skeleton__art"></span>
+          </div>
+          <div class="card__body">
+            <p class="card__kicker">Club album</p>
+            <h3>Photographs, diagrams and a little grain</h3>
+            <p>Real boards from our tournament days, with vector pieces laid over the top. Every image is dimensioned, so nothing jumps.</p>
+          </div>
+          <div class="card__art">
+            <div class="collage">
+              <div class="collage__shot collage__shot--a">
+                <img src="assets/tournament-focus.jpg" width="1200" height="896" loading="lazy" decoding="async"
+                     alt="A tournament board mid-game, pieces clustered on the king side.">
+              </div>
+              <div class="collage__shot collage__shot--b">
+                <img src="assets/orig-02.jpg" width="1400" height="787" loading="lazy" decoding="async"
+                     alt="Rows of boards set out for a county fixture, each with its own clock and scoresheet.">
+              </div>
+              <div class="collage__shot collage__shot--c">
+                <img src="assets/chess-materials.jpg" width="1200" height="896" loading="lazy" decoding="async"
+                     alt="Academy coaching materials: a demonstration board, workbooks and a set of pieces.">
+              </div>
+              <svg class="collage__vec" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                <polygon points="43,0 51,8 64,12 78,22 89,38 94,57 74,61 65,54 59,60 67,82 84,100 11,100 19,76 30,54 26,40 19,28 27,10"
+                         fill="#fda638" opacity=".92"/>
+              </svg>
+              <span class="collage__grain" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="card__foot">Lazy-loaded with width and height set.</div>
+        </article>
+
+        <!-- 8 · EFFECT-17 liquid goo ------------------------------------------- -->
+        <article class="card card--half card-goo" aria-busy="true">
+          <div class="skeleton" aria-hidden="true">
+            <span class="skeleton__bar skeleton__bar--sm"></span>
+            <span class="skeleton__bar skeleton__bar--lg"></span>
+            <span class="skeleton__bar skeleton__art"></span>
+          </div>
+          <div class="card__body">
+            <p class="card__kicker">Transition</p>
+            <h3>One position dissolving into the next</h3>
+            <p>An SVG filter with a bounded region. The blur never escapes the card.</p>
+          </div>
+          <div class="card__art">
+            <svg class="goo" viewBox="0 0 300 170" aria-hidden="true" focusable="false">
+              <defs>
+                <filter id="gooFilter" x="-18%" y="-18%" width="136%" height="136%" color-interpolation-filters="sRGB">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="blur"/>
+                  <feColorMatrix in="blur" mode="matrix"
+                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9" result="goo"/>
+                  <feBlend in="SourceGraphic" in2="goo"/>
+                </filter>
+              </defs>
+              <g filter="url(#gooFilter)">
+                <g transform="translate(58,52) scale(0.72,1.05)">
+                  <polygon class="goo__blob" points="50,0 60,6 64,16 57,27 55,31 68,53 77,76 83,100 17,100 23,76 32,53 45,31 43,27 36,16 40,6"/>
+                </g>
+                <circle class="goo__blob" cx="150" cy="96" r="30"/>
+                <circle class="goo__blob goo__blob--amber" cx="196" cy="86" r="24"/>
+                <g transform="translate(196,30) scale(0.6,0.72)">
+                  <polygon class="goo__blob goo__blob--amber" points="43,0 51,8 64,12 78,22 89,38 94,57 74,61 65,54 59,60 67,82 84,100 11,100 19,76 30,54 26,40 19,28 27,10"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="card__foot">The same filter spills across the 404 page.</div>
+        </article>
+
+        <!-- 9 · EFFECT-19 isometric assembly ----------------------------------- -->
+        <article class="card card--wide card-iso" aria-busy="true">
+          <div class="skeleton" aria-hidden="true">
+            <span class="skeleton__bar skeleton__bar--sm"></span>
+            <span class="skeleton__bar skeleton__bar--lg"></span>
+            <span class="skeleton__bar skeleton__art"></span>
+          </div>
+          <div class="card__body">
+            <p class="card__kicker">Endgame</p>
+            <h3>King and rook against a lone king</h3>
+            <p>True 120° axes, no perspective convergence. The scene assembles as the card comes up the screen.</p>
+          </div>
+          <div class="card__art">
+            <svg class="card-iso__svg" viewBox="0 0 340 260" aria-hidden="true" focusable="false"></svg>
+          </div>
+          <div class="card__foot">Fully assembled under reduced motion.</div>
+        </article>
+
+        <!-- 10 · EFFECT-31 stop-motion sprite ---------------------------------- -->
+        <article class="card card--wide card-sprite" aria-busy="true">
+          <div class="skeleton" aria-hidden="true">
+            <span class="skeleton__bar skeleton__bar--sm"></span>
+            <span class="skeleton__bar skeleton__bar--lg"></span>
+            <span class="skeleton__bar skeleton__art"></span>
+          </div>
+          <div class="card__body">
+            <p class="card__kicker">Capture, frame by frame</p>
+            <h3>Eight frames, ten per second</h3>
+            <p>A sprite sheet stepped through with <span class="mono">steps()</span> timing — the cheapest way to show a capture without video.</p>
+          </div>
+          <div class="card__art">
+            <div class="sprite" role="img"
+                 aria-label="Stop-motion sequence: a white knight crosses the board, takes the black pawn on the marked square and settles there."></div>
+          </div>
+          <div class="card__foot">Rests on the impact frame under reduced motion.</div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         EFFECT-05 · LIVE PRESENCE
+         ========================================================================= -->
+    <section class="section live" id="live" aria-labelledby="liveTitle"
+             data-fen="r2q1rk1/ppp2ppp/2n1bn2/2bpp3/3PP3/2P1BN2/PP1NBPPP/R2Q1RK1 w - - 6 8">
+      <div class="section__head">
+        <span class="eyebrow">Spectator room</span>
+        <h2 id="liveTitle">Watch it with other people</h2>
+        <p>
+          Board 1 of the county fixture. Everyone watching sees the same board and the
+          same pointers — and if the room is empty, the page says so plainly instead of
+          inventing company.
+        </p>
+      </div>
+
+      <div class="live__grid">
+        <div class="presence">
+          <div class="presence__stage" data-presence-stage>
+            <div data-presence-board></div>
+            <div class="presence__layer" data-presence-layer aria-hidden="true"></div>
+          </div>
+          <div class="presence__bar">
+            <span class="presence__status" data-presence-status data-state="connecting">
+              <span class="dot" aria-hidden="true"></span>
+              <span data-status-text>Connecting…</span>
+            </span>
+            <div class="reactions" role="group" aria-label="Send a reaction">
+              <button class="icon-btn" type="button" data-react="👍" aria-label="React: good move">👍</button>
+              <button class="icon-btn" type="button" data-react="😂" aria-label="React: that was funny">😂</button>
+              <button class="icon-btn" type="button" data-react="🤔" aria-label="React: thinking about it">🤔</button>
+              <button class="icon-btn" type="button" data-react="👏" aria-label="React: well played">👏</button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size:20px">Who is here</h3>
+          <p style="color:var(--muted);font-size:14.5px">
+            Move your pointer over the board and everyone else sees it move. Reactions
+            float up from the square you are looking at. Your own pointer is drawn
+            instantly, before the network is involved.
+          </p>
+          <ul class="roster" data-presence-roster aria-label="People on this board"></ul>
+          <p class="sr-only" data-presence-announce role="status" aria-live="polite"></p>
+          <p style="margin-top:16px">
+            <a class="btn btn--ghost btn--sm" href="live.html">Open the full broadcast room</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         PLAYER / COMMUNITY CARDS · EFFECT-26 + EFFECT-12
+         ========================================================================= -->
+    <section class="section" id="community" aria-labelledby="communityTitle">
+      <div class="section__head">
+        <span class="eyebrow">The club</span>
+        <h2 id="communityTitle">The players and the people who keep score</h2>
+        <p>
+          Hover, tap or focus a card to see rating, recent form and the follow button.
+          No portraits — these are the boards they play on.
+        </p>
+      </div>
+
+      <div class="players">
+        <article class="player" data-tap-reveal>
+          <div class="player__top">
+            <img src="assets/orig-01.jpg" width="549" height="366" loading="lazy" decoding="async"
+                 alt="A club board photographed during a Saturday session, mid-middlegame.">
+            <span class="player__badge">Board 1</span>
+          </div>
+          <div class="player__body">
+            <h3>President's board</h3>
+            <p class="player__rating">Club rating 1842 · 12 games this season</p>
+            <div class="player__reveal">
+              <ul>
+                <li><span>Last fixture</span><span>win</span></li>
+                <li><span>Openings</span><span>1.e4 · Ruy López</span></li>
+                <li><span>Coaching</span><span>Saturdays, 09:00</span></li>
+              </ul>
+              <button class="btn btn--primary btn--sm" type="button" aria-pressed="false">Follow</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="player" data-tap-reveal>
+          <div class="player__top">
+            <img src="assets/tournament-prep-03.jpg" width="622" height="1280" loading="lazy" decoding="async"
+                 alt="A board photographed from above at a tournament hall, clocks running.">
+            <span class="player__badge">Board 2</span>
+          </div>
+          <div class="player__body">
+            <h3>Squad board</h3>
+            <p class="player__rating">Club rating 1610 · 9 games this season</p>
+            <div class="player__reveal">
+              <ul>
+                <li><span>Last fixture</span><span>draw</span></li>
+                <li><span>Openings</span><span>1.d4 · Queen's Gambit</span></li>
+                <li><span>School</span><span>Kericho Township</span></li>
+              </ul>
+              <button class="btn btn--primary btn--sm" type="button" aria-pressed="false">Follow</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="player" data-tap-reveal>
+          <div class="player__top">
+            <img src="assets/shelf-clock.jpg" width="1536" height="1024" loading="lazy" decoding="async"
+                 alt="A digital tournament clock beside a wooden set on a club table.">
+            <span class="player__badge">Board 3</span>
+          </div>
+          <div class="player__body">
+            <h3>Rapid board</h3>
+            <p class="player__rating">Rapid 1735 · 21 games</p>
+            <div class="player__reveal">
+              <ul>
+                <li><span>Time control</span><span>10 + 5</span></li>
+                <li><span>Best result</span><span>county semi-final</span></li>
+                <li><span>Availability</span><span>Wednesdays</span></li>
+              </ul>
+              <button class="btn btn--primary btn--sm" type="button" aria-pressed="false">Follow</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="player" data-tap-reveal>
+          <div class="player__top">
+            <img src="assets/orig-04.jpg" width="1400" height="932" loading="lazy" decoding="async"
+                 alt="Learners at a school club fixture leaning over boards set out on desks.">
+            <span class="player__badge">Board 4</span>
+          </div>
+          <div class="player__body">
+            <h3>Schools board</h3>
+            <p class="player__rating">Development squad · 30 learners</p>
+            <div class="player__reveal">
+              <ul>
+                <li><span>Programme</span><span>school clubs</span></li>
+                <li><span>Next fixture</span><span>inter-school</span></li>
+                <li><span>Kit</span><span>academy sets</span></li>
+              </ul>
+              <button class="btn btn--primary btn--sm" type="button" aria-pressed="false">Follow</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         EFFECT-03 · AR / 360° TOURNAMENT OVERLAY
+         ========================================================================= -->
+    <section class="section" id="broadcast" aria-labelledby="broadcastTitle">
+      <div class="section__head">
+        <span class="eyebrow">Tournament broadcast</span>
+        <h2 id="broadcastTitle">Put board 1 in your room</h2>
+      </div>
+
+      <div class="ar-band" data-ar>
+        <div>
+          <h2 style="font-size:clamp(21px,2.4vw,29px)">Opt in when you want it</h2>
+          <p>
+            Nothing is requested until you press the button. On a WebXR device the board
+            is placed at floor level about a metre in front of you; everywhere else you
+            get the same scene as a draggable 360° preview.
+          </p>
+          <p style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <button class="btn btn--primary" type="button" data-ar-start disabled aria-describedby="arSupport">
+              View in AR
+            </button>
+            <a class="btn btn--ghost" href="tournaments.html">Tournament calendar</a>
+          </p>
+          <p id="arSupport" data-ar-support data-state="probing" style="font-size:13.5px;color:var(--faint)">
+            Checking whether this device can place the board…
+          </p>
+        </div>
+
+        <div class="spin-stage" data-ar-stage tabindex="0" role="img"
+             aria-label="360 degree preview of the board: a white king and rook against a lone black king. Drag to spin it, or use the arrow keys.">
+          <div class="spin-plate" data-ar-plate aria-hidden="true"></div>
+          <button class="icon-btn ar-exit" type="button" data-ar-exit aria-label="Exit AR view" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+          <p class="spin-stage__hint">Drag to spin · arrow keys rotate · <span class="mono" data-ar-deg>0°</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         CTA BAND · EFFECT-13 waving mascot
+         ========================================================================= -->
+    <section class="section" aria-labelledby="ctaTitle" style="padding-top:0">
+      <div class="cta-band">
+        <svg class="mascot mascot--wave" data-mascot viewBox="0 0 200 220" aria-hidden="true" focusable="false">
+          <ellipse cx="100" cy="206" rx="56" ry="9" fill="rgba(0,0,0,.38)"/>
+          <path d="M40 198h120l-14-20H54z" fill="#223047"/>
+          <g class="mascot__head">
+            <g transform="translate(175,26) scale(-1.5,1.5)">
+              <polygon points="43,0 51,8 64,12 78,22 89,38 94,57 74,61 65,54 59,60 67,82 84,100 11,100 19,76 30,54 26,40 19,28 27,10"
+                       fill="#f6f1e6" stroke="#7a6a4f" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M43 0 51 8 64 12 78 22 89 38 94 57" fill="none" stroke="#fda638" stroke-width="7"
+                    stroke-linecap="round" stroke-linejoin="round" opacity=".95"/>
+              <g class="mascot__eye">
+                <circle cx="34" cy="30" r="4.8" fill="#22303c"/>
+                <circle cx="35.8" cy="28.2" r="1.6" fill="#fff"/>
+              </g>
+              <circle cx="57" cy="55" r="1.7" fill="#7a6a4f"/>
+              <path d="M50 60q5 4 10 0" fill="none" stroke="#7a6a4f" stroke-width="1.6" stroke-linecap="round"/>
+              <g transform="translate(30,66)">
+                <g class="mascot__arm">
+                  <path d="M0 0 -20-26" stroke="#f6f1e6" stroke-width="10" stroke-linecap="round" fill="none"/>
+                  <path d="M0 0 -20-26" stroke="#7a6a4f" stroke-width="1.2" stroke-linecap="round" fill="none" opacity=".45"/>
+                  <circle cx="-22" cy="-28" r="7" fill="#f6f1e6" stroke="#7a6a4f" stroke-width="1.5"/>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+        <div>
+          <h2 id="ctaTitle" style="margin-bottom:4px">Bring a friend, borrow a board</h2>
+          <p>
+            Saturday sessions are open to anyone who turns up. Coaching in schools runs
+            through the term, and the county circuit takes every age group from Under-8
+            upwards.
+          </p>
+        </div>
+        <p style="display:grid;gap:10px;margin:0">
+          <a class="btn btn--primary" href="contact.html">Enrol a learner</a>
+          <a class="btn btn--ghost" href="coaching.html">See the programmes</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===========================================================================
+       FOOTER
+       =========================================================================== -->
+  <footer class="foot">
+    <div class="foot__grid">
+      <div>
+        <h4>Kericho Chess Club &amp; Academy</h4>
+        <p style="margin:0">Forward Ever, Backward Never.<br>Kericho, Kenya.</p>
+      </div>
+      <div>
+        <h4>Play &amp; watch</h4>
+        <ul>
+          <li><a href="play.html">Play the board</a></li>
+          <li><a href="live.html">Live broadcast room</a></li>
+          <li><a href="tournaments.html">Tournaments &amp; the circuit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="coaching.html">Coaching programmes</a></li>
+          <li><a href="shop.html">Materials &amp; kits</a></li>
+          <li><a href="about.html">About the academy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+254729037585">+254 729 037 585</a></li>
+          <li><a href="mailto:kerichochessacademy@gmail.com">kerichochessacademy@gmail.com</a></li>
+          <li><a href="contact.html">Enrol &amp; contact</a></li>
+        </ul>
+      </div>
     </div>
-
-    <p class="badge">Coming soon</p>
-
-    <h1 aria-label="A new home for Kericho Chess is on the way">
-      <span class="split" aria-hidden="true">
-        <span class="w"><span class="l" style="--n:0">A</span></span>
-        <span class="w"><span class="l" style="--n:1">n</span><span class="l" style="--n:2">e</span><span class="l" style="--n:3">w</span></span>
-        <span class="w"><span class="l" style="--n:4">h</span><span class="l" style="--n:5">o</span><span class="l" style="--n:6">m</span><span class="l" style="--n:7">e</span></span>
-        <span class="w"><span class="l" style="--n:8">f</span><span class="l" style="--n:9">o</span><span class="l" style="--n:10">r</span></span>
-        <span class="w"><span class="l" style="--n:11">K</span><span class="l" style="--n:12">e</span><span class="l" style="--n:13">r</span><span class="l" style="--n:14">i</span><span class="l" style="--n:15">c</span><span class="l" style="--n:16">h</span><span class="l" style="--n:17">o</span></span>
-        <span class="w"><span class="l" style="--n:18">C</span><span class="l" style="--n:19">h</span><span class="l" style="--n:20">e</span><span class="l" style="--n:21">s</span><span class="l" style="--n:22">s</span></span>
-        <span class="w"><span class="l" style="--n:23">i</span><span class="l" style="--n:24">s</span></span>
-        <span class="w hl"><span class="l" style="--n:25">o</span><span class="l" style="--n:26">n</span></span>
-        <span class="w hl"><span class="l" style="--n:27">t</span><span class="l" style="--n:28">h</span><span class="l" style="--n:29">e</span></span>
-        <span class="w hl"><span class="l" style="--n:30">w</span><span class="l" style="--n:31">a</span><span class="l" style="--n:32">y</span></span>
-      </span>
-    </h1>
-
-    <p class="lede">
-      We are rebuilding our website. The new one will be quicker, will work properly
-      on a phone, and will make it far easier to register, follow tournaments and find us.
+    <p class="foot__base">
+      <span>Kericho Chess Club &amp; Academy</span>
+      <span aria-hidden="true">·</span>
+      <a href="coming-soon.html">Earlier holding page</a>
+      <span aria-hidden="true">·</span>
+      <span>Template heritage: Kiddos (Colorlib, CC BY 3.0) · chess.js (BSD)</span>
     </p>
+  </footer>
 
-    <p class="reassure">
-      <strong>The academy is open.</strong> Coaching, school clubs and Saturday sessions
-      are running as normal. Only the website is being rebuilt, so message us and a
-      person will reply.
-    </p>
+</div><!-- /page-shell -->
 
-    <div class="actions">
-      <a class="btn btn--primary" href="https://wa.me/254729037585?text=Hello%20Kericho%20Chess%20Academy%2C%20I%20found%20your%20website%20and%20would%20like%20to%20know%20more.">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.19-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24M8.53 7.33c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.43 1.03 2.6c.13.16 1.76 2.8 4.34 3.82.61.24 1.08.38 1.45.49.61.19 1.16.17 1.6.1.49-.07 1.5-.61 1.71-1.21.21-.6.21-1.1.15-1.21-.06-.11-.23-.17-.48-.3-.25-.12-1.5-.74-1.73-.82-.23-.09-.4-.13-.57.13-.17.25-.65.82-.8.99-.15.16-.29.19-.54.06-.25-.12-1.06-.39-2.02-1.25-.75-.66-1.25-1.48-1.4-1.73-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.38-.77-1.88-.2-.49-.41-.5-.57-.51h-.5Z"/></svg>
-        Message us on WhatsApp
-      </a>
-      <a class="btn btn--ghost" href="mailto:kerichochessacademy@gmail.com?subject=Enquiry%20from%20the%20website">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6"/></svg>
-        Email the academy
-      </a>
-    </div>
-
-    <ul class="lines">
-      <li><a href="tel:+254729037585">+254 729 037 585</a></li>
-      <li><a href="https://www.facebook.com/smesso" rel="noopener">Facebook</a></li>
-      <li><a href="https://www.tiktok.com/@kericho.chess.clu" rel="noopener">TikTok</a></li>
-    </ul>
-
-  </div>
-</main>
-
-<footer>
-  <strong>Kericho Chess Club &amp; Academy</strong>
-  Forward Ever, Backward Never
-</footer>
-
-<script>
-/* Pointer parallax: the scene leans a degree or two toward the cursor.
-   Skipped entirely for touch, for reduced-motion, and if anything is missing. */
-(function () {
-  var stage = document.getElementById('stage');
-  if (!stage) return;
-  var mm = window.matchMedia;
-  if (!mm) return;
-  if (mm('(prefers-reduced-motion: reduce)').matches) return;
-  if (!mm('(hover: hover) and (pointer: fine)').matches) return;
-
-  var x = 0, y = 0, queued = false;
-  function paint() {
-    queued = false;
-    stage.style.transform = 'rotateX(' + y.toFixed(2) + 'deg) rotateY(' + x.toFixed(2) + 'deg)';
-  }
-  window.addEventListener('pointermove', function (e) {
-    x = (e.clientX / window.innerWidth - .5) * 9;
-    y = -(e.clientY / window.innerHeight - .5) * 5;
-    if (!queued) { queued = true; requestAnimationFrame(paint); }
-  }, { passive: true });
-
-  window.addEventListener('blur', function () {
-    x = y = 0;
-    if (!queued) { queued = true; requestAnimationFrame(paint); }
-  });
-})();
-</script>
-
+<!-- Scripts. All deferred, so they run in order after parsing:
+     effects.js publishes window.KC, everything else consumes it. -->
+<script src="js/vendor/three.min.js" defer fetchpriority="low"></script>
+<script src="js/chess.js" defer></script>
+<script src="js/effects.js" defer></script>
+<script src="js/hero3d.js" defer></script>
+<script src="js/replay.js" defer></script>
+<script src="js/bento.js" defer></script>
+<script src="js/presence.js" defer></script>
+<script src="js/ar.js" defer></script>
 </body>
 </html>

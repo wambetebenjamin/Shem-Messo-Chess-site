@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — that square is empty · Kericho Chess Club &amp; Academy</title>
+<meta name="description" content="The page you asked for is not on the board. Head back to the club, the playable board or the live room.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#050b16">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+
+<link rel="stylesheet" href="css/effects.css">
+<link rel="stylesheet" href="css/sections.css">
+<noscript><style>.hero__step{opacity:1 !important}</style></noscript>
+</head>
+
+<body>
+<p id="routeStatus" class="sr-only" role="status" aria-live="polite"></p>
+
+<!-- EFFECT-06 · the same ambient particle layer as the home page, frozen to a
+     single frame under reduced motion. -->
+<canvas id="ambient" class="ambient" aria-hidden="true"></canvas>
+
+<main class="error-page" id="main" tabindex="-1">
+
+  <!-- EFFECT-17 · the gooey filter from bento card 8, reused as a spill -->
+  <svg class="error-page__goo" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"
+       aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="spillFilter" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="34" result="blur"/>
+        <feColorMatrix in="blur" mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo"/>
+        <feBlend in="SourceGraphic" in2="goo"/>
+      </filter>
+    </defs>
+    <g filter="url(#spillFilter)">
+      <circle class="goo__blob" cx="300" cy="380" r="150"/>
+      <circle class="goo__blob goo__blob--amber" cx="560" cy="300" r="110"/>
+      <circle class="goo__blob" cx="820" cy="420" r="130"/>
+      <circle class="goo__blob goo__blob--amber" cx="1010" cy="340" r="80"/>
+    </g>
+  </svg>
+
+  <div class="error-page__inner">
+    <p class="eyebrow" style="color:var(--amber)">Move not legal</p>
+    <h1>404</h1>
+    <p style="font-size:clamp(17px,2vw,20px)">
+      That square is empty. The page you asked for is not on the board — it may have
+      been renamed, or the link may have lost a move somewhere.
+    </p>
+    <p>
+      The academy is still here: replay the Opera Game, drill a tactic, or watch
+      board 1 with everyone else.
+    </p>
+
+    <div class="error-page__links">
+      <a class="btn btn--primary" href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.2 12 4l9 7.2V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+        Back to the club
+      </a>
+      <a class="btn btn--ghost" href="play.html">Play the board</a>
+      <a class="btn btn--ghost" href="live.html">Live room</a>
+      <a class="btn btn--ghost" href="contact.html">Contact us</a>
+    </div>
+
+    <p style="margin-top:26px;font-size:13.5px;color:var(--faint)">
+      Kericho Chess Club &amp; Academy · Forward Ever, Backward Never
+    </p>
+  </div>
+</main>
+
+<script src="js/effects.js" defer></script>
+</body>
+</html>
