@@ -1,6 +1,6 @@
 # Kericho Chess Club & Academy
 
-A static, multi-page chess site for the Academy in Kericho, Kenya. The home page is organized around a simple visitor path — **play, learn, compete** — and takes visual cues from the supplied chess-site reference: a charcoal-and-gold palette, a framed chess hero, feature cards and tournament updates. The recently added `eventre-master.zip` directly informs the event-led structure: a fixture-first hero, schedule-style agenda rows, a coach spotlight inspired by its speaker section, event gallery and clear registration actions. The archive layout is adapted for chess and its stock photos are not used; no child photos are referenced by active pages.
+A static, multi-page chess site for the Academy in Kericho, Kenya. The home page is organized around a simple visitor path — **play, learn, compete** — and takes visual cues from the supplied chess-site reference: a charcoal-and-gold palette, a photo-led chess hero, straightforward service links and fixture updates. The recently added `eventre-master.zip` directly informs the event-led structure: a fixture-first hero, schedule-style agenda rows, a coach spotlight inspired by its speaker section, event gallery and clear registration actions. The archive layout is adapted for chess and its stock photos are not used. The styling is intentionally restrained, with fewer decorative borders and dividers, simpler image treatments and more direct copy; no child photos are referenced by active pages.
 
 ## Pages
 

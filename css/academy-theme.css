@@ -446,7 +446,7 @@ body.academy-site::selection { background: var(--site-gold); color: #10100e; }
 .academy-site .chess-ticker span i { color: #a38b5b; }
 .academy-site .iframe-frame { background: #10110f; border-color: var(--site-line); }
 
-/* Homepage hero: split-copy and chess image, framed in the reference's thin gold line. */
+/* Homepage hero: plain split-copy beside a chessboard photograph. */
 .home-page { overflow-x: hidden; }
 .home-hero { padding: 24px 0 0; background: #090a09; }
 .home-hero__frame {
@@ -830,3 +830,288 @@ body.academy-site::selection { background: var(--site-gold); color: #10100e; }
 .academy-site .fixture-meta i { width: 15px; color: var(--site-gold); text-align: center; }
 .academy-site .fixture-notice { border-color: rgba(215,182,117,.4); }
 .academy-site .pricing-entry .product-photo { height: 190px; background-position: center; background-size: cover; background-repeat: no-repeat; }
+
+/* Plain, photo-led finish: keep the academy palette, lose the ornamental rules. */
+.academy-site {
+  --site-line: transparent;
+  --kc-shadow: none;
+  --kc-shadow-lg: none;
+}
+.academy-site #ftco-navbar,
+.academy-site .ftco-navbar-light,
+.academy-site .ftco-navbar-light.scrolled {
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.academy-site .ftco-navbar-light .navbar-nav > .nav-item.cta > a,
+.academy-site .ftco-navbar-light.scrolled .navbar-nav > .nav-item.cta > a {
+  border: 0 !important;
+  border-radius: 4px;
+}
+.academy-site .ftco-navbar-light .navbar-collapse { border: 0 !important; }
+.academy-site .hero-wrap.hero-wrap-2 { border: 0; }
+.academy-site .hero-wrap .overlay { background: rgba(7,8,7,.7); }
+.academy-site .ftco-section.bg-light + .ftco-section,
+.academy-site .ftco-section + .ftco-section.bg-light { border-top: 0; }
+.academy-site .ftco-footer,
+.academy-site .ftco-footer .ftco-footer-social a { border: 0; }
+.academy-site .ftco-footer .ftco-footer-social a { box-shadow: none; }
+
+.academy-site :is(.cd-card,.contact-card,.team-card,.office-band,.res-card,.cat-chip,
+  .faq-item,.sched-card,.pricing-entry,.crest-card,.note-card,.step-card,.bc-stage,
+  .bc-panel,.testimony-wrap,.appointment-form,.service-box,.services-2,.course .text,
+  .reg-card) {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.academy-site .reg-card { border-radius: 4px; }
+.academy-site .reg-side {
+  border: 0 !important;
+  background: #191a17 !important;
+}
+.academy-site .team-photo,
+.academy-site .sec-quote-photo,
+.academy-site .sec-gallery .sec-shot { border: 0 !important; box-shadow: none !important; }
+.academy-site .crest-tag,
+.academy-site .eyebrow-tag,
+.academy-site .badge-live { border: 0 !important; box-shadow: none !important; }
+.academy-site .team-ava,
+.academy-site .team-ava.o,
+.academy-site .team-ava.b { background: #c6a363; box-shadow: none; }
+.academy-site .chess-timeline::before,
+.academy-site .chess-timeline .tl-item::before { display: none !important; }
+.academy-site .chess-timeline .tl-item { padding-left: 0; }
+.academy-site .fixture-meta { padding-top: 0; border-top: 0; }
+.academy-site .fixture-notice { border: 0 !important; }
+.academy-site .res-table th,
+.academy-site .res-table td { border-bottom: 0 !important; }
+.academy-site .metric-row { border-color: transparent !important; }
+.academy-site .ftco-intro .overlay { background: rgba(7,8,7,.68); }
+.academy-site .btn,
+.academy-site button.btn { border-radius: 4px; box-shadow: none !important; transition: background .15s ease, color .15s ease; }
+.academy-site .btn:hover { transform: none; }
+
+.eyebrow {
+  color: #b4ac99;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: none;
+}
+.eyebrow > span { display: none; }
+.home-hero__frame {
+  border: 0;
+  border-radius: 0;
+  background: #111210;
+  box-shadow: none;
+}
+.home-hero__frame::before,
+.home-hero__frame::after,
+.home-hero__glow,
+.home-hero__visual-caption { display: none !important; }
+.home-hero__visual img,
+.home-approach__photo img,
+.academy-site .pricing-entry .img { filter: none !important; }
+.home-hero__visual::after {
+  background: linear-gradient(90deg,#111210 0%,rgba(17,18,16,.72) 24%,rgba(17,18,16,.12) 72%,rgba(17,18,16,.08) 100%);
+}
+.home-hero__play-link {
+  color: #e0d9cb !important;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-transform: none;
+}
+.home-hero__play-link .live-dot { display: none; }
+.home-hero__fixture {
+  grid-template-columns: 22px minmax(0,1fr) auto;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.home-hero__fixture-icon {
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--site-gold);
+}
+.home-hero__fixture-copy small {
+  color: #b4ac99;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-transform: none;
+}
+.home-hero__fixture-copy strong { font-size: 13px; font-weight: 600; }
+.home-hero__fixture > a {
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  color: var(--site-gold-bright) !important;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.gold-button,
+.outline-button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: none;
+  font-weight: 600;
+}
+.gold-button { background: var(--site-gold); }
+.gold-button:hover { box-shadow: none; }
+.outline-button { background: #252621; }
+.home-hero__proof li { border-left: 0; }
+
+.home-section__intro h2,
+.home-section__bar h2,
+.home-cta h2 { font-weight: 700; letter-spacing: -.02em; }
+.home-service-grid { gap: 30px; }
+.home-service-card,
+.home-service-card:hover {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+.home-service-card { padding: 15px 0; }
+.home-service-card__top { justify-content: flex-start; margin-bottom: 12px; }
+.service-icon {
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--site-gold);
+  font-size: 21px;
+}
+.card-index { display: none; }
+.home-service-card h3 { color: var(--site-cream); font-weight: 600; }
+.home-service-card p { font-size: 13px; }
+.text-link { font-weight: 600; }
+
+.home-agenda { display: grid; gap: 12px; border: 0; }
+.home-agenda__item,
+.home-agenda__item--featured,
+.home-agenda__item:hover {
+  border: 0;
+  border-radius: 0;
+  background: #111210;
+  box-shadow: none;
+  transform: none;
+}
+.home-agenda__item { padding: 17px 18px; }
+.home-agenda__item--featured { background: #171815; }
+.home-agenda__item:hover { background: #1a1b18; }
+.home-agenda__date {
+  justify-items: start;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+}
+.home-agenda__date small,
+.home-agenda__date span {
+  color: #a9a69d;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-transform: none;
+}
+.home-agenda__date strong { color: var(--site-gold-bright); font-size: 18px; font-weight: 600; }
+.home-agenda__image { border: 0; border-radius: 0; filter: none; }
+.home-agenda__meta {
+  color: #a9a69d;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.home-agenda__meta span:first-child { color: #b4ac99; }
+.home-agenda__details h3 { font-weight: 600; }
+.home-agenda__details p { font-size: 12px; }
+.home-agenda__link { font-size: 11px; font-weight: 600; }
+
+.home-approach__panel,
+.home-coach__panel {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.home-approach__photo::after { display: none; }
+.photo-stamp {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: rgba(9,10,9,.75);
+  color: #f1eee7;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.home-approach__copy h2,
+.home-coach__copy h2 { font-weight: 700; letter-spacing: -.02em; }
+.home-coach__panel { padding-right: 0; padding-left: 0; }
+.home-coach__portrait { border: 0; border-radius: 0; }
+.portrait-caption { background: rgba(9,10,9,.82); }
+.home-coach__crest { border: 0; border-radius: 0; background: transparent; }
+.home-cta {
+  border: 0;
+  background: #141512;
+}
+.home-footer { border: 0; }
+.home-footer__bottom { border: 0; }
+.home-footer__links h2,
+.home-footer__contact h2 {
+  color: var(--site-cream);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@media (max-width: 767.98px) {
+  .home-hero__visual::after {
+    background: linear-gradient(0deg,#111210 0%,rgba(17,18,16,.76) 34%,rgba(17,18,16,.14) 100%);
+  }
+  .home-hero__fixture { grid-template-columns: 22px minmax(0,1fr); }
+  .home-hero__fixture > a { grid-column: 2; justify-self: start; margin-top: 3px; }
+  .home-coach__panel { padding-right: 0; padding-left: 0; }
+}
+
+.academy-site .eyebrow-tag,
+.academy-site .badge-live,
+.academy-site .team-role,
+.academy-site .team-card .cc-link,
+.academy-site .price-note,
+.academy-site .price-label {
+  letter-spacing: .02em;
+  text-transform: none;
+}
+.academy-site .eyebrow-tag,
+.academy-site .badge-live { background: transparent; }
+.academy-site .breadcrumbs span { border: 0; }
+.academy-site .home-services,
+.academy-site .chess-ticker,
+.academy-site .home-footer__bottom,
+.academy-site .pay-box { border: 0 !important; }
+.academy-site .btn.btn-outline-chess { border: 0 !important; border-radius: 4px; background: #252621; }
+.academy-site .contact-card:hover,
+.academy-site .team-card:hover,
+.academy-site .step-card:hover,
+.academy-site .home-service-card:hover { transform: none !important; }
