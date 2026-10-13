@@ -123,12 +123,10 @@ app.post("/api/register", limit, async (req, res) => {
     password.length < 10 ||
     password.length > 72
   )
-    return res
-      .status(400)
-      .json({
-        error:
-          "Use a display name, valid email and a password of 10–72 characters.",
-      });
+    return res.status(400).json({
+      error:
+        "Use a display name, valid email and a password of 10–72 characters.",
+    });
   const hashed = await bcrypt.hash(password, 12);
   let user;
   try {
@@ -137,11 +135,9 @@ app.post("/api/register", limit, async (req, res) => {
       .run(email.toLowerCase().trim(), name.trim(), hashed);
     user = { id: Number(r.lastInsertRowid), name: name.trim() };
   } catch {
-    return res
-      .status(409)
-      .json({
-        error: "Unable to create this account. Try logging in instead.",
-      });
+    return res.status(409).json({
+      error: "Unable to create this account. Try logging in instead.",
+    });
   }
   req.session.regenerate((e) => {
     if (e) return res.status(500).json({ error: "Unable to start session." });
@@ -351,8 +347,16 @@ app.get("/vendor/chess.js", (req, res) =>
 );
 // Serve only explicitly public files, never credentials or account data.
 app.use("/assets", express.static("assets"));
-for (const f of ["style.css", "script.js", "sw.js"])
-  app.get("/" + f, (req, res) => res.sendFile(process.cwd() + "/" + f));
+for (const f of [
+  "style.css",
+  "script.js",
+  "sw.js",
+  "Mr. Ochieng.jpeg",
+  "Njambi.jpeg",
+])
+  app.get(encodeURI("/" + f), (req, res) =>
+    res.sendFile(process.cwd() + "/" + f),
+  );
 app.get(
   ["/", "/about", "/registration", "/events", "/play", "/help"],
   (req, res) => res.sendFile(process.cwd() + "/index.html"),
