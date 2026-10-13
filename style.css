@@ -1,10 +1,10 @@
 :root {
-  --green: #102e2b;
-  --orange: #ed762d;
-  --ink: #183632;
-  --muted: #6d7773;
-  --cream: #f7f7f0;
-  --line: #e3e7df;
+  --navy: #14233f;
+  --blue: #2563eb;
+  --ink: #1e293b;
+  --muted: #64748b;
+  --surface: #f5f7fb;
+  --line: #e2e8f0;
 }
 * {
   box-sizing: border-box;
@@ -72,8 +72,8 @@ p {
   margin: auto;
 }
 .topbar {
-  background: var(--green);
-  color: #d4dcd7;
+  background: var(--navy);
+  color: #dbe4f0;
   font-size: 11px;
   padding: 9px 0;
 }
@@ -83,14 +83,14 @@ p {
 }
 .top-divider {
   padding: 0 20px;
-  color: #70827c;
+  color: #94a3b8;
 }
 header {
   background: #fff;
   position: sticky;
   top: 0;
   z-index: 20;
-  border-bottom: 1px solid #eef0eb;
+  border-bottom: 1px solid #edf2f7;
 }
 .nav-wrap {
   height: 93px;
@@ -129,15 +129,15 @@ nav {
 }
 nav > a:not(.button):hover,
 nav > a.active {
-  color: var(--orange);
+  color: var(--blue);
 }
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 27px;
-  background: var(--orange);
-  border: 1px solid var(--orange);
+  background: var(--blue);
+  border: 1px solid var(--blue);
   color: #fff;
   padding: 14px 22px;
   font-size: 13px;
@@ -149,8 +149,8 @@ nav > a.active {
   line-height: 1.7;
 }
 .button:hover {
-  background: #cf5c1c;
-  border-color: #cf5c1c;
+  background: #1d4ed8;
+  border-color: #1d4ed8;
 }
 .button span {
   font-size: 19px;
@@ -165,7 +165,8 @@ nav > a.active {
 }
 .hero {
   position: relative;
-  background: var(--green) url("assets/hero-dark-board.jpg") center 48% / cover;
+  background: var(--navy) url("assets/site-photos/tournament-room.jpg") center
+    48% / cover;
   color: white;
   min-height: 650px;
 }
@@ -175,12 +176,12 @@ nav > a.active {
   background:
     linear-gradient(
       90deg,
-      rgba(5, 27, 24, 0.95) 0%,
-      rgba(5, 27, 24, 0.79) 35%,
-      rgba(5, 27, 24, 0.22) 70%,
-      rgba(5, 27, 24, 0.08)
+      rgba(11, 21, 43, 0.95) 0%,
+      rgba(11, 21, 43, 0.79) 35%,
+      rgba(11, 21, 43, 0.22) 70%,
+      rgba(11, 21, 43, 0.08)
     ),
-    linear-gradient(0deg, rgba(5, 27, 24, 0.35), transparent 40%);
+    linear-gradient(0deg, rgba(11, 21, 43, 0.35), transparent 40%);
 }
 .hero-content {
   position: relative;
@@ -190,7 +191,7 @@ nav > a.active {
 .eyebrow {
   font-size: 10px;
   letter-spacing: 1px;
-  color: #c96528;
+  color: #1d4ed8;
   font-weight: 700;
   margin-bottom: 20px;
   display: flex;
@@ -198,12 +199,12 @@ nav > a.active {
   gap: 10px;
 }
 .eyebrow.light {
-  color: #f6ac71;
+  color: #93c5fd;
 }
 .eyebrow span {
   width: 24px;
   height: 1px;
-  background: var(--orange);
+  background: var(--blue);
 }
 h1 {
   font-size: 62px;
@@ -214,10 +215,10 @@ h1 {
 }
 h1 em {
   font-style: normal;
-  color: #f59657;
+  color: #93c5fd;
 }
 .hero p {
-  color: #dae0d9;
+  color: #dbe4f0;
   font-size: 15px;
   line-height: 1.85;
 }
@@ -249,7 +250,7 @@ h1 em {
   margin-top: 42px;
   font-size: 11px;
   line-height: 1.7;
-  color: #cbd4cd;
+  color: #cbd5e1;
 }
 .hero-foot strong {
   font-weight: 400;
@@ -260,7 +261,7 @@ h1 em {
   letter-spacing: -3px;
   border-right: 1px solid #ffffff40;
   padding-right: 20px;
-  color: #e8c59d;
+  color: #bfdbfe;
 }
 .hero-caption {
   position: absolute;
@@ -274,7 +275,7 @@ h1 em {
   padding: 0 10px;
 }
 .values {
-  background: var(--cream);
+  background: var(--surface);
   border-bottom: 1px solid var(--line);
 }
 .values-grid {
@@ -287,7 +288,7 @@ h1 em {
   gap: 20px;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid #dddfd5;
+  border-right: 1px solid #dce3ee;
 }
 .values-grid > div:first-child {
   justify-content: flex-start;
@@ -308,7 +309,7 @@ h1 em {
 }
 .value-icon {
   font-size: 38px;
-  color: #bd6d3c;
+  color: #2563eb;
   line-height: 1;
 }
 .section {
@@ -335,7 +336,7 @@ h1 em {
   position: absolute;
   bottom: 0;
   right: 0;
-  background: var(--orange);
+  background: var(--blue);
   color: #fff;
   display: flex;
   align-items: center;
@@ -360,7 +361,7 @@ h1 em {
 }
 .about-copy blockquote {
   margin: 25px 0;
-  border-left: 3px solid var(--orange);
+  border-left: 3px solid var(--blue);
   padding: 4px 0 4px 20px;
   font-size: 20px;
   font-weight: 600;
@@ -374,7 +375,7 @@ h1 em {
   color: var(--muted);
 }
 .programs {
-  background: var(--cream);
+  background: var(--surface);
 }
 .section-heading {
   display: flex;
@@ -418,7 +419,7 @@ h1 em {
   position: absolute;
   bottom: 0;
   left: 23px;
-  background: var(--green);
+  background: var(--navy);
   color: white;
   font-size: 9px;
   letter-spacing: 1.4px;
@@ -428,7 +429,7 @@ h1 em {
   padding: 25px;
 }
 .card-copy > small {
-  color: #a4815e;
+  color: #64748b;
   font-size: 9px;
   letter-spacing: 1.5px;
 }
@@ -453,11 +454,11 @@ h1 em {
   font-weight: 600;
 }
 .program-detail span {
-  color: var(--orange);
+  color: var(--blue);
   font-size: 20px;
 }
 .belief {
-  background: var(--green);
+  background: var(--navy);
   color: #fff;
   padding: 52px 0;
 }
@@ -468,7 +469,7 @@ h1 em {
 }
 .big-knight {
   font-size: 110px;
-  color: #c68c54;
+  color: #93c5fd;
   line-height: 1;
 }
 .belief h2 {
@@ -480,7 +481,7 @@ h1 em {
   margin-bottom: 12px;
 }
 .belief p {
-  color: #adbfba;
+  color: #b8c6dc;
   font-size: 12px;
   margin: 0;
 }
@@ -510,7 +511,7 @@ h1 em {
 .team-card small {
   font-size: 9px;
   letter-spacing: 1.6px;
-  color: #bd6d3c;
+  color: #2563eb;
 }
 .team-card h3 {
   margin: 8px 0;
@@ -520,14 +521,14 @@ h1 em {
   margin: 0;
 }
 .team-invite {
-  background: var(--cream);
+  background: var(--surface);
   padding: 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .team-invite > span {
-  color: var(--orange);
+  color: var(--blue);
   font-size: 50px;
 }
 .team-invite h3 {
@@ -538,10 +539,10 @@ h1 em {
   font-size: 13px;
 }
 .team-invite .text-link {
-  color: #b85b24;
+  color: #1d4ed8;
 }
 .contact {
-  background: #f1f3eb;
+  background: #eef2f8;
 }
 .contact-grid {
   display: grid;
@@ -565,7 +566,7 @@ h1 em {
   background: white;
   display: grid;
   place-items: center;
-  color: #c96528;
+  color: #1d4ed8;
 }
 .contact-line small {
   display: block;
@@ -597,9 +598,9 @@ select,
 textarea {
   display: block;
   width: 100%;
-  border: 1px solid #dfe4dc;
+  border: 1px solid #dce3ee;
   border-radius: 2px;
-  background: #fbfcf9;
+  background: #f8fafc;
   padding: 12px;
   margin-top: 6px;
   color: var(--ink);
@@ -613,8 +614,8 @@ textarea {
   margin: 12px 0 0;
 }
 footer {
-  background: #0c2522;
-  color: #d6dfd9;
+  background: #0f1a30;
+  color: #dbe4f0;
   padding: 40px 0 18px;
 }
 .footer-main {
@@ -643,7 +644,7 @@ footer {
   justify-content: space-between;
   gap: 20px;
   font-size: 9px;
-  color: #91a49d;
+  color: #a0aec4;
 }
 .footer-bottom a {
   text-decoration: underline;
@@ -658,7 +659,7 @@ dialog {
   box-shadow: 0 20px 100px #0003;
 }
 dialog::backdrop {
-  background: #061d19b3;
+  background: #0b152bb3;
 }
 dialog h2 {
   font-size: 32px;
@@ -687,7 +688,7 @@ dialog p {
   top: 10px;
 }
 :focus-visible {
-  outline: 3px solid #db823e;
+  outline: 3px solid #2563eb;
   outline-offset: 4px;
 }
 @media (min-width: 1500px) {
@@ -779,7 +780,7 @@ dialog p {
     background-position: 60% center;
   }
   .hero-shade {
-    background: linear-gradient(90deg, #051b18ed, #051b1899 60%, #051b1855);
+    background: linear-gradient(90deg, #0b152bed, #0b152b99 60%, #0b152b55);
   }
   .values-grid {
     gap: 20px;
@@ -1032,9 +1033,9 @@ dialog p {
 .hero-shade {
   background: linear-gradient(
     90deg,
-    rgba(5, 27, 24, 0.94),
-    rgba(5, 27, 24, 0.72) 45%,
-    rgba(5, 27, 24, 0.16)
+    rgba(11, 21, 43, 0.94),
+    rgba(11, 21, 43, 0.72) 45%,
+    rgba(11, 21, 43, 0.16)
   );
 }
 .team-card img {
@@ -1051,7 +1052,7 @@ dialog p {
   grid-column: auto;
 }
 .merchandise {
-  background: var(--cream);
+  background: var(--surface);
 }
 .merch-grid {
   display: grid;
@@ -1094,7 +1095,7 @@ nav > a:not(.button)::after {
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--orange);
+  background: var(--blue);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.25s ease;
@@ -1113,8 +1114,8 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--orange);
-  box-shadow: 0 0 0 3px #ed762d18;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px #2563eb18;
 }
 @media (min-width: 851px) {
   nav {
@@ -1141,7 +1142,7 @@ select:focus {
   .team-card:hover,
   .merch-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 15px 35px #102e2b12;
+    box-shadow: 0 15px 35px #14233f12;
   }
   .program-card:hover img,
   .merch-card:hover img {
@@ -1149,7 +1150,7 @@ select:focus {
   }
   .button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px #a74c2326;
+    box-shadow: 0 5px 15px #1d4ed826;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -1200,5 +1201,27 @@ select:focus {
   .reveal-pending {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Photographic crops keep the real chess equipment in view. */
+.hero {
+  background-position: center 58%;
+}
+.about-visual > img {
+  object-position: center;
+}
+.merch-card:nth-child(2) .merch-image {
+  background: #f1f3f6;
+}
+.merch-card:nth-child(2) .merch-image img {
+  object-fit: contain;
+}
+.merchandise .section-heading > p {
+  max-width: 365px;
+}
+@media (max-width: 600px) {
+  .hero {
+    background-position: 63% center;
   }
 }
