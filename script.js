@@ -40,11 +40,11 @@ const observer = new IntersectionObserver(
 sections.forEach((section) => observer.observe(section));
 const descriptions = {
   "Junior chess academy":
-    "A welcoming introduction to chess for young learners. Explore the pieces, develop board awareness, and learn how to think through a move with guided coaching.",
+    "Coaching for young players, starting with piece movement and the rules of the game. Ask the academy about suitable sessions for your child.",
   "Club & competitive chess":
-    "Connect with other chess enthusiasts, practise your tactics, and build your confidence for competitive play. Get in touch to find out about club sessions and tournament preparation.",
+    "Club play and practice for players who want to improve their game. Contact us about joining, practice sessions, and tournament preparation.",
   "Chess in schools":
-    "Introduce your school community to the joy of chess. Talk to us about chess learning that encourages concentration, problem-solving, and respect for others.",
+    "For teachers and schools interested in chess. Contact the academy to discuss coaching and how a chess program could work at your school.",
 };
 const dialog = document.querySelector("#program-dialog");
 dialog.setAttribute("aria-labelledby", "dialog-title");
@@ -85,3 +85,56 @@ document.querySelector("#enquiry-form").addEventListener("submit", (event) => {
   );
 });
 document.querySelector("#year").textContent = new Date().getFullYear();
+
+// Merchandise enquiries use the same contact flow as program enquiries.
+document.querySelectorAll(".merchandise-enquiry").forEach((button) => {
+  button.addEventListener("click", () => {
+    document.querySelector('[name="program"]').value = "Merchandise";
+    const message = document.querySelector('[name="message"]');
+    if (!message.value.trim())
+      message.value = `Hello, please share the price and availability of the ${button.dataset.item.toLowerCase()}.`;
+    else if (!message.value.includes(button.dataset.item))
+      message.value += `\nI would also like to ask about: ${button.dataset.item}.`;
+    document
+      .querySelector("#contact")
+      .scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "instant"
+          : "smooth",
+      });
+    document.querySelector('[name="name"]').focus({ preventScroll: true });
+  });
+});
+
+// Content stays visible without JavaScript or when reduced motion is requested.
+const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+if (!motionPreference.matches && "IntersectionObserver" in window) {
+  const reveals = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("reveal-pending");
+          entry.target.classList.add("reveal-visible");
+          reveals.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08 },
+  );
+  document
+    .querySelectorAll(
+      ".section-heading, .about-visual, .about-copy, .program-card, .team-card, .team-invite, .merch-card",
+    )
+    .forEach((element) => {
+      element.classList.add("reveal-pending");
+      reveals.observe(element);
+    });
+  motionPreference.addEventListener("change", (event) => {
+    if (event.matches) {
+      reveals.disconnect();
+      document
+        .querySelectorAll(".reveal-pending")
+        .forEach((element) => element.classList.remove("reveal-pending"));
+    }
+  });
+}
