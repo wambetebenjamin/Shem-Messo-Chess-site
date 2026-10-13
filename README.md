@@ -4,7 +4,7 @@
 
 The public website was restored from commit `04d18c773e4da0e8cc0a98881c6ad5b05391bbba` on `arena/1fbcaa8d-shem-messo-chess-site` (PR #22): `index.html`, `style.css`, `script.js`, and `assets/site-photos/`.
 
-Subsequent requested enhancements remove the top contact strip, increase text sizes, and add a smoothly fading hero photo background, refined calls to action accessible program dropdowns, and separate documents for the main navigation items. Its original navy/blue/white palette, fonts, hero, programs, team, merchandise and contact interface are preserved. The replacement green interface from this branch has been removed.
+Subsequent requested enhancements remove the top contact strip, increase text sizes, and add a smoothly fading hero photo background, refined calls to action, accessible program dropdowns, and homepage overviews linking to separate detail pages. Its original navy/blue/white palette, fonts, hero, programs, team, merchandise and contact interface are preserved. The replacement green interface from this branch has been removed.
 
 The backend work is retained separately, but **registration embeds, account controls, chess, feedback, FAQs, events and push opt-in are not currently exposed in this restored UI**. They must be integrated into the approved previous design without redesigning it. The backend documentation below describes the retained implementation, not features available through the current page. The restored site's enquiry form still opens WhatsApp and does not store its submissions.
 
@@ -31,7 +31,7 @@ Open port 3000. The server binds to `0.0.0.0`; set `PORT` to change it. All brow
 
 The site is a real multi-page website. Each page has its own HTML document, title, description and active navigation item. Links also work on static hosting without server-side routing.
 
-- `index.html` (or `/`): Home, with the existing hero slideshow, values and a short joining CTA. Other sections no longer repeat on Home.
+- `index.html` (or `/`): Home, with the existing hero slideshow, values, joining CTA and concise overviews of About Us, Programs, Team, Merchandise and Contact. Overview links open the separate pages for fuller information. The Home team overview has no individual staff profiles; those remain on the Team page.
 - `about.html`: About Us and the academy's community introduction, immediately after Home in navigation.
 - `programs.html`: junior chess, club/competitive chess and school programs. Dropdown links point to their cards on this page.
 - `team.html`: the five existing staff profiles and photographs, separate from Home.

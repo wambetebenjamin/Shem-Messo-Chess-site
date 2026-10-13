@@ -35,7 +35,7 @@ test("original sections, navy palette and images are intact", async ({
   );
   await expect(page.locator("section#home")).toHaveCount(1);
   for (const id of ["about", "programs", "team", "merchandise", "contact"]) {
-    await expect(page.locator("section#" + id)).toHaveCount(0);
+    await expect(page.locator("section#" + id)).toHaveCount(1);
   }
   await page.evaluate(() => {
     for (const image of document.images) image.loading = "eager";
@@ -422,4 +422,35 @@ test("standalone page content and ordinary navigation work without JavaScript", 
   await page.locator("[data-page=team]").click();
   await expect(page.locator(".team-card")).toHaveCount(5);
   await context.close();
+});
+
+test("homepage overviews link to pages with fuller information", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.locator("#team .team-card")).toHaveCount(0);
+  await expect(page.locator("#enquiry-form")).toHaveCount(0);
+  const summaries = await page.evaluate(() =>
+    Object.fromEntries(
+      ["about", "programs", "team", "merchandise", "contact"].map((id) => [
+        id,
+        document
+          .querySelector("#" + id)
+          .textContent.replace(/\s+/g, " ")
+          .trim().length,
+      ]),
+    ),
+  );
+  for (const name of ["about", "programs", "team", "merchandise", "contact"]) {
+    await page.goto("/");
+    await page.locator(`#${name} a[href^="${name}.html"]`).first().click();
+    await expect(page).toHaveURL(new RegExp(name + "\\.html"));
+    const details = await page
+      .locator("#" + name)
+      .evaluate((el) => el.textContent.replace(/\s+/g, " ").trim().length);
+    expect(
+      details,
+      name + " has fuller information than its homepage overview",
+    ).toBeGreaterThan(summaries[name]);
+  }
 });
