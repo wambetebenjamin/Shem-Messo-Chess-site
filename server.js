@@ -357,10 +357,27 @@ for (const f of [
   app.get(encodeURI("/" + f), (req, res) =>
     res.sendFile(process.cwd() + "/" + f),
   );
-app.get(
-  ["/", "/about", "/registration", "/events", "/play", "/help"],
-  (req, res) => res.sendFile(process.cwd() + "/index.html"),
+// Real documents work on Node hosting and static hosting alike.
+app.get(["/", "/index.html"], (req, res) =>
+  res.sendFile(process.cwd() + "/index.html"),
 );
+for (const page of ["about", "programs", "team", "merchandise", "contact"]) {
+  app.get("/" + page, (req, res) => {
+    const query = req.url.includes("?")
+      ? req.url.slice(req.url.indexOf("?"))
+      : "";
+    res.redirect(302, "/" + page + ".html" + query);
+  });
+  app.get("/" + page + ".html", (req, res) => {
+    if (req.path.endsWith("/")) {
+      const query = req.url.includes("?")
+        ? req.url.slice(req.url.indexOf("?"))
+        : "";
+      return res.redirect(302, "/" + page + ".html" + query);
+    }
+    res.sendFile(process.cwd() + "/" + page + ".html");
+  });
+}
 app.use((err, req, res, next) => {
   console.error(err.message);
   res.status(500).json({ error: "Something went wrong. Please try again." });

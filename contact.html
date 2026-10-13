@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact | Kericho Chess Club &amp; Academy</title>
+    <meta
+      name="description"
+      content="Contact Kericho Chess Club & Academy about coaching, membership and equipment."
+    />
+    <meta name="theme-color" content="#14233f" />
+    <link rel="icon" href="assets/favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body class="inner-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <div class="container nav-wrap">
+        <a
+          class="brand"
+          href="index.html"
+          aria-label="Kericho Chess Academy home"
+          ><img src="assets/logo.png" alt="" /><span
+            >KERICHO CHESS<small>CLUB & ACADEMY</small></span
+          ></a
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="navigation"
+          aria-label="Open navigation"
+        >
+          ☰
+        </button>
+        <nav id="navigation" aria-label="Main navigation">
+          <a data-page="home" href="index.html">Home</a
+          ><a data-page="about" href="about.html">About us</a>
+          <div class="dropdown nav-dropdown">
+            <a data-page="programs" href="programs.html">Our programs</a>
+            <button
+              class="dropdown-toggle"
+              type="button"
+              aria-label="Open programs menu"
+              aria-expanded="false"
+              aria-controls="programs-menu"
+            >
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="m5 7 5 5 5-5" />
+              </svg>
+            </button>
+            <div class="dropdown-panel" id="programs-menu" hidden>
+              <a href="programs.html#junior-program"
+                ><strong>Junior chess academy</strong
+                ><small>A confident first move</small></a
+              >
+              <a href="programs.html#club-program"
+                ><strong>Club &amp; competitive chess</strong
+                ><small>Practise and prepare</small></a
+              >
+              <a href="programs.html#school-program"
+                ><strong>Chess in schools</strong
+                ><small>Bring chess to your school</small></a
+              >
+            </div>
+          </div>
+          <a data-page="team" href="team.html">Our team</a
+          ><a data-page="merchandise" href="merchandise.html">Merchandise</a
+          ><a
+            data-page="contact"
+            class="active"
+            aria-current="page"
+            href="contact.html"
+            >Contact</a
+          ><a class="button nav-cta" href="contact.html">Join the academy</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <section class="contact section" id="contact">
+        <div class="container contact-grid">
+          <div>
+            <div class="eyebrow">CONTACT US</div>
+            <h1>Ask about<br />the academy.</h1>
+            <p>
+              Ask about coaching, joining the club, or chess at your school. You
+              can reach us by phone, email, or WhatsApp.
+            </p>
+            <a class="contact-line" href="tel:+254729037585">
+              <div><small>PHONE</small>+254 729 037 585</div></a
+            ><a class="contact-line" href="mailto:kerichochessacademy@gmail.com"
+              ><span>✉</span>
+              <div><small>EMAIL</small>kerichochessacademy@gmail.com</div></a
+            >
+          </div>
+          <form id="enquiry-form">
+            <h3>Send an enquiry</h3>
+            <div class="form-row">
+              <label
+                >Your name<input
+                  name="name"
+                  autocomplete="name"
+                  placeholder="e.g. Alex Kiptoo"
+                  required
+                  maxlength="100" /></label
+              ><label
+                >Email address<input
+                  type="email"
+                  name="email"
+                  autocomplete="email"
+                  placeholder="you@example.com"
+                  required
+              /></label>
+            </div>
+            <label
+              >I’m interested in<select name="program">
+                <option>Junior chess academy</option>
+                <option>Club & competitive chess</option>
+                <option>Chess in schools</option>
+                <option>Volunteering or partnering</option>
+                <option>Merchandise</option>
+                <option>General enquiry</option>
+              </select></label
+            ><label
+              >Your message<textarea
+                name="message"
+                rows="3"
+                placeholder="How can we help you get started?"
+                required
+                maxlength="2000"
+              ></textarea></label
+            ><button class="button" type="submit">Continue on WhatsApp</button>
+            <p class="form-note">
+              Opens WhatsApp with your message ready to send. No details are
+              stored on this website.
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container footer-main">
+        <a class="brand" href="index.html"
+          ><img src="assets/logo.png" alt="" /><span
+            >KERICHO CHESS<small>CLUB & ACADEMY</small></span
+          ></a
+        >
+        <p>Chess coaching and club play in Kericho, Kenya.</p>
+        <a href="#main">Back to top ↑</a>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="year">2026</span> Kericho Chess Club & Academy.</span
+        ><span>Forward ever, backward never.</span>
+      </div>
+    </footer>
+  </body>
+</html>

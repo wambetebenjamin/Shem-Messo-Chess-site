@@ -80,25 +80,18 @@ document.addEventListener("keydown", (event) => {
     closeMenu();
   }
 });
-const sections = document.querySelectorAll("main section[id]");
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        navigation
-          .querySelectorAll("a:not(.nav-cta)")
-          .forEach((link) =>
-            link.classList.toggle(
-              "active",
-              link.hash === "#" + entry.target.id,
-            ),
-          );
-      }
-    });
-  },
-  { rootMargin: "-15% 0px -55% 0px", threshold: 0 },
-);
-sections.forEach((section) => observer.observe(section));
+// Each main navigation item is a document, not a scrolling section.
+const pathName = location.pathname
+  .split("/")
+  .pop()
+  .replace(/\.html$/, "");
+const pageName = !pathName || pathName === "index" ? "home" : pathName;
+navigation.querySelectorAll("[data-page]").forEach((link) => {
+  const current = link.dataset.page === pageName;
+  link.classList.toggle("active", current);
+  if (current) link.setAttribute("aria-current", "page");
+  else link.removeAttribute("aria-current");
+});
 const descriptions = {
   "Junior chess academy":
     "Coaching for young players, starting with piece movement and the rules of the game. Ask the academy about suitable sessions for your child.",
@@ -108,13 +101,16 @@ const descriptions = {
     "For teachers and schools interested in chess. Contact the academy to discuss coaching and how a chess program could work at your school.",
 };
 const dialog = document.querySelector("#program-dialog");
-dialog.setAttribute("aria-labelledby", "dialog-title");
+dialog?.setAttribute("aria-labelledby", "dialog-title");
 function openProgram(program) {
   closeDropdowns();
   document.querySelector("#dialog-title").textContent = program;
   document.querySelector("#dialog-description").textContent =
     descriptions[program];
-  document.querySelector('[name="program"]').value = program;
+  const field = document.querySelector('[name="program"]');
+  if (field) field.value = program;
+  document.querySelector("#dialog-enquire").href =
+    "contact.html?program=" + encodeURIComponent(program);
   dialog.showModal();
 }
 document.querySelectorAll(".program-detail").forEach((button) => {
@@ -127,11 +123,11 @@ document.querySelectorAll("[data-program-choice]").forEach((button) => {
 });
 document
   .querySelector(".dialog-close")
-  .addEventListener("click", () => dialog.close());
+  ?.addEventListener("click", () => dialog.close());
 document
   .querySelector("#dialog-enquire")
-  .addEventListener("click", () => dialog.close());
-dialog.addEventListener("click", (event) => {
+  ?.addEventListener("click", () => dialog.close());
+dialog?.addEventListener("click", (event) => {
   if (
     event.target === dialog &&
     (event.clientX < dialog.getBoundingClientRect().left ||
@@ -141,7 +137,7 @@ dialog.addEventListener("click", (event) => {
   )
     dialog.close();
 });
-document.querySelector("#enquiry-form").addEventListener("submit", (event) => {
+document.querySelector("#enquiry-form")?.addEventListener("submit", (event) => {
   event.preventDefault();
   const data = new FormData(event.target);
   const message = `Hello Kericho Chess Academy! My name is ${data.get("name")}.\nEmail: ${data.get("email")}\nI'm interested in: ${data.get("program")}.\n\n${data.get("message")}`;
@@ -153,21 +149,27 @@ document.querySelector("#enquiry-form").addEventListener("submit", (event) => {
 });
 document.querySelector("#year").textContent = new Date().getFullYear();
 
-// Merchandise enquiries use the same contact flow as program enquiries.
+// Carry enquiry context across real page navigation, without storing personal data.
+const enquiryForm = document.querySelector("#enquiry-form");
+if (enquiryForm) {
+  const params = new URLSearchParams(location.search);
+  const program = params.get("program");
+  const options = [...enquiryForm.elements.program.options].map(
+    (option) => option.value,
+  );
+  if (options.includes(program)) enquiryForm.elements.program.value = program;
+  const item = params.get("item");
+  if (program === "Merchandise" && item && item.length <= 120) {
+    enquiryForm.elements.message.value = `Hello, please share the price and availability of the ${item.toLowerCase()}.`;
+  }
+}
 document.querySelectorAll(".merchandise-enquiry").forEach((button) => {
   button.addEventListener("click", () => {
-    document.querySelector('[name="program"]').value = "Merchandise";
-    const message = document.querySelector('[name="message"]');
-    if (!message.value.trim())
-      message.value = `Hello, please share the price and availability of the ${button.dataset.item.toLowerCase()}.`;
-    else if (!message.value.includes(button.dataset.item))
-      message.value += `\nI would also like to ask about: ${button.dataset.item}.`;
-    document.querySelector("#contact").scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "instant"
-        : "smooth",
+    const params = new URLSearchParams({
+      program: "Merchandise",
+      item: button.dataset.item,
     });
-    document.querySelector('[name="name"]').focus({ preventScroll: true });
+    location.href = "contact.html?" + params.toString();
   });
 });
 
@@ -208,6 +210,7 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
 // Autoplay stops off-screen, in background tabs, on hover/focus and for reduced motion.
 (() => {
   const hero = document.querySelector(".hero");
+  if (!hero) return;
   const slides = [...hero.querySelectorAll(".hero-slide")];
   const controls = hero.querySelector(".hero-photo-controls");
   const pause = hero.querySelector(".photo-pause");

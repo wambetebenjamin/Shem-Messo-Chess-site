@@ -31,17 +31,11 @@ test("original sections, navy palette and images are intact", async ({
   ).toBeVisible();
   await expect(page.locator("#navigation a").nth(1)).toHaveAttribute(
     "href",
-    "#about",
+    "about.html",
   );
-  for (const id of [
-    "home",
-    "about",
-    "programs",
-    "team",
-    "merchandise",
-    "contact",
-  ]) {
-    await expect(page.locator("section#" + id)).toHaveCount(1);
+  await expect(page.locator("section#home")).toHaveCount(1);
+  for (const id of ["about", "programs", "team", "merchandise", "contact"]) {
+    await expect(page.locator("section#" + id)).toHaveCount(0);
   }
   await page.evaluate(() => {
     for (const image of document.images) image.loading = "eager";
@@ -60,13 +54,15 @@ test("original sections, navy palette and images are intact", async ({
 test("original program dialog and merchandise enquiries still work", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/programs.html");
   await page.locator(".program-detail").first().click();
   await expect(page.locator("#program-dialog")).toBeVisible();
   await expect(page.locator("#dialog-title")).not.toBeEmpty();
   await page.getByRole("button", { name: "Close program details" }).click();
   await expect(page.locator("#program-dialog")).not.toBeVisible();
+  await page.goto("/merchandise.html");
   await page.locator(".merchandise-enquiry").first().click();
+  await expect(page).toHaveURL(/contact\.html\?/);
   await expect(page.locator("[name=program]")).toHaveValue("Merchandise");
   await expect(page.locator("[name=message]")).toHaveValue(
     /price and availability/,
@@ -80,7 +76,7 @@ test("original mobile navigation works without horizontal overflow", async ({
   const menu = page.getByRole("button", { name: "Open navigation" });
   await menu.click();
   await expect(page.locator("#navigation")).toHaveClass(/open/);
-  await page.locator('#navigation a[href="#about"]').click();
+  await page.locator('#navigation a[href="about.html"]').click();
   await expect(menu).toHaveAttribute("aria-expanded", "false");
   expect(
     await page.evaluate(
@@ -155,6 +151,8 @@ test("program dropdowns work with keyboard, outside click, and enquiries", async
   await page.locator('[data-program-choice="Chess in schools"]').click();
   await expect(page.locator("#program-dialog")).toBeVisible();
   await expect(page.locator("#dialog-title")).toHaveText("Chess in schools");
+  await page.locator("#dialog-enquire").click();
+  await expect(page).toHaveURL(/contact\.html\?program=/);
   await expect(page.locator("[name=program]")).toHaveValue("Chess in schools");
 });
 
@@ -289,4 +287,139 @@ test("failed background photo is skipped without a blank hero", async ({
     "src",
     "assets/tournament-prep-09.jpg",
   );
+});
+
+test("each main item is its own directly loadable page", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  for (const item of ["about", "programs", "team", "merchandise", "contact"]) {
+    const response = await page.goto("/" + item + ".html");
+    expect(response.status()).toBe(200);
+    await expect(page.locator("main > section")).toHaveCount(1);
+    await expect(page.locator("section#" + item)).toHaveCount(1);
+    await expect(page.locator("main h1")).toHaveCount(1);
+    await expect(page.locator("main .hero")).toHaveCount(0);
+    await expect(page.locator(`[data-page=${item}]`)).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    await page.reload();
+    await expect(page.locator("section#" + item)).toHaveCount(1);
+    await page.evaluate(() => {
+      for (const image of document.images) image.loading = "eager";
+    });
+    await expect
+      .poll(() =>
+        page.evaluate(() =>
+          [...document.images]
+            .filter((img) => !img.naturalWidth)
+            .map((img) => img.src),
+        ),
+      )
+      .toEqual([]);
+    await page.setViewportSize({ width: 390, height: 844 });
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+      item + " fits mobile",
+    ).toBe(true);
+    await page.setViewportSize({ width: 1280, height: 720 });
+  }
+  expect(errors).toEqual([]);
+});
+
+test("navigation and program anchors lead to their distinct pages", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.locator("[data-page=about]").click();
+  await expect(page).toHaveURL(/about\.html$/);
+  await page.locator("[data-page=team]").click();
+  await expect(page).toHaveURL(/team\.html$/);
+  await expect(page.locator(".team-card")).toHaveCount(5);
+  await page.getByRole("button", { name: "Open programs menu" }).click();
+  await page.locator("#programs-menu a").last().click();
+  await expect(page).toHaveURL(/programs\.html#school-program$/);
+  await expect(page.locator("#school-program")).toBeVisible();
+});
+
+test("contact page safely handles query values and submits the enquiry via WhatsApp", async ({
+  page,
+}) => {
+  await page.goto("/contact.html?program=Invalid&item=%3Cscript%3E");
+  await expect(page.locator("[name=program]")).toHaveValue(
+    "Junior chess academy",
+  );
+  await expect(page.locator("[name=message]")).toHaveValue("");
+  await page.evaluate(() => {
+    window.open = (url) => {
+      window.lastEnquiry = url;
+    };
+  });
+  await page.locator("[name=name]").fill("Test Visitor");
+  await page.locator("[name=email]").fill("visitor@example.com");
+  await page
+    .locator("[name=message]")
+    .fill("Please share the coaching schedule.");
+  await page.getByRole("button", { name: "Continue on WhatsApp" }).click();
+  const url = await page.evaluate(() => window.lastEnquiry);
+  expect(url).toMatch(/^https:\/\/wa\.me\/254729037585\?text=/);
+  expect(decodeURIComponent(url)).toContain(
+    "Please share the coaching schedule.",
+  );
+});
+
+test("local page links and anchors resolve without broken destinations", async ({
+  page,
+}) => {
+  for (const file of [
+    "index",
+    "about",
+    "programs",
+    "team",
+    "merchandise",
+    "contact",
+  ]) {
+    await page.goto("/" + file + ".html");
+    const links = await page
+      .locator("a[href]")
+      .evaluateAll((anchors) =>
+        anchors
+          .map((a) => a.href)
+          .filter((href) => href.startsWith(location.origin)),
+      );
+    for (const link of new Set(links)) {
+      const response = await page.request.get(link);
+      expect(response.status(), link).toBe(200);
+      const hash = new URL(link).hash.slice(1);
+      if (hash) expect(await response.text(), link).toContain(`id="${hash}"`);
+    }
+  }
+});
+
+test("clean routes redirect to their documents and preserve enquiry context", async ({
+  page,
+}) => {
+  await page.goto("/contact/?program=Chess%20in%20schools");
+  await expect(page).toHaveURL(/contact\.html\?program=/);
+  await expect(page.locator("[name=program]")).toHaveValue("Chess in schools");
+  await page.goto("/about.html/");
+  await expect(page).toHaveURL(/about\.html$/);
+  await expect(page.locator("section#about")).toBeVisible();
+});
+
+test("standalone page content and ordinary navigation work without JavaScript", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto("http://127.0.0.1:3000/index.html");
+  await expect(page.locator("h1")).toBeVisible();
+  await page.locator("[data-page=about]").click();
+  await expect(page).toHaveURL(/about\.html$/);
+  await expect(page.locator("section#about")).toBeVisible();
+  await page.locator("[data-page=team]").click();
+  await expect(page.locator(".team-card")).toHaveCount(5);
+  await context.close();
 });

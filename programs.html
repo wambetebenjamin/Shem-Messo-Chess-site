@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Our Programs | Kericho Chess Club &amp; Academy</title>
+    <meta
+      name="description"
+      content="Explore junior chess coaching, competitive club play and chess in schools."
+    />
+    <meta name="theme-color" content="#14233f" />
+    <link rel="icon" href="assets/favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body class="inner-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <div class="container nav-wrap">
+        <a
+          class="brand"
+          href="index.html"
+          aria-label="Kericho Chess Academy home"
+          ><img src="assets/logo.png" alt="" /><span
+            >KERICHO CHESS<small>CLUB & ACADEMY</small></span
+          ></a
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="navigation"
+          aria-label="Open navigation"
+        >
+          ☰
+        </button>
+        <nav id="navigation" aria-label="Main navigation">
+          <a data-page="home" href="index.html">Home</a
+          ><a data-page="about" href="about.html">About us</a>
+          <div class="dropdown nav-dropdown">
+            <a
+              data-page="programs"
+              class="active"
+              aria-current="page"
+              href="programs.html"
+              >Our programs</a
+            >
+            <button
+              class="dropdown-toggle"
+              type="button"
+              aria-label="Open programs menu"
+              aria-expanded="false"
+              aria-controls="programs-menu"
+            >
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="m5 7 5 5 5-5" />
+              </svg>
+            </button>
+            <div class="dropdown-panel" id="programs-menu" hidden>
+              <a href="programs.html#junior-program"
+                ><strong>Junior chess academy</strong
+                ><small>A confident first move</small></a
+              >
+              <a href="programs.html#club-program"
+                ><strong>Club &amp; competitive chess</strong
+                ><small>Practise and prepare</small></a
+              >
+              <a href="programs.html#school-program"
+                ><strong>Chess in schools</strong
+                ><small>Bring chess to your school</small></a
+              >
+            </div>
+          </div>
+          <a data-page="team" href="team.html">Our team</a
+          ><a data-page="merchandise" href="merchandise.html">Merchandise</a
+          ><a data-page="contact" href="contact.html">Contact</a
+          ><a class="button nav-cta" href="contact.html">Join the academy</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <section class="programs section" id="programs">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">OUR PROGRAMS</div>
+              <h1>Coaching, club play, and schools.</h1>
+            </div>
+            <p>
+              Find out about our programs.<br class="desktop" />
+              Contact us for schedules and fees.
+            </p>
+          </div>
+          <div class="program-grid">
+            <article class="program-card" id="junior-program">
+              <div class="card-image">
+                <img
+                  src="assets/site-photos/chess-set.jpg"
+                  alt="Chessboard and pieces photographed at the tournament"
+                  loading="lazy"
+                /><span>JUNIOR CHESS</span>
+              </div>
+              <div class="card-copy">
+                <h3>Junior chess academy</h3>
+                <p>
+                  Learn how the pieces move, understand the rules, and practise
+                  basic tactics with a coach.
+                </p>
+                <button
+                  class="program-detail"
+                  data-program="Junior chess academy"
+                >
+                  Explore the program
+                </button>
+              </div>
+            </article>
+            <article class="program-card" id="club-program">
+              <div class="card-image">
+                <img
+                  src="assets/tournament-prep-01.jpg"
+                  alt="Chess sets arranged for tournament play"
+                  loading="lazy"
+                /><span>CLUB CHESS</span>
+              </div>
+              <div class="card-copy">
+                <h3>Club & competitive chess</h3>
+                <p>
+                  Play other club members, review your games, and work on your
+                  tournament preparation.
+                </p>
+                <button
+                  class="program-detail"
+                  data-program="Club & competitive chess"
+                >
+                  Explore the program
+                </button>
+              </div>
+            </article>
+            <article class="program-card" id="school-program">
+              <div class="card-image">
+                <img
+                  src="assets/tournament-prep-09.jpg"
+                  alt="Rows of chessboards ready for players"
+                  loading="lazy"
+                /><span>SCHOOL CHESS</span>
+              </div>
+              <div class="card-copy">
+                <h3>Chess in schools</h3>
+                <p>
+                  Interested in chess at your school? Talk to us about
+                  introducing pupils to the game.
+                </p>
+                <button class="program-detail" data-program="Chess in schools">
+                  Explore the program
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container footer-main">
+        <a class="brand" href="index.html"
+          ><img src="assets/logo.png" alt="" /><span
+            >KERICHO CHESS<small>CLUB & ACADEMY</small></span
+          ></a
+        >
+        <p>Chess coaching and club play in Kericho, Kenya.</p>
+        <a href="#main">Back to top ↑</a>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="year">2026</span> Kericho Chess Club & Academy.</span
+        ><span>Forward ever, backward never.</span>
+      </div>
+    </footer>
+    <dialog id="program-dialog">
+      <button class="dialog-close" aria-label="Close program details">×</button>
+      <div class="eyebrow">PROGRAM DETAILS</div>
+      <h2 id="dialog-title"></h2>
+      <p id="dialog-description"></p>
+      <p>Contact the academy for current schedules, availability, and fees.</p>
+      <a class="button" id="dialog-enquire" href="contact.html"
+        >Enquire about this program</a
+      >
+    </dialog>
+  </body>
+</html>

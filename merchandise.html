@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Merchandise | Kericho Chess Club &amp; Academy</title>
+    <meta
+      name="description"
+      content="Enquire about chess sets, clocks and school chess equipment."
+    />
+    <meta name="theme-color" content="#14233f" />
+    <link rel="icon" href="assets/favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body class="inner-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <div class="container nav-wrap">
+        <a
+          class="brand"
+          href="index.html"
+          aria-label="Kericho Chess Academy home"
+          ><img src="assets/logo.png" alt="" /><span
+            >KERICHO CHESS<small>CLUB & ACADEMY</small></span
+          ></a
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="navigation"
+          aria-label="Open navigation"
+        >
+          ☰
+        </button>
+        <nav id="navigation" aria-label="Main navigation">
+          <a data-page="home" href="index.html">Home</a
+          ><a data-page="about" href="about.html">About us</a>
+          <div class="dropdown nav-dropdown">
+            <a data-page="programs" href="programs.html">Our programs</a>
+            <button
+              class="dropdown-toggle"
+              type="button"
+              aria-label="Open programs menu"
+              aria-expanded="false"
+              aria-controls="programs-menu"
+            >
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="m5 7 5 5 5-5" />
+              </svg>
+            </button>
+            <div class="dropdown-panel" id="programs-menu" hidden>
+              <a href="programs.html#junior-program"
+                ><strong>Junior chess academy</strong
+                ><small>A confident first move</small></a
+              >
+              <a href="programs.html#club-program"
+                ><strong>Club &amp; competitive chess</strong
+                ><small>Practise and prepare</small></a
+              >
+              <a href="programs.html#school-program"
+                ><strong>Chess in schools</strong
+                ><small>Bring chess to your school</small></a
+              >
+            </div>
+          </div>
+          <a data-page="team" href="team.html">Our team</a
+          ><a
+            data-page="merchandise"
+            class="active"
+            aria-current="page"
+            href="merchandise.html"
+            >Merchandise</a
+          ><a data-page="contact" href="contact.html">Contact</a
+          ><a class="button nav-cta" href="contact.html">Join the academy</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <section class="section merchandise" id="merchandise">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">CHESS MERCHANDISE</div>
+              <h1>Equipment for your game.</h1>
+            </div>
+            <p>
+              Ask us about prices, stock, and collection.<br />Availability is
+              confirmed by the academy. Photos show equipment from our
+              tournament setup, not a guarantee of current stock.
+            </p>
+          </div>
+          <div class="merch-grid">
+            <article class="merch-card">
+              <div class="merch-image">
+                <img
+                  src="assets/site-photos/chess-set.jpg"
+                  alt="Chess set"
+                  loading="lazy"
+                />
+              </div>
+              <div class="card-copy">
+                <h3>Chess set</h3>
+                <p>
+                  Ask about boards and pieces for home, club, or school
+                  practice.
+                </p>
+                <button
+                  class="button merchandise-enquiry"
+                  data-item="Chess set"
+                >
+                  Ask about this item
+                </button>
+              </div>
+            </article>
+            <article class="merch-card">
+              <div class="merch-image">
+                <img
+                  src="assets/site-photos/chess-clock.jpg"
+                  alt="Digital chess clock beside a tournament board"
+                  loading="lazy"
+                />
+              </div>
+              <div class="card-copy">
+                <h3>Chess clock</h3>
+                <p>
+                  Keep track of thinking time during practice and competitive
+                  games.
+                </p>
+                <button
+                  class="button merchandise-enquiry"
+                  data-item="Chess clock"
+                >
+                  Ask about this item
+                </button>
+              </div>
+            </article>
+            <article class="merch-card">
+              <div class="merch-image">
+                <img
+                  src="assets/tournament-prep-09.jpg"
+                  alt="School & club equipment"
+                  loading="lazy"
+                />
+              </div>
+              <div class="card-copy">
+                <h3>School & club equipment</h3>
+                <p>
+                  Ask about equipment for setting up several boards at your
+                  school or club.
+                </p>
+                <button
+                  class="button merchandise-enquiry"
+                  data-item="School & club equipment"
+                >
+                  Ask about this item
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container footer-main">
+        <a class="brand" href="index.html"
+          ><img src="assets/logo.png" alt="" /><span
+            >KERICHO CHESS<small>CLUB & ACADEMY</small></span
+          ></a
+        >
+        <p>Chess coaching and club play in Kericho, Kenya.</p>
+        <a href="#main">Back to top ↑</a>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="year">2026</span> Kericho Chess Club & Academy.</span
+        ><span>Forward ever, backward never.</span>
+      </div>
+    </footer>
+  </body>
+</html>

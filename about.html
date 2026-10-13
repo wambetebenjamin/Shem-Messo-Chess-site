@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About Us | Kericho Chess Club &amp; Academy</title>
+    <meta
+      name="description"
+      content="Learn about Kericho Chess Club & Academy and our community."
+    />
+    <meta name="theme-color" content="#14233f" />
+    <link rel="icon" href="assets/favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body class="inner-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <div class="container nav-wrap">
+        <a
+          class="brand"
+          href="index.html"
+          aria-label="Kericho Chess Academy home"
+          ><img src="assets/logo.png" alt="" /><span
+            >KERICHO CHESS<small>CLUB & ACADEMY</small></span
+          ></a
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="navigation"
+          aria-label="Open navigation"
+        >
+          ☰
+        </button>
+        <nav id="navigation" aria-label="Main navigation">
+          <a data-page="home" href="index.html">Home</a
+          ><a
+            data-page="about"
+            class="active"
+            aria-current="page"
+            href="about.html"
+            >About us</a
+          >
+          <div class="dropdown nav-dropdown">
+            <a data-page="programs" href="programs.html">Our programs</a>
+            <button
+              class="dropdown-toggle"
+              type="button"
+              aria-label="Open programs menu"
+              aria-expanded="false"
+              aria-controls="programs-menu"
+            >
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="m5 7 5 5 5-5" />
+              </svg>
+            </button>
+            <div class="dropdown-panel" id="programs-menu" hidden>
+              <a href="programs.html#junior-program"
+                ><strong>Junior chess academy</strong
+                ><small>A confident first move</small></a
+              >
+              <a href="programs.html#club-program"
+                ><strong>Club &amp; competitive chess</strong
+                ><small>Practise and prepare</small></a
+              >
+              <a href="programs.html#school-program"
+                ><strong>Chess in schools</strong
+                ><small>Bring chess to your school</small></a
+              >
+            </div>
+          </div>
+          <a data-page="team" href="team.html">Our team</a
+          ><a data-page="merchandise" href="merchandise.html">Merchandise</a
+          ><a data-page="contact" href="contact.html">Contact</a
+          ><a class="button nav-cta" href="contact.html">Join the academy</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <section class="section about container" id="about">
+        <div class="about-visual">
+          <img
+            src="assets/tournament-prep-02.jpg"
+            alt="Chess boards and tables prepared for a tournament"
+            loading="lazy"
+          />
+        </div>
+        <div class="about-copy">
+          <div class="eyebrow">ABOUT THE ACADEMY</div>
+          <h1>A chess club<br />for our community.</h1>
+          <p>
+            Kericho Chess Club & Academy brings together people who want to
+            learn and play chess. We welcome beginners and players looking to
+            practise and prepare for competition.
+          </p>
+          <p>
+            Our programs cover junior coaching, club chess, and chess in
+            schools. Contact the team to find out which sessions would suit you
+            or your child.
+          </p>
+          <blockquote>
+            “Forward ever, backward never.”<small>OUR MOTTO</small>
+          </blockquote>
+          <a class="button" href="contact.html">Contact us</a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container footer-main">
+        <a class="brand" href="index.html"
+          ><img src="assets/logo.png" alt="" /><span
+            >KERICHO CHESS<small>CLUB & ACADEMY</small></span
+          ></a
+        >
+        <p>Chess coaching and club play in Kericho, Kenya.</p>
+        <a href="#main">Back to top ↑</a>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="year">2026</span> Kericho Chess Club & Academy.</span
+        ><span>Forward ever, backward never.</span>
+      </div>
+    </footer>
+  </body>
+</html>

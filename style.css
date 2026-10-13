@@ -370,7 +370,7 @@ h1 em {
   margin-bottom: 38px;
   gap: 25px;
 }
-.section-heading h2 {
+.section-heading :is(h1, h2) {
   margin: 0;
 }
 .section-heading .eyebrow {
@@ -914,7 +914,7 @@ dialog p {
   .about-visual > img {
     height: 350px;
   }
-  .about-copy h2 {
+  .about-copy :is(h1, h2) {
     font-size: 40px;
   }
   .section-heading {
@@ -1474,5 +1474,38 @@ select:focus {
   }
   .premium-cta:hover .cta-arrow {
     transform: none;
+  }
+}
+
+/* Standalone pages reuse the existing section design and heading scale. */
+.inner-page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+.inner-page main {
+  flex: 1;
+}
+.inner-page h1 {
+  font-size: 47px;
+  line-height: 1.15;
+  letter-spacing: -1.4px;
+  margin-bottom: 24px;
+}
+@media (max-width: 850px) {
+  .inner-page h1 {
+    font-size: 38px;
+  }
+}
+@media (max-width: 600px) {
+  .inner-page .about-copy h1 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 850px) {
+  nav {
+    max-height: calc(100dvh - 78px);
+    overflow-y: auto;
   }
 }
