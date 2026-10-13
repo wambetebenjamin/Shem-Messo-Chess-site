@@ -2,13 +2,9 @@ import { test, expect } from "@playwright/test";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 
-// Regression checks for the exact previous-branch UI, not the removed redesign.
-test("public frontend matches the approved previous branch byte-for-byte", async () => {
+// Original assets and behavior stay unchanged; only the requested strip/text changes are allowed.
+test("original scripts and photo assets remain unchanged", async () => {
   const hashes = {
-    "index.html":
-      "b17d777a2ab856e3ea59b465f7fc6e75b92aa5ab0ab4c3889e9cab2f42755ad2",
-    "style.css":
-      "c471f0f27c1cfc86658bd01f92063822a897e8d2c2d1980a9d7284aff09ebbfe",
     "script.js":
       "524ad29b3173c922248999e48cfdd22143b284c1010a171db10ada4f9f330fb1",
     "assets/site-photos/README.md":
@@ -93,4 +89,49 @@ test("original mobile navigation works without horizontal overflow", async ({
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
+});
+
+test("top strip removed and text enlarged without changing colors", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.locator(".topbar")).toHaveCount(0);
+  expect(
+    await page.locator("body").evaluate((el) => getComputedStyle(el).fontSize),
+  ).toBe("18px");
+  expect(
+    await page.locator("h1").evaluate((el) => getComputedStyle(el).fontSize),
+  ).toBe("69px");
+  expect(
+    await page.evaluate(() =>
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--navy")
+        .trim(),
+    ),
+  ).toBe("#14233f");
+  expect(
+    await page.evaluate(() =>
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--blue")
+        .trim(),
+    ),
+  ).toBe("#2563eb");
+  for (const width of [320, 390, 600, 851, 900, 1024, 1200, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+      `No overflow at ${width}px`,
+    ).toBe(true);
+    const overlap = await page.evaluate(() => {
+      const nav = document.querySelector("nav");
+      if (getComputedStyle(nav).display === "none") return false;
+      return (
+        document.querySelector("header .brand").getBoundingClientRect().right >
+        nav.getBoundingClientRect().left
+      );
+    });
+    expect(overlap, `No header overlap at ${width}px`).toBe(false);
+  }
 });

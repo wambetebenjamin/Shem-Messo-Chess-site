@@ -17,7 +17,7 @@ body {
   margin: 0;
   color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 15px;
+  font-size: 18px;
   line-height: 1.7;
 }
 a {
@@ -57,11 +57,11 @@ h3 {
   letter-spacing: -1.4px;
 }
 h2 {
-  font-size: 42px;
+  font-size: 47px;
   margin-bottom: 24px;
 }
 h3 {
-  font-size: 23px;
+  font-size: 28px;
   letter-spacing: -0.65px;
 }
 p {
@@ -70,20 +70,6 @@ p {
 .container {
   width: min(1200px, 88%);
   margin: auto;
-}
-.topbar {
-  background: var(--navy);
-  color: #dbe4f0;
-  font-size: 11px;
-  padding: 9px 0;
-}
-.topbar-inner {
-  display: flex;
-  justify-content: space-between;
-}
-.top-divider {
-  padding: 0 20px;
-  color: #94a3b8;
 }
 header {
   background: #fff;
@@ -104,7 +90,7 @@ header {
   gap: 12px;
   line-height: 1.2;
   letter-spacing: 1px;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 800;
   flex-shrink: 0;
 }
@@ -116,7 +102,7 @@ header {
 .brand small {
   display: block;
   letter-spacing: 3.7px;
-  font-size: 10px;
+  font-size: 12px;
   margin-top: 7px;
   font-weight: 500;
 }
@@ -124,7 +110,7 @@ nav {
   display: flex;
   gap: 29px;
   align-items: center;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
 }
 nav > a:not(.button):hover,
@@ -140,7 +126,7 @@ nav > a.active {
   border: 1px solid var(--blue);
   color: #fff;
   padding: 14px 22px;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
   border-radius: 3px;
   transition:
@@ -153,7 +139,7 @@ nav > a.active {
   border-color: #1d4ed8;
 }
 .button span {
-  font-size: 19px;
+  font-size: 23px;
   line-height: 1;
 }
 .nav-cta {
@@ -189,7 +175,7 @@ nav > a.active {
   padding-bottom: 65px;
 }
 .eyebrow {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
   color: #1d4ed8;
   font-weight: 700;
@@ -207,7 +193,7 @@ nav > a.active {
   background: var(--blue);
 }
 h1 {
-  font-size: 62px;
+  font-size: 69px;
   letter-spacing: -2.5px;
   line-height: 1.09;
   margin: 0 0 25px;
@@ -219,7 +205,7 @@ h1 em {
 }
 .hero p {
   color: #dbe4f0;
-  font-size: 15px;
+  font-size: 18px;
   line-height: 1.85;
 }
 .hero-actions {
@@ -232,7 +218,7 @@ h1 em {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
 }
 .play {
@@ -248,7 +234,7 @@ h1 em {
   align-items: center;
   gap: 17px;
   margin-top: 42px;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.7;
   color: #cbd5e1;
 }
@@ -257,7 +243,7 @@ h1 em {
   color: #fff;
 }
 .mini-pieces {
-  font-size: 24px;
+  font-size: 29px;
   letter-spacing: -3px;
   border-right: 1px solid #ffffff40;
   padding-right: 20px;
@@ -267,7 +253,7 @@ h1 em {
   position: absolute;
   right: 6%;
   bottom: 31px;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 2px;
   color: #fff9;
 }
@@ -302,13 +288,13 @@ h1 em {
 .values strong {
   display: block;
   color: var(--ink);
-  font-size: 15px;
+  font-size: 18px;
 }
 .values small {
-  font-size: 11px;
+  font-size: 13px;
 }
 .value-icon {
-  font-size: 38px;
+  font-size: 43px;
   color: #2563eb;
   line-height: 1;
 }
@@ -345,7 +331,7 @@ h1 em {
   border: 7px solid #fff;
 }
 .image-label > span {
-  font-size: 54px;
+  font-size: 60px;
   line-height: 1;
   font-weight: 700;
   letter-spacing: -3px;
@@ -353,23 +339,23 @@ h1 em {
 .image-label p {
   color: #fff;
   margin: 0;
-  font-size: 14px;
+  font-size: 17px;
   line-height: 1.5;
 }
 .about-copy p {
-  font-size: 14px;
+  font-size: 17px;
 }
 .about-copy blockquote {
   margin: 25px 0;
   border-left: 3px solid var(--blue);
   padding: 4px 0 4px 20px;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
 }
 .about-copy blockquote small {
   display: block;
   letter-spacing: 1.8px;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 400;
   margin-top: 7px;
   color: var(--muted);
@@ -391,7 +377,7 @@ h1 em {
   margin-bottom: 14px;
 }
 .section-heading p {
-  font-size: 13px;
+  font-size: 16px;
   margin: 0;
 }
 .program-grid {
@@ -421,7 +407,7 @@ h1 em {
   left: 23px;
   background: var(--navy);
   color: white;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 1.4px;
   padding: 8px 12px;
 }
@@ -430,14 +416,14 @@ h1 em {
 }
 .card-copy > small {
   color: #64748b;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 1.5px;
 }
 .card-copy h3 {
   margin: 10px 0 15px;
 }
 .card-copy p {
-  font-size: 13px;
+  font-size: 16px;
   min-height: 66px;
 }
 .program-detail {
@@ -450,12 +436,12 @@ h1 em {
   padding: 18px 0 0;
   background: none;
   color: var(--ink);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
 }
 .program-detail span {
   color: var(--blue);
-  font-size: 20px;
+  font-size: 24px;
 }
 .belief {
   background: var(--navy);
@@ -473,7 +459,7 @@ h1 em {
   line-height: 1;
 }
 .belief h2 {
-  font-size: 32px;
+  font-size: 36px;
   letter-spacing: -0.8px;
   margin-bottom: 15px;
 }
@@ -482,7 +468,7 @@ h1 em {
 }
 .belief p {
   color: #b8c6dc;
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
 }
 .belief .button {
@@ -509,7 +495,7 @@ h1 em {
   padding: 23px;
 }
 .team-card small {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 1.6px;
   color: #2563eb;
 }
@@ -517,7 +503,7 @@ h1 em {
   margin: 8px 0;
 }
 .team-card p {
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
 }
 .team-invite {
@@ -529,14 +515,14 @@ h1 em {
 }
 .team-invite > span {
   color: var(--blue);
-  font-size: 50px;
+  font-size: 56px;
 }
 .team-invite h3 {
-  font-size: 29px;
+  font-size: 35px;
   margin: 15px 0;
 }
 .team-invite p {
-  font-size: 13px;
+  font-size: 16px;
 }
 .team-invite .text-link {
   color: #1d4ed8;
@@ -551,14 +537,14 @@ h1 em {
 }
 .contact-grid > div > p {
   max-width: 360px;
-  font-size: 14px;
+  font-size: 17px;
 }
 .contact-line {
   display: flex;
   align-items: center;
   gap: 15px;
   margin-top: 25px;
-  font-size: 14px;
+  font-size: 17px;
 }
 .contact-line > span {
   width: 40px;
@@ -570,7 +556,7 @@ h1 em {
 }
 .contact-line small {
   display: block;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 1.5px;
   color: var(--muted);
 }
@@ -584,7 +570,7 @@ form h3 {
 }
 label {
   display: block;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   margin-bottom: 18px;
 }
@@ -604,13 +590,13 @@ textarea {
   padding: 12px;
   margin-top: 6px;
   color: var(--ink);
-  font-size: 12px;
+  font-size: 14px;
 }
 textarea {
   resize: vertical;
 }
 .form-note {
-  font-size: 10px;
+  font-size: 12px;
   margin: 12px 0 0;
 }
 footer {
@@ -626,7 +612,7 @@ footer {
   padding-bottom: 35px;
 }
 .footer-main .brand {
-  font-size: 15px;
+  font-size: 18px;
 }
 .footer-main .brand img {
   width: 42px;
@@ -634,7 +620,7 @@ footer {
 }
 .footer-main p,
 .footer-main > a:last-child {
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
 }
 .footer-bottom {
@@ -643,7 +629,7 @@ footer {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  font-size: 9px;
+  font-size: 11px;
   color: #a0aec4;
 }
 .footer-bottom a {
@@ -662,10 +648,10 @@ dialog::backdrop {
   background: #0b152bb3;
 }
 dialog h2 {
-  font-size: 32px;
+  font-size: 36px;
 }
 dialog p {
-  font-size: 14px;
+  font-size: 17px;
 }
 .dialog-close {
   position: absolute;
@@ -673,7 +659,7 @@ dialog p {
   top: 8px;
   border: 0;
   background: none;
-  font-size: 30px;
+  font-size: 34px;
   color: var(--ink);
 }
 .skip-link {
@@ -704,7 +690,7 @@ dialog p {
     gap: 17px;
   }
   .brand {
-    font-size: 15px;
+    font-size: 18px;
   }
   .nav-cta {
     gap: 12px;
@@ -717,7 +703,7 @@ dialog p {
     gap: 45px;
   }
   h1 {
-    font-size: 56px;
+    font-size: 63px;
   }
   .hero-caption {
     display: none;
@@ -726,7 +712,7 @@ dialog p {
     gap: 12px;
   }
   .values small {
-    font-size: 10px;
+    font-size: 12px;
   }
   .belief-inner {
     gap: 20px;
@@ -736,12 +722,6 @@ dialog p {
   }
 }
 @media (max-width: 850px) {
-  .topbar-inner > a {
-    display: none;
-  }
-  .topbar-inner {
-    justify-content: center;
-  }
   .nav-wrap {
     height: 78px;
   }
@@ -750,7 +730,7 @@ dialog p {
     border: 1px solid var(--line);
     background: #fff;
     padding: 5px 12px;
-    font-size: 23px;
+    font-size: 28px;
     color: var(--ink);
   }
   nav {
@@ -792,10 +772,10 @@ dialog p {
     gap: 10px;
   }
   .values strong {
-    font-size: 13px;
+    font-size: 16px;
   }
   .values small {
-    font-size: 11px;
+    font-size: 13px;
     line-height: 1.5;
     display: block;
   }
@@ -807,7 +787,7 @@ dialog p {
     gap: 30px;
   }
   h2 {
-    font-size: 34px;
+    font-size: 38px;
   }
   .about-visual > img {
     height: 460px;
@@ -822,7 +802,7 @@ dialog p {
     padding: 20px;
   }
   .card-copy h3 {
-    font-size: 20px;
+    font-size: 24px;
   }
   .card-image img {
     height: 175px;
@@ -867,14 +847,8 @@ dialog p {
   .container {
     width: 88%;
   }
-  .topbar {
-    font-size: 9px;
-  }
-  .top-divider {
-    padding: 0 8px;
-  }
   .brand {
-    font-size: 15px;
+    font-size: 18px;
   }
   .brand img {
     height: 47px;
@@ -889,15 +863,15 @@ dialog p {
     padding-bottom: 45px;
   }
   h1 {
-    font-size: 43px;
+    font-size: 48px;
     letter-spacing: -1.8px;
   }
   .eyebrow {
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 1.6px;
   }
   .hero p {
-    font-size: 13px;
+    font-size: 16px;
     max-width: 320px;
   }
   .desktop {
@@ -912,26 +886,26 @@ dialog p {
     gap: 20px;
   }
   .text-link {
-    font-size: 11px;
+    font-size: 13px;
   }
   .hero-foot {
     margin-top: 35px;
-    font-size: 10px;
+    font-size: 12px;
   }
   .values-grid {
     padding: 25px 0;
     gap: 14px;
   }
   .values strong {
-    font-size: 11px;
+    font-size: 13px;
     line-height: 1.5;
     margin-bottom: 6px;
   }
   .values small {
-    font-size: 10px;
+    font-size: 12px;
   }
   .value-icon {
-    font-size: 29px;
+    font-size: 35px;
   }
   .about {
     grid-template-columns: 1fr;
@@ -941,7 +915,7 @@ dialog p {
     height: 350px;
   }
   .about-copy h2 {
-    font-size: 36px;
+    font-size: 40px;
   }
   .section-heading {
     display: block;
@@ -960,7 +934,7 @@ dialog p {
     padding: 25px;
   }
   .card-copy h3 {
-    font-size: 24px;
+    font-size: 29px;
   }
   .card-copy p {
     min-height: 0;
@@ -972,7 +946,7 @@ dialog p {
     display: none;
   }
   .belief h2 {
-    font-size: 29px;
+    font-size: 35px;
   }
   .belief .button {
     margin: 25px 0 0;
@@ -991,30 +965,30 @@ dialog p {
     gap: 35px;
   }
   .contact-line {
-    font-size: 12px;
+    font-size: 14px;
   }
   .footer-main {
     align-items: start;
   }
   .footer-main > a:last-child {
-    font-size: 10px;
+    font-size: 12px;
   }
   .footer-bottom {
     flex-direction: column;
     gap: 8px;
   }
   .footer-main .brand {
-    font-size: 12px;
+    font-size: 14px;
   }
   .footer-main .brand small {
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 2.4px;
   }
   dialog {
     padding: 35px 25px;
   }
   dialog h2 {
-    font-size: 27px;
+    font-size: 32px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1120,7 +1094,7 @@ select:focus {
 @media (min-width: 851px) {
   nav {
     gap: 18px;
-    font-size: 12px;
+    font-size: 14px;
   }
   .nav-cta {
     margin-left: 0;

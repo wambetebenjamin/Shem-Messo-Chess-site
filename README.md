@@ -2,9 +2,9 @@
 
 ## UI restored to the previous branch
 
-The public website is restored **byte-for-byte** from commit `04d18c773e4da0e8cc0a98881c6ad5b05391bbba` on `arena/1fbcaa8d-shem-messo-chess-site` (PR #22): `index.html`, `style.css`, `script.js`, and `assets/site-photos/`.
+The public website was restored from commit `04d18c773e4da0e8cc0a98881c6ad5b05391bbba` on `arena/1fbcaa8d-shem-messo-chess-site` (PR #22): `index.html`, `style.css`, `script.js`, and `assets/site-photos/`.
 
-Its original structure, navy/blue/white palette, typography, hero, programs, team, merchandise and contact interface are unchanged. The replacement green interface from this branch has been removed.
+The only subsequent UI changes requested are removing the top contact strip and increasing text sizes. Its original navy/blue/white palette, fonts, hero, programs, team, merchandise and contact interface are preserved. The replacement green interface from this branch has been removed.
 
 The backend work is retained separately, but **registration embeds, account controls, chess, feedback, FAQs, events and push opt-in are not currently exposed in this restored UI**. They must be integrated into the approved previous design without redesigning it. The backend documentation below describes the retained implementation, not features available through the current page. The restored site's enquiry form still opens WhatsApp and does not store its submissions.
 
