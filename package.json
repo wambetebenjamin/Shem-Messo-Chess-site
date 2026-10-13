@@ -1,0 +1,28 @@
+{
+  "name": "kericho-chess-academy",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test test/chess.test.js test/api.test.js",
+    "notify": "node scripts/notify.js",
+    "feedback": "node scripts/feedback.js",
+    "test:browser": "playwright test"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "chess.js": "^1.4.0",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "socket.io": "^4.8.1",
+    "web-push": "^3.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0"
+  }
+}
