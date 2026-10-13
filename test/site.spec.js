@@ -2,11 +2,9 @@ import { test, expect } from "@playwright/test";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 
-// Original assets and behavior stay unchanged; only the requested strip/text changes are allowed.
-test("original scripts and photo assets remain unchanged", async () => {
+// Existing photography stays original while requested interactions evolve.
+test("original photo assets remain unchanged", async () => {
   const hashes = {
-    "script.js":
-      "524ad29b3173c922248999e48cfdd22143b284c1010a171db10ada4f9f330fb1",
     "assets/site-photos/README.md":
       "b5c494231d79687f649bae43c4b2bad8802e30ff04935b0b2efa8dcd73f3410a",
     "assets/site-photos/chess-clock.jpg":
@@ -134,4 +132,161 @@ test("top strip removed and text enlarged without changing colors", async ({
     });
     expect(overlap, `No header overlap at ${width}px`).toBe(false);
   }
+});
+
+test("program dropdowns work with keyboard, outside click, and enquiries", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const toggle = page.getByRole("button", { name: "Open programs menu" });
+  await toggle.focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(toggle).toHaveAttribute("aria-expanded", "true");
+  await expect(page.locator("#programs-menu a").first()).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  await expect(page.locator("#programs-menu a").nth(1)).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(toggle).toBeFocused();
+  await expect(page.locator("#programs-menu")).toBeHidden();
+  await toggle.click();
+  await page.locator("h1").click({ position: { x: 10, y: 10 } });
+  await expect(page.locator("#programs-menu")).toBeHidden();
+  await page.getByRole("button", { name: "Choose a chess program" }).click();
+  await page.locator('[data-program-choice="Chess in schools"]').click();
+  await expect(page.locator("#program-dialog")).toBeVisible();
+  await expect(page.locator("#dialog-title")).toHaveText("Chess in schools");
+  await expect(page.locator("[name=program]")).toHaveValue("Chess in schools");
+});
+
+test("hero crossfades, manual controls work, and pause persists", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("/");
+  await expect(page.locator(".hero-photo-controls")).toBeVisible();
+  await expect
+    .poll(() =>
+      page
+        .locator(".hero-slide")
+        .evaluateAll((images) =>
+          images.every((img) => img.complete && img.naturalWidth),
+        ),
+    )
+    .toBe(true);
+  await page.mouse.move(0, 0);
+  await page.clock.fastForward(7100);
+  await expect(page.locator('[data-photo="1"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page.getByRole("button", { name: "Next hero photo" }).click();
+  await expect(page.locator('[data-photo="2"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page.getByRole("button", { name: "Previous hero photo" }).click();
+  await expect(page.locator('[data-photo="1"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page
+    .getByRole("button", { name: "Pause hero photo transitions" })
+    .click();
+  await page.locator("header .brand").focus();
+  await page.mouse.move(0, 0);
+  await page.clock.fastForward(15000);
+  await expect(page.locator('[data-photo="1"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await expect(
+    page.getByRole("button", { name: "Resume hero photo transitions" }),
+  ).toBeVisible();
+});
+
+test("reduced motion disables automatic transitions but permits photo choice", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.clock.install();
+  await page.goto("/");
+  await expect(page.locator(".hero-photo-controls")).toBeVisible();
+  await expect(
+    page.getByRole("button", {
+      name: "Automatic transitions disabled for reduced motion",
+    }),
+  ).toBeDisabled();
+  await page.clock.fastForward(15000);
+  await expect(page.locator('[data-photo="0"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page
+    .getByRole("button", { name: "Show tournament boards photo" })
+    .click();
+  await expect(page.locator('[data-photo="1"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  expect(
+    await page
+      .locator(".hero-slide")
+      .first()
+      .evaluate((el) => getComputedStyle(el).transitionDuration),
+  ).toBe("0s");
+});
+
+test("dropdowns fit and close correctly on narrow screens", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Open navigation" }).click();
+  await page.getByRole("button", { name: "Open programs menu" }).click();
+  await expect(page.locator("#programs-menu")).toBeVisible();
+  await page.locator("#programs-menu a").first().click();
+  await expect(page.locator("#navigation")).not.toHaveClass(/open/);
+  await expect(page.locator("#programs-menu")).toBeHidden();
+  await page.locator("header .brand").click();
+  await page.getByRole("button", { name: "Choose a chess program" }).click();
+  await expect(page.locator("#hero-programs-menu")).toBeVisible();
+  const bounds = await page.locator("#hero-programs-menu").boundingBox();
+  expect(bounds.x).toBeGreaterThanOrEqual(0);
+  expect(bounds.x + bounds.width).toBeLessThanOrEqual(320);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+});
+
+test("mobile dropdown options are not covered by slideshow controls", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Choose a chess program" }).click();
+  await page.locator('[data-program-choice="Chess in schools"]').click();
+  await expect(page.locator("#dialog-title")).toHaveText("Chess in schools");
+  await expect(page.locator("#program-dialog")).toBeVisible();
+});
+
+test("failed background photo is skipped without a blank hero", async ({
+  page,
+}) => {
+  await page.route("**/assets/tournament-prep-02.jpg", (route) =>
+    route.abort(),
+  );
+  await page.goto("/");
+  await expect(page.locator(".hero-photo-controls")).toBeVisible();
+  await expect(page.locator('[data-photo="1"]')).toBeDisabled();
+  await page.getByRole("button", { name: "Next hero photo" }).click();
+  await expect(page.locator('[data-photo="2"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await expect(page.locator(".hero-slide.is-active")).toHaveAttribute(
+    "src",
+    "assets/tournament-prep-09.jpg",
+  );
 });

@@ -4,9 +4,15 @@
 
 The public website was restored from commit `04d18c773e4da0e8cc0a98881c6ad5b05391bbba` on `arena/1fbcaa8d-shem-messo-chess-site` (PR #22): `index.html`, `style.css`, `script.js`, and `assets/site-photos/`.
 
-The only subsequent UI changes requested are removing the top contact strip and increasing text sizes. Its original navy/blue/white palette, fonts, hero, programs, team, merchandise and contact interface are preserved. The replacement green interface from this branch has been removed.
+Subsequent requested enhancements remove the top contact strip, increase text sizes, and add a smoothly fading hero photo background, refined calls to action and accessible program dropdowns. Its original navy/blue/white palette, fonts, hero, programs, team, merchandise and contact interface are preserved. The replacement green interface from this branch has been removed.
 
 The backend work is retained separately, but **registration embeds, account controls, chess, feedback, FAQs, events and push opt-in are not currently exposed in this restored UI**. They must be integrated into the approved previous design without redesigning it. The backend documentation below describes the retained implementation, not features available through the current page. The restored site's enquiry form still opens WhatsApp and does not store its submissions.
+
+### Hero and dropdown behavior
+
+The hero cycles through three existing tournament photographs every seven seconds with a 1.6-second crossfade. Previous/next, photo dots and pause/resume controls are provided. Autoplay pauses while hovered, focused, off-screen or in a background tab; reduced-motion preferences disable autoplay and transitions. Failed images are skipped. The first photo stays visible without JavaScript.
+
+The navigation program dropdown links to the existing program cards. The hero split-button dropdown opens the existing program enquiry dialog with the chosen program selected. Dropdowns support click/touch, keyboard arrows, Escape, outside clicks and tab navigation. The navy/blue/white palette and remaining page sections are preserved.
 
 ## Run
 
