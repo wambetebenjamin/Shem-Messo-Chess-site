@@ -1509,3 +1509,296 @@ select:focus {
     overflow-y: auto;
   }
 }
+
+/* Quiet, line-free surfaces; form boundaries and focus outlines stay usable. */
+header,
+.values,
+.values-grid > div,
+.mini-pieces,
+.about-copy blockquote,
+.program-card,
+.program-detail,
+.team-card,
+.merch-card,
+.footer-bottom,
+.hero-secondary,
+.hero-photo-controls,
+.dropdown-panel {
+  border: 0;
+}
+nav > a::after {
+  display: none;
+}
+.photo-pause,
+.split-cta > .dropdown-toggle {
+  border-left: 0 !important;
+}
+.program-card,
+.team-card,
+.merch-card {
+  box-shadow: 0 4px 24px #14233f08;
+}
+
+/* The same complete footer appears on every page. */
+footer {
+  padding-top: 58px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 0.8fr 1fr;
+  gap: 40px;
+  padding-bottom: 30px;
+}
+.footer-grid .brand {
+  font-size: 18px;
+  white-space: nowrap;
+}
+.footer-grid .brand small {
+  font-size: 10px;
+}
+.footer-grid .brand img {
+  width: 44px;
+  height: 50px;
+}
+.footer-grid h3 {
+  font-size: 17px;
+  letter-spacing: 0;
+  margin: 0 0 20px;
+  color: #fff;
+}
+.footer-grid p {
+  color: #a0aec4;
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.footer-about > p {
+  margin-top: 20px;
+  max-width: 310px;
+}
+.footer-location {
+  margin-top: 0 !important;
+}
+.footer-contact-icons {
+  display: flex;
+  align-items: start;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.footer-contact-icons a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.footer-contact-icons svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.footer-contact-icons a:hover,
+.footer-links a:hover,
+.footer-social-links a:hover {
+  color: #93c5fd;
+}
+.footer-links {
+  position: static;
+  width: auto;
+  padding: 0;
+  box-shadow: none;
+  background: transparent;
+  max-height: none;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 400;
+}
+.footer-social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.footer-social-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+}
+.footer-social-links small {
+  display: block;
+  font-size: 13px;
+  color: #a0aec4;
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+.social-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  background: #ffffff0a;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 23px;
+}
+.footer-bottom a {
+  text-decoration: none;
+}
+
+/* Portraits fade as cards, not as a second full-width hero. */
+.staff-carousel {
+  max-width: 440px;
+  margin: 0 auto 32px;
+}
+.staff-carousel-stage {
+  display: grid;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 35px #14233f12;
+}
+.staff-slide {
+  grid-area: 1 / 1;
+  background: var(--navy);
+  color: #fff;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 1.4s ease-in-out,
+    visibility 0s linear 1.4s;
+}
+.staff-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+.staff-slide img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  object-position: center 20%;
+}
+.staff-slide-caption {
+  padding: 25px 28px;
+}
+.staff-slide-caption small {
+  color: #93c5fd;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.staff-slide-caption h3 {
+  font-size: 28px;
+  margin: 10px 0 17px;
+}
+.staff-slide-caption .text-link {
+  font-size: 15px;
+}
+.staff-carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 18px;
+}
+.staff-carousel-controls button {
+  border: 0;
+  background: var(--surface);
+  color: var(--navy);
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 20px;
+}
+.staff-carousel-controls button:hover {
+  background: #e2e8f0;
+}
+.staff-carousel-controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.staff-dots {
+  display: flex;
+  gap: 2px;
+}
+.staff-dots button {
+  width: 23px;
+  background: transparent;
+}
+.staff-dots button::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #64748b60;
+  border-radius: 6px;
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+.staff-dots button[aria-pressed="true"]::before {
+  width: 17px;
+  background: var(--blue);
+}
+#team > .button {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+}
+@media (max-width: 1100px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+  }
+}
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .footer-grid .brand {
+    font-size: 17px;
+  }
+  .footer-social-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+  .staff-slide img {
+    height: 340px;
+  }
+  .staff-slide-caption {
+    padding: 22px;
+  }
+  .staff-carousel-controls {
+    gap: 5px;
+  }
+  .staff-dots {
+    gap: 0;
+  }
+  .staff-dots button {
+    width: 21px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .staff-slide {
+    transition: none;
+  }
+}
+.footer-grid .brand img {
+  background: #fff;
+  border-radius: 50%;
+  padding: 3px;
+}
+.footer-links a {
+  padding: 0;
+  line-height: 1.6;
+}

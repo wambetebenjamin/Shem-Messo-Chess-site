@@ -454,3 +454,171 @@ test("homepage overviews link to pages with fuller information", async ({
     ).toBeGreaterThan(summaries[name]);
   }
 });
+
+test("footer has basic information, contact icons and the original social handles on every page", async ({
+  page,
+}) => {
+  for (const file of [
+    "index",
+    "about",
+    "programs",
+    "team",
+    "merchandise",
+    "contact",
+  ]) {
+    await page.goto("/" + file + ".html");
+    const footer = page.locator("footer");
+    await expect(footer).toContainText("Kericho, Kenya");
+    await expect(footer).toContainText("Forward ever, backward never.");
+    await expect(
+      footer.getByRole("link", { name: "Call the academy", exact: true }),
+    ).toHaveAttribute("href", "tel:+254729037585");
+    await expect(
+      footer.getByRole("link", { name: "Email the academy", exact: true }),
+    ).toHaveAttribute("href", "mailto:kerichochessacademy@gmail.com");
+    await expect(
+      footer.getByRole("link", { name: "Message the academy on WhatsApp" }),
+    ).toHaveAttribute("href", "https://wa.me/254729037585");
+    await expect(
+      footer.getByRole("link", { name: "Facebook @smesso" }),
+    ).toHaveAttribute("href", "https://www.facebook.com/smesso");
+    await expect(
+      footer.getByRole("link", { name: "TikTok @kericho.chess.clu" }),
+    ).toHaveAttribute("href", "https://www.tiktok.com/@kericho.chess.clu");
+    expect(await footer.innerText()).not.toContain(
+      "kerichochessacademy@gmail.com",
+    );
+    expect(await footer.innerText()).not.toContain("729 037 585");
+    await page.setViewportSize({ width: 320, height: 900 });
+    await expect(footer.getByRole("navigation")).toBeVisible();
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true);
+    await page.setViewportSize({ width: 1280, height: 720 });
+  }
+});
+
+test("decorative divider lines are removed while form fields remain usable", async ({
+  page,
+}) => {
+  await page.goto("/");
+  for (const selector of [
+    "header",
+    ".values",
+    ".values-grid > div",
+    ".mini-pieces",
+    ".program-card",
+    ".merch-card",
+    ".hero-secondary",
+    ".footer-bottom",
+  ]) {
+    const widths = await page
+      .locator(selector)
+      .first()
+      .evaluate((el) => {
+        const s = getComputedStyle(el);
+        return [
+          s.borderTopWidth,
+          s.borderRightWidth,
+          s.borderBottomWidth,
+          s.borderLeftWidth,
+        ];
+      });
+    expect(widths, selector).toEqual(["0px", "0px", "0px", "0px"]);
+  }
+  await page.goto("/contact.html");
+  expect(
+    await page
+      .locator("[name=name]")
+      .evaluate((el) => getComputedStyle(el).borderTopWidth),
+  ).not.toBe("0px");
+});
+
+test("team photo cards transition, pause, and link to the full profile", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("/");
+  const carousel = page.locator(".staff-carousel");
+  await carousel.scrollIntoViewIfNeeded();
+  await expect(page.locator(".staff-carousel-controls")).toBeVisible();
+  await expect
+    .poll(() =>
+      page
+        .locator(".staff-slide img")
+        .evaluateAll((images) =>
+          images.every((img) => img.complete && img.naturalWidth),
+        ),
+    )
+    .toBe(true);
+  await page.mouse.move(0, 0);
+  await page.clock.fastForward(7100);
+  await expect(page.locator('[data-staff="1"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page.getByRole("button", { name: "Next team photo" }).click();
+  await expect(page.locator('[data-staff="2"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page
+    .getByRole("button", { name: "Pause team photo transitions" })
+    .click();
+  await page
+    .getByRole("button", { name: "Resume team photo transitions" })
+    .blur();
+  await page.mouse.move(0, 0);
+  await page.clock.fastForward(15000);
+  await expect(page.locator('[data-staff="2"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page.locator(".staff-slide.is-active a").click();
+  await expect(page).toHaveURL(/team\.html#staff-gladys-langat$/);
+  await expect(page.locator("#staff-gladys-langat")).toBeVisible();
+});
+
+test("team cards respect reduced motion and inactive cards cannot receive focus", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.clock.install();
+  await page.goto("/");
+  await page.locator(".staff-carousel").scrollIntoViewIfNeeded();
+  await expect(page.locator(".staff-carousel-controls")).toBeVisible();
+  await expect(
+    page.getByRole("button", {
+      name: "Automatic team transitions disabled for reduced motion",
+    }),
+  ).toBeDisabled();
+  await page.clock.fastForward(15000);
+  await expect(page.locator('[data-staff="0"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page
+    .getByRole("button", { name: "Show Barnabas Ochieng photo" })
+    .click();
+  await expect(page.locator(".staff-slide.is-active h3")).toHaveText(
+    "Barnabas Ochieng",
+  );
+  expect(
+    await page
+      .locator(".staff-slide:not(.is-active)")
+      .evaluateAll((slides) =>
+        slides.every(
+          (slide) =>
+            slide.inert && slide.getAttribute("aria-hidden") === "true",
+        ),
+      ),
+  ).toBe(true);
+  expect(
+    await page
+      .locator(".staff-slide")
+      .first()
+      .evaluate((el) => getComputedStyle(el).transitionDuration),
+  ).toBe("0s");
+});

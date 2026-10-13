@@ -323,3 +323,134 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
   });
   syncTimer();
 })();
+
+// Team portrait cards follow the hero's pause and reduced-motion rules.
+(() => {
+  const carousel = document.querySelector(".staff-carousel");
+  if (!carousel) return;
+  const slides = [...carousel.querySelectorAll(".staff-slide")];
+  const dots = [...carousel.querySelectorAll("[data-staff]")];
+  const controls = carousel.querySelector(".staff-carousel-controls");
+  const pause = carousel.querySelector(".staff-pause");
+  let index = 0,
+    timer = null,
+    paused = false,
+    hovered = false,
+    focused = false,
+    visible = false;
+  const ready = () =>
+    slides
+      .map((slide, i) => {
+        const image = slide.querySelector("img");
+        return image.complete && image.naturalWidth ? i : -1;
+      })
+      .filter((i) => i >= 0);
+  function sync() {
+    clearInterval(timer);
+    const loaded = ready();
+    if (loaded.length && !loaded.includes(index)) show(loaded[0], false);
+    controls.hidden = loaded.length < 2;
+    dots.forEach((dot, i) => {
+      dot.disabled = !loaded.includes(i);
+    });
+    pause.disabled = motionPreference.matches;
+    pause.setAttribute(
+      "aria-label",
+      motionPreference.matches
+        ? "Automatic team transitions disabled for reduced motion"
+        : paused
+          ? "Resume team photo transitions"
+          : "Pause team photo transitions",
+    );
+    pause.querySelector("span").textContent =
+      paused || motionPreference.matches ? "▶" : "Ⅱ";
+    if (
+      loaded.length > 1 &&
+      visible &&
+      !document.hidden &&
+      !paused &&
+      !hovered &&
+      !focused &&
+      !motionPreference.matches
+    )
+      timer = setInterval(() => step(1, false), 7000);
+  }
+  function show(next, reset = true) {
+    if (!ready().includes(next)) return;
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("is-active", i === next);
+      slide.setAttribute("aria-hidden", String(i !== next));
+      slide.inert = i !== next;
+    });
+    dots.forEach((dot, i) =>
+      dot.setAttribute("aria-pressed", String(i === next)),
+    );
+    index = next;
+    if (reset) sync();
+  }
+  function step(direction, reset = true) {
+    const loaded = ready();
+    if (loaded.length)
+      show(
+        loaded[
+          (loaded.indexOf(index) + direction + loaded.length) % loaded.length
+        ],
+        reset,
+      );
+  }
+  dots.forEach((dot) =>
+    dot.addEventListener("click", () => show(Number(dot.dataset.staff))),
+  );
+  carousel
+    .querySelector(".staff-next")
+    .addEventListener("click", () => step(1));
+  carousel
+    .querySelector(".staff-previous")
+    .addEventListener("click", () => step(-1));
+  pause.addEventListener("click", () => {
+    paused = !paused;
+    sync();
+  });
+  carousel.addEventListener("mouseenter", () => {
+    hovered = true;
+    sync();
+  });
+  carousel.addEventListener("mouseleave", () => {
+    hovered = false;
+    sync();
+  });
+  carousel.addEventListener("focusin", () => {
+    focused = true;
+    sync();
+  });
+  carousel.addEventListener("focusout", (event) => {
+    focused = carousel.contains(event.relatedTarget);
+    sync();
+  });
+  document.addEventListener("visibilitychange", sync);
+  motionPreference.addEventListener("change", sync);
+  slides.forEach((slide, i) => {
+    const image = slide.querySelector("img");
+    image.addEventListener("load", () => {
+      if (!ready().includes(index)) show(i, false);
+      sync();
+    });
+    image.addEventListener("error", sync);
+  });
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(
+      (entries) => {
+        visible = entries[0].isIntersecting;
+        if (visible)
+          slides.forEach((slide) => {
+            slide.querySelector("img").loading = "eager";
+          });
+        sync();
+      },
+      { threshold: 0.1 },
+    ).observe(carousel);
+  } else {
+    visible = true;
+  }
+  sync();
+})();

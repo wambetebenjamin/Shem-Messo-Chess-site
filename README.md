@@ -14,6 +14,12 @@ The hero cycles through three existing tournament photographs every seven second
 
 The navigation program dropdown links to the existing program cards. The hero split-button dropdown opens the existing program enquiry dialog with the chosen program selected. Dropdowns support click/touch, keyboard arrows, Escape, outside clicks and tab navigation. The navy/blue/white palette and remaining page sections are preserved.
 
+### Footer and team photo cards
+
+Each page shares a footer with basic academy information, Kericho location, call/email/WhatsApp icons, page links, and the Facebook `@smesso` and TikTok `@kericho.chess.clu` handles already present in the original repository. No new social accounts or contact numbers were invented. Contact numbers and email are not printed in the footer.
+
+Homepage team portrait cards crossfade every seven seconds and link to the corresponding profile on the Team page. Controls support previous/next, individual photos and pause/resume. Autoplay stops on hover/focus, off-screen, in background tabs or with reduced motion. Inactive cards are hidden from assistive technology and keyboard focus. Decorative divider lines and card outlines are removed; form boundaries and focus outlines remain for usability.
+
 ## Run
 
 Requires **Node.js 22.13 or later** (SQLite is built into Node).
@@ -31,7 +37,7 @@ Open port 3000. The server binds to `0.0.0.0`; set `PORT` to change it. All brow
 
 The site is a real multi-page website. Each page has its own HTML document, title, description and active navigation item. Links also work on static hosting without server-side routing.
 
-- `index.html` (or `/`): Home, with the existing hero slideshow, values, joining CTA and concise overviews of About Us, Programs, Team, Merchandise and Contact. Overview links open the separate pages for fuller information. The Home team overview has no individual staff profiles; those remain on the Team page.
+- `index.html` (or `/`): Home, with the existing hero slideshow, values, joining CTA and concise overviews of About Us, Programs, Team, Merchandise and Contact. Overview links open the separate pages for fuller information. The Home team overview now has smoothly crossfading portrait cards linking to the full Team page. Full staff profiles remain on that page.
 - `about.html`: About Us and the academy's community introduction, immediately after Home in navigation.
 - `programs.html`: junior chess, club/competitive chess and school programs. Dropdown links point to their cards on this page.
 - `team.html`: the five existing staff profiles and photographs, separate from Home.
