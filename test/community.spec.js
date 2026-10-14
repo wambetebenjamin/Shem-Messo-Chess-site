@@ -63,7 +63,7 @@ test("community pages, mobile navigation, and all local destinations resolve", a
   expect(errors).toEqual([]);
 });
 
-test("official forms are embedded on request, keyboard tabs and fallback links work", async ({
+test("guided registration embeds both official forms and preserves them between steps", async ({
   page,
 }) => {
   const googleRequests = [];
@@ -74,42 +74,44 @@ test("official forms are embedded on request, keyboard tabs and fallback links w
   await page.route("https://docs.google.com/**", (route) => route.abort());
   await page.goto("/registration.html");
   expect(googleRequests).toEqual([]);
-  await expect(page.locator("#membership-frame")).not.toHaveAttribute("src");
+  await expect(page.locator("#journey-next")).toBeDisabled();
+  await page.locator("#joining-child").check();
+  await page.locator("#journey-next").click();
+  await expect(page.locator("#journey-position")).toContainText("Step 2 of 4");
   await page
-    .getByRole("button", { name: "Load membership registration form here" })
+    .getByRole("button", {
+      name: "Open membership registration form",
+      exact: true,
+    })
     .click();
   await expect(page.locator("#membership-frame")).toBeVisible();
   await expect(page.locator("#membership-frame")).toHaveAttribute(
     "src",
     /1FAIpQLSdbieIfMBN_VQPdNGKFHh1rPMa_JFpRZUUhkHEEU92DbUgJGw\/viewform\?embedded=true$/,
   );
-  await page.locator("#membership-tab").focus();
-  await page.keyboard.press("ArrowRight");
-  await expect(page.locator("#consent-tab")).toHaveAttribute(
-    "aria-selected",
-    "true",
+  await page.locator("#journey-next").click();
+  await expect(page.locator("#consent-guidance")).toContainText(
+    "one official consent form for each child",
   );
-  await expect(page.locator("#membership-panel")).toBeHidden();
-  await expect(page.locator("#consent-panel")).toContainText("separate");
   await page
-    .getByRole("button", { name: "Load photo & video consent form here" })
+    .getByRole("button", {
+      name: "Open photo & video consent form",
+      exact: true,
+    })
     .click();
   await expect(page.locator("#consent-frame")).toHaveAttribute(
     "src",
     /1FAIpQLSefyh1CBlzc_YsCPh9dp8oNl9dcBPjr4cNvjET8ob4ndaodzw\/viewform\?embedded=true$/,
   );
-  await expect(page.locator("#consent-panel a[target=_blank]")).toHaveAttribute(
-    "rel",
-    "noopener noreferrer",
+  await expect(
+    page.locator('[data-journey-screen="2"] a[target=_blank]'),
+  ).toHaveAttribute("rel", "noopener noreferrer");
+  await page.locator("#journey-back").click();
+  await expect(page.locator("#membership-frame")).toBeVisible();
+  await expect(page.locator("#membership-frame")).toHaveAttribute(
+    "src",
+    /embedded=true/,
   );
-  await page.locator("#consent-tab").focus();
-  await page.keyboard.press("Home");
-  await expect(page.locator("#membership-tab")).toHaveAttribute(
-    "aria-selected",
-    "true",
-  );
-  await page.locator("#go-consent").click();
-  await expect(page.locator("#consent-tab")).toBeFocused();
 });
 
 test("feedback saves privately, validates length, and never puts messages in URLs", async ({
@@ -170,7 +172,10 @@ test("FAQs and official form links are usable without JavaScript", async ({
   await expect(page.locator(".faq-item").first()).toHaveAttribute("open", "");
   await page.goto(base + "/registration.html");
   await expect(
-    page.locator("#membership-panel a[target=_blank]"),
+    page.getByRole("link", {
+      name: "Open membership registration",
+      exact: true,
+    }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Open photo/video consent", exact: true }),
@@ -421,6 +426,8 @@ test("notification opt-in and opt-out wire to the backend without prompting on p
 }) => {
   await mockPush(page);
   await page.goto("/registration.html");
+  await page.locator("#joining-self").check();
+  await page.locator('[data-journey-step="3"]').click();
   await expect(page.locator("#push-enable")).toBeEnabled();
   expect(await page.evaluate(() => window.permissionRequests)).toBe(0);
   expect(await page.evaluate(() => window.workerRegistrations)).toBe(0);

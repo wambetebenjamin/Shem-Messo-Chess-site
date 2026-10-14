@@ -22,49 +22,6 @@ function message(node, error) {
   node.textContent = error.message || "Connection failed. Please try again.";
 }
 
-// Native tab panels: a Google form loads only after an explicit request.
-const tabs = [...document.querySelectorAll('[role="tab"]')];
-function selectTab(tab, focus = false) {
-  tabs.forEach((item) => {
-    const selected = item === tab;
-    item.setAttribute("aria-selected", String(selected));
-    item.tabIndex = selected ? 0 : -1;
-    document.getElementById(item.getAttribute("aria-controls")).hidden =
-      !selected;
-  });
-  if (focus) tab.focus();
-}
-tabs.forEach((tab, index) => {
-  tab.addEventListener("click", () => selectTab(tab));
-  tab.addEventListener("keydown", (event) => {
-    const next =
-      event.key === "ArrowRight"
-        ? (index + 1) % tabs.length
-        : event.key === "ArrowLeft"
-          ? (index - 1 + tabs.length) % tabs.length
-          : event.key === "Home"
-            ? 0
-            : event.key === "End"
-              ? tabs.length - 1
-              : -1;
-    if (next < 0) return;
-    event.preventDefault();
-    selectTab(tabs[next], true);
-  });
-});
-$("#go-consent")?.addEventListener("click", () =>
-  selectTab($("#consent-tab"), true),
-);
-document.querySelectorAll(".load-google-form").forEach((button) => {
-  button.addEventListener("click", () => {
-    const frame = document.getElementById(button.dataset.frame);
-    frame.src = frame.dataset.src;
-    frame.hidden = false;
-    button.hidden = true;
-    frame.scrollIntoView({ block: "start", behavior: "auto" });
-  });
-});
-
 // Feedback is sent to private server storage, never to localStorage or a public feed.
 $("#feedback-form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
