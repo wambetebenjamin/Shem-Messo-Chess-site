@@ -453,8 +453,10 @@ test("footer is compact, icon-only and retains original social destinations on e
     await page.goto("/" + file + ".html");
     const footer = page.locator("footer");
     await expect(footer).toHaveClass(/compact-footer/);
-    expect(await footer.innerText()).not.toMatch(
-      /Forward ever|Get in touch|Your next move|Explore/,
+    expect(await footer.innerText()).not.toMatch(/Get in touch|Your next move/);
+    await expect(footer).toContainText("Kericho, Kenya");
+    await expect(footer).toContainText(
+      "Coaching, club play and chess in schools.",
     );
     await expect(footer.locator("svg")).toHaveCount(5);
     await expect(

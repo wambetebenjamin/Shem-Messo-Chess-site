@@ -277,3 +277,97 @@ footer.compact-footer,
     gap: 12px;
   }
 }
+/* Basic, useful footer content, without the former repeated marketing sections. */
+.basic-footer .footer-main-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
+  gap: 36px;
+  align-items: start;
+}
+.basic-footer .footer-mark {
+  align-items: center;
+  gap: 12px;
+}
+.basic-footer .footer-mark > span {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.basic-footer .footer-mark small {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  margin-top: 4px;
+}
+.basic-footer .footer-details p {
+  max-width: 330px;
+  margin: 14px 0 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #bdc9dc;
+}
+.basic-footer .footer-details .footer-place {
+  font-size: 12px;
+  margin-top: 8px;
+}
+.basic-footer h3 {
+  font-size: 17px;
+  margin: 4px 0 12px;
+  color: white;
+  letter-spacing: 0;
+}
+.basic-footer nav.footer-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 12px;
+}
+.basic-footer .footer-links a {
+  justify-content: flex-start;
+  padding: 8px 0;
+}
+.basic-footer .footer-actions {
+  gap: 14px;
+}
+.basic-footer .footer-bottom {
+  margin-top: 20px;
+}
+@media (max-width: 1000px) {
+  .basic-footer .footer-main-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
+  }
+  .basic-footer .footer-connect {
+    grid-column: 1/-1;
+  }
+  .basic-footer .footer-actions {
+    width: auto;
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 600px) {
+  .basic-footer .footer-main-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .basic-footer .footer-explore,
+  .basic-footer .footer-connect {
+    grid-column: auto;
+  }
+  .basic-footer nav.footer-links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px 8px;
+  }
+  .basic-footer .footer-links a {
+    font-size: 13px;
+  }
+  .basic-footer .footer-details p {
+    margin-top: 10px;
+  }
+  .basic-footer .footer-details .footer-place {
+    margin-top: 6px;
+  }
+  .basic-footer .footer-mark > span {
+    font-size: 18px;
+  }
+}

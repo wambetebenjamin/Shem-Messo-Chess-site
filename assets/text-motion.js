@@ -129,6 +129,39 @@ if (
       });
   }
   scan();
+  const hero = document.querySelector(".hero");
+  hero?.addEventListener("hero-slide-change", () => {
+    if (
+      preference.matches ||
+      document.hidden ||
+      !inView(hero) ||
+      document.querySelector("dialog[open]")
+    )
+      return;
+    const heading = hero.querySelector("h1");
+    prepare(heading);
+    const record = prepared.get(heading);
+    if (record) {
+      record.shown = false;
+      heading.classList.remove("lettering-in");
+      void heading.offsetWidth;
+      reveal(heading);
+    }
+    hero.querySelectorAll(".hero-content > p").forEach((paragraph) => {
+      paragraphs.delete(paragraph);
+      paragraph.classList.remove("text-arriving");
+      void paragraph.offsetWidth;
+      reveal(paragraph);
+    });
+  });
+  hero?.addEventListener("hero-motion-state", (event) => {
+    if (event.detail.stopped)
+      hero
+        .querySelectorAll(".lettering-in,.text-arriving")
+        .forEach((element) =>
+          element.classList.remove("lettering-in", "text-arriving"),
+        );
+  });
   // Step headings, product previews and other dynamically updated titles get the same treatment.
   let queued = false;
   const changes = new MutationObserver(() => {
@@ -161,5 +194,33 @@ if (
       .forEach((element) =>
         element.classList.remove("lettering-in", "text-arriving"),
       );
+  });
+}
+
+// The independent comparison keeps its own fonts/layout and replays a whole-text entrance.
+if (!root?.classList.contains("ck-design")) {
+  const hero = document.querySelector(".preview-hero");
+  const elements = [
+    ...(hero?.querySelectorAll(".hero-copy h1,.hero-copy > p") || []),
+  ];
+  hero?.addEventListener("hero-slide-change", () => {
+    if (preference.matches || document.hidden) return;
+    hero.dataset.textReplays = String(
+      Number(hero.dataset.textReplays || 0) + 1,
+    );
+    elements.forEach((element) => {
+      element.classList.remove("text-arriving");
+      void element.offsetWidth;
+      element.classList.add("text-arriving");
+      element.addEventListener(
+        "animationend",
+        () => element.classList.remove("text-arriving"),
+        { once: true },
+      );
+    });
+  });
+  hero?.addEventListener("hero-motion-state", (event) => {
+    if (event.detail.stopped)
+      elements.forEach((element) => element.classList.remove("text-arriving"));
   });
 }

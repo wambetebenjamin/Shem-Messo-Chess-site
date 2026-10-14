@@ -13,7 +13,7 @@ A shorter public website using the user-supplied Chess Kenya source layout and t
 - **Play (`play.html`)**: account creation/login/logout, beginner computer practice, online matchmaking, legal interactive boards with keyboard navigation and promotion choice, move history, and a daily puzzle available without login.
 - **Legacy Team (`team.html`)** redirects to `about.html#officials` on Node; a static meta-refresh and fallback link do the same on static hosts.
 
-The Community dropdown exposes Registration, Events, Play, Daily Puzzle and Help without crowding the main header. The compact footer keeps three short links, the original social destinations, icon-only call/email/WhatsApp actions and copyright; repeated academy descriptions, CTA blocks and long navigation lists are removed. Existing photographs are unchanged. The primary hero continues rotating every four seconds without hover interruption.
+The Community dropdown exposes Registration, Events, Play, Daily Puzzle and Help without crowding the main header. The compact footer keeps a brief academy summary/location, key page links, the original social destinations, icon-only call/email/WhatsApp actions and copyright; repeated academy descriptions, CTA blocks and long navigation lists are removed. Existing photographs are unchanged. The primary hero continues rotating every four seconds without hover interruption.
 
 ## Shared page design
 
@@ -113,7 +113,7 @@ Category filters, an accessible quick-look dialog with previous/next browsing, e
 
 A brief fold/swipe-return effect is staggered between visible items. It pauses for inspection, keyboard focus, explicit pause, reduced motion, hidden tabs and offscreen views. Horizontal gestures can trigger the effect; vertical scrolling and pinch zoom remain available. Photos and ordinary navigation remain visible without JavaScript. All six enquiry buttons carry the correct item into Contact. No unconfirmed prices, sizes or stock guarantees are introduced. See `assets/clothing/README.md` for source provenance.
 
-Shared footers now use a compact About/Join/Help link set and five accessible social/contact icons, without repeated marketing copy. CTA lift/arrow feedback is restrained and disabled for reduced motion. Existing colors, contact-icon-only presentation, verified social handles, homepage structure and hero/staff timing remain unchanged.
+Shared footers now use a basic academy summary, location/motto, seven relevant page links and five accessible social/contact icons, without repeated marketing CTA blocks. CTA lift/arrow feedback is restrained and disabled for reduced motion. Existing colors, contact-icon-only presentation, verified social handles, homepage structure and hero/staff timing remain unchanged.
 
 ## Verification
 
@@ -129,3 +129,7 @@ npm run test:browser
 ## Footer and text refinement
 
 `assets/page-finish.css` condenses the shared footer (including the independent comparison), balances headings with fluid type and natural wrapping, and removes hard-coded heading breaks. `assets/text-motion.js` progressively adds brief, staggered lettering to headings and gentle entrances to selected introductions, including dynamic registration/product headings. Words remain intact and accessible names stay complete; text remains readable with JavaScript disabled or reduced motion. Reduced-motion changes also restore ordinary text before later dynamic updates. Native same-origin view transitions provide a short exit/entrance where supported, without intercepting links, delaying forms or creating a custom router. Optional snapshot cancellation is handled without suppressing unrelated errors. No perpetual typing loops or letter-by-letter screen-reader announcements.
+
+### Basic footer and continuing hero motion
+
+The latest footer revision restores useful academy information (short description, Kericho location and motto) and seven core page links while keeping social/contact icons, copyright and no repeated CTA ribbons or printed contact details. Hero lettering now replays briefly with each existing four-second photo change; the existing pause button stops both, and hidden/offscreen/reduced-motion states keep it still. The independent comparison uses its own five-second photo loop and a gentle whole-text entrance. No additional perpetual animation timer is introduced; text follows actual slide-change events.

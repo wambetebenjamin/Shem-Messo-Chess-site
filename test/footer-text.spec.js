@@ -11,7 +11,7 @@ const pages = [
   "play",
 ];
 
-test("compact footer removes repeated copy and uses five accessible icon-only destinations", async ({
+test("basic footer restores useful information without duplicate CTA blocks or printed contacts", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -20,9 +20,13 @@ test("compact footer removes repeated copy and uses five accessible icon-only de
     await page.evaluate(() => document.fonts.ready);
     const footer = page.locator("footer");
     await expect(
-      footer.locator(".footer-grid,.footer-quick-actions,h3,p"),
+      footer.locator(".footer-grid,.footer-quick-actions,.footer-action-bar"),
     ).toHaveCount(0);
-    await expect(footer.locator(".footer-links a")).toHaveCount(3);
+    await expect(footer).toContainText(
+      "Coaching, club play and chess in schools.",
+    );
+    await expect(footer).toContainText("Kericho, Kenya");
+    await expect(footer.locator(".footer-links a")).toHaveCount(7);
     await expect(footer.locator(".footer-actions a")).toHaveCount(5);
     expect(await footer.locator(".footer-actions").innerText()).toBe("");
     for (const link of await footer.locator(".footer-actions a").all()) {
@@ -33,9 +37,9 @@ test("compact footer removes repeated copy and uses five accessible icon-only de
       expect(box.height).toBeGreaterThanOrEqual(44);
     }
     await page.setViewportSize({ width: 1440, height: 900 });
-    expect((await footer.boundingBox()).height).toBeLessThan(180);
+    expect((await footer.boundingBox()).height).toBeLessThan(340);
     await page.setViewportSize({ width: 320, height: 900 });
-    expect((await footer.boundingBox()).height).toBeLessThan(230);
+    expect((await footer.boundingBox()).height).toBeLessThan(580);
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,

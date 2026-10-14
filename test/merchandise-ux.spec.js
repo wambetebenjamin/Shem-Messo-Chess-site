@@ -221,7 +221,7 @@ test("footer shortcuts work on every main page and use comfortably sized touch t
     await expect(
       footer.locator(".footer-action-bar, .footer-quick-actions, .footer-grid"),
     ).toHaveCount(0);
-    await expect(footer.locator(".footer-links a")).toHaveCount(3);
+    await expect(footer.locator(".footer-links a")).toHaveCount(7);
     await expect(footer.locator(".footer-links a").nth(1)).toHaveAttribute(
       "href",
       "registration.html",

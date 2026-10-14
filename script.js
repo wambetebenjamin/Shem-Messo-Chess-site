@@ -196,7 +196,7 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
   });
 }
 
-// Crossfade existing photographs without moving text or stealing focus.
+// Crossfade existing photographs; text enhancement follows slide changes without stealing focus.
 // Autoplay runs without clicks or hover interruption; explicit pause and reduced motion are respected.
 (() => {
   const hero = document.querySelector(".hero");
@@ -219,6 +219,17 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
   }
   function syncTimer() {
     stop();
+    hero.dispatchEvent(
+      new CustomEvent("hero-motion-state", {
+        detail: {
+          stopped:
+            userPaused ||
+            !inView ||
+            document.hidden ||
+            motionPreference.matches,
+        },
+      }),
+    );
     const ready = loaded();
     controls.hidden = ready.length < 2;
     dots.forEach((dot, i) => {
@@ -247,6 +258,7 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
   }
   function show(next, reset = true) {
     if (!loaded().includes(next)) return;
+    const changed = next !== index;
     slides.forEach((slide, i) =>
       slide.classList.toggle("is-active", i === next),
     );
@@ -254,6 +266,7 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
       dot.setAttribute("aria-pressed", String(i === next)),
     );
     index = next;
+    if (changed) hero.dispatchEvent(new CustomEvent("hero-slide-change"));
     if (reset) syncTimer();
   }
   function change(step, reset = true) {

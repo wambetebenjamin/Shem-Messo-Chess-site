@@ -16,3 +16,5 @@ The older PCA homepage comparison remains independent and does not load this sty
 ## Latest refinement
 
 The user subsequently requested less repeated footer content and balanced, animated lettering. The grouped reference-style footer has therefore been condensed to three links, five labelled icons, a logo and copyright. Headings no longer use forced line breaks; fluid sizing and balanced wrapping avoid narrow word ladders. Brief lettering and optional native page transitions enhance relevant text without looping, splitting words, delaying navigation or compromising reduced-motion/no-JavaScript reading.
+
+The following user correction restored basic relevant footer information: a short academy summary, location/motto and seven main-page links, with icon-only contact/social actions. Duplicate marketing CTA sections remain absent. Hero text motion now follows each actual slide change and respects the existing pause, offscreen/hidden-tab and reduced-motion behavior.

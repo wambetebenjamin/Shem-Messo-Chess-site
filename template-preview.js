@@ -53,9 +53,11 @@ const loaded = () =>
     .filter((i) => i >= 0);
 function show(next, reset = true) {
   if (!loaded().includes(next)) return;
+  const changed = next !== index;
   photos.forEach((p, i) => p.classList.toggle("active", i === next));
   dots.forEach((d, i) => d.setAttribute("aria-pressed", String(i === next)));
   index = next;
+  if (changed) hero.dispatchEvent(new CustomEvent("hero-slide-change"));
   if (reset) sync();
 }
 function step(direction, reset = true) {
@@ -68,6 +70,13 @@ function step(direction, reset = true) {
 }
 function sync() {
   clearInterval(timer);
+  hero.dispatchEvent(
+    new CustomEvent("hero-motion-state", {
+      detail: {
+        stopped: paused || !visible || document.hidden || motion.matches,
+      },
+    }),
+  );
   const ready = loaded();
   if (ready.length && !ready.includes(index)) show(ready[0], false);
   controls.hidden = ready.length < 2;
