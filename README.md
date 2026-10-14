@@ -101,11 +101,13 @@ PORT=3001 TEMPLATE_PREVIEW=1 npm start
 
 On this comparison server, `/` opens the template and `/index.html` opens the current homepage. On the default server, `/` remains the current homepage; `/template-preview.html` is also available. This is a homepage comparison, not an assertion that every PCA page/backend was replicated.
 
-## Rotating clothing illustrations
+## Merchandise presentation and shared actions
 
-Merchandise now places three independent 3D illustrations beside the existing equipment: a white round-neck T-shirt, cream hoodie and black polo. Front artwork is extracted from the user-supplied `WhatsApp Image 2026-10-14 at 12.04.54 PM.jpeg` on `main`. Colors and wording are preserved; polo ink is white. These are real volumetric Three.js meshes with modeled collars/hood/pocket/buttons, not CSS-flipped photographs. Back styling is illustrative because only front references were supplied. No prices, sizes or current stock guarantees are invented.
+The merchandise catalogue displays source-derived clothing cutouts beside the existing equipment photos: short names and enquiry buttons, not technical labels or long descriptions. The rejected volumetric viewers and their runtime have been removed. The original supplied clothing and print artwork are retained; only the surrounding image background is masked.
 
-Each rotates automatically, with its own pause/resume, front and left/right controls, plus horizontal pointer dragging. Reduced motion disables automatic turning but keeps manual controls available. Offscreen/hidden-tab animation suspends; vertical mobile scrolling and pinch zoom remain available. WebGL failure/context loss or disabled JavaScript leaves the cropped reference image visible. Garment enquiries use the existing Contact/WhatsApp flow. Three.js, print textures and fallback pictures are local, so these views also work on static hosting without Node or a CDN. See `assets/merchandise-3d/README.md` for model boundaries, source provenance, bundled version and MIT license.
+A brief fold/swipe-return effect is staggered between visible items. It pauses for inspection, keyboard focus, explicit pause, reduced motion, hidden tabs and offscreen views. Horizontal gestures can trigger the effect; vertical scrolling and pinch zoom remain available. Photos and ordinary navigation remain visible without JavaScript. All six enquiry buttons carry the correct item into Contact. No unconfirmed prices, sizes or stock guarantees are introduced. See `assets/clothing/README.md` for source provenance.
+
+Shared footers now have compact Join/Play/Events shortcuts, grouped Explore links, larger contact/social touch areas and keyboard focus treatment. CTA lift/arrow feedback is restrained and disabled for reduced motion. Existing colors, contact-icon-only presentation, verified social handles, homepage structure and hero/staff timing remain unchanged.
 
 ## Verification
 

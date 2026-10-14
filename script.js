@@ -163,16 +163,6 @@ if (enquiryForm) {
     enquiryForm.elements.message.value = `Hello, please share the price and availability of the ${item.toLowerCase()}.`;
   }
 }
-document.querySelectorAll(".merchandise-enquiry").forEach((button) => {
-  button.addEventListener("click", () => {
-    const params = new URLSearchParams({
-      program: "Merchandise",
-      item: button.dataset.item,
-    });
-    location.href = "contact.html?" + params.toString();
-  });
-});
-
 // Content stays visible without JavaScript or when reduced motion is requested.
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 if (!motionPreference.matches && "IntersectionObserver" in window) {

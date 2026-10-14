@@ -6,14 +6,15 @@
     <title>Merchandise | Kericho Chess Club &amp; Academy</title>
     <meta
       name="description"
-      content="Explore academy T-shirts, hoodies and polos in 3D, alongside chess sets, clocks and school equipment."
+      content="Shop academy clothing and chess essentials. Ask about sizes, prices and availability."
     />
     <meta name="theme-color" content="#14233f" />
     <link rel="icon" href="assets/favicon.png" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
-    <link rel="stylesheet" href="assets/merchandise-3d/viewers.css" />
-    <script type="module" src="assets/merchandise-3d/viewers.js"></script>
+    <link rel="stylesheet" href="assets/clothing/showcase.css" />
+    <script type="module" src="assets/clothing/showcase.js"></script>
+    <link rel="stylesheet" href="assets/site-actions.css" />
   </head>
   <body class="inner-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -120,211 +121,93 @@
               <div class="eyebrow">CHESS MERCHANDISE</div>
               <h1>Wear the club.<br />Equip your game.</h1>
             </div>
-            <p>
-              Explore our clothing designs in rotating 3D, alongside chess
-              equipment. Ask the academy about prices, sizes, stock and
-              collection. Clothing models are illustrations based on your
-              supplied front-view designs; rear styling is illustrative, not a
-              confirmed product specification.
-            </p>
+            <div class="merch-intro">
+              <p>
+                Find your favourite. Ask us about sizes, prices and
+                availability.
+              </p>
+              <button
+                id="product-motion"
+                type="button"
+                aria-label="Pause product motion"
+                aria-pressed="false"
+                hidden
+              >
+                Ⅱ
+              </button>
+            </div>
           </div>
           <div class="merch-grid">
             <article class="merch-card clothing-card" id="academy-tshirt">
-              <div
-                class="garment-viewer"
-                data-garment="tshirt"
-                data-label="T-shirt"
-                data-description="White round-neck T-shirt with the black Kericho Chess Academy & Club chest artwork."
-              >
-                <div class="garment-stage">
-                  <span class="garment-badge">3D illustration</span
-                  ><img
-                    class="garment-fallback"
-                    src="assets/merchandise-3d/tshirt-reference.jpg"
-                    alt="White round-neck T-shirt with the black Kericho Chess Academy & Club chest artwork."
-                    loading="lazy"
-                  />
-                </div>
-                <div
-                  class="garment-controls"
-                  aria-label="T-shirt rotation controls"
-                  hidden
-                >
-                  <button
-                    type="button"
-                    data-rotation="left"
-                    aria-label="Turn T-shirt left"
-                  >
-                    ←</button
-                  ><button
-                    type="button"
-                    data-rotation="front"
-                    aria-label="Show front of T-shirt"
-                  >
-                    Front</button
-                  ><button
-                    type="button"
-                    data-rotation="pause"
-                    aria-label="Pause T-shirt rotation"
-                  >
-                    Ⅱ</button
-                  ><button
-                    type="button"
-                    data-rotation="right"
-                    aria-label="Turn T-shirt right"
-                  >
-                    →
-                  </button>
-                </div>
-                <p class="garment-status" role="status">
-                  Reference design · interactive 3D loads when supported.
-                </p>
+              <div class="apparel-visual" data-apparel="tshirt">
+                <img
+                  class="apparel-photo"
+                  draggable="false"
+                  src="assets/clothing/tshirt.png"
+                  alt="White academy T-shirt"
+                  width="640"
+                  height="720"
+                  loading="lazy"
+                />
               </div>
               <div class="card-copy">
                 <h3>Round-neck T-shirt</h3>
-                <p>
-                  White fabric, bold black academy artwork. Ask about sizes and
-                  availability.
-                </p>
-                <button
+                <a
+                  href="contact.html?program=Merchandise&amp;item=Round-neck+T-shirt"
                   class="button merchandise-enquiry"
                   data-item="Round-neck T-shirt"
-                  type="button"
+                  aria-label="Enquire about Round-neck T-shirt"
                 >
-                  Ask about this item
-                </button>
+                  Enquire <span class="action-arrow" aria-hidden="true">↗</span>
+                </a>
               </div>
             </article>
             <article class="merch-card clothing-card" id="academy-hoodie">
-              <div
-                class="garment-viewer"
-                data-garment="hoodie"
-                data-label="hoodie"
-                data-description="Cream pullover hoodie with a hood, drawstrings, front pocket and black academy artwork."
-              >
-                <div class="garment-stage">
-                  <span class="garment-badge">3D illustration</span
-                  ><img
-                    class="garment-fallback"
-                    src="assets/merchandise-3d/hoodie-reference.jpg"
-                    alt="Cream pullover hoodie with a hood, drawstrings, front pocket and black academy artwork."
-                    loading="lazy"
-                  />
-                </div>
-                <div
-                  class="garment-controls"
-                  aria-label="hoodie rotation controls"
-                  hidden
-                >
-                  <button
-                    type="button"
-                    data-rotation="left"
-                    aria-label="Turn hoodie left"
-                  >
-                    ←</button
-                  ><button
-                    type="button"
-                    data-rotation="front"
-                    aria-label="Show front of hoodie"
-                  >
-                    Front</button
-                  ><button
-                    type="button"
-                    data-rotation="pause"
-                    aria-label="Pause hoodie rotation"
-                  >
-                    Ⅱ</button
-                  ><button
-                    type="button"
-                    data-rotation="right"
-                    aria-label="Turn hoodie right"
-                  >
-                    →
-                  </button>
-                </div>
-                <p class="garment-status" role="status">
-                  Reference design · interactive 3D loads when supported.
-                </p>
+              <div class="apparel-visual" data-apparel="hoodie">
+                <img
+                  class="apparel-photo"
+                  draggable="false"
+                  src="assets/clothing/hoodie.png"
+                  alt="Cream academy hoodie"
+                  width="640"
+                  height="720"
+                  loading="lazy"
+                />
               </div>
               <div class="card-copy">
-                <h3>Academy hoodie</h3>
-                <p>
-                  Cream pullover with our academy artwork. Ask about sizes and
-                  availability.
-                </p>
-                <button
+                <h3>Hoodie</h3>
+                <a
+                  href="contact.html?program=Merchandise&amp;item=Academy+hoodie"
                   class="button merchandise-enquiry"
                   data-item="Academy hoodie"
-                  type="button"
+                  aria-label="Enquire about Hoodie"
                 >
-                  Ask about this item
-                </button>
+                  Enquire <span class="action-arrow" aria-hidden="true">↗</span>
+                </a>
               </div>
             </article>
             <article class="merch-card clothing-card" id="academy-polo">
-              <div
-                class="garment-viewer"
-                data-garment="polo"
-                data-label="polo"
-                data-description="Black collared polo shirt with buttons and white academy artwork."
-              >
-                <div class="garment-stage">
-                  <span class="garment-badge">3D illustration</span
-                  ><img
-                    class="garment-fallback"
-                    src="assets/merchandise-3d/polo-reference.jpg"
-                    alt="Black collared polo shirt with buttons and white academy artwork."
-                    loading="lazy"
-                  />
-                </div>
-                <div
-                  class="garment-controls"
-                  aria-label="polo rotation controls"
-                  hidden
-                >
-                  <button
-                    type="button"
-                    data-rotation="left"
-                    aria-label="Turn polo left"
-                  >
-                    ←</button
-                  ><button
-                    type="button"
-                    data-rotation="front"
-                    aria-label="Show front of polo"
-                  >
-                    Front</button
-                  ><button
-                    type="button"
-                    data-rotation="pause"
-                    aria-label="Pause polo rotation"
-                  >
-                    Ⅱ</button
-                  ><button
-                    type="button"
-                    data-rotation="right"
-                    aria-label="Turn polo right"
-                  >
-                    →
-                  </button>
-                </div>
-                <p class="garment-status" role="status">
-                  Reference design · interactive 3D loads when supported.
-                </p>
+              <div class="apparel-visual" data-apparel="polo">
+                <img
+                  class="apparel-photo"
+                  draggable="false"
+                  src="assets/clothing/polo.png"
+                  alt="Black academy polo"
+                  width="640"
+                  height="720"
+                  loading="lazy"
+                />
               </div>
               <div class="card-copy">
-                <h3>Academy polo shirt</h3>
-                <p>
-                  Black polo with contrasting white academy artwork. Ask about
-                  sizes and availability.
-                </p>
-                <button
+                <h3>Polo shirt</h3>
+                <a
+                  href="contact.html?program=Merchandise&amp;item=Academy+polo+shirt"
                   class="button merchandise-enquiry"
                   data-item="Academy polo shirt"
-                  type="button"
+                  aria-label="Enquire about Polo shirt"
                 >
-                  Ask about this item
-                </button>
+                  Enquire <span class="action-arrow" aria-hidden="true">↗</span>
+                </a>
               </div>
             </article>
             <article class="merch-card" id="chess-set">
@@ -337,16 +220,14 @@
               </div>
               <div class="card-copy">
                 <h3>Chess set</h3>
-                <p>
-                  Ask about boards and pieces for home, club, or school
-                  practice.
-                </p>
-                <button
+                <a
+                  href="contact.html?program=Merchandise&amp;item=Chess+set"
                   class="button merchandise-enquiry"
+                  aria-label="Enquire about Chess set"
                   data-item="Chess set"
                 >
-                  Ask about this item
-                </button>
+                  Enquire <span class="action-arrow" aria-hidden="true">↗</span>
+                </a>
               </div>
             </article>
             <article class="merch-card" id="chess-clock">
@@ -359,16 +240,14 @@
               </div>
               <div class="card-copy">
                 <h3>Chess clock</h3>
-                <p>
-                  Keep track of thinking time during practice and competitive
-                  games.
-                </p>
-                <button
+                <a
+                  href="contact.html?program=Merchandise&amp;item=Chess+clock"
                   class="button merchandise-enquiry"
+                  aria-label="Enquire about Chess clock"
                   data-item="Chess clock"
                 >
-                  Ask about this item
-                </button>
+                  Enquire <span class="action-arrow" aria-hidden="true">↗</span>
+                </a>
               </div>
             </article>
             <article class="merch-card" id="school-equipment">
@@ -381,16 +260,14 @@
               </div>
               <div class="card-copy">
                 <h3>School & club equipment</h3>
-                <p>
-                  Ask about equipment for setting up several boards at your
-                  school or club.
-                </p>
-                <button
+                <a
+                  href="contact.html?program=Merchandise&amp;item=School+%26+club+equipment"
                   class="button merchandise-enquiry"
+                  aria-label="Enquire about School & club equipment"
                   data-item="School & club equipment"
                 >
-                  Ask about this item
-                </button>
+                  Enquire <span class="action-arrow" aria-hidden="true">↗</span>
+                </a>
               </div>
             </article>
           </div>
@@ -398,6 +275,21 @@
       </section>
     </main>
     <footer>
+      <div class="container footer-action-bar">
+        <p>Your next move.</p>
+        <div class="footer-quick-actions">
+          <a href="registration.html"
+            >Join the academy
+            <span class="action-arrow" aria-hidden="true">↗</span></a
+          ><a href="play.html"
+            >Play chess
+            <span class="action-arrow" aria-hidden="true">♞</span></a
+          ><a href="events.html"
+            >See events
+            <span class="action-arrow" aria-hidden="true">→</span></a
+          >
+        </div>
+      </div>
       <div class="container footer-grid">
         <div class="footer-about">
           <a class="brand" href="index.html"
@@ -454,11 +346,10 @@
         <div>
           <h3>Explore</h3>
           <nav class="footer-links" aria-label="Footer navigation">
-            <a href="about.html">About the academy</a
-            ><a href="programs.html">Our programs</a
-            ><a href="about.html#officials">Our officials</a
-            ><a href="merchandise.html">Chess equipment</a
-            ><a href="contact.html">Contact us</a
+            <a href="about.html">About us</a><a href="programs.html">Programs</a
+            ><a href="about.html#officials">Officials</a
+            ><a href="merchandise.html">Merchandise</a
+            ><a href="contact.html">Contact</a
             ><a href="registration.html">Registration</a
             ><a href="events.html">Events</a
             ><a href="play.html">Play &amp; puzzles</a

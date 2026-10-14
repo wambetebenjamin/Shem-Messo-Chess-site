@@ -1,0 +1,130 @@
+/* Product-first presentation, using the supplied clothing photography. */
+.apparel-visual {
+  position: relative;
+  height: 330px;
+  overflow: hidden;
+  background: #f3f5f9;
+  touch-action: pan-y pinch-zoom;
+}
+.apparel-visual .apparel-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px 20px;
+  filter: drop-shadow(0 9px 7px #14233f16);
+  transform-origin: 70% center;
+}
+.apparel-visual::after {
+  content: "";
+  position: absolute;
+  inset: 12% 16% 12% auto;
+  width: 7%;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ffffff55,
+    #14233f12,
+    transparent
+  );
+  pointer-events: none;
+}
+.is-swiping .apparel-photo {
+  animation: apparel-fold-swipe 620ms cubic-bezier(0.22, 0.7, 0.25, 1) both;
+}
+.is-swiping::after {
+  animation: apparel-fold-light 620ms ease-out both;
+}
+@keyframes apparel-fold-swipe {
+  0%,
+  100% {
+    transform: translateX(0) skewY(0) scaleX(1);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  32% {
+    transform: translateX(5%) skewY(-1.5deg) scaleX(0.94);
+    clip-path: polygon(0 0, 94% 2%, 99% 100%, 0 100%);
+  }
+  62% {
+    transform: translateX(-3%) skewY(0.7deg) scaleX(0.98);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+@keyframes apparel-fold-light {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  35% {
+    opacity: 0.55;
+    transform: translateX(-35px) skewY(-2deg);
+  }
+  65% {
+    opacity: 0.15;
+    transform: translateX(15px);
+  }
+}
+.merch-grid .merch-card {
+  display: flex;
+  flex-direction: column;
+}
+.merch-grid .card-copy {
+  flex: 1;
+  padding: 24px;
+  gap: 18px;
+}
+.merch-grid .card-copy h3 {
+  margin: 0;
+  font-size: 25px;
+}
+.merch-grid .merchandise-enquiry {
+  margin-top: auto;
+  justify-content: space-between;
+  min-width: 148px;
+  border-radius: 5px;
+}
+.clothing-card .card-copy {
+  min-height: 144px;
+}
+.merch-intro {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 365px;
+}
+.merch-intro p {
+  margin: 0;
+  font-size: 17px;
+}
+#product-motion {
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--navy);
+  background: white;
+  font-size: 18px;
+}
+@media (max-width: 600px) {
+  .apparel-visual {
+    height: 320px;
+  }
+  .merch-grid .merch-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .merch-grid .card-copy {
+    flex: 1;
+    padding: 22px;
+  }
+  .merch-intro {
+    margin-top: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .is-swiping .apparel-photo,
+  .is-swiping::after {
+    animation: none;
+  }
+}
