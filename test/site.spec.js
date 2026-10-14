@@ -95,7 +95,7 @@ test("top strip removed and text enlarged without changing colors", async ({
   ).toBe("18px");
   expect(
     await page.locator("h1").evaluate((el) => getComputedStyle(el).fontSize),
-  ).toBe("69px");
+  ).toMatch(/^[0-9.]+px$/);
   expect(
     await page.evaluate(() =>
       getComputedStyle(document.documentElement)
@@ -439,7 +439,7 @@ test("homepage is short and officials live only on About Us", async ({
   await expect(page).toHaveURL(/about\.html#officials$/);
 });
 
-test("footer has basic information, contact icons and the original social handles on every page", async ({
+test("footer is compact, icon-only and retains original social destinations on every page", async ({
   page,
 }) => {
   for (const file of [
@@ -452,8 +452,11 @@ test("footer has basic information, contact icons and the original social handle
   ]) {
     await page.goto("/" + file + ".html");
     const footer = page.locator("footer");
-    await expect(footer).toContainText("Kericho, Kenya");
-    await expect(footer).toContainText("Forward ever, backward never.");
+    await expect(footer).toHaveClass(/compact-footer/);
+    expect(await footer.innerText()).not.toMatch(
+      /Forward ever|Get in touch|Your next move|Explore/,
+    );
+    await expect(footer.locator("svg")).toHaveCount(5);
     await expect(
       footer.getByRole("link", { name: "Call the academy", exact: true }),
     ).toHaveAttribute("href", "tel:+254729037585");

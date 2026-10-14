@@ -24,7 +24,7 @@ test("source-based template uses our photos and loads without external assets", 
   });
   await page.goto("/template-preview.html");
   await expect(page.locator("h1")).toHaveText(
-    "Learn and playchess in Kericho.",
+    "Learn and play chess in Kericho.",
   );
   await expect(page.locator(".contact-strip")).toHaveCount(0);
   await expect(page.locator(".service-card")).toHaveCount(6);

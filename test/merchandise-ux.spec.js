@@ -183,9 +183,7 @@ test("offscreen and hidden-page effects stop until the products are visible agai
   await page.evaluate(() =>
     window.scrollTo({ top: document.body.scrollHeight, behavior: "instant" }),
   );
-  await page
-    .getByRole("link", { name: "See events", exact: true })
-    .scrollIntoViewIfNeeded();
+  await page.locator("footer .footer-links a").last().scrollIntoViewIfNeeded();
   await page.clock.fastForward(10000);
   expect(await swipes(page)).toBe(started);
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
@@ -220,21 +218,17 @@ test("footer shortcuts work on every main page and use comfortably sized touch t
   ]) {
     await page.goto(`/${file}.html`);
     const footer = page.locator("footer");
-    await expect(footer.locator(".footer-quick-actions a")).toHaveCount(3);
     await expect(
-      footer.locator(".footer-quick-actions a").nth(0),
-    ).toHaveAttribute("href", "registration.html");
-    await expect(
-      footer.locator(".footer-quick-actions a").nth(1),
-    ).toHaveAttribute("href", "play.html");
-    await expect(
-      footer.locator(".footer-quick-actions a").nth(2),
-    ).toHaveAttribute("href", "events.html");
+      footer.locator(".footer-action-bar, .footer-quick-actions, .footer-grid"),
+    ).toHaveCount(0);
+    await expect(footer.locator(".footer-links a")).toHaveCount(3);
+    await expect(footer.locator(".footer-links a").nth(1)).toHaveAttribute(
+      "href",
+      "registration.html",
+    );
     await page.setViewportSize({ width: 320, height: 900 });
     for (const link of await footer
-      .locator(
-        ".footer-links a, .footer-contact-icons a, .footer-quick-actions a, .footer-bottom a",
-      )
+      .locator(".footer-links a, .footer-actions a, .footer-bottom a")
       .all()) {
       const box = await link.boundingBox();
       expect(box.height).toBeGreaterThanOrEqual(44);
@@ -250,7 +244,7 @@ test("footer shortcuts work on every main page and use comfortably sized touch t
   }
   await page
     .locator("footer")
-    .getByRole("link", { name: "Join the academy", exact: true })
+    .getByRole("link", { name: "Join", exact: true })
     .click();
   await expect(page).toHaveURL(/registration\.html$/);
 });
@@ -259,7 +253,7 @@ test("footer links have visible keyboard feedback and CTA hover respects reduced
   page,
 }) => {
   await page.goto("/");
-  const join = page.locator("footer .footer-quick-actions a").first();
+  const join = page.locator("footer .footer-links a").nth(1);
   await join.scrollIntoViewIfNeeded();
   await page.keyboard.press("Tab");
   await join.focus();
