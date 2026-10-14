@@ -172,7 +172,7 @@ test("hero crossfades, manual controls work, and pause persists", async ({
     )
     .toBe(true);
   await page.mouse.move(0, 0);
-  await page.clock.fastForward(7100);
+  await page.clock.fastForward(4100);
   await expect(page.locator('[data-photo="1"]')).toHaveAttribute(
     "aria-pressed",
     "true",
@@ -554,7 +554,7 @@ test("team photo cards transition, pause, and link to the full profile", async (
     )
     .toBe(true);
   await page.mouse.move(0, 0);
-  await page.clock.fastForward(7100);
+  await page.clock.fastForward(4100);
   await expect(page.locator('[data-staff="1"]')).toHaveAttribute(
     "aria-pressed",
     "true",
@@ -621,4 +621,68 @@ test("team cards respect reduced motion and inactive cards cannot receive focus"
       .first()
       .evaluate((el) => getComputedStyle(el).transitionDuration),
   ).toBe("0s");
+});
+
+test("hero automatically rotates every four seconds even with hover and control focus", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("/");
+  await expect
+    .poll(() =>
+      page
+        .locator(".hero-slide")
+        .evaluateAll((images) =>
+          images.every((img) => img.complete && img.naturalWidth),
+        ),
+    )
+    .toBe(true);
+  await page.locator(".hero").hover();
+  await page.getByRole("button", { name: "Next hero photo" }).focus();
+  await page.clock.fastForward(4100);
+  await expect(page.locator('[data-photo="1"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page.clock.fastForward(4100);
+  await expect(page.locator('[data-photo="2"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+});
+
+test("staff cards automatically rotate every four seconds without clicking", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("/");
+  await page.locator(".staff-carousel").scrollIntoViewIfNeeded();
+  await expect
+    .poll(() =>
+      page
+        .locator(".staff-slide img")
+        .evaluateAll((images) =>
+          images.every((img) => img.complete && img.naturalWidth),
+        ),
+    )
+    .toBe(true);
+  await page.locator(".staff-carousel").hover();
+  await page.getByRole("button", { name: "Next team photo" }).focus();
+  await page.clock.fastForward(4100);
+  await expect(page.locator('[data-staff="1"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page.clock.fastForward(4100);
+  await expect(page.locator('[data-staff="2"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page.locator(".staff-slide.is-active a").focus();
+  await page.clock.fastForward(8100);
+  await expect(page.locator('[data-staff="2"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await expect(page.locator(".staff-slide.is-active a")).toBeFocused();
 });

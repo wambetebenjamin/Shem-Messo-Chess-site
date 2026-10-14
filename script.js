@@ -207,7 +207,7 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
 }
 
 // Crossfade existing photographs without moving text or stealing focus.
-// Autoplay stops off-screen, in background tabs, on hover/focus and for reduced motion.
+// Autoplay runs without clicks or hover interruption; explicit pause and reduced motion are respected.
 (() => {
   const hero = document.querySelector(".hero");
   if (!hero) return;
@@ -218,8 +218,6 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
   let index = 0,
     timer = null,
     userPaused = false,
-    hovered = false,
-    focused = false,
     inView = true;
   const loaded = () =>
     slides
@@ -250,13 +248,11 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
     if (
       ready.length > 1 &&
       !userPaused &&
-      !hovered &&
-      !focused &&
       inView &&
       !document.hidden &&
       !motionPreference.matches
     ) {
-      timer = setInterval(() => change(1, false), 7000);
+      timer = setInterval(() => change(1, false), 4000);
     }
   }
   function show(next, reset = true) {
@@ -285,22 +281,6 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
     .addEventListener("click", () => change(-1));
   pause.addEventListener("click", () => {
     userPaused = !userPaused;
-    syncTimer();
-  });
-  hero.addEventListener("mouseenter", () => {
-    hovered = true;
-    syncTimer();
-  });
-  hero.addEventListener("mouseleave", () => {
-    hovered = false;
-    syncTimer();
-  });
-  hero.addEventListener("focusin", () => {
-    focused = true;
-    syncTimer();
-  });
-  hero.addEventListener("focusout", (event) => {
-    focused = hero.contains(event.relatedTarget);
     syncTimer();
   });
   document.addEventListener("visibilitychange", syncTimer);
@@ -335,7 +315,6 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
   let index = 0,
     timer = null,
     paused = false,
-    hovered = false,
     focused = false,
     visible = false;
   const ready = () =>
@@ -369,11 +348,10 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
       visible &&
       !document.hidden &&
       !paused &&
-      !hovered &&
       !focused &&
       !motionPreference.matches
     )
-      timer = setInterval(() => step(1, false), 7000);
+      timer = setInterval(() => step(1, false), 4000);
   }
   function show(next, reset = true) {
     if (!ready().includes(next)) return;
@@ -411,20 +389,17 @@ if (!motionPreference.matches && "IntersectionObserver" in window) {
     paused = !paused;
     sync();
   });
-  carousel.addEventListener("mouseenter", () => {
-    hovered = true;
-    sync();
-  });
-  carousel.addEventListener("mouseleave", () => {
-    hovered = false;
-    sync();
-  });
-  carousel.addEventListener("focusin", () => {
-    focused = true;
+  carousel.addEventListener("focusin", (event) => {
+    focused = Boolean(event.target.closest(".staff-slide"));
     sync();
   });
   carousel.addEventListener("focusout", (event) => {
-    focused = carousel.contains(event.relatedTarget);
+    focused = Boolean(
+      event.relatedTarget &&
+      carousel
+        .querySelector(".staff-slide.is-active")
+        .contains(event.relatedTarget),
+    );
     sync();
   });
   document.addEventListener("visibilitychange", sync);

@@ -10,7 +10,7 @@ The backend work is retained separately, but **registration embeds, account cont
 
 ### Hero and dropdown behavior
 
-The hero cycles through three existing tournament photographs every seven seconds with a 1.6-second crossfade. Previous/next, photo dots and pause/resume controls are provided. Autoplay pauses while hovered, focused, off-screen or in a background tab; reduced-motion preferences disable autoplay and transitions. Failed images are skipped. The first photo stays visible without JavaScript.
+The hero cycles through three existing tournament photographs every four seconds with a 1.6-second crossfade. Previous/next, photo dots and pause/resume controls are provided. Autoplay continues while hovering or focusing the hero controls. It pauses off-screen, in a background tab or through the pause button; reduced-motion preferences disable autoplay and transitions. Failed images are skipped. The first photo stays visible without JavaScript.
 
 The navigation program dropdown links to the existing program cards. The hero split-button dropdown opens the existing program enquiry dialog with the chosen program selected. Dropdowns support click/touch, keyboard arrows, Escape, outside clicks and tab navigation. The navy/blue/white palette and remaining page sections are preserved.
 
@@ -18,7 +18,7 @@ The navigation program dropdown links to the existing program cards. The hero sp
 
 Each page shares a footer with basic academy information, Kericho location, call/email/WhatsApp icons, page links, and the Facebook `@smesso` and TikTok `@kericho.chess.clu` handles already present in the original repository. No new social accounts or contact numbers were invented. Contact numbers and email are not printed in the footer.
 
-Homepage team portrait cards crossfade every seven seconds and link to the corresponding profile on the Team page. Controls support previous/next, individual photos and pause/resume. Autoplay stops on hover/focus, off-screen, in background tabs or with reduced motion. Inactive cards are hidden from assistive technology and keyboard focus. Decorative divider lines and card outlines are removed; form boundaries and focus outlines remain for usability.
+Homepage team portrait cards crossfade every four seconds and link to the corresponding profile on the Team page. Controls support previous/next, individual photos and pause/resume. Autoplay does not stop on hover or when the carousel controls receive focus. It pauses when a profile link inside a card is focused (so keyboard focus is not hidden), off-screen, in background tabs, through the pause button or with reduced motion. Inactive cards are hidden from assistive technology and keyboard focus. Decorative divider lines and card outlines are removed; form boundaries and focus outlines remain for usability.
 
 ## Run
 
