@@ -20,7 +20,7 @@ test("original photo assets remain unchanged", async () => {
     );
   }
 });
-test("original sections, navy palette and images are intact", async ({
+test("short homepage preserves its navy palette, hero and photos", async ({
   page,
 }) => {
   const errors = [];
@@ -34,7 +34,7 @@ test("original sections, navy palette and images are intact", async ({
     "about.html",
   );
   await expect(page.locator("section#home")).toHaveCount(1);
-  for (const id of ["about", "programs", "team", "merchandise", "contact"]) {
+  for (const id of ["about", "community"]) {
     await expect(page.locator("section#" + id)).toHaveCount(1);
   }
   await page.evaluate(() => {
@@ -292,10 +292,12 @@ test("failed background photo is skipped without a blank hero", async ({
 test("each main item is its own directly loadable page", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  for (const item of ["about", "programs", "team", "merchandise", "contact"]) {
+  for (const item of ["about", "programs", "merchandise", "contact"]) {
     const response = await page.goto("/" + item + ".html");
     expect(response.status()).toBe(200);
-    await expect(page.locator("main > section")).toHaveCount(1);
+    await expect(page.locator("main > section")).toHaveCount(
+      item === "about" ? 2 : 1,
+    );
     await expect(page.locator("section#" + item)).toHaveCount(1);
     await expect(page.locator("main h1")).toHaveCount(1);
     await expect(page.locator("main .hero")).toHaveCount(0);
@@ -335,8 +337,7 @@ test("navigation and program anchors lead to their distinct pages", async ({
   await page.goto("/");
   await page.locator("[data-page=about]").click();
   await expect(page).toHaveURL(/about\.html$/);
-  await page.locator("[data-page=team]").click();
-  await expect(page).toHaveURL(/team\.html$/);
+  await page.locator("#officials").scrollIntoViewIfNeeded();
   await expect(page.locator(".team-card")).toHaveCount(5);
   await page.getByRole("button", { name: "Open programs menu" }).click();
   await page.locator("#programs-menu a").last().click();
@@ -419,40 +420,23 @@ test("standalone page content and ordinary navigation work without JavaScript", 
   await page.locator("[data-page=about]").click();
   await expect(page).toHaveURL(/about\.html$/);
   await expect(page.locator("section#about")).toBeVisible();
-  await page.locator("[data-page=team]").click();
   await expect(page.locator(".team-card")).toHaveCount(5);
   await context.close();
 });
 
-test("homepage overviews link to pages with fuller information", async ({
+test("homepage is short and officials live only on About Us", async ({
   page,
 }) => {
   await page.goto("/");
-  await expect(page.locator("#team .team-card")).toHaveCount(0);
-  await expect(page.locator("#enquiry-form")).toHaveCount(0);
-  const summaries = await page.evaluate(() =>
-    Object.fromEntries(
-      ["about", "programs", "team", "merchandise", "contact"].map((id) => [
-        id,
-        document
-          .querySelector("#" + id)
-          .textContent.replace(/\s+/g, " ")
-          .trim().length,
-      ]),
-    ),
-  );
-  for (const name of ["about", "programs", "team", "merchandise", "contact"]) {
-    await page.goto("/");
-    await page.locator(`#${name} a[href^="${name}.html"]`).first().click();
-    await expect(page).toHaveURL(new RegExp(name + "\\.html"));
-    const details = await page
-      .locator("#" + name)
-      .evaluate((el) => el.textContent.replace(/\s+/g, " ").trim().length);
-    expect(
-      details,
-      name + " has fuller information than its homepage overview",
-    ).toBeGreaterThan(summaries[name]);
-  }
+  await expect(page.locator("main > section")).toHaveCount(4);
+  await expect(
+    page.locator(".staff-carousel, .team-card, #officials"),
+  ).toHaveCount(0);
+  await expect(page.locator(".quick-card")).toHaveCount(4);
+  await page.locator('#about a[href="about.html"]').click();
+  await expect(page.locator("#officials .team-card")).toHaveCount(5);
+  await page.goto("/team.html");
+  await expect(page).toHaveURL(/about\.html#officials$/);
 });
 
 test("footer has basic information, contact icons and the original social handles on every page", async ({
@@ -509,8 +493,6 @@ test("decorative divider lines are removed while form fields remain usable", asy
     ".values",
     ".values-grid > div",
     ".mini-pieces",
-    ".program-card",
-    ".merch-card",
     ".hero-secondary",
     ".footer-bottom",
   ]) {
@@ -540,7 +522,7 @@ test("team photo cards transition, pause, and link to the full profile", async (
   page,
 }) => {
   await page.clock.install();
-  await page.goto("/");
+  await page.goto("/about.html");
   const carousel = page.locator(".staff-carousel");
   await carousel.scrollIntoViewIfNeeded();
   await expect(page.locator(".staff-carousel-controls")).toBeVisible();
@@ -577,7 +559,7 @@ test("team photo cards transition, pause, and link to the full profile", async (
     "true",
   );
   await page.locator(".staff-slide.is-active a").click();
-  await expect(page).toHaveURL(/team\.html#staff-gladys-langat$/);
+  await expect(page).toHaveURL(/about\.html#staff-gladys-langat$/);
   await expect(page.locator("#staff-gladys-langat")).toBeVisible();
 });
 
@@ -586,7 +568,7 @@ test("team cards respect reduced motion and inactive cards cannot receive focus"
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.clock.install();
-  await page.goto("/");
+  await page.goto("/about.html");
   await page.locator(".staff-carousel").scrollIntoViewIfNeeded();
   await expect(page.locator(".staff-carousel-controls")).toBeVisible();
   await expect(
@@ -655,7 +637,7 @@ test("staff cards automatically rotate every four seconds without clicking", asy
   page,
 }) => {
   await page.clock.install();
-  await page.goto("/");
+  await page.goto("/about.html");
   await page.locator(".staff-carousel").scrollIntoViewIfNeeded();
   await expect
     .poll(() =>

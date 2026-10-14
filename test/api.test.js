@@ -147,6 +147,16 @@ test("accounts, protected games, puzzle, feedback and public-file security", asy
       200,
     );
     assert.equal((await (await req("events")).json()).length, 0);
+    writeFileSync(
+      join(dir, "events.json"),
+      JSON.stringify([
+        { title: "Past fixture", date: "2000-01-01" },
+        { title: "Future fixture", date: "2099-01-01" },
+      ]),
+    );
+    const events = await (await req("events")).json();
+    assert.equal(events.length, 1);
+    assert.equal(events[0].title, "Future fixture");
   } finally {
     child.kill();
     await once(child, "exit");

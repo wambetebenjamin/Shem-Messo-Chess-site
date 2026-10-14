@@ -269,8 +269,13 @@ app.get("/api/events", (req, res) =>
 io.use((socket, next) => {
   const origin = socket.handshake.headers.origin;
   try {
-    if (!origin || new URL(origin).host !== socket.handshake.headers.host)
+    // Same-origin polling GETs may omit Origin; Fetch Metadata still identifies
+    // the browser's origin relationship. WebSocket handshakes include Origin.
+    if (origin) {
+      if (new URL(origin).host !== socket.handshake.headers.host) throw Error();
+    } else if (socket.handshake.headers["sec-fetch-site"] !== "same-origin") {
       throw Error();
+    }
     if (!socket.request.session.user) throw Error();
     next();
   } catch {
@@ -351,13 +356,14 @@ for (const f of [
   "style.css",
   "script.js",
   "sw.js",
+  "community.js",
   "Mr. Ochieng.jpeg",
   "Njambi.jpeg",
 ])
   app.get(encodeURI("/" + f), (req, res) =>
     res.sendFile(process.cwd() + "/" + f),
   );
-// Independent source-based comparison preview; the current site is unchanged.
+// Independent source-based comparison preview; selecting it as root is opt-in.
 for (const file of [
   "template-preview.html",
   "template-preview.css",
@@ -379,7 +385,19 @@ app.get("/", (req, res) => {
 app.get("/index.html", (req, res) =>
   res.sendFile(process.cwd() + "/index.html"),
 );
-for (const page of ["about", "programs", "team", "merchandise", "contact"]) {
+app.get(["/team", "/team.html"], (req, res) =>
+  res.redirect(302, "/about.html#officials"),
+);
+for (const page of [
+  "about",
+  "programs",
+  "merchandise",
+  "contact",
+  "registration",
+  "events",
+  "help",
+  "play",
+]) {
   app.get("/" + page, (req, res) => {
     const query = req.url.includes("?")
       ? req.url.slice(req.url.indexOf("?"))

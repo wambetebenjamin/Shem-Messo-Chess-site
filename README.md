@@ -1,142 +1,111 @@
 # Kericho Chess Club & Academy
 
-## UI restored to the previous branch
+A shorter public website in the approved navy/blue/white design, with real registration interfaces, private feedback, optional browser push, and login-required computer/online chess. The supplied PCA source-inspired homepage remains a separate comparison, not a replacement of the approved design.
 
-The public website was restored from commit `04d18c773e4da0e8cc0a98881c6ad5b05391bbba` on `arena/1fbcaa8d-shem-messo-chess-site` (PR #22): `index.html`, `style.css`, `script.js`, and `assets/site-photos/`.
+## Public pages
 
-Subsequent requested enhancements remove the top contact strip, increase text sizes, and add a smoothly fading hero photo background, refined calls to action, accessible program dropdowns, and homepage overviews linking to separate detail pages. Its original navy/blue/white palette, fonts, hero, programs, team, merchandise and contact interface are preserved. The replacement green interface from this branch has been removed.
+- **Home (`index.html`)**: existing automatic hero, values strip, brief welcome and four compact shortcuts to Registration, Play/Daily Puzzle, Events, and FAQs/Feedback. No officials’ portraits, profiles or staff carousel on Home.
+- **About Us (`about.html`)**: immediately after Home in every main navigation. All five existing officials/team profiles and photographs are here. Only the confirmed President and Vice Chairperson roles are named; other responsibilities remain unconfirmed. The existing portrait carousel now lives here, with its original four-second autoplay, controls and reduced-motion behavior.
+- **Programs (`programs.html`)**, **Merchandise (`merchandise.html`)**, **Contact (`contact.html`)**: existing detail pages, enquiries and photographs retained.
+- **Registration (`registration.html`)**: membership and photo/video consent panels, keyboard-accessible tabs, embedded Google Forms loaded on request, fallback external links, and optional push controls.
+- **Events (`events.html`)**: confirmed upcoming events from `events.json`, safe text rendering, clear empty/error states and optional push controls.
+- **FAQs & Feedback (`help.html`)**: native expandable FAQs and a feedback form writing to private server storage. No public feedback feed.
+- **Play (`play.html`)**: account creation/login/logout, beginner computer practice, online matchmaking, legal interactive boards with keyboard navigation and promotion choice, move history, and a daily puzzle available without login.
+- **Legacy Team (`team.html`)** redirects to `about.html#officials` on Node; a static meta-refresh and fallback link do the same on static hosts.
 
-The backend work is retained separately, but **registration embeds, account controls, chess, feedback, FAQs, events and push opt-in are not currently exposed in this restored UI**. They must be integrated into the approved previous design without redesigning it. The backend documentation below describes the retained implementation, not features available through the current page. The restored site's enquiry form still opens WhatsApp and does not store its submissions.
+The Community dropdown exposes Registration, Events, Play, Daily Puzzle and Help without crowding the main header. Footer contacts use call/email/WhatsApp icons rather than displaying contact details. Existing photographs are unchanged. The primary hero continues rotating every four seconds without hover interruption.
 
-### Hero and dropdown behavior
+## Run locally or deploy the full website
 
-The hero cycles through three existing tournament photographs every four seconds with a 1.6-second crossfade. Previous/next, photo dots and pause/resume controls are provided. Autoplay continues while hovering or focusing the hero controls. It pauses off-screen, in a background tab or through the pause button; reduced-motion preferences disable autoplay and transitions. Failed images are skipped. The first photo stays visible without JavaScript.
-
-The navigation program dropdown links to the existing program cards. The hero split-button dropdown opens the existing program enquiry dialog with the chosen program selected. Dropdowns support click/touch, keyboard arrows, Escape, outside clicks and tab navigation. The navy/blue/white palette and remaining page sections are preserved.
-
-### Footer and team photo cards
-
-Each page shares a footer with basic academy information, Kericho location, call/email/WhatsApp icons, page links, and the Facebook `@smesso` and TikTok `@kericho.chess.clu` handles already present in the original repository. No new social accounts or contact numbers were invented. Contact numbers and email are not printed in the footer.
-
-Homepage team portrait cards crossfade every four seconds and link to the corresponding profile on the Team page. Controls support previous/next, individual photos and pause/resume. Autoplay does not stop on hover or when the carousel controls receive focus. It pauses when a profile link inside a card is focused (so keyboard focus is not hidden), off-screen, in background tabs, through the pause button or with reduced motion. Inactive cards are hidden from assistive technology and keyboard focus. Decorative divider lines and card outlines are removed; form boundaries and focus outlines remain for usability.
-
-## Run
-
-Requires **Node.js 22.13 or later** (SQLite is built into Node).
+Requires **Node.js 22.13+** (built-in SQLite), npm, and persistent private storage for the backend.
 
 ```sh
 npm ci
 npm start
 ```
 
-Open port 3000. The server binds to `0.0.0.0`; set `PORT` to change it. All browser API and Socket.IO requests are same-origin, including proxied previews.
+The server binds to `0.0.0.0`, with `PORT=3000` by default. All browser API, Socket.IO and service-worker requests are same-origin; no browser-facing localhost backend URL is hardcoded. Use one Node process in production for shared matchmaking/game state. Configure your reverse proxy for HTTP, Socket.IO polling and WebSocket upgrades. `NODE_ENV=production` enables secure cookies; deploy behind HTTPS with the configured trusted proxy. Keep private signing keys stable across restarts.
 
-**This is now a Node application, not a static-only site.** GitHub Pages alone cannot provide accounts, online matchmaking, feedback storage or notifications. Deploy one Node process behind an HTTPS reverse proxy with WebSocket support. Set `NODE_ENV=production` for secure session cookies. The proxy must preserve the browser Host and forward HTTPS protocol; one trusted proxy hop is assumed. Do not expose the process directly on public HTTP in production.
+**GitHub Pages is static-only.** It can display public information and the supplied Google Form interfaces, but cannot run accounts, chess/puzzle APIs, feedback storage, event APIs or Web Push subscription storage. The UI reports this limitation rather than claiming success. Those features need the Node service on the same origin. This branch/PR is not automatically a production deployment.
 
-## Public pages
+## Registration and consent
 
-The site is a real multi-page website. Each page has its own HTML document, title, description and active navigation item. Links also work on static hosting without server-side routing.
+Official forms supplied by the club:
 
-- `index.html` (or `/`): Home, with the existing hero slideshow, values, joining CTA and concise overviews of About Us, Programs, Team, Merchandise and Contact. Overview links open the separate pages for fuller information. The Home team overview now has smoothly crossfading portrait cards linking to the full Team page. Full staff profiles remain on that page.
-- `about.html`: About Us and the academy's community introduction, immediately after Home in navigation.
-- `programs.html`: junior chess, club/competitive chess and school programs. Dropdown links point to their cards on this page.
-- `team.html`: the five existing staff profiles and photographs, separate from Home.
-- `merchandise.html`: chess equipment and enquiry buttons.
-- `contact.html`: the existing contact information and WhatsApp enquiry form. Program/item choices are carried in URL query parameters to prefill the enquiry; no personal details are stored or carried in those links.
+- Membership: `https://docs.google.com/forms/d/e/1FAIpQLSdbieIfMBN_VQPdNGKFHh1rPMa_JFpRZUUhkHEEU92DbUgJGw/viewform`
+- Photo/video consent: `https://docs.google.com/forms/d/e/1FAIpQLSefyh1CBlzc_YsCPh9dp8oNl9dcBPjr4cNvjET8ob4ndaodzw/viewform`
 
-Node hosting also redirects `/about`, `/programs`, `/team`, `/merchandise` and `/contact` to the matching document. Shared navigation/footer markup is repeated in each document; keep these consistent when updating links. All documents use the same `style.css` and `script.js`.
+Their published introductions were inspected. The membership form describes email verification, fees shown at checkout, inactive membership until paid, issuance of a membership ID after processing, and a paid term ending 31 December 2026. No fee amount, payment processing, membership activation or email verification is fabricated on this website. Confirm current terms with the club; update the page if the supplied form changes.
 
-## Retained backend groundwork (not exposed in these pages)
+The consent introduction asks for one form per child, distinguishes internal/publicity use and separate permission to identify children by name, and describes review/withdrawal in writing and limits on recalling printed/third-party material. The embedded official forms retain their own downstream fields, validation and consent choices; later sections were not independently extracted.
 
-The API includes accounts, beginner computer chess, matchmaking, a daily puzzle, private feedback and push subscriptions. Registration embeds, FAQs, events and a play interface from the removed redesign are **not in the current public frontend**. Previous `/registration`, `/events`, `/help` and `/play` placeholder document routes have been removed rather than showing Home under misleading URLs.
+Google processes these forms. Loading is explicit to avoid unnecessary third-party requests. Cross-origin iframe submissions cannot be inspected by this website, so it does not mark forms complete or send automatic submission notifications. Sign-in, cookie restrictions or blocked embedding may require the always-available external link. No live membership/consent submission was made during testing. Play accounts are separate from academy membership.
 
-The membership form supplied earlier is `1FAIpQLSdbieIfMBN_VQPdNGKFHh1rPMa_JFpRZUUhkHEEU92DbUgJGw`; photo/video consent is `1FAIpQLSefyh1CBlzc_YsCPh9dp8oNl9dcBPjr4cNvjET8ob4ndaodzw`. These still require integration into the approved design. Event data remains in `events.json` for `/api/events`, initially empty pending confirmed dates. The retained backend is separate from the public contact form, which opens WhatsApp.
+## Events and push notifications
 
-## Storage and operations
+`events.json` is initially `[]`: no unconfirmed dates are invented. An operator can add confirmed entries:
 
-The first run creates private `data/academy.sqlite` and `data/secrets.json`. This directory is ignored by Git and **must be on persistent private storage in production**. Back it up securely; never serve it publicly. Passwords are bcrypt hashed; sessions use HTTP-only, same-site cookies and persistent SQLite storage. Feedback and push subscriptions are also private. The VAPID private key remains on the server. Optionally set `SESSION_SECRET` and `VAPID_SUBJECT` (a valid operator contact such as `mailto:...`). Keep the same signing secrets across restarts.
+```json
+[
+  {
+    "title": "Confirmed event title",
+    "date": "YYYY-MM-DD",
+    "location": "Confirmed venue",
+    "description": "Confirmed details"
+  }
+]
+```
 
-Review feedback on the server:
+Replace the placeholders with confirmed information; do not publish this example literally. `/api/events` excludes past dates in `Africa/Nairobi`; the interface sorts and formats dates in Nairobi time.
+
+Push is an explicit opt-in on Registration/Events, with on-device unsubscribe controls. Merely loading a page does not prompt for permission or register a worker. HTTPS and browser support are required; iOS may require home-screen installation. Stored endpoints are private, restricted to standard browser push providers. A failed new subscription save is rolled back on the device.
+
+An authorized operator with server access sends announcements:
+
+```sh
+npm run notify -- "Academy update" "Contact the academy for confirmed details." "/events.html"
+```
+
+Editing events does not automatically send announcements. Google Form completion does not trigger push notifications. Real delivery needs outbound access to browser push providers; Arena restricts those hosts. Opt-in/out wiring is covered using a mock browser subscription, **not a claim of verified real-device delivery**.
+
+## Accounts, chess and privacy
+
+Passwords are bcrypt hashed. Sessions use persistent SQLite, HTTP-only same-site cookies and regeneration on login. Computer and online play require server-side authentication. Socket connections require same-origin browser metadata or a matching Origin; anonymous/foreign-origin connections are rejected. Registration/login/feedback/subscription endpoints are rate-limited. No passwords or session tokens are saved to localStorage or placed in URL parameters.
+
+- Computer: legal moves with a simple capture/reply heuristic, **not Stockfish**; White is the human player.
+- Online: distinct signed-in accounts select matchmaking on the same server. Untimed, casual games; leaving/disconnecting ends the game. Use one active game tab per player. Games/computer positions live in memory and are lost on restart. No ratings, clocks or reconnection/resumption are claimed.
+- Daily puzzle: three reviewed mate-in-one positions rotate at midnight in Nairobi. Puzzle play does not require login; expand the reviewed collection in `lib/chess.js` for more variety.
+- Play-account email verification and automatic password recovery are not implemented. Use nicknames; parents/guardians should help juniors set up accounts. Never put children’s full names or sensitive details in feedback.
+
+First run creates `data/academy.sqlite` and `data/secrets.json`. These are Git-ignored and must live on **persistent private storage** in production; back them up securely and never serve them publicly. Optional environment values: `SESSION_SECRET`, `VAPID_SUBJECT`. Feedback, play accounts, sessions and push subscriptions are stored privately; Google Form submissions stay with Google/the form owner, not this database. Establish a retention policy and a process for deletion/consent withdrawal before production use.
+
+Review private feedback as an authorized operator:
 
 ```sh
 npm run feedback
 ```
 
-Feedback has no public read endpoint or admin UI. Do not share the output publicly. Set a retention policy and delete old feedback/accounts when no longer needed. Email verification and password recovery for **play accounts** are not implemented; the membership form's own verification process is separate.
+There is no public read endpoint or admin dashboard. Feedback does not collect email, so use Contact for enquiries needing a reply.
 
-## Push notifications
+## Independent supplied-template comparison
 
-The retained push API requires a future opt-in interface; there is no Events page or opt-in control in the current public frontend. HTTPS and browser Web Push support are required. On iOS, Web Push normally requires installing the site to the home screen. Visitors can unsubscribe in the site or browser settings. Only standard FCM, Mozilla and Apple push endpoints are accepted, preventing arbitrary server-side URL requests.
+`template-preview.html` follows the user-supplied saved `view-source_https___pcachess.com.html` on `main`. The Chrome view-source wrapper was decoded and inspected locally, not shipped as executable WordPress code. Local Nunito/Raleway fonts, burgundy/olive colors, a boxed layout, enquiry card and source-configured two-photo hero (5000ms loop / 500ms fade) remain. Only existing Kericho photos and relevant content are used; no PCA contacts, tracking, OTP/backend, unverified overseas claims, awards or free-demo offers are imported.
 
-An authorised operator with server access sends updates:
+The comparison homepage is also shortened: welcome, three existing program summaries and community shortcuts. Officials remain on About Us; top contact strip and decorative section dividers remain omitted. Its enquiry opens Kericho WhatsApp for review/send and stores nothing. Links to detail pages use the approved existing design. Font licenses/provenance are in `assets/template-fonts/`.
 
 ```sh
-npm run notify -- "Academy update" "Contact the academy for registration details." "/contact.html"
-npm run notify -- "New event announced" "Contact the academy for confirmed details." "/contact.html"
+PORT=3001 TEMPLATE_PREVIEW=1 npm start
 ```
 
-Delivery needs outbound access to the subscriber's browser push provider. The Arena sandbox restricts those hosts, so real push delivery cannot be verified here. Delivery errors are reported; expired subscriptions are removed. Updating events does not automatically send a push. Embedded Google Form submissions do **not** send automatic notifications or report completion back to this server; that would need a separate authorised Google Forms integration.
+On this comparison server, `/` opens the template and `/index.html` opens the current homepage. On the default server, `/` remains the current homepage; `/template-preview.html` is also available. This is a homepage comparison, not an assertion that every PCA page/backend was replicated.
 
-## Chess limitations
-
-- Computer uses legal moves and a simple capture/reply heuristic; it is not Stockfish.
-- Daily puzzle rotates through three validated mate-in-one positions at midnight in `Africa/Nairobi`. Expand `lib/chess.js` with reviewed FENs for a larger collection.
-- Online play matches distinct signed-in accounts in one server process. Games are untimed, authoritative on the server and held in memory. Leaving or disconnecting ends the live session; a restart loses active games. Horizontal deployment needs shared matchmaking/game storage and a Socket.IO adapter.
-- Standard legal moves, castling, en passant, promotions, checks, mate and draws use `chess.js`. Public display names, not account emails, are shared with opponents. Use a nickname.
-
-## Tests
+## Verification
 
 ```sh
 npm test
-# With a Playwright browser and system dependencies installed:
-npx playwright install --with-deps chromium
-npm start # in a separate terminal (current website, port 3000)
-# In another terminal, for the independent template tests:
-PORT=3001 TEMPLATE_PREVIEW=1 npm start
-# Then run the complete browser suite:
+npx playwright install chromium
+# Start the default server and, in another terminal, the comparison server above.
 npm run test:browser
 ```
 
-`CHROMIUM_EXECUTABLE` may point the browser suite at an existing Chromium binary. Unit/API tests use an isolated temporary database and cover puzzles, Nairobi rollover, legal computer moves, special moves, account login, illegal moves, feedback validation, request origins, and private file protection. Browser tests cover separate page navigation/direct loading, enquiry handoff, mobile layout, dropdown keyboards and touch behavior, hero controls and reduced motion. Backend tests cover the retained API independently.
-
-## Source-based PCA template comparison preview
-
-The user-supplied `view-source_https___pcachess.com.html` on `main` is a saved
-Chrome **view-source** page, not directly usable website HTML. Its line-content
-cells were decoded and inspected locally. The reference file is left in `.cache`
-and is not copied into the public site: it contains WordPress plugin settings,
-analytics, third-party assets and form/OTP integrations that are not appropriate
-for Kericho.
-
-A separate, standalone comparison page is available at `template-preview.html`
-(or `/template-preview` on the Node server). **The current six pages, stylesheet
-and script remain unchanged.** Run a dedicated preview if desired:
-
-```sh
-PORT=3001 TEMPLATE_PREVIEW=1 npm start
-```
-
-In this mode `/` shows the comparison page; `/index.html` still shows the current
-website, so the comparison links work normally. Without this environment flag,
-`/` remains the current homepage.
-
-The preview reconstructs the reference's burgundy `#4b0901` / olive `#505828`
-colors, Nunito/Raleway typography, 80px header, 1140px content width, two-thirds
-hero copy with a one-third enquiry card, centered section headings, circular
-learner images, six service cards, four focus panels and a burgundy footer.
-The top contact strip and decorative section dividers stay omitted, honoring
-the earlier simplification request. Contact actions remain icons in the footer.
-The source's actual hero settings are looped photos every **5000ms** with a
-**500ms fade**; these are implemented without WordPress dependencies. The mobile
-form moves below the hero photo, as in the supplied source. Photo navigation,
-pause and reduced-motion support are included.
-
-Only existing repository photographs and Kericho content are used. International
-country claims become learner/community groups; award counters become learning
-focuses; source-specific success stories become our real team/gallery. No free
-demo offer, overseas branches, made-up metrics, unconfirmed online services,
-testimonials, PCA contacts or OTP verification is copied. The enquiry form opens
-WhatsApp for review/send and stores nothing. Read More links lead to the current
-site's deeper pages. This is a **homepage template evaluation**, not a deployment
-of PCA's WordPress backend or a claim that all reference pages are replicated.
-Fonts are served locally under the licenses in `assets/template-fonts`.
+`CHROMIUM_EXECUTABLE` can point to an existing Chromium binary. Browser coverage includes original photo hashes, retained hero/dropdown controls, relocation of staff portraits, navigation/anchors/no-JS fallbacks, 320–1440px layouts, registration embeds (external requests mocked/blocked, no submissions), feedback success/failure, safe event rendering, account sessions and legal computer moves, two real isolated browser accounts matching and exchanging online moves, anonymous/foreign-origin socket rejection, daily puzzle solving, static-host error messages, and mocked push opt-in/out/rollback. Unit/API tests cover protected endpoints, password login, private file protection and chess rules including special moves and Nairobi rollover.
