@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Registration | Kericho Chess Club &amp; Academy</title>
+    <meta
+      name="description"
+      content="Official academy membership and consent forms, with optional browser notifications."
+    />
+    <meta name="site-revision" content="basic-footer-repeating-hero-text" />
+    <meta name="theme-color" content="#14233f" />
+    <link rel="icon" href="assets/favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <script type="module" src="community.js"></script>
+    <link rel="stylesheet" href="assets/registration.css" />
+    <script type="module" src="assets/registration.js"></script>
+    <link rel="stylesheet" href="assets/site-actions.css" />
+    <link rel="stylesheet" href="assets/academy-pages.css" />
+    <link rel="stylesheet" href="assets/page-finish.css" />
+    <script type="module" src="assets/text-motion.js"></script>
+  </head>
+  <body class="ck-design inner-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <div class="container nav-wrap">
+        <a
+          class="brand"
+          href="index.html"
+          aria-label="Kericho Chess Academy home"
+          ><img src="assets/logo.png" alt="" /><span
+            >KERICHO CHESS<small>CLUB & ACADEMY</small></span
+          ></a
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="navigation"
+          aria-label="Open navigation"
+        >
+          ☰
+        </button>
+        <nav id="navigation" aria-label="Main navigation">
+          <a data-page="home" href="index.html">Home</a
+          ><a data-page="about" href="about.html">About us</a>
+          <div class="dropdown nav-dropdown">
+            <a data-page="programs" href="programs.html">Our programs</a>
+            <button
+              class="dropdown-toggle"
+              type="button"
+              aria-label="Open programs menu"
+              aria-expanded="false"
+              aria-controls="programs-menu"
+            >
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="m5 7 5 5 5-5" />
+              </svg>
+            </button>
+            <div class="dropdown-panel" id="programs-menu" hidden>
+              <a href="programs.html#junior-program"
+                ><strong>Junior chess academy</strong
+                ><small>A confident first move</small></a
+              >
+              <a href="programs.html#club-program"
+                ><strong>Club &amp; competitive chess</strong
+                ><small>Practise and prepare</small></a
+              >
+              <a href="programs.html#school-program"
+                ><strong>Chess in schools</strong
+                ><small>Bring chess to your school</small></a
+              >
+            </div>
+          </div>
+          <a data-page="merchandise" href="merchandise.html">Merchandise</a
+          ><a data-page="contact" href="contact.html">Contact</a>
+          <div class="dropdown nav-dropdown">
+            <a data-page="events" href="events.html">Community</a>
+            <button
+              class="dropdown-toggle"
+              type="button"
+              aria-label="Open community menu"
+              aria-expanded="false"
+              aria-controls="community-menu"
+            >
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="m5 7 5 5 5-5" />
+              </svg>
+            </button>
+            <div class="dropdown-panel" id="community-menu" hidden>
+              <a
+                data-page="registration"
+                class="active"
+                aria-current="page"
+                href="registration.html"
+                ><strong>Registration</strong
+                ><small>Membership and consent forms</small></a
+              >
+              <a href="events.html"
+                ><strong>Upcoming events</strong
+                ><small>Confirmed academy dates</small></a
+              >
+              <a data-page="play" href="play.html"
+                ><strong>Play chess</strong
+                ><small>Computer and online games</small></a
+              >
+              <a href="play.html#puzzle"
+                ><strong>Puzzle of the day</strong
+                ><small>A daily mate-in-one challenge</small></a
+              >
+              <a data-page="help" href="help.html"
+                ><strong>FAQs &amp; feedback</strong
+                ><small>Answers and suggestions</small></a
+              >
+            </div>
+          </div>
+          <a class="button nav-cta" href="registration.html">Register</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <div class="page-masthead">
+        <div class="container page-masthead-inner">
+          <h1>Registration</h1>
+          <nav class="page-breadcrumbs" aria-label="Breadcrumb">
+            <a href="index.html">Home</a><span aria-hidden="true">/</span
+            ><span aria-current="page">Registration</span>
+          </nav>
+        </div>
+      </div>
+      <section class="container registration-experience" id="registration">
+        <div class="registration-heading">
+          <div class="eyebrow">BECOME PART OF OUR CHESS COMMUNITY</div>
+          <h2 class="page-intro-title">Your next move starts here.</h2>
+          <p>
+            A friendly guide to joining Kericho Chess Club &amp; Academy. Choose
+            your path, complete the official forms, and decide how you’d like to
+            stay in touch.
+          </p>
+        </div>
+        <div class="registration-layout">
+          <aside class="registration-sidebar">
+            <div class="registration-photo">
+              <img
+                src="assets/site-photos/tournament-room.jpg"
+                alt="Chess tables prepared for play at the academy"
+              />
+              <div>
+                <span aria-hidden="true">♞</span>
+                <p>Learn. Play.<br />Belong.</p>
+                <small>Forward ever, backward never.</small>
+              </div>
+            </div>
+            <nav class="registration-steps" aria-label="Registration steps">
+              <button
+                type="button"
+                data-journey-step="0"
+                aria-label="Step 1: Your path"
+                aria-current="step"
+              >
+                <span class="step-number">1</span
+                ><span
+                  >Your path<small class="step-caption">Start here</small></span
+                ></button
+              ><button
+                type="button"
+                data-journey-step="1"
+                aria-label="Step 2: Membership"
+                disabled
+              >
+                <span class="step-number">2</span
+                ><span
+                  >Membership<small class="step-caption"
+                    >Not opened</small
+                  ></span
+                ></button
+              ><button
+                type="button"
+                data-journey-step="2"
+                aria-label="Step 3: Media consent"
+                disabled
+              >
+                <span class="step-number">3</span
+                ><span
+                  >Media consent<small class="step-caption"
+                    >Not opened</small
+                  ></span
+                ></button
+              ><button
+                type="button"
+                data-journey-step="3"
+                aria-label="Step 4: Updates & next steps"
+                disabled
+              >
+                <span class="step-number">4</span
+                ><span
+                  >Updates & next steps<small class="step-caption"
+                    >Not opened</small
+                  ></span
+                >
+              </button>
+            </nav>
+            <div class="registration-support">
+              <strong>Need a hand?</strong>
+              <p>
+                Ask the academy about registration, fees or the right program
+                for you.
+              </p>
+              <a class="text-link" href="contact.html">Contact the academy →</a>
+            </div>
+          </aside>
+          <div class="registration-workspace">
+            <p class="journey-position" id="journey-position" role="status">
+              Step 1 of 4 · Your path
+            </p>
+            <div class="journey-screen" data-journey-screen="0">
+              <span class="registration-kicker"
+                >LET’S GET TO KNOW YOUR NEXT MOVE</span
+              >
+              <h2 tabindex="-1">Who are you registering?</h2>
+              <p>
+                We’ll tailor the guidance to you. No personal details are
+                collected at this step.
+              </p>
+              <fieldset class="registration-choices">
+                <legend class="sr-only">Choose your registration path</legend>
+                <label class="registration-choice" for="joining-self"
+                  ><input
+                    id="joining-self"
+                    type="radio"
+                    name="joining-path"
+                    value="self"
+                  /><span class="choice-symbol" aria-hidden="true">♜</span
+                  ><span
+                    ><strong>I’m joining</strong
+                    ><small>Registration guidance for yourself.</small></span
+                  ></label
+                ><label class="registration-choice" for="joining-child"
+                  ><input
+                    id="joining-child"
+                    type="radio"
+                    name="joining-path"
+                    value="child"
+                  /><span class="choice-symbol" aria-hidden="true">♟</span
+                  ><span
+                    ><strong>I’m registering a child</strong
+                    ><small
+                      >A parent or guardian is helping a junior player
+                      join.</small
+                    ></span
+                  ></label
+                >
+              </fieldset>
+              <div class="registration-reassurance">
+                <span aria-hidden="true">♔</span>
+                <p>
+                  <strong>One guide, no duplicate paperwork.</strong><br />Your
+                  membership details go directly into the club’s official Google
+                  Form, not a second form on this website.
+                </p>
+              </div>
+              <p class="journey-note">
+                Already registered with the academy?
+                <a href="play.html"
+                  >Create or access your separate play account →</a
+                >
+              </p>
+            </div>
+            <div class="journey-screen" data-journey-screen="1" hidden>
+              <span class="registration-kicker">YOUR MEMBERSHIP DETAILS</span>
+              <h2 tabindex="-1">Make your first move.</h2>
+              <p id="membership-guidance">
+                Complete the official membership form, following its prompts.
+              </p>
+              <details class="registration-help">
+                <summary>What should I have ready?</summary>
+                <ul>
+                  <li>
+                    The member’s personal details, as requested by the official
+                    form.
+                  </li>
+                  <li>
+                    Access to email: the supplied form describes email
+                    verification.
+                  </li>
+                  <li>
+                    The form says fees are shown at checkout, membership stays
+                    inactive until paid, and a membership ID is issued after
+                    processing. This website does not collect payments or
+                    activate membership.
+                  </li>
+                  <li>
+                    The supplied form currently states paid membership ends on
+                    31 December 2026. Confirm the current term and fee with the
+                    academy.
+                  </li>
+                </ul>
+              </details>
+              <div class="official-form">
+                <div class="action-row">
+                  <button
+                    class="button load-google-form"
+                    data-frame="membership-frame"
+                    type="button"
+                  >
+                    Open membership registration form</button
+                  ><a
+                    class="registration-external"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdbieIfMBN_VQPdNGKFHh1rPMa_JFpRZUUhkHEEU92DbUgJGw/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Open in a new tab ↗</a
+                  >
+                </div>
+                <p
+                  class="registration-frame-status"
+                  id="membership-frame-status"
+                  role="status"
+                >
+                  The official form opens inside this step. If embedding or
+                  Google sign-in is blocked, use the new-tab link above.
+                </p>
+                <iframe
+                  id="membership-frame"
+                  title="Membership registration"
+                  data-src="https://docs.google.com/forms/d/e/1FAIpQLSdbieIfMBN_VQPdNGKFHh1rPMa_JFpRZUUhkHEEU92DbUgJGw/viewform?embedded=true"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  hidden
+                ></iframe>
+              </div>
+              <p class="journey-note">
+                Use Google’s own Submit button to send your details. Continue
+                below to review the next step; continuing does not submit the
+                form or confirm membership.
+              </p>
+            </div>
+            <div class="journey-screen" data-journey-screen="2" hidden>
+              <span class="registration-kicker">YOUR CHOICES MATTER</span>
+              <h2 tabindex="-1">Photos, videos &amp; privacy.</h2>
+              <p id="consent-guidance">
+                Review the official photo and video consent form where
+                applicable.
+              </p>
+              <div class="consent-explainer">
+                <div>
+                  <strong>Separate permissions</strong>
+                  <p>
+                    Internal coaching/records and publicity are covered in the
+                    supplied form. Permission to identify a child by name is a
+                    separate choice.
+                  </p>
+                </div>
+                <div>
+                  <strong>You stay in control</strong>
+                  <p>
+                    You may ask to review images or change/withdraw permission
+                    in writing. Previously printed material or third-party
+                    shares cannot always be recalled.
+                  </p>
+                </div>
+              </div>
+              <div class="official-form">
+                <div class="action-row">
+                  <button
+                    class="button load-google-form"
+                    data-frame="consent-frame"
+                    type="button"
+                  >
+                    Open photo & video consent form</button
+                  ><a
+                    class="registration-external"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSefyh1CBlzc_YsCPh9dp8oNl9dcBPjr4cNvjET8ob4ndaodzw/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Open in a new tab ↗</a
+                  >
+                </div>
+                <p
+                  class="registration-frame-status"
+                  id="consent-frame-status"
+                  role="status"
+                >
+                  The official form opens inside this step. If embedding or
+                  Google sign-in is blocked, use the new-tab link above.
+                </p>
+                <iframe
+                  id="consent-frame"
+                  title="Photo & video consent"
+                  data-src="https://docs.google.com/forms/d/e/1FAIpQLSefyh1CBlzc_YsCPh9dp8oNl9dcBPjr4cNvjET8ob4ndaodzw/viewform?embedded=true"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  hidden
+                ></iframe>
+              </div>
+              <p class="journey-note">
+                One form per child. No permission is granted by visiting this
+                page, opening the form or continuing this guide. Your choices
+                must be submitted in the official consent form.
+              </p>
+            </div>
+            <div class="journey-screen" data-journey-screen="3" hidden>
+              <span class="registration-kicker"
+                >STAY CONNECTED, ON YOUR TERMS</span
+              >
+              <h2 tabindex="-1">Your next steps.</h2>
+              <p>
+                You’ve reached the last step of this guide—not a membership
+                confirmation. The academy processes your official submission.
+              </p>
+              <div class="registration-summary">
+                <div>
+                  <span aria-hidden="true">01</span>
+                  <p>
+                    <strong>Membership</strong><br />If you submitted the
+                    membership form, follow its verification/payment
+                    instructions and await the academy’s confirmation and
+                    membership ID.
+                  </p>
+                </div>
+                <div>
+                  <span aria-hidden="true">02</span>
+                  <p>
+                    <strong>Photo &amp; video choices</strong><br />Only choices
+                    submitted in the official consent form are recorded. This
+                    website cannot check either form’s submission.
+                  </p>
+                </div>
+              </div>
+              <aside class="notice push-panel" aria-labelledby="updates-title">
+                <h2 id="updates-title">Academy updates, if you want them.</h2>
+                <p>
+                  Opt into browser push notifications for academy announcements
+                  and confirmed events. This is optional and separate from
+                  membership registration. We won’t ask permission until you
+                  choose to enable updates.
+                </p>
+                <div class="action-row">
+                  <button
+                    class="button"
+                    id="push-enable"
+                    type="button"
+                    disabled
+                  >
+                    Enable notifications</button
+                  ><button
+                    class="button secondary-button"
+                    id="push-disable"
+                    type="button"
+                    hidden
+                  >
+                    Disable notifications
+                  </button>
+                </div>
+                <p id="push-status" role="status" aria-live="polite">
+                  Checking notification support…
+                </p>
+                <small
+                  >HTTPS and a supported browser are required. On iPhone/iPad,
+                  you may need to add this site to your home screen first.
+                  Announcements are sent by the academy; submitting a Google
+                  Form does not automatically trigger a push
+                  notification.</small
+                >
+              </aside>
+              <div class="action-row">
+                <a class="button" href="programs.html">Explore our programs →</a
+                ><button
+                  class="registration-text-button"
+                  type="button"
+                  id="restart-registration"
+                >
+                  Start a new guide
+                </button>
+              </div>
+            </div>
+            <div class="registration-journey-footer">
+              <button
+                class="button secondary-button"
+                type="button"
+                id="journey-back"
+                hidden
+              >
+                ← Back</button
+              ><button class="button" type="button" id="journey-next" disabled>
+                Continue to membership →
+              </button>
+            </div>
+            <p class="journey-note registration-mobile-help">
+              Need a hand? <a href="contact.html">Contact the academy →</a>
+            </p>
+            <p class="registration-data-note">
+              Your choice here stays on this page only. Official forms are
+              provided and processed by Google; this website cannot read or
+              verify their submissions.
+            </p>
+          </div>
+        </div>
+      </section>
+      <noscript
+        ><p class="container">
+          <a
+            class="text-link"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdbieIfMBN_VQPdNGKFHh1rPMa_JFpRZUUhkHEEU92DbUgJGw/viewform"
+            >Open membership registration</a
+          >
+          ·
+          <a
+            class="text-link"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSefyh1CBlzc_YsCPh9dp8oNl9dcBPjr4cNvjET8ob4ndaodzw/viewform"
+            >Open photo/video consent</a
+          >
+        </p>
+        <p class="container notice">
+          JavaScript is needed for interactive forms, notifications and chess.
+          You can still read the FAQs and open the official registration forms.
+        </p></noscript
+      >
+    </main>
+    <footer class="compact-footer basic-footer">
+      <div class="container footer-main-row">
+        <div class="footer-details">
+          <a
+            class="footer-mark"
+            href="index.html"
+            aria-label="Kericho Chess Academy home"
+            ><img
+              src="assets/logo.png"
+              alt=""
+              width="48"
+              height="48"
+              loading="lazy"
+            /><span>Kericho Chess<small>Club &amp; Academy</small></span></a
+          >
+          <p>Coaching, club play and chess in schools.</p>
+          <p class="footer-place">
+            Kericho, Kenya <span aria-hidden="true">·</span> Forward ever,
+            backward never.
+          </p>
+        </div>
+        <div class="footer-explore">
+          <h3>Explore</h3>
+          <nav class="footer-links" aria-label="Footer navigation">
+            <a href="about.html">About</a><a href="registration.html">Join</a
+            ><a href="programs.html">Programs</a
+            ><a href="merchandise.html">Merchandise</a
+            ><a href="events.html">Events</a
+            ><a href="play.html">Play &amp; puzzle</a
+            ><a href="help.html">Help</a>
+          </nav>
+        </div>
+        <div class="footer-connect">
+          <h3>Stay connected</h3>
+          <div class="footer-actions">
+            <div
+              class="footer-social-links"
+              role="group"
+              aria-label="Social links"
+            >
+              <a
+                href="https://www.facebook.com/smesso"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook @smesso"
+                title="Facebook · @smesso"
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M14 21v-8h3l.5-4H14V7c0-1 .4-2 2-2h2V1.5A24 24 0 0 0 15 1c-3 0-5 2-5 5v3H7v4h3v8Z"
+                    fill="currentColor"
+                  /></svg></a
+              ><a
+                href="https://www.tiktok.com/@kericho.chess.clu"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok @kericho.chess.clu"
+                title="TikTok · @kericho.chess.clu"
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M14 3v12a4 4 0 1 1-4-4m4-8c.5 3 2.5 5 6 5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></a>
+            </div>
+            <div
+              class="footer-contact-icons"
+              role="group"
+              aria-label="Contact shortcuts"
+            >
+              <a
+                href="tel:+254729037585"
+                aria-label="Call the academy"
+                title="Call the academy"
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M6 3 3 5c0 8 8 16 16 16l2-3-5-3-2 2c-3-1-6-4-7-7l2-2Z"
+                  /></svg></a
+              ><a
+                href="mailto:kerichochessacademy@gmail.com"
+                aria-label="Email the academy"
+                title="Email the academy"
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3 6 9 7 9-7" /></svg></a
+              ><a
+                href="https://wa.me/254729037585"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Message the academy on WhatsApp"
+                title="Message on WhatsApp"
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M20 11.5a8 8 0 0 1-11.8 7L3 20l1.5-5.2A8 8 0 1 1 20 11.5Z"
+                  />
+                  <path d="m9 7-1 2c1 3 3 5 6 6l2-1-2-2-1 1-3-3 1-1Z" /></svg
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span
+          >© <span id="year">2026</span> Kericho Chess Club &amp; Academy.</span
+        ><a href="#main" aria-label="Back to top" title="Back to top">↑</a>
+      </div>
+    </footer>
+  </body>
+</html>

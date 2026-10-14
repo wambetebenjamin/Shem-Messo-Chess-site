@@ -1,0 +1,7 @@
+# Academy clothing
+
+These transparent product cutouts come from the user-supplied `WhatsApp Image 2026-10-14 at 12.04.54 PM.jpeg` on main. Only the surrounding background was masked; clothing and printed artwork remain from that supplied image. No unseen rear artwork or additional variants are invented.
+
+The catalogue uses the photographs with short product names, useful one-to-two-sentence descriptions and an enquiry link. `showcase.js` occasionally applies a brief, staggered fold/swipe-return effect; it also responds to horizontal swipes. It stays still while an item is hovered or its enquiry has focus. Motion can be paused, respects reduced motion, and stops offscreen or in hidden tabs. All products remain visible with JavaScript disabled. No renderer, canvas, Three.js, CDN, or backend is needed for the showcase. Enquiries use the existing Contact flow.
+
+`catalogue.js` progressively enhances this page with category filters, accessible quick-look dialogs, previous/next browsing, item-specific enquiries and shareable product links. The dialog traps keyboard focus, closes with Escape or a backdrop click and returns focus to its opener. Sharing uses the native browser sheet or clipboard only after a click, with truthful cancellation/failure messages and a manual-copy fallback. Filters, quick-look controls and motion controls remain hidden without JavaScript; all six descriptions and enquiry links still work. No prices, material specifications, sizes or stock guarantees are invented.

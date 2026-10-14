@@ -1,0 +1,373 @@
+/* A quieter footer and naturally balanced titles; no branding change. */
+footer.compact-footer,
+.ck-design footer.compact-footer {
+  padding: 24px 0 18px;
+}
+.compact-footer .footer-main-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.compact-footer .footer-mark {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.compact-footer .footer-mark img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  background: white;
+  border-radius: 50%;
+  padding: 3px;
+}
+.compact-footer nav.footer-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: static;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+}
+.compact-footer .footer-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  font-size: 14px;
+  background: transparent;
+}
+.compact-footer .footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.compact-footer .footer-contact-icons,
+.compact-footer .footer-social-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin: 0;
+}
+.compact-footer .footer-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 10px;
+  border-radius: 50%;
+  background: #ffffff08;
+}
+.compact-footer .footer-actions svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.compact-footer .footer-contact-icons svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.compact-footer .footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 14px;
+  padding-top: 0;
+  font-size: 12px;
+}
+.compact-footer .footer-bottom a {
+  width: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  justify-content: center;
+  font-size: 20px;
+  border-radius: 50%;
+  text-decoration: none;
+}
+.compact-footer .footer-bottom > span {
+  min-width: 0;
+  line-height: 1.5;
+}
+@media (max-width: 700px) {
+  .compact-footer .footer-main-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .compact-footer .footer-actions {
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+  }
+  .compact-footer .footer-links {
+    margin-left: auto;
+  }
+  .compact-footer .footer-bottom {
+    margin-top: 12px;
+    font-size: 11px;
+  }
+}
+/* Whole words remain intact. No forced break, truncated title or letter ladder. */
+.ck-design main :is(h1, h2, h3) {
+  text-wrap: balance;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+  overflow: visible;
+  min-width: 0;
+}
+.ck-design .hero h1 {
+  font-size: clamp(2.1rem, 4.8vw, 4.3125rem);
+  line-height: 1.14;
+  max-width: 20ch;
+  letter-spacing: -0.6px;
+}
+.ck-design .about-copy h2,
+.ck-design .page-intro-title,
+.ck-design .section-heading h2,
+.ck-design .registration-heading .page-intro-title,
+.ck-design .community-section h2 {
+  font-size: clamp(1.65rem, 3vw, 2.5rem);
+  line-height: 1.24;
+  max-width: 27ch;
+}
+.ck-design .community-section h2 {
+  margin-left: auto;
+  margin-right: auto;
+}
+.ck-design .help-layout h2,
+.ck-design .auth-grid h2,
+.ck-design .journey-screen h2,
+.ck-design .notice h2 {
+  font-size: clamp(1.6rem, 2.3vw, 2rem);
+  line-height: 1.25;
+}
+.ck-design .section-heading > div,
+.ck-design .about-copy,
+.ck-design .registration-heading {
+  min-width: 0;
+}
+.letter-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.letter-char {
+  display: inline-block;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ck-design .hero-content > h1.text-lettered {
+    animation: none;
+  }
+  .lettering-in .letter-char {
+    animation: letter-arrive 520ms cubic-bezier(0.2, 0.65, 0.3, 1) both;
+    animation-delay: var(--letter-delay, 0ms);
+  }
+  .text-arriving {
+    animation: text-arrive 650ms ease-out both;
+  }
+  @keyframes letter-arrive {
+    from {
+      opacity: 0;
+      transform: translateY(0.25em);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes text-arrive {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* Native same-origin page transitions: no link interception or artificial delay. */
+  @view-transition {
+    navigation: auto;
+  }
+  ::view-transition-old(root) {
+    animation: page-letter-out 150ms ease-in both;
+  }
+  ::view-transition-new(root) {
+    animation: page-letter-in 220ms ease-out both;
+  }
+  @keyframes page-letter-out {
+    to {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+  @keyframes page-letter-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .letter-char,
+  .text-arriving {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.compact-footer .footer-actions > div {
+  flex-shrink: 0;
+}
+.compact-footer .footer-contact-icons a:last-child {
+  width: 44px;
+  min-height: 44px;
+  flex-direction: row;
+  gap: 0;
+}
+
+.compact-footer .footer-bottom {
+  flex-direction: row;
+  text-align: left;
+}
+.ck-design .hero-foot .mini-pieces {
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding-right: 0;
+  font-size: 24px;
+  letter-spacing: 0;
+}
+@media (max-width: 600px) {
+  .ck-design .registration-journey-footer .button {
+    padding: 12px 14px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .ck-design .registration-reassurance {
+    padding: 16px;
+    gap: 12px;
+  }
+}
+/* Basic, useful footer content, without the former repeated marketing sections. */
+.basic-footer .footer-main-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
+  gap: 36px;
+  align-items: start;
+}
+.basic-footer .footer-mark {
+  align-items: center;
+  gap: 12px;
+}
+.basic-footer .footer-mark > span {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.basic-footer .footer-mark small {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  margin-top: 4px;
+}
+.basic-footer .footer-details p {
+  max-width: 330px;
+  margin: 14px 0 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #bdc9dc;
+}
+.basic-footer .footer-details .footer-place {
+  font-size: 12px;
+  margin-top: 8px;
+}
+.basic-footer h3 {
+  font-size: 17px;
+  margin: 4px 0 12px;
+  color: white;
+  letter-spacing: 0;
+}
+.basic-footer nav.footer-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 12px;
+}
+.basic-footer .footer-links a {
+  justify-content: flex-start;
+  padding: 8px 0;
+}
+.basic-footer .footer-actions {
+  gap: 14px;
+}
+.basic-footer .footer-bottom {
+  margin-top: 20px;
+}
+@media (max-width: 1000px) {
+  .basic-footer .footer-main-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
+  }
+  .basic-footer .footer-connect {
+    grid-column: 1/-1;
+  }
+  .basic-footer .footer-actions {
+    width: auto;
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 600px) {
+  .basic-footer .footer-main-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .basic-footer .footer-explore,
+  .basic-footer .footer-connect {
+    grid-column: auto;
+  }
+  .basic-footer nav.footer-links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px 8px;
+  }
+  .basic-footer .footer-links a {
+    font-size: 13px;
+  }
+  .basic-footer .footer-details p {
+    margin-top: 10px;
+  }
+  .basic-footer .footer-details .footer-place {
+    margin-top: 6px;
+  }
+  .basic-footer .footer-mark > span {
+    font-size: 18px;
+  }
+}

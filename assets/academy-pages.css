@@ -1,0 +1,805 @@
+/* Chess Kenya source-layout adaptation. Own branding, local fonts and real content. */
+@font-face {
+  font-family: "Academy Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("academy-fonts/open-sans-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Academy Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("academy-fonts/open-sans-latin-600-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Academy Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("academy-fonts/open-sans-latin-700-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Academy Raleway";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("academy-fonts/raleway-latin-600-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Academy Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("academy-fonts/raleway-latin-700-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Academy Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("academy-fonts/poppins-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Academy Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("academy-fonts/poppins-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Academy Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("academy-fonts/poppins-latin-600-normal.woff2") format("woff2");
+}
+.ck-design {
+  --page-pale: #f1f4fa;
+  font-family: "Academy Open Sans", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.75;
+  background: white;
+}
+.ck-design .container {
+  width: min(1140px, calc(100% - 48px));
+}
+.ck-design :is(h1, h2, h3) {
+  font-family: "Academy Raleway", Arial, sans-serif;
+  letter-spacing: -0.6px;
+  line-height: 1.2;
+}
+.ck-design h2 {
+  font-size: 40px;
+}
+.ck-design h3 {
+  font-size: 25px;
+}
+.ck-design .eyebrow {
+  font-family: "Academy Poppins", Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  margin-bottom: 16px;
+}
+.ck-design header {
+  border: 0;
+  box-shadow: 0 2px 18px #14233f0c;
+  background: white;
+}
+.ck-design .nav-wrap {
+  height: 88px;
+  gap: 24px;
+}
+.ck-design header .brand {
+  font-family: "Academy Raleway", Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.ck-design header .brand img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+.ck-design header .brand small {
+  font-family: "Academy Open Sans", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 2.7px;
+  margin-top: 4px;
+}
+.ck-design #navigation {
+  font-family: "Academy Poppins", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 20px;
+}
+.ck-design .nav-cta {
+  padding: 11px 20px;
+  min-height: 44px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.ck-design #navigation .dropdown-panel {
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: 0 8px 30px #14233f20;
+}
+.ck-design .button {
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.ck-design .secondary-button {
+  background: var(--page-pale);
+  color: var(--navy);
+}
+.ck-design .hero {
+  min-height: 640px;
+  height: auto;
+  display: grid;
+  align-items: center;
+}
+.ck-design .hero-shade {
+  background:
+    linear-gradient(90deg, #14233f91, #14233f80),
+    linear-gradient(0deg, #0f1a3060, transparent 45%);
+}
+.ck-design .hero-content {
+  text-align: center;
+  max-width: 980px;
+  padding: 88px 0 108px;
+}
+.ck-design .hero h1 {
+  font-size: 69px;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  margin: 0 auto 24px;
+  max-width: 850px;
+}
+.ck-design .hero .eyebrow {
+  justify-content: center;
+  color: #dbeafe;
+}
+.ck-design .hero p {
+  margin: 0 auto;
+  max-width: 720px;
+  font-size: 18px;
+  color: #f1f5f9;
+  line-height: 1.8;
+}
+.ck-design .hero-actions {
+  justify-content: center;
+  gap: 20px;
+}
+.ck-design .hero-secondary {
+  min-height: 48px;
+  padding: 11px 20px;
+  border: 1px solid #ffffff60;
+  border-radius: 4px;
+}
+.ck-design .hero-foot {
+  justify-content: center;
+  margin-top: 28px;
+  font-size: 13px;
+}
+.ck-design .hero-photo-controls {
+  left: 50%;
+  right: auto;
+  bottom: 22px;
+  transform: translateX(-50%);
+  width: max-content;
+  padding: 5px 12px;
+  background: #14233f9c;
+}
+.ck-design .hero-photo-controls button {
+  min-width: 38px;
+  min-height: 38px;
+}
+.ck-design .values {
+  background: var(--page-pale);
+}
+.ck-design .values-grid {
+  gap: 24px;
+  padding: 34px 0;
+}
+.ck-design .values-grid > a {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 10px 12px;
+  min-height: 70px;
+  border-radius: 4px;
+}
+.ck-design .values-grid > a:hover {
+  background: #ffffffb3;
+}
+.ck-design .values-grid strong {
+  font-family: "Academy Raleway", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.35;
+}
+.ck-design .values-grid small {
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.ck-design .value-icon {
+  width: 44px;
+  flex-shrink: 0;
+  text-align: center;
+}
+.ck-design .section {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+.ck-design .about {
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: center;
+}
+.ck-design .about-visual {
+  padding: 0;
+}
+.ck-design .about-visual > img {
+  height: 470px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.ck-design .about-copy {
+  background: white;
+  padding: 38px 40px;
+  box-shadow: 0 6px 38px #14233f10;
+  position: relative;
+  margin-left: -36px;
+  border-radius: 4px;
+}
+.ck-design .about-copy :is(h1, h2) {
+  font-size: 40px;
+}
+.ck-design .about-copy p {
+  font-size: 17px;
+  line-height: 1.8;
+}
+.ck-design .community-section {
+  background: var(--page-pale);
+}
+.ck-design .community-section .eyebrow {
+  justify-content: center;
+}
+.ck-design .community-section h2 {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.ck-design .community-section .quick-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.ck-design .community-section .quick-card {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 4px 18px;
+  padding: 28px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: none;
+}
+.ck-design .community-section .quick-symbol {
+  grid-row: 1/4;
+  align-self: start;
+  font-size: 32px;
+}
+.ck-design .community-section .quick-card h3 {
+  margin: 0;
+  font-size: 23px;
+}
+.ck-design .community-section .quick-card p {
+  margin: 6px 0 10px;
+  font-size: 16px;
+}
+.ck-design .community-section .quick-card .text-link {
+  grid-column: 2;
+  font-size: 14px;
+  color: var(--blue);
+}
+.ck-design .page-masthead {
+  background: var(--page-pale);
+  padding: 28px 0;
+}
+.ck-design .page-masthead-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+}
+.ck-design .page-masthead h1 {
+  font-size: 28px;
+  letter-spacing: 0;
+  margin: 0;
+  font-weight: 600;
+}
+.ck-design nav.page-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: static;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  border-radius: 0;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.ck-design .page-breadcrumbs a {
+  padding: 0;
+  color: var(--blue);
+}
+.ck-design .page-intro-title {
+  font-size: 40px;
+  margin-bottom: 24px;
+}
+.ck-design .section-heading {
+  margin-bottom: 36px;
+  gap: 32px;
+  align-items: center;
+}
+.ck-design .section-heading :is(h1, h2) {
+  max-width: 700px;
+  font-size: 40px;
+}
+.ck-design .section-heading p {
+  font-size: 17px;
+}
+.ck-design .programs,
+.ck-design .merchandise {
+  background: white;
+}
+.ck-design .program-grid,
+.ck-design .merch-grid {
+  gap: 24px;
+}
+.ck-design .program-card,
+.ck-design .merch-card {
+  border-radius: 4px;
+  box-shadow: 0 4px 28px #14233f0b;
+}
+.ck-design .card-copy h3 {
+  font-size: 24px;
+}
+.ck-design .product-filters button:not([aria-pressed="true"]) {
+  background: var(--page-pale);
+}
+.ck-design .apparel-visual {
+  background: var(--page-pale);
+}
+.ck-design .merch-intro {
+  max-width: 365px;
+}
+.ck-design .product-look {
+  font-family: "Academy Poppins", Arial, sans-serif;
+  font-size: 13px;
+}
+.ck-design .team-card {
+  border-radius: 4px;
+  box-shadow: 0 4px 28px #14233f0b;
+}
+.ck-design #officials {
+  padding-top: 24px;
+}
+.ck-design #officials .section-heading .eyebrow {
+  justify-content: center;
+}
+.ck-design #officials .section-heading {
+  justify-content: center;
+  text-align: center;
+}
+.ck-design .team-card h3 {
+  font-size: 23px;
+}
+.ck-design .contact {
+  background: white;
+}
+.ck-design .contact-grid {
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 60px;
+}
+.ck-design .contact-grid > div > p {
+  max-width: 440px;
+}
+.ck-design #enquiry-form {
+  background: var(--page-pale);
+  padding: 32px;
+}
+.ck-design label {
+  font-size: 14px;
+}
+.ck-design :is(input, select, textarea) {
+  background: white;
+  font-size: 15px;
+  border-radius: 4px;
+}
+.ck-design .contact-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+.ck-design .contact-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 96px;
+  min-height: 96px;
+  background: var(--page-pale);
+  border-radius: 4px;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 600;
+}
+.ck-design .contact-action svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ck-design .registration-experience {
+  padding: 60px 0 72px;
+}
+.ck-design .registration-heading {
+  max-width: 820px;
+  margin-bottom: 30px;
+}
+.ck-design .registration-heading .page-intro-title {
+  font-size: 40px;
+  margin-top: 0;
+}
+.ck-design .registration-layout {
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 30px;
+}
+.ck-design .registration-photo,
+.ck-design .registration-workspace,
+.ck-design .registration-summary {
+  border-radius: 4px;
+}
+.ck-design .notice {
+  background: var(--page-pale);
+  border-radius: 4px;
+}
+.ck-design .faq-item {
+  background: var(--page-pale);
+  border-radius: 4px;
+}
+.ck-design #feedback-form {
+  background: var(--page-pale);
+}
+.ck-design .auth-grid form {
+  box-shadow: 0 4px 28px #14233f0b;
+  background: var(--page-pale);
+}
+.ck-design .game-info {
+  background: var(--page-pale);
+  padding: 24px;
+  border-radius: 4px;
+  min-width: 0;
+}
+.ck-design footer {
+  background: #0f1a30;
+  padding-top: 48px;
+}
+.ck-design .footer-grid {
+  padding-bottom: 30px;
+}
+.ck-design .footer-grid h3 {
+  font-family: "Academy Raleway", Arial, sans-serif;
+  letter-spacing: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+.ck-design .footer-action-bar > p {
+  font-family: "Academy Raleway", Arial, sans-serif;
+  letter-spacing: 0;
+}
+.ck-design .footer-links a {
+  background: transparent;
+  padding-left: 0;
+}
+.ck-design footer .footer-bottom {
+  margin-top: 0;
+  padding-top: 20px;
+}
+.ck-design
+  :is(
+    .values-grid > a,
+    .contact-action,
+    .quick-card,
+    .page-breadcrumbs a
+  ):focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+@media (min-width: 1101px) {
+  .ck-design .menu-toggle {
+    display: none;
+  }
+}
+@media (max-width: 1100px) {
+  .ck-design .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+  .ck-design #navigation {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 24px;
+    right: 24px;
+    width: auto;
+    max-height: calc(100svh - 110px);
+    overflow-y: auto;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 4px;
+    background: white;
+    padding: 18px;
+    border-radius: 4px;
+    box-shadow: 0 14px 38px #14233f20;
+  }
+  .ck-design #navigation.open {
+    display: flex;
+  }
+  .ck-design #navigation > a {
+    padding: 11px 12px;
+    min-height: 44px;
+  }
+  .ck-design #navigation .nav-dropdown {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .ck-design #navigation .nav-dropdown > a {
+    flex: 1;
+    min-height: 44px;
+    padding: 11px 12px;
+  }
+  .ck-design #navigation .dropdown-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px;
+  }
+  .ck-design #navigation .dropdown-panel {
+    position: static;
+    width: 100%;
+    max-width: none;
+    flex-basis: 100%;
+    margin-top: 4px;
+    background: var(--page-pale);
+    box-shadow: none;
+  }
+  .ck-design .values-grid {
+    gap: 12px;
+  }
+  .ck-design .values-grid > a {
+    gap: 12px;
+    padding: 8px;
+  }
+  .ck-design .values-grid strong {
+    font-size: 17px;
+  }
+  .ck-design .about-copy {
+    margin-left: -24px;
+    padding: 30px;
+  }
+}
+@media (max-width: 850px) {
+  .ck-design .hero {
+    min-height: 600px;
+  }
+  .ck-design .hero h1 {
+    font-size: 56px;
+  }
+  .ck-design .hero-content {
+    padding: 76px 0 106px;
+  }
+  .ck-design .about {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .ck-design .about-visual > img {
+    height: 370px;
+  }
+  .ck-design .about-copy {
+    margin: -28px 24px 0;
+    padding: 32px;
+  }
+  .ck-design .registration-layout {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .ck-design .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+}
+@media (max-width: 600px) {
+  .ck-design .container {
+    width: calc(100% - 32px);
+  }
+  .ck-design .nav-wrap {
+    height: 80px;
+    gap: 12px;
+  }
+  .ck-design header .brand {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    gap: 9px;
+  }
+  .ck-design header .brand img {
+    width: 44px;
+    height: 44px;
+  }
+  .ck-design header .brand small {
+    font-size: 8px;
+    letter-spacing: 1.9px;
+  }
+  .ck-design #navigation {
+    left: 16px;
+    right: 16px;
+    max-height: calc(100svh - 98px);
+  }
+  .ck-design .hero {
+    min-height: 600px;
+  }
+  .ck-design .hero-content {
+    padding: 60px 0 106px;
+  }
+  .ck-design .hero h1 {
+    font-size: 44px;
+    letter-spacing: -0.6px;
+    max-width: 390px;
+  }
+  .ck-design .hero p {
+    font-size: 16px;
+    max-width: 365px;
+  }
+  .ck-design .hero-actions {
+    gap: 14px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 24px;
+  }
+  .ck-design .hero-actions .button {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+  .ck-design .hero-actions .split-cta {
+    max-width: 100%;
+  }
+  .ck-design .hero-secondary {
+    min-height: 44px;
+    font-size: 14px;
+  }
+  .ck-design .hero-foot {
+    margin-top: 22px;
+    font-size: 12px;
+  }
+  .ck-design .hero-photo-controls {
+    bottom: 18px;
+  }
+  .ck-design .values-grid {
+    grid-template-columns: 1fr;
+    padding: 22px 0;
+    gap: 6px;
+  }
+  .ck-design .values-grid > a {
+    justify-content: flex-start;
+    min-height: 68px;
+    gap: 18px;
+  }
+  .ck-design .values-grid strong {
+    font-size: 19px;
+    margin-bottom: 2px;
+  }
+  .ck-design .values-grid small {
+    font-size: 14px;
+  }
+  .ck-design .section {
+    padding: 48px 0;
+  }
+  .ck-design .about-visual > img {
+    height: 300px;
+  }
+  .ck-design .about-copy {
+    margin: -24px 12px 0;
+    padding: 26px 22px;
+  }
+  .ck-design :is(h2, .about-copy h2, .page-intro-title, .section-heading h2) {
+    font-size: 32px;
+    letter-spacing: -0.4px;
+  }
+  .ck-design .community-section .quick-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .ck-design .community-section .quick-card {
+    padding: 24px 20px;
+    gap: 4px 12px;
+  }
+  .ck-design .community-section .quick-card h3 {
+    font-size: 22px;
+  }
+  .ck-design .page-masthead {
+    padding: 24px 0;
+  }
+  .ck-design .page-masthead-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .ck-design .page-masthead h1 {
+    font-size: 25px;
+  }
+  .ck-design nav.page-breadcrumbs {
+    font-size: 13px;
+    gap: 10px;
+  }
+  .ck-design .section-heading {
+    margin-bottom: 28px;
+  }
+  .ck-design .registration-experience {
+    padding: 42px 0 48px;
+  }
+  .ck-design .registration-heading .page-intro-title {
+    font-size: 32px;
+  }
+  .ck-design #enquiry-form {
+    padding: 24px 20px;
+  }
+  .ck-design .contact-options {
+    gap: 8px;
+  }
+  .ck-design .contact-action {
+    min-width: 84px;
+    min-height: 90px;
+  }
+  .ck-design .footer-grid h3 {
+    font-size: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-design .hero-content > h1 {
+    animation: none;
+  }
+}
+
+.ck-design .help-layout h2,
+.ck-design .auth-grid h2,
+.ck-design .journey-screen h2 {
+  font-size: 32px;
+}
+@media (max-width: 600px) {
+  .ck-design .help-layout h2,
+  .ck-design .auth-grid h2,
+  .ck-design .journey-screen h2 {
+    font-size: 28px;
+  }
+}
+
+.ck-design .program-detail {
+  color: var(--blue);
+  min-height: 44px;
+  padding-top: 12px;
+  gap: 16px;
+}
