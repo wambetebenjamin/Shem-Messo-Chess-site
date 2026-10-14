@@ -357,8 +357,26 @@ for (const f of [
   app.get(encodeURI("/" + f), (req, res) =>
     res.sendFile(process.cwd() + "/" + f),
   );
+// Independent source-based comparison preview; the current site is unchanged.
+for (const file of [
+  "template-preview.html",
+  "template-preview.css",
+  "template-preview.js",
+]) {
+  app.get("/" + file, (req, res) => res.sendFile(process.cwd() + "/" + file));
+}
+app.get("/template-preview", (req, res) =>
+  res.redirect(302, "/template-preview.html"),
+);
 // Real documents work on Node hosting and static hosting alike.
-app.get(["/", "/index.html"], (req, res) =>
+app.get("/", (req, res) => {
+  const file =
+    process.env.TEMPLATE_PREVIEW === "1"
+      ? "template-preview.html"
+      : "index.html";
+  res.sendFile(process.cwd() + "/" + file);
+});
+app.get("/index.html", (req, res) =>
   res.sendFile(process.cwd() + "/index.html"),
 );
 for (const page of ["about", "programs", "team", "merchandise", "contact"]) {

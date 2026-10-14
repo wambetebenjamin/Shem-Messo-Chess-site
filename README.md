@@ -90,8 +90,53 @@ Delivery needs outbound access to the subscriber's browser push provider. The Ar
 npm test
 # With a Playwright browser and system dependencies installed:
 npx playwright install --with-deps chromium
-npm start # in a separate terminal
+npm start # in a separate terminal (current website, port 3000)
+# In another terminal, for the independent template tests:
+PORT=3001 TEMPLATE_PREVIEW=1 npm start
+# Then run the complete browser suite:
 npm run test:browser
 ```
 
 `CHROMIUM_EXECUTABLE` may point the browser suite at an existing Chromium binary. Unit/API tests use an isolated temporary database and cover puzzles, Nairobi rollover, legal computer moves, special moves, account login, illegal moves, feedback validation, request origins, and private file protection. Browser tests cover separate page navigation/direct loading, enquiry handoff, mobile layout, dropdown keyboards and touch behavior, hero controls and reduced motion. Backend tests cover the retained API independently.
+
+## Source-based PCA template comparison preview
+
+The user-supplied `view-source_https___pcachess.com.html` on `main` is a saved
+Chrome **view-source** page, not directly usable website HTML. Its line-content
+cells were decoded and inspected locally. The reference file is left in `.cache`
+and is not copied into the public site: it contains WordPress plugin settings,
+analytics, third-party assets and form/OTP integrations that are not appropriate
+for Kericho.
+
+A separate, standalone comparison page is available at `template-preview.html`
+(or `/template-preview` on the Node server). **The current six pages, stylesheet
+and script remain unchanged.** Run a dedicated preview if desired:
+
+```sh
+PORT=3001 TEMPLATE_PREVIEW=1 npm start
+```
+
+In this mode `/` shows the comparison page; `/index.html` still shows the current
+website, so the comparison links work normally. Without this environment flag,
+`/` remains the current homepage.
+
+The preview reconstructs the reference's burgundy `#4b0901` / olive `#505828`
+colors, Nunito/Raleway typography, 80px header, 1140px content width, two-thirds
+hero copy with a one-third enquiry card, centered section headings, circular
+learner images, six service cards, four focus panels and a burgundy footer.
+The top contact strip and decorative section dividers stay omitted, honoring
+the earlier simplification request. Contact actions remain icons in the footer.
+The source's actual hero settings are looped photos every **5000ms** with a
+**500ms fade**; these are implemented without WordPress dependencies. The mobile
+form moves below the hero photo, as in the supplied source. Photo navigation,
+pause and reduced-motion support are included.
+
+Only existing repository photographs and Kericho content are used. International
+country claims become learner/community groups; award counters become learning
+focuses; source-specific success stories become our real team/gallery. No free
+demo offer, overseas branches, made-up metrics, unconfirmed online services,
+testimonials, PCA contacts or OTP verification is copied. The enquiry form opens
+WhatsApp for review/send and stores nothing. Read More links lead to the current
+site's deeper pages. This is a **homepage template evaluation**, not a deployment
+of PCA's WordPress backend or a claim that all reference pages are replicated.
+Fonts are served locally under the licenses in `assets/template-fonts`.
