@@ -6,12 +6,14 @@
     <title>Merchandise | Kericho Chess Club &amp; Academy</title>
     <meta
       name="description"
-      content="Enquire about chess sets, clocks and school chess equipment."
+      content="Explore academy T-shirts, hoodies and polos in 3D, alongside chess sets, clocks and school equipment."
     />
     <meta name="theme-color" content="#14233f" />
     <link rel="icon" href="assets/favicon.png" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="assets/merchandise-3d/viewers.css" />
+    <script type="module" src="assets/merchandise-3d/viewers.js"></script>
   </head>
   <body class="inner-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -116,15 +118,215 @@
           <div class="section-heading">
             <div>
               <div class="eyebrow">CHESS MERCHANDISE</div>
-              <h1>Equipment for your game.</h1>
+              <h1>Wear the club.<br />Equip your game.</h1>
             </div>
             <p>
-              Ask us about prices, stock, and collection.<br />Availability is
-              confirmed by the academy. Photos show equipment from our
-              tournament setup, not a guarantee of current stock.
+              Explore our clothing designs in rotating 3D, alongside chess
+              equipment. Ask the academy about prices, sizes, stock and
+              collection. Clothing models are illustrations based on your
+              supplied front-view designs; rear styling is illustrative, not a
+              confirmed product specification.
             </p>
           </div>
           <div class="merch-grid">
+            <article class="merch-card clothing-card" id="academy-tshirt">
+              <div
+                class="garment-viewer"
+                data-garment="tshirt"
+                data-label="T-shirt"
+                data-description="White round-neck T-shirt with the black Kericho Chess Academy & Club chest artwork."
+              >
+                <div class="garment-stage">
+                  <span class="garment-badge">3D illustration</span
+                  ><img
+                    class="garment-fallback"
+                    src="assets/merchandise-3d/tshirt-reference.jpg"
+                    alt="White round-neck T-shirt with the black Kericho Chess Academy & Club chest artwork."
+                    loading="lazy"
+                  />
+                </div>
+                <div
+                  class="garment-controls"
+                  aria-label="T-shirt rotation controls"
+                  hidden
+                >
+                  <button
+                    type="button"
+                    data-rotation="left"
+                    aria-label="Turn T-shirt left"
+                  >
+                    ←</button
+                  ><button
+                    type="button"
+                    data-rotation="front"
+                    aria-label="Show front of T-shirt"
+                  >
+                    Front</button
+                  ><button
+                    type="button"
+                    data-rotation="pause"
+                    aria-label="Pause T-shirt rotation"
+                  >
+                    Ⅱ</button
+                  ><button
+                    type="button"
+                    data-rotation="right"
+                    aria-label="Turn T-shirt right"
+                  >
+                    →
+                  </button>
+                </div>
+                <p class="garment-status" role="status">
+                  Reference design · interactive 3D loads when supported.
+                </p>
+              </div>
+              <div class="card-copy">
+                <h3>Round-neck T-shirt</h3>
+                <p>
+                  White fabric, bold black academy artwork. Ask about sizes and
+                  availability.
+                </p>
+                <button
+                  class="button merchandise-enquiry"
+                  data-item="Round-neck T-shirt"
+                  type="button"
+                >
+                  Ask about this item
+                </button>
+              </div>
+            </article>
+            <article class="merch-card clothing-card" id="academy-hoodie">
+              <div
+                class="garment-viewer"
+                data-garment="hoodie"
+                data-label="hoodie"
+                data-description="Cream pullover hoodie with a hood, drawstrings, front pocket and black academy artwork."
+              >
+                <div class="garment-stage">
+                  <span class="garment-badge">3D illustration</span
+                  ><img
+                    class="garment-fallback"
+                    src="assets/merchandise-3d/hoodie-reference.jpg"
+                    alt="Cream pullover hoodie with a hood, drawstrings, front pocket and black academy artwork."
+                    loading="lazy"
+                  />
+                </div>
+                <div
+                  class="garment-controls"
+                  aria-label="hoodie rotation controls"
+                  hidden
+                >
+                  <button
+                    type="button"
+                    data-rotation="left"
+                    aria-label="Turn hoodie left"
+                  >
+                    ←</button
+                  ><button
+                    type="button"
+                    data-rotation="front"
+                    aria-label="Show front of hoodie"
+                  >
+                    Front</button
+                  ><button
+                    type="button"
+                    data-rotation="pause"
+                    aria-label="Pause hoodie rotation"
+                  >
+                    Ⅱ</button
+                  ><button
+                    type="button"
+                    data-rotation="right"
+                    aria-label="Turn hoodie right"
+                  >
+                    →
+                  </button>
+                </div>
+                <p class="garment-status" role="status">
+                  Reference design · interactive 3D loads when supported.
+                </p>
+              </div>
+              <div class="card-copy">
+                <h3>Academy hoodie</h3>
+                <p>
+                  Cream pullover with our academy artwork. Ask about sizes and
+                  availability.
+                </p>
+                <button
+                  class="button merchandise-enquiry"
+                  data-item="Academy hoodie"
+                  type="button"
+                >
+                  Ask about this item
+                </button>
+              </div>
+            </article>
+            <article class="merch-card clothing-card" id="academy-polo">
+              <div
+                class="garment-viewer"
+                data-garment="polo"
+                data-label="polo"
+                data-description="Black collared polo shirt with buttons and white academy artwork."
+              >
+                <div class="garment-stage">
+                  <span class="garment-badge">3D illustration</span
+                  ><img
+                    class="garment-fallback"
+                    src="assets/merchandise-3d/polo-reference.jpg"
+                    alt="Black collared polo shirt with buttons and white academy artwork."
+                    loading="lazy"
+                  />
+                </div>
+                <div
+                  class="garment-controls"
+                  aria-label="polo rotation controls"
+                  hidden
+                >
+                  <button
+                    type="button"
+                    data-rotation="left"
+                    aria-label="Turn polo left"
+                  >
+                    ←</button
+                  ><button
+                    type="button"
+                    data-rotation="front"
+                    aria-label="Show front of polo"
+                  >
+                    Front</button
+                  ><button
+                    type="button"
+                    data-rotation="pause"
+                    aria-label="Pause polo rotation"
+                  >
+                    Ⅱ</button
+                  ><button
+                    type="button"
+                    data-rotation="right"
+                    aria-label="Turn polo right"
+                  >
+                    →
+                  </button>
+                </div>
+                <p class="garment-status" role="status">
+                  Reference design · interactive 3D loads when supported.
+                </p>
+              </div>
+              <div class="card-copy">
+                <h3>Academy polo shirt</h3>
+                <p>
+                  Black polo with contrasting white academy artwork. Ask about
+                  sizes and availability.
+                </p>
+                <button
+                  class="button merchandise-enquiry"
+                  data-item="Academy polo shirt"
+                  type="button"
+                >
+                  Ask about this item
+                </button>
+              </div>
+            </article>
             <article class="merch-card" id="chess-set">
               <div class="merch-image">
                 <img

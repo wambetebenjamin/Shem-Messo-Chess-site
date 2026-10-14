@@ -1,0 +1,2 @@
+# The vendored bundle contains upstream GLSL template strings with significant formatting.
+three.min.js -whitespace linguist-vendored=true

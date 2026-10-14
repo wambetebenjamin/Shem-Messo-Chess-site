@@ -101,6 +101,12 @@ PORT=3001 TEMPLATE_PREVIEW=1 npm start
 
 On this comparison server, `/` opens the template and `/index.html` opens the current homepage. On the default server, `/` remains the current homepage; `/template-preview.html` is also available. This is a homepage comparison, not an assertion that every PCA page/backend was replicated.
 
+## Rotating clothing illustrations
+
+Merchandise now places three independent 3D illustrations beside the existing equipment: a white round-neck T-shirt, cream hoodie and black polo. Front artwork is extracted from the user-supplied `WhatsApp Image 2026-10-14 at 12.04.54 PM.jpeg` on `main`. Colors and wording are preserved; polo ink is white. These are real volumetric Three.js meshes with modeled collars/hood/pocket/buttons, not CSS-flipped photographs. Back styling is illustrative because only front references were supplied. No prices, sizes or current stock guarantees are invented.
+
+Each rotates automatically, with its own pause/resume, front and left/right controls, plus horizontal pointer dragging. Reduced motion disables automatic turning but keeps manual controls available. Offscreen/hidden-tab animation suspends; vertical mobile scrolling and pinch zoom remain available. WebGL failure/context loss or disabled JavaScript leaves the cropped reference image visible. Garment enquiries use the existing Contact/WhatsApp flow. Three.js, print textures and fallback pictures are local, so these views also work on static hosting without Node or a CDN. See `assets/merchandise-3d/README.md` for model boundaries, source provenance, bundled version and MIT license.
+
 ## Verification
 
 ```sh

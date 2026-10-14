@@ -1185,10 +1185,10 @@ select:focus {
 .about-visual > img {
   object-position: center;
 }
-.merch-card:nth-child(2) .merch-image {
+#chess-clock .merch-image {
   background: #f1f3f6;
 }
-.merch-card:nth-child(2) .merch-image img {
+#chess-clock .merch-image img {
   object-fit: contain;
 }
 .merchandise .section-heading > p {
