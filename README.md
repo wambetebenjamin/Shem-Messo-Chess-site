@@ -1,6 +1,6 @@
 # Kericho Chess Club & Academy
 
-A shorter public website in the approved navy/blue/white design, with real registration interfaces, private feedback, optional browser push, and login-required computer/online chess. The supplied PCA source-inspired homepage remains a separate comparison, not a replacement of the approved design.
+A shorter public website using the user-supplied Chess Kenya source layout and typography across its main pages, with the academy’s own navy/blue branding, photos and content. It includes real registration interfaces, private feedback, optional browser push, and login-required computer/online chess. The supplied PCA source-inspired homepage remains a separate comparison, not a replacement of the approved design.
 
 ## Public pages
 
@@ -14,6 +14,10 @@ A shorter public website in the approved navy/blue/white design, with real regis
 - **Legacy Team (`team.html`)** redirects to `about.html#officials` on Node; a static meta-refresh and fallback link do the same on static hosts.
 
 The Community dropdown exposes Registration, Events, Play, Daily Puzzle and Help without crowding the main header. Footer contacts use call/email/WhatsApp icons rather than displaying contact details. Existing photographs are unchanged. The primary hero continues rotating every four seconds without hover interruption.
+
+## Shared page design
+
+The supplied `view-source_https___chesskenya.co.ke.html` is a saved Chrome source table. Its markup was inspected to adapt the white dropdown header, photographic carousel, three-column highlights, overlapping image/About panel, pale sections and multi-column footer. All nine main pages use `assets/academy-pages.css` and the declared Open Sans/Raleway/Poppins families served locally with their font licenses. Detail pages have matching title/breadcrumb bands; responsive navigation changes to a touch menu at 1100px. The academy's original content, photos, navy/blue palette, four-second hero/staff timing, interactive catalogue and other features remain. No federation statistics, news, partner claims, contacts or external application backend are imported. Home's three highlights are useful links, not invented counters. See `assets/ACADEMY-DESIGN.md` for the source boundary and `assets/academy-fonts/README.md` for font provenance. The original saved source references external CSS not included in the document: this is a source-inspired adaptation, not a claim of pixel-identical rendering.
 
 ## Run locally or deploy the full website
 

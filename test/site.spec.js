@@ -491,9 +491,8 @@ test("decorative divider lines are removed while form fields remain usable", asy
   for (const selector of [
     "header",
     ".values",
-    ".values-grid > div",
+    ".values-grid > a",
     ".mini-pieces",
-    ".hero-secondary",
     ".footer-bottom",
   ]) {
     const widths = await page
