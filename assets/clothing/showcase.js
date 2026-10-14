@@ -1,4 +1,6 @@
+import { enhanceCatalogue } from "./catalogue.js";
 const visuals = [...document.querySelectorAll("[data-apparel]")];
+const preview = document.querySelector("#product-preview");
 const toggle = document.querySelector("#product-motion");
 const preference = matchMedia("(prefers-reduced-motion: reduce)");
 const hover = matchMedia("(hover: hover)");
@@ -7,7 +9,12 @@ let timer = null,
   index = 0,
   paused = false;
 function swipe(visual) {
-  if (preference.matches || visual.classList.contains("is-swiping")) return;
+  if (
+    preference.matches ||
+    preview.open ||
+    visual.classList.contains("is-swiping")
+  )
+    return;
   const image = visual.querySelector("img");
   if (!image.complete || !image.naturalWidth) return;
   visual.classList.add("is-swiping");
@@ -27,7 +34,13 @@ function sync() {
   toggle.setAttribute("aria-pressed", String(paused));
   toggle.textContent = paused ? "▶" : "Ⅱ";
   toggle.title = paused ? "Resume" : "Pause";
-  if (paused || preference.matches || document.hidden || !visible.size) {
+  if (
+    paused ||
+    preference.matches ||
+    document.hidden ||
+    preview.open ||
+    !visible.size
+  ) {
     visuals.forEach((visual) => visual.classList.remove("is-swiping"));
     return;
   }
@@ -35,6 +48,7 @@ function sync() {
     const candidates = visuals.filter(
       (visual) =>
         visible.has(visual) &&
+        !visual.closest(".merch-card").hidden &&
         !(hover.matches && visual.matches(":hover")) &&
         !visual.closest(".merch-card").matches(":focus-within"),
     );
@@ -85,4 +99,5 @@ if ("IntersectionObserver" in window) {
 }
 preference.addEventListener("change", sync);
 document.addEventListener("visibilitychange", sync);
+enhanceCatalogue(sync);
 sync();

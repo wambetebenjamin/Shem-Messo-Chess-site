@@ -128,3 +128,215 @@
     animation: none;
   }
 }
+/* Useful interaction stays optional: every product and enquiry works without it. */
+.merch-grid .product-description {
+  margin: 0;
+  min-height: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.65;
+}
+.catalogue-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+.product-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.product-filters button {
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 6px;
+  background: white;
+  color: var(--ink);
+  font-weight: 600;
+}
+.product-filters button[aria-pressed="true"] {
+  background: var(--blue);
+  color: white;
+}
+#catalogue-status {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+.merch-image {
+  position: relative;
+}
+.product-look {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  min-height: 44px;
+  padding: 10px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  border-radius: 6px;
+  background: white;
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 3px 16px #14233f16;
+}
+.product-look span {
+  font-size: 20px;
+}
+.product-preview-open {
+  overflow: hidden;
+}
+#product-preview {
+  max-width: 900px;
+  width: calc(100% - 32px);
+  max-height: calc(100svh - 32px);
+  overflow: auto;
+  padding: 32px;
+  border-radius: 12px;
+}
+.preview-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--navy);
+  font-size: 28px;
+  z-index: 1;
+}
+.preview-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 32px;
+}
+.preview-photo {
+  background: #f3f5f9;
+  border-radius: 8px;
+}
+#preview-image {
+  display: block;
+  width: 100%;
+  height: 390px;
+  object-fit: contain;
+  padding: 16px;
+}
+#product-preview h2 {
+  font-size: 30px;
+  line-height: 1.2;
+  margin: 12px 0 18px;
+}
+#preview-description {
+  font-size: 17px;
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+#product-preview .preview-help {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+.preview-share {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  margin-top: 12px;
+  background: transparent;
+  border: 0;
+  padding: 10px 0;
+  color: var(--blue);
+  font-weight: 600;
+}
+#product-preview #share-status {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 8px 0 0;
+}
+.preview-fallback {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.preview-fallback input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  min-height: 44px;
+  font-size: 14px;
+}
+.preview-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+}
+.preview-navigation button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 14px;
+  background: var(--surface);
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 600;
+}
+#product-preview #preview-position {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+.product-filters button:focus-visible,
+.product-look:focus-visible,
+#product-preview button:focus-visible,
+#preview-enquiry:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+@media (hover: hover) {
+  .product-look:hover,
+  .preview-share:hover {
+    color: var(--blue);
+  }
+  .product-filters button:not([aria-pressed="true"]):hover {
+    background: #e7edf8;
+  }
+}
+@media (max-width: 600px) {
+  .catalogue-tools {
+    gap: 10px;
+  }
+  .product-filters button {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  #product-preview {
+    padding: 24px;
+  }
+  .preview-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  #preview-image {
+    height: 250px;
+  }
+  .preview-navigation {
+    gap: 6px;
+  }
+  .preview-navigation button {
+    padding: 10px;
+    font-size: 13px;
+  }
+}

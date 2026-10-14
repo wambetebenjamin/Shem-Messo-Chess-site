@@ -37,10 +37,15 @@ test("merchandise is concise photography, not a renderer or technical descriptio
   expect(await page.locator("#merchandise").innerText()).not.toMatch(
     /3D|illustrat|rotate|reference design/i,
   );
-  await expect(page.locator(".card-copy > p")).toHaveCount(0);
+  await expect(page.locator(".product-description")).toHaveCount(6);
+  for (const description of await page.locator(".product-description").all()) {
+    const words = (await description.innerText()).trim().split(/\s+/).length;
+    expect(words).toBeGreaterThanOrEqual(15);
+    expect(words).toBeLessThanOrEqual(30);
+  }
   expect(
     (await page.locator("#merchandise").innerText()).split(/\s+/).length,
-  ).toBeLessThan(75);
+  ).toBeLessThan(240);
   for (const name of ["tshirt", "hoodie", "polo"])
     await expect(page.locator(`#academy-${name} img`)).toHaveAttribute(
       "src",

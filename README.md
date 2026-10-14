@@ -103,7 +103,9 @@ On this comparison server, `/` opens the template and `/index.html` opens the cu
 
 ## Merchandise presentation and shared actions
 
-The merchandise catalogue displays source-derived clothing cutouts beside the existing equipment photos: short names and enquiry buttons, not technical labels or long descriptions. The rejected volumetric viewers and their runtime have been removed. The original supplied clothing and print artwork are retained; only the surrounding image background is masked.
+The merchandise catalogue displays source-derived clothing cutouts beside the existing equipment photos: short names, useful one-to-two-sentence descriptions and enquiry links, not technical labels or long descriptions. The rejected volumetric viewers and their runtime have been removed. The original supplied clothing and print artwork are retained; only the surrounding image background is masked.
+
+Category filters, an accessible quick-look dialog with previous/next browsing, enlarged photographs and shareable item links make browsing interactive. Product enquiries retain their context. Native sharing/clipboard success is reported only after it completes; unavailable sharing offers a selectable link instead. Controls progressively enhance the page without hiding static descriptions or enquiry links.
 
 A brief fold/swipe-return effect is staggered between visible items. It pauses for inspection, keyboard focus, explicit pause, reduced motion, hidden tabs and offscreen views. Horizontal gestures can trigger the effect; vertical scrolling and pinch zoom remain available. Photos and ordinary navigation remain visible without JavaScript. All six enquiry buttons carry the correct item into Contact. No unconfirmed prices, sizes or stock guarantees are introduced. See `assets/clothing/README.md` for source provenance.
 

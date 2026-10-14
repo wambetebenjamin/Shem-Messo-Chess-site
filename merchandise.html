@@ -8,7 +8,10 @@
       name="description"
       content="Shop academy clothing and chess essentials. Ask about sizes, prices and availability."
     />
-    <meta name="site-revision" content="42655a7-photo-merchandise-footer" />
+    <meta
+      name="site-revision"
+      content="interactive-catalogue-short-descriptions"
+    />
     <meta name="theme-color" content="#14233f" />
     <link rel="icon" href="assets/favicon.png" />
     <link rel="stylesheet" href="style.css" />
@@ -138,8 +141,38 @@
               </button>
             </div>
           </div>
+          <div class="catalogue-tools" hidden>
+            <div
+              class="product-filters"
+              role="group"
+              aria-label="Filter products"
+            >
+              <button type="button" data-filter="all" aria-pressed="true">
+                All items</button
+              ><button
+                type="button"
+                data-filter="clothing"
+                aria-pressed="false"
+              >
+                Clothing</button
+              ><button
+                type="button"
+                data-filter="equipment"
+                aria-pressed="false"
+              >
+                Chess equipment
+              </button>
+            </div>
+            <p id="catalogue-status" role="status" aria-live="polite">
+              Showing all 6 items
+            </p>
+          </div>
           <div class="merch-grid">
-            <article class="merch-card clothing-card" id="academy-tshirt">
+            <article
+              class="merch-card clothing-card"
+              id="academy-tshirt"
+              data-category="clothing"
+            >
               <div class="apparel-visual" data-apparel="tshirt">
                 <img
                   class="apparel-photo"
@@ -150,9 +183,23 @@
                   height="720"
                   loading="lazy"
                 />
+                <button
+                  type="button"
+                  class="product-look"
+                  data-product="academy-tshirt"
+                  aria-label="View Round-neck T-shirt"
+                  aria-haspopup="dialog"
+                  hidden
+                >
+                  Quick look <span aria-hidden="true">+</span>
+                </button>
               </div>
               <div class="card-copy">
                 <h3>Round-neck T-shirt</h3>
+                <p class="product-description">
+                  White round-neck tee with the academy’s chess-piece print. An
+                  easy club look for practice days and casual outings.
+                </p>
                 <a
                   href="contact.html?program=Merchandise&amp;item=Round-neck+T-shirt"
                   class="button merchandise-enquiry"
@@ -163,7 +210,11 @@
                 </a>
               </div>
             </article>
-            <article class="merch-card clothing-card" id="academy-hoodie">
+            <article
+              class="merch-card clothing-card"
+              id="academy-hoodie"
+              data-category="clothing"
+            >
               <div class="apparel-visual" data-apparel="hoodie">
                 <img
                   class="apparel-photo"
@@ -174,9 +225,24 @@
                   height="720"
                   loading="lazy"
                 />
+                <button
+                  type="button"
+                  class="product-look"
+                  data-product="academy-hoodie"
+                  aria-label="View Hoodie"
+                  aria-haspopup="dialog"
+                  hidden
+                >
+                  Quick look <span aria-hidden="true">+</span>
+                </button>
               </div>
               <div class="card-copy">
                 <h3>Hoodie</h3>
+                <p class="product-description">
+                  Cream hooded top with a front pocket and academy print. A
+                  relaxed layer for cooler days at practice or away from the
+                  board.
+                </p>
                 <a
                   href="contact.html?program=Merchandise&amp;item=Academy+hoodie"
                   class="button merchandise-enquiry"
@@ -187,7 +253,11 @@
                 </a>
               </div>
             </article>
-            <article class="merch-card clothing-card" id="academy-polo">
+            <article
+              class="merch-card clothing-card"
+              id="academy-polo"
+              data-category="clothing"
+            >
               <div class="apparel-visual" data-apparel="polo">
                 <img
                   class="apparel-photo"
@@ -198,9 +268,23 @@
                   height="720"
                   loading="lazy"
                 />
+                <button
+                  type="button"
+                  class="product-look"
+                  data-product="academy-polo"
+                  aria-label="View Polo shirt"
+                  aria-haspopup="dialog"
+                  hidden
+                >
+                  Quick look <span aria-hidden="true">+</span>
+                </button>
               </div>
               <div class="card-copy">
                 <h3>Polo shirt</h3>
+                <p class="product-description">
+                  Black collared polo with white academy artwork. A smart club
+                  look for team meet-ups, events and everyday wear.
+                </p>
                 <a
                   href="contact.html?program=Merchandise&amp;item=Academy+polo+shirt"
                   class="button merchandise-enquiry"
@@ -211,16 +295,34 @@
                 </a>
               </div>
             </article>
-            <article class="merch-card" id="chess-set">
+            <article
+              class="merch-card"
+              id="chess-set"
+              data-category="equipment"
+            >
               <div class="merch-image">
                 <img
                   src="assets/site-photos/chess-set.jpg"
                   alt="Chess set"
                   loading="lazy"
                 />
+                <button
+                  type="button"
+                  class="product-look"
+                  data-product="chess-set"
+                  aria-label="View Chess set"
+                  aria-haspopup="dialog"
+                  hidden
+                >
+                  Quick look <span aria-hidden="true">+</span>
+                </button>
               </div>
               <div class="card-copy">
                 <h3>Chess set</h3>
+                <p class="product-description">
+                  Board and pieces for practice, friendly matches and learning
+                  the game. Ask us which sets are currently available.
+                </p>
                 <a
                   href="contact.html?program=Merchandise&amp;item=Chess+set"
                   class="button merchandise-enquiry"
@@ -231,16 +333,34 @@
                 </a>
               </div>
             </article>
-            <article class="merch-card" id="chess-clock">
+            <article
+              class="merch-card"
+              id="chess-clock"
+              data-category="equipment"
+            >
               <div class="merch-image">
                 <img
                   src="assets/site-photos/chess-clock.jpg"
                   alt="Digital chess clock beside a tournament board"
                   loading="lazy"
                 />
+                <button
+                  type="button"
+                  class="product-look"
+                  data-product="chess-clock"
+                  aria-label="View Chess clock"
+                  aria-haspopup="dialog"
+                  hidden
+                >
+                  Quick look <span aria-hidden="true">+</span>
+                </button>
               </div>
               <div class="card-copy">
                 <h3>Chess clock</h3>
+                <p class="product-description">
+                  Keep track of each player’s thinking time in timed games. Ask
+                  about available models and the time controls they support.
+                </p>
                 <a
                   href="contact.html?program=Merchandise&amp;item=Chess+clock"
                   class="button merchandise-enquiry"
@@ -251,16 +371,35 @@
                 </a>
               </div>
             </article>
-            <article class="merch-card" id="school-equipment">
+            <article
+              class="merch-card"
+              id="school-equipment"
+              data-category="equipment"
+            >
               <div class="merch-image">
                 <img
                   src="assets/tournament-prep-09.jpg"
                   alt="School & club equipment"
                   loading="lazy"
                 />
+                <button
+                  type="button"
+                  class="product-look"
+                  data-product="school-equipment"
+                  aria-label="View School & club equipment"
+                  aria-haspopup="dialog"
+                  hidden
+                >
+                  Quick look <span aria-hidden="true">+</span>
+                </button>
               </div>
               <div class="card-copy">
                 <h3>School & club equipment</h3>
+                <p class="product-description">
+                  Planning a school chess club or group session? Tell us your
+                  player numbers so we can discuss suitable boards, pieces and
+                  clocks.
+                </p>
                 <a
                   href="contact.html?program=Merchandise&amp;item=School+%26+club+equipment"
                   class="button merchandise-enquiry"
@@ -274,6 +413,59 @@
           </div>
         </div>
       </section>
+      <dialog
+        id="product-preview"
+        aria-labelledby="preview-title"
+        aria-describedby="preview-description"
+      >
+        <button
+          type="button"
+          class="preview-close"
+          aria-label="Close product details"
+        >
+          ×
+        </button>
+        <div class="preview-layout">
+          <div class="preview-photo">
+            <img
+              id="preview-image"
+              src="assets/clothing/tshirt.png"
+              alt="White academy T-shirt"
+              width="640"
+              height="720"
+            />
+          </div>
+          <div class="preview-copy">
+            <p class="eyebrow" id="preview-category"></p>
+            <h2 id="preview-title"></h2>
+            <p id="preview-description"></p>
+            <p class="preview-help" id="preview-help"></p>
+            <a id="preview-enquiry" class="button"
+              >Ask about this item
+              <span class="action-arrow" aria-hidden="true">↗</span></a
+            ><button type="button" id="share-product" class="preview-share">
+              Share item <span aria-hidden="true">↗</span>
+            </button>
+            <p id="share-status" role="status" aria-live="polite"></p>
+            <label id="share-fallback" class="preview-fallback" hidden
+              >Item link<input type="text" readonly
+            /></label>
+          </div>
+        </div>
+        <div class="preview-navigation">
+          <button
+            type="button"
+            id="previous-product"
+            aria-label="Previous product"
+          >
+            ← Previous
+          </button>
+          <p id="preview-position" aria-live="polite"></p>
+          <button type="button" id="next-product" aria-label="Next product">
+            Next →
+          </button>
+        </div>
+      </dialog>
     </main>
     <footer>
       <div class="container footer-action-bar">
