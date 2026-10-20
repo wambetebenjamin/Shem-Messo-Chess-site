@@ -371,3 +371,75 @@ footer.compact-footer,
     font-size: 18px;
   }
 }
+
+/* Play page: saved games, coach booking requests and holiday activity cards. */
+.saved-games,
+.booking-form fieldset {
+  background: var(--page-pale, #f5f7fb);
+  padding: 24px;
+  border-radius: 4px;
+  margin-top: 25px;
+}
+.booking-form fieldset {
+  margin: 0 0 20px;
+  border: 0;
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+  max-width: 640px;
+}
+.booking-form fieldset:disabled {
+  opacity: 0.6;
+}
+.booking-form label,
+.saved-games h2 {
+  display: grid;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  font: inherit;
+  font-size: 16px;
+  padding: 10px 12px;
+  border: 1px solid #b9c3d6;
+  border-radius: 4px;
+  background: #fff;
+  max-width: 100%;
+}
+.saved-games h2 {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+.plain-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: grid;
+  gap: 10px;
+}
+.plain-list li {
+  background: #fff;
+  padding: 12px 14px;
+  border-radius: 4px;
+  overflow-wrap: anywhere;
+}
+.plain-list li button {
+  margin-top: 6px;
+}
+.holiday-art {
+  min-height: 225px;
+  background: linear-gradient(135deg, #14233f 0%, #2d4f86 100%);
+}
+.holiday-art > span {
+  position: absolute;
+  inset: auto auto 0 23px;
+}
+@media (max-width: 1100px) {
+  .holiday-art {
+    min-height: 175px;
+  }
+}

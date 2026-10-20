@@ -99,6 +99,12 @@ const descriptions = {
     "Club play and practice for players who want to improve their game. Contact us about joining, practice sessions, and tournament preparation.",
   "Chess in schools":
     "For teachers and schools interested in chess. Contact the academy to discuss coaching and how a chess program could work at your school.",
+  "Chess scramble":
+    "A fast, friendly chess scramble for juniors, families and friends during the holidays. Ask the academy about the format, times and any fees.",
+  "Other indoor games":
+    "Board and table games beyond chess for the holiday break. Ask the academy about dates, venues and any fees.",
+  Dancing:
+    "Joyful indoor dancing sessions for the holiday season. Ask the academy about dates, venues and any fees.",
 };
 const dialog = document.querySelector("#program-dialog");
 dialog?.setAttribute("aria-labelledby", "dialog-title");

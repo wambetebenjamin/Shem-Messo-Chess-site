@@ -79,7 +79,7 @@ Editing events does not automatically send announcements. Google Form completion
 Passwords are bcrypt hashed. Sessions use persistent SQLite, HTTP-only same-site cookies and regeneration on login. Computer and online play require server-side authentication. Socket connections require same-origin browser metadata or a matching Origin; anonymous/foreign-origin connections are rejected. Registration/login/feedback/subscription endpoints are rate-limited. No passwords or session tokens are saved to localStorage or placed in URL parameters.
 
 - Computer: legal moves with a simple capture/reply heuristic, **not Stockfish**; White is the human player.
-- Online: distinct signed-in accounts select matchmaking on the same server. Untimed, casual games; leaving/disconnecting ends the game. Use one active game tab per player. Games/computer positions live in memory and are lost on restart. No ratings, clocks or reconnection/resumption are claimed.
+- Online: distinct signed-in accounts select matchmaking on the same server. Untimed, casual games; leaving/disconnecting ends the game. Use one active game tab per player (a newer tab takes over). Every move of computer and online games is saved to private SQLite storage, listed under **My games**, and can be continued after a restart. Leaving or losing the connection pauses an online game; moves wait for both players to return. **Resign** ends a game. No ratings or clocks are claimed.
 - Daily puzzle: three reviewed mate-in-one positions rotate at midnight in Nairobi. Puzzle play does not require login; expand the reviewed collection in `lib/chess.js` for more variety.
 - Play-account email verification and automatic password recovery are not implemented. Use nicknames; parents/guardians should help juniors set up accounts. Never put children’s full names or sensitive details in feedback.
 
@@ -133,3 +133,10 @@ npm run test:browser
 ### Basic footer and continuing hero motion
 
 The latest footer revision restores useful academy information (short description, Kericho location and motto) and seven core page links while keeping social/contact icons, copyright and no repeated CTA ribbons or printed contact details. Hero lettering now replays briefly with each existing four-second photo change; the existing pause button stops both, and hidden/offscreen/reduced-motion states keep it still. The independent comparison uses its own five-second photo loop and a gentle whole-text entrance. No additional perpetual animation timer is introduced; text follows actual slide-change events.
+
+## Holiday activities, coach bookings and puzzles
+
+- **Programs** now has a *Holiday season* section for chess scramble, other indoor games and dancing. Dates, venues and fees are not yet confirmed and are not invented; the page points to Upcoming events and the academy.
+- **Book an online game with the coach** (`play.html#coach`): logged-in players request a date within six months, a time, a level and a phone/email for the coach to reply. Requests are stored privately and are not confirmed automatically. Review them with `npm run bookings`.
+- **Puzzle of the day** rotates through ten reviewed mate-in-one positions in `lib/chess.js`.
+- Same-origin API POSTs are accepted when a browser omits `Origin` but sends `Sec-Fetch-Site: same-origin`; cross-site requests are still rejected.

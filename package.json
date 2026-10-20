@@ -6,10 +6,11 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "test": "node --test test/chess.test.js test/api.test.js",
+    "test": "node --test test/chess.test.js test/api.test.js test/games.test.js",
     "notify": "node scripts/notify.js",
     "feedback": "node scripts/feedback.js",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "bookings": "node scripts/bookings.js"
   },
   "engines": {
     "node": ">=22.13"
@@ -23,6 +24,7 @@
     "web-push": "^3.6.7"
   },
   "devDependencies": {
-    "@playwright/test": "^1.64.0"
+    "@playwright/test": "^1.64.0",
+    "socket.io-client": "^4.8.4"
   }
 }
