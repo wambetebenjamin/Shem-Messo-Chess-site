@@ -25,10 +25,15 @@ db.exec(
   `CREATE TABLE IF NOT EXISTS sessions(id TEXT PRIMARY KEY,data TEXT,expires INTEGER); CREATE TABLE IF NOT EXISTS feedback(id INTEGER PRIMARY KEY,category TEXT,message TEXT,created TEXT); CREATE TABLE IF NOT EXISTS subscriptions(endpoint TEXT PRIMARY KEY,subscription TEXT);`,
 );
 const store = createStore(process.env);
-// The club's own address: confirmed accounts with this email get administrator access.
-const ADMIN_EMAIL = (
-  process.env.ADMIN_EMAIL || "kerichochessacademy@gmail.com"
-).toLowerCase();
+// Confirmed accounts with these addresses get administrator access.
+// ADMIN_EMAILS is a comma-separated list; the defaults are the club and its administrator.
+const ADMIN_EMAILS = (
+  process.env.ADMIN_EMAILS ||
+  "kerichochessacademy@gmail.com,shambetz@gmail.com"
+)
+  .split(",")
+  .map((email) => email.trim().toLowerCase())
+  .filter(Boolean);
 class SessionStore extends session.Store {
   get(id, cb) {
     try {
@@ -210,7 +215,7 @@ app.post(
     const user = {
       id: account.id,
       name: account.name,
-      admin: account.email.toLowerCase() === ADMIN_EMAIL,
+      admin: ADMIN_EMAILS.includes(account.email.toLowerCase()),
     };
     req.session.regenerate((e) => {
       if (e) return res.status(500).json({ error: "Unable to start session." });

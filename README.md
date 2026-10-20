@@ -146,7 +146,7 @@ The latest footer revision restores useful academy information (short descriptio
 Production is configured through environment variables (see `.env.example`). Copy it to `.env` on the server or set the values in your host's dashboard. `.env` is git-ignored.
 
 - `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` (used only to check passwords) and `SUPABASE_SECRET_KEY` (used for every data query; server-only).
-- `ADMIN_EMAIL` (default `kerichochessacademy@gmail.com`). A confirmed account with this address is an administrator. It can list all coach booking requests with contact details and change their status (requested, confirmed, declined, cancelled) through `/api/admin/bookings`. Other players receive 403.
+- `ADMIN_EMAILS` (comma-separated; default `kerichochessacademy@gmail.com,shambetz@gmail.com`). Confirmed accounts with these addresses are administrators. They can list all coach booking requests with contact details and change their status (requested, confirmed, declined, cancelled) through `/api/admin/bookings`. Other players receive 403.
 - Sign-up sends a confirmation email (Supabase's built-in email is rate-limited). **Set the Supabase project's Site URL to the live academy address** before launch, otherwise confirmation links point at `localhost`.
 - The server refuses to start without Supabase configuration. The file-based store (`ACADEMY_STORE=local`) is for development and tests only and is refused in production; it skips email confirmation.
 - Accounts created in the old SQLite system are not migrated. Players must register again.

@@ -228,10 +228,12 @@ test("computer and online games are saved, resumable and bookings are private", 
     assert.equal(mine[0].contact, undefined, "contact is not echoed back");
     assert.equal((await (await ben.req("bookings")).json()).length, 0);
 
-    // Administrator: only the club's confirmed account can see and manage requests.
+    // Administrators: only the club and shambetz@gmail.com can see and manage requests.
     const club = client(origin, await signUp(origin, "Academy", "kerichochessacademy@gmail.com"));
     assert.equal((await ben.req("admin/bookings")).status, 403);
     assert.equal((await anna.req("admin/bookings")).status, 403);
+    const admin2 = client(origin, await signUp(origin, "Shambetz", "shambetz@gmail.com"));
+    assert.equal((await admin2.req("admin/bookings")).status, 200, "second administrator can list requests");
     const all = await club.req("admin/bookings");
     assert.equal(all.status, 200);
     const rows = await all.json();
