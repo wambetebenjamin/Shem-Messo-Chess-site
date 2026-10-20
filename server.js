@@ -83,6 +83,8 @@ const sessions = session({
 app.use(sessions);
 io.engine.use(sessions);
 app.use((req, res, next) => {
+  // Lets the browser tell this Node service apart from static-only hosting.
+  if (req.path.startsWith("/api/")) res.setHeader("X-Academy-Service", "node");
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
   if (req.path.startsWith("/api/") && req.method !== "GET") {
@@ -659,6 +661,9 @@ for (const page of [
     res.sendFile(process.cwd() + "/" + page + ".html");
   });
 }
+app.use("/api", (req, res) =>
+  res.status(404).json({ error: "This request is not available." }),
+);
 app.use((err, req, res, next) => {
   console.error(err.message);
   res.status(500).json({ error: "Something went wrong. Please try again." });

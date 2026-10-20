@@ -3,14 +3,24 @@ const $ = (selector) => document.querySelector(selector);
 const serviceError =
   "This feature needs the academy’s Node.js service. It is not available on a static-only host such as GitHub Pages.";
 async function api(path, body) {
-  const response = await fetch("/api/" + path, {
-    method: body === undefined ? "GET" : "POST",
-    credentials: "same-origin",
-    headers: body === undefined ? {} : { "Content-Type": "application/json" },
-    body: body === undefined ? undefined : JSON.stringify(body),
-  });
+  let response;
+  try {
+    response = await fetch("/api/" + path, {
+      method: body === undefined ? "GET" : "POST",
+      credentials: "same-origin",
+      headers: body === undefined ? {} : { "Content-Type": "application/json" },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    });
+  } catch {
+    throw Error("Connection failed. Please check your connection and try again.");
+  }
   if (!response.headers.get("content-type")?.includes("application/json"))
-    throw Error(serviceError);
+    // Only static hosts lack the Node service header; the Node service always sends it.
+    throw Error(
+      response.headers.get("x-academy-service")
+        ? "The academy service returned an unexpected response. Please refresh and try again."
+        : serviceError,
+    );
   const data = await response.json();
   if (!response.ok)
     throw Error(
@@ -211,13 +221,25 @@ async function setupChess() {
     puzzleStatus = $("#puzzle-status");
   const coachStatus = $("#coach-status");
   let Chess;
+  // The chess rules module is served only by the Node service.
   try {
     ({ Chess } = await import("/vendor/chess.js"));
-    await api("me");
-    serviceStatus.hidden = true;
   } catch {
     serviceStatus.textContent = serviceError;
     puzzleStatus.textContent = serviceError;
+    document
+      .querySelectorAll("#play form button, #reset-puzzle")
+      .forEach((button) => (button.disabled = true));
+    $("#coach-fields").disabled = true;
+    return;
+  }
+  try {
+    await api("me");
+    serviceStatus.hidden = true;
+  } catch (error) {
+    // Show the real reason (for example, a connection problem) instead of the static-host text.
+    serviceStatus.textContent = error.message;
+    puzzleStatus.textContent = error.message;
     document
       .querySelectorAll("#play form button, #reset-puzzle")
       .forEach((button) => (button.disabled = true));
@@ -541,7 +563,8 @@ async function setupChess() {
       const script = document.createElement("script");
       script.src = "/socket.io/socket.io.js";
       script.onload = resolve;
-      script.onerror = () => reject(Error(serviceError));
+      script.onerror = () =>
+        reject(Error("The live game connection could not be loaded. Please refresh the page."));
       document.head.append(script);
     });
   }
