@@ -21,7 +21,7 @@ The supplied `view-source_https___chesskenya.co.ke.html` is a saved Chrome sourc
 
 ## Run locally or deploy the full website
 
-Requires **Node.js 22.13+** (built-in SQLite), npm, and persistent private storage for the backend.
+Requires **Node.js 22.13+** and npm. The server keeps no required local files: accounts, games, bookings, sessions, feedback and push subscriptions live in Supabase, so an ephemeral host disk is fine.
 
 ```sh
 npm ci
@@ -76,14 +76,14 @@ Editing events does not automatically send announcements. Google Form completion
 
 ## Accounts, chess and privacy
 
-Accounts use Supabase Auth: passwords are hashed by Supabase, new accounts must confirm their email before the first login, and the server only checks passwords through Supabase. Sessions use persistent SQLite, HTTP-only same-site cookies and regeneration on login. Games and coach bookings are stored in Supabase Postgres with row-level security enabled and no public policies, so only this server (using the secret key) can read or write them. Computer and online play require server-side authentication. Socket connections require same-origin browser metadata or a matching Origin; anonymous/foreign-origin connections are rejected. Registration/login/feedback/subscription endpoints are rate-limited. No passwords or session tokens are saved to localStorage or placed in URL parameters.
+Accounts use Supabase Auth: passwords are hashed by Supabase, new accounts must confirm their email before the first login, and the server only checks passwords through Supabase. Sessions are stored in Supabase (`sessions` table), HTTP-only same-site cookies and regeneration on login. Games and coach bookings are stored in Supabase Postgres with row-level security enabled and no public policies, so only this server (using the secret key) can read or write them. Computer and online play require server-side authentication. Socket connections require same-origin browser metadata or a matching Origin; anonymous/foreign-origin connections are rejected. Registration/login/feedback/subscription endpoints are rate-limited. No passwords or session tokens are saved to localStorage or placed in URL parameters.
 
 - Computer: legal moves with a simple capture/reply heuristic, **not Stockfish**; White is the human player.
-- Online: distinct signed-in accounts select matchmaking on the same server. Untimed, casual games; leaving/disconnecting ends the game. Use one active game tab per player (a newer tab takes over). Every move of computer and online games is saved to private SQLite storage, listed under **My games**, and can be continued after a restart. Leaving or losing the connection pauses an online game; moves wait for both players to return. **Resign** ends a game. No ratings or clocks are claimed.
+- Online: distinct signed-in accounts select matchmaking on the same server. Untimed, casual games; leaving/disconnecting ends the game. Use one active game tab per player (a newer tab takes over). Every move of computer and online games is saved to Supabase, listed under **My games**, and can be continued after a restart. Leaving or losing the connection pauses an online game; moves wait for both players to return. **Resign** ends a game. No ratings or clocks are claimed.
 - Daily puzzle: three reviewed mate-in-one positions rotate at midnight in Nairobi. Puzzle play does not require login; expand the reviewed collection in `lib/chess.js` for more variety.
 - Play-account email confirmation is handled by Supabase; automatic password recovery is not implemented yet. Use nicknames; parents/guardians should help juniors set up accounts. Never put children’s full names or sensitive details in feedback.
 
-First run creates `data/academy.sqlite` and `data/secrets.json`. These are Git-ignored and must live on **persistent private storage** in production; back them up securely and never serve them publicly. Optional environment values: `SESSION_SECRET`, `VAPID_SUBJECT`. Feedback, play accounts, sessions and push subscriptions are stored privately; Google Form submissions stay with Google/the form owner, not this database. Establish a retention policy and a process for deletion/consent withdrawal before production use.
+In production, `SESSION_SECRET`, `VAPID_PUBLIC_KEY` and `VAPID_PRIVATE_KEY` are **required environment variables** (the server refuses to start without them). Development runs create `data/secrets.json` automatically; it is Git-ignored and must never be served publicly. Generate VAPID keys once with `npx web-push generate-vapid-keys` and keep them stable. `VAPID_SUBJECT` is optional. Feedback, play accounts, sessions and push subscriptions are stored privately in Supabase (`sessions`, `feedback`, `push_subscriptions`; row-level security on, no public policies); Google Form submissions stay with Google/the form owner, not this database. Establish a retention policy and a process for deletion/consent withdrawal before production use.
 
 Review private feedback as an authorized operator:
 
@@ -141,6 +141,23 @@ The latest footer revision restores useful academy information (short descriptio
 - **Puzzle of the day** rotates through ten reviewed mate-in-one positions in `lib/chess.js`.
 - Same-origin API POSTs are accepted when a browser omits `Origin` but sends `Sec-Fetch-Site: same-origin`; cross-site requests are still rejected.
 
+## Free hosting on Render (no paid plan)
+
+The free Render web service works with this app because no local disk is needed, but it has limits:
+
+- It has no persistent disk and restarts at any time. Nothing is lost, because all data is in Supabase.
+- It **sleeps after 15 minutes without inbound traffic**. WebSocket play counts as traffic, but an idle or sleeping instance cuts live games; the first request after sleep takes about a minute. Reconnect and the saved game resumes.
+- Free instances get 750 instance hours per workspace per month.
+
+Steps (Render dashboard, free plan):
+
+1. New > Web Service > connect the GitHub repository and branch. Runtime Node, Build command `npm ci`, Start command `npm start`, Node 22.13 or later (`NODE_VERSION`).
+2. Environment: set `NODE_ENV=production`, `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`, `ADMIN_EMAILS`, `SESSION_SECRET` (long random string), `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`.
+3. Deploy, then in Supabase Authentication > URL Configuration set the **Site URL** to the Render address (for example `https://your-service.onrender.com`) so confirmation emails link to the live site.
+4. Open the site, register, confirm the email, and play a computer game.
+
+Vercel hosts only the static pages and cannot run games, bookings or push.
+
 ## Supabase accounts, administrator and configuration
 
 Production is configured through environment variables (see `.env.example`). Copy it to `.env` on the server or set the values in your host's dashboard. `.env` is git-ignored.
@@ -151,4 +168,4 @@ Production is configured through environment variables (see `.env.example`). Cop
 - The server refuses to start without Supabase configuration. The file-based store (`ACADEMY_STORE=local`) is for development and tests only and is refused in production; it skips email confirmation.
 - Accounts created in the old SQLite system are not migrated. Players must register again.
 
-Database schema is in the Supabase migration `academy_backend_schema` (tables `games` and `bookings`, row-level security on). Run `npm test` for tests against the local store; live Supabase behaviour needs a deployment with the variables above.
+Database schema is in the Supabase migrations `academy_backend_schema` (tables `games` and `bookings`) and `academy_sessions_feedback_push` (tables `sessions`, `feedback`, `push_subscriptions`), with row-level security on. Run `npm test` for tests against the local store; live Supabase behaviour needs a deployment with the variables above.

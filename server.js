@@ -1,11 +1,11 @@
 import express from "express";
 import session from "express-session";
-import { DatabaseSync } from "node:sqlite";
 import { randomBytes } from "node:crypto";
-import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
 import webpush from "web-push";
+import { loadSecrets } from "./lib/secrets.js";
 import { Chess } from "chess.js";
 import {
   dailyPuzzle,
@@ -18,12 +18,9 @@ import { createStore, StoreError } from "./lib/store.js";
 
 if (existsSync(".env")) process.loadEnvFile(".env");
 mkdirSync("data", { recursive: true });
-// Sessions, feedback and push subscriptions stay in private SQLite storage.
-// Accounts, games and coach bookings live in the configured store (Supabase in production).
-const db = new DatabaseSync("data/academy.sqlite");
-db.exec(
-  `CREATE TABLE IF NOT EXISTS sessions(id TEXT PRIMARY KEY,data TEXT,expires INTEGER); CREATE TABLE IF NOT EXISTS feedback(id INTEGER PRIMARY KEY,category TEXT,message TEXT,created TEXT); CREATE TABLE IF NOT EXISTS subscriptions(endpoint TEXT PRIMARY KEY,subscription TEXT);`,
-);
+// Everything persistent (accounts, games, bookings, sessions, feedback, push
+// subscriptions) lives in the configured store (Supabase in production), so the
+// host's disk can be ephemeral. Secrets come from environment variables in production.
 const store = createStore(process.env);
 // Confirmed accounts with these addresses get administrator access.
 // ADMIN_EMAILS is a comma-separated list; the defaults are the club and its administrator.
@@ -34,44 +31,31 @@ const ADMIN_EMAILS = (
   .split(",")
   .map((email) => email.trim().toLowerCase())
   .filter(Boolean);
+// express-session expects callback-style stores; this adapts the async store.
 class SessionStore extends session.Store {
   get(id, cb) {
-    try {
-      const r = db.prepare("SELECT * FROM sessions WHERE id=?").get(id);
-      cb(null, r && r.expires > Date.now() ? JSON.parse(r.data) : null);
-    } catch (e) {
-      cb(e);
-    }
+    store.sessions.get(id).then(
+      (data) => cb(null, data ?? null),
+      (e) => cb(e),
+    );
   }
   set(id, s, cb) {
-    try {
-      db.prepare("INSERT OR REPLACE INTO sessions VALUES(?,?,?)").run(
-        id,
-        JSON.stringify(s),
-        s.cookie.expires
-          ? new Date(s.cookie.expires).getTime()
-          : Date.now() + 86400000,
-      );
-      cb?.();
-    } catch (e) {
-      cb?.(e);
-    }
+    const expires = s.cookie.expires
+      ? new Date(s.cookie.expires).getTime()
+      : Date.now() + 86400000;
+    store.sessions.save(id, s, expires).then(
+      () => cb?.(),
+      (e) => cb?.(e),
+    );
   }
   destroy(id, cb) {
-    db.prepare("DELETE FROM sessions WHERE id=?").run(id);
-    cb?.();
+    store.sessions.destroy(id).then(
+      () => cb?.(),
+      (e) => cb?.(e),
+    );
   }
 }
-if (!existsSync("data/secrets.json"))
-  writeFileSync(
-    "data/secrets.json",
-    JSON.stringify({
-      session: randomBytes(48).toString("hex"),
-      vapid: webpush.generateVAPIDKeys(),
-    }),
-    { mode: 0o600 },
-  );
-const secrets = JSON.parse(readFileSync("data/secrets.json"));
+const secrets = loadSecrets(process.env, "data");
 webpush.setVapidDetails(
   process.env.VAPID_SUBJECT || "mailto:kerichochessacademy@gmail.com",
   secrets.vapid.publicKey,
@@ -83,7 +67,7 @@ const app = express(),
 app.set("trust proxy", 1);
 app.use(express.json({ limit: "16kb" }));
 const sessions = session({
-  secret: process.env.SESSION_SECRET || secrets.session,
+  secret: secrets.session,
   store: new SessionStore(),
   resave: false,
   saveUninitialized: false,
@@ -403,7 +387,7 @@ app.post("/api/puzzle", (req, res) => {
   }
   res.json({ ...gameState(g), solved: g.isCheckmate() });
 });
-app.post("/api/feedback", limit, (req, res) => {
+app.post("/api/feedback", limit, async (req, res) => {
   const { category, message } = req.body;
   if (
     !["Suggestion", "Question", "Issue"].includes(category) ||
@@ -412,10 +396,12 @@ app.post("/api/feedback", limit, (req, res) => {
     message.length > 3000
   )
     return res.status(400).json({ error: "Please write 10–3,000 characters." });
-  db.prepare(
-    "INSERT INTO feedback(category,message,created) VALUES(?,?,?)",
-  ).run(category, message.trim(), new Date().toISOString());
-  res.json({ ok: true });
+  try {
+    await store.feedback.add({ category, message: message.trim() });
+    res.json({ ok: true });
+  } catch {
+    res.status(500).json({ error: "Feedback could not be saved. Please try again." });
+  }
 });
 // Coach booking requests are private; the coach confirms them directly.
 const sessionTypes = ["Online game with the coach", "Online coaching lesson"],
@@ -537,7 +523,7 @@ app.post(
 app.get("/api/push/key", (req, res) =>
   res.json({ key: secrets.vapid.publicKey }),
 );
-app.post("/api/push/subscribe", limit, (req, res) => {
+app.post("/api/push/subscribe", limit, async (req, res) => {
   const s = req.body;
   try {
     const url = new URL(s.endpoint);
@@ -552,20 +538,17 @@ app.post("/api/push/subscribe", limit, (req, res) => {
       !s.keys?.auth
     )
       throw Error();
-    db.prepare("INSERT OR REPLACE INTO subscriptions VALUES(?,?)").run(
-      s.endpoint,
-      JSON.stringify(s),
-    );
+    await store.push.save(s.endpoint, s);
     res.json({ ok: true });
-  } catch {
+  } catch (e) {
+    if (e instanceof StoreError)
+      return res.status(500).json({ error: "Subscription could not be saved." });
     res.status(400).json({ error: "Unsupported push subscription." });
   }
 });
-app.post("/api/push/unsubscribe", (req, res) => {
+app.post("/api/push/unsubscribe", async (req, res) => {
   if (typeof req.body.endpoint === "string")
-    db.prepare("DELETE FROM subscriptions WHERE endpoint=?").run(
-      req.body.endpoint,
-    );
+    await store.push.remove(req.body.endpoint).catch(() => {});
   res.json({ ok: true });
 });
 app.get("/api/events", (req, res) =>
