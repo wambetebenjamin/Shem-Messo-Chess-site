@@ -1,6 +1,5 @@
 import express from "express";
 import session from "express-session";
-import bcrypt from "bcryptjs";
 import { DatabaseSync } from "node:sqlite";
 import { randomBytes } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
@@ -15,12 +14,22 @@ import {
   movesOf,
   replay,
 } from "./lib/chess.js";
+import { createStore, StoreError } from "./lib/store.js";
+
+if (existsSync(".env")) process.loadEnvFile(".env");
 mkdirSync("data", { recursive: true });
+// Sessions, feedback and push subscriptions stay in private SQLite storage.
+// Accounts, games and coach bookings live in the configured store (Supabase in production).
 const db = new DatabaseSync("data/academy.sqlite");
 db.exec(
-  `CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,email TEXT UNIQUE,name TEXT,password TEXT); CREATE TABLE IF NOT EXISTS sessions(id TEXT PRIMARY KEY,data TEXT,expires INTEGER); CREATE TABLE IF NOT EXISTS feedback(id INTEGER PRIMARY KEY,category TEXT,message TEXT,created TEXT); CREATE TABLE IF NOT EXISTS subscriptions(endpoint TEXT PRIMARY KEY,subscription TEXT); CREATE TABLE IF NOT EXISTS games(id TEXT PRIMARY KEY,kind TEXT NOT NULL,white_id INTEGER NOT NULL,black_id INTEGER,white_name TEXT NOT NULL,black_name TEXT NOT NULL,moves TEXT NOT NULL DEFAULT '[]',status TEXT NOT NULL DEFAULT 'active',result TEXT,created TEXT NOT NULL,updated TEXT NOT NULL); CREATE INDEX IF NOT EXISTS games_white ON games(white_id,updated); CREATE INDEX IF NOT EXISTS games_black ON games(black_id,updated); CREATE TABLE IF NOT EXISTS bookings(id INTEGER PRIMARY KEY,user_id INTEGER NOT NULL,name TEXT NOT NULL,session_type TEXT NOT NULL,preferred_date TEXT NOT NULL,time_slot TEXT NOT NULL,level TEXT NOT NULL,contact TEXT NOT NULL,notes TEXT NOT NULL,status TEXT NOT NULL DEFAULT 'requested',created TEXT NOT NULL);`,
+  `CREATE TABLE IF NOT EXISTS sessions(id TEXT PRIMARY KEY,data TEXT,expires INTEGER); CREATE TABLE IF NOT EXISTS feedback(id INTEGER PRIMARY KEY,category TEXT,message TEXT,created TEXT); CREATE TABLE IF NOT EXISTS subscriptions(endpoint TEXT PRIMARY KEY,subscription TEXT);`,
 );
-class Store extends session.Store {
+const store = createStore(process.env);
+// The club's own address: confirmed accounts with this email get administrator access.
+const ADMIN_EMAIL = (
+  process.env.ADMIN_EMAIL || "kerichochessacademy@gmail.com"
+).toLowerCase();
+class SessionStore extends session.Store {
   get(id, cb) {
     try {
       const r = db.prepare("SELECT * FROM sessions WHERE id=?").get(id);
@@ -70,7 +79,7 @@ app.set("trust proxy", 1);
 app.use(express.json({ limit: "16kb" }));
 const sessions = session({
   secret: process.env.SESSION_SECRET || secrets.session,
-  store: new Store(),
+  store: new SessionStore(),
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -127,103 +136,137 @@ const auth = (req, res, next) =>
   req.session.user
     ? next()
     : res.status(401).json({ error: "Please log in first." });
+const adminOnly = (req, res, next) =>
+  req.session.user?.admin
+    ? next()
+    : res.status(403).json({ error: "This area is for the academy only." });
+// Route handlers return promises; route errors become a generic JSON response.
+const route = (handler) => (req, res, next) =>
+  Promise.resolve(handler(req, res, next)).catch(next);
+
 app.get("/api/me", (req, res) => res.json({ user: req.session.user || null }));
-app.post("/api/register", limit, async (req, res) => {
-  const { email, name, password } = req.body;
-  if (
-    typeof email !== "string" ||
-    !/^\S+@\S+\.\S+$/.test(email) ||
-    email.length > 254 ||
-    typeof name !== "string" ||
-    !name.trim() ||
-    name.length > 50 ||
-    typeof password !== "string" ||
-    password.length < 10 ||
-    password.length > 72
-  )
-    return res.status(400).json({
-      error:
-        "Use a display name, valid email and a password of 10–72 characters.",
+const validEmail = (email) =>
+  typeof email === "string" && /^\S+@\S+\.\S+$/.test(email) && email.length <= 254;
+app.post(
+  "/api/register",
+  limit,
+  route(async (req, res) => {
+    const { email, name, password } = req.body;
+    if (
+      !validEmail(email) ||
+      typeof name !== "string" ||
+      !name.trim() ||
+      name.length > 50 ||
+      typeof password !== "string" ||
+      password.length < 10 ||
+      password.length > 72
+    )
+      return res.status(400).json({
+        error:
+          "Use a display name, valid email and a password of 10–72 characters.",
+      });
+    try {
+      await store.auth.signUp({
+        email: email.toLowerCase().trim(),
+        password,
+        name: name.trim(),
+      });
+    } catch (error) {
+      if (error instanceof StoreError && error.code === "rate")
+        return res.status(429).json({ error: error.message });
+      return res.status(400).json({ error: error.message });
+    }
+    // The same answer is given whether or not the address already has an account.
+    res.json({
+      pending: true,
+      message:
+        "Check your email to confirm your account, then log in. If you do not receive it, check your spam folder.",
     });
-  const hashed = await bcrypt.hash(password, 12);
-  let user;
-  try {
-    const r = db
-      .prepare("INSERT INTO users(email,name,password) VALUES(?,?,?)")
-      .run(email.toLowerCase().trim(), name.trim(), hashed);
-    user = { id: Number(r.lastInsertRowid), name: name.trim() };
-  } catch {
-    return res.status(409).json({
-      error: "Unable to create this account. Try logging in instead.",
+  }),
+);
+app.post(
+  "/api/login",
+  limit,
+  route(async (req, res) => {
+    const { email, password } = req.body;
+    if (!validEmail(email) || typeof password !== "string" || password.length > 72)
+      return res
+        .status(401)
+        .json({ error: "Email or password is incorrect." });
+    let account;
+    try {
+      account = await store.auth.signIn({
+        email: email.toLowerCase().trim(),
+        password,
+      });
+    } catch (error) {
+      if (error instanceof StoreError && error.code === "unconfirmed")
+        return res.status(403).json({
+          error:
+            "Please confirm your email address first. Use the link we sent you.",
+        });
+      return res.status(401).json({ error: "Email or password is incorrect." });
+    }
+    const user = {
+      id: account.id,
+      name: account.name,
+      admin: account.email.toLowerCase() === ADMIN_EMAIL,
+    };
+    req.session.regenerate((e) => {
+      if (e) return res.status(500).json({ error: "Unable to start session." });
+      req.session.user = user;
+      res.json({ user });
     });
-  }
-  req.session.regenerate((e) => {
-    if (e) return res.status(500).json({ error: "Unable to start session." });
-    req.session.user = user;
-    res.json({ user });
-  });
-});
-app.post("/api/login", limit, async (req, res) => {
-  const { email, password } = req.body;
-  const u =
-    typeof email === "string"
-      ? db
-          .prepare("SELECT * FROM users WHERE email=?")
-          .get(email.toLowerCase().trim())
-      : null;
-  if (
-    typeof password !== "string" ||
-    password.length > 72 ||
-    !u ||
-    !(await bcrypt.compare(password, u.password))
-  )
-    return res.status(401).json({ error: "Email or password is incorrect." });
-  req.session.regenerate((e) => {
-    if (e) return res.status(500).json({ error: "Unable to start session." });
-    req.session.user = { id: u.id, name: u.name };
-    res.json({ user: req.session.user });
-  });
-});
-// Games are saved in SQLite after every move. The database is the source of
-// truth; in-memory rooms only track which signed-in players are connected.
-const queue = new Map(),
+  }),
+);
+
+// Games are saved after every move. The store is the source of truth; in-memory
+// rooms only track which signed-in players are connected to each game.
+const queue = new Map(), // userId -> socket waiting for an opponent
   rooms = new Map(); // gameId -> Map(userId -> socket)
-const now = () => new Date().toISOString();
 const newId = () => randomBytes(12).toString("hex");
-const gameRow = (id) => db.prepare("SELECT * FROM games WHERE id=?").get(id);
-function ownGame(user, id, kind) {
+// Moves for one game run one at a time so concurrent requests cannot overwrite each other.
+const gameLocks = new Map();
+function withGame(id, task) {
+  const previous = gameLocks.get(id) ?? Promise.resolve();
+  const next = previous.then(task, task);
+  const settled = next.catch(() => {});
+  gameLocks.set(id, settled);
+  settled.then(() => {
+    if (gameLocks.get(id) === settled) gameLocks.delete(id);
+  });
+  return next;
+}
+async function ownGame(user, id, kind) {
   if (typeof id !== "string" || !/^[a-f0-9]{24}$/.test(id)) return null;
-  const row = gameRow(id);
+  const row = await store.games.get(id);
   if (
     !row ||
-    (row.white_id !== user.id && row.black_id !== user.id) ||
+    (row.whiteId !== user.id && row.blackId !== user.id) ||
     (kind && row.kind !== kind)
   )
     return null;
   return row;
 }
-function latestComputerGame(user) {
-  return db
-    .prepare(
-      "SELECT * FROM games WHERE kind='computer' AND white_id=? AND status='active' ORDER BY updated DESC LIMIT 1",
-    )
-    .get(user.id);
-}
-function saveGame(id, game) {
-  const over = game.isGameOver();
-  db.prepare(
-    "UPDATE games SET moves=?,status=?,result=?,updated=? WHERE id=?",
-  ).run(
-    JSON.stringify(movesOf(game)),
-    over ? "finished" : "active",
-    over ? gameState(game).status : null,
-    now(),
-    id,
+async function latestComputerGame(user) {
+  const games = await store.games.listForUser(user.id);
+  return (
+    games.find(
+      (g) => g.kind === "computer" && g.whiteId === user.id && g.status === "active",
+    ) ?? null
   );
 }
-function gameView(row, user) {
-  const game = replay(JSON.parse(row.moves)),
-    color = row.white_id === user.id ? "w" : "b",
+async function saveGame(id, game) {
+  const over = game.isGameOver();
+  await store.games.save(id, {
+    moves: movesOf(game),
+    status: over ? "finished" : "active",
+    result: over ? gameState(game).status : null,
+  });
+}
+function gameView(row, userId) {
+  const game = replay(row.moves),
+    color = row.whiteId === userId ? "w" : "b",
     state = gameState(game),
     live = row.kind === "computer" || rooms.get(row.id)?.size === 2,
     active = row.status === "active";
@@ -231,7 +274,7 @@ function gameView(row, user) {
     gameId: row.id,
     kind: row.kind,
     color,
-    opponent: color === "w" ? row.black_name : row.white_name,
+    opponent: color === "w" ? row.blackName : row.whiteName,
     ...state,
     status: row.result || state.status,
     over: !active,
@@ -243,19 +286,21 @@ function gameView(row, user) {
   };
 }
 // Sends each connected player their own view of the saved game.
-function sendState(row) {
-  const sockets = rooms.get(row.id);
+async function broadcast(id) {
+  const sockets = rooms.get(id);
   if (!sockets) return;
+  const row = await store.games.get(id);
+  if (!row) return;
   for (const [userId, socket] of sockets)
-    socket.emit("state", gameView(row, { id: userId }));
+    socket.emit("state", gameView(row, userId));
 }
 // Removes one player's socket from a room; the saved game remains available.
-function detach(socket, user) {
+async function detach(socket, user) {
   for (const [id, sockets] of rooms) {
     if (sockets.get(user.id) !== socket) continue;
     sockets.delete(user.id);
     if (sockets.size === 0) rooms.delete(id);
-    else sendState(gameRow(id));
+    else await broadcast(id);
   }
   if (queue.get(user.id) === socket) queue.delete(user.id);
 }
@@ -266,63 +311,82 @@ app.post("/api/logout", (req, res) => {
     if (socket.request.session.user?.id === id) socket.disconnect(true);
   req.session.destroy(() => res.json({ ok: true }));
 });
-app.get("/api/games", auth, (req, res) => {
-  const user = req.session.user;
-  res.json(
-    db
-      .prepare(
-        "SELECT * FROM games WHERE white_id=? OR black_id=? ORDER BY updated DESC LIMIT 20",
-      )
-      .all(user.id, user.id)
-      .map((row) => ({
+app.get(
+  "/api/games",
+  auth,
+  route(async (req, res) => {
+    const user = req.session.user;
+    const games = await store.games.listForUser(user.id);
+    res.json(
+      games.map((row) => ({
         id: row.id,
         kind: row.kind,
-        opponent:
-          row.white_id === user.id ? row.black_name : row.white_name,
+        opponent: row.whiteId === user.id ? row.blackName : row.whiteName,
         status: row.status,
         result: row.result,
-        moves: JSON.parse(row.moves).length,
-        updated: row.updated,
+        moves: row.moves.length,
+        updated: row.updatedAt,
       })),
-  );
-});
-app.get("/api/games/:id", auth, (req, res) => {
-  const row = ownGame(req.session.user, req.params.id);
-  if (!row) return res.status(404).json({ error: "Game not found." });
-  res.json(gameView(row, req.session.user));
-});
-app.post("/api/computer", auth, (req, res) => {
-  const id = newId(),
-    t = now(),
-    user = req.session.user;
-  db.prepare(
-    "INSERT INTO games(id,kind,white_id,black_id,white_name,black_name,moves,status,created,updated) VALUES(?,?,?,?,?,?,?,?,?,?)",
-  ).run(id, "computer", user.id, null, user.name, "Computer", "[]", "active", t, t);
-  res.json(gameView(gameRow(id), user));
-});
-app.post("/api/computer/move", auth, (req, res) => {
-  const user = req.session.user,
-    row =
-      req.body.gameId !== undefined
-        ? ownGame(user, req.body.gameId, "computer")
-        : latestComputerGame(user);
-  if (!row || row.status !== "active" || row.kind !== "computer")
-    return res.status(400).json({ error: "Start a new game first." });
-  const game = replay(JSON.parse(row.moves));
-  try {
-    if (game.isGameOver() || game.turn() !== "w") throw Error();
-    game.move({
-      from: req.body.from,
-      to: req.body.to,
-      promotion: req.body.promotion || "q",
+    );
+  }),
+);
+app.get(
+  "/api/games/:id",
+  auth,
+  route(async (req, res) => {
+    const row = await ownGame(req.session.user, req.params.id);
+    if (!row) return res.status(404).json({ error: "Game not found." });
+    res.json(gameView(row, req.session.user.id));
+  }),
+);
+app.post(
+  "/api/computer",
+  auth,
+  route(async (req, res) => {
+    const user = req.session.user;
+    const row = await store.games.create({
+      id: newId(),
+      kind: "computer",
+      whiteId: user.id,
+      blackId: null,
+      whiteName: user.name,
+      blackName: "Computer",
     });
-  } catch {
-    return res.status(400).json({ error: "That move is not legal." });
-  }
-  if (!game.isGameOver()) computerMove(game);
-  saveGame(row.id, game);
-  res.json(gameView(gameRow(row.id), user));
-});
+    res.json(gameView(row, user.id));
+  }),
+);
+app.post(
+  "/api/computer/move",
+  auth,
+  route(async (req, res) => {
+    const user = req.session.user;
+    const row =
+      req.body.gameId !== undefined
+        ? await ownGame(user, req.body.gameId, "computer")
+        : await latestComputerGame(user);
+    if (!row || row.status !== "active" || row.kind !== "computer")
+      return res.status(400).json({ error: "Start a new game first." });
+    const result = await withGame(row.id, async () => {
+      const current = await store.games.get(row.id);
+      const game = replay(current.moves);
+      try {
+        if (game.isGameOver() || game.turn() !== "w") throw Error();
+        game.move({
+          from: req.body.from,
+          to: req.body.to,
+          promotion: req.body.promotion || "q",
+        });
+      } catch {
+        return { error: "That move is not legal." };
+      }
+      if (!game.isGameOver()) computerMove(game);
+      await saveGame(row.id, game);
+      return { row: await store.games.get(row.id) };
+    });
+    if (result.error) return res.status(400).json({ error: result.error });
+    res.json(gameView(result.row, user.id));
+  }),
+);
 app.get("/api/puzzle", (req, res) => res.json(dailyPuzzle()));
 app.post("/api/puzzle", (req, res) => {
   const p = dailyPuzzle(),
@@ -351,84 +415,120 @@ app.post("/api/feedback", limit, (req, res) => {
 // Coach booking requests are private; the coach confirms them directly.
 const sessionTypes = ["Online game with the coach", "Online coaching lesson"],
   levels = ["Beginner", "Improving player", "Club or competitive player"],
-  timeSlots = ["09:00", "11:00", "14:00", "16:00", "18:00"];
+  timeSlots = ["09:00", "11:00", "14:00", "16:00", "18:00"],
+  bookingStatuses = ["requested", "confirmed", "declined", "cancelled"];
 const nairobiDate = (date = new Date()) =>
   date.toLocaleDateString("en-CA", { timeZone: "Africa/Nairobi" });
-app.post("/api/bookings", auth, limit, (req, res) => {
-  const b = req.body,
-    user = req.session.user,
-    today = nairobiDate(),
-    maxDay = nairobiDate(new Date(Date.now() + 180 * 86400000)),
-    date = b.preferredDate;
-  const text = (value, max, min = 0) =>
-    typeof value === "string" &&
-    value.trim().length >= min &&
-    value.trim().length <= max;
-  if (
-    !sessionTypes.includes(b.sessionType) ||
-    typeof date !== "string" ||
-    !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
-    Number.isNaN(Date.parse(date + "T00:00:00Z")) ||
-    nairobiDate(new Date(date + "T12:00:00Z")) !== date ||
-    date < today ||
-    date > maxDay ||
-    !timeSlots.includes(b.timeSlot) ||
-    !levels.includes(b.level) ||
-    !text(b.contact, 120, 5) ||
-    !text(b.notes ?? "", 500)
-  )
-    return res.status(400).json({
-      error:
-        "Choose a session type, a date within the next six months, a time, a level and a contact (phone or email).",
-    });
-  const t = now();
-  const result = db
-    .prepare(
-      "INSERT INTO bookings(user_id,name,session_type,preferred_date,time_slot,level,contact,notes,status,created) VALUES(?,?,?,?,?,?,?,?,?,?)",
+app.post(
+  "/api/bookings",
+  auth,
+  limit,
+  route(async (req, res) => {
+    const b = req.body,
+      user = req.session.user,
+      today = nairobiDate(),
+      maxDay = nairobiDate(new Date(Date.now() + 180 * 86400000)),
+      date = b.preferredDate;
+    const text = (value, max, min = 0) =>
+      typeof value === "string" &&
+      value.trim().length >= min &&
+      value.trim().length <= max;
+    if (
+      !sessionTypes.includes(b.sessionType) ||
+      typeof date !== "string" ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+      Number.isNaN(Date.parse(date + "T00:00:00Z")) ||
+      nairobiDate(new Date(date + "T12:00:00Z")) !== date ||
+      date < today ||
+      date > maxDay ||
+      !timeSlots.includes(b.timeSlot) ||
+      !levels.includes(b.level) ||
+      !text(b.contact, 120, 5) ||
+      !text(b.notes ?? "", 500)
     )
-    .run(
-      user.id,
-      user.name,
-      b.sessionType,
-      date,
-      b.timeSlot,
-      b.level,
-      b.contact.trim(),
-      (b.notes ?? "").trim(),
-      "requested",
-      t,
-    );
-  res.json({
-    ok: true,
-    booking: {
-      id: Number(result.lastInsertRowid),
+      return res.status(400).json({
+        error:
+          "Choose a session type, a date within the next six months, a time, a level and a contact (phone or email).",
+      });
+    const created = await store.bookings.create({
+      userId: user.id,
+      name: user.name,
       sessionType: b.sessionType,
       preferredDate: date,
       timeSlot: b.timeSlot,
       level: b.level,
-      status: "requested",
-      created: t,
-    },
-  });
-});
-app.get("/api/bookings", auth, (req, res) => {
-  res.json(
-    db
-      .prepare(
-        "SELECT id,session_type,preferred_date,time_slot,level,status,created FROM bookings WHERE user_id=? ORDER BY id DESC LIMIT 20",
-      )
-      .all(req.session.user.id)
-      .map((row) => ({
+      contact: b.contact.trim(),
+      notes: (b.notes ?? "").trim(),
+    });
+    res.json({
+      ok: true,
+      booking: {
+        id: created.id,
+        sessionType: created.sessionType,
+        preferredDate: created.preferredDate,
+        timeSlot: created.timeSlot,
+        level: created.level,
+        status: created.status,
+        created: created.createdAt,
+      },
+    });
+  }),
+);
+app.get(
+  "/api/bookings",
+  auth,
+  route(async (req, res) => {
+    const rows = await store.bookings.listForUser(req.session.user.id);
+    res.json(
+      rows.map((row) => ({
         id: row.id,
-        sessionType: row.session_type,
-        preferredDate: row.preferred_date,
-        timeSlot: row.time_slot,
+        sessionType: row.sessionType,
+        preferredDate: row.preferredDate,
+        timeSlot: row.timeSlot,
         level: row.level,
         status: row.status,
-        created: row.created,
+        created: row.createdAt,
       })),
-  );
-});
+    );
+  }),
+);
+// Administrator access: the club's confirmed account only.
+app.get(
+  "/api/admin/bookings",
+  auth,
+  adminOnly,
+  route(async (req, res) => {
+    const rows = await store.bookings.listAll();
+    res.json(
+      rows.map((row) => ({
+        id: row.id,
+        name: row.name,
+        sessionType: row.sessionType,
+        preferredDate: row.preferredDate,
+        timeSlot: row.timeSlot,
+        level: row.level,
+        contact: row.contact,
+        notes: row.notes,
+        status: row.status,
+        created: row.createdAt,
+      })),
+    );
+  }),
+);
+app.post(
+  "/api/admin/bookings/:id/status",
+  auth,
+  adminOnly,
+  route(async (req, res) => {
+    const id = Number(req.params.id),
+      status = req.body.status;
+    if (!Number.isInteger(id) || !bookingStatuses.includes(status))
+      return res.status(400).json({ error: "Choose a valid booking and status." });
+    const row = await store.bookings.setStatus(id, status);
+    if (!row) return res.status(404).json({ error: "Booking not found." });
+    res.json({ ok: true, id: row.id, status: row.status });
+  }),
+);
 app.get("/api/push/key", (req, res) =>
   res.json({ key: secrets.vapid.publicKey }),
 );
@@ -493,106 +593,131 @@ io.on("connection", (socket) => {
   const roomOf = () =>
     [...rooms].find(([, sockets]) => sockets.get(user.id) === socket);
   // Each player has one live tab: the newest connection replaces the older one.
-  function attach(row) {
-    detach(socket, user);
+  async function attach(row) {
+    await detach(socket, user);
     queue.delete(user.id);
     const sockets = rooms.get(row.id) ?? new Map();
     rooms.set(row.id, sockets);
     const old = sockets.get(user.id);
     sockets.set(user.id, socket);
     if (old && old !== socket) old.disconnect(true);
-    sendState(row);
+    await broadcast(row.id);
   }
-  socket.on("queue", () => {
-    if (roomOf()) return;
-    for (const [id, s] of queue) if (!s.connected) queue.delete(id);
-    if (queue.has(user.id)) return;
-    const opponent = [...queue.values()].find(
-      (s) => s.request.session.user.id !== user.id,
+  const guard = (task) => (...args) =>
+    Promise.resolve(task(...args)).catch(() =>
+      socket.emit("moveError", "Something went wrong. Please try again."),
     );
-    if (!opponent) {
-      queue.set(user.id, socket);
-      socket.emit("waiting");
-      return;
-    }
-    const other = opponent.request.session.user;
-    queue.delete(opponent.request.session.user.id);
-    const id = newId(),
-      t = now();
-    db.prepare(
-      "INSERT INTO games(id,kind,white_id,black_id,white_name,black_name,moves,status,created,updated) VALUES(?,?,?,?,?,?,?,?,?,?)",
-    ).run(id, "online", other.id, user.id, other.name, user.name, "[]", "active", t, t);
-    const row = gameRow(id);
-    rooms.set(
-      id,
-      new Map([
-        [other.id, opponent],
-        [user.id, socket],
-      ]),
-    );
-    for (const [userId, s] of rooms.get(id))
-      s.emit("matched", gameView(row, { id: userId }));
-  });
-  socket.on("cancel", () => detach(socket, user));
-  // Resume a saved online game after leaving, refreshing or a dropped connection.
-  socket.on("resume", (gameId) => {
-    const row = ownGame(user, gameId, "online");
-    if (!row || row.status !== "active") {
-      socket.emit("moveError", "That online game is no longer available.");
-      return;
-    }
-    attach(row);
-  });
-  socket.on("move", (move) => {
-    const found = roomOf();
-    if (!found) {
-      socket.emit("moveError", "Start or resume an online game first.");
-      return;
-    }
-    const [id, sockets] = found,
-      row = gameRow(id);
-    if (sockets.size < 2) {
-      socket.emit(
-        "moveError",
-        "Your opponent is not connected. Your game is saved and moves continue when they return.",
+  socket.on(
+    "queue",
+    guard(async () => {
+      if (roomOf()) return;
+      for (const [id, s] of queue) if (!s.connected) queue.delete(id);
+      if (queue.has(user.id)) return;
+      const opponent = [...queue.values()].find(
+        (s) => s.request.session.user.id !== user.id,
       );
-      return;
-    }
-    const color = row.white_id === user.id ? "w" : "b",
-      game = replay(JSON.parse(row.moves));
-    if (row.status !== "active" || game.turn() !== color) {
-      socket.emit("moveError", "It is not your turn, or the game has ended.");
-      return;
-    }
-    try {
-      game.move({
-        from: move?.from,
-        to: move?.to,
-        promotion: move?.promotion || "q",
+      if (!opponent) {
+        queue.set(user.id, socket);
+        socket.emit("waiting");
+        return;
+      }
+      const other = opponent.request.session.user;
+      queue.delete(other.id);
+      const row = await store.games.create({
+        id: newId(),
+        kind: "online",
+        whiteId: other.id,
+        blackId: user.id,
+        whiteName: other.name,
+        blackName: user.name,
       });
-    } catch {
-      socket.emit("moveError", "That move is not legal.");
-      return;
-    }
-    saveGame(id, game);
-    const saved = gameRow(id);
-    sendState(saved);
-    if (game.isGameOver()) rooms.delete(id);
-  });
-  socket.on("resign", () => {
-    const found = roomOf();
-    if (!found) return;
-    const [id] = found,
-      row = gameRow(id);
-    if (row.status !== "active") return;
-    const winner = row.white_id === user.id ? row.black_name : row.white_name;
-    db.prepare(
-      "UPDATE games SET status='finished',result=?,updated=? WHERE id=?",
-    ).run(`${user.name} resigned. ${winner} wins.`, now(), id);
-    sendState(gameRow(id));
-    rooms.delete(id);
-  });
-  socket.on("disconnect", () => detach(socket, user));
+      rooms.set(
+        row.id,
+        new Map([
+          [other.id, opponent],
+          [user.id, socket],
+        ]),
+      );
+      for (const [userId, s] of rooms.get(row.id))
+        s.emit("matched", gameView(row, userId));
+    }),
+  );
+  socket.on("cancel", guard(() => detach(socket, user)));
+  // Resume a saved online game after leaving, refreshing or a dropped connection.
+  socket.on(
+    "resume",
+    guard(async (gameId) => {
+      const row = await ownGame(user, gameId, "online");
+      if (!row || row.status !== "active") {
+        socket.emit("moveError", "That online game is no longer available.");
+        return;
+      }
+      await attach(row);
+    }),
+  );
+  socket.on(
+    "move",
+    guard(async (move) => {
+      const found = roomOf();
+      if (!found) {
+        socket.emit("moveError", "Start or resume an online game first.");
+        return;
+      }
+      const [id, sockets] = found;
+      if (sockets.size < 2) {
+        socket.emit(
+          "moveError",
+          "Your opponent is not connected. Your game is saved and moves continue when they return.",
+        );
+        return;
+      }
+      await withGame(id, async () => {
+        const row = await store.games.get(id);
+        const color = row.whiteId === user.id ? "w" : "b",
+          game = replay(row.moves);
+        if (row.status !== "active" || game.turn() !== color) {
+          socket.emit("moveError", "It is not your turn, or the game has ended.");
+          return;
+        }
+        try {
+          game.move({
+            from: move?.from,
+            to: move?.to,
+            promotion: move?.promotion || "q",
+          });
+        } catch {
+          socket.emit("moveError", "That move is not legal.");
+          return;
+        }
+        await saveGame(id, game);
+        await broadcast(id);
+        if (game.isGameOver()) rooms.delete(id);
+      });
+    }),
+  );
+  socket.on(
+    "resign",
+    guard(async () => {
+      const found = roomOf();
+      if (!found) return;
+      const [id] = found;
+      await withGame(id, async () => {
+        const row = await store.games.get(id);
+        if (row.status !== "active") return;
+        const winner = row.whiteId === user.id ? row.blackName : row.whiteName;
+        await store.games.save(id, {
+          status: "finished",
+          result: `${user.name} resigned. ${winner} wins.`,
+        });
+        await broadcast(id);
+        rooms.delete(id);
+      });
+    }),
+  );
+  socket.on(
+    "disconnect",
+    guard(() => detach(socket, user)),
+  );
 });
 app.get("/vendor/chess.js", (req, res) =>
   res.sendFile(process.cwd() + "/node_modules/chess.js/dist/esm/chess.js"),

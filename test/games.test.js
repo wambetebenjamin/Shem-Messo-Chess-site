@@ -12,7 +12,12 @@ import { io } from "socket.io-client";
 async function startServer(dir, port) {
   const child = spawn(process.execPath, [resolve("server.js")], {
     cwd: dir,
-    env: { ...process.env, PORT: String(port), NODE_ENV: "test" },
+    env: {
+      ...process.env,
+      PORT: String(port),
+      NODE_ENV: "test",
+      ACADEMY_STORE: "local",
+    },
     stdio: ["ignore", "pipe", "pipe"],
   });
   await new Promise((done, fail) => {
@@ -71,7 +76,14 @@ async function signUp(origin, name, email) {
     body: JSON.stringify({ email, name, password: "secure-test-password" }),
   });
   assert.equal(r.status, 200);
-  return r.headers.get("set-cookie").split(";")[0];
+  assert.equal((await r.json()).pending, true);
+  const login = await fetch(origin + "/api/login", {
+    method: "POST",
+    headers: { Origin: origin, "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password: "secure-test-password" }),
+  });
+  assert.equal(login.status, 200);
+  return login.headers.get("set-cookie").split(";")[0];
 }
 
 test("computer and online games are saved, resumable and bookings are private", async () => {
@@ -215,6 +227,24 @@ test("computer and online games are saved, resumable and bookings are private", 
     assert.equal(mine.length, 1);
     assert.equal(mine[0].contact, undefined, "contact is not echoed back");
     assert.equal((await (await ben.req("bookings")).json()).length, 0);
+
+    // Administrator: only the club's confirmed account can see and manage requests.
+    const club = client(origin, await signUp(origin, "Academy", "kerichochessacademy@gmail.com"));
+    assert.equal((await ben.req("admin/bookings")).status, 403);
+    assert.equal((await anna.req("admin/bookings")).status, 403);
+    const all = await club.req("admin/bookings");
+    assert.equal(all.status, 200);
+    const rows = await all.json();
+    const adminRow = rows.find((row) => row.contact === "+254700000000");
+    assert.ok(adminRow, "admin sees contact details of requests");
+    assert.equal(
+      (await club.req("admin/bookings/" + adminRow.id + "/status", { status: "confirmed" })).status,
+      200,
+    );
+    assert.equal((await club.req("admin/bookings/" + adminRow.id + "/status", { status: "approved" })).status, 400);
+    assert.equal((await anna.req("admin/bookings/" + adminRow.id + "/status", { status: "declined" })).status, 403);
+    const annaBookings = await (await anna.req("bookings")).json();
+    assert.equal(annaBookings[0].status, "confirmed");
   } finally {
     for (const socket of sockets) socket.disconnect();
     server.kill();

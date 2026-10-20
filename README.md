@@ -76,12 +76,12 @@ Editing events does not automatically send announcements. Google Form completion
 
 ## Accounts, chess and privacy
 
-Passwords are bcrypt hashed. Sessions use persistent SQLite, HTTP-only same-site cookies and regeneration on login. Computer and online play require server-side authentication. Socket connections require same-origin browser metadata or a matching Origin; anonymous/foreign-origin connections are rejected. Registration/login/feedback/subscription endpoints are rate-limited. No passwords or session tokens are saved to localStorage or placed in URL parameters.
+Accounts use Supabase Auth: passwords are hashed by Supabase, new accounts must confirm their email before the first login, and the server only checks passwords through Supabase. Sessions use persistent SQLite, HTTP-only same-site cookies and regeneration on login. Games and coach bookings are stored in Supabase Postgres with row-level security enabled and no public policies, so only this server (using the secret key) can read or write them. Computer and online play require server-side authentication. Socket connections require same-origin browser metadata or a matching Origin; anonymous/foreign-origin connections are rejected. Registration/login/feedback/subscription endpoints are rate-limited. No passwords or session tokens are saved to localStorage or placed in URL parameters.
 
 - Computer: legal moves with a simple capture/reply heuristic, **not Stockfish**; White is the human player.
 - Online: distinct signed-in accounts select matchmaking on the same server. Untimed, casual games; leaving/disconnecting ends the game. Use one active game tab per player (a newer tab takes over). Every move of computer and online games is saved to private SQLite storage, listed under **My games**, and can be continued after a restart. Leaving or losing the connection pauses an online game; moves wait for both players to return. **Resign** ends a game. No ratings or clocks are claimed.
 - Daily puzzle: three reviewed mate-in-one positions rotate at midnight in Nairobi. Puzzle play does not require login; expand the reviewed collection in `lib/chess.js` for more variety.
-- Play-account email verification and automatic password recovery are not implemented. Use nicknames; parents/guardians should help juniors set up accounts. Never put children’s full names or sensitive details in feedback.
+- Play-account email confirmation is handled by Supabase; automatic password recovery is not implemented yet. Use nicknames; parents/guardians should help juniors set up accounts. Never put children’s full names or sensitive details in feedback.
 
 First run creates `data/academy.sqlite` and `data/secrets.json`. These are Git-ignored and must live on **persistent private storage** in production; back them up securely and never serve them publicly. Optional environment values: `SESSION_SECRET`, `VAPID_SUBJECT`. Feedback, play accounts, sessions and push subscriptions are stored privately; Google Form submissions stay with Google/the form owner, not this database. Establish a retention policy and a process for deletion/consent withdrawal before production use.
 
@@ -140,3 +140,15 @@ The latest footer revision restores useful academy information (short descriptio
 - **Book an online game with the coach** (`play.html#coach`): logged-in players request a date within six months, a time, a level and a phone/email for the coach to reply. Requests are stored privately and are not confirmed automatically. Review them with `npm run bookings`.
 - **Puzzle of the day** rotates through ten reviewed mate-in-one positions in `lib/chess.js`.
 - Same-origin API POSTs are accepted when a browser omits `Origin` but sends `Sec-Fetch-Site: same-origin`; cross-site requests are still rejected.
+
+## Supabase accounts, administrator and configuration
+
+Production is configured through environment variables (see `.env.example`). Copy it to `.env` on the server or set the values in your host's dashboard. `.env` is git-ignored.
+
+- `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` (used only to check passwords) and `SUPABASE_SECRET_KEY` (used for every data query; server-only).
+- `ADMIN_EMAIL` (default `kerichochessacademy@gmail.com`). A confirmed account with this address is an administrator. It can list all coach booking requests with contact details and change their status (requested, confirmed, declined, cancelled) through `/api/admin/bookings`. Other players receive 403.
+- Sign-up sends a confirmation email (Supabase's built-in email is rate-limited). **Set the Supabase project's Site URL to the live academy address** before launch, otherwise confirmation links point at `localhost`.
+- The server refuses to start without Supabase configuration. The file-based store (`ACADEMY_STORE=local`) is for development and tests only and is refused in production; it skips email confirmation.
+- Accounts created in the old SQLite system are not migrated. Players must register again.
+
+Database schema is in the Supabase migration `academy_backend_schema` (tables `games` and `bookings`, row-level security on). Run `npm test` for tests against the local store; live Supabase behaviour needs a deployment with the variables above.

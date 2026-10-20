@@ -13,7 +13,12 @@ test("accounts, protected games, puzzle, feedback and public-file security", asy
     origin = `http://127.0.0.1:${port}`;
   const child = spawn(process.execPath, [resolve("server.js")], {
     cwd: dir,
-    env: { ...process.env, PORT: String(port), NODE_ENV: "test" },
+    env: {
+      ...process.env,
+      PORT: String(port),
+      NODE_ENV: "test",
+      ACADEMY_STORE: "local",
+    },
     stdio: ["ignore", "pipe", "pipe"],
   });
   try {
@@ -65,7 +70,14 @@ test("accounts, protected games, puzzle, feedback and public-file security", asy
       password: "secure-test-password",
     });
     assert.equal(r.status, 200);
-    assert.equal((await r.json()).user.name, "Test Player");
+    assert.equal((await r.json()).pending, true, "registration waits for email confirmation");
+    assert.equal((await (await req("me")).json()).user, null);
+    const login = await req("login", {
+      email: "test@example.com",
+      password: "secure-test-password",
+    });
+    assert.equal(login.status, 200);
+    assert.equal((await login.json()).user.name, "Test Player");
     assert.equal((await (await req("me")).json()).user.name, "Test Player");
     assert.equal((await req("computer", {})).status, 200);
     assert.equal(

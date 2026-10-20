@@ -654,6 +654,11 @@ async function setupChess() {
           Object.fromEntries(new FormData(form)),
         );
         form.reset();
+        if (data.pending) {
+          // New accounts must confirm their email before the first login.
+          status.textContent = data.message;
+          return;
+        }
         status.textContent = "";
         setUser(data.user);
       } catch (error) {
