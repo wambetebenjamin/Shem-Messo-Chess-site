@@ -6,6 +6,7 @@ import { createServer } from "node:http";
 import { Server } from "socket.io";
 import webpush from "web-push";
 import { loadSecrets } from "./lib/secrets.js";
+import { mpesaConfig, paymentItems, normalizePhone, stkPush, parseCallback } from "./lib/mpesa.js";
 import { Chess } from "chess.js";
 import {
   dailyPuzzle,
@@ -85,7 +86,13 @@ app.use((req, res, next) => {
   if (req.path.startsWith("/api/")) res.setHeader("X-Academy-Service", "node");
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
-  if (req.path.startsWith("/api/") && req.method !== "GET") {
+  // Safaricom's server posts payment results without a browser Origin. That one route is
+  // exempt; it is protected by matching checkout IDs and amounts instead.
+  if (
+    req.path.startsWith("/api/") &&
+    req.method !== "GET" &&
+    req.path !== "/api/mpesa/callback"
+  ) {
     // Some browsers omit Origin on same-origin POSTs; Fetch Metadata then
     // identifies the request as same-origin. Cross-site requests still fail.
     const origin = req.headers.origin;
@@ -578,6 +585,97 @@ app.get(
         notes: row.notes,
         status: row.status,
         created: row.createdAt,
+      })),
+    );
+  }),
+);
+// M-Pesa Express (STK Push). Payments stay closed until MPESA_* and MPESA_ITEMS are set.
+app.post(
+  "/api/payments",
+  auth,
+  limit,
+  route(async (req, res) => {
+    const config = mpesaConfig(process.env);
+    const items = paymentItems(process.env);
+    if (!config || !Object.keys(items).length)
+      return res
+        .status(503)
+        .json({ error: "Online payments are not open yet. Please contact the academy." });
+    const item = typeof req.body?.item === "string" ? req.body.item : "";
+    const amount = Object.hasOwn(items, item) ? items[item] : 0;
+    const phone = normalizePhone(req.body?.phone);
+    if (!amount || !phone)
+      return res.status(400).json({
+        error: "Choose an item and enter a Safaricom number, for example 0712345678.",
+      });
+    const pay = await store.payments.create({
+      userId: req.session.user.id,
+      item,
+      amount,
+      phone,
+      reference: item,
+    });
+    try {
+      const r = await stkPush(
+        config,
+        { phone, amount, reference: item, description: "Chess academy" },
+        fetch,
+      );
+      await store.payments.setCheckout(pay.id, r.checkoutRequestId, r.merchantRequestId);
+      res.json({ ok: true, id: pay.id, status: "pending", message: r.customerMessage });
+    } catch (e) {
+      await store.payments.setFailed(pay.id, e.message);
+      res.status(502).json({ error: "The payment prompt could not be sent. " + e.message });
+    }
+  }),
+);
+// Safaricom calls this after the customer enters (or cancels) their PIN.
+// Daraja does not sign callbacks, so we only accept a result for a checkout we started,
+// and only as paid when the amount matches what we asked for.
+app.post(
+  "/api/mpesa/callback",
+  route(async (req, res) => {
+    const cb = parseCallback(req.body);
+    if (cb) {
+      const pay = await store.payments.findByCheckout(cb.checkoutRequestId);
+      if (pay && pay.status !== "paid") {
+        const paid = cb.resultCode === 0 && Number(cb.amount) === pay.amount;
+        await store.payments.markResult(cb.checkoutRequestId, {
+          status: paid ? "paid" : "failed",
+          resultDesc: cb.resultDesc,
+          receipt: cb.receipt,
+        });
+      }
+    }
+    res.json({ ResultCode: 0, ResultDesc: "Accepted" });
+  }),
+);
+app.get(
+  "/api/payments",
+  auth,
+  route(async (req, res) => {
+    const rows = await store.payments.listForUser(req.session.user.id);
+    res.json(
+      rows.map((r) => ({ id: r.id, item: r.item, amount: r.amount, status: r.status, created: r.createdAt })),
+    );
+  }),
+);
+app.get(
+  "/api/admin/payments",
+  auth,
+  adminOnly,
+  route(async (req, res) => {
+    const rows = await store.payments.listAll();
+    res.json(
+      rows.map((r) => ({
+        id: r.id,
+        item: r.item,
+        amount: r.amount,
+        phone: r.phone,
+        status: r.status,
+        receipt: r.receipt,
+        resultDesc: r.resultDesc,
+        created: r.createdAt,
       })),
     );
   }),

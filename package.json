@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "test": "node --test test/chess.test.js test/api.test.js test/games.test.js",
+    "test": "node --test test/chess.test.js test/api.test.js test/games.test.js test/mpesa.test.js",
     "notify": "node scripts/notify.js",
     "feedback": "node scripts/feedback.js",
     "test:browser": "playwright test",

@@ -158,6 +158,15 @@ Steps (Render dashboard, free plan):
 
 Vercel hosts only the static pages and cannot run games, bookings or push.
 
+## M-Pesa payments (Daraja STK Push)
+
+`lib/mpesa.js` and `/api/payments` send an STK prompt to a signed-in player's phone. Safaricom then calls `/api/mpesa/callback`, and the result is stored in the `payments` table. Admins see every payment at `/api/admin/payments`.
+
+- **Off by default.** Payments return "not open yet" until `MPESA_*` and `MPESA_ITEMS` are set. Prices are never invented in code.
+- **Sandbox first.** Keep `MPESA_ENV=sandbox` and use Safaricom's test numbers. Switch to `production` only after the club's Paybill or Till is approved for Daraja.
+- **Callback.** Safaricom does not sign callbacks. The server only accepts a result for a checkout it started, and marks it paid only when the amount matches.
+- **Callback URL.** Must be the public https address of the live site, e.g. `https://kerichochessacademy.co.ke/api/mpesa/callback`.
+
 ## Supabase accounts, administrator and configuration
 
 Production is configured through environment variables (see `.env.example`). Copy it to `.env` on the server or set the values in your host's dashboard. `.env` is git-ignored.

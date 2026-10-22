@@ -321,3 +321,42 @@ test("group registration needs sign-in, validates players and is visible only to
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test("payments are closed by default and the callback acknowledges unknown checkouts", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "mpesa-test-"));
+  writeFileSync(join(dir, "events.json"), "[]");
+  const port = 31000 + Math.floor(Math.random() * 10000),
+    origin = `http://127.0.0.1:${port}`;
+  let server = await startServer(dir, port);
+  try {
+    const cookie = await signUp(origin, "Payer", "payer@example.com");
+    const closed = await fetch(origin + "/api/payments", {
+      method: "POST",
+      headers: { Origin: origin, "Content-Type": "application/json", Cookie: cookie },
+      body: JSON.stringify({ item: "membership", phone: "0712345678" }),
+    });
+    assert.equal(closed.status, 503);
+
+    const anonymous = await fetch(origin + "/api/payments", {
+      method: "POST",
+      headers: { Origin: origin, "Content-Type": "application/json" },
+      body: JSON.stringify({ item: "membership", phone: "0712345678" }),
+    });
+    assert.equal(anonymous.status, 401);
+
+    // Safaricom's callback for a checkout we never started is acknowledged but changes nothing.
+    const cb = await fetch(origin + "/api/mpesa/callback", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        Body: { stkCallback: { CheckoutRequestID: "unknown", ResultCode: 0, ResultDesc: "ok" } },
+      }),
+    });
+    assert.equal(cb.status, 200);
+    assert.equal((await cb.json()).ResultCode, 0);
+  } finally {
+    server.kill();
+    await once(server, "exit").catch(() => {});
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
