@@ -254,3 +254,70 @@ test("computer and online games are saved, resumable and bookings are private", 
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test("group registration needs sign-in, validates players and is visible only to administrators", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "group-test-"));
+  writeFileSync(join(dir, "events.json"), "[]");
+  const port = 31000 + Math.floor(Math.random() * 10000),
+    origin = `http://127.0.0.1:${port}`;
+  let server = await startServer(dir, port);
+  const post = (path, body, cookie) =>
+    fetch(origin + path, {
+      method: "POST",
+      headers: {
+        Origin: origin,
+        "Content-Type": "application/json",
+        ...(cookie ? { Cookie: cookie } : {}),
+      },
+      body: JSON.stringify(body),
+    });
+  try {
+    const parent = await signUp(origin, "Parent", "parent@example.com");
+    const admin = await signUp(origin, "Club", "kerichochessacademy@gmail.com");
+    const payload = {
+      contactName: "Mary Wanjiru",
+      contact: "0712345678",
+      notes: "Two children",
+      players: [
+        { name: "Ann", level: "Beginner" },
+        { name: "Brian", level: "Improving player" },
+      ],
+    };
+
+    // Anonymous visitors cannot register.
+    assert.equal((await post("/api/group-registrations", payload)).status, 401);
+
+    // Invalid input is rejected.
+    const bad = await post(
+      "/api/group-registrations",
+      { ...payload, players: [{ name: "A", level: "Beginner" }] },
+      parent,
+    );
+    assert.equal(bad.status, 400);
+
+    // A valid registration is saved.
+    const ok = await post("/api/group-registrations", payload, parent);
+    assert.equal(ok.status, 200);
+    assert.equal((await ok.json()).status, "received");
+
+    // The parent cannot read the administrator list.
+    const parentView = await fetch(origin + "/api/admin/group-registrations", {
+      headers: { Cookie: parent },
+    });
+    assert.equal(parentView.status, 403);
+
+    // The administrator sees the registration with contact details.
+    const adminView = await fetch(origin + "/api/admin/group-registrations", {
+      headers: { Cookie: admin },
+    });
+    assert.equal(adminView.status, 200);
+    const rows = await adminView.json();
+    assert.equal(rows.length, 1);
+    assert.equal(rows[0].contact, "0712345678");
+    assert.equal(rows[0].players.length, 2);
+  } finally {
+    server.kill();
+    await once(server, "exit").catch(() => {});
+    rmSync(dir, { recursive: true, force: true });
+  }
+});

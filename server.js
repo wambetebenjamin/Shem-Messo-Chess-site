@@ -520,6 +520,68 @@ app.post(
     res.json({ ok: true, id: row.id, status: row.status });
   }),
 );
+// Group registration: one signed-in parent, coach or club member registers several players.
+app.post(
+  "/api/group-registrations",
+  auth,
+  limit,
+  route(async (req, res) => {
+    const g = req.body ?? {};
+    const contactName = typeof g.contactName === "string" ? g.contactName.trim() : "";
+    const contact = typeof g.contact === "string" ? g.contact.trim() : "";
+    const notes = typeof g.notes === "string" ? g.notes.trim() : "";
+    const players = Array.isArray(g.players)
+      ? g.players.map((p) => ({
+          name: typeof p?.name === "string" ? p.name.trim() : "",
+          level: p?.level,
+        }))
+      : [];
+    const valid =
+      contactName.length >= 2 &&
+      contactName.length <= 120 &&
+      contact.length >= 5 &&
+      contact.length <= 200 &&
+      notes.length <= 500 &&
+      players.length >= 1 &&
+      players.length <= 10 &&
+      players.every(
+        (p) => p.name.length >= 2 && p.name.length <= 80 && levels.includes(p.level),
+      );
+    if (!valid)
+      return res.status(400).json({
+        error:
+          "Add your name and a contact (phone or email), then 1–10 players, each with a name (2–80 characters) and a level.",
+      });
+    const created = await store.groupRegistrations.create({
+      userId: req.session.user.id,
+      contactName,
+      contact,
+      players,
+      notes,
+    });
+    res.json({ ok: true, id: created.id, status: created.status });
+  }),
+);
+// Administrator view of group registrations, with contact details.
+app.get(
+  "/api/admin/group-registrations",
+  auth,
+  adminOnly,
+  route(async (req, res) => {
+    const rows = await store.groupRegistrations.listAll();
+    res.json(
+      rows.map((row) => ({
+        id: row.id,
+        contactName: row.contactName,
+        contact: row.contact,
+        players: row.players,
+        notes: row.notes,
+        status: row.status,
+        created: row.createdAt,
+      })),
+    );
+  }),
+);
 app.get("/api/push/key", (req, res) =>
   res.json({ key: secrets.vapid.publicKey }),
 );

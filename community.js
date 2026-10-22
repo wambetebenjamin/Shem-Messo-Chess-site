@@ -820,3 +820,86 @@ async function setupChess() {
   await loadPuzzle();
 }
 setupChess();
+
+// Group registration (registration page): one signed-in person registers up to 10 players.
+const groupForm = document.querySelector("#group-form");
+if (groupForm) {
+  const playersBox = document.querySelector("#group-players");
+  const addButton = document.querySelector("#add-player");
+  const status = document.querySelector("#group-status");
+  const levelOptions = ["Beginner", "Improving player", "Club or competitive player"];
+  const maxPlayers = 10;
+
+  function addPlayerRow() {
+    const count = playersBox.children.length;
+    if (count >= maxPlayers) return;
+    const row = document.createElement("div");
+    row.className = "group-player";
+    const name = document.createElement("input");
+    name.name = "playerName";
+    name.required = true;
+    name.minLength = 2;
+    name.maxLength = 80;
+    name.placeholder = "Player " + (count + 1) + " name";
+    name.setAttribute("aria-label", "Player " + (count + 1) + " name");
+    const level = document.createElement("select");
+    level.name = "playerLevel";
+    level.setAttribute("aria-label", "Player " + (count + 1) + " level");
+    for (const option of levelOptions) level.add(new Option(option, option));
+    row.append(name, level);
+    if (count > 0) {
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "button button-secondary";
+      remove.textContent = "Remove";
+      remove.addEventListener("click", () => {
+        row.remove();
+        addButton.disabled = false;
+      });
+      row.append(remove);
+    }
+    playersBox.append(row);
+    if (playersBox.children.length >= maxPlayers) addButton.disabled = true;
+  }
+
+  addButton.addEventListener("click", addPlayerRow);
+  addPlayerRow();
+
+  // Show a sign-in hint and disable submit when nobody is signed in.
+  api("me")
+    .then((result) => {
+      if (!result.user) {
+        document.querySelector("#group-login").hidden = false;
+        groupForm.querySelector("button[type=submit]").disabled = true;
+      }
+    })
+    .catch(() => {});
+
+  groupForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!groupForm.reportValidity()) return;
+    const button = groupForm.querySelector("button[type=submit]");
+    const values = Object.fromEntries(new FormData(groupForm));
+    const names = [...groupForm.querySelectorAll("[name=playerName]")];
+    const levels = [...groupForm.querySelectorAll("[name=playerLevel]")];
+    const body = {
+      contactName: values.contactName,
+      contact: values.contact,
+      notes: values.notes ?? "",
+      players: names.map((input, i) => ({ name: input.value, level: levels[i].value })),
+    };
+    button.disabled = true;
+    status.textContent = "Sending your registration…";
+    try {
+      await api("group-registrations", body);
+      groupForm.reset();
+      playersBox.replaceChildren();
+      addPlayerRow();
+      status.textContent = "Thank you. Your registration was received. The academy will contact you.";
+    } catch (error) {
+      status.textContent = error.message;
+    } finally {
+      button.disabled = false;
+    }
+  });
+}
