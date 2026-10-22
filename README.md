@@ -5,7 +5,7 @@ A shorter public website using the user-supplied Chess Kenya source layout and t
 ## Public pages
 
 - **Home (`index.html`)**: existing automatic hero, values strip, brief welcome and four compact shortcuts to Registration, Play/Daily Puzzle, Events, and FAQs/Feedback. No officials’ portraits, profiles or staff carousel on Home.
-- **About Us (`about.html`)**: immediately after Home in every main navigation. All five existing officials/team profiles and photographs are here. Only the confirmed President and Vice Chairperson roles are named; other responsibilities remain unconfirmed. The existing portrait carousel now lives here, with its original four-second autoplay, controls and reduced-motion behavior.
+- **About Us (`about.html`)**: immediately after Home in every main navigation. All four existing team profiles and photographs are here. Only the confirmed President role is named; other responsibilities remain unconfirmed. The existing portrait carousel now lives here, with its original four-second autoplay, controls and reduced-motion behavior.
 - **Programs (`programs.html`)**, **Merchandise (`merchandise.html`)**, **Contact (`contact.html`)**: existing detail pages, enquiries and photographs retained.
 - **Registration (`registration.html`)**: a four-step guided joining experience with a welcome screen, self/child path cards, a keyboard-accessible progress navigation, contextual membership/consent guidance, back/continue controls, explicit official-form embeds, next-step summaries and optional push controls.
 - **Events (`events.html`)**: confirmed upcoming events from `events.json`, safe text rendering, clear empty/error states and optional push controls.
