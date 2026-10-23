@@ -50,10 +50,16 @@ test("production config requires an https callback and uses the production host"
   assert.equal(live.host, "https://api.safaricom.co.ke");
 });
 
-test("only positive integer prices from MPESA_ITEMS are accepted", () => {
+test("only positive integer prices from MPESA_ITEMS are accepted, with labels", () => {
   assert.deepEqual(
-    paymentItems({ MPESA_ITEMS: '{"membership":1000,"bad":-5,"text":"x"}' }),
-    { membership: 1000 },
+    paymentItems({
+      MPESA_ITEMS:
+        '{"tournament-500":{"amount":500,"label":"Tournament"},"bad":-5,"text":"x","corporate-2500":2500}',
+    }),
+    {
+      "tournament-500": { amount: 500, label: "Tournament" },
+      "corporate-2500": { amount: 2500, label: "corporate-2500" },
+    },
   );
   assert.throws(() => paymentItems({ MPESA_ITEMS: "not json" }));
 });

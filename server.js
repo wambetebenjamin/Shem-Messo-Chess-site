@@ -602,11 +602,13 @@ app.post(
         .status(503)
         .json({ error: "Online payments are not open yet. Please contact the academy." });
     const item = typeof req.body?.item === "string" ? req.body.item : "";
-    const amount = Object.hasOwn(items, item) ? items[item] : 0;
+    const amount = Object.hasOwn(items, item) ? items[item].amount : 0;
     const phone = normalizePhone(req.body?.phone);
-    if (!amount || !phone)
+    const payerName = typeof req.body?.name === "string" ? req.body.name.trim() : "";
+    if (!amount || !phone || payerName.length < 2 || payerName.length > 80)
       return res.status(400).json({
-        error: "Choose an item and enter a Safaricom number, for example 0712345678.",
+        error:
+          "Choose a tournament, enter the player or school name (2–80 characters) and a Safaricom number, for example 0712345678.",
       });
     const pay = await store.payments.create({
       userId: req.session.user.id,
@@ -614,6 +616,7 @@ app.post(
       amount,
       phone,
       reference: item,
+      payerName,
     });
     try {
       const r = await stkPush(
@@ -648,6 +651,24 @@ app.post(
       }
     }
     res.json({ ResultCode: 0, ResultDesc: "Accepted" });
+  }),
+);
+// Public list of open tournament fees. Shows nothing until the club has set MPESA_ITEMS.
+app.get("/api/payments/items", (req, res) => {
+  const config = mpesaConfig(process.env);
+  const items = paymentItems(process.env);
+  const list = Object.entries(items).map(([id, v]) => ({ id, label: v.label, amount: v.amount }));
+  res.json({ open: Boolean(config) && list.length > 0, items: list });
+});
+// A player checks the status of their own payment after the M-Pesa prompt.
+app.get(
+  "/api/payments/:id",
+  auth,
+  route(async (req, res) => {
+    const id = Number(req.params.id);
+    const row = Number.isInteger(id) ? await store.payments.getForUser(id, req.session.user.id) : null;
+    if (!row) return res.status(404).json({ error: "Payment not found." });
+    res.json({ id: row.id, item: row.item, amount: row.amount, status: row.status, message: row.resultDesc });
   }),
 );
 app.get(

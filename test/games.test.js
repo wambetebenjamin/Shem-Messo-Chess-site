@@ -337,6 +337,16 @@ test("payments are closed by default and the callback acknowledges unknown check
     });
     assert.equal(closed.status, 503);
 
+    const items = await (await fetch(origin + "/api/payments/items")).json();
+    assert.deepEqual(items, { open: false, items: [] });
+    assert.equal((await fetch(origin + "/api/payments/1")).status, 401);
+    const badName = await fetch(origin + "/api/payments", {
+      method: "POST",
+      headers: { Origin: origin, "Content-Type": "application/json", Cookie: cookie },
+      body: JSON.stringify({ item: "tournament-500", name: "A", phone: "0712345678" }),
+    });
+    assert.equal(badName.status, 503);
+
     const anonymous = await fetch(origin + "/api/payments", {
       method: "POST",
       headers: { Origin: origin, "Content-Type": "application/json" },

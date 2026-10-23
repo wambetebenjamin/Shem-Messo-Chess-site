@@ -903,3 +903,69 @@ if (groupForm) {
     }
   });
 }
+
+// Tournament payments (events page): choose a fee, then confirm the M-Pesa prompt.
+const payForm = document.querySelector("#pay-form");
+if (payForm) {
+  const select = payForm.querySelector("[name=item]");
+  const submit = payForm.querySelector("button[type=submit]");
+  const payStatus = document.querySelector("#pay-status");
+  const sleep = (ms) => new Promise((done) => setTimeout(done, ms));
+
+  submit.disabled = true;
+  api("payments/items")
+    .then(({ open, items }) => {
+      if (!open) {
+        document.querySelector("#pay-closed").hidden = false;
+        return;
+      }
+      select.append(new Option("Choose a tournament fee", ""));
+      for (const item of items) select.append(new Option(`${item.label} · KES ${item.amount}`, item.id));
+      api("me")
+        .then((result) => {
+          if (result.user) submit.disabled = false;
+          else document.querySelector("#pay-login").hidden = false;
+        })
+        .catch(() => {});
+    })
+    .catch((error) => {
+      payStatus.textContent = error.message;
+    });
+
+  payForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!payForm.reportValidity() || !select.value) {
+      payStatus.textContent = "Choose a tournament fee first.";
+      return;
+    }
+    const values = Object.fromEntries(new FormData(payForm));
+    submit.disabled = true;
+    payStatus.textContent = "Sending the M-Pesa prompt to your phone…";
+    try {
+      const started = await api("payments", {
+        item: values.item,
+        name: values.name,
+        phone: values.phone,
+      });
+      payStatus.textContent = "Check your phone and enter your M-Pesa PIN to complete the payment.";
+      for (let attempt = 0; attempt < 20; attempt++) {
+        await sleep(4000);
+        const current = await api("payments/" + started.id);
+        if (current.status === "paid") {
+          payStatus.textContent = "Payment received. Thank you. Keep the M-Pesa message as your receipt.";
+          return;
+        }
+        if (current.status === "failed") {
+          payStatus.textContent = "The payment was not completed. You can try again.";
+          return;
+        }
+      }
+      payStatus.textContent =
+        "We have not received confirmation yet. If money left your M-Pesa, keep the message and contact the academy.";
+    } catch (error) {
+      payStatus.textContent = error.message;
+    } finally {
+      submit.disabled = false;
+    }
+  });
+}
