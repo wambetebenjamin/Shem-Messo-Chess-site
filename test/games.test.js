@@ -343,7 +343,7 @@ test("payments are closed by default and the callback acknowledges unknown check
     const badName = await fetch(origin + "/api/payments", {
       method: "POST",
       headers: { Origin: origin, "Content-Type": "application/json", Cookie: cookie },
-      body: JSON.stringify({ item: "tournament-500", name: "A", phone: "0712345678" }),
+      body: JSON.stringify({ item: "academy-fee", name: "A", phone: "0712345678" }),
     });
     assert.equal(badName.status, 503);
 

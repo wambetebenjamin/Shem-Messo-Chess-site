@@ -904,7 +904,7 @@ if (groupForm) {
   });
 }
 
-// Tournament payments (events page): choose a fee, then confirm the M-Pesa prompt.
+// Online payments (events page): choose a payment, then confirm the M-Pesa prompt.
 const payForm = document.querySelector("#pay-form");
 if (payForm) {
   const select = payForm.querySelector("[name=item]");
@@ -919,7 +919,7 @@ if (payForm) {
         document.querySelector("#pay-closed").hidden = false;
         return;
       }
-      select.append(new Option("Choose a tournament fee", ""));
+      select.append(new Option("Choose what you are paying for", ""));
       for (const item of items) select.append(new Option(`${item.label} · KES ${item.amount}`, item.id));
       api("me")
         .then((result) => {
@@ -935,7 +935,7 @@ if (payForm) {
   payForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!payForm.reportValidity() || !select.value) {
-      payStatus.textContent = "Choose a tournament fee first.";
+      payStatus.textContent = "Choose what you are paying for first.";
       return;
     }
     const values = Object.fromEntries(new FormData(payForm));

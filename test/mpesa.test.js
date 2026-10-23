@@ -54,11 +54,11 @@ test("only positive integer prices from MPESA_ITEMS are accepted, with labels", 
   assert.deepEqual(
     paymentItems({
       MPESA_ITEMS:
-        '{"tournament-500":{"amount":500,"label":"Tournament"},"bad":-5,"text":"x","corporate-2500":2500}',
+        '{"academy-fee":{"amount":500,"label":"Tournament"},"bad":-5,"text":"x","other-fee":2500}',
     }),
     {
-      "tournament-500": { amount: 500, label: "Tournament" },
-      "corporate-2500": { amount: 2500, label: "corporate-2500" },
+      "academy-fee": { amount: 500, label: "Tournament" },
+      "other-fee": { amount: 2500, label: "other-fee" },
     },
   );
   assert.throws(() => paymentItems({ MPESA_ITEMS: "not json" }));
