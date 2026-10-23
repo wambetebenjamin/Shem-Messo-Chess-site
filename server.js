@@ -140,6 +140,8 @@ const adminOnly = (req, res, next) =>
 const route = (handler) => (req, res, next) =>
   Promise.resolve(handler(req, res, next)).catch(next);
 
+// Lightweight check used by the keep-alive ping (see .github/workflows/keep-alive.yml).
+app.get("/api/health", (req, res) => res.json({ ok: true }));
 app.get("/api/me", (req, res) => res.json({ user: req.session.user || null }));
 const validEmail = (email) =>
   typeof email === "string" && /^\S+@\S+\.\S+$/.test(email) && email.length <= 254;
