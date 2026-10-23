@@ -563,8 +563,8 @@ test("team photo cards transition, pause, and link to the full profile", async (
     "true",
   );
   await page.locator(".staff-slide.is-active a").click();
-  await expect(page).toHaveURL(/about\.html#staff-gladys-langat$/);
-  await expect(page.locator("#staff-gladys-langat")).toBeVisible();
+  await expect(page).toHaveURL(/about\.html#staff-mr-ochieng$/);
+  await expect(page.locator("#staff-mr-ochieng")).toBeVisible();
 });
 
 test("team cards respect reduced motion and inactive cards cannot receive focus", async ({
@@ -586,10 +586,10 @@ test("team cards respect reduced motion and inactive cards cannot receive focus"
     "true",
   );
   await page
-    .getByRole("button", { name: "Show Barnabas Ochieng photo" })
+    .getByRole("button", { name: "Show Gladys Langat photo" })
     .click();
   await expect(page.locator(".staff-slide.is-active h3")).toHaveText(
-    "Barnabas Ochieng",
+    "Gladys Langat",
   );
   expect(
     await page

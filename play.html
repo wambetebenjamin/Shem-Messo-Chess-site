@@ -6,7 +6,7 @@
     <title>Play Chess | Kericho Chess Club &amp; Academy</title>
     <meta
       name="description"
-      content="Login-required computer and online chess, plus a daily chess puzzle."
+      content="Login-required computer and online chess with saved games, coach bookings and a daily chess puzzle."
     />
     <meta name="site-revision" content="basic-footer-repeating-hero-text" />
     <meta name="theme-color" content="#14233f" />
@@ -67,6 +67,10 @@
                 ><strong>Chess in schools</strong
                 ><small>Bring chess to your school</small></a
               >
+              <a href="programs.html#holiday-season"
+                ><strong>Holiday season</strong
+                ><small>Chess scramble, games and dancing</small></a
+              >
             </div>
           </div>
           <a data-page="merchandise" href="merchandise.html">Merchandise</a
@@ -104,6 +108,10 @@
               <a href="play.html#puzzle"
                 ><strong>Puzzle of the day</strong
                 ><small>A daily mate-in-one challenge</small></a
+              >
+              <a href="play.html#coach"
+                ><strong>Book a coach session</strong
+                ><small>Online game or lesson</small></a
               >
               <a data-page="help" href="help.html"
                 ><strong>FAQs &amp; feedback</strong
@@ -188,8 +196,8 @@
                 aria-describedby="password-help"
             /></label>
             <p id="password-help" class="form-note">
-              Use 10–72 characters. Email verification and automatic password
-              recovery for play accounts are not yet available.
+              Use 10–72 characters. We will email you a confirmation link before
+              your first login. Automatic password recovery is not yet available.
             </p>
             <button class="button" type="submit" disabled>
               Create play account
@@ -215,13 +223,22 @@
               id="leave-online"
               hidden
             >
-              Cancel / leave online game
+              Leave online game (it stays saved)
+            </button
+            ><button
+              type="button"
+              class="button secondary-button"
+              id="resign-game"
+              hidden
+            >
+              Resign online game
             </button>
           </div>
           <p class="form-note">
             Computer: beginner opponent; you play White. Online: another
-            signed-in player must also be searching. Games are untimed; leaving
-            or disconnecting ends the live game.
+            signed-in player must also be searching. Games are untimed and saved
+            automatically after every move. If you leave or lose your connection,
+            your game waits in My games; continue it when your opponent returns.
           </p>
           <div class="chess-layout">
             <div
@@ -252,7 +269,84 @@
               <p id="move-history">No moves yet.</p>
             </div>
           </div>
+          <div class="saved-games">
+            <h2>My games</h2>
+            <p class="form-note">
+              Your computer and online games are saved after every move, so you
+              can continue them later from this list.
+            </p>
+            <ul id="saved-games" class="plain-list"></ul>
+          </div>
         </div>
+      </section>
+      <section class="section container" id="coach">
+        <div class="eyebrow">LEARN WITH THE COACH</div>
+        <h2>Book an online game with the coach.</h2>
+        <p>
+          Request a time for an online game or online lesson. Log in first; a
+          parent or guardian should set up the account for a junior. This is a
+          request only. It is not confirmed until the coach replies using the
+          contact you give.
+        </p>
+        <p class="notice" id="coach-login-note">
+          Log in above to request a booking.
+        </p>
+        <form id="coach-form" class="booking-form">
+          <fieldset id="coach-fields" disabled>
+            <label
+              >Session type<select name="sessionType" required>
+                <option value="Online game with the coach">
+                  Online game with the coach
+                </option>
+                <option value="Online coaching lesson">
+                  Online coaching lesson
+                </option>
+              </select></label
+            >
+            <label
+              >Preferred date (Nairobi time)<input
+                type="date"
+                name="preferredDate"
+                required /></label
+            >
+            <label
+              >Preferred time<select name="timeSlot" required>
+                <option value="09:00">09:00</option>
+                <option value="11:00">11:00</option>
+                <option value="14:00">14:00</option>
+                <option value="16:00">16:00</option>
+                <option value="18:00">18:00</option>
+              </select></label
+            >
+            <label
+              >Playing level<select name="level" required>
+                <option value="Beginner">Beginner</option>
+                <option value="Improving player">Improving player</option>
+                <option value="Club or competitive player">
+                  Club or competitive player
+                </option>
+              </select></label
+            >
+            <label
+              >Phone or email for the coach to reply<input
+                name="contact"
+                maxlength="120"
+                autocomplete="tel"
+                required /></label
+            >
+            <label
+              >Notes for the coach (optional)<textarea
+                name="notes"
+                maxlength="500"
+                rows="3"
+              ></textarea></label
+            >
+            <button class="button" type="submit">Request booking</button>
+          </fieldset>
+          <p role="status" id="coach-status" class="form-note"></p>
+        </form>
+        <h3>My booking requests</h3>
+        <ul id="my-bookings" class="plain-list"></ul>
       </section>
       <section class="section container" id="puzzle">
         <div class="eyebrow">ONE CHALLENGE EACH DAY</div>

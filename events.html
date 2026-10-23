@@ -67,6 +67,10 @@
                 ><strong>Chess in schools</strong
                 ><small>Bring chess to your school</small></a
               >
+              <a href="programs.html#holiday-season"
+                ><strong>Holiday season</strong
+                ><small>Chess scramble, games and dancing</small></a
+              >
             </div>
           </div>
           <a data-page="merchandise" href="merchandise.html">Merchandise</a
@@ -106,6 +110,10 @@
               <a href="play.html#puzzle"
                 ><strong>Puzzle of the day</strong
                 ><small>A daily mate-in-one challenge</small></a
+              >
+              <a href="play.html#coach"
+                ><strong>Book a coach session</strong
+                ><small>Online game or lesson</small></a
               >
               <a data-page="help" href="help.html"
                 ><strong>FAQs &amp; feedback</strong
@@ -174,6 +182,34 @@
           You can still read the FAQs and open the official registration forms.
         </p></noscript
       >
+      <section class="section container" id="tournament-payments">
+        <h2>Pay online with M-Pesa.</h2>
+        <p>
+          Choose what you are paying for, then enter the player’s or school’s name and your
+          Safaricom number. An M-Pesa PIN prompt will appear on your phone. You need to
+          sign in first.
+        </p>
+        <p id="pay-login" hidden>
+          <a href="play.html">Sign in on the Play page</a> to pay online.
+        </p>
+        <p id="pay-closed" hidden>Online payments are not open yet. Please contact the academy.</p>
+        <form id="pay-form" class="group-form" novalidate>
+          <label>
+            Payment for
+            <select name="item" required></select>
+          </label>
+          <label>
+            Player or school name
+            <input name="name" required minlength="2" maxlength="80" autocomplete="name" />
+          </label>
+          <label>
+            Safaricom number
+            <input name="phone" required inputmode="tel" placeholder="0712345678" />
+          </label>
+          <button class="button" type="submit">Send M-Pesa prompt</button>
+          <p id="pay-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
     </main>
     <footer class="compact-footer basic-footer">
       <div class="container footer-main-row">

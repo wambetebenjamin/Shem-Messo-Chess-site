@@ -1,11 +1,5 @@
-import { DatabaseSync } from "node:sqlite";
-const db = new DatabaseSync("data/academy.sqlite");
-console.log(
-  JSON.stringify(
-    db
-      .prepare("SELECT category,message,created FROM feedback ORDER BY id DESC")
-      .all(),
-    null,
-    2,
-  ),
-);
+import { existsSync } from "node:fs";
+import { createStore } from "../lib/store.js";
+if (existsSync(".env")) process.loadEnvFile(".env");
+const store = createStore(process.env);
+console.log(JSON.stringify(await store.feedback.list(), null, 2));

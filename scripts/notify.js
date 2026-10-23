@@ -1,6 +1,8 @@
-import { DatabaseSync } from "node:sqlite";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import webpush from "web-push";
+import { createStore } from "../lib/store.js";
+import { loadSecrets } from "../lib/secrets.js";
+if (existsSync(".env")) process.loadEnvFile(".env");
 const [title, body, url = "/events"] = process.argv.slice(2);
 if (!title || !body) {
   console.error('Usage: npm run notify -- "Title" "Message" "/events"');
@@ -8,27 +10,24 @@ if (!title || !body) {
 }
 if (!url.startsWith("/") || url.startsWith("//"))
   throw Error("Use a local URL such as /events.");
-const secrets = JSON.parse(readFileSync("data/secrets.json"));
+const secrets = loadSecrets(process.env, "data");
 webpush.setVapidDetails(
   process.env.VAPID_SUBJECT || "mailto:kerichochessacademy@gmail.com",
   secrets.vapid.publicKey,
   secrets.vapid.privateKey,
 );
-const db = new DatabaseSync("data/academy.sqlite");
+const store = createStore(process.env);
 let sent = 0,
   failed = 0;
-for (const row of db.prepare("SELECT * FROM subscriptions").all()) {
+for (const row of await store.push.list()) {
   try {
     await webpush.sendNotification(
-      JSON.parse(row.subscription),
+      row.subscription,
       JSON.stringify({ title, body, url }),
     );
     sent++;
   } catch (e) {
-    if ([404, 410].includes(e.statusCode))
-      db.prepare("DELETE FROM subscriptions WHERE endpoint=?").run(
-        row.endpoint,
-      );
+    if ([404, 410].includes(e.statusCode)) await store.push.remove(row.endpoint);
     else failed++;
   }
 }

@@ -3,14 +3,24 @@ const $ = (selector) => document.querySelector(selector);
 const serviceError =
   "This feature needs the academy’s Node.js service. It is not available on a static-only host such as GitHub Pages.";
 async function api(path, body) {
-  const response = await fetch("/api/" + path, {
-    method: body === undefined ? "GET" : "POST",
-    credentials: "same-origin",
-    headers: body === undefined ? {} : { "Content-Type": "application/json" },
-    body: body === undefined ? undefined : JSON.stringify(body),
-  });
+  let response;
+  try {
+    response = await fetch("/api/" + path, {
+      method: body === undefined ? "GET" : "POST",
+      credentials: "same-origin",
+      headers: body === undefined ? {} : { "Content-Type": "application/json" },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    });
+  } catch {
+    throw Error("Connection failed. Please check your connection and try again.");
+  }
   if (!response.headers.get("content-type")?.includes("application/json"))
-    throw Error(serviceError);
+    // Only static hosts lack the Node service header; the Node service always sends it.
+    throw Error(
+      response.headers.get("x-academy-service")
+        ? "The academy service returned an unexpected response. Please refresh and try again."
+        : serviceError,
+    );
   const data = await response.json();
   if (!response.ok)
     throw Error(
@@ -209,17 +219,31 @@ async function setupChess() {
   const serviceStatus = $("#play-service-status"),
     gameStatus = $("#game-status"),
     puzzleStatus = $("#puzzle-status");
+  const coachStatus = $("#coach-status");
   let Chess;
+  // The chess rules module is served only by the Node service.
   try {
     ({ Chess } = await import("/vendor/chess.js"));
-    await api("me");
-    serviceStatus.hidden = true;
   } catch {
     serviceStatus.textContent = serviceError;
     puzzleStatus.textContent = serviceError;
     document
       .querySelectorAll("#play form button, #reset-puzzle")
       .forEach((button) => (button.disabled = true));
+    $("#coach-fields").disabled = true;
+    return;
+  }
+  try {
+    await api("me");
+    serviceStatus.hidden = true;
+  } catch (error) {
+    // Show the real reason (for example, a connection problem) instead of the static-host text.
+    serviceStatus.textContent = error.message;
+    puzzleStatus.textContent = error.message;
+    document
+      .querySelectorAll("#play form button, #reset-puzzle")
+      .forEach((button) => (button.disabled = true));
+    $("#coach-fields").disabled = true;
     return;
   }
   const glyphs = {
@@ -238,7 +262,9 @@ async function setupChess() {
     socket = null,
     mode = null,
     myColor = "w",
-    pending = false;
+    pending = false,
+    gameId = null,
+    lastState = null;
   const gameView = {
     board: $("#game-board"),
     status: gameStatus,
@@ -341,13 +367,34 @@ async function setupChess() {
       squares[next].focus();
     }),
   );
-  function updateGame(state) {
+  // Saved state comes from the server after every move; this view never invents results.
+  function lockedFor(state) {
+    return Boolean(
+      pending ||
+        !state ||
+        state.over ||
+        (mode === "online" && (!state.live || state.turn !== myColor)),
+    );
+  }
+  function updateButtons() {
+    const playing = Boolean(socket) && mode === "online";
+    $("#resign-game").hidden = !(playing && lastState && !lastState.over);
+    $("#leave-online").hidden = !playing;
+    $("#find-opponent").disabled = Boolean(socket);
+  }
+  function applyState(state) {
+    if (state.gameId) gameId = state.gameId;
+    if (state.color) myColor = state.color;
+    lastState = state;
     gameView.game = new Chess(state.fen);
     gameView.selected = null;
     gameView.color = myColor;
-    gameView.locked =
-      pending || state.over || (mode === "online" && state.turn !== myColor);
-    gameStatus.textContent = state.status;
+    gameView.locked = lockedFor(state);
+    let text = state.status;
+    if (mode === "online" && state.opponent)
+      text = `Playing ${state.opponent}. You play ${myColor === "w" ? "White" : "Black"}. ${state.status}`;
+    if (state.notice) text += " " + state.notice;
+    gameStatus.textContent = text;
     const history = state.history || [];
     $("#move-history").textContent = history.length
       ? history
@@ -357,6 +404,12 @@ async function setupChess() {
           )
           .join(" ")
       : "No moves yet.";
+    render(gameView);
+    updateButtons();
+  }
+  function showError(error) {
+    message(gameStatus, error);
+    gameView.locked = lockedFor(lastState);
     render(gameView);
   }
   async function choose(view, square) {
@@ -413,19 +466,86 @@ async function setupChess() {
       render(view);
       gameStatus.textContent = "Computer is thinking…";
       try {
-        const result = await api("computer/move", move);
+        const result = await api("computer/move", { ...move, gameId });
         pending = false;
-        updateGame(result);
+        applyState(result);
+        refreshGames();
       } catch (error) {
         pending = false;
-        view.locked = false;
-        message(gameStatus, error);
-        render(view);
+        showError(error);
       }
     } else if (mode === "online" && socket?.connected) {
       view.locked = true;
       render(view);
       socket.emit("move", move);
+    }
+  }
+  const timeLabel = (value) =>
+    new Intl.DateTimeFormat("en-KE", {
+      dateStyle: "medium",
+      timeStyle: "short",
+      timeZone: "Africa/Nairobi",
+    }).format(new Date(value));
+  // Lists the signed-in player's saved computer and online games.
+  async function refreshGames() {
+    const list = $("#saved-games");
+    try {
+      const games = await api("games");
+      list.replaceChildren();
+      if (!games.length) {
+        const empty = document.createElement("li");
+        empty.textContent =
+          "No saved games yet. Games are saved automatically after every move.";
+        list.append(empty);
+        return;
+      }
+      for (const game of games) {
+        const item = document.createElement("li"),
+          label = document.createElement("span"),
+          button = document.createElement("button");
+        const who =
+          game.kind === "computer" ? "Computer" : `Online vs ${game.opponent}`;
+        const state =
+          game.status === "active" ? "In progress" : game.result || "Finished";
+        label.textContent = `${who} · ${game.moves} move${game.moves === 1 ? "" : "s"} · ${state} · saved ${timeLabel(game.updated)}`;
+        button.type = "button";
+        button.className = "button secondary-button";
+        button.textContent = game.status === "active" ? "Continue" : "View";
+        button.addEventListener("click", () => openGame(game));
+        item.append(label, " ", button);
+        list.append(item);
+      }
+    } catch (error) {
+      list.replaceChildren();
+      const item = document.createElement("li");
+      message(item, error);
+      list.append(item);
+    }
+  }
+  async function openGame(game) {
+    if (pending) return;
+    if (socket && !confirm("Leave your current online game? It stays saved.")) return;
+    endOnline();
+    try {
+      if (game.status !== "active") {
+        mode = null;
+        const state = await api("games/" + game.id);
+        applyState(state);
+        gameStatus.textContent = `Finished game. ${state.status}`;
+        return;
+      }
+      if (game.kind === "computer") {
+        mode = "computer";
+        applyState(await api("games/" + game.id));
+        return;
+      }
+      mode = "online";
+      gameView.locked = true;
+      render(gameView);
+      gameStatus.textContent = "Reconnecting to your online game…";
+      connectThen(() => socket.emit("resume", game.id));
+    } catch (error) {
+      showError(error);
     }
   }
   function endOnline() {
@@ -435,16 +555,85 @@ async function setupChess() {
       closing.emit("cancel");
       closing.disconnect();
     }
-    $("#leave-online").hidden = true;
-    $("#find-opponent").disabled = false;
+    updateButtons();
+  }
+  async function socketLibrary() {
+    if (window.io) return;
+    await new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "/socket.io/socket.io.js";
+      script.onload = resolve;
+      script.onerror = () =>
+        reject(Error("The live game connection could not be loaded. Please refresh the page."));
+      document.head.append(script);
+    });
+  }
+  // Runs an action once the live connection is ready; the server validates everything.
+  async function connectThen(action) {
+    if (socket?.connected) return action();
+    if (socket) return socket.once("connect", action);
+    await socketLibrary();
+    const connection = (socket = window.io({
+      autoConnect: false,
+      reconnection: false,
+    }));
+    updateButtons();
+    connection.once("connect", action);
+    connection.on("waiting", () => {
+      if (socket === connection)
+        gameStatus.textContent =
+          "Waiting for another signed-in player. They must also select Find online opponent.";
+    });
+    connection.on("matched", (state) => {
+      if (socket !== connection) return;
+      mode = "online";
+      applyState(state);
+      refreshGames();
+    });
+    connection.on("state", (state) => {
+      if (socket !== connection) return;
+      applyState(state);
+      if (state.over) {
+        endOnline();
+        refreshGames();
+      }
+    });
+    connection.on("moveError", (error) => {
+      if (socket === connection) showError(String(error));
+    });
+    connection.on("connect_error", (error) => {
+      if (socket === connection) socket = null;
+      updateButtons();
+      message(gameStatus, error);
+    });
+    connection.on("disconnect", (reason) => {
+      if (socket !== connection) return;
+      socket = null;
+      gameStatus.textContent =
+        reason === "io server disconnect"
+          ? "This game was opened in another tab, or your session ended. Continue it from My games."
+          : "Connection lost. Your game is saved; choose Continue in My games to reconnect.";
+      updateButtons();
+      gameView.locked = lockedFor(lastState);
+      render(gameView);
+      refreshGames();
+    });
+    connection.connect();
   }
   function setUser(value) {
     user = value;
     $("#auth-panel").hidden = Boolean(user);
     $("#player-panel").hidden = !user;
     $("#player-greeting").textContent = user ? `Welcome, ${user.name}.` : "";
+    $("#coach-fields").disabled = !user;
+    $("#coach-login-note").hidden = Boolean(user);
     if (user) {
       render(gameView);
+      refreshGames();
+      loadBookings();
+    } else {
+      $("#saved-games").replaceChildren();
+      $("#my-bookings").replaceChildren();
     }
   }
   for (const [selector, endpoint] of [
@@ -465,6 +654,11 @@ async function setupChess() {
           Object.fromEntries(new FormData(form)),
         );
         form.reset();
+        if (data.pending) {
+          // New accounts must confirm their email before the first login.
+          status.textContent = data.message;
+          return;
+        }
         status.textContent = "";
         setUser(data.user);
       } catch (error) {
@@ -480,6 +674,8 @@ async function setupChess() {
       await api("logout", {});
       endOnline();
       mode = null;
+      lastState = null;
+      gameId = null;
       gameView.locked = true;
       gameView.game = new Chess();
       setUser(null);
@@ -493,7 +689,7 @@ async function setupChess() {
     if (pending) return;
     if (
       socket &&
-      !confirm("Leave online matchmaking or your current online game?")
+      !confirm("Leave your current online game? It stays saved in My games.")
     )
       return;
     endOnline();
@@ -503,93 +699,39 @@ async function setupChess() {
     try {
       const state = await api("computer", {});
       mode = "computer";
-      myColor = "w";
       pending = false;
-      updateGame(state);
+      applyState(state);
+      refreshGames();
     } catch (error) {
       pending = false;
       message(gameStatus, error);
     }
   });
-  async function socketLibrary() {
-    if (window.io) return;
-    await new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = "/socket.io/socket.io.js";
-      script.onload = resolve;
-      script.onerror = () => reject(Error(serviceError));
-      document.head.append(script);
-    });
-  }
-  $("#find-opponent").addEventListener("click", async () => {
+  $("#find-opponent").addEventListener("click", () => {
     if (pending || socket) return;
-    $("#find-opponent").disabled = true;
     mode = "online";
     gameView.locked = true;
     render(gameView);
-    try {
-      await socketLibrary();
-      const connection = (socket = window.io({
-        autoConnect: false,
-        reconnection: false,
-      }));
-      $("#leave-online").hidden = false;
-      gameStatus.textContent = "Connecting to online matchmaking…";
-      socket.on("connect", () => connection.emit("queue"));
-      socket.on(
-        "waiting",
-        () =>
-          (gameStatus.textContent =
-            "Waiting for another signed-in player. They must also select Find online opponent."),
-      );
-      socket.on("matched", (state) => {
-        myColor = state.color;
-        updateGame(state);
-        gameStatus.textContent = `Matched with ${state.opponent}. You play ${myColor === "w" ? "White" : "Black"}. ${state.status}`;
-      });
-      socket.on("state", updateGame);
-      socket.on("moveError", (error) => {
-        gameView.locked = gameView.game.turn() !== myColor;
-        gameStatus.textContent = String(error);
-        render(gameView);
-      });
-      socket.on("opponentLeft", () => {
-        endOnline();
-        mode = null;
-        gameView.locked = true;
-        gameStatus.textContent =
-          "Your opponent left. This game has ended. Find another opponent or play the computer.";
-        render(gameView);
-      });
-      socket.on("connect_error", (error) => {
-        endOnline();
-        gameView.locked = true;
-        message(gameStatus, error);
-      });
-      socket.on("disconnect", () => {
-        if (socket === connection) {
-          socket = null;
-          $("#leave-online").hidden = true;
-          $("#find-opponent").disabled = false;
-          gameView.locked = true;
-          gameStatus.textContent =
-            "Disconnected. The online game has ended; please start again.";
-          render(gameView);
-        }
-      });
-      socket.connect();
-    } catch (error) {
-      endOnline();
-      message(gameStatus, error);
-    }
+    gameStatus.textContent = "Connecting to online matchmaking…";
+    connectThen(() => socket.emit("queue"));
   });
   $("#leave-online").addEventListener("click", () => {
+    if (!socket) return;
     endOnline();
     mode = null;
     gameView.locked = true;
     gameStatus.textContent =
-      "Online matchmaking/game ended. Choose another game to start.";
+      "You left the online game. It is saved in My games, so you can continue it later.";
     render(gameView);
+    refreshGames();
+  });
+  $("#resign-game").addEventListener("click", () => {
+    if (
+      !socket ||
+      !confirm("Resign this online game? It will end and cannot be continued.")
+    )
+      return;
+    socket.emit("resign");
   });
   async function loadPuzzle() {
     $("#reset-puzzle").disabled = true;
@@ -612,6 +754,60 @@ async function setupChess() {
     }
   }
   $("#reset-puzzle").addEventListener("click", loadPuzzle);
+
+  // Coach bookings are requests only. The coach confirms them directly.
+  const nairobiToday = (offsetDays = 0) =>
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Africa/Nairobi",
+    }).format(new Date(Date.now() + offsetDays * 86400000));
+  const bookingDate = $("#coach-form [name=preferredDate]");
+  if (bookingDate) {
+    bookingDate.min = nairobiToday();
+    bookingDate.max = nairobiToday(180);
+  }
+  async function loadBookings() {
+    const list = $("#my-bookings");
+    try {
+      const bookings = await api("bookings");
+      list.replaceChildren();
+      if (!bookings.length) {
+        const item = document.createElement("li");
+        item.textContent = "No booking requests yet.";
+        list.append(item);
+      }
+      for (const booking of bookings) {
+        const item = document.createElement("li");
+        item.textContent = `${booking.sessionType} · ${booking.preferredDate} at ${booking.timeSlot} (Nairobi time) · ${booking.level} · Requested ${timeLabel(booking.created)}. Awaiting the coach’s confirmation.`;
+        list.append(item);
+      }
+    } catch (error) {
+      list.replaceChildren();
+      const item = document.createElement("li");
+      message(item, error);
+      list.append(item);
+    }
+  }
+  $("#coach-form")?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget,
+      button = form.querySelector("button[type=submit]");
+    if (!form.reportValidity()) return;
+    button.disabled = true;
+    coachStatus.textContent = "Sending your booking request…";
+    try {
+      const values = Object.fromEntries(new FormData(form));
+      await api("bookings", values);
+      form.reset();
+      coachStatus.textContent =
+        "Request received. The coach will confirm the time with you. It is not confirmed until then.";
+      loadBookings();
+    } catch (error) {
+      message(coachStatus, error);
+    } finally {
+      button.disabled = false;
+    }
+  });
+
   try {
     setUser((await api("me")).user);
   } catch (error) {
@@ -624,3 +820,152 @@ async function setupChess() {
   await loadPuzzle();
 }
 setupChess();
+
+// Group registration (registration page): one signed-in person registers up to 10 players.
+const groupForm = document.querySelector("#group-form");
+if (groupForm) {
+  const playersBox = document.querySelector("#group-players");
+  const addButton = document.querySelector("#add-player");
+  const status = document.querySelector("#group-status");
+  const levelOptions = ["Beginner", "Improving player", "Club or competitive player"];
+  const maxPlayers = 10;
+
+  function addPlayerRow() {
+    const count = playersBox.children.length;
+    if (count >= maxPlayers) return;
+    const row = document.createElement("div");
+    row.className = "group-player";
+    const name = document.createElement("input");
+    name.name = "playerName";
+    name.required = true;
+    name.minLength = 2;
+    name.maxLength = 80;
+    name.placeholder = "Player " + (count + 1) + " name";
+    name.setAttribute("aria-label", "Player " + (count + 1) + " name");
+    const level = document.createElement("select");
+    level.name = "playerLevel";
+    level.setAttribute("aria-label", "Player " + (count + 1) + " level");
+    for (const option of levelOptions) level.add(new Option(option, option));
+    row.append(name, level);
+    if (count > 0) {
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "button button-secondary";
+      remove.textContent = "Remove";
+      remove.addEventListener("click", () => {
+        row.remove();
+        addButton.disabled = false;
+      });
+      row.append(remove);
+    }
+    playersBox.append(row);
+    if (playersBox.children.length >= maxPlayers) addButton.disabled = true;
+  }
+
+  addButton.addEventListener("click", addPlayerRow);
+  addPlayerRow();
+
+  // Show a sign-in hint and disable submit when nobody is signed in.
+  api("me")
+    .then((result) => {
+      if (!result.user) {
+        document.querySelector("#group-login").hidden = false;
+        groupForm.querySelector("button[type=submit]").disabled = true;
+      }
+    })
+    .catch(() => {});
+
+  groupForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!groupForm.reportValidity()) return;
+    const button = groupForm.querySelector("button[type=submit]");
+    const values = Object.fromEntries(new FormData(groupForm));
+    const names = [...groupForm.querySelectorAll("[name=playerName]")];
+    const levels = [...groupForm.querySelectorAll("[name=playerLevel]")];
+    const body = {
+      contactName: values.contactName,
+      contact: values.contact,
+      notes: values.notes ?? "",
+      players: names.map((input, i) => ({ name: input.value, level: levels[i].value })),
+    };
+    button.disabled = true;
+    status.textContent = "Sending your registration…";
+    try {
+      await api("group-registrations", body);
+      groupForm.reset();
+      playersBox.replaceChildren();
+      addPlayerRow();
+      status.textContent = "Thank you. Your registration was received. The academy will contact you.";
+    } catch (error) {
+      status.textContent = error.message;
+    } finally {
+      button.disabled = false;
+    }
+  });
+}
+
+// Online payments (events page): choose a payment, then confirm the M-Pesa prompt.
+const payForm = document.querySelector("#pay-form");
+if (payForm) {
+  const select = payForm.querySelector("[name=item]");
+  const submit = payForm.querySelector("button[type=submit]");
+  const payStatus = document.querySelector("#pay-status");
+  const sleep = (ms) => new Promise((done) => setTimeout(done, ms));
+
+  submit.disabled = true;
+  api("payments/items")
+    .then(({ open, items }) => {
+      if (!open) {
+        document.querySelector("#pay-closed").hidden = false;
+        return;
+      }
+      select.append(new Option("Choose what you are paying for", ""));
+      for (const item of items) select.append(new Option(`${item.label} · KES ${item.amount}`, item.id));
+      api("me")
+        .then((result) => {
+          if (result.user) submit.disabled = false;
+          else document.querySelector("#pay-login").hidden = false;
+        })
+        .catch(() => {});
+    })
+    .catch((error) => {
+      payStatus.textContent = error.message;
+    });
+
+  payForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!payForm.reportValidity() || !select.value) {
+      payStatus.textContent = "Choose what you are paying for first.";
+      return;
+    }
+    const values = Object.fromEntries(new FormData(payForm));
+    submit.disabled = true;
+    payStatus.textContent = "Sending the M-Pesa prompt to your phone…";
+    try {
+      const started = await api("payments", {
+        item: values.item,
+        name: values.name,
+        phone: values.phone,
+      });
+      payStatus.textContent = "Check your phone and enter your M-Pesa PIN to complete the payment.";
+      for (let attempt = 0; attempt < 20; attempt++) {
+        await sleep(4000);
+        const current = await api("payments/" + started.id);
+        if (current.status === "paid") {
+          payStatus.textContent = "Payment received. Thank you. Keep the M-Pesa message as your receipt.";
+          return;
+        }
+        if (current.status === "failed") {
+          payStatus.textContent = "The payment was not completed. You can try again.";
+          return;
+        }
+      }
+      payStatus.textContent =
+        "We have not received confirmation yet. If money left your M-Pesa, keep the message and contact the academy.";
+    } catch (error) {
+      payStatus.textContent = error.message;
+    } finally {
+      submit.disabled = false;
+    }
+  });
+}
