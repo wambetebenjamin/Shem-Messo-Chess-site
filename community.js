@@ -1,7 +1,7 @@
 // All API and socket requests are same-origin. Static hosts get an honest service-unavailable message.
 const $ = (selector) => document.querySelector(selector);
 const serviceError =
-  "This feature needs the academy’s Node.js service. It is not available on a static-only host such as GitHub Pages.";
+  "This feature is temporarily unavailable. The academy’s server may be starting up. Please try again in a minute.";
 async function api(path, body) {
   let response;
   try {
