@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /template-preview.html
+
+Sitemap: https://www.kerichochessacademy.co.ke/sitemap.xml
