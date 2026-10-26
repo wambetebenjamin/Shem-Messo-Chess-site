@@ -349,7 +349,7 @@ test("static-only chess hosting displays an honest limitation and never submits 
   );
   await page.goto("/play.html");
   await expect(page.locator("#play-service-status")).toContainText(
-    "Node.js service",
+    "temporarily unavailable",
   );
   await expect(page.locator("#account-form button")).toBeDisabled();
   await expect(page.locator("#login-form")).toHaveAttribute("method", "post");
