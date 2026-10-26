@@ -81,6 +81,14 @@ const sessions = session({
 });
 app.use(sessions);
 io.engine.use(sessions);
+const TRUSTED_HOSTS = new Set(
+  [
+    "www.kerichochessacademy.co.ke",
+    "kerichochessacademy.co.ke",
+    "shem-messo-chess-site.onrender.com",
+    ...(process.env.TRUSTED_ORIGINS || "").split(",").map((h) => h.trim()).filter(Boolean),
+  ],
+);
 app.use((req, res, next) => {
   // Lets the browser tell this Node service apart from static-only hosting.
   if (req.path.startsWith("/api/")) res.setHeader("X-Academy-Service", "node");
@@ -95,11 +103,13 @@ app.use((req, res, next) => {
   ) {
     // Some browsers omit Origin on same-origin POSTs; Fetch Metadata then
     // identifies the request as same-origin. Cross-site requests still fail.
+    // Requests from the academy's own domains are allowed too. Through the Vercel proxy the
+    // Host header is the Render address, so the domain names are listed explicitly.
     const origin = req.headers.origin;
     let allowed;
     try {
       allowed = origin
-        ? new URL(origin).host === req.get("host")
+        ? new URL(origin).host === req.get("host") || TRUSTED_HOSTS.has(new URL(origin).host)
         : req.headers["sec-fetch-site"] === "same-origin";
     } catch {
       allowed = false;
