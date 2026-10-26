@@ -744,14 +744,127 @@ app.post("/api/push/unsubscribe", async (req, res) => {
     await store.push.remove(req.body.endpoint).catch(() => {});
   res.json({ ok: true });
 });
-app.get("/api/events", (req, res) =>
-  res.json(
-    JSON.parse(readFileSync("events.json", "utf8")).filter(
-      (e) =>
-        e.date >=
-        new Date().toLocaleDateString("en-CA", { timeZone: "Africa/Nairobi" }),
-    ),
-  ),
+// ---- Events and site content (managed from the admin dashboard) ----
+const nairobiToday = () =>
+  new Date().toLocaleDateString("en-CA", { timeZone: "Africa/Nairobi" });
+const publicEvent = (e) => ({
+  id: e.id,
+  title: e.title,
+  date: e.date,
+  startTime: e.startTime,
+  location: e.location,
+  description: e.description,
+  entryFee: e.entryFee,
+  registrationUrl: e.registrationUrl,
+});
+// Returns { value } with a clean event, or { error } saying what to fix.
+function validEvent(body) {
+  const text = (v, max) => (typeof v === "string" ? v.trim().slice(0, max) : "");
+  const title = text(body?.title, 120);
+  const date = typeof body?.date === "string" ? body.date.trim() : "";
+  const parsed = new Date(date + "T00:00:00Z");
+  if (title.length < 3) return { error: "Title must be 3 to 120 characters." };
+  // Round-trip check rejects impossible dates such as 2099-02-30.
+  if (
+    !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+    Number.isNaN(parsed.getTime()) ||
+    parsed.toISOString().slice(0, 10) !== date
+  )
+    return { error: "Choose a valid date." };
+  const fee = body?.entryFee === undefined || body?.entryFee === "" ? 0 : Number(body.entryFee);
+  if (!Number.isInteger(fee) || fee < 0 || fee > 150000)
+    return { error: "Entry fee must be a whole number of shillings (0 to 150000)." };
+  const url = text(body?.registrationUrl, 300);
+  if (url && !/^https:\/\/\S+$/.test(url))
+    return { error: "The sign-up link must start with https://" };
+  return {
+    value: {
+      title,
+      date,
+      startTime: text(body?.startTime, 20),
+      location: text(body?.location, 120),
+      description: text(body?.description, 1000),
+      entryFee: fee,
+      registrationUrl: url,
+      published: body?.published !== false,
+    },
+  };
+}
+app.get(
+  "/api/events",
+  route(async (req, res) => {
+    const rows = await store.events.listPublished(nairobiToday());
+    res.json(rows.map(publicEvent));
+  }),
+);
+app.get(
+  "/api/admin/events",
+  auth,
+  adminOnly,
+  route(async (req, res) => res.json(await store.events.listAll())),
+);
+app.post(
+  "/api/admin/events",
+  auth,
+  adminOnly,
+  route(async (req, res) => {
+    const check = validEvent(req.body);
+    if (check.error) return res.status(400).json({ error: check.error });
+    res.status(201).json(await store.events.create(check.value));
+  }),
+);
+app.put(
+  "/api/admin/events/:id",
+  auth,
+  adminOnly,
+  route(async (req, res) => {
+    const id = Number(req.params.id);
+    const check = validEvent(req.body);
+    if (!Number.isInteger(id)) return res.status(400).json({ error: "Choose a valid event." });
+    if (check.error) return res.status(400).json({ error: check.error });
+    const row = await store.events.update(id, check.value);
+    if (!row) return res.status(404).json({ error: "Event not found." });
+    res.json(row);
+  }),
+);
+app.delete(
+  "/api/admin/events/:id",
+  auth,
+  adminOnly,
+  route(async (req, res) => {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id)) return res.status(400).json({ error: "Choose a valid event." });
+    await store.events.remove(id);
+    res.json({ ok: true });
+  }),
+);
+// Editable site text. Only the keys listed here can be changed from the dashboard.
+const editableContent = {
+  announcement: { text: 300 },
+};
+app.get(
+  "/api/content/:key",
+  route(async (req, res) => {
+    if (!Object.hasOwn(editableContent, req.params.key))
+      return res.status(404).json({ error: "Not found." });
+    const value = await store.content.get(req.params.key);
+    res.json(value ?? { text: "", show: false });
+  }),
+);
+app.put(
+  "/api/admin/content/:key",
+  auth,
+  adminOnly,
+  route(async (req, res) => {
+    const rule = editableContent[req.params.key];
+    if (!rule) return res.status(404).json({ error: "Not found." });
+    const value = {
+      text: typeof req.body?.text === "string" ? req.body.text.trim().slice(0, rule.text) : "",
+      show: req.body?.show === true,
+    };
+    await store.content.set(req.params.key, value);
+    res.json({ ok: true, ...value });
+  }),
 );
 io.use((socket, next) => {
   const origin = socket.handshake.headers.origin;

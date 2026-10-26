@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Admin dashboard | Kericho Chess Club &amp; Academy</title>
+    <meta name="theme-color" content="#14233f" />
+    <link rel="icon" href="assets/favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/academy-pages.css" />
+    <style>
+      .admin-wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 60px; }
+      .admin-wrap section { margin-top: 32px; }
+      .admin-wrap h2 { margin-bottom: 10px; }
+      .admin-card { background: #fff; border: 1px solid #d8dfeb; border-radius: 10px; padding: 16px; margin: 10px 0; }
+      .admin-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+      .admin-grid label { display: grid; gap: 4px; font-weight: 600; font-size: 14px; }
+      .admin-grid .wide { grid-column: 1 / -1; }
+      .admin-grid input, .admin-grid textarea, .admin-grid select { font: inherit; padding: 8px; border: 1px solid #b8c3d6; border-radius: 6px; }
+      .admin-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+      .admin-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+      .admin-actions button { font: inherit; padding: 6px 10px; border-radius: 6px; border: 1px solid #14233f; background: #fff; cursor: pointer; }
+      .admin-actions button.primary { background: #14233f; color: #fff; }
+      .admin-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+      .admin-table th, .admin-table td { text-align: left; padding: 8px; border-bottom: 1px solid #e3e8f1; vertical-align: top; }
+      .admin-table-wrap { overflow-x: auto; }
+      .muted { color: #5a6578; font-size: 14px; }
+      .admin-msg { min-height: 1.4em; margin: 8px 0 0; }
+      .admin-msg.error { color: #a4161a; }
+      .admin-msg.ok { color: #1b6e2b; }
+      [hidden] { display: none !important; }
+    </style>
+  </head>
+  <body class="ck-design inner-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html" aria-label="Kericho Chess Academy home"
+          ><img src="assets/logo.png" alt="" /><span
+            >KERICHO CHESS<small>CLUB &amp; ACADEMY</small></span
+          ></a
+        >
+        <nav aria-label="Admin">
+          <a href="events.html">View public events</a>
+          <button id="logout" class="button" type="button" hidden>Log out</button>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" class="admin-wrap">
+      <h1>Admin dashboard</h1>
+
+      <section id="gate" aria-live="polite">
+        <p id="gate-message" class="muted">Checking your sign-in…</p>
+        <form id="admin-login" hidden>
+          <div class="admin-grid">
+            <label>Email<input name="email" type="email" autocomplete="username" required /></label>
+            <label>Password<input name="password" type="password" autocomplete="current-password" required /></label>
+          </div>
+          <p class="admin-actions"><button class="primary" type="submit">Sign in</button></p>
+          <p class="admin-msg" role="status"></p>
+        </form>
+      </section>
+
+      <div id="dashboard" hidden>
+        <section aria-labelledby="events-title">
+          <h2 id="events-title">Events</h2>
+          <p class="muted">Changes go live on the events page straight away. No redeploy needed.</p>
+          <form id="event-form" class="admin-card">
+            <input type="hidden" name="id" />
+            <div class="admin-grid">
+              <label>Title<input name="title" required minlength="3" maxlength="120" /></label>
+              <label>Date<input name="date" type="date" required /></label>
+              <label>Start time<input name="startTime" placeholder="e.g. 09:00" maxlength="20" /></label>
+              <label>Location<input name="location" maxlength="120" /></label>
+              <label>Entry fee (KES)<input name="entryFee" type="number" min="0" max="150000" step="1" value="0" /></label>
+              <label>Sign-up link (https)<input name="registrationUrl" type="url" pattern="https://.*" maxlength="300" placeholder="https://" /></label>
+              <label class="wide">Description<textarea name="description" rows="3" maxlength="1000"></textarea></label>
+              <label><span><input name="published" type="checkbox" checked /> Published (visible on the site)</span></label>
+            </div>
+            <p class="admin-actions">
+              <button class="primary" type="submit">Save event</button>
+              <button id="event-cancel" type="button" hidden>Cancel edit</button>
+            </p>
+            <p class="admin-msg" id="event-msg" role="status"></p>
+          </form>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Date</th><th>Title</th><th>Fee</th><th>Published</th><th>Actions</th></tr></thead>
+              <tbody id="event-rows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="announce-title">
+          <h2 id="announce-title">Site announcement</h2>
+          <form id="announce-form" class="admin-card">
+            <label>Message shown at the top of the site
+              <textarea name="text" rows="2" maxlength="300"></textarea>
+            </label>
+            <label><span><input name="show" type="checkbox" /> Show this message on the site</span></label>
+            <p class="admin-actions"><button class="primary" type="submit">Save announcement</button></p>
+            <p class="admin-msg" id="announce-msg" role="status"></p>
+          </form>
+        </section>
+
+        <section aria-labelledby="bookings-title">
+          <h2 id="bookings-title">Coaching bookings</h2>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Date</th><th>Time</th><th>Name</th><th>Type</th><th>Contact</th><th>Level</th><th>Notes</th><th>Status</th></tr></thead>
+              <tbody id="booking-rows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="groups-title">
+          <h2 id="groups-title">Group registrations</h2>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Received</th><th>Contact</th><th>Phone / email</th><th>Players</th><th>Notes</th><th>Status</th></tr></thead>
+              <tbody id="group-rows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="payments-title">
+          <h2 id="payments-title">Payments</h2>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Date</th><th>Item</th><th>Amount (KES)</th><th>Phone</th><th>Status</th><th>Receipt</th><th>Note</th></tr></thead>
+              <tbody id="payment-rows"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="compact-footer basic-footer">
+      <div class="container footer-main-row">
+        <div class="footer-details"><p>Kericho Chess Club &amp; Academy admin</p></div>
+      </div>
+    </footer>
+    <script type="module" src="admin.js"></script>
+  </body>
+</html>
