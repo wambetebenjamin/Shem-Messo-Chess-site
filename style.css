@@ -2187,3 +2187,31 @@ button:disabled {
     grid-template-columns: 1fr;
   }
 }
+
+/* Status messages for games and puzzles: colour shows whether the news is good, a warning or neutral. */
+.status-line {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-left: 4px solid var(--blue);
+  border-radius: 4px;
+  background: #eef4fb;
+  color: var(--navy);
+  font-weight: 600;
+  line-height: 1.5;
+}
+.status-line.tone-success {
+  border-color: #15803d;
+  background: #dcfce7;
+  color: #14532d;
+}
+.status-line.tone-warn {
+  border-color: #b45309;
+  background: #fef3c7;
+  color: #78350f;
+}
+#puzzle .game-info > details summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
