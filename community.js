@@ -101,7 +101,19 @@ async function loadEvents() {
         const description = document.createElement("p");
         description.textContent =
           item.description || "Contact the academy for details.";
-        card.append(heading, date, location, description);
+        const fee = document.createElement("p");
+        fee.textContent = item.entryFee
+          ? "Entry fee: KES " + Number(item.entryFee).toLocaleString("en-KE")
+          : "Entry: free";
+        card.append(heading, date, location, description, fee);
+        if (/^https:\/\//.test(item.registrationUrl || "")) {
+          const link = document.createElement("a");
+          link.className = "button";
+          link.href = item.registrationUrl;
+          link.rel = "noopener";
+          link.textContent = "Register for this event";
+          card.append(link);
+        }
         list.append(card);
       });
   } catch (error) {

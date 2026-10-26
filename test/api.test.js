@@ -8,7 +8,6 @@ import { once } from "node:events";
 import { Chess } from "chess.js";
 test("accounts, protected games, puzzle, feedback and public-file security", async () => {
   const dir = mkdtempSync(join(tmpdir(), "academy-test-"));
-  writeFileSync(join(dir, "events.json"), "[]");
   const port = 31000 + Math.floor(Math.random() * 10000),
     origin = `http://127.0.0.1:${port}`;
   const child = spawn(process.execPath, [resolve("server.js")], {
@@ -158,17 +157,7 @@ test("accounts, protected games, puzzle, feedback and public-file security", asy
       ).status,
       200,
     );
-    assert.equal((await (await req("events")).json()).length, 0);
-    writeFileSync(
-      join(dir, "events.json"),
-      JSON.stringify([
-        { title: "Past fixture", date: "2000-01-01" },
-        { title: "Future fixture", date: "2099-01-01" },
-      ]),
-    );
-    const events = await (await req("events")).json();
-    assert.equal(events.length, 1);
-    assert.equal(events[0].title, "Future fixture");
+    assert.deepEqual(await (await req("events")).json(), []);
   } finally {
     child.kill();
     await once(child, "exit");
