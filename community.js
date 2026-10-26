@@ -32,6 +32,12 @@ function message(node, error) {
   node.textContent = error.message || "Connection failed. Please try again.";
 }
 
+// Shows a status line with a colour: info (blue), success (green) or warn (amber).
+function setStatus(node, text, tone = "info") {
+  node.textContent = text;
+  node.className = "status-line tone-" + tone;
+}
+
 // Feedback is sent to private server storage, never to localStorage or a public feed.
 $("#feedback-form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -446,15 +452,18 @@ async function setupChess() {
         const result = await api("puzzle", move);
         if (result.solved) {
           view.game = new Chess(result.fen);
-          view.status.textContent = "Correct! Checkmate. Well done.";
+          setStatus(view.status, "Solved! That is checkmate. Well done. Come back tomorrow for a new puzzle.", "success");
           view.locked = true;
         } else {
-          view.status.textContent =
-            "That move is legal, but not checkmate. Try again.";
+          setStatus(
+            view.status,
+            "That move is legal, but it is not checkmate yet. Look for a move that attacks the king with no escape.",
+            "warn",
+          );
           view.locked = false;
         }
       } catch (error) {
-        message(view.status, error);
+        setStatus(view.status, error.message || "Connection failed. Please try again.", "warn");
         view.locked = false;
       }
       render(view);
@@ -745,7 +754,11 @@ async function setupChess() {
       $("#puzzle-date").textContent =
         `Challenge date: ${puzzle.date} · Africa/Nairobi`;
       $("#puzzle-hint").textContent = puzzle.hint;
-      puzzleStatus.textContent = `${puzzleView.color === "w" ? "White" : "Black"} to move. Find checkmate in one.`;
+      setStatus(
+        puzzleStatus,
+        `${puzzleView.color === "w" ? "White" : "Black"} to move. Find the move that gives checkmate.`,
+        "info",
+      );
       render(puzzleView);
     } catch (error) {
       message(puzzleStatus, error);
