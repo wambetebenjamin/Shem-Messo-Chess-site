@@ -9,6 +9,10 @@
     {
       "source": "/socket.io/:path*",
       "destination": "https://shem-messo-chess-site.onrender.com/socket.io/:path*"
+    },
+    {
+      "source": "/vendor/:path*",
+      "destination": "https://shem-messo-chess-site.onrender.com/vendor/:path*"
     }
   ]
 }
