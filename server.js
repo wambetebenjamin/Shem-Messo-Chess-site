@@ -3,6 +3,7 @@ import session from "express-session";
 import { randomBytes } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { createServer } from "node:http";
+import { join } from "node:path";
 import { Server } from "socket.io";
 import webpush from "web-push";
 import { loadSecrets } from "./lib/secrets.js";
@@ -1091,7 +1092,9 @@ app.use("/api", (req, res) =>
 app.use((req, res, next) => {
   if (req.method !== "GET" && req.method !== "HEAD") return next();
   if (!req.accepts("html")) return next();
-  res.status(404).sendFile(process.cwd() + "/404.html");
+  res.status(404).sendFile(join(import.meta.dirname, "404.html"), (err) => {
+    if (err && !res.headersSent) res.type("text/plain").send("Page not found");
+  });
 });
 app.use((err, req, res, next) => {
   console.error(err.message);
