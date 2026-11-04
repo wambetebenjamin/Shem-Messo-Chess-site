@@ -1095,6 +1095,13 @@ app.get(["/privacy", "/privacy.html"], (req, res) =>
 app.get(["/terms", "/terms.html"], (req, res) =>
   res.sendFile(join(import.meta.dirname, "terms.html")),
 );
+// Search engine files (also present on static hosting).
+app.get("/robots.txt", (req, res) =>
+  res.type("text/plain").sendFile(join(import.meta.dirname, "robots.txt")),
+);
+app.get("/sitemap.xml", (req, res) =>
+  res.type("application/xml").sendFile(join(import.meta.dirname, "sitemap.xml")),
+);
 // Thank-you page after a successful form (the type says which copy to show).
 app.get(["/thanks", "/thanks.html"], (req, res) =>
   res.sendFile(join(import.meta.dirname, "thanks.html")),
