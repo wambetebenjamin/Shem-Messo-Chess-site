@@ -1018,6 +1018,10 @@ app.get("/vendor/chess.js", (req, res) =>
 );
 // Serve only explicitly public files, never credentials or account data.
 app.use("/assets", express.static("assets"));
+app.get("/favicon.ico", (req, res) => res.sendFile(process.cwd() + "/favicon.ico"));
+app.get("/site.webmanifest", (req, res) =>
+  res.type("application/manifest+json").sendFile(process.cwd() + "/site.webmanifest"),
+);
 for (const f of [
   "style.css",
   "script.js",
