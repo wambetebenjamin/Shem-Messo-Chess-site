@@ -1092,6 +1092,9 @@ app.use("/api", (req, res) =>
 app.get(["/privacy", "/privacy.html"], (req, res) =>
   res.sendFile(join(import.meta.dirname, "privacy.html")),
 );
+app.get(["/terms", "/terms.html"], (req, res) =>
+  res.sendFile(join(import.meta.dirname, "terms.html")),
+);
 // Thank-you page after a successful form (the type says which copy to show).
 app.get(["/thanks", "/thanks.html"], (req, res) =>
   res.sendFile(join(import.meta.dirname, "thanks.html")),
