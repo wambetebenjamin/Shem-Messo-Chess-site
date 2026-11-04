@@ -1088,6 +1088,10 @@ for (const page of [
 app.use("/api", (req, res) =>
   res.status(404).json({ error: "This request is not available." }),
 );
+// Legal pages.
+app.get(["/privacy", "/privacy.html"], (req, res) =>
+  res.sendFile(join(import.meta.dirname, "privacy.html")),
+);
 // Thank-you page after a successful form (the type says which copy to show).
 app.get(["/thanks", "/thanks.html"], (req, res) =>
   res.sendFile(join(import.meta.dirname, "thanks.html")),
