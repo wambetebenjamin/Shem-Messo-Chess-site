@@ -69,6 +69,7 @@ $("#feedback-form")?.addEventListener("submit", async (event) => {
     form.reset();
     status.textContent =
       "Thank you. Your feedback has been saved privately for the academy to review.";
+    location.href = "thanks.html?type=feedback";
   } catch (error) {
     message(status, error);
   } finally {
@@ -839,6 +840,7 @@ async function setupChess() {
       coachStatus.textContent =
         "Request received. The coach will confirm the time with you. It is not confirmed until then.";
       loadBookings();
+      location.href = "thanks.html?type=booking";
     } catch (error) {
       message(coachStatus, error);
     } finally {
@@ -934,6 +936,7 @@ if (groupForm) {
       playersBox.replaceChildren();
       addPlayerRow();
       status.textContent = "Thank you. Your registration was received. The academy will contact you.";
+      location.href = "thanks.html?type=group";
     } catch (error) {
       status.textContent = error.message;
     } finally {

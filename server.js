@@ -1088,6 +1088,10 @@ for (const page of [
 app.use("/api", (req, res) =>
   res.status(404).json({ error: "This request is not available." }),
 );
+// Thank-you page after a successful form (the type says which copy to show).
+app.get(["/thanks", "/thanks.html"], (req, res) =>
+  res.sendFile(join(import.meta.dirname, "thanks.html")),
+);
 // Unknown page addresses get the academy's friendly 404 page (with a 404 status).
 app.use((req, res, next) => {
   if (req.method !== "GET" && req.method !== "HEAD") return next();
