@@ -1,0 +1,57 @@
+/*
+ * Shared mobile breakpoints for the academy's public pages.
+ * Standard breakpoints (min-width / max-width pairs used across the site):
+ *   480px   small phones: tighter headings and gutters
+ *   600px   phones: touch-sized buttons, single-column layouts
+ *   850px   tablets and large phones in portrait
+ *   1100px  desktop navigation starts here (the menu collapses below this)
+ * Loaded after the page styles so these rules only tighten, never replace, the layouts.
+ */
+
+/* Media never forces a horizontal scrollbar. */
+.ck-design img,
+.ck-design video,
+.ck-design iframe,
+.ck-design svg {
+  max-width: 100%;
+  height: auto;
+}
+.ck-design iframe {
+  height: auto;
+}
+
+@media (max-width: 850px) {
+  .ck-design .container {
+    max-width: 100%;
+  }
+  .ck-design table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .ck-design .button,
+  .ck-design button,
+  .ck-design .text-link,
+  .ck-design .dropdown-toggle {
+    min-height: 44px;
+  }
+  .ck-design input,
+  .ck-design select,
+  .ck-design textarea {
+    font-size: 16px; /* stops iOS zooming into form fields */
+  }
+}
+
+@media (max-width: 480px) {
+  .ck-design .page-masthead h1 {
+    font-size: clamp(26px, 8vw, 34px);
+    line-height: 1.15;
+  }
+  .ck-design .hero h1 {
+    font-size: clamp(30px, 9vw, 40px);
+    line-height: 1.12;
+  }
+}
