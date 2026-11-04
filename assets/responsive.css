@@ -55,3 +55,39 @@
     line-height: 1.12;
   }
 }
+
+/* Loading states: busy buttons show a spinner; placeholders say what is loading. */
+.ck-design button[aria-busy="true"],
+.ck-design .button[aria-busy="true"] {
+  opacity: 0.75;
+  cursor: progress;
+  position: relative;
+  padding-left: 2.1em;
+}
+.ck-design button[aria-busy="true"]::before,
+.ck-design .button[aria-busy="true"]::before {
+  content: "";
+  position: absolute;
+  left: 0.9em;
+  top: 50%;
+  width: 0.9em;
+  height: 0.9em;
+  margin-top: -0.45em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: ck-spin 0.8s linear infinite;
+}
+.ck-design .loading-line {
+  color: #3b4a63;
+  font-style: italic;
+}
+@keyframes ck-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-design button[aria-busy="true"]::before,
+  .ck-design .button[aria-busy="true"]::before {
+    animation-duration: 2.4s;
+  }
+}

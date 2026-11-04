@@ -31,6 +31,19 @@ async function api(path, body) {
 function message(node, error) {
   node.textContent = error.message || "Connection failed. Please try again.";
 }
+// Loading state for a submit button: disabled, announced as busy, with a label such as "Sending…".
+function busy(button, on, label = "Sending…") {
+  if (!button) return;
+  if (on) {
+    button.dataset.idleLabel = button.textContent;
+    button.textContent = label;
+  } else if (button.dataset.idleLabel !== undefined) {
+    button.textContent = button.dataset.idleLabel;
+    delete button.dataset.idleLabel;
+  }
+  button.disabled = on;
+  button.setAttribute("aria-busy", on ? "true" : "false");
+}
 
 // Shows a status line with a colour: info (blue), success (green) or warn (amber).
 function setStatus(node, text, tone = "info") {
@@ -45,7 +58,7 @@ $("#feedback-form")?.addEventListener("submit", async (event) => {
     button = form.querySelector("button"),
     status = $("#feedback-status");
   if (!form.reportValidity()) return;
-  button.disabled = true;
+  busy(button, true, "Sending…");
   status.textContent = "Sending feedback…";
   const values = new FormData(form);
   try {
@@ -59,7 +72,7 @@ $("#feedback-form")?.addEventListener("submit", async (event) => {
   } catch (error) {
     message(status, error);
   } finally {
-    button.disabled = false;
+    busy(button, false);
   }
 });
 
@@ -817,7 +830,7 @@ async function setupChess() {
     const form = event.currentTarget,
       button = form.querySelector("button[type=submit]");
     if (!form.reportValidity()) return;
-    button.disabled = true;
+    busy(button, true, "Sending request…");
     coachStatus.textContent = "Sending your booking request…";
     try {
       const values = Object.fromEntries(new FormData(form));
@@ -829,7 +842,7 @@ async function setupChess() {
     } catch (error) {
       message(coachStatus, error);
     } finally {
-      button.disabled = false;
+      busy(button, false);
     }
   });
 
@@ -913,7 +926,7 @@ if (groupForm) {
       notes: values.notes ?? "",
       players: names.map((input, i) => ({ name: input.value, level: levels[i].value })),
     };
-    button.disabled = true;
+    busy(button, true, "Sending registration…");
     status.textContent = "Sending your registration…";
     try {
       await api("group-registrations", body);
@@ -924,7 +937,7 @@ if (groupForm) {
     } catch (error) {
       status.textContent = error.message;
     } finally {
-      button.disabled = false;
+      busy(button, false);
     }
   });
 }
