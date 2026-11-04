@@ -1083,6 +1083,12 @@ for (const page of [
 app.use("/api", (req, res) =>
   res.status(404).json({ error: "This request is not available." }),
 );
+// Unknown page addresses get the academy's friendly 404 page (with a 404 status).
+app.use((req, res, next) => {
+  if (req.method !== "GET" && req.method !== "HEAD") return next();
+  if (!req.accepts("html")) return next();
+  res.status(404).sendFile(process.cwd() + "/404.html");
+});
 app.use((err, req, res, next) => {
   console.error(err.message);
   res.status(500).json({ error: "Something went wrong. Please try again." });
