@@ -3,31 +3,41 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Play Chess | Kericho Chess Club &amp; Academy</title>
+    <title>Play Chess Online and Practise | Kericho Chess Club &amp; Academy</title>
     <meta
       name="description"
-      content="Login-required computer and online chess with saved games, coach bookings and a daily chess puzzle."
+      content="Practise chess against the computer, play online matches, and solve the daily puzzle at Kericho Chess Club &amp; Academy. Sign in to save games."
     />
     <meta name="site-revision" content="basic-footer-repeating-hero-text" />
     <meta name="theme-color" content="#14233f" />
-    <link rel="icon" href="assets/favicon.png" />
+    <meta name="analytics-id" content="G-K7YSD5XBY6" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
     <script type="module" src="community.js"></script>
     <link rel="stylesheet" href="assets/site-actions.css" />
     <link rel="stylesheet" href="assets/academy-pages.css" />
     <link rel="stylesheet" href="assets/page-finish.css" />
+    <link rel="stylesheet" href="assets/responsive.css" />
+    <link rel="stylesheet" href="assets/mobile-cta.css" />
+    <script src="assets/analytics.js" defer></script>
+    <script src="assets/cookie-consent.js" defer></script>
+    <script src="assets/form-errors.js" defer></script>
     <script type="module" src="assets/text-motion.js"></script>
       <link rel="canonical" href="https://www.kerichochessacademy.co.ke/play.html" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Kericho Chess Club &amp; Academy" />
-    <meta property="og:title" content="Play Chess | Kericho Chess Club &amp; Academy" />
-    <meta property="og:description" content="Login-required computer and online chess with saved games, coach bookings and a daily chess puzzle." />
+    <meta property="og:title" content="Play Chess Online and Practise | Kericho Chess Club &amp; Academy" />
+    <meta property="og:description" content="Practise chess against the computer, play online matches, and solve the daily puzzle at Kericho Chess Club &amp; Academy. Sign in to save games." />
     <meta property="og:url" content="https://www.kerichochessacademy.co.ke/play.html" />
     <meta property="og:image" content="https://www.kerichochessacademy.co.ke/assets/logo.png" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Play Chess | Kericho Chess Club &amp; Academy" />
-    <meta name="twitter:description" content="Login-required computer and online chess with saved games, coach bookings and a daily chess puzzle." />
+    <meta name="twitter:title" content="Play Chess Online and Practise | Kericho Chess Club &amp; Academy" />
+    <meta name="twitter:description" content="Practise chess against the computer, play online matches, and solve the daily puzzle at Kericho Chess Club &amp; Academy. Sign in to save games." />
     <meta name="twitter:image" content="https://www.kerichochessacademy.co.ke/assets/logo.png" />
   </head>
   <body class="ck-design inner-page">
@@ -38,7 +48,7 @@
           class="brand"
           href="index.html"
           aria-label="Kericho Chess Academy home"
-          ><img src="assets/logo.png" alt="" /><span
+          ><img src="assets/logo.png" alt="Kericho Chess Academy logo" /><span
             >KERICHO CHESS<small>CLUB & ACADEMY</small></span
           ></a
         ><button
@@ -408,7 +418,7 @@
             aria-label="Kericho Chess Academy home"
             ><img
               src="assets/logo.png"
-              alt=""
+              alt="Kericho Chess Academy logo"
               width="48"
               height="48"
               loading="lazy"
@@ -506,8 +516,13 @@
       <div class="container footer-bottom">
         <span
           >© <span id="year">2026</span> Kericho Chess Club &amp; Academy.</span
-        ><a href="#main" aria-label="Back to top" title="Back to top">↑</a>
+        ><a href="privacy.html">Privacy</a> <span aria-hidden="true">·</span> <a href="terms.html">Terms</a> <span aria-hidden="true">·</span> <a href="privacy.html#cookies" data-cookie-settings>Cookie settings</a> <span aria-hidden="true">·</span> <a href="#main" aria-label="Back to top" title="Back to top">↑</a>
       </div>
     </footer>
+    <nav class="mobile-cta" aria-label="Quick actions">
+      <a class="mobile-cta-primary" href="registration.html">Register</a>
+      <a href="tel:+254729037585" aria-label="Call the academy">Call</a>
+      <a href="https://wa.me/254729037585" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp the academy">WhatsApp</a>
+    </nav>
   </body>
 </html>

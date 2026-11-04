@@ -3,6 +3,7 @@ import session from "express-session";
 import { randomBytes } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { createServer } from "node:http";
+import { join } from "node:path";
 import { Server } from "socket.io";
 import webpush from "web-push";
 import { loadSecrets } from "./lib/secrets.js";
@@ -1018,6 +1019,10 @@ app.get("/vendor/chess.js", (req, res) =>
 );
 // Serve only explicitly public files, never credentials or account data.
 app.use("/assets", express.static("assets"));
+app.get("/favicon.ico", (req, res) => res.sendFile(process.cwd() + "/favicon.ico"));
+app.get("/site.webmanifest", (req, res) =>
+  res.type("application/manifest+json").sendFile(process.cwd() + "/site.webmanifest"),
+);
 for (const f of [
   "style.css",
   "script.js",
@@ -1083,6 +1088,32 @@ for (const page of [
 app.use("/api", (req, res) =>
   res.status(404).json({ error: "This request is not available." }),
 );
+// Legal pages.
+app.get(["/privacy", "/privacy.html"], (req, res) =>
+  res.sendFile(join(import.meta.dirname, "privacy.html")),
+);
+app.get(["/terms", "/terms.html"], (req, res) =>
+  res.sendFile(join(import.meta.dirname, "terms.html")),
+);
+// Search engine files (also present on static hosting).
+app.get("/robots.txt", (req, res) =>
+  res.type("text/plain").sendFile(join(import.meta.dirname, "robots.txt")),
+);
+app.get("/sitemap.xml", (req, res) =>
+  res.type("application/xml").sendFile(join(import.meta.dirname, "sitemap.xml")),
+);
+// Thank-you page after a successful form (the type says which copy to show).
+app.get(["/thanks", "/thanks.html"], (req, res) =>
+  res.sendFile(join(import.meta.dirname, "thanks.html")),
+);
+// Unknown page addresses get the academy's friendly 404 page (with a 404 status).
+app.use((req, res, next) => {
+  if (req.method !== "GET" && req.method !== "HEAD") return next();
+  if (!req.accepts("html")) return next();
+  res.status(404).sendFile(join(import.meta.dirname, "404.html"), (err) => {
+    if (err && !res.headersSent) res.type("text/plain").send("Page not found");
+  });
+});
 app.use((err, req, res, next) => {
   console.error(err.message);
   res.status(500).json({ error: "Something went wrong. Please try again." });
