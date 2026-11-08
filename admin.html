@@ -78,8 +78,13 @@
               <label>Date<input name="date" type="date" required /></label>
               <label>Start time<input name="startTime" placeholder="e.g. 09:00" maxlength="20" /></label>
               <label>Location<input name="location" maxlength="120" /></label>
+              <label>Category (optional)<input name="category" maxlength="30" placeholder="e.g. Tournament" /></label>
+              <label>Time control (optional)<input name="timeControl" maxlength="60" placeholder="e.g. 25+0 minutes" /></label>
+              <label>Registration deadline (optional)<input name="registrationDeadline" type="datetime-local" /></label>
+              <label>Contact for this event (optional)<input name="contact" maxlength="120" placeholder="e.g. 0729 037 585" /></label>
               <label>Entry fee (KES)<input name="entryFee" type="number" min="0" max="150000" step="1" value="0" /></label>
               <label>Sign-up link (https)<input name="registrationUrl" type="url" pattern="https://.*" maxlength="300" placeholder="https://" /></label>
+              <label>Poster image URL, https (optional)<input name="poster" type="url" pattern="https://.*" maxlength="300" placeholder="https://" /></label>
               <label class="wide">Description<textarea name="description" rows="3" maxlength="1000"></textarea></label>
               <label><span><input name="published" type="checkbox" checked /> Published (visible on the site)</span></label>
             </div>

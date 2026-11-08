@@ -778,6 +778,12 @@ function validEvent(body) {
   const url = text(body?.registrationUrl, 300);
   if (url && !/^https:\/\/\S+$/.test(url))
     return { error: "The sign-up link must start with https://" };
+  const poster = text(body?.poster, 300);
+  if (poster && !/^https:\/\/\S+$/.test(poster))
+    return { error: "The poster image link must start with https://" };
+  const deadline = text(body?.registrationDeadline, 30);
+  if (deadline && !/^\d{4}-\d{2}-\d{2}([T ]\d{2}:\d{2})?$/.test(deadline))
+    return { error: "Choose a valid registration deadline." };
   return {
     value: {
       title,
@@ -787,6 +793,11 @@ function validEvent(body) {
       description: text(body?.description, 1000),
       entryFee: fee,
       registrationUrl: url,
+      category: text(body?.category, 30),
+      poster,
+      timeControl: text(body?.timeControl, 60),
+      registrationDeadline: deadline,
+      contact: text(body?.contact, 120),
       published: body?.published !== false,
     },
   };

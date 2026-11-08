@@ -173,8 +173,13 @@ $("#event-form").addEventListener("submit", async (event) => {
     date: data.date,
     startTime: data.startTime,
     location: data.location,
+    category: data.category,
+    timeControl: data.timeControl,
+    registrationDeadline: data.registrationDeadline,
+    contact: data.contact,
     entryFee: data.entryFee,
     registrationUrl: data.registrationUrl,
+    poster: data.poster,
     description: data.description,
     published: form.elements.published.checked,
   };
