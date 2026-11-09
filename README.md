@@ -55,7 +55,7 @@ Public content and form submissions no longer use local JSON files or a local fi
 - Reads: `GoogleSheets.fetchSheet("Events")` — a `GET` that returns the tab as a standard JSON array of row objects keyed by the header row.
 - Writes: `GoogleSheets.postToSheet("Feedback" | "Enquiries", payload)` — a clean `fetch()` POST of `{ action: "append", sheet, data }`.
 - The Events page, the contact enquiry form and the feedback form all use these helpers. Until a real URL is pasted, `configured()` is false and they fall back to the same-origin API, so the site keeps working during migration.
-- The exact `doGet`/`doPost` Apps Script code to paste into the Sheet (Extensions → Apps Script) is in `docs/GOOGLE-SHEETS-BACKEND.md` and `docs/google-apps-script.gs`, including how to connect Google Docs/Slides outputs.
+- The exact `doGet`/`doPost` Apps Script code to paste into the Sheet (Extensions → Apps Script) is in `docs/GOOGLE-SHEETS-BACKEND.md` and `docs/google-apps-script.gs`, including how to connect Google Docs/Slides outputs. Every form row is also emailed directly to the club inbox `kerichochessacademy@gmail.com` (`notifyClub()` via `MailApp`), which is the same address the site's Email buttons use.
 - The web app URL acts as a capability token (keep it unlisted); it can only append rows to the allow-listed tabs. Accounts, live chess and payments stay on the Node service — Sheets cannot hold real-time game state.
 
 ## Events and push notifications

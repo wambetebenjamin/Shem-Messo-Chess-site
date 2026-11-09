@@ -9,6 +9,23 @@ const SHEETS = {
   Enquiries: "Enquiries",
 };
 
+// Every form submission is emailed directly to the club inbox that receives the data.
+const CLUB_EMAIL = "kerichochessacademy@gmail.com";
+
+// Sends one notification email per appended row so the club sees submissions
+// immediately in the inbox, even before anyone opens the Sheet.
+function notifyClub(sheetName, data) {
+  const subject = "New " + sheetName + " entry — Kericho Chess Academy website";
+  const lines = Object.keys(data).map((k) => k + ": " + data[k]);
+  MailApp.sendEmail(
+    CLUB_EMAIL,
+    subject,
+    "A new row was added to the \"" + sheetName + "\" tab of the academy site data sheet.\n\n" +
+      lines.join("\n") +
+      "\n\nOpen the sheet to review: " + SpreadsheetApp.getActiveSpreadsheet().getUrl()
+  );
+}
+
 function sheetByName(name) {
   const allowed = Object.values(SHEETS);
   if (!allowed.includes(name)) return null;

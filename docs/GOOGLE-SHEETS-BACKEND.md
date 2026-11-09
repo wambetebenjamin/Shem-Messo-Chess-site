@@ -84,6 +84,11 @@ function doPost(e) {
   const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map((h) => String(h).trim());
   const row = headers.map((h) => (data[h] !== undefined ? String(data[h]) : ""));
   sheet.appendRow(row);
+  try {
+    notifyClub(String(body.sheet || "").trim(), data);
+  } catch (err) {
+    // The row is already saved; an email failure must not fail the request.
+  }
   return json({ ok: true, row: sheet.getLastRow() });
 }
 
@@ -107,6 +112,13 @@ function onFormRow(sheetName, data) {
    acts as a capability token — keep it unlisted).
 3. Copy the `/exec` URL and paste it into `assets/google-sheets.js` as
    `GOOGLE_SCRIPT_WEBAPP_URL`. Redeploy the website (Render).
+
+**Email delivery:** every appended row (Enquiries, Feedback) is also emailed
+directly to the club inbox **`kerichochessacademy@gmail.com`** via
+`MailApp.sendEmail` in `notifyClub()` — so the club email receives the data
+immediately, and the Sheet remains the stored source of truth. Make sure the
+Google account that owns the Apps Script is allowed to send mail (it sends as
+that account); the club inbox just receives it.
 
 ## 4. Frontend contract
 
