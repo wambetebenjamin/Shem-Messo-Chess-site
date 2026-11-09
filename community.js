@@ -51,7 +51,9 @@ function setStatus(node, text, tone = "info") {
   node.className = "status-line tone-" + tone;
 }
 
-// Feedback is sent to private server storage, never to localStorage or a public feed.
+// Feedback goes to the Google Sheet ("Feedback" tab) when the Apps Script web
+// app URL is configured; otherwise to private server storage. Never to
+// localStorage or a public feed.
 $("#feedback-form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
   const form = event.currentTarget,
@@ -61,11 +63,17 @@ $("#feedback-form")?.addEventListener("submit", async (event) => {
   busy(button, true, "Sending…");
   status.textContent = "Sending feedback…";
   const values = new FormData(form);
+  const payload = {
+    category: values.get("category"),
+    message: values.get("message"),
+    submittedAt: new Date().toISOString(),
+  };
   try {
-    await api("feedback", {
-      category: values.get("category"),
-      message: values.get("message"),
-    });
+    if (window.GoogleSheets?.configured()) {
+      await window.GoogleSheets.postToSheet("Feedback", payload);
+    } else {
+      await api("feedback", payload);
+    }
     form.reset();
     status.textContent =
       "Thank you. Your feedback has been saved privately for the academy to review.";
@@ -133,10 +141,18 @@ async function loadEvents() {
   const list = $("#event-list");
   if (!list) return;
   try {
-    const events = await api("events");
+    // Events come from the Google Sheet "Events" tab (source of truth) when the
+    // Apps Script web app URL is configured; otherwise from the same-origin API.
+    const events = window.GoogleSheets?.configured()
+      ? await window.GoogleSheets.fetchSheet("Events")
+      : await api("events");
     if (!Array.isArray(events)) throw Error("Unable to read the events list.");
+    // Sheet rows may carry a "published" column; hide anything not published.
+    const visible = events.filter(
+      (e) => String(e.published ?? "true").toLowerCase() !== "false",
+    );
     list.replaceChildren();
-    if (!events.length) {
+    if (!visible.length) {
       const notice = document.createElement("p");
       notice.className = "notice";
       notice.textContent =
@@ -144,7 +160,7 @@ async function loadEvents() {
       list.append(notice);
       return;
     }
-    events
+    visible
       .sort((a, b) => String(a.date).localeCompare(String(b.date)))
       .forEach((item) => {
         const card = document.createElement("article");

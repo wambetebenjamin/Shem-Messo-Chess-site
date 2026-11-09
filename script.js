@@ -146,6 +146,19 @@ dialog?.addEventListener("click", (event) => {
 document.querySelector("#enquiry-form")?.addEventListener("submit", (event) => {
   event.preventDefault();
   const data = new FormData(event.target);
+  // When the Google Sheets backend is configured, also log the enquiry to the
+  // "Enquiries" sheet via the Apps Script web app (clean fetch POST; the sheet
+  // stores rows as a JSON array of objects). The WhatsApp handoff below must
+  // not be blocked if the sheet save fails.
+  if (window.GoogleSheets?.configured()) {
+    window.GoogleSheets.postToSheet("Enquiries", {
+      name: data.get("name"),
+      email: data.get("email"),
+      program: data.get("program"),
+      message: data.get("message"),
+      submittedAt: new Date().toISOString(),
+    }).catch(() => {});
+  }
   const message = `Hello Kericho Chess Academy! My name is ${data.get("name")}.\nEmail: ${data.get("email")}\nI'm interested in: ${data.get("program")}.\n\n${data.get("message")}`;
   window.open(
     "https://wa.me/254729037585?text=" + encodeURIComponent(message),

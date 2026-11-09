@@ -8,7 +8,7 @@ A shorter public website using the user-supplied Chess Kenya source layout and t
 - **About Us (`about.html`)**: immediately after Home in every main navigation. All four existing team profiles and photographs are here. Only the confirmed President role is named; other responsibilities remain unconfirmed. The existing portrait carousel now lives here, with its original four-second autoplay, controls and reduced-motion behavior.
 - **Programs (`programs.html`)**, **Merchandise (`merchandise.html`)**, **Contact (`contact.html`)**: existing detail pages, enquiries and photographs retained.
 - **Registration (`registration.html`)**: a four-step guided joining experience with a welcome screen, self/child path cards, a keyboard-accessible progress navigation, contextual membership/consent guidance, back/continue controls, explicit official-form embeds, next-step summaries and optional push controls.
-- **Events (`events.html`)**: confirmed upcoming events from the events API, safe text rendering, clear empty/error states and optional push controls. Cards follow a peer-academy layout: a category badge (set in the admin dashboard or derived from the title/description), an optional https poster image, a live "starts in" countdown, and an event-information list (when, venue, time control, entry, registration deadline, contact) above the sign-up link. The optional `category`, `poster`, `time_control`, `registration_deadline` and `contact` event columns are read when present; the site works without them.
+- **Events (`events.html`)**: confirmed upcoming events read from the Google Sheet **Events** tab via the Apps Script web app (see "Google Sheets backend" below), with the same-origin API as fallback until the web app URL is configured. Safe text rendering, clear empty/error states and optional push controls. Cards follow a peer-academy layout: a category badge (set in the sheet/admin or derived from the title/description), an optional https poster image, a live "starts in" countdown, and an event-information list (when, venue, time control, entry, registration deadline, contact) above the sign-up link.
 - **FAQs & Feedback (`help.html`)**: native expandable FAQs and a feedback form writing to private server storage. No public feedback feed.
 - **Play (`play.html`)**: account creation/login/logout, beginner computer practice, online matchmaking, legal interactive boards with keyboard navigation and promotion choice, move history, and a daily puzzle available without login.
 - **Legacy Team (`team.html`)** redirects to `about.html#officials` on Node; a static meta-refresh and fallback link do the same on static hosts.
@@ -47,22 +47,20 @@ The guide asks only who is joining (self or child) to tailor its advice. It does
 
 Google processes these forms. Loading is explicit to avoid unnecessary third-party requests. Cross-origin iframe submissions cannot be inspected by this website, so it does not mark forms complete or send automatic submission notifications. Sign-in, cookie restrictions or blocked embedding may require the always-available external link. No live membership/consent submission was made during testing. Play accounts are separate from academy membership.
 
+## Google Sheets backend (source of truth)
+
+Public content and form submissions no longer use local JSON files or a local file database. The **Google Sheet is the source of truth**, exposed through a Google Apps Script Web App:
+
+- `assets/google-sheets.js` holds the placeholder `GOOGLE_SCRIPT_WEBAPP_URL`. Paste your deployed Apps Script `/exec` URL there.
+- Reads: `GoogleSheets.fetchSheet("Events")` — a `GET` that returns the tab as a standard JSON array of row objects keyed by the header row.
+- Writes: `GoogleSheets.postToSheet("Feedback" | "Enquiries", payload)` — a clean `fetch()` POST of `{ action: "append", sheet, data }`.
+- The Events page, the contact enquiry form and the feedback form all use these helpers. Until a real URL is pasted, `configured()` is false and they fall back to the same-origin API, so the site keeps working during migration.
+- The exact `doGet`/`doPost` Apps Script code to paste into the Sheet (Extensions → Apps Script) is in `docs/GOOGLE-SHEETS-BACKEND.md` and `docs/google-apps-script.gs`, including how to connect Google Docs/Slides outputs.
+- The web app URL acts as a capability token (keep it unlisted); it can only append rows to the allow-listed tabs. Accounts, live chess and payments stay on the Node service — Sheets cannot hold real-time game state.
+
 ## Events and push notifications
 
-`events.json` is initially `[]`: no unconfirmed dates are invented. An operator can add confirmed entries:
-
-```json
-[
-  {
-    "title": "Confirmed event title",
-    "date": "YYYY-MM-DD",
-    "location": "Confirmed venue",
-    "description": "Confirmed details"
-  }
-]
-```
-
-Replace the placeholders with confirmed information; do not publish this example literally. `/api/events` excludes past dates in `Africa/Nairobi`; the interface sorts and formats dates in Nairobi time.
+Events live in the **Events** tab of the Google Sheet (headers: `title, date, startTime, location, category, timeControl, entryFee, registrationDeadline, contact, description, poster, registrationUrl, published`). No unconfirmed dates are invented; rows with `published` = `FALSE` are hidden. The interface sorts and formats dates in Nairobi time.
 
 Push is an explicit opt-in on Registration/Events, with on-device unsubscribe controls. Merely loading a page does not prompt for permission or register a worker. HTTPS and browser support are required; iOS may require home-screen installation. Stored endpoints are private, restricted to standard browser push providers. A failed new subscription save is rolled back on the device.
 
