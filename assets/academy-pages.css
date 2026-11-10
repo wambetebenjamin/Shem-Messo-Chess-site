@@ -455,6 +455,7 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
 .ck-design .event-card {
   display: flex;
   flex-direction: column;
@@ -500,6 +501,17 @@
 .ck-design .event-info dd {
   margin: 0;
 }
+
+.ck-design .contact-postal {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.ck-design .contact-postal a {
+  color: var(--blue);
+  font-weight: 600;
+}
+
 .ck-design .registration-experience {
   padding: 60px 0 72px;
 }
