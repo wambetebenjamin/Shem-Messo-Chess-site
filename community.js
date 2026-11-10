@@ -51,7 +51,9 @@ function setStatus(node, text, tone = "info") {
   node.className = "status-line tone-" + tone;
 }
 
-// Feedback is sent to private server storage, never to localStorage or a public feed.
+// Feedback goes to the Google Sheet ("Feedback" tab) when the Apps Script web
+// app URL is configured; otherwise to private server storage. Never to
+// localStorage or a public feed.
 $("#feedback-form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
   const form = event.currentTarget,
@@ -61,15 +63,60 @@ $("#feedback-form")?.addEventListener("submit", async (event) => {
   busy(button, true, "Sending…");
   status.textContent = "Sending feedback…";
   const values = new FormData(form);
+  const payload = {
+    category: values.get("category"),
+    message: values.get("message"),
+    submittedAt: new Date().toISOString(),
+  };
   try {
-    await api("feedback", {
-      category: values.get("category"),
-      message: values.get("message"),
-    });
+    if (window.GoogleSheets?.configured()) {
+      await window.GoogleSheets.postToSheet("Feedback", payload);
+    } else {
+      await api("feedback", payload);
+    }
     form.reset();
     status.textContent =
       "Thank you. Your feedback has been saved privately for the academy to review.";
-    location.href = "thanks.html?type=feedback";
+    location.href = "thanks?type=feedback";
+  } catch (error) {
+    message(status, error);
+  } finally {
+    busy(button, false);
+  }
+});
+
+// Registration form on the registration page: saved to the Google Sheet
+// "Registrations" tab; the Apps Script emails the registrant a thank-you +
+// newsletter link and notifies the club inbox. Without the web app URL the
+// form explains it is unavailable rather than pretending to save.
+$("#register-email-form")?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const form = event.currentTarget,
+    button = form.querySelector("button"),
+    status = $("#register-email-status");
+  if (!form.reportValidity()) return;
+  const values = new FormData(form);
+  const payload = {
+    submittedAt: new Date().toISOString(),
+    role: values.get("role"),
+    name: values.get("name"),
+    email: values.get("email"),
+    event: values.get("event") || "",
+    newsletter: "",
+    message: "Registered via the academy website registration page.",
+  };
+  busy(button, true, "Sending…");
+  status.textContent = "Sending your registration…";
+  try {
+    if (window.GoogleSheets?.configured()) {
+      await window.GoogleSheets.postToSheet("Registrations", payload);
+      status.textContent =
+        "Thank you! Your registration was received — check your email for our reply and the newsletter link.";
+      form.reset();
+    } else {
+      status.textContent =
+        "Online registration is being set up. Please use the official membership form above or contact kerichochessacademy@gmail.com.";
+    }
   } catch (error) {
     message(status, error);
   } finally {
@@ -78,14 +125,73 @@ $("#feedback-form")?.addEventListener("submit", async (event) => {
 });
 
 // Only confirmed operator-supplied events are displayed; user strings are never HTML.
+// Card layout is inspired by peer academies: a category badge, poster, live countdown
+// to the start, and a compact "event information" list (venue, time control, entry,
+// registration deadline, contact) above the sign-up button.
+function eventCategory(item) {
+  const explicit = String(item.category || "").trim();
+  if (explicit) return explicit.slice(0, 30);
+  const hay = `${item.title || ""} ${item.description || ""}`.toLowerCase();
+  if (/tournament|cup|championship|open\b/.test(hay)) return "Tournament";
+  if (/training|clinic|camp|workshop|coaching/.test(hay)) return "Training";
+  if (/simul|exhibition/.test(hay)) return "Exhibition";
+  if (/blitz/.test(hay)) return "Blitz";
+  if (/rapid/.test(hay)) return "Rapid";
+  return "Event";
+}
+
+function eventStartMs(item) {
+  const date = String(item.date || "");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return NaN;
+  const t = String(item.startTime || "");
+  const time = /^([01]\d|2[0-3]):[0-5]\d/.test(t) ? t.slice(0, 5) : "09:00";
+  return new Date(`${date}T${time}:00+03:00`).getTime();
+}
+
+function countdownText(target) {
+  const diff = target - Date.now();
+  if (diff <= 0) return "Happening now";
+  const minutes = Math.floor(diff / 60000);
+  if (minutes < 1) return "Starting soon";
+  if (minutes < 60) return `Starts in ${minutes} minute${minutes === 1 ? "" : "s"}`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 48) return `Starts in ${hours} hour${hours === 1 ? "" : "s"}`;
+  const days = Math.floor(hours / 24);
+  return `Starts in ${days} day${days === 1 ? "" : "s"}, ${hours % 24} hr`;
+}
+
+function deadlineTime(value) {
+  const raw = String(value || "");
+  const parsed = /^\d{4}-\d{2}-\d{2}$/.test(raw)
+    ? new Date(raw + "T12:00:00+03:00")
+    : new Date(raw);
+  if (Number.isNaN(parsed.getTime())) return null;
+  const time = document.createElement("time");
+  time.dateTime = raw;
+  time.textContent = new Intl.DateTimeFormat("en-KE", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "Africa/Nairobi",
+  }).format(parsed);
+  return time;
+}
+
 async function loadEvents() {
   const list = $("#event-list");
   if (!list) return;
   try {
-    const events = await api("events");
+    // Events come from the Google Sheet "Events" tab (source of truth) when the
+    // Apps Script web app URL is configured; otherwise from the same-origin API.
+    const events = window.GoogleSheets?.configured()
+      ? await window.GoogleSheets.fetchSheet("Events")
+      : await api("events");
     if (!Array.isArray(events)) throw Error("Unable to read the events list.");
+    // Sheet rows may carry a "published" column; hide anything not published.
+    const visible = events.filter(
+      (e) => String(e.published ?? "true").toLowerCase() !== "false",
+    );
     list.replaceChildren();
-    if (!events.length) {
+    if (!visible.length) {
       const notice = document.createElement("p");
       notice.className = "notice";
       notice.textContent =
@@ -93,14 +199,30 @@ async function loadEvents() {
       list.append(notice);
       return;
     }
-    events
+    visible
       .sort((a, b) => String(a.date).localeCompare(String(b.date)))
       .forEach((item) => {
         const card = document.createElement("article");
-        card.className = "quick-card";
+        card.className = "quick-card event-card";
+
+        const badge = document.createElement("span");
+        badge.className = "event-badge";
+        badge.textContent = eventCategory(item);
+        card.append(badge);
+
+        if (/^https:\/\//.test(item.poster || "")) {
+          const poster = document.createElement("img");
+          poster.className = "event-poster";
+          poster.src = item.poster;
+          poster.alt = (item.title || "Academy event") + " poster";
+          poster.loading = "lazy";
+          card.append(poster);
+        }
+
         const heading = document.createElement("h2");
         heading.textContent = item.title || "Academy event";
         heading.style.fontSize = "26px";
+
         const date = document.createElement("time");
         date.dateTime = item.date;
         const parsed = new Date(String(item.date) + "T12:00:00+03:00");
@@ -110,16 +232,48 @@ async function loadEvents() {
               dateStyle: "long",
               timeZone: "Africa/Nairobi",
             }).format(parsed);
-        const location = document.createElement("p");
-        location.textContent = item.location || "Venue to be confirmed";
+
+        const countdown = document.createElement("p");
+        countdown.className = "event-countdown";
+        countdown.setAttribute("role", "timer");
+        const start = eventStartMs(item);
+        if (Number.isNaN(start)) {
+          countdown.hidden = true;
+        } else {
+          countdown.dataset.target = String(start);
+          countdown.textContent = countdownText(start);
+        }
+
+        const info = document.createElement("dl");
+        info.className = "event-info";
+        const addInfo = (label, value) => {
+          if (!value) return;
+          const dt = document.createElement("dt");
+          dt.textContent = label;
+          const dd = document.createElement("dd");
+          dd.append(value);
+          info.append(dt, dd);
+        };
+        addInfo("When", date);
+        addInfo("Venue", item.location || "Venue to be confirmed");
+        if (item.timeControl) addInfo("Time control", item.timeControl);
+        addInfo(
+          "Entry",
+          item.entryFee
+            ? "KES " + Number(item.entryFee).toLocaleString("en-KE")
+            : "Free",
+        );
+        if (item.registrationDeadline) {
+          const deadline = deadlineTime(item.registrationDeadline);
+          if (deadline) addInfo("Registration closes", deadline);
+        }
+        if (item.contact) addInfo("Contact", item.contact);
+
         const description = document.createElement("p");
         description.textContent =
           item.description || "Contact the academy for details.";
-        const fee = document.createElement("p");
-        fee.textContent = item.entryFee
-          ? "Entry fee: KES " + Number(item.entryFee).toLocaleString("en-KE")
-          : "Entry: free";
-        card.append(heading, date, location, description, fee);
+
+        card.append(heading, countdown, info, description);
         if (/^https:\/\//.test(item.registrationUrl || "")) {
           const link = document.createElement("a");
           link.className = "button";
@@ -130,6 +284,15 @@ async function loadEvents() {
         }
         list.append(card);
       });
+    if (list.querySelector(".event-countdown[data-target]")) {
+      setInterval(() => {
+        list
+          .querySelectorAll(".event-countdown[data-target]")
+          .forEach((el) => {
+            el.textContent = countdownText(Number(el.dataset.target));
+          });
+      }, 30000);
+    }
   } catch (error) {
     list.replaceChildren();
     const notice = document.createElement("p");
@@ -840,7 +1003,7 @@ async function setupChess() {
       coachStatus.textContent =
         "Request received. The coach will confirm the time with you. It is not confirmed until then.";
       loadBookings();
-      location.href = "thanks.html?type=booking";
+      location.href = "thanks?type=booking";
     } catch (error) {
       message(coachStatus, error);
     } finally {
@@ -936,7 +1099,7 @@ if (groupForm) {
       playersBox.replaceChildren();
       addPlayerRow();
       status.textContent = "Thank you. Your registration was received. The academy will contact you.";
-      location.href = "thanks.html?type=group";
+      location.href = "thanks?type=group";
     } catch (error) {
       status.textContent = error.message;
     } finally {

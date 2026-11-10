@@ -41,13 +41,13 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header>
       <div class="container nav-wrap">
-        <a class="brand" href="index.html" aria-label="Kericho Chess Academy home"
+        <a class="brand" href="index" aria-label="Kericho Chess Academy home"
           ><img src="assets/logo.png" alt="Kericho Chess Academy logo" /><span
             >KERICHO CHESS<small>CLUB &amp; ACADEMY</small></span
           ></a
         >
         <nav aria-label="Admin">
-          <a href="events.html">View public events</a>
+          <a href="events">View public events</a>
           <button id="logout" class="button" type="button" hidden>Log out</button>
         </nav>
       </div>
@@ -78,8 +78,13 @@
               <label>Date<input name="date" type="date" required /></label>
               <label>Start time<input name="startTime" placeholder="e.g. 09:00" maxlength="20" /></label>
               <label>Location<input name="location" maxlength="120" /></label>
+              <label>Category (optional)<input name="category" maxlength="30" placeholder="e.g. Tournament" /></label>
+              <label>Time control (optional)<input name="timeControl" maxlength="60" placeholder="e.g. 25+0 minutes" /></label>
+              <label>Registration deadline (optional)<input name="registrationDeadline" type="datetime-local" /></label>
+              <label>Contact for this event (optional)<input name="contact" maxlength="120" placeholder="e.g. 0729 037 585" /></label>
               <label>Entry fee (KES)<input name="entryFee" type="number" min="0" max="150000" step="1" value="0" /></label>
               <label>Sign-up link (https)<input name="registrationUrl" type="url" pattern="https://.*" maxlength="300" placeholder="https://" /></label>
+              <label>Poster image URL, https (optional)<input name="poster" type="url" pattern="https://.*" maxlength="300" placeholder="https://" /></label>
               <label class="wide">Description<textarea name="description" rows="3" maxlength="1000"></textarea></label>
               <label><span><input name="published" type="checkbox" checked /> Published (visible on the site)</span></label>
             </div>
@@ -135,6 +140,38 @@
             <table class="admin-table">
               <thead><tr><th>Date</th><th>Item</th><th>Amount (KES)</th><th>Phone</th><th>Status</th><th>Receipt</th><th>Note</th></tr></thead>
               <tbody id="payment-rows"></tbody>
+            </table>
+          </div>
+        </section>
+        <section aria-labelledby="users-title">
+          <h2 id="users-title">Accounts &amp; sign-ins</h2>
+          <p class="muted">Play-page accounts (email, joined, last sign-in). Passwords are never shown.</p>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Email</th><th>Name</th><th>Joined</th><th>Last sign-in</th></tr></thead>
+              <tbody id="user-rows"></tbody>
+            </table>
+          </div>
+        </section>
+        <section aria-labelledby="sheet-title">
+          <h2 id="sheet-title">Google Sheet data</h2>
+          <p class="muted">Read-only view of the site data sheet (source of truth) via the Apps Script web app.</p>
+          <p>
+            <label>Sheet tab
+              <select id="sheet-select">
+                <option value="Events">Events</option>
+                <option value="Registrations" selected>Registrations</option>
+                <option value="Enquiries">Enquiries</option>
+                <option value="Feedback">Feedback</option>
+              </select>
+            </label>
+            <button type="button" id="sheet-refresh">Refresh</button>
+          </p>
+          <p class="admin-msg" id="sheet-msg" role="status"></p>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead id="sheet-head"></thead>
+              <tbody id="sheet-rows"></tbody>
             </table>
           </div>
         </section>

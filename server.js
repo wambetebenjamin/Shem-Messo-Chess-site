@@ -778,6 +778,12 @@ function validEvent(body) {
   const url = text(body?.registrationUrl, 300);
   if (url && !/^https:\/\/\S+$/.test(url))
     return { error: "The sign-up link must start with https://" };
+  const poster = text(body?.poster, 300);
+  if (poster && !/^https:\/\/\S+$/.test(poster))
+    return { error: "The poster image link must start with https://" };
+  const deadline = text(body?.registrationDeadline, 30);
+  if (deadline && !/^\d{4}-\d{2}-\d{2}([T ]\d{2}:\d{2})?$/.test(deadline))
+    return { error: "Choose a valid registration deadline." };
   return {
     value: {
       title,
@@ -787,6 +793,11 @@ function validEvent(body) {
       description: text(body?.description, 1000),
       entryFee: fee,
       registrationUrl: url,
+      category: text(body?.category, 30),
+      poster,
+      timeControl: text(body?.timeControl, 60),
+      registrationDeadline: deadline,
+      contact: text(body?.contact, 120),
       published: body?.published !== false,
     },
   };
@@ -797,6 +808,12 @@ app.get(
     const rows = await store.events.listPublished(nairobiToday());
     res.json(rows.map(publicEvent));
   }),
+);
+app.get(
+  "/api/admin/users",
+  auth,
+  adminOnly,
+  route(async (req, res) => res.json(await store.auth.listUsers())),
 );
 app.get(
   "/api/admin/events",
@@ -1053,11 +1070,11 @@ app.get("/", (req, res) => {
       : "index.html";
   res.sendFile(process.cwd() + "/" + file);
 });
-app.get("/index.html", (req, res) =>
-  res.sendFile(process.cwd() + "/index.html"),
-);
+// Clean, extensionless URLs are canonical: /about serves about.html directly,
+// and /about.html redirects to /about. Static hosts keep working via the .html files.
+app.get("/index.html", (req, res) => res.redirect(301, "/" + (req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "")));
 app.get(["/team", "/team.html"], (req, res) =>
-  res.redirect(302, "/about.html#officials"),
+  res.redirect(301, "/about#officials"),
 );
 for (const page of [
   "about",
@@ -1068,32 +1085,23 @@ for (const page of [
   "events",
   "help",
   "play",
+  "thanks",
+  "admin",
+  "privacy",
+  "terms",
 ]) {
   app.get("/" + page, (req, res) => {
+    res.sendFile(process.cwd() + "/" + page + ".html");
+  });
+  app.get("/" + page + ".html", (req, res) => {
     const query = req.url.includes("?")
       ? req.url.slice(req.url.indexOf("?"))
       : "";
-    res.redirect(302, "/" + page + ".html" + query);
-  });
-  app.get("/" + page + ".html", (req, res) => {
-    if (req.path.endsWith("/")) {
-      const query = req.url.includes("?")
-        ? req.url.slice(req.url.indexOf("?"))
-        : "";
-      return res.redirect(302, "/" + page + ".html" + query);
-    }
-    res.sendFile(process.cwd() + "/" + page + ".html");
+    res.redirect(301, "/" + page + query);
   });
 }
 app.use("/api", (req, res) =>
   res.status(404).json({ error: "This request is not available." }),
-);
-// Legal pages.
-app.get(["/privacy", "/privacy.html"], (req, res) =>
-  res.sendFile(join(import.meta.dirname, "privacy.html")),
-);
-app.get(["/terms", "/terms.html"], (req, res) =>
-  res.sendFile(join(import.meta.dirname, "terms.html")),
 );
 // Search engine files (also present on static hosting).
 app.get("/robots.txt", (req, res) =>
@@ -1103,9 +1111,7 @@ app.get("/sitemap.xml", (req, res) =>
   res.type("application/xml").sendFile(join(import.meta.dirname, "sitemap.xml")),
 );
 // Thank-you page after a successful form (the type says which copy to show).
-app.get(["/thanks", "/thanks.html"], (req, res) =>
-  res.sendFile(join(import.meta.dirname, "thanks.html")),
-);
+// (Clean URL /thanks is registered in the page loop above; /thanks.html 301s there.)
 // Unknown page addresses get the academy's friendly 404 page (with a 404 status).
 app.use((req, res, next) => {
   if (req.method !== "GET" && req.method !== "HEAD") return next();
