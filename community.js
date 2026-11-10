@@ -77,7 +77,7 @@ $("#feedback-form")?.addEventListener("submit", async (event) => {
     form.reset();
     status.textContent =
       "Thank you. Your feedback has been saved privately for the academy to review.";
-    location.href = "thanks.html?type=feedback";
+    location.href = "thanks?type=feedback";
   } catch (error) {
     message(status, error);
   } finally {
@@ -85,7 +85,7 @@ $("#feedback-form")?.addEventListener("submit", async (event) => {
   }
 });
 
-// Registration form on registration.html: saved to the Google Sheet
+// Registration form on the registration page: saved to the Google Sheet
 // "Registrations" tab; the Apps Script emails the registrant a thank-you +
 // newsletter link and notifies the club inbox. Without the web app URL the
 // form explains it is unavailable rather than pretending to save.
@@ -1003,7 +1003,7 @@ async function setupChess() {
       coachStatus.textContent =
         "Request received. The coach will confirm the time with you. It is not confirmed until then.";
       loadBookings();
-      location.href = "thanks.html?type=booking";
+      location.href = "thanks?type=booking";
     } catch (error) {
       message(coachStatus, error);
     } finally {
@@ -1099,7 +1099,7 @@ if (groupForm) {
       playersBox.replaceChildren();
       addPlayerRow();
       status.textContent = "Thank you. Your registration was received. The academy will contact you.";
-      location.href = "thanks.html?type=group";
+      location.href = "thanks?type=group";
     } catch (error) {
       status.textContent = error.message;
     } finally {

@@ -116,7 +116,7 @@ function openProgram(program) {
   const field = document.querySelector('[name="program"]');
   if (field) field.value = program;
   document.querySelector("#dialog-enquire").href =
-    "contact.html?program=" + encodeURIComponent(program);
+    "contact?program=" + encodeURIComponent(program);
   dialog.showModal();
 }
 document.querySelectorAll(".program-detail").forEach((button) => {

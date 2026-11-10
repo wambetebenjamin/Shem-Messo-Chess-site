@@ -30,7 +30,7 @@
     box.setAttribute("aria-label", "Cookie notice");
     box.innerHTML =
       '<p>We use an essential cookie to keep you signed in. With your permission we also use analytics cookies to see which pages help visitors. ' +
-      '<a href="privacy.html">Read our privacy policy</a>.</p>' +
+      '<a href="privacy">Read our privacy policy</a>.</p>' +
       '<div class="cookie-actions"><button type="button" class="cookie-decline">Decline</button>' +
       '<button type="button" class="cookie-accept">Accept analytics</button></div>';
     box.querySelector(".cookie-accept").addEventListener("click", () => { store("accepted"); box.remove(); });

@@ -2,6 +2,10 @@
 
 A shorter public website using the user-supplied Chess Kenya source layout and typography across its main pages, with the academy’s own navy/blue branding, photos and content. It includes real registration interfaces, private feedback, optional browser push, and login-required computer/online chess. The supplied PCA source-inspired homepage remains a separate comparison, not a replacement of the approved design.
 
+## Clean URLs
+
+Pages are served at extensionless URLs — `/events`, `/about`, `/registration`, `/play`, `/admin`, etc. (the Node server maps them to the `.html` files, and old `.html` addresses 301-redirect to the clean ones). Static hosts keep working through the `.html` files, and `vercel.json` sets `cleanUrls: true`.
+
 ## Public pages
 
 - **Home (`index.html`)**: existing automatic hero, values strip, brief welcome and four compact shortcuts to Registration, Play/Daily Puzzle, Events, and FAQs/Feedback. No officials’ portraits, profiles or staff carousel on Home.

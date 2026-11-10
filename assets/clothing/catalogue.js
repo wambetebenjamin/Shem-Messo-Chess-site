@@ -15,7 +15,7 @@ export function enhanceCatalogue(onModalChange) {
     opener = null;
   const shown = () => cards.filter((card) => !card.hidden);
   const shareURL = (card) => {
-    const url = new URL("merchandise.html", location.href);
+    const url = new URL("merchandise", location.href);
     url.hash = card.id;
     return url.href;
   };
