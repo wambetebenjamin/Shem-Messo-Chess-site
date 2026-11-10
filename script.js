@@ -168,27 +168,6 @@ document.querySelector("#enquiry-form")?.addEventListener("submit", (event) => {
 });
 document.querySelector("#year").textContent = new Date().getFullYear();
 
-// The sticky mobile action bar is optional: visitors can dismiss it for this
-// visit (sessionStorage only — no personal data, nothing persistent).
-(function dismissibleMobileCta() {
-  const bar = document.querySelector(".mobile-cta");
-  if (!bar) return;
-  if (sessionStorage.getItem("academy-cta-dismissed") === "1") {
-    bar.remove();
-    return;
-  }
-  const close = document.createElement("button");
-  close.type = "button";
-  close.className = "mobile-cta-close";
-  close.setAttribute("aria-label", "Hide quick actions");
-  close.textContent = "×";
-  close.addEventListener("click", () => {
-    sessionStorage.setItem("academy-cta-dismissed", "1");
-    bar.remove();
-  });
-  bar.append(close);
-})();
-
 // Carry enquiry context across real page navigation, without storing personal data.
 const enquiryForm = document.querySelector("#enquiry-form");
 if (enquiryForm) {
