@@ -7,7 +7,7 @@
 // existing same-origin API so the site keeps working during the migration.
 window.GoogleSheets = (function () {
   const GOOGLE_SCRIPT_WEBAPP_URL =
-    "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+    "https://script.google.com/macros/s/AKfycbynlZB70fyPEXNnfVYx29PB_izWX95fhXZjz-Od3Ib974pVoV3UxsKRNmlqqV8tjJ6cOw/exec";
 
   function configured() {
     return (

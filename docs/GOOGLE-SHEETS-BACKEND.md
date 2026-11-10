@@ -113,6 +113,12 @@ function onFormRow(sheetName, data) {
 3. Copy the `/exec` URL and paste it into `assets/google-sheets.js` as
    `GOOGLE_SCRIPT_WEBAPP_URL`. Redeploy the website (Render).
 
+**Current deployment (2026-11-04):** deployment ID
+`AKfycbynlZB70fyPEXNnfVYx29PB_izWX95fhXZjz-Od3Ib974pVoV3UxsKRNmlqqV8tjJ6cOw`, web app URL
+`https://script.google.com/macros/s/AKfycbynlZB70fyPEXNnfVYx29PB_izWX95fhXZjz-Od3Ib974pVoV3UxsKRNmlqqV8tjJ6cOw/exec`
+— already set in `assets/google-sheets.js`. If you redeploy the script, update
+both this note and the constant (a new deployment gets a new ID).
+
 **Email delivery:** every appended row (Enquiries, Feedback) is also emailed
 directly to the club inbox **`kerichochessacademy@gmail.com`** via
 `MailApp.sendEmail` in `notifyClub()` — so the club email receives the data
