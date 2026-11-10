@@ -85,6 +85,45 @@ $("#feedback-form")?.addEventListener("submit", async (event) => {
   }
 });
 
+// Registration form on registration.html: saved to the Google Sheet
+// "Registrations" tab; the Apps Script emails the registrant a thank-you +
+// newsletter link and notifies the club inbox. Without the web app URL the
+// form explains it is unavailable rather than pretending to save.
+$("#register-email-form")?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const form = event.currentTarget,
+    button = form.querySelector("button"),
+    status = $("#register-email-status");
+  if (!form.reportValidity()) return;
+  const values = new FormData(form);
+  const payload = {
+    submittedAt: new Date().toISOString(),
+    role: values.get("role"),
+    name: values.get("name"),
+    email: values.get("email"),
+    event: values.get("event") || "",
+    newsletter: "",
+    message: "Registered via the academy website registration page.",
+  };
+  busy(button, true, "Sending…");
+  status.textContent = "Sending your registration…";
+  try {
+    if (window.GoogleSheets?.configured()) {
+      await window.GoogleSheets.postToSheet("Registrations", payload);
+      status.textContent =
+        "Thank you! Your registration was received — check your email for our reply and the newsletter link.";
+      form.reset();
+    } else {
+      status.textContent =
+        "Online registration is being set up. Please use the official membership form above or contact kerichochessacademy@gmail.com.";
+    }
+  } catch (error) {
+    message(status, error);
+  } finally {
+    busy(button, false);
+  }
+});
+
 // Only confirmed operator-supplied events are displayed; user strings are never HTML.
 // Card layout is inspired by peer academies: a category badge, poster, live countdown
 // to the start, and a compact "event information" list (venue, time control, entry,
