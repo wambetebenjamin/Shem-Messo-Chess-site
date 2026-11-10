@@ -143,6 +143,38 @@
             </table>
           </div>
         </section>
+        <section aria-labelledby="users-title">
+          <h2 id="users-title">Accounts &amp; sign-ins</h2>
+          <p class="muted">Play-page accounts (email, joined, last sign-in). Passwords are never shown.</p>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Email</th><th>Name</th><th>Joined</th><th>Last sign-in</th></tr></thead>
+              <tbody id="user-rows"></tbody>
+            </table>
+          </div>
+        </section>
+        <section aria-labelledby="sheet-title">
+          <h2 id="sheet-title">Google Sheet data</h2>
+          <p class="muted">Read-only view of the site data sheet (source of truth) via the Apps Script web app.</p>
+          <p>
+            <label>Sheet tab
+              <select id="sheet-select">
+                <option value="Events">Events</option>
+                <option value="Registrations" selected>Registrations</option>
+                <option value="Enquiries">Enquiries</option>
+                <option value="Feedback">Feedback</option>
+              </select>
+            </label>
+            <button type="button" id="sheet-refresh">Refresh</button>
+          </p>
+          <p class="admin-msg" id="sheet-msg" role="status"></p>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead id="sheet-head"></thead>
+              <tbody id="sheet-rows"></tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </main>
     <footer class="compact-footer basic-footer">

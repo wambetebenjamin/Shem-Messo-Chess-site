@@ -322,6 +322,61 @@ async function loadPayments() {
   }
 }
 
+// ---- Accounts & sign-ins (admin-only; never includes password hashes) ----
+async function loadUsers() {
+  const users = await api("GET", "admin/users");
+  const tbody = $("#user-rows");
+  tbody.replaceChildren();
+  if (!users.length) tbody.append(emptyRow(4, "No accounts yet."));
+  for (const user of users) {
+    const tr = document.createElement("tr");
+    tr.append(
+      cell(user.email),
+      cell(user.name),
+      cell(formatDate(user.createdAt)),
+      cell(user.lastSignInAt ? formatTime(user.lastSignInAt) : "—"),
+    );
+    tbody.append(tr);
+  }
+}
+
+// ---- Google Sheet data (read-only, source of truth) ----
+async function loadSheetData() {
+  const tbody = $("#sheet-rows"),
+    thead = $("#sheet-head"),
+    msg = $("#sheet-msg");
+  tbody.replaceChildren();
+  thead.replaceChildren();
+  if (!window.GoogleSheets?.configured()) {
+    setMsg(msg, "Google Sheets backend URL is not configured on this page.", "error");
+    return;
+  }
+  const sheet = $("#sheet-select").value;
+  try {
+    const rows = await window.GoogleSheets.fetchSheet(sheet);
+    setMsg(msg, rows.length + " row(s) in the " + sheet + " tab.", "ok");
+    const headers = [...new Set(rows.flatMap((r) => Object.keys(r)))];
+    const headRow = document.createElement("tr");
+    for (const h of headers) {
+      const th = document.createElement("th");
+      th.textContent = h;
+      headRow.append(th);
+    }
+    thead.append(headRow);
+    if (!rows.length) tbody.append(emptyRow(headers.length || 1, "No rows yet."));
+    for (const row of rows) {
+      const tr = document.createElement("tr");
+      for (const h of headers) tr.append(cell(row[h]));
+      tbody.append(tr);
+    }
+  } catch (error) {
+    setMsg(msg, error.message, "error");
+  }
+}
+
+$("#sheet-refresh").addEventListener("click", loadSheetData);
+$("#sheet-select").addEventListener("change", loadSheetData);
+
 async function loadAll() {
   const jobs = [
     ["events", loadEvents],
@@ -329,6 +384,8 @@ async function loadAll() {
     ["bookings", loadBookings],
     ["group registrations", loadGroups],
     ["payments", loadPayments],
+    ["accounts", loadUsers],
+    ["sheet data", loadSheetData],
   ];
   const results = await Promise.allSettled(jobs.map(([, job]) => job()));
   const failed = results

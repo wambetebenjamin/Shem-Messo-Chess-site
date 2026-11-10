@@ -810,6 +810,12 @@ app.get(
   }),
 );
 app.get(
+  "/api/admin/users",
+  auth,
+  adminOnly,
+  route(async (req, res) => res.json(await store.auth.listUsers())),
+);
+app.get(
   "/api/admin/events",
   auth,
   adminOnly,
