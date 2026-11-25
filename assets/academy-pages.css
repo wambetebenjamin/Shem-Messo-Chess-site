@@ -456,6 +456,36 @@
   stroke-linejoin: round;
 }
 
+.ck-design .promo-banner {
+  background: var(--blue);
+  color: #fff;
+}
+.ck-design .promo-banner-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.ck-design .promo-banner-text {
+  font-size: 14px;
+}
+.ck-design .promo-banner-cta {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #f5b041;
+  color: #14233f;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.ck-design .promo-banner-cta:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
 .ck-design .event-card {
   display: flex;
   flex-direction: column;
@@ -859,4 +889,8 @@
   min-height: 44px;
   padding-top: 12px;
   gap: 16px;
+}
+.ck-design .event-featured {
+  border: 2px solid var(--blue);
+  margin-bottom: 24px;
 }
