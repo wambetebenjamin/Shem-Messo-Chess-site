@@ -894,3 +894,42 @@
   border: 2px solid var(--blue);
   margin-bottom: 24px;
 }
+.ck-design .signup-progress {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+.ck-design .signup-progress li {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--page-pale);
+  color: var(--muted);
+}
+.ck-design .signup-progress li.active {
+  background: var(--blue);
+  color: #fff;
+}
+.ck-design .signup-progress li.done {
+  background: #e3ecdf;
+  color: #2f5d34;
+}
+.ck-design .signup-choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border: 1px solid #d8dfeb;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.ck-design .signup-choice:has(input:checked) {
+  border-color: var(--blue);
+  background: var(--page-pale);
+}
