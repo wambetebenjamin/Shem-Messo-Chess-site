@@ -29,6 +29,7 @@ window.GoogleSheets = (function () {
     const response = await fetch(url, { method: "GET" });
     if (!response.ok) throw Error("Could not read from the sheet (HTTP " + response.status + ").");
     const data = await response.json();
+    if (data && !Array.isArray(data) && data.error) throw Error(String(data.error));
     const rows = Array.isArray(data) ? data : data.rows;
     if (!Array.isArray(rows)) throw Error("The sheet returned an unexpected format.");
     return rows;

@@ -181,11 +181,19 @@ async function loadEvents() {
   if (!list) return;
   try {
     // Events come from the Google Sheet "Events" tab (source of truth) when the
-    // Apps Script web app URL is configured; otherwise from the same-origin API.
-    const events = window.GoogleSheets?.configured()
-      ? await window.GoogleSheets.fetchSheet("Events")
-      : await api("events");
-    if (!Array.isArray(events)) throw Error("Unable to read the events list.");
+    // Apps Script web app URL is configured; if that fails for any reason we
+    // fall back to the same-origin API instead of showing an error.
+    let events;
+    if (window.GoogleSheets?.configured()) {
+      try {
+        events = await window.GoogleSheets.fetchSheet("Events");
+      } catch {
+        events = await api("events");
+      }
+    } else {
+      events = await api("events");
+    }
+    if (!Array.isArray(events)) throw Error("The events list came back in an unexpected format.");
     // Sheet rows may carry a "published" column; hide anything not published.
     const visible = events.filter(
       (e) => String(e.published ?? "true").toLowerCase() !== "false",
@@ -294,10 +302,12 @@ async function loadEvents() {
       }, 30000);
     }
   } catch (error) {
+    // Friendly fallback copy — never a raw "something went wrong" error to visitors.
     list.replaceChildren();
     const notice = document.createElement("p");
     notice.className = "notice";
-    message(notice, error);
+    notice.textContent =
+      "We're having trouble loading the events list right now. Please check back soon, or contact the academy for current dates.";
     list.append(notice);
   }
 }
