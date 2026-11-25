@@ -85,44 +85,115 @@ $("#feedback-form")?.addEventListener("submit", async (event) => {
   }
 });
 
-// Registration form on the registration page: saved to the Google Sheet
-// "Registrations" tab; the Apps Script emails the registrant a thank-you +
-// newsletter link and notifies the club inbox. Without the web app URL the
-// form explains it is unavailable rather than pretending to save.
-$("#register-email-form")?.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const form = event.currentTarget,
-    button = form.querySelector("button"),
-    status = $("#register-email-status");
-  if (!form.reportValidity()) return;
-  const values = new FormData(form);
-  const payload = {
-    submittedAt: new Date().toISOString(),
-    role: values.get("role"),
-    name: values.get("name"),
-    email: values.get("email"),
-    event: values.get("event") || "",
-    newsletter: "",
-    message: "Registered via the academy website registration page.",
-  };
-  busy(button, true, "Sending…");
-  status.textContent = "Sending your registration…";
-  try {
-    if (window.GoogleSheets?.configured()) {
-      await window.GoogleSheets.postToSheet("Registrations", payload);
-      status.textContent =
-        "Thank you! Your registration was received — check your email for our reply and the newsletter link.";
-      form.reset();
-    } else {
-      status.textContent =
-        "Online registration is being set up. Please use the official membership form above or contact kerichochessacademy@gmail.com.";
-    }
-  } catch (error) {
-    message(status, error);
-  } finally {
-    busy(button, false);
+// Step-by-step registration form on the registration page. Each step is
+// validated before continuing; the finished form is saved to the Google
+// Sheet "Registrations" tab, and the Apps Script emails the registrant a
+// thank-you + newsletter link and notifies the club inbox. Without the web
+// app URL the form explains it is unavailable rather than pretending to save.
+(function signupStepper() {
+  const form = $("#signup-form");
+  if (!form) return;
+  const steps = [...form.querySelectorAll(".signup-step")];
+  const labels = [...form.querySelectorAll("[data-step-label]")];
+  const back = $("#signup-back"),
+    next = $("#signup-next"),
+    submit = $("#signup-submit"),
+    status = $("#register-email-status"),
+    review = $("#signup-review"),
+    done = $("#signup-done");
+  let step = 1;
+
+  function showStep(n) {
+    step = n;
+    steps.forEach((s) => {
+      s.hidden = Number(s.dataset.step) !== n;
+    });
+    labels.forEach((li) => {
+      const n2 = Number(li.dataset.stepLabel);
+      li.classList.toggle("active", n2 === n);
+      li.classList.toggle("done", n2 < n);
+    });
+    back.hidden = n === 1;
+    next.hidden = n === steps.length;
+    submit.hidden = n !== steps.length;
+    if (n === steps.length) fillReview();
+    status.textContent = "";
   }
-});
+
+  function fillReview() {
+    const values = new FormData(form);
+    review.replaceChildren();
+    const rows = [
+      ["Registering as", values.get("role")],
+      ["Name", values.get("name")],
+      ["Email", values.get("email")],
+      ["Phone", values.get("phone") || "—"],
+      ["Event or program", values.get("event")],
+      ["Notes", values.get("message") || "—"],
+    ];
+    for (const [label, value] of rows) {
+      const dt = document.createElement("dt");
+      dt.textContent = label;
+      const dd = document.createElement("dd");
+      dd.textContent = value || "—";
+      review.append(dt, dd);
+    }
+  }
+
+  next.addEventListener("click", () => {
+    const current = form.querySelector(`.signup-step[data-step="${step}"]`);
+    if (!current.querySelector("input,select,textarea")?.checkValidity()) {
+      current.querySelector("input,select,textarea")?.reportValidity();
+      return;
+    }
+    if (step < steps.length) showStep(step + 1);
+  });
+  back.addEventListener("click", () => {
+    if (step > 1) showStep(step - 1);
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const values = new FormData(form);
+    const payload = {
+      submittedAt: new Date().toISOString(),
+      role: values.get("role"),
+      name: values.get("name"),
+      email: values.get("email"),
+      event: values.get("event") || "",
+      newsletter: "",
+      message: (values.get("phone") ? "Phone: " + values.get("phone") + ". " : "") +
+        (values.get("message") || ""),
+    };
+    busy(submit, true, "Sending…");
+    status.textContent = "Sending your registration…";
+    try {
+      if (window.GoogleSheets?.configured()) {
+        await window.GoogleSheets.postToSheet("Registrations", payload);
+        form.hidden = true;
+        done.hidden = false;
+        $("#signup-done-text").textContent =
+          "Thanks, " + payload.name + ". We've emailed a confirmation to " +
+          payload.email + " (with a link to subscribe to our newsletter) and " +
+          "the academy will reply with next steps.";
+        done.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        status.textContent =
+          "Online registration is being set up. Please use the official membership form above or contact kerichochessacademy@gmail.com.";
+      }
+    } catch (error) {
+      message(status, error);
+    } finally {
+      busy(submit, false);
+    }
+  });
+
+  showStep(1);
+})();
 
 // Only confirmed operator-supplied events are displayed; user strings are never HTML.
 // Card layout is inspired by peer academies: a category badge, poster, live countdown

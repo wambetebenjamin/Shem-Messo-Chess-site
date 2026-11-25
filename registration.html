@@ -147,7 +147,7 @@
     </header>
     <div class="promo-banner" role="region" aria-label="Featured tournament">
       <div class="container promo-banner-inner">
-        <span class="promo-banner-text">♟️ <strong>Kericho Open Chess Tournament</strong> · 27–28 Nov 2026 · ACK Grace Conference &amp; Hotel, Kericho · Open &amp; Ladies · cash prizes</span>
+        <span class="promo-banner-text"><strong>Kericho Open Chess Tournament</strong> · 27–28 Nov 2026 · ACK Grace Conference &amp; Hotel, Kericho · Open &amp; Ladies · cash prizes</span>
         <a class="promo-banner-cta" href="events">View & register →</a>
       </div>
     </div>
@@ -546,38 +546,89 @@
         </form>
       </section>
       <section class="section container" id="register-email">
-        <h2>Get a confirmation email.</h2>
+        <h2>Register step by step.</h2>
         <p>
-          Registering as a parent, tutor, student or for an event? Leave your
-          details and we will email you a thank-you note — including a link to
-          subscribe to our newsletter. Your details go to the academy’s sheet
-          and to <a href="mailto:kerichochessacademy@gmail.com">kerichochessacademy@gmail.com</a>.
+          Fill in this short form one step at a time — no need to open another
+          site. When you finish, we save your details to the academy’s sheet,
+          email you a thank-you note (with a link to subscribe to our
+          newsletter), and copy
+          <a href="mailto:kerichochessacademy@gmail.com">kerichochessacademy@gmail.com</a>.
         </p>
-        <form id="register-email-form" class="group-form" novalidate>
-          <label>
-            I am registering as
-            <select name="role" required>
-              <option value="Parent">Parent / guardian</option>
-              <option value="Tutor">Tutor / coach</option>
-              <option value="Student">Student / player</option>
-              <option value="Event participant">Event participant</option>
-            </select>
-          </label>
-          <label>
-            Your name
-            <input name="name" required minlength="2" maxlength="120" autocomplete="name" />
-          </label>
-          <label>
-            Email for our reply
-            <input name="email" type="email" required maxlength="200" autocomplete="email" />
-          </label>
-          <label>
-            Event or program (optional)
-            <input name="event" maxlength="120" placeholder="e.g. Youth Explosion Chess Tournament" />
-          </label>
-          <button class="button" type="submit">Send my registration</button>
+        <form id="signup-form" class="group-form signup-form" novalidate>
+          <ol class="signup-progress" aria-label="Registration progress">
+            <li data-step-label="1" class="active">Who</li>
+            <li data-step-label="2">Details</li>
+            <li data-step-label="3">Event</li>
+            <li data-step-label="4">Review</li>
+          </ol>
+
+          <fieldset class="signup-step" data-step="1">
+            <legend>Who is registering?</legend>
+            <label class="signup-choice"><input type="radio" name="role" value="Parent" required /> Parent / guardian</label>
+            <label class="signup-choice"><input type="radio" name="role" value="Tutor" /> Tutor / coach</label>
+            <label class="signup-choice"><input type="radio" name="role" value="Student" /> Student / player</label>
+            <label class="signup-choice"><input type="radio" name="role" value="Event participant" /> Event participant</label>
+          </fieldset>
+
+          <fieldset class="signup-step" data-step="2" hidden>
+            <legend>Your details</legend>
+            <label>
+              Your name
+              <input name="name" required minlength="2" maxlength="120" autocomplete="name" />
+            </label>
+            <label>
+              Email for our reply
+              <input name="email" type="email" required maxlength="200" autocomplete="email" />
+            </label>
+            <label>
+              Phone number (optional)
+              <input name="phone" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="07…" />
+            </label>
+          </fieldset>
+
+          <fieldset class="signup-step" data-step="3" hidden>
+            <legend>What are you registering for?</legend>
+            <label>
+              Event or program
+              <select name="event" required>
+                <option value="">Choose one…</option>
+                <option>Kericho Open Chess Tournament — 27–28 Nov 2026</option>
+                <option>Junior chess academy</option>
+                <option>Club &amp; competitive chess</option>
+                <option>Chess in schools</option>
+                <option>Coaching booking</option>
+                <option>Merchandise</option>
+                <option>General enquiry</option>
+              </select>
+            </label>
+            <label>
+              Anything we should know? (optional)
+              <textarea name="message" rows="3" maxlength="500"></textarea>
+            </label>
+          </fieldset>
+
+          <fieldset class="signup-step" data-step="4" hidden>
+            <legend>Review and send</legend>
+            <dl class="event-info" id="signup-review"></dl>
+            <p class="form-note">
+              This sends your details to the academy only. It is not a paid
+              membership confirmation; the academy will reply by email with
+              next steps.
+            </p>
+          </fieldset>
+
+          <div class="action-row">
+            <button type="button" class="button secondary-button" id="signup-back" hidden>← Back</button>
+            <button type="button" class="button" id="signup-next">Continue →</button>
+            <button type="submit" class="button" id="signup-submit" hidden>Send my registration</button>
+          </div>
           <p id="register-email-status" role="status" aria-live="polite"></p>
         </form>
+        <div id="signup-done" class="notice" hidden>
+          <h3>Thank you — your registration was received.</h3>
+          <p id="signup-done-text"></p>
+          <p>You can also reach us any time at <a href="mailto:kerichochessacademy@gmail.com">kerichochessacademy@gmail.com</a> or <a href="tel:+254729037585">+254 729 037 585</a>.</p>
+        </div>
       </section>
     </main>
     <footer class="compact-footer basic-footer">
